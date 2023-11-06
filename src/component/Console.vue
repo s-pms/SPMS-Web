@@ -31,13 +31,13 @@ import {
 } from '@/airpower/component'
 import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirRouter } from '@/airpower/helper/AirRouter'
-import { MenuEntity } from '@/model/menu/MenuEntity'
-import { UserService } from '@/model/user/UserService'
 import { AirWebsocket } from '@/airpower/websocket/AirWebSocket'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { UserEntity } from '@/model/user/UserEntity'
 import { AirClassTransformer } from '@/airpower/helper/AirClassTransformer'
 import airpower from '@/airpower/assets/img/airpower.png'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { MenuEntity } from '@/model/system/menu/MenuEntity'
 
 const currentUserInfo = ref(new UserEntity())
 const menuList = ref([] as MenuEntity[])

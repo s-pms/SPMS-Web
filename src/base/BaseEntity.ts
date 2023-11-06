@@ -2,13 +2,13 @@ import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
-import { DisableDictionary } from '@/model/DisableDictionary'
 import {
   ClassName, Dictionary, FieldName, Type,
 } from '@/airpower/decorator/Custom'
 import { AirEntity } from '@/airpower/base/AirEntity'
 import { SearchField } from '@/airpower/decorator/SearchField'
 import { AirSearchDataType } from '@/airpower/enum/AirSearchDataType'
+import { DisableDictionary } from '@/model/common/DisableDictionary'
 
 /**
  * # 数据库实体基类

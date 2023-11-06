@@ -250,15 +250,15 @@
 import { computed, ref } from 'vue'
 import { LoginAction } from '@/model/common/LoginAction'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { UserRequestVo } from '@/model/user/UserRequestVo'
 import { AirValidator } from '@/airpower/helper/AirValidator'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { UserService } from '@/model/user/UserService'
 import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirAlert } from '@/airpower/feedback/AirAlert'
-import { AppEntity } from '@/model/app/AppEntity'
-import { AppService } from '@/model/app/AppService'
-import { MailService } from '@/model/mail/MailService'
+import { UserRequestVo } from '@/model/personnel/user/UserRequestVo'
+import { UserService } from '@/model/personnel/user/UserService'
+import { AppEntity } from '@/model/system/app/AppEntity'
+import { AppService } from '@/model/system/app/AppService'
+import { MailService } from '@/model/system/mail/MailService'
 
 /**
  * # 是否二维码登录
