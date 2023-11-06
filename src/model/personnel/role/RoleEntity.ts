@@ -34,6 +34,19 @@ export class RoleEntity extends BaseEntity {
   @FieldName('角色名称') name!: string
 
   /**
+   * # 角色编码
+   */
+  @TableField({
+    forceShow: true,
+  })
+  @SearchField()
+  @FormField({
+    placeholder: '不填按编码规则自动生成',
+  })
+  @Type(String)
+  @FieldName('角色编码') code!: string
+
+  /**
    * # 角色类别
    */
   @Dictionary(RoleSystemDictionary)

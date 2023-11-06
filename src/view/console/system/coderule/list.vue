@@ -17,7 +17,7 @@
       @on-sort-change="onSortChanged"
     >
       <template #tableId="row">
-        {{ tableName(row.data) }}
+        {{ getFieldName(row.data) }}
       </template>
     </ATable>
     <template #footerLeft>
@@ -38,7 +38,7 @@ import { useAirTable } from '@/airpower/hook/useAirTable'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from './component'
-import { CodeRuleTable } from '@/model/system/coderule/CodeRuleTable'
+import { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 
 const {
   isLoading,
@@ -48,20 +48,16 @@ const {
   editView: CodeRuleEditor,
 })
 
-const tableList = ref([] as CodeRuleTable[])
+const fieldList = ref([] as CodeRuleField[])
 
 async function getTableList() {
-  tableList.value = await CodeRuleService.create(isLoading).getTableList()
+  fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
 }
 
 getTableList()
 
-function tableName(codeRule: CodeRuleEntity) {
-  const item = tableList.value.find((item) => item.value === codeRule.tableId)
-  if (item) {
-    return `${item.label}(${item.table})`
-  }
-  return ''
+function getFieldName(codeRule: CodeRuleEntity) {
+  return fieldList.value.find((item) => item.value === codeRule.ruleField)?.label || ''
 }
 
 </script>

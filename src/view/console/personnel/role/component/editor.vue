@@ -25,6 +25,15 @@
         />
       </el-form-item>
       <el-form-item
+        :label="RoleEntity.getFormFieldLabel('code')"
+        prop="code"
+      >
+        <AInput
+          v-model.code="formData.code"
+          :entity="RoleEntity"
+        />
+      </el-form-item>
+      <el-form-item
         :label="RoleEntity.getFormFieldLabel('remark')"
         prop="remark"
       >

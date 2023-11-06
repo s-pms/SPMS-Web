@@ -17,7 +17,7 @@ export class CodeRuleEntity extends BaseEntity {
     requiredNumber: true,
   })
   @TableField()
-  @FieldName('所属表') tableId!: number
+  @FieldName('编码所属字段') ruleField!: number
 
   @FormField({
     maxLength: 10,

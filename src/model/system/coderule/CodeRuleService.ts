@@ -1,6 +1,6 @@
 import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { CodeRuleEntity } from './CodeRuleEntity'
-import { CodeRuleTable } from './CodeRuleTable'
+import { CodeRuleField } from './CodeRuleField'
 import { CodeRuleParam } from './CodeRuleParam'
 
 /**
@@ -13,9 +13,9 @@ export class CodeRuleService extends AbstractBaseService<CodeRuleEntity> {
 
   entityClass = CodeRuleEntity
 
-  async getTableList(): Promise<CodeRuleTable[]> {
-    const jsonArray = await this.api('getTableList').post()
-    return CodeRuleTable.fromJsonArray(jsonArray)
+  async getFieldList(): Promise<CodeRuleField[]> {
+    const jsonArray = await this.api('getFieldList').post()
+    return CodeRuleField.fromJsonArray(jsonArray)
   }
 
   async getParamList(): Promise<CodeRuleParam[]> {

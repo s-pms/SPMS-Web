@@ -16,20 +16,20 @@
     >
       <AGroup title="基础配置">
         <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('tableId')"
-          prop="tableId"
+          :label="CodeRuleEntity.getFormFieldLabel('ruleField')"
+          prop="ruleField"
         >
           <AInput
-            v-model.tableId="formData.tableId"
+            v-model.ruleField="formData.ruleField"
             :entity="CodeRuleEntity"
-            :list="tableList.map(item => {
+            :list="fieldList.map(item => {
               return {
                 key: item.value,
                 label: item.label
               } as IDictionary
             })"
             clearable
-            @on-change="tableIdChanged"
+            @on-change="fieldChanged"
           />
         </el-form-item>
         <el-form-item
@@ -106,7 +106,7 @@ import { AirValidator } from '@/airpower/helper/AirValidator'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
-import { CodeRuleTable } from '@/model/system/coderule/CodeRuleTable'
+import { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import { IDictionary } from '@/airpower/interface/IDictionary'
 import { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
@@ -127,10 +127,10 @@ const {
   },
 })
 
-const tableList = ref([] as CodeRuleTable[])
+const fieldList = ref([] as CodeRuleField[])
 
-async function getTableList() {
-  tableList.value = await CodeRuleService.create(isLoading).getTableList()
+async function getFieldList() {
+  fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
 }
 
 const paramList = ref([] as CodeRuleParam[])
@@ -138,15 +138,15 @@ async function getParamList() {
   paramList.value = await CodeRuleService.create(isLoading).getParamList()
 }
 
-function tableIdChanged(tableId: number) {
-  formData.value.prefix = tableList.value.find((item) => item.value === tableId)?.defaultPrefix || formData.value.prefix
+function fieldChanged(fieldId: number) {
+  formData.value.prefix = fieldList.value.find((item) => item.value === fieldId)?.defaultPrefix || formData.value.prefix
 }
 
 function paramClicked(param: CodeRuleParam) {
   formData.value.template += param.label
 }
 
-getTableList()
+getFieldList()
 getParamList()
 
 const demoCode = computed(() => {
