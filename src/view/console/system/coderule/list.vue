@@ -11,7 +11,7 @@
       v-loading="isLoading"
       :data-list="response.list"
       :entity="CodeRuleEntity"
-      :ctrl-width="130"
+      :ctrl-width="105"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-sort-change="onSortChanged"
