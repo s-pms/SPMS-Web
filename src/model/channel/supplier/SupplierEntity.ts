@@ -16,8 +16,8 @@ export class SupplierEntity extends BaseEntity {
     orderNumber: 99,
   })
   @FormField({
-    orderNumber: 99,
-    requiredString: true,
+    orderNumber: 98,
+    placeholder: '不输入按编码规则自动生成',
   })
   @FieldName('供应商编码') code!: string
 
@@ -26,6 +26,7 @@ export class SupplierEntity extends BaseEntity {
    */
   @TableField({
     forceShow: true,
+    orderNumber: 99,
   })
   @FormField({
     orderNumber: 98,
