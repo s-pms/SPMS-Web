@@ -1,0 +1,1 @@
+git pull && cd src/airpower && git checkout web && git pull && cd ../../
