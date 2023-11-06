@@ -132,11 +132,13 @@ const fieldList = ref([] as CodeRuleField[])
 async function getFieldList() {
   fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
 }
+getFieldList()
 
 const paramList = ref([] as CodeRuleParam[])
 async function getParamList() {
   paramList.value = await CodeRuleService.create(isLoading).getParamList()
 }
+getParamList()
 
 function fieldChanged(fieldId: number) {
   formData.value.prefix = fieldList.value.find((item) => item.value === fieldId)?.defaultPrefix || formData.value.prefix
@@ -145,9 +147,6 @@ function fieldChanged(fieldId: number) {
 function paramClicked(param: CodeRuleParam) {
   formData.value.template += param.label
 }
-
-getFieldList()
-getParamList()
 
 const demoCode = computed(() => {
   let code = formData.value.template

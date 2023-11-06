@@ -1,7 +1,7 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { SerialNumberType } from './SerialNumberType'
 import {
-  ClassName, Dictionary, FieldName,
+  ClassName, Dictionary, FieldName, Type,
 } from '@/airpower/decorator/Custom'
 import { SerialNumberUpdateDictionary } from './SerialNumberUpdateDictionary'
 import { FormField } from '@/airpower/decorator/FormField'
@@ -30,20 +30,21 @@ export class CodeRuleEntity extends BaseEntity {
 
   @FormField({
     max: 10,
-    min: 4,
+    min: 1,
     number: true,
     requiredNumber: true,
     defaultValue: 4,
   })
-  @TableField()
+  @TableField({
+    width: 160,
+  })
   @FieldName('序列号初始长度') snLength!: number
 
   @TableField()
   @FormField({
     defaultValue: '',
-    requiredString: true,
     clearable: true,
-    maxLength: 32,
+    maxLength: 64,
   })
   @FieldName('规则模板') template!: string
 
@@ -55,6 +56,12 @@ export class CodeRuleEntity extends BaseEntity {
   })
   @TableField({
     showColor: true,
+    width: 100,
   })
   @FieldName('序列号更新') snType!: SerialNumberType
+
+  @TableField()
+  @FieldName('下一个编码') nextCode!: string
+
+  @Type(Number) currentSn!: number
 }
