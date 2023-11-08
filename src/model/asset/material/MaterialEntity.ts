@@ -68,4 +68,32 @@ export class MaterialEntity extends BaseEntity {
     requiredNumber: true,
   })
   @FieldName('单位ID') unitId!: number
+
+  @TableField({
+    width: 150,
+    suffixText: '元',
+    align: 'right',
+    hide: true,
+  })
+  @FormField({
+    number: true,
+    defaultValue: 0,
+    requiredNumber: true,
+  })
+  @Type(Number)
+  @FieldName('采购单价') purchasePrice!: number
+
+  @TableField({
+    width: 150,
+    suffixText: '元',
+    align: 'right',
+    hide: true,
+  })
+  @FormField({
+    number: true,
+    defaultValue: 0,
+    requiredNumber: true,
+  })
+  @Type(Number)
+  @FieldName('销售单价') salePrice!: number
 }

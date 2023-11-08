@@ -51,7 +51,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ElInput } from 'element-plus'
 import { ADialog, AInput } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

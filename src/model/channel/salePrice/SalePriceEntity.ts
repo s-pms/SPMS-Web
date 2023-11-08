@@ -41,6 +41,7 @@ export class SalePriceEntity extends BaseEntity {
     number: true,
   })
   @TableField({
+    width: 150,
     suffixText: '元',
     align: 'right',
   })

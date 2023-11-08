@@ -61,6 +61,24 @@
           @click="selectUnit()"
         />
       </el-form-item>
+      <el-form-item
+        :label="MaterialEntity.getFieldName('purchasePrice')"
+        prop="purchasePrice"
+      >
+        <AInput
+          v-model.purchasePrice="formData.purchasePrice"
+          :entity="MaterialEntity"
+        />
+      </el-form-item>
+      <el-form-item
+        :label="MaterialEntity.getFieldName('salePrice')"
+        prop="salePrice"
+      >
+        <AInput
+          v-model.salePrice="formData.salePrice"
+          :entity="MaterialEntity"
+        />
+      </el-form-item>
     </el-form>
   </ADialog>
 </template>

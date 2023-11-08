@@ -5,8 +5,8 @@ import { TableField } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
 
-@ClassName('采购价')
-export class PurchasePriceEntity extends BaseEntity {
+@ClassName('采购明细')
+export class PurchaseDetailEntity extends BaseEntity {
   @Type(MaterialEntity) material!: MaterialEntity
 
   @Type(SupplierEntity) supplier!: SupplierEntity
@@ -44,6 +44,28 @@ export class PurchasePriceEntity extends BaseEntity {
     width: 150,
     suffixText: '元',
     align: 'right',
+    orderNumber: -1,
   })
   @Type(Number) purchasePrice!: number
+
+  @FieldName('采购数量')
+  @FormField({
+    requiredNumber: true,
+    number: true,
+  })
+  @TableField({
+    align: 'right',
+    width: 150,
+    orderNumber: -2,
+  })
+  @Type(Number) quantity!: number
+
+  @FieldName('已入库数量')
+  @TableField({
+    align: 'right',
+    width: 150,
+    orderNumber: -3,
+    hide: true,
+  })
+  @Type(Number) inputQuantity!: number
 }
