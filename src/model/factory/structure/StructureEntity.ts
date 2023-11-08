@@ -4,26 +4,26 @@ import { TableField } from '@/airpower/decorator/TableField'
 import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 
-@ClassName('存储资源')
-export class StorageEntity extends BaseEntity implements ITree {
+@ClassName('工厂结构')
+export class StructureEntity extends BaseEntity implements ITree {
   @TableField()
   @FormField({
     requiredString: true,
   })
-  @FieldName('存储资源名称') name!: string
+  @FieldName('工厂结构名称') name!: string
 
   @TableField()
   @FormField({
     placeholder: '不输入按编码规则自动生成',
   })
-  @FieldName('存储资源编码') code!: string
+  @FieldName('工厂结构编码') code!: string
 
   // eslint-disable-next-line no-use-before-define
-  @Type(StorageEntity, true) children!: this[]
+  @Type(StructureEntity, true) children!: this[]
 
   parentId!: number
 
   // eslint-disable-next-line no-use-before-define
-  @Type(StorageEntity)
+  @Type(StructureEntity)
   @FieldName('所属上级') parent!: this
 }

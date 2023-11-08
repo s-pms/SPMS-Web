@@ -14,7 +14,9 @@ import { DisableDictionary } from '@/model/common/DisableDictionary'
  * # 数据库实体基类
  * @author Hamm
  */
+
 @EntityConfig({
+  addChildPermission: 'add',
 })
 @ClassName('记录')
 export class BaseEntity extends AirEntity {

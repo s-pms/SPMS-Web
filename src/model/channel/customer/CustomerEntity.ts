@@ -33,7 +33,7 @@ export class CustomerEntity extends BaseEntity {
    */
   @TableField()
   @FormField({
-    mobilePhone: true,
+    phone: true,
   })
   @FieldName('联系电话') phone!: string
 }

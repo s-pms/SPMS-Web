@@ -23,4 +23,9 @@ export const SerialNumberUpdateDictionary = AirDictionaryArray.create([
     label: '每年更新',
     color: AirColor.DANGER,
   },
+  {
+    key: SerialNumberType.NEVER,
+    label: '不更新',
+    color: AirColor.NORMAL,
+  },
 ])

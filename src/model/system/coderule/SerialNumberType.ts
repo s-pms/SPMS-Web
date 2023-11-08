@@ -19,4 +19,9 @@ export enum SerialNumberType {
    * # 每年更新
    */
   YEAR = 3,
+
+  /**
+   * # 不更新
+   */
+  NEVER = 4
 }
