@@ -38,6 +38,7 @@ export class MaterialEntity extends BaseEntity {
    */
   @TableField({
     showColor: true,
+    width: 100,
   })
   @FormField({
     clearable: false,
@@ -58,6 +59,7 @@ export class MaterialEntity extends BaseEntity {
 
   @TableField({
     payloadField: 'name',
+    width: 100,
   })
   @Type(UnitEntity)
   @FieldName('计量单位') unitInfo!: UnitEntity
