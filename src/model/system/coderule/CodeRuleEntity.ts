@@ -6,12 +6,16 @@ import {
 import { SerialNumberUpdateDictionary } from './SerialNumberUpdateDictionary'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
+import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 /**
  * # 编码规则实体
  *
  * @author Hamm
  */
 @ClassName('编码规则')
+@EntityConfig({
+  permissionPrefix: 'coderule_',
+})
 export class CodeRuleEntity extends BaseEntity {
   @FormField({
     requiredNumber: true,

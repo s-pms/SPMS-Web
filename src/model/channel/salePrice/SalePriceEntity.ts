@@ -3,13 +3,13 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { SupplierEntity } from '../supplier/SupplierEntity'
+import { CustomerEntity } from '../customer/CustomerEntity'
 
-@ClassName('采购价')
-export class PurchasePriceEntity extends BaseEntity {
+@ClassName('销售价')
+export class SalePriceEntity extends BaseEntity {
   @Type(MaterialEntity) material!: MaterialEntity
 
-  @Type(SupplierEntity) supplier!: SupplierEntity
+  @Type(CustomerEntity) customer!: CustomerEntity
 
   @TableField()
   @FieldName('物料编码') materialCode!: string
@@ -18,10 +18,10 @@ export class PurchasePriceEntity extends BaseEntity {
   @FieldName('物料名称') materialName!: string
 
   @TableField()
-  @FieldName('供应商名称') supplierName!: string
+  @FieldName('客户编码') customerName!: string
 
   @TableField()
-  @FieldName('供应商名称') supplierCode!: string
+  @FieldName('客户名称') customerCode!: string
 
   @FormField({
     requiredNumber: true,
@@ -32,10 +32,10 @@ export class PurchasePriceEntity extends BaseEntity {
   @FormField({
     requiredNumber: true,
   })
-  @FieldName('供应商')
-  @Type(Number) supplierId!: number
+  @FieldName('客户')
+  @Type(Number) customerId!: number
 
-  @FieldName('采购单价')
+  @FieldName('销售单价')
   @FormField({
     requiredNumber: true,
     number: true,
@@ -44,5 +44,5 @@ export class PurchasePriceEntity extends BaseEntity {
     suffixText: '元',
     align: 'right',
   })
-  @Type(Number) purchasePrice!: number
+  @Type(Number) salePrice!: number
 }

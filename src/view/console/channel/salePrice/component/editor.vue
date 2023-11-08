@@ -26,24 +26,24 @@
         />
       </el-form-item>
       <el-form-item
-        label="供应商"
-        prop="supplierId"
+        label="客户"
+        prop="customerId"
       >
         <el-input
-          v-model="formData.supplierName"
+          v-model="formData.customerName"
           clearable
-          placeholder="请选择供应商"
-          @clear="formData.exclude('supplier','supplierId')"
+          placeholder="请选择客户"
+          @clear="formData.exclude('customer','customerId')"
           @click="selectSupplier()"
         />
       </el-form-item>
       <el-form-item
-        :label="PurchasePriceEntity.getFieldName('purchasePrice')"
-        prop="purchasePrice"
+        :label="SalePriceEntity.getFieldName('salePrice')"
+        prop="salePrice"
       >
         <AInput
-          v-model.purchasePrice="formData.purchasePrice"
-          :entity="PurchasePriceEntity"
+          v-model.salePrice="formData.salePrice"
+          :entity="SalePriceEntity"
         />
       </el-form-item>
     </el-form>
@@ -56,24 +56,24 @@ import { ADialog, AInput } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
-import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
+import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { SupplierSelector } from '../../supplier/component'
+import { CustomerSelector } from '../../customer/component'
 
-const props = defineProps(airPropsParam(new PurchasePriceEntity()))
+const props = defineProps(airPropsParam(new SalePriceEntity()))
 
 const {
   title, formData, rules, formRef, isLoading,
   onSubmit,
-} = useAirEditor(props, PurchasePriceEntity, PurchasePriceService, {
+} = useAirEditor(props, SalePriceEntity, SalePriceService, {
   afterGetDetail(detailData) {
-    detailData.supplierId = detailData.supplier.id
+    detailData.customerId = detailData.customer.id
     detailData.materialId = detailData.material.id
     return detailData
   },
   beforeSubmit(submitData) {
-    submitData.exclude('materialId', 'supplierId')
+    submitData.exclude('materialId', 'customerId')
     return submitData
   },
 })
@@ -85,8 +85,8 @@ async function selectMaterial() {
 }
 
 async function selectSupplier() {
-  formData.value.supplier = await AirDialog.select(SupplierSelector)
-  formData.value.supplierId = formData.value.supplier.id
-  formData.value.supplierName = formData.value.supplier.name
+  formData.value.customer = await AirDialog.select(CustomerSelector)
+  formData.value.customerId = formData.value.customer.id
+  formData.value.customerName = formData.value.customer.name
 }
 </script>
