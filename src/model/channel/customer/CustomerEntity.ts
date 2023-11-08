@@ -3,10 +3,10 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 
-@ClassName('供应商')
-export class SupplierEntity extends BaseEntity {
+@ClassName('客户')
+export class CustomerEntity extends BaseEntity {
   /**
-   * # 供应商名称
+   * # 客户名称
    */
   @TableField({
     forceShow: true,
@@ -14,10 +14,10 @@ export class SupplierEntity extends BaseEntity {
   @FormField({
     requiredString: true,
   })
-  @FieldName('供应商名称') name!: string
+  @FieldName('客户名称') name!: string
 
   /**
-   * # 供应商编码
+   * # 客户编码
    */
   @TableField({
     copyField: true,
@@ -26,7 +26,7 @@ export class SupplierEntity extends BaseEntity {
   @FormField({
     placeholder: '不输入按编码规则自动生成',
   })
-  @FieldName('供应商编码') code!: string
+  @FieldName('客户编码') code!: string
 
   /**
    * # 联系电话

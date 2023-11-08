@@ -14,9 +14,7 @@ import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
  * # 菜单
  * @author Hamm
  */
-@EntityConfig({
-  addChildPermission: 'add',
-})
+@EntityConfig()
 @ClassName('菜单')
 export class MenuEntity extends BaseEntity implements IMenu {
   /**

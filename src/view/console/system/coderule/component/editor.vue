@@ -4,6 +4,7 @@
     :form-ref="formRef"
     :loading="isLoading"
     width="600px"
+    height="600px"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
   >

@@ -2,15 +2,15 @@
   <APanel>
     <AToolBar
       :loading="isLoading"
-      :entity="SupplierEntity"
-      :service="SupplierService"
+      :entity="CustomerEntity"
+      :service="CustomerService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
-      :entity="SupplierEntity"
+      :entity="CustomerEntity"
       :select-list="selectList"
       @on-edit="onEdit"
       @on-delete="onDelete"
@@ -31,17 +31,17 @@ import {
   APanel, APage, ATable, AToolBar,
 } from '@/airpower/component'
 import { useAirTable } from '@/airpower/hook/useAirTable'
-import { SupplierEditor } from './component'
-import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
-import { SupplierService } from '@/model/channel/supplier/SupplierService'
+import { CustomerEditor } from './component'
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+import { CustomerService } from '@/model/channel/customer/CustomerService'
 
 const {
   isLoading,
   response,
   selectList,
   onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(SupplierEntity, SupplierService, {
-  editView: SupplierEditor,
+} = useAirTable(CustomerEntity, CustomerService, {
+  editView: CustomerEditor,
 })
 </script>
 <style scoped lang="scss"></style>

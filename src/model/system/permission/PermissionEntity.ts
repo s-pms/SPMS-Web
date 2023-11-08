@@ -15,9 +15,7 @@ import { PermissionSystemDictionary } from './PermissionSystemDictionary'
  * # 权限
  * @author Hamm
  */
-@EntityConfig({
-  addChildPermission: 'add',
-})
+@EntityConfig()
 @ClassName('权限')
 export class PermissionEntity extends BaseEntity implements ITree {
   /**
