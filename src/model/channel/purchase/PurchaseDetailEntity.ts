@@ -46,7 +46,7 @@ export class PurchaseDetailEntity extends BaseEntity {
     align: 'right',
     orderNumber: -1,
   })
-  @Type(Number) purchasePrice!: number
+  @Type(Number) price!: number
 
   @FieldName('采购数量')
   @FormField({

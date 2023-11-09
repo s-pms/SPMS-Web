@@ -44,6 +44,7 @@ export class SalePriceEntity extends BaseEntity {
     width: 150,
     suffixText: '元',
     align: 'right',
+    orderNumber: -1,
   })
-  @Type(Number) salePrice!: number
+  @Type(Number) price!: number
 }

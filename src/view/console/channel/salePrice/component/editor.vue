@@ -38,11 +38,11 @@
         />
       </el-form-item>
       <el-form-item
-        :label="SalePriceEntity.getFieldName('salePrice')"
-        prop="salePrice"
+        :label="SalePriceEntity.getFieldName('price')"
+        prop="price"
       >
         <AInput
-          v-model.salePrice="formData.salePrice"
+          v-model.price="formData.price"
           :entity="SalePriceEntity"
         />
       </el-form-item>
@@ -68,7 +68,9 @@ const {
 } = useAirEditor(props, SalePriceEntity, SalePriceService, {
   afterGetDetail(detailData) {
     detailData.customerId = detailData.customer.id
+    detailData.customerName = detailData.customer.name
     detailData.materialId = detailData.material.id
+    detailData.materialName = detailData.material.name
     return detailData
   },
   beforeSubmit(submitData) {

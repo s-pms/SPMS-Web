@@ -4,6 +4,7 @@
     :form-ref="formRef"
     :loading="isLoading"
     width="60%"
+    height="60%"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
   >
@@ -38,13 +39,10 @@
           />
         </el-form-item>
       </AGroup>
-      <AGroup
-        :title="PurchaseEntity.getFieldName('purchaseDetail')"
-        :column="1"
-      >
+      <AGroup title="采购明细">
         <ATable
           :entity="PurchaseDetailEntity"
-          :data-list="formData.purchaseDetail"
+          :data-list="formData.details"
           :field-list="PurchaseDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
           hide-edit
           hide-delete
@@ -66,7 +64,7 @@
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ PurchaseEntity.getFieldName('purchaseDetail') }}
+              添加{{ PurchaseEntity.getFieldName('details') }}
             </AButton>
           </template>
           <template #customRow="row">
@@ -95,6 +93,7 @@ import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
+import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
@@ -106,17 +105,23 @@ const {
     return detailData
   },
   beforeSubmit(submitData) {
+    if (submitData.details.length === 0) {
+      AirNotification.warning('请添加采购明细后再提交')
+      return null
+    }
     return submitData
   },
 })
 
+formData.value.reason = formData.value.reason || '12345'
+
 async function addDetail() {
   const detail: PurchaseDetailEntity = await AirDialog.show(PurchaseDetailEditor)
-  formData.value.purchaseDetail.push(detail)
+  formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
   await AirConfirm.warning('是否删除选中行的采购明细？')
-  formData.value.purchaseDetail.splice(index, 1)
+  formData.value.details.splice(index, 1)
 }
 </script>

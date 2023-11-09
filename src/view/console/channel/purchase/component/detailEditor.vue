@@ -39,11 +39,11 @@
         />
       </el-form-item>
       <el-form-item
-        :label="PurchaseDetailEntity.getFieldName('purchasePrice')"
-        prop="purchasePrice"
+        :label="PurchaseDetailEntity.getFieldName('price')"
+        prop="price"
       >
         <AInput
-          v-model.purchasePrice="formData.purchasePrice"
+          v-model.price="formData.price"
           :entity="PurchaseDetailEntity"
         />
       </el-form-item>
@@ -96,11 +96,11 @@ async function getPurchasePrice() {
   if (formData.value.materialId && formData.value.supplierId) {
     const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(formData.value.materialId, formData.value.supplierId)
     if (purchasePrice) {
-      formData.value.purchasePrice = purchasePrice.purchasePrice
+      formData.value.price = purchasePrice.price
       return
     }
-    await AirNotification.warning('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
-    formData.value.purchasePrice = formData.value.material.purchasePrice
+    AirNotification.warning('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
+    formData.value.price = formData.value.material.purchasePrice
   }
 }
 

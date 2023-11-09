@@ -42,5 +42,5 @@ export class PurchaseEntity extends BaseEntity {
   @FieldName('采购状态') status!: PurchaseStatus
 
   @FieldName('采购明细')
-  @Type(PurchaseDetailEntity, true) purchaseDetail: PurchaseDetailEntity[] = []
+  @Type(PurchaseDetailEntity, true) details: PurchaseDetailEntity[] = []
 }
