@@ -45,7 +45,14 @@
         <AInput
           v-model.price="formData.price"
           :entity="PurchaseDetailEntity"
-        />
+        >
+          <template
+            v-if="formData.material"
+            #append
+          >
+            元/{{ formData.material.unitInfo.name }}
+          </template>
+        </AInput>
       </el-form-item>
       <el-form-item
         :label="PurchaseDetailEntity.getFieldName('quantity')"
@@ -54,7 +61,14 @@
         <AInput
           v-model.quantity="formData.quantity"
           :entity="PurchaseDetailEntity"
-        />
+        >
+          <template
+            v-if="formData.material"
+            #append
+          >
+            {{ formData.material.unitInfo.name }}
+          </template>
+        </AInput>
       </el-form-item>
       <el-form-item
         :label="PurchaseDetailEntity.getFieldName('remark')"
@@ -99,7 +113,7 @@ async function getPurchasePrice() {
       formData.value.price = purchasePrice.price
       return
     }
-    AirNotification.warning('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
+    AirNotification.create().setDuration(5000).info('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
     formData.value.price = formData.value.material.purchasePrice
   }
 }
