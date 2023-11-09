@@ -113,8 +113,6 @@ const {
   },
 })
 
-formData.value.reason = formData.value.reason || '12345'
-
 async function addDetail() {
   const detail: PurchaseDetailEntity = await AirDialog.show(PurchaseDetailEditor)
   formData.value.details.push(detail)
