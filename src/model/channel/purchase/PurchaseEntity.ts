@@ -32,6 +32,9 @@ export class PurchaseEntity extends BaseEntity {
     suffixText: '元',
     align: 'right',
   })
+  @FormField({
+    suffixText: '元',
+  })
   @FieldName('总金额') totalPrice!: number
 
   @TableField({

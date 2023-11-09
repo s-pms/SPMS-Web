@@ -28,6 +28,9 @@ export class BaseEntity extends AirEntity {
   })
   @Type(Number) createTime!: number
 
+  @FieldName('更新时间')
+  @Type(Number) updateTime!: number
+
   @FieldName('状态')
   @SearchField({
     orderNumber: -100,

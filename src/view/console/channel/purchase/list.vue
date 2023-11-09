@@ -14,7 +14,9 @@
       :select-list="selectList"
       :disable-edit="(row: PurchaseEntity) => row.status !== PurchaseStatus.AUDITING"
       hide-delete
-      :ctrl-width="105"
+      show-detail
+      :ctrl-width="130"
+      @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
@@ -42,7 +44,7 @@ import {
   APanel, APage, ATable, AToolBar, AButton,
 } from '@/airpower/component'
 import { useAirTable } from '@/airpower/hook/useAirTable'
-import { PurchaseEditor } from './component'
+import { PurchaseDetail, PurchaseEditor } from './component'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
@@ -52,9 +54,10 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onReloadData,
+  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onReloadData, onDetail,
 } = useAirTable(PurchaseEntity, PurchaseService, {
   editView: PurchaseEditor,
+  detailView: PurchaseDetail,
 })
 
 async function onConfirm(row: PurchaseEntity) {
