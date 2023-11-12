@@ -1,6 +1,7 @@
 import { FieldName } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
+import { FormField } from '@/airpower/decorator/FormField'
 
 /**
  * # 单据基类
@@ -23,5 +24,8 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
    */
   abstract details: D[]
 
+  @FormField({
+    textarea: true,
+  })
   @FieldName('驳回原因') rejectReason!: string
 }

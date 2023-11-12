@@ -55,7 +55,6 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
     align: 'right',
     width: 150,
     orderNumber: -3,
-    hide: true,
   })
   @Type(Number) outputQuantity!: number
 

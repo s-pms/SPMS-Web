@@ -55,6 +55,24 @@
             disabled
           />
         </el-form-item>
+        <el-form-item :label="SaleEntity.getFieldName('status')">
+          <AInput
+            v-model.status="formData.status"
+            :entity="SaleEntity"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item
+          v-if="formData.status === SaleStatus.REJECTED"
+          style="width: 100%;"
+          :label="SaleEntity.getFieldName('rejectReason')"
+        >
+          <AInput
+            v-model.rejectReason="formData.rejectReason"
+            :entity="SaleEntity"
+            disabled
+          />
+        </el-form-item>
       </AGroup>
       <AGroup title="采购明细">
         <ATable
@@ -86,6 +104,7 @@ import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
+import { SaleStatus } from '@/model/channel/sale/SaleStatus'
 
 const props = defineProps(airPropsParam(new SaleEntity()))
 

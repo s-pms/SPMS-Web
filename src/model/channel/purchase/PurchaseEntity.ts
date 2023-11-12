@@ -22,7 +22,6 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @FormField({
     textarea: true,
     maxLength: 80,
-    minLength: 5,
     requiredString: true,
   })
   @FieldName('采购事由') reason!: string
