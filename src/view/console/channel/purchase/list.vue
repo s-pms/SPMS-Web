@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="PurchaseEntity"
       :select-list="selectList"
-      :disable-edit="(row: PurchaseEntity) => row.status !== PurchaseStatus.AUDITING"
+      :disable-edit="(row: PurchaseEntity) => row.status !== PurchaseStatus.REJECTED"
       hide-delete
       show-detail
       :ctrl-width="130"
@@ -26,7 +26,15 @@
           icon-button
           tooltip="审核"
           type="CONFIRM"
-          @click="onConfirm(row.data)"
+          :disabled="(row.data as PurchaseEntity).status !== PurchaseStatus.AUDITING"
+          @click="onAudit(row.data)"
+        />
+        <AButton
+          icon-button
+          tooltip="驳回"
+          type="LOCK"
+          :disabled="(row.data as PurchaseEntity).status !== PurchaseStatus.AUDITING"
+          @click="onReject(row.data)"
         />
       </template>
     </ATable>
@@ -43,27 +51,21 @@
 import {
   APanel, APage, ATable, AToolBar, AButton,
 } from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
 import { PurchaseDetail, PurchaseEditor } from './component'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
+import { useBillTable } from '@/hook/billTable/useBillTable'
 
 const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onReloadData, onDetail,
-} = useAirTable(PurchaseEntity, PurchaseService, {
+  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onReject, onAudit,
+} = useBillTable(PurchaseEntity, PurchaseService, {
   editView: PurchaseEditor,
   detailView: PurchaseDetail,
 })
 
-async function onConfirm(row: PurchaseEntity) {
-  await AirConfirm.warning(`是否确认审核选择的${PurchaseEntity.getClassName()}？`)
-  await PurchaseService.create(isLoading).audit(row)
-  onReloadData()
-}
 </script>
 <style scoped lang="scss"></style>

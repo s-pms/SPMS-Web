@@ -1,12 +1,9 @@
-import { AbstractBaseService } from '@/base/AbstractBaseService'
+import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { PurchaseEntity } from './PurchaseEntity'
+import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 
-export class PurchaseService extends AbstractBaseService<PurchaseEntity> {
+export class PurchaseService extends AbstractBaseBillService<PurchaseDetailEntity, PurchaseEntity> {
   entityClass = PurchaseEntity
 
   baseUrl = 'purchase'
-
-  async audit(entity: PurchaseEntity): Promise<void> {
-    await this.api('audit').post(entity)
-  }
 }

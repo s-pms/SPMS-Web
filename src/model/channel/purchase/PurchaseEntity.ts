@@ -1,15 +1,15 @@
 import {
   ClassName, Dictionary, FieldName, Type,
 } from '@/airpower/decorator/Custom'
-import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { PurchaseStatus } from './PurchaseStatus'
 import { PurchaseStatusDictionary } from './PurchaseStatusDictionary'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 
 @ClassName('采购单')
-export class PurchaseEntity extends BaseEntity {
+export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity> {
   @TableField()
   @FormField({
     placeholder: '不填写按编码规则自动生成',

@@ -67,7 +67,7 @@ export class MaterialEntity extends BaseEntity {
   @FormField({
     requiredNumber: true,
   })
-  @FieldName('单位ID') unitId!: number
+  @FieldName('计量单位') unitId!: number
 
   @TableField({
     width: 150,

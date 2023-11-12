@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="SaleEntity"
       :select-list="selectList"
-      :disable-edit="(row: SaleEntity) => row.status !== SaleStatus.AUDITING"
+      :disable-edit="(row: SaleEntity) => row.status !== SaleStatus.REJECTED"
       hide-delete
       show-detail
       :ctrl-width="130"
@@ -32,7 +32,15 @@
           icon-button
           tooltip="审核"
           type="CONFIRM"
-          @click="onConfirm(row.data)"
+          :disabled="(row.data as SaleEntity).status !== SaleStatus.AUDITING"
+          @click="onAudit(row.data)"
+        />
+        <AButton
+          icon-button
+          tooltip="驳回"
+          type="LOCK"
+          :disabled="(row.data as SaleEntity).status !== SaleStatus.AUDITING"
+          @click="onReject(row.data)"
         />
       </template>
     </ATable>
@@ -49,27 +57,20 @@
 import {
   APanel, APage, ATable, AToolBar, AButton,
 } from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
 import { SaleDetail, SaleEditor } from './component'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleStatus } from '@/model/channel/sale/SaleStatus'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
+import { useBillTable } from '@/hook/billTable/useBillTable'
 
 const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onReloadData, onDetail,
-} = useAirTable(SaleEntity, SaleService, {
+  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+} = useBillTable(SaleEntity, SaleService, {
   editView: SaleEditor,
   detailView: SaleDetail,
 })
-
-async function onConfirm(row: SaleEntity) {
-  await AirConfirm.warning(`是否确认审核选择的${SaleEntity.getClassName()}？`)
-  await SaleService.create(isLoading).audit(row)
-  onReloadData()
-}
 </script>
 <style scoped lang="scss"></style>

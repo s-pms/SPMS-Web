@@ -104,8 +104,7 @@ const {
     return detailData
   },
   beforeSubmit(submitData) {
-    submitData.unitId = submitData.unitInfo.id
-    submitData.exclude('unitInfo')
+    submitData.exclude('unitId')
     return submitData
   },
 })

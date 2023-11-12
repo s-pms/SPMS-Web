@@ -1,12 +1,12 @@
 import { ClassName, FieldName, Type } from '@/airpower/decorator/Custom'
-import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
+import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
 @ClassName('采购明细')
-export class PurchaseDetailEntity extends BaseEntity {
+export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Type(MaterialEntity) material!: MaterialEntity
 
   @Type(SupplierEntity) supplier!: SupplierEntity
@@ -70,4 +70,6 @@ export class PurchaseDetailEntity extends BaseEntity {
     hide: true,
   })
   @Type(Number) inputQuantity!: number
+
+  billId!: number
 }

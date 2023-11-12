@@ -17,32 +17,24 @@
         title="采购单"
         :column="2"
       >
-        <el-form-item
-          :label="PurchaseEntity.getFieldName('billCode')"
-        >
+        <el-form-item :label="PurchaseEntity.getFieldName('billCode')">
           <AInput
             v-model.billCode="formData.billCode"
             :entity="PurchaseEntity"
             disabled
           />
         </el-form-item>
-        <el-form-item
-          :label="PurchaseEntity.getFieldName('totalPrice')"
-        >
+        <el-form-item :label="PurchaseEntity.getFieldName('totalPrice')">
           <AInput
             v-model.totalPrice="formData.totalPrice"
             :entity="PurchaseEntity"
             disabled
           />
         </el-form-item>
-        <el-form-item
-          :label="PurchaseEntity.getFieldName('createTime')"
-        >
+        <el-form-item :label="PurchaseEntity.getFieldName('createTime')">
           <ADateTime :time="formData.createTime" />
         </el-form-item>
-        <el-form-item
-          :label="PurchaseEntity.getFieldName('updateTime')"
-        >
+        <el-form-item :label="PurchaseEntity.getFieldName('updateTime')">
           <ADateTime :time="formData.updateTime" />
         </el-form-item>
         <el-form-item
@@ -51,6 +43,24 @@
         >
           <AInput
             v-model.reason="formData.reason"
+            :entity="PurchaseEntity"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item :label="PurchaseEntity.getFieldName('status')">
+          <AInput
+            v-model.status="formData.status"
+            :entity="PurchaseEntity"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item
+          v-if="formData.status === PurchaseStatus.REJECTED"
+          style="width: 100%;"
+          :label="PurchaseEntity.getFieldName('rejectReason')"
+        >
+          <AInput
+            v-model.rejectReason="formData.rejectReason"
             :entity="PurchaseEntity"
             disabled
           />
@@ -92,6 +102,7 @@ import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEnt
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
+import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 

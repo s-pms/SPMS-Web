@@ -1,12 +1,14 @@
 import { ClassName, FieldName, Type } from '@/airpower/decorator/Custom'
-import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
+import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
 @ClassName('销售明细')
-export class SaleDetailEntity extends BaseEntity {
+export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
+  billId!: number
+
   @Type(MaterialEntity) material!: MaterialEntity
 
   @TableField()
