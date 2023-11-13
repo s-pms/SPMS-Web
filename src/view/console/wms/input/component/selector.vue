@@ -1,10 +1,9 @@
 <template>
   <ADialog
-    width="70%"
-    height="70%"
     :hide-footer="!mult"
     :title="title"
     is-selector
+    width="60%"
     :loading="isLoading"
     :disable-confirm="mult && selectList.length === 0"
     @on-confirm="onConfirm(selectList)"
@@ -13,22 +12,28 @@
     <AToolBar
       hide-add
       :loading="isLoading"
-      :entity="StorageEntity"
-      :service="StorageService"
+      :entity="InputEntity"
+      :service="InputService"
       @on-search="onSearch"
     />
     <ATable
-      :data-list="list"
+      :data-list="response.list"
       :show-select="mult"
       hide-delete
       hide-edit
       :select-list="selectList"
-      :entity="StorageEntity"
+      :entity="InputEntity"
       :ctrl-width="80"
       hide-field-selector
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
+      <template #storageCode="row">
+        {{ (row.data as InputEntity).storage.code }}
+      </template>
+      <template #storageName="row">
+        {{ (row.data as InputEntity).storage.name }}
+      </template>
       <template
         v-if="!mult"
         #customRow="{ data }"
@@ -38,30 +43,35 @@
           icon-button
           :disabled="data.isDisabled"
           tooltip="选择"
-          @click="onConfirm(data)"
+          @click="
+            onConfirm(data)
+          "
         />
       </template>
     </ATable>
+    <template #footerRight>
+      <APage
+        :response="response"
+        @changed="onPageChanged"
+      />
+    </template>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
 import {
-  ATable, AToolBar, ADialog, AButton,
+  APage, ATable, AToolBar, ADialog, AButton,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
-import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { StorageService } from '@/model/factory/storage/StorageService'
+import { InputEntity } from '@/model/wms/input/InputEntity'
+import { InputService } from '@/model/wms/input/InputService'
 
-const props = defineProps(airPropsSelector<StorageEntity>())
+const props = defineProps(airPropsSelector<InputEntity>())
 
 const {
-  title, selectList, isLoading, list,
-  onSearch, onSelected,
-} = useAirSelector(props, StorageEntity, StorageService, {
-  unPaginate: true,
-})
-
+  title, selectList, onSelected, isLoading, response,
+  onSearch, onPageChanged,
+} = useAirSelector(props, InputEntity, InputService)
 </script>
 <style scoped lang="scss"></style>
