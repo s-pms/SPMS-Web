@@ -27,16 +27,6 @@
           />
         </el-form-item>
         <el-form-item
-          :label="InputEntity.getFieldName('createTime')"
-        >
-          <ADateTime :time="formData.createTime" />
-        </el-form-item>
-        <el-form-item
-          :label="InputEntity.getFieldName('updateTime')"
-        >
-          <ADateTime :time="formData.updateTime" />
-        </el-form-item>
-        <el-form-item
           :label="InputEntity.getFieldName('type')"
           prop="type"
         >
@@ -46,12 +36,32 @@
             disabled
           />
         </el-form-item>
+        <el-form-item
+          label="目标存储资源"
+          prop="storageId"
+        >
+          <el-input
+            v-model="formData.storageName"
+            clearable
+            disabled
+          />
+        </el-form-item>
         <el-form-item :label="InputEntity.getFieldName('status')">
           <AInput
             v-model.status="formData.status"
             :entity="InputEntity"
             disabled
           />
+        </el-form-item>
+        <el-form-item
+          :label="InputEntity.getFieldName('createTime')"
+        >
+          <ADateTime :time="formData.createTime" />
+        </el-form-item>
+        <el-form-item
+          :label="InputEntity.getFieldName('updateTime')"
+        >
+          <ADateTime :time="formData.updateTime" />
         </el-form-item>
         <el-form-item
           v-if="formData.status === InputStatus.REJECTED"
@@ -102,6 +112,9 @@ const props = defineProps(airPropsParam(new InputEntity()))
 const {
   title, formData, isLoading,
 } = useAirDetail(props, InputEntity, InputService, {
+  afterGetDetail(detailData) {
+    detailData.storageName = detailData.storage.name
+  },
 })
 
 </script>
