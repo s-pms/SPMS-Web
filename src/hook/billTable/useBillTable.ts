@@ -19,8 +19,6 @@ export function useBillTable<D extends AbstractBaseBillDetailEntity, B extends A
   }
 
   async function onReject(bill: B) {
-    console.log(bill)
-
     const rejectReason: string = await AirDialog.show(BillRejectDialog, `驳回${result.entity.getClassName()}的原因`)
     await AirConfirm.warning(`是否确认驳回选择的${result.entity.getClassName()}？`)
     bill.rejectReason = rejectReason
