@@ -2,8 +2,8 @@
   <AFrame :menu-list="menuList">
     <template #logo>
       <img
-        :src="airpower"
-        height="30"
+        src="https://cdn.hamm.cn/svg/spms/logo.svg"
+        style="height: 40px;"
       >
     </template>
     <template #user>
@@ -34,7 +34,6 @@ import { AirRouter } from '@/airpower/helper/AirRouter'
 import { AirWebsocket } from '@/airpower/websocket/AirWebSocket'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { AirClassTransformer } from '@/airpower/helper/AirClassTransformer'
-import airpower from '@/airpower/assets/img/airpower.png'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'

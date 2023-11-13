@@ -106,7 +106,7 @@ const {
   },
   beforeSubmit(submitData) {
     if (submitData.details.length === 0) {
-      AirNotification.warning('请添加采购明细后再提交')
+      AirNotification.warning('请添加明细后再提交')
       return null
     }
     return submitData

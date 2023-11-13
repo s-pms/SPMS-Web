@@ -4,7 +4,7 @@
     :form-ref="formRef"
     :loading="isLoading"
     width="60%"
-    height="60%"
+    height="80%"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
   >
@@ -16,61 +16,79 @@
       @submit.prevent
     >
       <AGroup
-        title="采购单"
+        title="生产计划"
         :column="2"
       >
         <el-form-item
-          :label="SaleEntity.getFieldName('billCode')"
+          :label="PlanEntity.getFieldName('billCode')"
           prop="billCode"
         >
           <AInput
             v-model.billCode="formData.billCode"
-            :entity="SaleEntity"
+            :entity="PlanEntity"
           />
         </el-form-item>
         <el-form-item
-          label="销售客户"
+          :label="PlanEntity.getFieldName('startTime')"
+          prop="startTime"
+        >
+          <AInput
+            v-model.startTime="formData.startTime"
+            :entity="PlanEntity"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="PlanEntity.getFieldName('deliverTime')"
+          prop="deliverTime"
+        >
+          <AInput
+            v-model.deliverTime="formData.deliverTime"
+            :entity="PlanEntity"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="PlanEntity.getFieldName('type')"
+          prop="type"
+        >
+          <AInput
+            v-model.type="formData.type"
+            :entity="PlanEntity"
+          />
+        </el-form-item>
+        <el-form-item
+          v-if="formData.type === PlanType.SALE"
+          label="关联客户"
           prop="customerId"
         >
           <el-input
             v-model="formData.customerName"
             clearable
-            placeholder="请选择销售客户"
+            placeholder="请选择计划关联客户"
             @clear="formData.exclude('customer', 'customerId')"
             @click="selectCustomer()"
           />
         </el-form-item>
-        <el-form-item
-          style="width: 100%;"
-          :label="SaleEntity.getFieldName('reason')"
-          prop="reason"
-        >
-          <AInput
-            v-model.reason="formData.reason"
-            :entity="SaleEntity"
-          />
-        </el-form-item>
       </AGroup>
-      <AGroup title="采购明细">
+      <AGroup title="计划明细">
         <ATable
-          :entity="SaleDetailEntity"
+          :entity="PlanDetailEntity"
           :data-list="formData.details"
-          :field-list="SaleDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :field-list="PlanDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
           hide-edit
           hide-delete
         >
           <template #materialCode="row">
-            {{ (row.data as SaleDetailEntity).material.code }}
+            {{ (row.data as PlanDetailEntity).material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as SaleDetailEntity).material.name }}
+            {{ (row.data as PlanDetailEntity).material.name }}
           </template>
           <template #addButton>
             <AButton
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ SaleEntity.getFieldName('details') }}
+              添加{{ PlanEntity.getFieldName('details') }}
             </AButton>
           </template>
           <template #customRow="row">
@@ -94,26 +112,31 @@ import {
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-import { SaleEntity } from '@/model/channel/sale/SaleEntity'
-import { SaleService } from '@/model/channel/sale/SaleService'
-import { SaleDetailEditor } from '.'
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
+import { PlanDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { CustomerSelector } from '../../customer/component'
+import { CustomerSelector } from '@/view/console/channel/customer/component'
+import { PlanType } from '@/model/mes/plan/PlanType'
 
-const props = defineProps(airPropsParam(new SaleEntity()))
+const props = defineProps(airPropsParam(new PlanEntity()))
 
 const {
   title, formData, rules, formRef, isLoading,
   onSubmit,
-} = useAirEditor(props, SaleEntity, SaleService, {
+} = useAirEditor(props, PlanEntity, PlanService, {
   afterGetDetail(detailData) {
     detailData.customerName = detailData.customer.name
     detailData.customerId = detailData.customer.id
     return detailData
   },
   beforeSubmit(submitData) {
+    if (submitData.deliverTime < submitData.startTime) {
+      AirNotification.warning('交付日期不能早于开始日期')
+      return null
+    }
     if (submitData.details.length === 0) {
       AirNotification.warning('请添加明细后再提交')
       return null
@@ -123,15 +146,12 @@ const {
 })
 
 async function addDetail() {
-  const newDetail = new SaleDetailEntity()
-  newDetail.customer = formData.value.customer
-  const detail: SaleDetailEntity = await AirDialog.show(SaleDetailEditor, newDetail)
-
+  const detail: PlanDetailEntity = await AirDialog.show(PlanDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的采购明细？')
+  await AirConfirm.warning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
 }
 
