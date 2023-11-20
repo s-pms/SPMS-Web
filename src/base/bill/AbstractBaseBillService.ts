@@ -23,4 +23,20 @@ export abstract class AbstractBaseBillService<D extends AbstractBaseBillDetailEn
   async reject(bill: B): Promise<void> {
     await this.api('reject').post(bill)
   }
+
+  /**
+   * # 完成单据
+   * @param bill 单据
+   */
+  async finish(bill: B): Promise<void> {
+    await this.api('finish').post(bill)
+  }
+
+  /**
+   * # 添加完成数量
+   * @param bill 单据
+   */
+  async addFinish(bill: D): Promise<void> {
+    await this.api('addFinish').post(bill)
+  }
 }

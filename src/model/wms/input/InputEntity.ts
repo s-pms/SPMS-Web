@@ -51,7 +51,7 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
   @Dictionary(InputTypeDictionary)
   @FieldName('入库类型') type!: InputType
 
-  @FieldName('入库仓库')
+  @FieldName('存储资源')
   @Type(StorageEntity) storage!: StorageEntity
 
   @FieldName('入库明细')

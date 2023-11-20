@@ -81,6 +81,7 @@
           <template #addButton>
             <AButton
               type="ADD"
+              :disabled="isAddDetailDisabled"
               @click="addDetail()"
             >
               添加{{ InputEntity.getFieldName('details') }}
@@ -101,6 +102,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
   ADialog, AGroup, AInput, ATable, AButton,
 } from '@/airpower/component'
@@ -137,6 +139,13 @@ const {
     }
     return submitData
   },
+})
+
+const isAddDetailDisabled = computed(() => {
+  if (formData.value.type === InputType.PURCHASE && !formData.value.purchaseId) {
+    return true
+  }
+  return false
 })
 
 async function addDetail() {

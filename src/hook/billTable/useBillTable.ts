@@ -18,6 +18,12 @@ export function useBillTable<D extends AbstractBaseBillDetailEntity, B extends A
     result.onReloadData()
   }
 
+  async function onFinish(bill: B) {
+    await AirConfirm.warning(`是否确认手动完成选择的${result.entity.getClassName()}？`)
+    await result.service.finish(bill)
+    result.onReloadData()
+  }
+
   async function onReject(bill: B) {
     const rejectReason: string = await AirDialog.show(BillRejectDialog, `驳回${result.entity.getClassName()}的原因`)
     await AirConfirm.warning(`是否确认驳回选择的${result.entity.getClassName()}？`)
@@ -26,5 +32,7 @@ export function useBillTable<D extends AbstractBaseBillDetailEntity, B extends A
     result.onReloadData()
   }
 
-  return { onAudit, onReject, ...result }
+  return {
+    onFinish, onAudit, onReject, ...result,
+  } as IUseBillTableResult<D, B, S>
 }

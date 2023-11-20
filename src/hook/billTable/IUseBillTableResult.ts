@@ -10,7 +10,21 @@ import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBil
  * @author Hamm
  */
 export interface IUseBillTableResult<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>, S extends AbstractBaseBillService<D, B>> extends IUseTableResult<B, S> {
+  /**
+   * # 审核
+   * @param bill 单据
+   */
   onAudit: (bill: B) => void
 
+  /**
+   * # 驳回
+   * @param bill 单据
+   */
   onReject: (bill: B) => void
+
+  /**
+   * # 完成单据
+   * @param bill
+   */
+  onFinish: (bill: B) => void
 }

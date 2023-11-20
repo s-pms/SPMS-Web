@@ -16,4 +16,14 @@ export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
     removed: true,
   })
   declare createTime: number
+
+  /**
+   * # 数量
+   */
+  abstract quantity: number
+
+  /**
+   * # 已完成数量
+   */
+  abstract finishQuantity: number
 }

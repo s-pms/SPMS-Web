@@ -1,7 +1,7 @@
-import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { InputDetailEntity } from './InputDetailEntity'
+import { AbstractBaseBillDetailService } from '@/base/bill/AbstractBaseBillDetailService'
 
-export class InputDetailService extends AbstractBaseService<InputDetailEntity> {
+export class InputDetailService extends AbstractBaseBillDetailService<InputDetailEntity> {
   entityClass = InputDetailEntity
 
   baseUrl = 'inputDetail'

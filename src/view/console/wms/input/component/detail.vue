@@ -17,9 +17,7 @@
         title="采购单"
         :column="2"
       >
-        <el-form-item
-          :label="InputEntity.getFieldName('billCode')"
-        >
+        <el-form-item :label="InputEntity.getFieldName('billCode')">
           <AInput
             v-model.billCode="formData.billCode"
             :entity="InputEntity"
@@ -53,14 +51,10 @@
             disabled
           />
         </el-form-item>
-        <el-form-item
-          :label="InputEntity.getFieldName('createTime')"
-        >
+        <el-form-item :label="InputEntity.getFieldName('createTime')">
           <ADateTime :time="formData.createTime" />
         </el-form-item>
-        <el-form-item
-          :label="InputEntity.getFieldName('updateTime')"
-        >
+        <el-form-item :label="InputEntity.getFieldName('updateTime')">
           <ADateTime :time="formData.updateTime" />
         </el-form-item>
         <el-form-item
@@ -75,19 +69,28 @@
           />
         </el-form-item>
       </AGroup>
-      <AGroup title="采购明细">
+      <AGroup title="入库明细">
         <ATable
           :entity="InputDetailEntity"
           :data-list="formData.details"
           :field-list="InputDetailEntity.getTableFieldConfigList()"
-          hide-ctrl
-          :ctrl-width="60"
+          hide-delete
+          hide-edit
         >
           <template #materialCode="row">
             {{ (row.data as InputDetailEntity).material.code }}
           </template>
           <template #materialName="row">
             {{ (row.data as InputDetailEntity).material.name }}
+          </template>
+          <template #endRow="row">
+            <AButton
+              icon-button
+              tooltip="添加完成"
+              :disabled="formData.status !== InputStatus.INPUTING"
+              type="CHECKIN"
+              @click="onAddFinish(row.data)"
+            />
           </template>
         </ATable>
       </AGroup>
@@ -97,6 +100,7 @@
 
 <script lang="ts" setup>
 import {
+  AButton,
   ADateTime,
   ADialog, AGroup, AInput, ATable,
 } from '@/airpower/component'
@@ -104,16 +108,19 @@ import { airPropsParam } from '@/airpower/config/AirProps'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { InputStatus } from '@/model/wms/input/InputStatus'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
 const {
   title, formData, isLoading,
-} = useAirDetail(props, InputEntity, InputService, {
+  onAddFinish,
+} = useBillDetail(props, InputEntity, InputService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
+    detailData.storageId = detailData.storage.id
+    return detailData
   },
 })
 

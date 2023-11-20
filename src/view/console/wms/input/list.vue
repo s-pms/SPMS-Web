@@ -15,7 +15,7 @@
       :disable-edit="(row: InputEntity) => row.status !== InputStatus.REJECTED"
       hide-delete
       show-detail
-      :ctrl-width="130"
+      :ctrl-width="155"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort-change="onSortChanged"
@@ -42,6 +42,13 @@
           :disabled="(row.data as InputEntity).status !== InputStatus.AUDITING"
           @click="onReject(row.data)"
         />
+        <AButton
+          icon-button
+          tooltip="完成"
+          type="CHECKIN"
+          :disabled="(row.data as InputEntity).status !== InputStatus.INPUTING"
+          @click="onFinish(row.data)"
+        />
       </template>
     </ATable>
     <template #footerLeft>
@@ -67,7 +74,7 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject, onFinish,
 } = useBillTable(InputEntity, InputService, {
   editView: InputEditor,
   detailView: InputDetail,
