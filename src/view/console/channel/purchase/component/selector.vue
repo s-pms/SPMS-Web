@@ -10,11 +10,11 @@
     @on-cancel="onCancel()"
   >
     <AToolBar
-      hide-add
       :loading="isLoading"
       :entity="PurchaseEntity"
       :service="PurchaseService"
       @on-search="onSearch"
+      @on-add="onAdd"
     />
     <ATable
       :data-list="response.list"
@@ -60,12 +60,15 @@ import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
+import { PurchaseEditor } from '.'
 
 const props = defineProps(airPropsSelector<PurchaseEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
-} = useAirSelector(props, PurchaseEntity, PurchaseService)
+  title, selectList, isLoading, response,
+  onSearch, onPageChanged, onSelected, onAdd,
+} = useAirSelector(props, PurchaseEntity, PurchaseService, {
+  editView: PurchaseEditor,
+})
 </script>
 <style scoped lang="scss"></style>
