@@ -102,6 +102,8 @@ async function inventoryTypeChanged() {
       break
     default:
   }
+  // eslint-disable-next-line no-use-before-define
+  treeChanged(undefined)
 }
 
 async function getList() {
@@ -131,6 +133,5 @@ async function treeChanged(current: ITree | undefined) {
 }
 
 inventoryTypeChanged()
-treeChanged(undefined)
 </script>
 <style scoped lang="scss"></style>

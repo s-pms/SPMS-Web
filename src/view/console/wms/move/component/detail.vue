@@ -25,12 +25,10 @@
             disabled
           />
         </el-form-item>
-        <el-form-item
-          label="目标存储资源"
-          prop="toStorageId"
-        >
-          <el-input
-            v-model="formData.toStorageName"
+        <el-form-item :label="MoveEntity.getFieldName('status')">
+          <AInput
+            v-model.status="formData.status"
+            :entity="MoveEntity"
             disabled
           />
         </el-form-item>
@@ -40,6 +38,32 @@
         >
           <el-input
             v-model="formData.fromStorageName"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item
+          label="目标存储资源"
+          prop="toStorageId"
+        >
+          <el-input
+            v-model="formData.toStorageName"
+            disabled
+          />
+        </el-form-item>
+        <el-form-item :label="MoveEntity.getFieldName('createTime')">
+          <ADateTime :time="formData.createTime" />
+        </el-form-item>
+        <el-form-item :label="MoveEntity.getFieldName('updateTime')">
+          <ADateTime :time="formData.updateTime" />
+        </el-form-item>
+        <el-form-item
+          v-if="formData.status === MoveStatus.REJECTED"
+          style="width: 100%;"
+          :label="MoveEntity.getFieldName('rejectReason')"
+        >
+          <AInput
+            v-model.rejectReason="formData.rejectReason"
+            :entity="MoveEntity"
             disabled
           />
         </el-form-item>
@@ -53,10 +77,19 @@
           hide-delete
         >
           <template #materialCode="row">
-            {{ (row.data as MoveDetailEntity).material.code }}
+            {{ (row.data as MoveDetailEntity).inventory.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as MoveDetailEntity).material.name }}
+            {{ (row.data as MoveDetailEntity).inventory.material.name }}
+          </template>
+          <template #endRow="row">
+            <AButton
+              icon-button
+              tooltip="添加完成"
+              :disabled="formData.status !== MoveStatus.MOVING"
+              type="CHECKIN"
+              @click="(row.data as MoveDetailEntity).billId = formData.id; onAddFinish(row.data)"
+            />
           </template>
         </ATable>
       </AGroup>
@@ -66,19 +99,20 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AInput,
+  ADialog, AGroup, ATable, AInput, AButton, ADateTime,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { MoveStatus } from '@/model/wms/move/MoveStatus'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
 const {
-  formData, isLoading,
-} = useAirDetail(props, MoveEntity, MoveService, {
+  formData, isLoading, onAddFinish,
+} = useBillDetail(props, MoveEntity, MoveService, {
   afterGetDetail(detailData) {
     detailData.fromStorageName = detailData.fromStorage.name
     detailData.fromStorageCode = detailData.fromStorage.code

@@ -17,7 +17,7 @@ export function useBillDetail<D extends AbstractBaseBillDetailEntity, B extends 
     const dec = 100000
     const number: number = await AirDialog.show(BillAddFinishDialog, parseFloat((Math.ceil((detail.quantity - detail.finishQuantity) * dec) / dec).toString()))
     postData.quantity = Math.max(number, 0)
-    await result.service.addFinish(postData.expose('id', 'quantity'))
+    await result.service.addFinish(postData.expose('id', 'quantity', 'billId'))
     result.getDetail()
   }
 

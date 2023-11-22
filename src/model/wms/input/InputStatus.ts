@@ -25,9 +25,4 @@ export enum InputStatus {
    * # 已完成
    */
   DONE = 4,
-
-  /**
-   * # 已取消
-   */
-  CANCELED = 5,
 }

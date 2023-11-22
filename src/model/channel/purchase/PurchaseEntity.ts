@@ -7,6 +7,7 @@ import { PurchaseStatus } from './PurchaseStatus'
 import { PurchaseStatusDictionary } from './PurchaseStatusDictionary'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { SearchField } from '@/airpower/decorator/SearchField'
 
 @ClassName('采购单')
 export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity> {
@@ -38,9 +39,20 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
 
   @TableField({
     width: 100,
+    suffixText: '元',
+    align: 'right',
+  })
+  @FormField({
+    suffixText: '元',
+  })
+  @FieldName('实际金额') totalRealPrice!: number
+
+  @TableField({
+    width: 100,
     showColor: true,
   })
   @Dictionary(PurchaseStatusDictionary)
+  @SearchField()
   @FieldName('采购状态') status!: PurchaseStatus
 
   @FieldName('采购明细')

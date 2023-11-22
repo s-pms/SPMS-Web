@@ -3,7 +3,7 @@
     :title="title"
     :loading="isLoading"
     width="60%"
-    height="60%"
+    height="80%"
     @on-confirm="onConfirm()"
     @on-cancel="onCancel()"
   >
@@ -72,7 +72,6 @@
           :data-list="formData.details"
           :field-list="PurchaseDetailEntity.getTableFieldConfigList()"
           hide-ctrl
-          :ctrl-width="60"
         >
           <template #materialCode="row">
             {{ (row.data as PurchaseDetailEntity).material.code }}
@@ -86,6 +85,15 @@
           <template #supplierName="row">
             {{ (row.data as PurchaseDetailEntity).supplier.name }}
           </template>
+          <template #endRow="row">
+            <AButton
+              icon-button
+              tooltip="添加完成"
+              :disabled="formData.status !== PurchaseStatus.PURCHASING"
+              type="CHECKIN"
+              @click="onAddFinish(row.data)"
+            />
+          </template>
         </ATable>
       </AGroup>
     </el-form>
@@ -94,6 +102,7 @@
 
 <script lang="ts" setup>
 import {
+  AButton,
   ADateTime,
   ADialog, AGroup, AInput, ATable,
 } from '@/airpower/component'
@@ -101,14 +110,14 @@ import { airPropsParam } from '@/airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
 const {
-  title, formData, isLoading,
-} = useAirDetail(props, PurchaseEntity, PurchaseService, {
+  title, formData, isLoading, onAddFinish,
+} = useBillDetail(props, PurchaseEntity, PurchaseService, {
 })
 
 </script>

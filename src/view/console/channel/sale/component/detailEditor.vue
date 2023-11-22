@@ -49,6 +49,7 @@
         <AInput
           v-model.quantity="formData.quantity"
           :entity="SaleDetailEntity"
+          clearable
         >
           <template
             v-if="formData.material"

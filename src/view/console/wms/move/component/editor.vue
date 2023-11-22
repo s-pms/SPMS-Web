@@ -30,6 +30,19 @@
         </el-form-item>
         <el-form-item />
         <el-form-item
+          label="来源存储资源"
+          prop="fromStorageId"
+        >
+          <el-input
+            v-model="formData.fromStorageName"
+            clearable
+            placeholder="请选择来源存储资源"
+            @clear="formData.exclude('fromStorage', 'fromStorageId'); formData.details = []"
+            @click="selectFromStorage()"
+          />
+        </el-form-item>
+        <el-form-item
+          v-if="formData.fromStorageId"
           label="目标存储资源"
           prop="toStorageId"
         >
@@ -39,18 +52,6 @@
             placeholder="请选择目标存储资源"
             @clear="formData.exclude('toStorage', 'toStorageId')"
             @click="selectToStorage()"
-          />
-        </el-form-item>
-        <el-form-item
-          label="来源存储资源"
-          prop="fromStorageId"
-        >
-          <el-input
-            v-model="formData.fromStorageName"
-            clearable
-            placeholder="请选择来源存储资源"
-            @clear="formData.exclude('fromStorage', 'fromStorageId')"
-            @click="selectFromStorage()"
           />
         </el-form-item>
       </AGroup>
@@ -63,10 +64,10 @@
           hide-delete
         >
           <template #materialCode="row">
-            {{ (row.data as MoveDetailEntity).material.code }}
+            {{ (row.data as MoveDetailEntity).inventory.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as MoveDetailEntity).material.name }}
+            {{ (row.data as MoveDetailEntity).inventory.material.name }}
           </template>
           <template #addButton>
             <AButton
@@ -105,6 +106,9 @@ import { MoveDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { StorageSelector } from '@/view/console/factory/storage/component'
+import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
+import { InventoryType } from '@/model/wms/inventory/InventoryType'
+import { InventorySelector } from '../../inventory/component'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
@@ -131,8 +135,14 @@ const {
 })
 
 async function addDetail() {
+  let inventory = new InventoryEntity()
+  inventory.type = InventoryType.STORAGE
+  inventory.storage = formData.value.fromStorage
+  inventory.storage.expose('id')
+  inventory = await AirDialog.select(InventorySelector, inventory)
   let detail = new MoveDetailEntity()
-  detail = await AirDialog.show(MoveDetailEditor)
+  detail.inventory = inventory
+  detail = await AirDialog.show(MoveDetailEditor, detail)
   formData.value.details.push(detail)
 }
 

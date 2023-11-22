@@ -56,7 +56,7 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
     width: 150,
     orderNumber: -3,
   })
-  @Type(Number) outputQuantity!: number
+  @Type(Number) finishQuantity!: number
 
   @Type(CustomerEntity) customer!: CustomerEntity
 }

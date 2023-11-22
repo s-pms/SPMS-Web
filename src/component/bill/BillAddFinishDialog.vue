@@ -11,6 +11,7 @@
     <el-input
       v-model="num"
       type="number"
+      clearable
       placeholder="请输入本次完成数量..."
     />
   </ADialog>

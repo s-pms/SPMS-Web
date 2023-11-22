@@ -1,7 +1,7 @@
 <template>
   <ADialog
     :hide-footer="!mult"
-    :title="title"
+    title="请选择已完成的采购单"
     is-selector
     width="60%"
     :loading="isLoading"
@@ -9,19 +9,13 @@
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
-    <AToolBar
-      :loading="isLoading"
-      :entity="PurchaseEntity"
-      :service="PurchaseService"
-      @on-search="onSearch"
-      @on-add="onAdd"
-    />
     <ATable
       :data-list="response.list"
       :show-select="mult"
       hide-delete
       hide-edit
       :select-list="selectList"
+      :field-list="PurchaseEntity.getTableFieldConfigList().filter(item => !['status'].includes(item.key))"
       :entity="PurchaseEntity"
       :ctrl-width="80"
       hide-field-selector
@@ -54,21 +48,26 @@
 
 <script lang="ts" setup>
 import {
-  APage, ATable, AToolBar, ADialog, AButton,
+  APage, ATable, ADialog, AButton,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseEditor } from '.'
+import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
 
-const props = defineProps(airPropsSelector<PurchaseEntity>())
+const props = defineProps(airPropsSelector(new PurchaseEntity()))
 
 const {
-  title, selectList, isLoading, response,
-  onSearch, onPageChanged, onSelected, onAdd,
+  selectList, isLoading, response,
+  onPageChanged, onSelected,
 } = useAirSelector(props, PurchaseEntity, PurchaseService, {
   editView: PurchaseEditor,
+  beforeSearch(requestData) {
+    requestData.filter.status = PurchaseStatus.DONE
+    return requestData
+  },
 })
 </script>
 <style scoped lang="scss"></style>

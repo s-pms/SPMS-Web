@@ -62,14 +62,13 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Type(Number) quantity!: number
 
-  @FieldName('已入库数量')
+  @FieldName('已采购数量')
   @TableField({
     align: 'right',
     width: 150,
     orderNumber: -3,
-    hide: true,
   })
-  @Type(Number) inputQuantity!: number
+  @Type(Number) finishQuantity!: number
 
   billId!: number
 }

@@ -22,17 +22,7 @@ export enum PurchaseStatus {
   PURCHASING = 3,
 
   /**
-   * # 入库中
-   */
-  INPUTING = 4,
-
-  /**
    * # 采购完成
    */
-  DONE = 5,
-
-  /**
-   * # 采购取消
-   */
-  CANCELED = 6,
+  DONE = 4
 }

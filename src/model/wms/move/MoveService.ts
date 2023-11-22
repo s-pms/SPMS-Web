@@ -5,5 +5,5 @@ import { MoveDetailEntity } from './MoveDetailEntity'
 export class MoveService extends AbstractBaseBillService<MoveDetailEntity, MoveEntity> {
   entityClass = MoveEntity
 
-  baseUrl = 'input'
+  baseUrl = 'move'
 }

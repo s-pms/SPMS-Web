@@ -4,6 +4,7 @@
       :loading="isLoading"
       :entity="PurchaseEntity"
       :service="PurchaseService"
+      show-filter
       @on-add="onAdd"
       @on-search="onSearch"
     />

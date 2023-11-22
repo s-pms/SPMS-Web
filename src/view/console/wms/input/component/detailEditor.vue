@@ -34,6 +34,7 @@
         <AInput
           v-model.quantity="formData.quantity"
           :entity="InputDetailEntity"
+          clearable
         >
           <template
             v-if="formData.material"

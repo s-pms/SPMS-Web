@@ -15,7 +15,7 @@ export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
   @TableField({
     removed: true,
   })
-  declare createTime: number
+  declare updateTime: number
 
   /**
    * # 数量

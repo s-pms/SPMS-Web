@@ -15,16 +15,12 @@
       @submit.prevent
     >
       <el-form-item
-        label="销售物料"
+        label="转移库存物料"
         prop="materialId"
       >
         <el-input
-          v-model="formData.materialName"
-          clearable
-          placeholder="请选择物料"
-          :disabled="props.param.material"
-          @clear="formData.exclude('material', 'materialId')"
-          @click="selectMaterial()"
+          v-model="formData.inventory.material.name"
+          disabled
         />
       </el-form-item>
       <el-form-item
@@ -34,12 +30,13 @@
         <AInput
           v-model.quantity="formData.quantity"
           :entity="MoveDetailEntity"
+          clearable
         >
           <template
-            v-if="formData.material"
+            v-if="formData.inventory"
             #append
           >
-            {{ formData.material.unitInfo.name }}
+            {{ formData.inventory.material.unitInfo.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -64,27 +61,18 @@ import {
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { MaterialSelector } from '@/view/console/asset/material/component'
 import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
 
 const props = defineProps(airPropsParam(new MoveDetailEntity()))
 
 const formData = ref(props.param.copy())
-if (formData.value.material) {
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-}
 
 const isLoading = ref(false)
 
 const formRef = ref<AirFormInstance>()
 
-async function selectMaterial() {
-  formData.value.material = await AirDialog.select(MaterialSelector)
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-}
+formData.value.quantity = props.param.inventory.quantity
+formData.value.billId = props.param.billId
 
 async function onSubmit() {
   props.onConfirm(formData.value)

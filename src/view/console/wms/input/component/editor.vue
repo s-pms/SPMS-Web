@@ -160,6 +160,7 @@ async function addDetail() {
       // eslint-disable-next-line no-case-declarations
       const purchaseDetail: PurchaseDetailEntity = await AirDialog.show(PurchaseDetailSelector, new PurchaseEntity(formData.value.purchaseId))
       inputDetail.material = purchaseDetail.material
+      inputDetail.quantity = purchaseDetail.finishQuantity
       detail = await AirDialog.show(InputDetailEditor, inputDetail)
       formData.value.details.push(detail)
       break
