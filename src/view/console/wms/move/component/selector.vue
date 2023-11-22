@@ -3,7 +3,8 @@
     :hide-footer="!mult"
     :title="title"
     is-selector
-    width="60%"
+    width="70%"
+    height="70%"
     :loading="isLoading"
     :disable-confirm="mult && selectList.length === 0"
     @on-confirm="onConfirm(selectList)"
@@ -28,17 +29,11 @@
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
-      <template #fromStorageCode="row">
-        {{ (row.data as MoveEntity).fromStorage.code }}
+      <template #storageCode="row">
+        {{ (row.data as MoveEntity).storage.code }}
       </template>
-      <template #fromStorageName="row">
-        {{ (row.data as MoveEntity).fromStorage.name }}
-      </template>
-      <template #toStorageCode="row">
-        {{ (row.data as MoveEntity).toStorage.code }}
-      </template>
-      <template #toStorageName="row">
-        {{ (row.data as MoveEntity).toStorage.name }}
+      <template #storageName="row">
+        {{ (row.data as MoveEntity).storage.name }}
       </template>
       <template
         v-if="!mult"

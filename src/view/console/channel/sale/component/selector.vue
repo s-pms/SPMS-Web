@@ -1,7 +1,7 @@
 <template>
   <ADialog
     :hide-footer="!mult"
-    title="请选择已完成的采购单"
+    title="请选择销售单"
     is-selector
     width="70%"
     height="70%"
@@ -16,13 +16,19 @@
       hide-delete
       hide-edit
       :select-list="selectList"
-      :field-list="PurchaseEntity.getTableFieldConfigList().filter(item => !['status'].includes(item.key))"
-      :entity="PurchaseEntity"
+      :field-list="SaleEntity.getTableFieldConfigList().filter(item => !['status'].includes(item.key))"
+      :entity="SaleEntity"
       :ctrl-width="80"
       hide-field-selector
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
+      <template #customerCode="row">
+        {{ (row.data as SaleEntity).customer?.code || "-" }}
+      </template>
+      <template #customerName="row">
+        {{ (row.data as SaleEntity).customer?.name || "-" }}
+      </template>
       <template
         v-if="!mult"
         #customRow="{ data }"
@@ -53,20 +59,20 @@ import {
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { PurchaseEditor } from '.'
-import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
+import { SaleEntity } from '@/model/channel/sale/SaleEntity'
+import { SaleService } from '@/model/channel/sale/SaleService'
+import { SaleEditor } from '.'
+import { SaleStatus } from '@/model/channel/sale/SaleStatus'
 
-const props = defineProps(airPropsSelector(new PurchaseEntity()))
+const props = defineProps(airPropsSelector(new SaleEntity()))
 
 const {
   selectList, isLoading, response,
   onPageChanged, onSelected,
-} = useAirSelector(props, PurchaseEntity, PurchaseService, {
-  editView: PurchaseEditor,
+} = useAirSelector(props, SaleEntity, SaleService, {
+  editView: SaleEditor,
   beforeSearch(requestData) {
-    requestData.filter.status = PurchaseStatus.DONE
+    requestData.filter.status = SaleStatus.OUTPUTING
     return requestData
   },
 })

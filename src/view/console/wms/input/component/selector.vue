@@ -3,7 +3,8 @@
     :hide-footer="!mult"
     :title="title"
     is-selector
-    width="60%"
+    width="70%"
+    height="70%"
     :loading="isLoading"
     :disable-confirm="mult && selectList.length === 0"
     @on-confirm="onConfirm(selectList)"

@@ -9,7 +9,7 @@
     @on-cancel="onCancel()"
   >
     <el-form
-      ref="form"
+      ref="formRef"
       :model="formData"
       label-width="120px"
       :rules="rules"
@@ -30,15 +30,6 @@
       >
         <AInput
           v-model.code="formData.code"
-          :entity="RoleEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="RoleEntity.getFormFieldLabel('remark')"
-        prop="remark"
-      >
-        <AInput
-          v-model.remark="formData.remark"
           :entity="RoleEntity"
         />
       </el-form-item>

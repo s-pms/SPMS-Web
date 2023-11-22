@@ -3,66 +3,81 @@
     :hide-footer="!mult"
     title="选择库存"
     is-selector
-    width="60%"
+    width="70%"
+    height="70%"
     :loading="isLoading"
     :disable-confirm="mult && selectList.length === 0"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
-    <ATable
-      :data-list="list"
-      :show-select="mult"
-      hide-delete
-      hide-edit
-      :select-list="selectList"
-      :entity="InventoryEntity"
-      :ctrl-width="80"
-      hide-field-selector
-      :hide-ctrl="mult"
-      @on-select="onConfirm($event)"
+    <ATreeBox
+      v-loading="isLoadingTree"
+      :tree-data="treeData"
+      searchable
+      :placeholder="treePlaceHolder"
+      @on-change="treeChanged"
     >
-      <template #materialCode="row">
-        {{ (row.data as InventoryEntity).material.code }}
-      </template>
-      <template #materialName="row">
-        {{ (row.data as InventoryEntity).material.name }}
-      </template>
-      <template #storageCode="row">
-        {{ (row.data as InventoryEntity).storage.code }}
-      </template>
-      <template #storageName="row">
-        {{ (row.data as InventoryEntity).storage.name }}
-      </template>
-      <template #unitName="row">
-        {{ (row.data as InventoryEntity).material.unitInfo.name }}
-      </template>
-      <template
-        v-if="!mult"
-        #customRow="{ data }"
+      <ATable
+        :data-list="list"
+        :show-select="mult"
+        hide-delete
+        hide-edit
+        :select-list="selectList"
+        :entity="InventoryEntity"
+        :ctrl-width="80"
+        hide-field-selector
+        :hide-ctrl="mult"
+        @on-select="onConfirm($event)"
       >
-        <AButton
-          type="SELECT"
-          icon-button
-          :disabled="data.isDisabled"
-          tooltip="选择"
-          @click="
-            onConfirm(data)
-          "
-        />
-      </template>
-    </ATable>
+        <template #materialCode="row">
+          {{ (row.data as InventoryEntity).material.code }}
+        </template>
+        <template #materialName="row">
+          {{ (row.data as InventoryEntity).material.name }}
+        </template>
+        <template #storageCode="row">
+          {{ (row.data as InventoryEntity).storage.code }}
+        </template>
+        <template #storageName="row">
+          {{ (row.data as InventoryEntity).storage.name }}
+        </template>
+        <template #unitName="row">
+          {{ (row.data as InventoryEntity).material.unitInfo.name }}
+        </template>
+        <template
+          v-if="!mult"
+          #customRow="{ data }"
+        >
+          <AButton
+            type="SELECT"
+            icon-button
+            :disabled="data.isDisabled"
+            tooltip="选择"
+            @click="
+              onConfirm(data)
+            "
+          />
+        </template>
+      </ATable>
+    </ATreeBox>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import {
-  ATable, ADialog, AButton,
+  ATable, ADialog, AButton, ATreeBox,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { AirRequest } from '@/airpower/model/AirRequest'
+import { ITree } from '@/airpower/interface/ITree'
+import { StorageEntity } from '@/model/factory/storage/StorageEntity'
+import { StorageService } from '@/model/factory/storage/StorageService'
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { StructureService } from '@/model/factory/structure/StructureService'
+import { InventoryType } from '@/model/wms/inventory/InventoryType'
 
 const props = defineProps(airPropsSelector(new InventoryEntity()))
 
@@ -70,14 +85,63 @@ const request = ref(new AirRequest(InventoryEntity))
 const list = ref([] as InventoryEntity[])
 
 const isLoading = ref(false)
+const isLoadingTree = ref(false)
+
+const inventoryType = ref(props.param.type)
+
+const treeData = ref([] as ITree[])
+
+async function getStorage() {
+  treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
+}
+async function getStructure() {
+  treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
+}
+
+const treePlaceHolder = ref('搜索...')
+
+async function inventoryTypeChanged() {
+  switch (inventoryType.value) {
+    case InventoryType.STORAGE:
+      treePlaceHolder.value = '搜索存储资源...'
+      getStorage()
+      break
+    case InventoryType.STRUCTURE:
+      treePlaceHolder.value = '搜索工厂结构...'
+      getStructure()
+      break
+    default:
+  }
+  // eslint-disable-next-line no-use-before-define
+  treeChanged(undefined)
+}
 
 async function getList() {
   request.value.filter = request.value.filter || new InventoryEntity()
-  request.value.filter.type = props.param.type
-  request.value.filter.storage = props.param.storage
+  request.value.filter.type = inventoryType.value
   list.value = await InventoryService.create(isLoading).getList(request.value)
 }
 
-getList()
+async function treeChanged(current: ITree | undefined) {
+  list.value = []
+  if (current) {
+    switch (inventoryType.value) {
+      case InventoryType.STORAGE:
+        request.value.filter.storage = (current as StorageEntity).copy()
+        request.value.filter.storage.expose('id')
+        break
+      case InventoryType.STRUCTURE:
+        request.value.filter.structure = (current as StructureEntity).copy()
+        request.value.filter.structure.expose('id')
+        break
+      default:
+    }
+  } else {
+    request.value.filter.exclude('storage', 'structure')
+  }
+  getList()
+}
+
+inventoryTypeChanged()
 </script>
 <style scoped lang="scss"></style>

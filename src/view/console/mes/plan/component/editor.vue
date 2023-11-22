@@ -3,7 +3,7 @@
     :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="60%"
+    width="80%"
     height="80%"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"

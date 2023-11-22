@@ -12,6 +12,7 @@ import { InputType } from './InputType'
 import { InputTypeDictionary } from './InputTypeDictionary'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { SearchField } from '@/airpower/decorator/SearchField'
+import { MoveEntity } from '../move/MoveEntity'
 
 @ClassName('入库单')
 export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
@@ -23,18 +24,6 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
   })
   @SearchField()
   @FieldName('入库单号') billCode!: string
-
-  @TableField()
-  @FieldName('存储资源编码') storageCode!: string
-
-  @TableField()
-  @FieldName('存储资源名称') storageName!: string
-
-  @FormField({
-    requiredNumber: true,
-  })
-  @FieldName('目标存储资源')
-  @Type(Number) storageId!: number
 
   @TableField({
     width: 100,
@@ -64,14 +53,9 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
   @FieldName('入库明细')
   @Type(InputDetailEntity, true) details: InputDetailEntity[] = []
 
-  @FieldName('采购单号') purchaseBillCode!: string
-
-  @FormField({
-    requiredNumber: true,
-  })
-  @FieldName('采购单')
-  @Type(Number) purchaseId!: number
-
   @FieldName('采购单')
   @Type(PurchaseEntity) purchase!: PurchaseEntity
+
+  @FieldName('移库单')
+  @Type(MoveEntity) move!: MoveEntity
 }

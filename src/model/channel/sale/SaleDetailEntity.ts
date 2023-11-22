@@ -50,12 +50,6 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Type(Number) quantity!: number
 
-  @FieldName('已出库数量')
-  @TableField({
-    align: 'right',
-    width: 150,
-    orderNumber: -3,
-  })
   @Type(Number) finishQuantity!: number
 
   @Type(CustomerEntity) customer!: CustomerEntity

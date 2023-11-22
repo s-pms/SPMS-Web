@@ -47,7 +47,7 @@
           icon-button
           tooltip="完成"
           type="CHECKIN"
-          :disabled="(row.data as InputEntity).status !== InputStatus.INPUTING"
+          :disabled="(row.data as InputEntity).status !== InputStatus.INPUTTING"
           @click="onFinish(row.data)"
         />
       </template>

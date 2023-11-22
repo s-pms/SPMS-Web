@@ -3,8 +3,8 @@
     :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="60%"
-    height="70%"
+    width="80%"
+    height="80%"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
   >
@@ -16,7 +16,7 @@
       @submit.prevent
     >
       <AGroup
-        title="入库单"
+        title="移库单"
         :column="2"
       >
         <el-form-item
@@ -28,34 +28,20 @@
             :entity="MoveEntity"
           />
         </el-form-item>
-        <el-form-item />
         <el-form-item
-          label="来源存储资源"
-          prop="fromStorageId"
-        >
-          <el-input
-            v-model="formData.fromStorageName"
-            clearable
-            placeholder="请选择来源存储资源"
-            @clear="formData.exclude('fromStorage', 'fromStorageId'); formData.details = []"
-            @click="selectFromStorage()"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="formData.fromStorageId"
           label="目标存储资源"
-          prop="toStorageId"
+          prop="storageId"
         >
           <el-input
-            v-model="formData.toStorageName"
+            v-model="formData.storageName"
             clearable
             placeholder="请选择目标存储资源"
-            @clear="formData.exclude('toStorage', 'toStorageId')"
-            @click="selectToStorage()"
+            @clear="formData.exclude('storage', 'storageId')"
+            @click="selectStorage()"
           />
         </el-form-item>
       </AGroup>
-      <AGroup title="入库明细">
+      <AGroup title="移库明细">
         <ATable
           :entity="MoveDetailEntity"
           :data-list="formData.details"
@@ -72,7 +58,6 @@
           <template #addButton>
             <AButton
               type="ADD"
-              :disabled="!formData.fromStorageId"
               @click="addDetail()"
             >
               添加{{ MoveEntity.getFieldName('details') }}
@@ -117,12 +102,9 @@ const {
   onSubmit,
 } = useAirEditor(props, MoveEntity, MoveService, {
   afterGetDetail(detailData) {
-    detailData.fromStorageName = detailData.fromStorage.name
-    detailData.fromStorageCode = detailData.fromStorage.code
-    detailData.fromStorageId = detailData.fromStorage.id
-    detailData.toStorageName = detailData.toStorage.name
-    detailData.toStorageCode = detailData.toStorage.code
-    detailData.toStorageId = detailData.toStorage.id
+    detailData.storageName = detailData.storage.name
+    detailData.storageCode = detailData.storage.code
+    detailData.storageId = detailData.storage.id
     return detailData
   },
   beforeSubmit(submitData) {
@@ -137,8 +119,6 @@ const {
 async function addDetail() {
   let inventory = new InventoryEntity()
   inventory.type = InventoryType.STORAGE
-  inventory.storage = formData.value.fromStorage
-  inventory.storage.expose('id')
   inventory = await AirDialog.select(InventorySelector, inventory)
   let detail = new MoveDetailEntity()
   detail.inventory = inventory
@@ -151,14 +131,9 @@ async function deleteDetail(index: number) {
   formData.value.details.splice(index, 1)
 }
 
-async function selectFromStorage() {
-  formData.value.fromStorage = await AirDialog.select(StorageSelector)
-  formData.value.fromStorageId = formData.value.fromStorage.id
-  formData.value.fromStorageName = formData.value.fromStorage.name
-}
-async function selectToStorage() {
-  formData.value.toStorage = await AirDialog.select(StorageSelector)
-  formData.value.toStorageId = formData.value.toStorage.id
-  formData.value.toStorageName = formData.value.toStorage.name
+async function selectStorage() {
+  formData.value.storage = await AirDialog.select(StorageSelector)
+  formData.value.storageId = formData.value.storage.id
+  formData.value.storageName = formData.value.storage.name
 }
 </script>

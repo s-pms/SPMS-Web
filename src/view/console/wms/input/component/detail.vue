@@ -2,7 +2,7 @@
   <ADialog
     :title="title"
     :loading="isLoading"
-    width="60%"
+    width="80%"
     height="80%"
     @on-confirm="onConfirm()"
     @on-cancel="onCancel()"
@@ -14,7 +14,7 @@
       @submit.prevent
     >
       <AGroup
-        title="采购单"
+        title="入库单"
         :column="2"
       >
         <el-form-item :label="InputEntity.getFieldName('billCode')">
@@ -34,15 +34,11 @@
             disabled
           />
         </el-form-item>
-        <el-form-item
-          label="目标存储资源"
-          prop="storageId"
-        >
-          <el-input
-            v-model="formData.storageName"
-            clearable
-            disabled
-          />
+        <el-form-item :label="InputEntity.getFieldName('createTime')">
+          <ADateTime :time="formData.createTime" />
+        </el-form-item>
+        <el-form-item :label="InputEntity.getFieldName('updateTime')">
+          <ADateTime :time="formData.updateTime" />
         </el-form-item>
         <el-form-item :label="InputEntity.getFieldName('status')">
           <AInput
@@ -51,11 +47,25 @@
             disabled
           />
         </el-form-item>
-        <el-form-item :label="InputEntity.getFieldName('createTime')">
-          <ADateTime :time="formData.createTime" />
+        <el-form-item
+          v-if="formData.type===InputType.PURCHASE"
+          label="采购单号"
+        >
+          <AInput
+            v-model.status="formData.purchase.billCode"
+            :entity="InputEntity"
+            disabled
+          />
         </el-form-item>
-        <el-form-item :label="InputEntity.getFieldName('updateTime')">
-          <ADateTime :time="formData.updateTime" />
+        <el-form-item
+          v-if="formData.type===InputType.MOVE"
+          label="移库单号"
+        >
+          <AInput
+            v-model.status="formData.move.billCode"
+            :entity="InputEntity"
+            disabled
+          />
         </el-form-item>
         <el-form-item
           v-if="formData.status === InputStatus.REJECTED"
@@ -77,6 +87,12 @@
           hide-delete
           hide-edit
         >
+          <template #storageCode="row">
+            {{ (row.data as InputDetailEntity).storage?.code || "-" }}
+          </template>
+          <template #storageName="row">
+            {{ (row.data as InputDetailEntity).storage?.name || "-" }}
+          </template>
           <template #materialCode="row">
             {{ (row.data as InputDetailEntity).material.code }}
           </template>
@@ -87,7 +103,7 @@
             <AButton
               icon-button
               tooltip="添加完成"
-              :disabled="formData.status !== InputStatus.INPUTING"
+              :disabled="formData.status !== InputStatus.INPUTTING"
               type="CHECKIN"
               @click="onAddFinish(row.data)"
             />
@@ -110,18 +126,25 @@ import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputStatus } from '@/model/wms/input/InputStatus'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { InputType } from '@/model/wms/input/InputType'
+import { InputAddFinishEditor } from '.'
+import { AirNotification } from '@/airpower/feedback/AirNotification'
+import { AirDialog } from '@/airpower/helper/AirDialog'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
 const {
   title, formData, isLoading,
-  onAddFinish,
+  getDetail,
 } = useBillDetail(props, InputEntity, InputService, {
   afterGetDetail(detailData) {
-    detailData.storageName = detailData.storage.name
-    detailData.storageId = detailData.storage.id
     return detailData
   },
 })
 
+async function onAddFinish(detail: InputDetailEntity) {
+  await AirDialog.show(InputAddFinishEditor, detail)
+  AirNotification.success('明细入库成功')
+  getDetail()
+}
 </script>

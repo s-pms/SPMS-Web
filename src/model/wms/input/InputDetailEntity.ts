@@ -3,10 +3,13 @@ import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 
 @ClassName('入库明细')
 export class InputDetailEntity extends AbstractBaseBillDetailEntity {
   billId!: number
+
+  @Type(StorageEntity) storage!: StorageEntity
 
   @Type(MaterialEntity) material!: MaterialEntity
 
@@ -15,6 +18,12 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
 
   @TableField()
   @FieldName('物料名称') materialName!: string
+
+  @TableField()
+  @FieldName('目标存储编码') storageCode!: string
+
+  @TableField()
+  @FieldName('目标存储名称') storageName!: string
 
   @FormField({
     requiredNumber: true,
@@ -42,4 +51,9 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
     orderNumber: -3,
   })
   @Type(Number) finishQuantity!: number
+
+  @FormField({
+    requiredNumber: true,
+  })
+  @FieldName('目标存储资源') storageId !: number
 }

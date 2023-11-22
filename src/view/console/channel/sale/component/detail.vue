@@ -2,8 +2,8 @@
   <ADialog
     :title="title"
     :loading="isLoading"
-    width="60%"
-    height="60%"
+    width="80%"
+    height="80%"
     @on-confirm="onConfirm()"
     @on-cancel="onCancel()"
   >

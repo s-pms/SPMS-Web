@@ -71,15 +71,6 @@
           </template>
         </AInput>
       </el-form-item>
-      <el-form-item
-        :label="PurchaseDetailEntity.getFieldName('remark')"
-        prop="remark"
-      >
-        <AInput
-          v-model.remark="formData.remark"
-          :entity="PurchaseDetailEntity"
-        />
-      </el-form-item>
     </el-form>
   </ADialog>
 </template>

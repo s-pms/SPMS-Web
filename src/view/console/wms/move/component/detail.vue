@@ -2,8 +2,8 @@
   <ADialog
     title="移库单明细"
     :loading="isLoading"
-    width="60%"
-    height="70%"
+    width="80%"
+    height="80%"
     @on-confirm="onConfirm()"
     @on-cancel="onCancel()"
   >
@@ -25,28 +25,11 @@
             disabled
           />
         </el-form-item>
-        <el-form-item :label="MoveEntity.getFieldName('status')">
-          <AInput
-            v-model.status="formData.status"
-            :entity="MoveEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          label="来源存储资源"
-          prop="fromStorageId"
-        >
-          <el-input
-            v-model="formData.fromStorageName"
-            disabled
-          />
-        </el-form-item>
         <el-form-item
           label="目标存储资源"
-          prop="toStorageId"
         >
           <el-input
-            v-model="formData.toStorageName"
+            v-model="formData.storageName"
             disabled
           />
         </el-form-item>
@@ -55,6 +38,13 @@
         </el-form-item>
         <el-form-item :label="MoveEntity.getFieldName('updateTime')">
           <ADateTime :time="formData.updateTime" />
+        </el-form-item>
+        <el-form-item :label="MoveEntity.getFieldName('status')">
+          <AInput
+            v-model.status="formData.status"
+            :entity="MoveEntity"
+            disabled
+          />
         </el-form-item>
         <el-form-item
           v-if="formData.status === MoveStatus.REJECTED"
@@ -68,7 +58,7 @@
           />
         </el-form-item>
       </AGroup>
-      <AGroup title="入库明细">
+      <AGroup title="移库明细">
         <ATable
           :entity="MoveDetailEntity"
           :data-list="formData.details"
@@ -76,6 +66,12 @@
           hide-edit
           hide-delete
         >
+          <template #storageCode="row">
+            {{ (row.data as MoveDetailEntity).inventory.storage.code }}
+          </template>
+          <template #storageName="row">
+            {{ (row.data as MoveDetailEntity).inventory.storage.name }}
+          </template>
           <template #materialCode="row">
             {{ (row.data as MoveDetailEntity).inventory.material.code }}
           </template>
@@ -114,12 +110,9 @@ const {
   formData, isLoading, onAddFinish,
 } = useBillDetail(props, MoveEntity, MoveService, {
   afterGetDetail(detailData) {
-    detailData.fromStorageName = detailData.fromStorage.name
-    detailData.fromStorageCode = detailData.fromStorage.code
-    detailData.fromStorageId = detailData.fromStorage.id
-    detailData.toStorageName = detailData.toStorage.name
-    detailData.toStorageCode = detailData.toStorage.code
-    detailData.toStorageId = detailData.toStorage.id
+    detailData.storageName = detailData.storage.name
+    detailData.storageCode = detailData.storage.code
+    detailData.storageId = detailData.storage.id
     return detailData
   },
 })

@@ -4,6 +4,8 @@
     :form-ref="formRef"
     :loading="isLoading"
     confirm-text="保存"
+    width="60%"
+    height="60%"
     :fullable="false"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
@@ -34,15 +36,6 @@
         >
           <AInput
             v-model.nickname="formData.nickname"
-            :entity="UserEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('remark')"
-          prop="remark"
-        >
-          <AInput
-            v-model.remark="formData.remark"
             :entity="UserEntity"
           />
         </el-form-item>

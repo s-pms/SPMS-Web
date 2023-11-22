@@ -15,7 +15,7 @@
       @submit.prevent
     >
       <el-form-item
-        label="转移库存物料"
+        label="转移物料"
         prop="materialId"
       >
         <el-input
@@ -39,15 +39,6 @@
             {{ formData.inventory.material.unitInfo.name }}
           </template>
         </AInput>
-      </el-form-item>
-      <el-form-item
-        :label="MoveDetailEntity.getFieldName('remark')"
-        prop="remark"
-      >
-        <AInput
-          v-model.remark="formData.remark"
-          :entity="MoveDetailEntity"
-        />
       </el-form-item>
     </el-form>
   </ADialog>

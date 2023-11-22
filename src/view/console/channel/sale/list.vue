@@ -22,10 +22,10 @@
       @on-select="onSelected"
     >
       <template #customerCode="row">
-        {{ (row.data as SaleEntity).customer.code }}
+        {{ (row.data as SaleEntity).customer?.code || "-" }}
       </template>
       <template #customerName="row">
-        {{ (row.data as SaleEntity).customer.name }}
+        {{ (row.data as SaleEntity).customer?.name ||"-" }}
       </template>
       <template #customRow="row">
         <AButton

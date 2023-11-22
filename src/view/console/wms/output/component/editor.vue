@@ -16,59 +16,51 @@
       @submit.prevent
     >
       <AGroup
-        title="采购单"
+        title="入库单"
         :column="2"
       >
         <el-form-item
-          :label="PurchaseEntity.getFieldName('billCode')"
+          :label="OutputEntity.getFieldName('billCode')"
           prop="billCode"
         >
           <AInput
             v-model.billCode="formData.billCode"
-            :entity="PurchaseEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          style="width: 100%;"
-          :label="PurchaseEntity.getFieldName('reason')"
-          prop="reason"
-        >
-          <AInput
-            v-model.reason="formData.reason"
-            :entity="PurchaseEntity"
+            :entity="OutputEntity"
           />
         </el-form-item>
       </AGroup>
-      <AGroup title="采购明细">
+      <AGroup title="出库明细">
         <ATable
-          :entity="PurchaseDetailEntity"
+          :entity="OutputDetailEntity"
           :data-list="formData.details"
-          :field-list="PurchaseDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :field-list="OutputDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
           hide-edit
           hide-delete
         >
+          <template #storageCode="row">
+            {{ (row.data as OutputDetailEntity).inventory.storage.code || "-" }}
+          </template>
+          <template #storageName="row">
+            {{ (row.data as OutputDetailEntity).inventory.storage.name || "-" }}
+          </template>
           <template #materialCode="row">
-            {{ (row.data as PurchaseDetailEntity).material.code }}
+            {{ (row.data as OutputDetailEntity).material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as PurchaseDetailEntity).material.name }}
-          </template>
-          <template #supplierCode="row">
-            {{ (row.data as PurchaseDetailEntity).supplier.code }}
-          </template>
-          <template #supplierName="row">
-            {{ (row.data as PurchaseDetailEntity).supplier.name }}
+            {{ (row.data as OutputDetailEntity).material.name }}
           </template>
           <template #addButton>
             <AButton
+              v-if="isDetailEditable"
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ PurchaseEntity.getFieldName('details') }}
+              添加{{ OutputEntity.getFieldName('details') }}
             </AButton>
           </template>
           <template #customRow="row">
             <AButton
+              v-if="isDetailEditable"
               type="DELETE"
               danger
               icon-button
@@ -82,25 +74,27 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
-  ADialog, AGroup, AInput, ATable, AButton,
+  ADialog, AGroup, ATable, AButton, AInput,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { PurchaseDetailEditor } from '.'
+import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
+import { OutputEntity } from '@/model/wms/output/OutputEntity'
+import { OutputService } from '@/model/wms/output/OutputService'
+import { OutputDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
+import { OutputType } from '@/model/wms/output/OutputType'
 
-const props = defineProps(airPropsParam(new PurchaseEntity()))
+const props = defineProps(airPropsParam(new OutputEntity()))
 
 const {
   title, formData, rules, formRef, isLoading,
   onSubmit,
-} = useAirEditor(props, PurchaseEntity, PurchaseService, {
+} = useAirEditor(props, OutputEntity, OutputService, {
   afterGetDetail(detailData) {
     return detailData
   },
@@ -113,13 +107,23 @@ const {
   },
 })
 
+formData.value.type = formData.value.type ?? OutputType.OTHER
+
+const isDetailEditable = computed(() => {
+  if (formData.value.type !== OutputType.OTHER) {
+    return false
+  }
+  return true
+})
+
 async function addDetail() {
-  const detail: PurchaseDetailEntity = await AirDialog.show(PurchaseDetailEditor)
+  const detail: OutputDetailEntity = await AirDialog.show(OutputDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的采购明细？')
+  await AirConfirm.warning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
 }
+
 </script>

@@ -3,8 +3,8 @@
     :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="60%"
-    height="70%"
+    width="80%"
+    height="80%"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
   >
@@ -29,15 +29,13 @@
           />
         </el-form-item>
         <el-form-item
-          label="目标存储资源"
-          prop="storageId"
+          v-if="formData.type === InputType.PURCHASE"
+          label="采购单号"
         >
-          <el-input
-            v-model="formData.storageName"
-            clearable
-            placeholder="请选择入库存储资源"
-            @clear="formData.exclude('storage', 'storageId')"
-            @click="selectStorage()"
+          <AInput
+            v-model.status="formData.purchase.billCode"
+            :entity="InputEntity"
+            disabled
           />
         </el-form-item>
       </AGroup>
@@ -93,7 +91,6 @@ import { InputService } from '@/model/wms/input/InputService'
 import { InputDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { StorageSelector } from '@/view/console/factory/storage/component'
 import { InputType } from '@/model/wms/input/InputType'
 
 const props = defineProps(airPropsParam(new InputEntity()))
@@ -103,8 +100,6 @@ const {
   onSubmit,
 } = useAirEditor(props, InputEntity, InputService, {
   afterGetDetail(detailData) {
-    detailData.storageName = detailData.storage.name
-    detailData.storageId = detailData.storage.id
     return detailData
   },
   beforeSubmit(submitData) {
@@ -133,12 +128,6 @@ async function addDetail() {
 async function deleteDetail(index: number) {
   await AirConfirm.warning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
-}
-
-async function selectStorage() {
-  formData.value.storage = await AirDialog.select(StorageSelector)
-  formData.value.storageId = formData.value.storage.id
-  formData.value.storageName = formData.value.storage.name
 }
 
 </script>

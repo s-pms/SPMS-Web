@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /**
- * # 入库状态枚举
+ * # 出库状态枚举
  *
  * @author Hamm
  */
-export enum InputStatus {
+export enum OutputStatus {
 
   /**
    * # 审核中
@@ -17,9 +17,9 @@ export enum InputStatus {
   REJECTED = 2,
 
   /**
-   * # 入库中
+   * # 出库中
    */
-  INPUTTING = 3,
+  OUTPUTTING = 3,
 
   /**
    * # 已完成

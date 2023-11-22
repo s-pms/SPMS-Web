@@ -11,7 +11,7 @@ import { MoveStatusDictionary } from './MoveStatusDictionary'
 
 @ClassName('移库单')
 export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
-  @TableField()
+  @TableField({ orderNumber: 99 })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
     orderNumber: 99,
@@ -19,28 +19,16 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @FieldName('移库单号') billCode!: string
 
   @TableField()
-  @FieldName('来源存储编码') fromStorageCode!: string
+  @FieldName('目标存储编码') storageCode!: string
 
   @TableField()
-  @FieldName('来源存储名称') fromStorageName!: string
-
-  @FormField({
-    requiredNumber: true,
-  })
-  @FieldName('来源存储资源')
-  @Type(Number) fromStorageId!: number
-
-  @TableField()
-  @FieldName('目标存储编码') toStorageCode!: string
-
-  @TableField()
-  @FieldName('目标存储名称') toStorageName!: string
+  @FieldName('目标存储名称') storageName!: string
 
   @FormField({
     requiredNumber: true,
   })
   @FieldName('目标存储资源')
-  @Type(Number) toStorageId!: number
+  @Type(Number) storageId!: number
 
   @TableField({
     width: 100,
@@ -50,11 +38,8 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @Dictionary(MoveStatusDictionary)
   @FieldName('移库状态') status!: MoveStatus
 
-  @FieldName('来源存储资源')
-  @Type(StorageEntity) fromStorage!: StorageEntity
-
   @FieldName('目标存储资源')
-  @Type(StorageEntity) toStorage!: StorageEntity
+  @Type(StorageEntity) storage!: StorageEntity
 
   @FieldName('移库明细')
   @Type(MoveDetailEntity, true) details: MoveDetailEntity[] = []

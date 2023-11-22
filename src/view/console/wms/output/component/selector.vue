@@ -1,7 +1,7 @@
 <template>
   <ADialog
     :hide-footer="!mult"
-    title="请选择已完成的采购单"
+    :title="title"
     is-selector
     width="70%"
     height="70%"
@@ -10,14 +10,20 @@
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
+    <AToolBar
+      hide-add
+      :loading="isLoading"
+      :entity="OutputEntity"
+      :service="OutputService"
+      @on-search="onSearch"
+    />
     <ATable
       :data-list="response.list"
       :show-select="mult"
       hide-delete
       hide-edit
       :select-list="selectList"
-      :field-list="PurchaseEntity.getTableFieldConfigList().filter(item => !['status'].includes(item.key))"
-      :entity="PurchaseEntity"
+      :entity="OutputEntity"
       :ctrl-width="80"
       hide-field-selector
       :hide-ctrl="mult"
@@ -49,26 +55,18 @@
 
 <script lang="ts" setup>
 import {
-  APage, ATable, ADialog, AButton,
+  APage, ATable, AToolBar, ADialog, AButton,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { PurchaseEditor } from '.'
-import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
+import { OutputEntity } from '@/model/wms/output/OutputEntity'
+import { OutputService } from '@/model/wms/output/OutputService'
 
-const props = defineProps(airPropsSelector(new PurchaseEntity()))
+const props = defineProps(airPropsSelector<OutputEntity>())
 
 const {
-  selectList, isLoading, response,
-  onPageChanged, onSelected,
-} = useAirSelector(props, PurchaseEntity, PurchaseService, {
-  editView: PurchaseEditor,
-  beforeSearch(requestData) {
-    requestData.filter.status = PurchaseStatus.DONE
-    return requestData
-  },
-})
+  title, selectList, onSelected, isLoading, response,
+  onSearch, onPageChanged,
+} = useAirSelector(props, OutputEntity, OutputService)
 </script>
 <style scoped lang="scss"></style>
