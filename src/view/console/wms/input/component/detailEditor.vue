@@ -15,7 +15,7 @@
       @submit.prevent
     >
       <el-form-item
-        label="销售物料"
+        label="采购物料"
         prop="materialId"
       >
         <el-input

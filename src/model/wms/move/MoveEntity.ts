@@ -14,6 +14,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @TableField()
   @FormField({
     placeholder: '不填写按编码规则自动生成',
+    orderNumber: 99,
   })
   @FieldName('移库单号') billCode!: string
 

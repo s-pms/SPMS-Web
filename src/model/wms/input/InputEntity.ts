@@ -14,7 +14,9 @@ import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 
 @ClassName('入库单')
 export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
-  @TableField()
+  @TableField({
+    orderNumber: 99,
+  })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
   })
@@ -37,7 +39,7 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     showColor: true,
   })
   @FormField({
-    defaultValue: InputType.PURCHASE,
+    defaultValue: InputType.OTHER,
     clearable: false,
     requiredNumber: true,
   })

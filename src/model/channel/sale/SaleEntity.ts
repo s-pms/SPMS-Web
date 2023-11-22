@@ -11,7 +11,9 @@ import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 
 @ClassName('销售单')
 export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
-  @TableField()
+  @TableField({
+    orderNumber: 99,
+  })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
   })
