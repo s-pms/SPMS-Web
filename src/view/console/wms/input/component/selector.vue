@@ -29,11 +29,8 @@
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
-      <template #storageCode="row">
-        {{ (row.data as InputEntity).storage.code }}
-      </template>
       <template #storageName="row">
-        {{ (row.data as InputEntity).storage.name }}
+        {{ (row.data as InputEntity).storage.name }}({{ (row.data as InputEntity).storage.code }})
       </template>
       <template
         v-if="!mult"

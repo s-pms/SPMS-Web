@@ -21,11 +21,8 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #storageCode="row">
-        {{ (row.data as MoveEntity).storage.code }}
-      </template>
       <template #storageName="row">
-        {{ (row.data as MoveEntity).storage.name }}
+        {{ (row.data as MoveEntity).storage.name }}({{ (row.data as MoveEntity).storage.code }})
       </template>
       <template #customRow="row">
         <AButton

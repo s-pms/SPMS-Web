@@ -13,17 +13,14 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Type(MaterialEntity) material!: MaterialEntity
 
-  @TableField()
+  @TableField({ forceShow: true })
   @FieldName('物料编码') materialCode!: string
 
-  @TableField()
+  @TableField({ forceShow: true })
   @FieldName('物料名称') materialName!: string
 
-  @TableField()
-  @FieldName('目标存储编码') storageCode!: string
-
-  @TableField()
-  @FieldName('目标存储名称') storageName!: string
+  @TableField({ forceShow: true })
+  @FieldName('目标存储资源') storageName!: string
 
   @FormField({
     requiredNumber: true,
@@ -41,6 +38,7 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
     align: 'right',
     width: 150,
     orderNumber: -2,
+    forceShow: true,
   })
   @Type(Number) quantity!: number
 

@@ -10,17 +10,14 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Type(InventoryEntity) inventory!: InventoryEntity
 
-  @TableField()
+  @TableField({ forceShow: true })
   @FieldName('物料编码') materialCode!: string
 
-  @TableField()
+  @TableField({ forceShow: true })
   @FieldName('物料名称') materialName!: string
 
   @TableField()
-  @FieldName('来源存储编码') storageCode!: string
-
-  @TableField()
-  @FieldName('来源存储名称') storageName!: string
+  @FieldName('来源存储资源') storageName!: string
 
   @FieldName('移动数量')
   @FormField({
@@ -32,6 +29,7 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
     align: 'right',
     width: 150,
     orderNumber: -2,
+    forceShow: true,
   })
   @Type(Number) quantity!: number
 

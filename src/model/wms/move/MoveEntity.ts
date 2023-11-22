@@ -11,7 +11,10 @@ import { MoveStatusDictionary } from './MoveStatusDictionary'
 
 @ClassName('移库单')
 export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
-  @TableField({ orderNumber: 99 })
+  @TableField({
+    orderNumber: 99,
+    forceShow: true,
+  })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
     orderNumber: 99,
@@ -19,10 +22,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @FieldName('移库单号') billCode!: string
 
   @TableField()
-  @FieldName('目标存储编码') storageCode!: string
-
-  @TableField()
-  @FieldName('目标存储名称') storageName!: string
+  @FieldName('目标存储资源') storageName!: string
 
   @FormField({
     requiredNumber: true,
@@ -34,6 +34,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
     width: 100,
     showColor: true,
     orderNumber: -80,
+    forceShow: true,
   })
   @Dictionary(MoveStatusDictionary)
   @FieldName('移库状态') status!: MoveStatus

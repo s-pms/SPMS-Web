@@ -41,11 +41,8 @@
         <template #materialName="row">
           {{ (row.data as InventoryEntity).material.name }}
         </template>
-        <template #storageCode="row">
-          {{ (row.data as InventoryEntity).storage.code }}
-        </template>
         <template #storageName="row">
-          {{ (row.data as InventoryEntity).storage.name }}
+          {{ (row.data as InventoryEntity).storage.name }}({{ (row.data as InventoryEntity).storage.code }})
         </template>
         <template #unitName="row">
           {{ (row.data as InventoryEntity).material.unitInfo.name }}

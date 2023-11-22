@@ -17,6 +17,7 @@ import { MoveEntity } from '../move/MoveEntity'
 export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
   @TableField({
     orderNumber: 99,
+    forceShow: true,
   })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
@@ -27,6 +28,7 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
   @TableField({
     width: 100,
     showColor: true,
+    forceShow: true,
   })
   @FormField({
     defaultValue: OutputType.OTHER,
@@ -41,6 +43,7 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     width: 100,
     showColor: true,
     orderNumber: -80,
+    forceShow: true,
   })
   @SearchField()
   @Dictionary(OutputStatusDictionary)

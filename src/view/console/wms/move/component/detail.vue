@@ -66,11 +66,8 @@
           hide-edit
           hide-delete
         >
-          <template #storageCode="row">
-            {{ (row.data as MoveDetailEntity).inventory.storage.code }}
-          </template>
           <template #storageName="row">
-            {{ (row.data as MoveDetailEntity).inventory.storage.name }}
+            {{ (row.data as MoveDetailEntity).inventory.storage.name }}({{ (row.data as MoveDetailEntity).inventory.storage.code }})
           </template>
           <template #materialCode="row">
             {{ (row.data as MoveDetailEntity).inventory.material.code }}
@@ -111,7 +108,6 @@ const {
 } = useBillDetail(props, MoveEntity, MoveService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
-    detailData.storageCode = detailData.storage.code
     detailData.storageId = detailData.storage.id
     return detailData
   },

@@ -10,10 +10,12 @@ import { InventoryType } from './InventoryType'
 
 @ClassName('库存')
 export class InventoryEntity extends BaseEntity {
-  @TableField()
+  @TableField({
+    forceShow: true,
+  })
   @FieldName('物料编码') materialCode!: string
 
-  @TableField()
+  @TableField({ forceShow: true })
   @FieldName('物料名称') materialName!: string
 
   @FieldName('库存数量')
@@ -21,6 +23,7 @@ export class InventoryEntity extends BaseEntity {
     align: 'right',
     width: 150,
     orderNumber: -2,
+    forceShow: true,
   })
   @Type(Number) quantity!: number
 
@@ -35,10 +38,7 @@ export class InventoryEntity extends BaseEntity {
   @Type(StorageEntity) storage!: StorageEntity
 
   @TableField()
-  @FieldName('存储资源编码') storageCode!: string
-
-  @TableField()
-  @FieldName('存储资源名称') storageName!: string
+  @FieldName('存储资源') storageName!: string
 
   @FieldName('库存类型') type!: InventoryType
 

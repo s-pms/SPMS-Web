@@ -52,21 +52,17 @@
           v-if="formData.type===OutputType.SALE"
           label="销售单号"
         >
-          <AInput
-            v-model.status="formData.sale.billCode"
-            :entity="OutputEntity"
-            disabled
-          />
+          <el-link @click="AirDialog.show(SaleDetail,formData.sale)">
+            {{ formData.sale.billCode }}
+          </el-link>
         </el-form-item>
         <el-form-item
           v-if="formData.type===OutputType.MOVE"
           label="移库单号"
         >
-          <AInput
-            v-model.status="formData.move.billCode"
-            :entity="OutputEntity"
-            disabled
-          />
+          <el-link @click="AirDialog.show(MoveDetail,formData.move)">
+            {{ formData.move.billCode }}
+          </el-link>
         </el-form-item>
         <el-form-item
           v-if="formData.status === OutputStatus.REJECTED"
@@ -88,11 +84,8 @@
           hide-edit
           hide-delete
         >
-          <template #storageCode="row">
-            {{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }}
-          </template>
           <template #storageName="row">
-            {{ (row.data as OutputDetailEntity).inventory?.storage.name || "-" }}
+            {{ (row.data as OutputDetailEntity).inventory?.storage.name || "-" }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
           </template>
           <template #materialCode="row">
             {{ (row.data as OutputDetailEntity).material.code }}
@@ -129,6 +122,8 @@ import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OutputAddFinishEditor } from '.'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { OutputType } from '@/model/wms/output/OutputType'
+import { MoveDetail } from '../../move/component'
+import { SaleDetail } from '@/view/console/channel/sale/component'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 

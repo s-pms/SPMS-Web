@@ -51,21 +51,17 @@
           v-if="formData.type===InputType.PURCHASE"
           label="采购单号"
         >
-          <AInput
-            v-model.status="formData.purchase.billCode"
-            :entity="InputEntity"
-            disabled
-          />
+          <el-link @click="AirDialog.show(PurchaseDetail,formData.purchase)">
+            {{ formData.purchase.billCode }}
+          </el-link>
         </el-form-item>
         <el-form-item
           v-if="formData.type===InputType.MOVE"
           label="移库单号"
         >
-          <AInput
-            v-model.status="formData.move.billCode"
-            :entity="InputEntity"
-            disabled
-          />
+          <el-link @click="AirDialog.show(MoveDetail,formData.move)">
+            {{ formData.move.billCode }}
+          </el-link>
         </el-form-item>
         <el-form-item
           v-if="formData.status === InputStatus.REJECTED"
@@ -87,11 +83,8 @@
           hide-delete
           hide-edit
         >
-          <template #storageCode="row">
-            {{ (row.data as InputDetailEntity).storage?.code || "-" }}
-          </template>
           <template #storageName="row">
-            {{ (row.data as InputDetailEntity).storage?.name || "-" }}
+            {{ (row.data as InputDetailEntity).storage?.name || "-" }}({{ (row.data as InputDetailEntity).storage?.code || "-" }})
           </template>
           <template #materialCode="row">
             {{ (row.data as InputDetailEntity).material.code }}
@@ -130,6 +123,8 @@ import { InputType } from '@/model/wms/input/InputType'
 import { InputAddFinishEditor } from '.'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { AirDialog } from '@/airpower/helper/AirDialog'
+import { MoveDetail } from '../../move/component'
+import { PurchaseDetail } from '@/view/console/channel/purchase/component'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 

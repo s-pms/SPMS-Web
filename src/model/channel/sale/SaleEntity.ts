@@ -13,6 +13,7 @@ import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   @TableField({
     orderNumber: 99,
+    forceShow: true,
   })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
@@ -44,6 +45,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
     width: 100,
     suffixText: '元',
     align: 'right',
+    forceShow: true,
   })
   @FormField({
     suffixText: '元',
@@ -54,6 +56,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
     width: 100,
     showColor: true,
     orderNumber: -80,
+    forceShow: true,
   })
   @Dictionary(SaleStatusDictionary)
   @FieldName('销售状态') status!: SaleStatus

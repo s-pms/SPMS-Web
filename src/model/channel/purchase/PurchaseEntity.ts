@@ -13,6 +13,7 @@ import { SearchField } from '@/airpower/decorator/SearchField'
 export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity> {
   @TableField({
     orderNumber: 99,
+    forceShow: true,
   })
   @FormField({
     placeholder: '不填写按编码规则自动生成',
@@ -33,6 +34,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
     width: 100,
     suffixText: '元',
     align: 'right',
+    forceShow: true,
   })
   @FormField({
     suffixText: '元',
@@ -43,6 +45,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
     width: 100,
     suffixText: '元',
     align: 'right',
+    forceShow: true,
   })
   @FormField({
     suffixText: '元',
@@ -53,6 +56,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
     width: 100,
     showColor: true,
     orderNumber: -80,
+    forceShow: true,
   })
   @Dictionary(PurchaseStatusDictionary)
   @SearchField()
