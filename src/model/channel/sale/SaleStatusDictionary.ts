@@ -10,6 +10,6 @@ import { AirColor } from '@/airpower/enum/AirColor'
 export const SaleStatusDictionary = AirDictionaryArray.create([
   { key: SaleStatus.AUDITING, color: AirColor.WARNING, label: '审核中' },
   { key: SaleStatus.REJECTED, color: AirColor.DANGER, label: '已驳回' },
-  { key: SaleStatus.OUTPUTING, color: AirColor.WARNING, label: '出库中' },
+  { key: SaleStatus.OUTPUTING, color: AirColor.SUCCESS, label: '出库中' },
   { key: SaleStatus.DONE, color: AirColor.NORMAL, label: '已完成' },
 ])

@@ -36,13 +36,6 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     width: 100,
     showColor: true,
   })
-  @Dictionary(InputStatusDictionary)
-  @FieldName('入库状态') status!: InputStatus
-
-  @TableField({
-    width: 100,
-    showColor: true,
-  })
   @FormField({
     defaultValue: InputType.PURCHASE,
     clearable: false,
@@ -50,6 +43,14 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
   })
   @Dictionary(InputTypeDictionary)
   @FieldName('入库类型') type!: InputType
+
+  @TableField({
+    width: 100,
+    showColor: true,
+    orderNumber: -80,
+  })
+  @Dictionary(InputStatusDictionary)
+  @FieldName('入库状态') status!: InputStatus
 
   @FieldName('存储资源')
   @Type(StorageEntity) storage!: StorageEntity

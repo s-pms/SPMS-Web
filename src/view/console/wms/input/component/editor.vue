@@ -29,16 +29,6 @@
           />
         </el-form-item>
         <el-form-item
-          :label="InputEntity.getFieldName('type')"
-          prop="type"
-        >
-          <AInput
-            v-model.type="formData.type"
-            :entity="InputEntity"
-            @on-change="inputTypeChanged"
-          />
-        </el-form-item>
-        <el-form-item
           label="目标存储资源"
           prop="storageId"
         >
@@ -48,19 +38,6 @@
             placeholder="请选择入库存储资源"
             @clear="formData.exclude('storage', 'storageId')"
             @click="selectStorage()"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="formData.type === InputType.PURCHASE"
-          label="采购单"
-          prop="purchaseId"
-        >
-          <el-input
-            v-model="formData.purchaseBillCode"
-            clearable
-            placeholder="请选择采购单"
-            @clear="formData.exclude('purchase', 'purchaseId')"
-            @click="selectPurchase()"
           />
         </el-form-item>
       </AGroup>
@@ -80,8 +57,8 @@
           </template>
           <template #addButton>
             <AButton
+              v-if="isDetailEditable"
               type="ADD"
-              :disabled="isAddDetailDisabled"
               @click="addDetail()"
             >
               添加{{ InputEntity.getFieldName('details') }}
@@ -89,6 +66,7 @@
           </template>
           <template #customRow="row">
             <AButton
+              v-if="isDetailEditable"
               type="DELETE"
               danger
               icon-button
@@ -117,9 +95,6 @@ import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { StorageSelector } from '@/view/console/factory/storage/component'
 import { InputType } from '@/model/wms/input/InputType'
-import { PurchaseDetailSelector, PurchaseSelector } from '@/view/console/channel/purchase/component'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
@@ -141,32 +116,16 @@ const {
   },
 })
 
-const isAddDetailDisabled = computed(() => {
-  if (formData.value.type === InputType.PURCHASE && !formData.value.purchaseId) {
-    return true
+const isDetailEditable = computed(() => {
+  if (formData.value.type !== InputType.OTHER) {
+    return false
   }
-  return false
+  return true
 })
 
 async function addDetail() {
-  let detail = new InputDetailEntity()
-  const inputDetail = new InputDetailEntity()
-  switch (formData.value.type) {
-    case InputType.OTHER:
-      detail = await AirDialog.show(InputDetailEditor)
-      formData.value.details.push(detail)
-      break
-    case InputType.PURCHASE:
-      // eslint-disable-next-line no-case-declarations
-      const purchaseDetail: PurchaseDetailEntity = await AirDialog.show(PurchaseDetailSelector, new PurchaseEntity(formData.value.purchaseId))
-      inputDetail.material = purchaseDetail.material
-      inputDetail.quantity = purchaseDetail.finishQuantity
-      detail = await AirDialog.show(InputDetailEditor, inputDetail)
-      formData.value.details.push(detail)
-      break
-    default:
-      AirNotification.warning('暂不支持')
-  }
+  const detail: InputDetailEntity = await AirDialog.show(InputDetailEditor)
+  formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
@@ -180,14 +139,4 @@ async function selectStorage() {
   formData.value.storageName = formData.value.storage.name
 }
 
-async function selectPurchase() {
-  formData.value.purchase = await AirDialog.select(PurchaseSelector)
-  formData.value.purchaseId = formData.value.purchase.id
-  formData.value.purchaseBillCode = formData.value.purchase.billCode
-}
-
-function inputTypeChanged() {
-  formData.value.exclude('purchase', 'purchaseId', 'purchaseBillCode')
-  formData.value.details = []
-}
 </script>

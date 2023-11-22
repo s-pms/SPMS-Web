@@ -22,7 +22,12 @@ export enum PurchaseStatus {
   PURCHASING = 3,
 
   /**
-   * # 采购完成
+   * # 已完成
    */
-  DONE = 4
+  DONE = 4,
+
+  /**
+   * # 已入库
+   */
+  FINISHED = 5,
 }

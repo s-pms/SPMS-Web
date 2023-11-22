@@ -10,6 +10,7 @@ import { AirColor } from '@/airpower/enum/AirColor'
 export const PurchaseStatusDictionary = AirDictionaryArray.create([
   { key: PurchaseStatus.AUDITING, color: AirColor.WARNING, label: '审核中' },
   { key: PurchaseStatus.REJECTED, color: AirColor.DANGER, label: '已驳回' },
-  { key: PurchaseStatus.PURCHASING, color: AirColor.WARNING, label: '采购中' },
+  { key: PurchaseStatus.PURCHASING, color: AirColor.SUCCESS, label: '采购中' },
   { key: PurchaseStatus.DONE, color: AirColor.NORMAL, label: '已完成' },
+  { key: PurchaseStatus.FINISHED, color: AirColor.NORMAL, label: '已入库' },
 ])

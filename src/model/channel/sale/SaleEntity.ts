@@ -51,6 +51,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   @TableField({
     width: 100,
     showColor: true,
+    orderNumber: -80,
   })
   @Dictionary(SaleStatusDictionary)
   @FieldName('销售状态') status!: SaleStatus

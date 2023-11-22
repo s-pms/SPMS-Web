@@ -50,6 +50,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @TableField({
     width: 100,
     showColor: true,
+    orderNumber: -80,
   })
   @Dictionary(PurchaseStatusDictionary)
   @SearchField()

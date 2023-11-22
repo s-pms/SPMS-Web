@@ -44,6 +44,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @TableField({
     width: 100,
     showColor: true,
+    orderNumber: -80,
   })
   @Dictionary(MoveStatusDictionary)
   @FieldName('移库状态') status!: MoveStatus
