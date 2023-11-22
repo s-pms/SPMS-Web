@@ -42,7 +42,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   @FieldName('销售说明') reason!: string
 
   @TableField({
-    width: 100,
+    width: 150,
     suffixText: '元',
     align: 'right',
     forceShow: true,
@@ -53,7 +53,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   @FieldName('总金额') totalPrice!: number
 
   @TableField({
-    width: 100,
+    width: 150,
     showColor: true,
     orderNumber: -80,
     forceShow: true,

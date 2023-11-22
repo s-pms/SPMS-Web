@@ -31,7 +31,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @FieldName('采购事由') reason!: string
 
   @TableField({
-    width: 100,
+    width: 150,
     suffixText: '元',
     align: 'right',
     forceShow: true,
@@ -42,7 +42,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @FieldName('总金额') totalPrice!: number
 
   @TableField({
-    width: 100,
+    width: 150,
     suffixText: '元',
     align: 'right',
     forceShow: true,
