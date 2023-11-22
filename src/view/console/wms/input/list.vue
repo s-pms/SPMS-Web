@@ -4,6 +4,7 @@
       :loading="isLoading"
       :entity="InputEntity"
       :service="InputService"
+      show-filter
       @on-add="onAdd"
       @on-search="onSearch"
     />
