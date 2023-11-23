@@ -38,7 +38,7 @@
           hide-delete
         >
           <template #storageName="row">
-            {{ (row.data as OutputDetailEntity).inventory.storage.name || "-" }}({{ (row.data as OutputDetailEntity).inventory.storage.code || "-" }})
+            {{ (row.data as OutputDetailEntity).inventory?.storage.name || "-" }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
           </template>
           <template #materialCode="row">
             {{ (row.data as OutputDetailEntity).material.code }}
