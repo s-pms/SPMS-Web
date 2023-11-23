@@ -27,6 +27,7 @@ export class BaseEntity extends AirEntity {
     width: 170,
     orderNumber: -99,
     dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
+    hide: true,
   })
   @Type(Number) updateTime!: number
 
