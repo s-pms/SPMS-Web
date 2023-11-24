@@ -111,10 +111,10 @@ const {
   },
 })
 
-formData.value.type = formData.value.type ?? InputType.OTHER
+formData.value.type = formData.value.type ?? InputType.NORMAL
 
 const isDetailEditable = computed(() => {
-  if (formData.value.type !== InputType.OTHER) {
+  if (formData.value.type !== InputType.NORMAL) {
     return false
   }
   return true

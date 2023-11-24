@@ -31,7 +31,7 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     forceShow: true,
   })
   @FormField({
-    defaultValue: OutputType.OTHER,
+    defaultValue: OutputType.NORMAL,
     clearable: false,
     requiredNumber: true,
   })

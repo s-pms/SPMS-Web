@@ -8,18 +8,9 @@ import { InputType } from './InputType'
  * @author Hamm
  */
 export const InputTypeDictionary = AirDictionaryArray.create([
-  { key: InputType.PURCHASE, color: AirColor.WARNING, label: '采购入库' },
-  {
-    key: InputType.RESTORE, color: AirColor.NORMAL, label: '退料入库', disabled: true,
-  },
-  {
-    key: InputType.PRODUCE, color: AirColor.SUCCESS, label: '生产入库', disabled: true,
-  },
-  {
-    key: InputType.REVIEW, color: AirColor.DANGER, label: '盘点入库', disabled: true,
-  },
+  { key: InputType.NORMAL, color: AirColor.WARNING, label: '普通入库' },
   {
     key: InputType.MOVE, color: AirColor.NORMAL, label: '移动入库', disabled: true,
   },
-  { key: InputType.OTHER, color: AirColor.WARNING, label: '其他入库' },
+  { key: InputType.PURCHASE, color: AirColor.WARNING, label: '采购入库' },
 ])

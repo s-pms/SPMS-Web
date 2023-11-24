@@ -32,7 +32,7 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     forceShow: true,
   })
   @FormField({
-    defaultValue: InputType.OTHER,
+    defaultValue: InputType.NORMAL,
     clearable: false,
     requiredNumber: true,
   })

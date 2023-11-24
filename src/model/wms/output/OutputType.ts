@@ -6,27 +6,17 @@
  */
 export enum OutputType {
   /**
-   * # 销售出库
+   * # 普通出库
    */
-  SALE = 1,
-
-  /**
-   * # 领料出库
-   */
-  PICKOUT = 2,
-
-  /**
-   * # 盘点出库
-   */
-  REVIEW = 3,
+  NORMAL = 1,
 
   /**
    * # 转移出库
    */
-  MOVE = 4,
+  MOVE = 2,
 
   /**
-   * # 其他出库
+   * # 销售出库
    */
-  OTHER = 5,
+  SALE = 3,
 }

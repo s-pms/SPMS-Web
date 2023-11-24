@@ -6,32 +6,17 @@
  */
 export enum InputType {
   /**
-   * # 采购入库
+   * # 普通入库
    */
-  PURCHASE = 1,
-
-  /**
-   * # 退料入库
-   */
-  RESTORE = 2,
-
-  /**
-   * # 生产入库
-   */
-  PRODUCE = 3,
-
-  /**
-   * # 盘点入库
-   */
-  REVIEW = 4,
+  NORMAL = 1,
 
   /**
    * # 转移入库
    */
-  MOVE = 5,
+  MOVE = 2,
 
   /**
-   * # 其他入库
+   * # 采购入库
    */
-  OTHER = 6,
+  PURCHASE = 3,
 }
