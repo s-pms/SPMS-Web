@@ -14,6 +14,8 @@
 
 # SPMS-Web
 
+SPMS - 智能生产管理系统，内置了MES、WMS、ERP、QMS等轻量一体化系统。
+
 ### 写在前面
 
 
