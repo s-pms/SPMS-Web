@@ -3,28 +3,17 @@
     <div
       v-loading="isLoadingApp"
       class="card"
-      :style="{ width: isQrcodeLogin ? 'auto' : '400px' }"
     >
       <div class="logo">
-        <img src="@/assets/img/logo.png">
+        <img src="@/assets/img/logo.svg">
       </div>
       <div class="app-name">
         {{ appInfo.appName }}
       </div>
-      <template v-if="isQrcodeLogin">
-        <div class="qrcode-login">
-          <div class="qrcode-img">
-            <img src="@/assets/img/login/qrcode.png">
-          </div>
-          <div class="desc">
-            请使用App或微信扫码登录
-          </div>
-        </div>
-      </template>
-      <template v-else>
+      <div class="login-form">
         <div class="tabs">
           <div
-            v-for="item in [LoginAction.LOGIN_VIA_PASSWORD, LoginAction.LOGIN_VIA_EMAIL, LoginAction.REGISTER_VIA_EMAIL]"
+            v-for="item in [LoginAction.LOGIN_VIA_PASSWORD, LoginAction.LOGIN_VIA_QRCODE, LoginAction.LOGIN_VIA_PHONE, LoginAction.LOGIN_VIA_EMAIL]"
             :key="item"
             class="item"
             :class="currentAction === item ? 'active' : ''"
@@ -42,10 +31,10 @@
               class="label"
               :class="!isValidAccount ? 'error' : ''"
             >
-              ID / 邮箱
+              ID / 账号
             </div>
             <el-input
-              v-model="requestVo.email"
+              v-model="requestVo.account"
               type="text"
             />
           </div>
@@ -195,50 +184,59 @@
             />
           </div>
         </div>
-        <div class="rules">
-          <el-checkbox v-model="isReaded">
-            我已阅读并同意 <a href="">
-              隐私政策
-            </a> 以及 <a href="">
-              服务条款
-            </a>
-          </el-checkbox>
-        </div>
-        <div class="button">
-          <div class="submit">
-            <el-button
-              v-if="LoginAction.REGISTER_VIA_EMAIL === currentAction"
-              :loading="isLoadingReg"
-              type="primary"
-              :disabled="isButtonDisabled"
-              @click="onSubmit()"
-            >
-              注册账号
-            </el-button>
-            <el-button
-              v-else
-              :loading="isLoadingLogin"
-              type="primary"
-              :disabled="isButtonDisabled"
-              @click="onSubmit()"
-            >
-              立即登录
-            </el-button>
+        <div
+          v-if="currentAction === LoginAction.LOGIN_VIA_QRCODE"
+          class="qrcode-login"
+        >
+          <div class="qrcode-img">
+            <img src="@/assets/img/login/qrcode.png">
+          </div>
+          <div class="desc">
+            请使用小程序或App扫码登录
           </div>
         </div>
-      </template>
+        <template v-else>
+          <div class="rules">
+            <el-checkbox v-model="isReaded">
+              我已阅读并同意 <a href="">
+                隐私政策
+              </a> 以及 <a href="">
+                服务条款
+              </a>
+            </el-checkbox>
+          </div>
+          <div class="button">
+            <div class="submit">
+              <el-button
+                v-if="LoginAction.REGISTER_VIA_EMAIL === currentAction"
+                :loading="isLoadingReg"
+                type="primary"
+                :disabled="isButtonDisabled"
+                @click="onSubmit()"
+              >
+                注册账号
+              </el-button>
+              <el-button
+                v-else
+                :loading="isLoadingLogin"
+                type="primary"
+                :disabled="isButtonDisabled"
+                @click="onSubmit()"
+              >
+                立即登录
+              </el-button>
+            </div>
+          </div>
+        </template>
+      </div>
       <div
         v-if="false"
         class="link"
       >
-        <a
-          href="#"
-          @click="isQrcodeLogin = !isQrcodeLogin"
-        >
-          {{ isQrcodeLogin ? '普通登录' : '扫码登录' }}
-        </a>
-        <a href="">钉钉登录</a>
-        <a href="">企业微信登录</a>
+        <a href="">企业微信</a>
+        <a href="">钉钉</a>
+        <a href="">飞书</a>
+        <a href="">ERP账号</a>
       </div>
     </div>
     <div class="copyright">
@@ -260,11 +258,6 @@ import { AppEntity } from '@/model/system/app/AppEntity'
 import { AppService } from '@/model/system/app/AppService'
 import { MailService } from '@/model/system/mail/MailService'
 
-/**
- * # 是否二维码登录
- */
-const isQrcodeLogin = ref(false)
-
 const currentAction = ref(LoginAction.LOGIN_VIA_PASSWORD)
 
 /**
@@ -280,6 +273,8 @@ const redirectUri = (AirConfig.router.currentRoute.value.query.redirectUri || '/
 const appInfo = ref(new AppEntity())
 
 requestVo.value.email = 'admin@hamm.cn'
+requestVo.value.phone = '18523749565'
+requestVo.value.account = 'hamm'
 requestVo.value.password = 'Aa123456'
 
 // 一些Loading状态
@@ -293,7 +288,7 @@ const isValidPassword = computed(() => requestVo.value.password && requestVo.val
 const isValidCode = computed(() => requestVo.value.code && requestVo.value.code.length === 6)
 const isValidEmail = computed(() => requestVo.value.email && AirValidator.isEmail(requestVo.value.email))
 const isValidPhone = computed(() => requestVo.value.phone && AirValidator.isMobilePhone(requestVo.value.phone))
-const isValidAccount = computed(() => requestVo.value.email && (AirValidator.isEmail(requestVo.value.email) || AirValidator.isNaturalNumber(requestVo.value.email)))
+const isValidAccount = computed(() => requestVo.value.account)
 
 /**
  * # 计算是否禁用登录/注册按钮
@@ -430,14 +425,15 @@ getAppInfo()
     align-items: center;
 
     .qrcode-login {
-      margin: 30px 0px;
-      padding: 0px 60px;
+      text-align: center;
+      margin-top: 25px;
 
       .qrcode-img {
         background-color: rgba($color: #fff, $alpha: 0.9);
         padding: 10px;
         border-radius: 10px;
         font-size: 0;
+        display: inline-block;
 
         img {
           width: 200px;
@@ -454,13 +450,10 @@ getAppInfo()
     }
 
     .logo {
-
-      width: 80px;
       height: 80px;
       padding: 10px;
       background-color: rgba($color: #fff, $alpha: 0.1);
       border-radius: 20px;
-      box-shadow: 0 0 60px rgba($color: #000, $alpha: 0.1);
 
       img {
         width: 100%;
@@ -506,47 +499,51 @@ getAppInfo()
       }
     }
 
-    .form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      padding: 10px 60px;
+    .login-form {
+      height: 340px;
 
-      .item {
-        height: 50px;
-        background-color: white;
-        margin: 5px;
-        font-size: 14px;
-        border-radius: 10px;
-        overflow: hidden;
-        padding: 10px 20px;
-
-        .label {
-          color: #999;
-        }
-
-        .error {
-          color: red;
-        }
-      }
-    }
-
-    .button {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      padding: 0px 40px;
-      margin-top: 20px;
-
-      .submit {
+      .form {
+        display: flex;
+        flex-direction: column;
         width: 100%;
-        flex: 1;
+        padding: 20px 0px 10px 0px;
 
-        .el-button {
-          padding: 20px;
-          width: 100%;
+        .item {
+          height: 50px;
+          background-color: white;
+          margin: 5px 0px;
+          font-size: 14px;
+          border-radius: 10px;
+          overflow: hidden;
+          padding: 10px 20px;
+
+          .label {
+            color: #999;
+          }
+
+          .error {
+            color: red;
+          }
         }
       }
+
+      .button {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 20px;
+
+        .submit {
+          width: 100%;
+          flex: 1;
+
+          .el-button {
+            padding: 20px;
+            width: 100%;
+          }
+        }
+      }
+
     }
 
     .link {
@@ -627,7 +624,6 @@ getAppInfo()
 @media screen and ((orientation:portrait) and (max-width: 600px)) {
   .login {
     .card {
-      width: 90% !important;
       background: transparent !important;
       backdrop-filter: blur(0px) !important;
       box-shadow: none !important;

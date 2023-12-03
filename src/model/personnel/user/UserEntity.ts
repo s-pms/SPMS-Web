@@ -23,11 +23,28 @@ export class UserEntity extends BaseEntity implements IUser {
    */
   @FormField({
     email: true,
-    requiredString: true,
   })
-  @TableField({
-    forceShow: true,
+  @TableField()
+  @SearchField()
+  @FieldName('账号') account!: string
+
+  /**
+   * # 手机
+   */
+  @FormField({
+    mobilePhone: true,
   })
+  @TableField()
+  @SearchField()
+  @FieldName('手机') phone!: string
+
+  /**
+   * # 邮箱
+   */
+  @FormField({
+    email: true,
+  })
+  @TableField()
   @SearchField()
   @FieldName('邮箱') email!: string
 
@@ -55,19 +72,6 @@ export class UserEntity extends BaseEntity implements IUser {
    * # 头像
    */
   @FieldName('头像') avatar!: string
-
-  /**
-   * # 手机
-   */
-  @FormField({
-    mobilePhone: true,
-    requiredString: true,
-  })
-  @TableField({
-    forceShow: true,
-  })
-  @SearchField()
-  @FieldName('手机') phone!: string
 
   /**
    * # 角色列表

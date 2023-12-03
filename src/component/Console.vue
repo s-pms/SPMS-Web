@@ -2,7 +2,7 @@
   <AFrame :menu-list="menuList">
     <template #logo>
       <img
-        src="https://cdn.hamm.cn/svg/spms/logo.svg"
+        src="@/assets/img/logo.svg"
         style="height: 40px;"
       >
     </template>
