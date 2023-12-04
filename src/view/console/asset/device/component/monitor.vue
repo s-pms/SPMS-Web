@@ -29,9 +29,6 @@
             />
             {{ getValue(item) }}
           </div>
-          <div class="desc">
-            最后变更: {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
-          </div>
         </div>
       </div>
     </div>
@@ -51,7 +48,6 @@ import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDictionary'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
@@ -67,11 +63,11 @@ async function getDetail() {
   formData.value = await DeviceService.create().getDetail(props.param.id)
 }
 
-async function getCollectionList() {
-  monitorList.value = await DeviceService.create().getCollectionList(props.param.id)
+async function getCurrentReport() {
+  monitorList.value = await DeviceService.create().getCurrentReport(props.param.id)
 }
 
-const timer = setInterval(() => { getCollectionList() }, 1000)
+const timer = setInterval(() => { getCurrentReport() }, 1000)
 
 onUnmounted(() => {
   clearInterval(timer)
@@ -141,6 +137,9 @@ function addParameter() {
       display: flex;
       flex-direction: row;
       align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: keep-all;
 
       .light {
         width: 20px;
@@ -148,12 +147,6 @@ function addParameter() {
         border-radius: 100%;
         margin-right: 5px;
       }
-    }
-
-    .desc {
-      margin-top: 5px;
-      font-size: 12px;
-      color: #aaa;
     }
   }
 }

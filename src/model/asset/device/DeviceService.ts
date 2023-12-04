@@ -7,8 +7,8 @@ export class DeviceService extends AbstractBaseService<DeviceEntity> {
 
   baseUrl = 'device'
 
-  async getCollectionList(id: number): Promise<CollectionEntity[]> {
-    const jsonArray = await this.api('getCurrentCollectionList').post(new DeviceEntity(id))
+  async getCurrentReport(id: number): Promise<CollectionEntity[]> {
+    const jsonArray = await this.api('getCurrentReport').post(new DeviceEntity(id))
     return CollectionEntity.fromJsonArray(jsonArray)
   }
 }
