@@ -1,85 +1,41 @@
 <template>
   <ADialog
-    title="设备监控"
+    :title="formData.name+'('+formData.code+') 采集监控'"
     hide-confirm
     width="70%"
     height="70%"
     @on-cancel="onCancel()"
   >
-    <el-form
-      ref="formRef"
-      :model="formData"
-      label-width="120px"
-      @submit.prevent
+    <div
+      v-for="item in monitorList"
+      :key="item.code"
+      class="monitor-card"
     >
-      <AGroup
-        :column="3"
-        title="基本信息"
-      >
-        <el-form-item
-          :label="DeviceEntity.getFieldName('name')"
-          prop="name"
-        >
-          <AInput
-            v-model.name="formData.name"
-            :entity="DeviceEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="DeviceEntity.getFieldName('code')"
-          prop="code"
-        >
-          <AInput
-            v-model.code="formData.code"
-            disabled
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="DeviceEntity.getFieldName('uuid')"
-          prop="uuid"
-        >
-          <AInput
-            v-model.uuid="formData.uuid"
-            disabled
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
-      </AGroup>
-      <AGroup title="监控参数">
-        <div
-          v-for="item in monitorList"
-          :key="item.code"
-          class="monitor-card"
-        >
-          <div class="card-body">
-            <div class="head">
-              <div class="title">
-                {{ item.label }}
-              </div>
-              <div class="code">
-                {{ item.code }}
-              </div>
-            </div>
-            <div class="value">
-              <div
-                v-if="['status','alarm'].includes(item.code)"
-                class="light"
-                :style="{backgroundColor:getColor(item)}"
-              />
-              {{ getValue(item) }}
-            </div>
+      <div class="card-body">
+        <div class="head">
+          <div class="title">
+            {{ item.label }}
+          </div>
+          <div class="code">
+            {{ item.code }}
           </div>
         </div>
-      </AGroup>
-    </el-form>
+        <div class="value">
+          <div
+            v-if="['status','alarm'].includes(item.code)"
+            class="light"
+            :style="{backgroundColor:getColor(item)}"
+          />
+          {{ getValue(item) }}
+        </div>
+      </div>
+    </div>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
-import { ADialog, AGroup, AInput } from '@/airpower/component'
+import { ADialog } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
