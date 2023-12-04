@@ -1,12 +1,12 @@
 <template>
   <ADialog
-    :title="formData.name+'('+formData.code+') 采集监控'"
+    :title="formData.name + '(' + formData.code + ') 采集监控'"
     hide-confirm
     width="70%"
     height="70%"
     @on-cancel="onCancel()"
   >
-    <template v-if="monitorList.length>0">
+    <div v-if="monitorList.length > 0">
       <div
         v-for="item in monitorList"
         :key="item.code"
@@ -23,9 +23,9 @@
           </div>
           <div class="value">
             <div
-              v-if="['status','alarm'].includes(item.code)"
+              v-if="[CollectionDefault.ALARM.toString(), CollectionDefault.STATUS.toString()].includes(item.code)"
               class="light"
-              :style="{backgroundColor:getColor(item)}"
+              :style="{ backgroundColor: getColor(item) }"
             />
             {{ getValue(item) }}
           </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-    </template>
+    </div>
     <AEmpty v-else>
       暂无已添加的监控属性 <el-link @click="addParameter()">
         去添加
@@ -54,6 +54,7 @@ import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDiction
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
+import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
@@ -79,9 +80,9 @@ getDetail()
 
 function getValue(item: CollectionEntity) {
   switch (item.code) {
-    case 'status':
+    case CollectionDefault.STATUS:
       return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
-    case 'alarm':
+    case CollectionDefault.ALARM:
       return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
     default:
       return item.value
@@ -90,9 +91,9 @@ function getValue(item: CollectionEntity) {
 
 function getColor(item: CollectionEntity) {
   switch (item.code) {
-    case 'status':
+    case CollectionDefault.STATUS:
       return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
-    case 'alarm':
+    case CollectionDefault.ALARM:
       return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
     default:
       return item.value
@@ -109,6 +110,7 @@ function addParameter() {
 .monitor-card {
   display: inline-block;
   width: 33.33333333%;
+  min-width: 360px;
 
   .card-body {
     margin: 5px;
@@ -139,7 +141,7 @@ function addParameter() {
       flex-direction: row;
       align-items: center;
 
-      .light{
+      .light {
         width: 20px;
         height: 20px;
         border-radius: 100%;
@@ -147,7 +149,7 @@ function addParameter() {
       }
     }
 
-    .desc{
+    .desc {
       margin-top: 5px;
       font-size: 12px;
       color: #aaa;
