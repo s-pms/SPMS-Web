@@ -55,6 +55,7 @@ import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
+import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
@@ -83,7 +84,7 @@ function getValue(item: CollectionEntity) {
     case CollectionDefault.STATUS:
       return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
     case CollectionDefault.ALARM:
-      return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
+      return AlarmStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
     default:
       return item.value
   }
@@ -94,7 +95,7 @@ function getColor(item: CollectionEntity) {
     case CollectionDefault.STATUS:
       return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
     case CollectionDefault.ALARM:
-      return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
+      return AlarmStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
     default:
       return item.value
   }
