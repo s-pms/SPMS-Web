@@ -6,45 +6,54 @@
     height="70%"
     @on-cancel="onCancel()"
   >
-    <div
-      v-for="item in monitorList"
-      :key="item.code"
-      class="monitor-card"
-    >
-      <div class="card-body">
-        <div class="head">
-          <div class="title">
-            {{ item.label }}
+    <template v-if="monitorList.length>0">
+      <div
+        v-for="item in monitorList"
+        :key="item.code"
+        class="monitor-card"
+      >
+        <div class="card-body">
+          <div class="head">
+            <div class="title">
+              {{ item.label }}
+            </div>
+            <div class="code">
+              {{ item.code }}
+            </div>
           </div>
-          <div class="code">
-            {{ item.code }}
+          <div class="value">
+            <div
+              v-if="['status','alarm'].includes(item.code)"
+              class="light"
+              :style="{backgroundColor:getColor(item)}"
+            />
+            {{ getValue(item) }}
           </div>
-        </div>
-        <div class="value">
-          <div
-            v-if="['status','alarm'].includes(item.code)"
-            class="light"
-            :style="{backgroundColor:getColor(item)}"
-          />
-          {{ getValue(item) }}
-        </div>
-        <div class="desc">
-          最后变更: {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
+          <div class="desc">
+            最后变更: {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
+          </div>
         </div>
       </div>
-    </div>
+    </template>
+    <AEmpty v-else>
+      暂无已添加的监控属性 <el-link @click="addParameter()">
+        去添加
+      </el-link>
+    </AEmpty>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
-import { ADialog } from '@/airpower/component'
+import { ADialog, AEmpty } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDictionary'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
+import { AirDialog } from '@/airpower/helper/AirDialog'
+import { ParameterEditor } from '@/view/console/iot/parameter/component'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
@@ -88,6 +97,10 @@ function getColor(item: CollectionEntity) {
     default:
       return item.value
   }
+}
+
+function addParameter() {
+  AirDialog.show(ParameterEditor)
 }
 
 </script>
