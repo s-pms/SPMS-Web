@@ -28,4 +28,6 @@ export class CollectionEntity extends BaseEntity {
     requiredString: true,
   })
   @FieldName('参数采集值') value!: string
+
+  @FieldName('最后变更') timestamp!: number
 }

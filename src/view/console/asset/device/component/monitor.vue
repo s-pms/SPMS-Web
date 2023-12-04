@@ -28,6 +28,9 @@
           />
           {{ getValue(item) }}
         </div>
+        <div class="desc">
+          最后变更: {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
+        </div>
       </div>
     </div>
   </ADialog>
@@ -41,6 +44,7 @@ import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDictionary'
+import { AirDateTime } from '@/airpower/helper/AirDateTime'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
@@ -128,6 +132,12 @@ function getColor(item: CollectionEntity) {
         border-radius: 100%;
         margin-right: 5px;
       }
+    }
+
+    .desc{
+      margin-top: 5px;
+      font-size: 12px;
+      color: #aaa;
     }
   }
 }
