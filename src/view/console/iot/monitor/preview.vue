@@ -1,31 +1,30 @@
 <template>
   <APanel>
-    <AGroup title="设备状态统计">
+    <AGroup
+      title="设备实时状态"
+      :column="1"
+      disable-collapse
+    >
       <div class="device-view">
         <div
           v-for="item in DeviceStatusDictionary"
           :key="(item.key as number)"
           class="device-item"
+          :style="{ width: (deviceList.filter(i => i.status === item.key).length / deviceList.length * 100) + '%' }"
         >
           <div
             class="device-card"
-            :style="{ borderColor: item.color }"
+            :style="{ background: item.color }"
           >
             <div class="device-status">
               <span :style="{ backgroundColor: item.color }" />{{ item.label }}
             </div>
             <div class="device-number">
-              {{ AirRand.getRandNumber(10, 99) }}
-              <span>台</span>
+              {{ deviceList.filter(i => i.status === item.key).length }}
             </div>
           </div>
         </div>
       </div>
-    </AGroup>
-    <AGroup
-      title="设备实时状态"
-      :column="1"
-    >
       <div
         v-if="deviceList.length > 0"
         class="device-list"
@@ -100,7 +99,6 @@ import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDiction
 import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
 import { DeviceStatus } from '@/model/asset/device/DeviceStatus'
 import { AlarmStatus } from '@/model/asset/device/AlarmStatus'
-import { AirRand } from '@/airpower/helper/AirRand'
 
 const deviceList = ref([] as DeviceEntity[])
 
@@ -116,37 +114,32 @@ onUnmounted(() => {
 </script>
 <style scoped lang="scss">
 .device-view {
+  margin: 0px 8px;
+  overflow: hidden;
+
   .device-item {
-    width: 20%;
     display: inline-block;
+    overflow: hidden;
+    height: 100%;
 
     .device-card {
-      border: 2px dashed;
-      margin: 5px;
-      border-radius: 10px;
-      padding: 10px;
+      overflow: hidden;
+      padding: 2px 0px;
       display: flex;
       flex-direction: row;
       align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 0px 1px 5px rgba($color: #000, $alpha: 0.3);
+      text-align: center;
+      font-size: 12px;
 
       .device-status {
-        flex: 1;
-        width: 0;
-        font-size: 16px;
+        display: inline-block;
       }
 
       .device-number {
-        font-size: 24px;
         font-weight: bold;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        span {
-          color: #999;
-          font-weight: normal;
-          font-size: 16px;
-        }
       }
     }
   }
