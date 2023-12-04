@@ -140,6 +140,7 @@ function addParameter() {
       overflow: hidden;
       text-overflow: ellipsis;
       word-break: keep-all;
+      white-space: nowrap;
 
       .light {
         width: 20px;
