@@ -1,5 +1,5 @@
 import {
-  ClassName, Dictionary, FieldName,
+  ClassName, Dictionary, FieldName, Type,
 } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
@@ -9,6 +9,7 @@ import { DeviceStatusDictionary } from './DeviceStatusDictionary'
 import { AlarmStatus } from './AlarmStatus'
 import { AlarmStatusDictionary } from './AlarmStatusDictionary'
 import { DeviceReportingDictionary } from './DeviceReportingDictionary'
+import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 
 @ClassName('设备')
 export class DeviceEntity extends BaseEntity {
@@ -81,4 +82,13 @@ export class DeviceEntity extends BaseEntity {
     orderNumber: -80,
   })
   @FieldName('报警状态') alarm!: AlarmStatus
+
+  @FormField({
+    placeholder: '采集间隔毫秒数,最小200ms',
+    requiredNumber: true,
+    defaultValue: 200,
+  })
+  @FieldName('采集频率') rate!: number
+
+  @Type(ParameterEntity, true) parameters!: ParameterEntity[]
 }

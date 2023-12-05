@@ -62,11 +62,16 @@ import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
 
-const props = defineProps(airPropsSelector<ParameterEntity>())
+const props = defineProps(airPropsSelector<ParameterEntity, ParameterEntity>())
 
 const {
   title, selectList, onSelected, isLoading, response,
   onSearch, onPageChanged,
-} = useAirSelector(props, ParameterEntity, ParameterService)
+} = useAirSelector(props, ParameterEntity, ParameterService, {
+  beforeSearch(requestData) {
+    requestData.filter.recoverBy(props.param)
+    return requestData
+  },
+})
 </script>
 <style scoped lang="scss"></style>
