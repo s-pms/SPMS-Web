@@ -34,7 +34,10 @@
           :key="device.id"
           class="device-item"
         >
-          <div class="device-card">
+          <div
+            class="device-card"
+            @click="showMonitor(device)"
+          >
             <div
               class="bg"
               :style="{ backgroundColor: DeviceStatusDictionary.getColor(device.status), }"
@@ -99,6 +102,8 @@ import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDiction
 import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
 import { DeviceStatus } from '@/model/asset/device/DeviceStatus'
 import { AlarmStatus } from '@/model/asset/device/AlarmStatus'
+import { AirDialog } from '@/airpower/helper/AirDialog'
+import { DeviceMonitor } from '../../asset/device/component'
 
 const deviceList = ref([] as DeviceEntity[])
 
@@ -114,6 +119,10 @@ getDeviceList()
 onUnmounted(() => {
   clearInterval(timer)
 })
+
+function showMonitor(device: DeviceEntity) {
+  AirDialog.show(DeviceMonitor, device)
+}
 </script>
 <style scoped lang="scss">
 .device-view {

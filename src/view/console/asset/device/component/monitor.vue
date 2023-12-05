@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    :title="formData.name + '(' + formData.code + ') 采集监控'"
+    :title="formData.name + '(' + formData.code + ') 采集实时监控'"
     hide-confirm
     width="70%"
     height="70%"
