@@ -2,6 +2,7 @@ import { AirDictionaryArray } from '@/airpower/model/extend/AirDictionaryArray'
 import { DeviceStatus } from './DeviceStatus'
 
 export const DeviceStatusDictionary = AirDictionaryArray.create([
+  { key: DeviceStatus.UNKNOWN, label: '未知', color: '#999' },
   { key: DeviceStatus.ALARM, label: '报警', color: '#e14027' },
   { key: DeviceStatus.RUNNING, label: '运行', color: '#73cc44' },
   { key: DeviceStatus.FREE, label: '空闲', color: '#e3d349' },

@@ -6,7 +6,10 @@
     height="70%"
     @on-cancel="onCancel()"
   >
-    <div v-if="monitorList.length > 0">
+    <div
+      v-if="monitorList.length > 0"
+      class="monitor-list"
+    >
       <div
         v-for="item in monitorList"
         :key="item.code"
@@ -104,49 +107,58 @@ function addParameter() {
 </script>
 
 <style lang="scss" scoped>
-.monitor-card {
-  display: inline-block;
-  width: 33.33333333%;
-  min-width: 360px;
+.monitor-list {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
 
-  .card-body {
-    margin: 5px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 20px;
+  .monitor-card {
+    display: inline-block;
+    width: 33.33333333%;
+    min-width: 360px;
 
-    .head {
-      display: flex;
-      flex-direction: row;
+    .card-body {
+      margin: 5px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      padding: 20px;
+      height: 80px;
+      vertical-align: top;
 
-      .title {
-        flex: 1;
-        font-size: 16px;
+      .head {
+        display: flex;
+        flex-direction: row;
+
+        .title {
+          flex: 1;
+          font-size: 16px;
+        }
+
+        .code {
+          color: #999;
+          font-size: 14px;
+        }
       }
 
-      .code {
-        color: #999;
-        font-size: 14px;
-      }
-    }
+      .value {
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        white-space: nowrap;
 
-    .value {
-      font-weight: bold;
-      font-size: 20px;
-      margin-top: 20px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      word-break: keep-all;
-      white-space: nowrap;
-
-      .light {
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-right: 5px;
+        .light {
+          width: 20px;
+          height: 20px;
+          border-radius: 100%;
+          margin-right: 5px;
+        }
       }
     }
   }
