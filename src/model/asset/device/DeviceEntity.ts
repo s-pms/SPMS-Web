@@ -8,6 +8,7 @@ import { DeviceStatus } from './DeviceStatus'
 import { DeviceStatusDictionary } from './DeviceStatusDictionary'
 import { AlarmStatus } from './AlarmStatus'
 import { AlarmStatusDictionary } from './AlarmStatusDictionary'
+import { DeviceReportingDictionary } from './DeviceReportingDictionary'
 
 @ClassName('设备')
 export class DeviceEntity extends BaseEntity {
@@ -48,13 +49,27 @@ export class DeviceEntity extends BaseEntity {
 
   @TableField({
     copyField: true,
+    orderNumber: -79,
+    width: 80,
+    showColor: true,
+  })
+  @FormField({
+    defaultValue: true,
+    clearable: false,
+  })
+  @Dictionary(DeviceReportingDictionary)
+  @FieldName('开启采集') isReporting!: boolean
+
+  @TableField({
+    copyField: true,
+    align: 'right',
   })
   @FieldName('实时产量') partCount!: string
 
   @Dictionary(DeviceStatusDictionary)
   @TableField({
     showColor: true,
-    width: 100,
+    width: 80,
     orderNumber: -80,
   })
   @FieldName('运行状态') status!: DeviceStatus

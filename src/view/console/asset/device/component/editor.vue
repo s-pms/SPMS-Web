@@ -40,6 +40,15 @@
           :entity="DeviceEntity"
         />
       </el-form-item>
+      <el-form-item
+        :label="DeviceEntity.getFieldName('isReporting')"
+        prop="isReporting"
+      >
+        <AInput
+          v-model.isReporting="formData.isReporting"
+          :entity="DeviceEntity"
+        />
+      </el-form-item>
     </el-form>
   </ADialog>
 </template>

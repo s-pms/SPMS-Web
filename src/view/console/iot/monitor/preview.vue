@@ -102,8 +102,11 @@ import { AlarmStatus } from '@/model/asset/device/AlarmStatus'
 
 const deviceList = ref([] as DeviceEntity[])
 
+const request = ref(new AirRequest(DeviceEntity))
+request.value.filter = new DeviceEntity()
+request.value.filter.isReporting = true
 async function getDeviceList() {
-  deviceList.value = await DeviceService.create().getList(new AirRequest(DeviceEntity))
+  deviceList.value = await DeviceService.create().getList(request.value)
 }
 
 const timer = setInterval(() => { getDeviceList() }, 1000)
