@@ -15,7 +15,10 @@
         :key="item.code"
         class="monitor-card"
       >
-        <div class="card-body">
+        <div
+          class="card-body"
+          @click="showHistory(item)"
+        >
           <div class="head">
             <div class="title">
               {{ item.label }}
@@ -55,6 +58,7 @@ import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
 import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
+import { DeviceCollectHistory } from '.'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
@@ -70,7 +74,7 @@ async function getCurrentReport() {
   monitorList.value = await DeviceService.create().getCurrentReport(props.param.id)
 }
 
-const timer = setInterval(() => { getCurrentReport() }, 1000)
+let timer = setInterval(() => { getCurrentReport() }, 1000)
 
 onUnmounted(() => {
   clearInterval(timer)
@@ -104,6 +108,15 @@ function addParameter() {
   AirDialog.show(ParameterEditor)
 }
 
+async function showHistory(item: CollectionEntity) {
+  item.uuid = props.param.uuid
+  clearInterval(timer)
+  try {
+    await AirDialog.show(DeviceCollectHistory, item)
+  } finally {
+    timer = setInterval(() => { getCurrentReport() }, 1000)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

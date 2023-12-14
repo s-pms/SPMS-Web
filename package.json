@@ -21,6 +21,7 @@
         "axios": "^1.5.1",
         "core-js": "^3.33.0",
         "crypto-js": "^4.1.1",
+        "echarts": "^5.4.3",
         "element-plus": "^2.4.0",
         "js-base64": "^3.7.5",
         "pinia": "^2.1.7",

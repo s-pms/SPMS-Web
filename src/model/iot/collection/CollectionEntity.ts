@@ -30,4 +30,6 @@ export class CollectionEntity extends BaseEntity {
   @FieldName('参数采集值') value!: string
 
   @FieldName('最后变更') timestamp!: number
+
+  @FieldName('uuid') uuid!: string
 }
