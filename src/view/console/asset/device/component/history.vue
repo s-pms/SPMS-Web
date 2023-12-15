@@ -55,25 +55,6 @@
       />
     </div>
     <template v-else-if="collectionList.length > 3 && dictionary.length > 0">
-      <div class="timeline">
-        <div class="line">
-          <div
-            v-for="(item, index) in statusList"
-            :key="index"
-            v-tip="item.label"
-            class="item"
-            :style="{ backgroundColor: item.color, width: item.percent + '%' }"
-          />
-        </div>
-        <div class="time">
-          <div class="left">
-            {{ AirDateTime.formatFromMilliSecond(collectionList[0].timestamp) }}
-          </div>
-          <div class="right">
-            {{ AirDateTime.formatFromMilliSecond(collectionList[collectionList.length - 1].timestamp) }}
-          </div>
-        </div>
-      </div>
       <div
         v-loading="isLoading"
         class="view"
@@ -100,6 +81,25 @@
                 {{ getLabel(item) }}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="line">
+          <div
+            v-for="(item, index) in statusList"
+            :key="index"
+            v-tip="item.label"
+            class="item"
+            :style="{ backgroundColor: item.color, width: item.percent + '%' }"
+          />
+        </div>
+        <div class="time">
+          <div class="left">
+            {{ AirDateTime.formatFromMilliSecond(collectionList[0].timestamp) }}
+          </div>
+          <div class="right">
+            {{ AirDateTime.formatFromMilliSecond(collectionList[collectionList.length - 1].timestamp) }}
           </div>
         </div>
       </div>
@@ -180,6 +180,9 @@ const dictionary = computed(() => {
   return []
 })
 
+/**
+ * 处理时间区间是否合理
+ */
 function validDateTimeRange() {
   if (dateTimeRange.value && dateTimeRange.value.length === 2) {
     if (props.param.dataType === ParameterType.QUANTITY) {
@@ -238,6 +241,10 @@ function validDateTimeRange() {
   getDevicePayloadHistory()
 }
 
+/**
+ * 获取采集数据的颜色
+ * @param item 采集数据
+ */
 function getStatusColor(item: CollectionEntity) {
   switch (props.param.code) {
     case 'Status':
@@ -249,6 +256,11 @@ function getStatusColor(item: CollectionEntity) {
   return AirColor.NORMAL
 }
 
+/**
+ * 获取采集数据的显示文案
+ * @param item 采集数据
+ * @param index 循环索引
+ */
 function getStatusLabel(item: CollectionEntity, index: number) {
   if (index === 0 || collectionList.value.length < 3) {
     return ''
@@ -276,6 +288,11 @@ function getStatusLabel(item: CollectionEntity, index: number) {
   return item.intValue
 }
 
+/**
+ * 采集数据指定状态的百分比
+ * @param item 采集数据
+ * @param index 循环索引
+ */
 function getStatusPercent(item: CollectionEntity, index: number) {
   if (index === 0 || collectionList.value.length < 3) {
     return 0
@@ -289,6 +306,9 @@ function getStatusPercent(item: CollectionEntity, index: number) {
     / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(2)
 }
 
+/**
+ * 采集数据的状态列表
+ */
 const statusList = computed(() => {
   const arr: IJson[] = []
   if (collectionList.value.length < 3) {
@@ -328,7 +348,7 @@ function getFriendlyTime(milSecond: number) {
   if (hour > 0) {
     arr.push(`${hour}h`)
   }
-  const minute = parseInt((s / 60).toString(), 10)
+  const minute = parseInt(((s % 3600) / 60).toString(), 10)
   if (minute > 0) {
     arr.push(`${minute}m`)
   }
@@ -493,7 +513,7 @@ function onFull() {
         overflow: hidden;
 
         .quantity {
-          font-size: 20px;
+          font-size: 16px;
         }
 
         .percent {
@@ -506,9 +526,9 @@ function onFull() {
           background-color: #333;
           box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.3);
           padding: 50px;
-          padding-bottom: 5px;
+          padding-bottom: 2px;
           position: absolute;
-          right: -55px;
+          right: -60px;
           top: -30px;
           transform: rotateZ(45deg);
         }
