@@ -29,6 +29,11 @@ export class ParameterEntity extends BaseEntity {
     showColor: true,
     width: 100,
   })
+  @FormField({
+    defaultValue: ParameterType.QUANTITY,
+    clearable: false,
+    requiredNumber: true,
+  })
   @FieldName('数据类型') dataType!: ParameterType
 
   @Dictionary(ParameterSystemDictionary)
