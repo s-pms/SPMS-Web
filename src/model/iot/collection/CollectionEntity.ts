@@ -4,6 +4,7 @@ import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { CollectionGranularity } from './CollectionGranularity'
 import { CollectionGranularityDictionary } from './CollectionGranularityDictionary'
+import { ParameterType } from '../parameter/ParameterType'
 
 @ClassName('采集参数')
 export class CollectionEntity extends BaseEntity {
@@ -38,4 +39,16 @@ export class CollectionEntity extends BaseEntity {
   @Dictionary(CollectionGranularityDictionary)
   @FormField()
   @FieldName('颗粒度') reportGranularity!: CollectionGranularity
+
+  intValue!: number
+
+  booleanValue!: boolean
+
+  strValue!: string
+
+  startTime!: number
+
+  endTime!: number
+
+  dataType!: ParameterType
 }

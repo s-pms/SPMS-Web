@@ -22,11 +22,11 @@ export default defineConfig({
     https: false,
     proxy: {
       '/api': {
-        target: 'http://192.168.110.32:8080/',
+        target: 'http://127.0.0.1:8080/',
         rewrite: (path) => path.replace(/^\/api/, ''),
         changeOrigin: true,
       },
-      target: 'http://192.168.110.32:8080/',
+      target: 'http://127.0.0.1:8080/',
     },
   },
 })
