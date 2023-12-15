@@ -3,6 +3,8 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { ParameterSystemDictionary } from './ParameterSystemDictionary'
+import { ParameterType } from './ParameterType'
+import { ParameterTypeDictionary } from './ParameterTypeDictionary'
 
 @ClassName('采集参数')
 export class ParameterEntity extends BaseEntity {
@@ -21,6 +23,13 @@ export class ParameterEntity extends BaseEntity {
     requiredString: true,
   })
   @FieldName('参数标题') label!: string
+
+  @Dictionary(ParameterTypeDictionary)
+  @TableField({
+    showColor: true,
+    width: 100,
+  })
+  @FieldName('数据类型') dataType!: ParameterType
 
   @Dictionary(ParameterSystemDictionary)
   @TableField({
