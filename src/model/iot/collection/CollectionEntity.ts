@@ -1,7 +1,9 @@
-import { ClassName, FieldName } from '@/airpower/decorator/Custom'
+import { ClassName, Dictionary, FieldName } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
+import { CollectionGranularity } from './CollectionGranularity'
+import { CollectionGranularityDictionary } from './CollectionGranularityDictionary'
 
 @ClassName('采集参数')
 export class CollectionEntity extends BaseEntity {
@@ -32,4 +34,8 @@ export class CollectionEntity extends BaseEntity {
   @FieldName('最后变更') timestamp!: number
 
   @FieldName('uuid') uuid!: string
+
+  @Dictionary(CollectionGranularityDictionary)
+  @FormField()
+  @FieldName('颗粒度') reportGranularity!: CollectionGranularity
 }
