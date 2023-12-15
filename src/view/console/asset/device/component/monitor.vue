@@ -132,6 +132,8 @@ async function showHistory(item: CollectionEntity) {
     min-width: 360px;
 
     .card-body {
+      cursor: pointer;
+      transition: all .3s;
       margin: 5px;
       background-color: #f5f5f5;
       border-radius: 10px;
@@ -173,6 +175,12 @@ async function showHistory(item: CollectionEntity) {
           margin-right: 5px;
         }
       }
+    }
+
+    .card-body:hover {
+      transform: scale(1.05);
+      z-index: 1;
+      box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.2);
     }
   }
 }
