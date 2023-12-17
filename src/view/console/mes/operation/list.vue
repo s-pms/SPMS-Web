@@ -39,5 +39,6 @@ const {
 } = useAirTable(OperationEntity, OperationService, {
   editView: OperationEditor,
 })
+
 </script>
 <style scoped lang="scss"></style>
