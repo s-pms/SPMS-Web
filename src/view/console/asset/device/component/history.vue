@@ -185,53 +185,56 @@ const dictionary = computed(() => {
  */
 function validDateTimeRange() {
   if (dateTimeRange.value && dateTimeRange.value.length === 2) {
-    if (props.param.dataType === ParameterType.QUANTITY) {
-      switch (currentGranularity.value) {
-        case CollectionGranularity.ONE_MINUTE:
+    switch (props.param.dataType) {
+      case ParameterType.QUANTITY:
+        switch (currentGranularity.value) {
+          case CollectionGranularity.ONE_MINUTE:
           // 每分钟 最多允许查看最近6小时
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > 6 * SECOND_PER_HOUR) {
-            AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - 6 * SECOND_PER_HOUR) * 1000)
-          }
-          break
-        case CollectionGranularity.FIVE_MINUTES:
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY) {
-            AirNotification.warning('该时间粒度下最多允许查看24小时内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY) * 1000)
-          }
-          break
-        case CollectionGranularity.THIRTY_MINUTES:
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 3) {
-            AirNotification.warning('该时间粒度下最多允许查看72小时内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 3) * 1000)
-          }
-          break
-        case CollectionGranularity.ONE_HOUR:
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 7) {
-            AirNotification.warning('该时间粒度下最多允许查看7天内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 7) * 1000)
-          }
-          break
-        case CollectionGranularity.ONE_DAY:
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365) {
-            AirNotification.warning('该时间粒度下最多允许查看一年内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365) * 1000)
-          }
-          break
-        case CollectionGranularity.ONE_WEEK:
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 3) {
-            AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 3) * 1000)
-          }
-          break
-        case CollectionGranularity.ONE_MONTH:
-          if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 10) {
-            AirNotification.warning('该时间粒度下最多允许查看十年内的数据')
-            dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 10) * 1000)
-          }
-          break
-        default:
-      }
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > 6 * SECOND_PER_HOUR) {
+              AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - 6 * SECOND_PER_HOUR) * 1000)
+            }
+            break
+          case CollectionGranularity.FIVE_MINUTES:
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY) {
+              AirNotification.warning('该时间粒度下最多允许查看24小时内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY) * 1000)
+            }
+            break
+          case CollectionGranularity.THIRTY_MINUTES:
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 3) {
+              AirNotification.warning('该时间粒度下最多允许查看72小时内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 3) * 1000)
+            }
+            break
+          case CollectionGranularity.ONE_HOUR:
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 7) {
+              AirNotification.warning('该时间粒度下最多允许查看7天内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 7) * 1000)
+            }
+            break
+          case CollectionGranularity.ONE_DAY:
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365) {
+              AirNotification.warning('该时间粒度下最多允许查看一年内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365) * 1000)
+            }
+            break
+          case CollectionGranularity.ONE_WEEK:
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 3) {
+              AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 3) * 1000)
+            }
+            break
+          case CollectionGranularity.ONE_MONTH:
+            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 10) {
+              AirNotification.warning('该时间粒度下最多允许查看十年内的数据')
+              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 10) * 1000)
+            }
+            break
+          default:
+        }
+        break
+      default:
     }
   } else {
     dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()] as Date[]
