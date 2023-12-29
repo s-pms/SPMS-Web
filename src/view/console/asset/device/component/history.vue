@@ -442,6 +442,7 @@ async function getDevicePayloadHistory() {
   postData.startTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
   postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
   collectionList.value = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
+  console.log(collectionList.value)
   loadData()
 }
 onMounted(() => {
