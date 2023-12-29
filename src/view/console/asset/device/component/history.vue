@@ -307,7 +307,7 @@ function getStatusPercent(item: CollectionEntity, index: number) {
   }
   return parseFloat(((
     (item.timestamp - startTime)
-    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(2)
+    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(6)
 }
 
 /**
