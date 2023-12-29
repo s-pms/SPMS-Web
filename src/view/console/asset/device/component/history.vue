@@ -108,7 +108,7 @@
       <template v-if="collectionList.length > 0">
         <el-timeline>
           <el-timeline-item
-            v-for="(item, index) in collectionList.reverse().filter((item, index) => index < maxLength)"
+            v-for="(item, index) in collectionList"
             :key="index"
             :icon="Clock"
           >
@@ -441,8 +441,12 @@ async function getDevicePayloadHistory() {
   postData.reportGranularity = currentGranularity.value
   postData.startTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
   postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-  collectionList.value = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
-  console.log(collectionList.value)
+  const list = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
+  if (props.param.dataType === ParameterType.INFORMATION) {
+    collectionList.value = list.reverse()
+  } else {
+    collectionList.value = list
+  }
   loadData()
 }
 onMounted(() => {
