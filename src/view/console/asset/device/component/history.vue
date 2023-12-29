@@ -122,7 +122,6 @@
         </el-timeline>
 
         <div
-          v-if="collectionList.length > maxLength"
           class="more-data"
         >
           仅展示前{{ maxLength }}条, 可筛选后查看指定时间段的数据"
