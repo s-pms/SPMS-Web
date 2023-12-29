@@ -122,10 +122,10 @@
         </el-timeline>
 
         <div
-          v-if="collectionList.length > 100"
+          v-if="collectionList.length > 500"
           class="more-data"
         >
-          仅展示前100条, 可筛选后查看指定时间段的数据"
+          仅展示前500条, 可筛选后查看指定时间段的数据"
         </div>
       </template>
       <AEmpty v-else>
