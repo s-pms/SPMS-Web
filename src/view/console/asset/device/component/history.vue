@@ -108,7 +108,7 @@
       <template v-if="collectionList.length > 0">
         <el-timeline>
           <el-timeline-item
-            v-for="(item, index) in collectionList.filter((item, index) => index < maxLength)"
+            v-for="(item, index) in collectionList.reverse().filter((item, index) => index < maxLength)"
             :key="index"
             :icon="Clock"
           >
@@ -164,7 +164,7 @@ const collectionList = ref([] as CollectionEntity[])
 
 const isLoading = ref(false)
 
-const maxLength = 50
+const maxLength = 500
 
 const SECOND_PER_DAY = 86400
 const SECOND_PER_HOUR = 3600
