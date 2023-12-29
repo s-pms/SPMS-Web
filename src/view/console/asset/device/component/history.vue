@@ -108,7 +108,7 @@
       <template v-if="collectionList.length > 0">
         <el-timeline>
           <el-timeline-item
-            v-for="(item, index) in collectionList.reverse().filter((item, index) => index < maxLength)"
+            v-for="(item, index) in collectionList.filter((item, index) => index < maxLength)"
             :key="index"
             :icon="Clock"
           >
