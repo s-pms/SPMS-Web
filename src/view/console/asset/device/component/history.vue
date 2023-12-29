@@ -108,7 +108,7 @@
       <template v-if="collectionList.length > 0">
         <el-timeline>
           <el-timeline-item
-            v-for="(item, index) in collectionList.reverse().filter((item, index) => index < 50)"
+            v-for="(item, index) in collectionList.reverse().filter((item, index) => index < maxLength)"
             :key="index"
             :icon="Clock"
           >
@@ -122,10 +122,10 @@
         </el-timeline>
 
         <div
-          v-if="collectionList.length > 200"
+          v-if="collectionList.length > maxLength"
           class="more-data"
         >
-          仅展示前200条, 可筛选后查看指定时间段的数据"
+          仅展示前{{ maxLength }}条, 可筛选后查看指定时间段的数据"
         </div>
       </template>
       <AEmpty v-else>
@@ -163,6 +163,8 @@ const props = defineProps(airPropsParam(new CollectionEntity()))
 const collectionList = ref([] as CollectionEntity[])
 
 const isLoading = ref(false)
+
+const maxLength = 50
 
 const SECOND_PER_DAY = 86400
 const SECOND_PER_HOUR = 3600
