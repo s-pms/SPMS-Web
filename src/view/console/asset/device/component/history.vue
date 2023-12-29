@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    :title="param.label + '历史'"
+    :title="currentLabel || param.label + '历史(最多500条记录)'"
     hide-confirm
     width="65%"
     height="50%"
@@ -17,6 +17,7 @@
           start-placeholder="开始时间"
           end-placeholder="结束时间"
           format="YYYY-MM-DD HH:mm:ss"
+          :shortcuts="shortcuts"
           @change="validDateTimeRange"
         />
 
@@ -83,23 +84,37 @@
             </div>
           </div>
         </div>
+        <div
+          class="cover"
+          :style="{ backgroundColor: currentColor || 'transparent' }"
+        />
       </div>
       <div class="timeline">
         <div class="line">
           <div
             v-for="(item, index) in statusList"
             :key="index"
-            v-tip="item.label"
             class="item"
             :style="{ backgroundColor: item.color, width: item.percent + '%' }"
+            @mouseenter="currentLabel = item.label; currentColor = item.color"
+            @mouseout="currentLabel = ''; currentColor = ''"
           />
         </div>
         <div class="time">
           <div class="left">
             {{ AirDateTime.formatFromMilliSecond(collectionList[0].timestamp) }}
           </div>
-          <div class="right">
+          <div
+            v-if="collectionList.length < maxLength"
+            class="right"
+          >
             {{ AirDateTime.formatFromMilliSecond(collectionList[collectionList.length - 1].timestamp) }}
+          </div>
+          <div
+            v-else
+            class="right"
+          >
+            仅最近{{ maxLength }}条数据, 可尝试缩小时间范围
           </div>
         </div>
       </div>
@@ -121,9 +136,7 @@
           </el-timeline-item>
         </el-timeline>
 
-        <div
-          class="more-data"
-        >
+        <div class="more-data">
           仅展示前{{ maxLength }}条, 可筛选后查看指定时间段的数据
         </div>
       </template>
@@ -157,6 +170,8 @@ import { IJson } from '@/airpower/interface/IJson'
 import { DeviceStatus } from '@/model/asset/device/DeviceStatus'
 import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
 
+const currentLabel = ref('')
+const currentColor = ref('')
 const props = defineProps(airPropsParam(new CollectionEntity()))
 
 const collectionList = ref([] as CollectionEntity[])
@@ -169,6 +184,108 @@ const SECOND_PER_DAY = 86400
 const SECOND_PER_HOUR = 3600
 const currentGranularity = ref(CollectionGranularity.ONE_MINUTE)
 const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()] as Date[])
+
+const shortcuts = [
+  {
+    text: '近一小时',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 1)
+      return [start, end]
+    },
+  },
+  {
+    text: '近三小时',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 3)
+      return [start, end]
+    },
+  },
+  {
+    text: '近六小时',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 6)
+      return [start, end]
+    },
+  },
+  {
+    text: '近半天',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 12)
+      return [start, end]
+    },
+  },
+  {
+    text: '近一天',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24)
+      return [start, end]
+    },
+  },
+  {
+    text: '近三天',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 3)
+      return [start, end]
+    },
+  },
+  {
+    text: '近一周',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+      return [start, end]
+    },
+  },
+  {
+    text: '近一月',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31)
+      return [start, end]
+    },
+  },
+  {
+    text: '近一季度',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31 * 3)
+      return [start, end]
+    },
+  },
+  {
+    text: '近半年',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31 * 6)
+      return [start, end]
+    },
+  },
+  {
+    text: '近一年',
+    value: () => {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31 * 12)
+      return [start, end]
+    },
+  },
+]
 
 const dictionary = computed(() => {
   switch (props.param.code) {
@@ -190,7 +307,7 @@ function validDateTimeRange() {
       case ParameterType.QUANTITY:
         switch (currentGranularity.value) {
           case CollectionGranularity.ONE_MINUTE:
-          // 每分钟 最多允许查看最近6小时
+            // 每分钟 最多允许查看最近6小时
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > 6 * SECOND_PER_HOUR) {
               AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - 6 * SECOND_PER_HOUR) * 1000)
@@ -274,17 +391,17 @@ function getStatusLabel(item: CollectionEntity, index: number) {
     case 'Status':
       label = DeviceStatusDictionary.getLabel(item.intValue)
       label += ' [ '
-      label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp, AirDateTimeFormatter.HH_mm_ss)
+      label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp)
       label += ' ~ '
-      label += AirDateTime.formatFromMilliSecond(item.timestamp, AirDateTimeFormatter.HH_mm_ss)
+      label += AirDateTime.formatFromMilliSecond(item.timestamp)
       label += ' ]'
       return label
     case 'Alarm':
       label = AlarmStatusDictionary.getLabel(item.intValue)
       label += ' [ '
-      label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp, AirDateTimeFormatter.HH_mm_ss)
+      label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp)
       label += ' ~ '
-      label += AirDateTime.formatFromMilliSecond(item.timestamp, AirDateTimeFormatter.HH_mm_ss)
+      label += AirDateTime.formatFromMilliSecond(item.timestamp)
       label += ' ]'
       return label
     default:
@@ -326,6 +443,8 @@ const statusList = computed(() => {
       percent: getStatusPercent(item, index),
     })
   })
+  console.log(arr)
+
   return arr
 })
 
@@ -544,6 +663,15 @@ function onFull() {
       }
     }
   }
+
+  .cover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0.3;
+  }
 }
 
 .el-timeline {
@@ -575,7 +703,7 @@ function onFull() {
 
 .timeline {
   .line {
-    height: 10px;
+    height: 20px;
 
     .item {
       height: 100%;
