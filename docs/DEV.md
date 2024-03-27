@@ -1,24 +1,27 @@
-# 前端仓库使用说明
+# S-PMS 前端仓库
 
 ### 初始化仓库
 
 > 建议windows开发者使用 ```git bash``` 不要使用windows自带的拉垮的 ```cmd``` ```powershell``` 等。否则接下来的脚本可能出现问题，你只能通过自己手动去操作。
 
-1. ssh方式
+
+
+1. Via Gitee
 
 ```shell
-git clone git@gitee.com:smart-pms/SPMS-Web.git &&
+git clone https://gitee.com/s-pms/SPMS-Web.git &&
 cd SPMS-Web/src && 
-git clone git@gitee.com:air-power/AirPower4T.git airpower && cd ../ &&
+git clone https://gitee.com/air-power/AirPower4T.git airpower && cd ../ &&
 yarn && cp .env.template .env && yarn s
 ```
 
-2. https方式
+
+2. Via Github
 
 ```shell
-git clone https://gitee.com/smart-pms/SPMS-Web.git &&
+git clone https://github.com/s-pms/SPMS-Web.git &&
 cd SPMS-Web/src && 
-git clone https://gitee.com/air-power/AirPower4T.git airpower && cd ../ &&
+git clone https://github.com/air-power/AirPower4T.git airpower && cd ../ &&
 yarn && cp .env.template .env && yarn s
 ```
 
