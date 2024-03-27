@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    :title="title"
+    :title="title + PurchaseEntity.getClassName()"
     :form-ref="formRef"
     :loading="isLoading"
     width="80%"

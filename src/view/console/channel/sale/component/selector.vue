@@ -10,6 +10,13 @@
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
+    <AToolBar
+      :loading="isLoading"
+      :entity="SaleEntity"
+      :service="SaleService"
+      @on-search="onSearch"
+      @on-add="onAdd"
+    />
     <ATable
       :data-list="response.list"
       :show-select="mult"
@@ -68,7 +75,7 @@ const props = defineProps(airPropsSelector(new SaleEntity()))
 
 const {
   selectList, isLoading, response,
-  onPageChanged, onSelected,
+  onPageChanged, onSelected, onSearch, onAdd,
 } = useAirSelector(props, SaleEntity, SaleService, {
   editView: SaleEditor,
   beforeSearch(requestData) {

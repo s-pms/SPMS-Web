@@ -57,7 +57,6 @@ import {
   APage, ATable, AToolBar, ADialog, AButton,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
@@ -67,12 +66,9 @@ const props = defineProps(airPropsSelector<MaterialEntity>())
 
 const {
   title, selectList, isLoading, response,
-  onSearch, onPageChanged, onSelected, onReloadData,
-} = useAirSelector(props, MaterialEntity, MaterialService)
-
-async function onAdd() {
-  await AirDialog.show(MaterialEditor)
-  onReloadData()
-}
+  onSearch, onPageChanged, onSelected, onAdd,
+} = useAirSelector(props, MaterialEntity, MaterialService, {
+  editView: MaterialEditor,
+})
 </script>
 <style scoped lang="scss"></style>

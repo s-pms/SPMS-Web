@@ -11,11 +11,11 @@
     @on-cancel="onCancel()"
   >
     <AToolBar
-      hide-add
       :loading="isLoading"
       :entity="RoleEntity"
       :service="RoleService"
       @on-search="onSearch"
+      @on-add="onAdd"
     />
     <ATable
       :data-list="response.list"
@@ -61,12 +61,15 @@ import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
+import { RoleEditor } from '.'
 
 const props = defineProps(airPropsSelector<RoleEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
-} = useAirSelector(props, RoleEntity, RoleService)
+  title, selectList, isLoading, response,
+  onSearch, onPageChanged, onSelected, onAdd,
+} = useAirSelector(props, RoleEntity, RoleService, {
+  editView: RoleEditor,
+})
 </script>
 <style scoped lang="scss"></style>
