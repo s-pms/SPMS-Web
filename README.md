@@ -13,9 +13,9 @@
 <a href="">@Github</a> <a href="//gitee.com/smart-pms/SPMS-Web">@Gitee</a> <a href="">版本发布</a> <a href="./docs/PLAN.md">开发计划</a> <a href="">反馈与建议</a>
 </p>
 
-## SPMS介绍
+## S-PMS介绍
 
-**SPMS** `(Smart Production Management System)` 即 **智能生产管理系统** ，是一个集成化、智能化的企业级应用软件，它集成了多个核心的生产管理模块，包括 **制造执行系统** `(MES, Manufacturing Execution System)`、**仓库管理系统** `(WMS, Warehouse Management System)`、**企业资源计划系统** `(ERP, Enterprise Resource Planning)`、**质量管理系统** `(QMS, Quality Management System)` 以及 **物联网管理系统** `(IoTS,Internet of Things System)` 等。
+**S-PMS** `(Smart Production Management System)` 即 **智能生产管理系统** ，是一个集成化、智能化的企业级应用软件，它集成了多个核心的生产管理模块，包括 **制造执行系统** `(MES, Manufacturing Execution System)`、**仓库管理系统** `(WMS, Warehouse Management System)`、**企业资源计划系统** `(ERP, Enterprise Resource Planning)`、**质量管理系统** `(QMS, Quality Management System)` 以及 **物联网管理系统** `(IoTS,Internet of Things System)` 等。
 
 - **MES (Manufacturing Execution System) 制造执行系统**，主要用于车间层的生产活动优化管理，实时监控从订单下达到产品完成的整个生产过程，实现对生产数据的实时采集和分析，以提高生产效率、产品质量和资源利用率。
 
@@ -27,7 +27,7 @@
 
 - **IoTS（Internet of Things System) 物联网管理系统**，通过连接各种生产设备和传感器，收集海量实时数据，实现设备远程监控、预防性维护、生产过程智能化控制等功能。
 
-通过将这些系统功能一体化整合在 **SPMS** 中，企业可以实现从采购、生产、仓储到销售全流程的信息化、精细化、智能化管理，有效提升企业的整体运营效率和市场竞争力。
+通过将这些系统功能一体化整合在 **S-PMS** 中，企业可以实现从采购、生产、仓储到销售全流程的信息化、精细化、智能化管理，有效提升企业的整体运营效率和市场竞争力。
 
 ## 产品宣传图
 
@@ -35,11 +35,11 @@ soon...
 
 ## 开发者指南
 
-本仓库为 **SPMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](./docs/PUBLISH.md)、[常见问题](./docs/QA.md) 等帮助文档。
+本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](./docs/PUBLISH.md)、[常见问题](./docs/QA.md) 等帮助文档。
 
 ## 联系我们
 
-**SPMS** 由国际知名团队 **UnNamed** 组织开发，所有代码均在 **MIT** 开源协议规范下免费提供，你可以放心使用。
+**S-PMS** 由国际知名团队 **UnNamed** 组织开发，所有代码均在 **MIT** 开源协议规范下免费提供，你可以放心使用。
 
 如果有定制需求，欢迎联系我们：
 
