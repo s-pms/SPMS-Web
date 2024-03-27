@@ -10,7 +10,7 @@
   <img src="//svg.hamm.cn?key=UI&value=ElementPlus"/>
 </p>
 <p align="center">
-<a href="//github.com/s-pms/SPMS-Web">@Github</a> <a href="//gitee.com/s-pms/SPMS-Web">@Gitee</a> <a href="/s-pms/SPMS-Docs/SPMS-RELEASE.md">版本发布</a> <a href="/s-pms/SPMS-Docs/SPMS-PLAN.md">开发计划</a> <a href="/s-pms/SPMS-Docs/issues">反馈与建议</a>
+<a href="//github.com/s-pms/SPMS-Web">@Github</a> <a href="//gitee.com/s-pms/SPMS-Web">@Gitee</a>
 </p>
 
 ## S-PMS介绍（前端项目）
@@ -35,7 +35,7 @@ soon...
 
 ## 开发者指南
 
-本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](/s-pms/SPMS-Docs/SPMS-PUBLISH.md)、[常见问题](/s-pms/SPMS-Docs/SPMS-QA.md) 等帮助文档。
+本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.com/s-pms/SPMS-Docs)、[开发者指南@Gitee](https://gitee.com/s-pms/SPMS-Docs) 等帮助文档。
 
 ## 联系我们
 
