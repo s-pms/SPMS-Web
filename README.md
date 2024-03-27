@@ -10,10 +10,10 @@
   <img src="//svg.hamm.cn?key=UI&value=ElementPlus"/>
 </p>
 <p align="center">
-<a href="">@Github</a> <a href="//gitee.com/smart-pms/SPMS-Web">@Gitee</a> <a href="">版本发布</a> <a href="./docs/PLAN.md">开发计划</a> <a href="">反馈与建议</a>
+<a href="//github.com/s-pms/SPMS-Web">@Github</a> <a href="//gitee.com/s-pms/SPMS-Web">@Gitee</a> <a href="/s-pms/SPMS-Docs/SPMS-RELEASE.md">版本发布</a> <a href="/s-pms/SPMS-Docs/SPMS-PLAN.md">开发计划</a> <a href="/s-pms/SPMS-Docs/issues">反馈与建议</a>
 </p>
 
-## S-PMS介绍
+## S-PMS介绍（前端项目）
 
 **S-PMS** `(Smart Production Management System)` 即 **智能生产管理系统** ，是一个集成化、智能化的企业级应用软件，它集成了多个核心的生产管理模块，包括 **制造执行系统** `(MES, Manufacturing Execution System)`、**仓库管理系统** `(WMS, Warehouse Management System)`、**企业资源计划系统** `(ERP, Enterprise Resource Planning)`、**质量管理系统** `(QMS, Quality Management System)` 以及 **物联网管理系统** `(IoTS,Internet of Things System)` 等。
 
@@ -35,7 +35,7 @@ soon...
 
 ## 开发者指南
 
-本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](./docs/PUBLISH.md)、[常见问题](./docs/QA.md) 等帮助文档。
+本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](/s-pms/SPMS-Docs/PUBLISH.md)、[常见问题](/s-pms/SPMS-Docs/QA.md) 等帮助文档。
 
 ## 联系我们
 
