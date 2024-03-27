@@ -1,16 +1,16 @@
 <p align="center">
-<img src="//cdn.hamm.cn/svg/spms/logo.svg"/>
+<img src="https://cdn.hamm.cn/svg/spms/logo.svg"/>
 </p>
 
 <p align="center">
-  <img src="//svg.hamm.cn?key=Core&value=AirPower4T"/>
-  <img src="//svg.hamm.cn?key=Lang&value=TypeScript&bg=green"/>
-  <img src="//svg.hamm.cn?key=Base&value=Vue3"/>
-  <img src="//svg.hamm.cn?key=Build&value=Vite"/>
-  <img src="//svg.hamm.cn?key=UI&value=ElementPlus"/>
+  <img src="https://svg.hamm.cn?key=Core&value=AirPower4T"/>
+  <img src="https://svg.hamm.cn?key=Lang&value=TypeScript&bg=green"/>
+  <img src="https://svg.hamm.cn?key=Base&value=Vue3"/>
+  <img src="https://svg.hamm.cn?key=Build&value=Vite"/>
+  <img src="https://svg.hamm.cn?key=UI&value=ElementPlus"/>
 </p>
 <p align="center">
-<a href="//github.com/s-pms/SPMS-Web">@Github</a> <a href="//gitee.com/s-pms/SPMS-Web">@Gitee</a>
+<a href="https://github.com/s-pms/SPMS-Web">@Github</a> <a href="https://gitee.com/s-pms/SPMS-Web">@Gitee</a>
 </p>
 
 ## S-PMS介绍（前端项目）
