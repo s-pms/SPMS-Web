@@ -130,7 +130,6 @@ const {
 })
 
 async function selectParameter() {
-  DeviceService.create().getDevice(formData.value.uuid)
   const filter = new ParameterEntity()
   filter.isSystem = false
   const systemList = formData.value.parameters.filter((item) => item.isSystem)

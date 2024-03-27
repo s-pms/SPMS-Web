@@ -90,5 +90,5 @@ export class DeviceEntity extends BaseEntity {
   })
   @FieldName('采集频率') rate!: number
 
-  @Type(ParameterEntity, true) parameters!: ParameterEntity[]
+  @Type(ParameterEntity, true) parameters: ParameterEntity[] = []
 }
