@@ -1,16 +1,16 @@
 <p align="center">
-<img src="https://cdn.hamm.cn/svg/spms/logo.svg"/>
+<img src="//cdn.hamm.cn/svg/spms/logo.svg"/>
 </p>
 
 <p align="center">
-  <img src="https://svg.hamm.cn?key=Core&value=AirPower4T"/>
-  <img src="https://svg.hamm.cn?key=Lang&value=TypeScript&bg=green"/>
-  <img src="https://svg.hamm.cn?key=Base&value=Vue3"/>
-  <img src="https://svg.hamm.cn?key=Build&value=Vite"/>
-  <img src="https://svg.hamm.cn?key=UI&value=ElementPlus"/>
+  <img src="//svg.hamm.cn?key=Core&value=AirPower4T"/>
+  <img src="//svg.hamm.cn?key=Lang&value=TypeScript&bg=green"/>
+  <img src="//svg.hamm.cn?key=Base&value=Vue3"/>
+  <img src="//svg.hamm.cn?key=Build&value=Vite"/>
+  <img src="//svg.hamm.cn?key=UI&value=ElementPlus"/>
 </p>
 <p align="center">
-<a href="">@Github</a> <a href="">@Gitee</a> <a href="">版本发布</a> <a href="./docs/PLAN.md">开发计划</a> <a href="">反馈与建议</a>
+<a href="">@Github</a> <a href="//gitee.com/smart-pms/SPMS-Web">@Gitee</a> <a href="">版本发布</a> <a href="./docs/PLAN.md">开发计划</a> <a href="">反馈与建议</a>
 </p>
 
 ## SPMS介绍
