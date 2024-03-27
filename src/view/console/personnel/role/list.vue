@@ -11,7 +11,6 @@
       v-loading="isLoading"
       :data-list="response.list"
       :entity="RoleEntity"
-      :disable-delete="(row: RoleEntity) => row.isSystem"
       :ctrl-width="130"
       @on-edit="onEdit"
       @on-delete="onDelete"
@@ -21,14 +20,12 @@
           type="CONFIRM"
           tooltip="授权菜单"
           icon-button
-          :disabled="row.data.isSystem"
           @click="onMenuEditor(row.data)"
         />
         <AButton
           type="LOCK"
           tooltip="授权权限"
           icon-button
-          :disabled="row.data.isSystem"
           @click="onPermissionEditor(row.data)"
         />
       </template>

@@ -1,6 +1,5 @@
 import {
   ClassName,
-  Dictionary,
   FieldName, Type,
 } from '@/airpower/decorator/Custom'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
@@ -8,7 +7,6 @@ import { FormField } from '@/airpower/decorator/FormField'
 import { SearchField } from '@/airpower/decorator/SearchField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
-import { RoleSystemDictionary } from './RoleSystemDictionary'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 
@@ -45,17 +43,6 @@ export class RoleEntity extends BaseEntity {
   })
   @Type(String)
   @FieldName('角色编码') code!: string
-
-  /**
-   * # 角色类别
-   */
-  @Dictionary(RoleSystemDictionary)
-  @TableField({
-    showColor: true,
-    width: 100,
-    orderNumber: -100,
-  })
-  @FieldName('类别') isSystem!: boolean
 
   /**
    * # 菜单列表

@@ -20,7 +20,9 @@ export class CodeRuleEntity extends BaseEntity {
   @FormField({
     requiredNumber: true,
   })
-  @TableField()
+  @TableField({
+    forceShow: true,
+  })
   @FieldName('编码所属字段') ruleField!: number
 
   @FormField({
@@ -29,7 +31,9 @@ export class CodeRuleEntity extends BaseEntity {
     requiredString: true,
     defaultValue: '',
   })
-  @TableField()
+  @TableField({
+    forceShow: true,
+  })
   @FieldName('规则前缀') prefix!: string
 
   @FormField({
@@ -41,10 +45,13 @@ export class CodeRuleEntity extends BaseEntity {
   })
   @TableField({
     width: 160,
+    forceShow: true,
   })
   @FieldName('序列号初始长度') snLength!: number
 
-  @TableField()
+  @TableField({
+    forceShow: true,
+  })
   @FormField({
     defaultValue: '',
     clearable: true,
@@ -61,6 +68,7 @@ export class CodeRuleEntity extends BaseEntity {
   @TableField({
     showColor: true,
     width: 100,
+    forceShow: true,
   })
   @FieldName('序列号更新') snType!: SerialNumberType
 

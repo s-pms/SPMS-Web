@@ -1,12 +1,11 @@
 import {
-  ClassName, Dictionary, FieldName, Type,
+  ClassName, FieldName, Type,
 } from '@/airpower/decorator/Custom'
 import { FormField } from '@/airpower/decorator/FormField'
 import { SearchField } from '@/airpower/decorator/SearchField'
 import { TableField } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { RoleEntity } from '../role/RoleEntity'
-import { UserSystemDictionary } from './UserSystemDictionary'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { IUser } from '@/airpower/interface/IUser'
 
@@ -86,13 +85,10 @@ export class UserEntity extends BaseEntity implements IUser {
   @Type(RoleEntity, true) roleList!: RoleEntity[]
 
   /**
-   * # 用户类别
+   * # 是否超级管理员
+   * @returns 是否超管
    */
-  @Dictionary(UserSystemDictionary)
-  @TableField({
-    showColor: true,
-    width: 100,
-    orderNumber: -100,
-  })
-  @FieldName('类别') isSystem!: boolean
+  isRootUser() {
+    return this.id === 1
+  }
 }

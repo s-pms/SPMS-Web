@@ -4,7 +4,7 @@
       :loading="isLoading"
       :entity="CodeRuleEntity"
       :service="CodeRuleService"
-      @on-add="onAdd"
+      hide-add
       @on-search="onSearch"
     />
     <ATable
@@ -12,8 +12,8 @@
       :data-list="response.list"
       :entity="CodeRuleEntity"
       :ctrl-width="105"
+      hide-delete
       @on-edit="onEdit"
-      @on-delete="onDelete"
       @on-sort-change="onSortChanged"
     >
       <template #ruleField="row">
@@ -49,7 +49,7 @@ import { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 const {
   isLoading,
   response,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged,
+  onSearch, onEdit, onPageChanged, onSortChanged,
 } = useAirTable(CodeRuleEntity, CodeRuleService, {
   editView: CodeRuleEditor,
 })
