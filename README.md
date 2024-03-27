@@ -10,10 +10,10 @@
   <img src="https://svg.hamm.cn?key=UI&value=ElementPlus"/>
 </p>
 <p align="center">
-<a href="">@Github</a> <a href="">@Gitee</a> <a href="">版本发布</a> <a href="./PLAN.md">开发计划</a> 
+<a href="">@Github</a> <a href="">@Gitee</a> <a href="">版本发布</a> <a href="./PLAN.md">开发计划</a> <a href="">反馈与建议</a>
 </p>
 
-# SPMS介绍
+## SPMS介绍
 
 **SPMS** `(Smart Production Management System)` 即 **智能生产管理系统** ，是一个集成化、智能化的企业级应用软件，它集成了多个核心的生产管理模块，包括 **制造执行系统** `(MES, Manufacturing Execution System)`、**仓库管理系统** `(WMS, Warehouse Management System)`、**企业资源计划系统** `(ERP, Enterprise Resource Planning)`、**质量管理系统** `(QMS, Quality Management System)` 以及 **物联网管理系统** `(IoTS,Internet of Things System)` 等。
 
@@ -29,77 +29,19 @@
 
 通过将这些系统功能一体化整合在 **SPMS** 中，企业可以实现从采购、生产、仓储到销售全流程的信息化、精细化、智能化管理，有效提升企业的整体运营效率和市场竞争力。
 
-# 开发计划
+## 产品宣传图
 
-请点击这里查看我们的开发计划: [SPMS开发计划](./plan.md)
+soon...
 
-# 前端仓库使用说明
+## 开发者指南
 
-### 初始化仓库
+本仓库为 **SPMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](./docs/PUBLISH.md)、[常见问题](./docs/QA.md) 等帮助文档。
 
-> 建议windows开发者使用 ```git bash``` 不要使用windows自带的拉垮的 ```cmd``` ```powershell``` 等。否则接下来的脚本可能出现问题，你只能通过自己手动去操作。
+## 联系我们
 
-1. ssh方式
+**SPMS** 由国际知名团队 **UnNamed** 组织开发，所有代码均在 **MIT** 开源协议规范下免费提供，你可以放心使用。
 
-```shell
-git clone git@gitee.com:smart-pms/SPMS-Web.git &&
-cd SPMS-Web/src && 
-git clone git@gitee.com:air-power/AirPower4T.git airpower && cd ../ &&
-yarn && cp .env.template .env && yarn s
-```
+如果有定制需求，欢迎联系我们：
 
-2. https方式
-
-```shell
-git clone https://gitee.com/smart-pms/SPMS-Web.git &&
-cd SPMS-Web/src && 
-git clone https://gitee.com/air-power/AirPower4T.git airpower && cd ../ &&
-yarn && cp .env.template .env && yarn s
-```
-
-
-#### 修改环境变量
-
-按需修改配置
-```conf
-VITE_APP_NAME = "开发环境"
-VITE_APP_API_URL = "/api/"
-VITE_APP_STATIC_URL = "/static/"
-```
-
-#### 启动和打包
-
-启动项目前，我们建议你关闭 ```visual studio code``` 的 ```Vetur``` 插件，避免 ```vue2``` 和 ```vue3``` 产生冲突。
-
-
-```shell
-# 启动项目
-yarn s              #缩写指令
-
-# 打包项目
-yarn dev            #开发环境 使用.env.dev
-yarn test           #测试环境 使用.env.test
-yarn production     #生产环境 使用.env.production
-```
-
-#### 其他命令
-
-```shell
-#使用标准commit模板
-yarn c   
-
-#更新项目和AirPower
-yarn u   
-
-#查看Git格式化日志
-yarn l           
-```
-
-#### 推荐的VSCODE插件扩展
-
-- Vue - Official
-- ESLint
-- SCSS Formatter
-
-> 如碰到其他兼容问题，建议在工作区禁用以上四个插件之外的其他插件，特别是```Vetur```。
+Email: admin@hamm.cn
 
