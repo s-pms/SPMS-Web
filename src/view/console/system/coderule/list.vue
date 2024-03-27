@@ -7,7 +7,6 @@
       @on-add="onAdd"
       @on-search="onSearch"
     />
-    {{ fieldList }}
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
