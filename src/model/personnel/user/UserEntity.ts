@@ -34,7 +34,9 @@ export class UserEntity extends BaseEntity implements IUser {
   @FormField({
     mobilePhone: true,
   })
-  @TableField()
+  @TableField({
+    phone: true,
+  })
   @SearchField()
   @FieldName('手机') phone!: string
 

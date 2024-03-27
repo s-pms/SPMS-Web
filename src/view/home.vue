@@ -2,7 +2,7 @@
   <div class="home">
     <el-image
       class="logo"
-      :src="airpower"
+      :src="logo"
     />
     <div class="intro">
       <img src="https://svg.hamm.cn?key=Lang&value=TypeScript">
@@ -39,7 +39,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import airpower from '@/airpower/assets/img/airpower.png'
+import logo from '@/assets/img/logo.svg'
 
 </script>
 <style scoped lang="scss">
