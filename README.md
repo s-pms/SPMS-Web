@@ -35,7 +35,7 @@ soon...
 
 ## 开发者指南
 
-本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](/s-pms/SPMS-Docs/PUBLISH.md)、[常见问题](/s-pms/SPMS-Docs/QA.md) 等帮助文档。
+本仓库为 **S-PMS** Web前端项目仓库，你可以查看 [开发说明](./docs/DEV.md)、[部署说明](/s-pms/SPMS-Docs/SPMS-PUBLISH.md)、[常见问题](/s-pms/SPMS-Docs/SPMS-QA.md) 等帮助文档。
 
 ## 联系我们
 
