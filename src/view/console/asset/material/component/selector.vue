@@ -10,11 +10,11 @@
     @on-cancel="onCancel()"
   >
     <AToolBar
-      hide-add
       :loading="isLoading"
       :entity="MaterialEntity"
       :service="MaterialService"
       @on-search="onSearch"
+      @on-add="onAdd"
     />
     <ATable
       :data-list="response.list"
@@ -57,15 +57,22 @@ import {
   APage, ATable, AToolBar, ADialog, AButton,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
+import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
+import { MaterialEditor } from '.'
 
 const props = defineProps(airPropsSelector<MaterialEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response,
+  onSearch, onPageChanged, onSelected, onReloadData,
 } = useAirSelector(props, MaterialEntity, MaterialService)
+
+async function onAdd() {
+  await AirDialog.show(MaterialEditor)
+  onReloadData()
+}
 </script>
 <style scoped lang="scss"></style>

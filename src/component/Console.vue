@@ -31,8 +31,6 @@ import {
 } from '@/airpower/component'
 import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirRouter } from '@/airpower/helper/AirRouter'
-import { AirWebsocket } from '@/airpower/websocket/AirWebSocket'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { AirClassTransformer } from '@/airpower/helper/AirClassTransformer'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
@@ -54,16 +52,6 @@ async function init() {
   const permissionList = await UserService.create(isLoading).getMyPermissionList()
   AirConfig.permissionList = AirClassTransformer.treeList2List(permissionList).map((item) => item.identity)
   await getMenuList()
-
-  AirWebsocket.create({
-    onmessage(message) {
-      // eslint-disable-next-line no-console
-      console.log(message)
-    },
-    onopen() {
-      AirNotification.success('Websocket连接成功')
-    },
-  })
 }
 
 init()

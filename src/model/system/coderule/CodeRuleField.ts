@@ -12,5 +12,5 @@ export class CodeRuleField extends AirModel {
   @FieldName('编码字段名称') label!: string
 
   @Type(Number)
-  @FieldName('表格ID') value!: number
+  @FieldName('表格ID') key!: number
 }

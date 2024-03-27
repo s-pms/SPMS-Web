@@ -6,8 +6,6 @@ import {
   ClassName, FieldName, Type,
 } from '@/airpower/decorator/Custom'
 import { AirEntity } from '@/airpower/base/AirEntity'
-import { SearchField } from '@/airpower/decorator/SearchField'
-import { AirSearchDataType } from '@/airpower/enum/AirSearchDataType'
 
 /**
  * # 数据库实体基类
@@ -45,10 +43,6 @@ export class BaseEntity extends AirEntity {
   // @Type(Boolean) isDisabled!: boolean
 
   @FieldName('备注')
-  @SearchField({
-    orderNumber: -100,
-    dataType: AirSearchDataType.TEXTAREA,
-  })
   @FormField({
     textarea: true,
     orderNumber: -100,

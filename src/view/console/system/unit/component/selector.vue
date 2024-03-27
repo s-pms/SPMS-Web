@@ -11,11 +11,11 @@
     @on-cancel="onCancel()"
   >
     <AToolBar
-      hide-add
       :loading="isLoading"
       :entity="UnitEntity"
       :service="UnitService"
       @on-search="onSearch"
+      @on-add="onAdd"
     />
     <ATable
       :data-list="response.list"
@@ -58,15 +58,22 @@ import {
   APage, ATable, AToolBar, ADialog, AButton,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
+import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
+import { UnitEditor } from '.'
 
 const props = defineProps(airPropsSelector<UnitEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response,
+  onSearch, onPageChanged, onReloadData, onSelected,
 } = useAirSelector(props, UnitEntity, UnitService)
+
+async function onAdd() {
+  await AirDialog.show(UnitEditor)
+  onReloadData()
+}
 </script>
 <style scoped lang="scss"></style>

@@ -7,6 +7,7 @@
       @on-add="onAdd"
       @on-search="onSearch"
     />
+    {{ fieldList }}
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
@@ -63,7 +64,7 @@ async function getFieldList() {
 getFieldList()
 
 function getFieldName(codeRule: CodeRuleEntity) {
-  return fieldList.value.find((item) => item.value === codeRule.ruleField)?.label || ''
+  return fieldList.value.find((item) => item.key === codeRule.ruleField)?.label || ''
 }
 
 const paramList = ref([] as CodeRuleParam[])

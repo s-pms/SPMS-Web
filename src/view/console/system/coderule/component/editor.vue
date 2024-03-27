@@ -25,7 +25,7 @@
             :entity="CodeRuleEntity"
             :list="fieldList.map(item => {
               return {
-                key: item.value,
+                key: item.key,
                 label: item.label
               } as IDictionary
             })"
@@ -142,7 +142,7 @@ async function getParamList() {
 getParamList()
 
 function fieldChanged(fieldId: number) {
-  formData.value.prefix = fieldList.value.find((item) => item.value === fieldId)?.defaultPrefix || formData.value.prefix
+  formData.value.prefix = fieldList.value.find((item) => item.key === fieldId)?.defaultPrefix || formData.value.prefix
 }
 
 function paramClicked(param: CodeRuleParam) {
