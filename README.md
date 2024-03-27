@@ -10,7 +10,7 @@
   <img src="https://svg.hamm.cn?key=UI&value=ElementPlus"/>
 </p>
 <p align="center">
-<a href="">@Github</a> <a href="">@Gitee</a> <a href="">版本发布</a> <a href="./PLAN.md">开发计划</a> <a href="">反馈与建议</a>
+<a href="">@Github</a> <a href="">@Gitee</a> <a href="">版本发布</a> <a href="./docs/PLAN.md">开发计划</a> <a href="">反馈与建议</a>
 </p>
 
 ## SPMS介绍
