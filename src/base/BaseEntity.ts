@@ -46,6 +46,7 @@ export class BaseEntity extends AirEntity {
   @FormField({
     textarea: true,
     orderNumber: -100,
+    hide: true,
   })
   @Type(String) remark!: string
 }

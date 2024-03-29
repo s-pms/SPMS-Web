@@ -1,10 +1,10 @@
 <template>
   <ADialog
-    :title="title"
+    :title="title + CodeRuleEntity.getClassName()"
     :form-ref="formRef"
     :loading="isLoading"
-    width="600px"
-    height="600px"
+    width="800px"
+    height="550px"
     @on-confirm="onSubmit()"
     @on-cancel="onCancel()"
   >
@@ -15,7 +15,10 @@
       :rules="rules"
       @submit.prevent
     >
-      <AGroup title="基础配置">
+      <AGroup
+        title="基础配置"
+        :column="2"
+      >
         <el-form-item
           :label="CodeRuleEntity.getFormFieldLabel('ruleField')"
           prop="ruleField"
@@ -23,6 +26,7 @@
           <AInput
             v-model.ruleField="formData.ruleField"
             :entity="CodeRuleEntity"
+            :disabled="!!formData.id"
             :list="fieldList.map(item => {
               return {
                 key: item.key,
@@ -31,6 +35,15 @@
             })"
             clearable
             @on-change="fieldChanged"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="CodeRuleEntity.getFormFieldLabel('snType')"
+          prop="snType"
+        >
+          <AInput
+            v-model.snType="formData.snType"
+            :entity="CodeRuleEntity"
           />
         </el-form-item>
         <el-form-item
@@ -48,15 +61,6 @@
         >
           <AInput
             v-model.snLength="formData.snLength"
-            :entity="CodeRuleEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('snType')"
-          prop="snType"
-        >
-          <AInput
-            v-model.snType="formData.snType"
             :entity="CodeRuleEntity"
           />
         </el-form-item>

@@ -1,5 +1,8 @@
 <template>
-  <AFrame :menu-list="menuList">
+  <AFrame
+    :menu-list="menuList"
+    :unique-opened="false"
+  >
     <template #logo>
       <img
         src="@/assets/img/logo.svg"
