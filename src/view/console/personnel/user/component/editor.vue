@@ -22,6 +22,15 @@
         title="基础信息"
       >
         <el-form-item
+          :label="UserEntity.getFormFieldLabel('account')"
+          prop="account"
+        >
+          <AInput
+            v-model.account="formData.account"
+            :entity="UserEntity"
+          />
+        </el-form-item>
+        <el-form-item
           :label="UserEntity.getFormFieldLabel('email')"
           prop="email"
         >
@@ -36,6 +45,15 @@
         >
           <AInput
             v-model.nickname="formData.nickname"
+            :entity="UserEntity"
+          />
+        </el-form-item>
+        <el-form-item
+          :label="UserEntity.getFormFieldLabel('phone')"
+          prop="phone"
+        >
+          <AInput
+            v-model.phone="formData.phone"
             :entity="UserEntity"
           />
         </el-form-item>
