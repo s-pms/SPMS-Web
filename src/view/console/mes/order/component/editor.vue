@@ -41,28 +41,26 @@
         <template v-if="formData.type === OrderType.PLAN">
           <el-form-item
             label="关联计划"
-            prop="planId"
+            prop="plan"
           >
-            <el-input
-              v-model="formData.planBillCode"
-              clearable
+            <ASelector
+              v-model="formData.plan"
+              :selector="PlanSelector"
               placeholder="请选择订单关联计划"
-              @clear="formData.exclude('plan', 'planId')"
-              @click="selectPlan()"
+              @change="selectPlan()"
             />
           </el-form-item>
           <el-form-item />
         </template>
         <el-form-item
           label="物料信息"
-          prop="materialId"
+          prop="material"
         >
           <el-input
-            v-model="formData.materialName"
             clearable
             placeholder="请选择物料"
-            :disabled="!formData.planId && formData.type === OrderType.PLAN"
-            @clear="formData.exclude('material', 'materialId')"
+            :value="formData.material?.name || ''"
+            @clear="formData.exclude('material')"
             @click="selectMaterial()"
           />
         </el-form-item>
@@ -95,15 +93,13 @@
         </el-form-item>
         <el-form-item
           label="客户信息"
-          prop="customerId"
+          prop="customer"
         >
-          <el-input
-            v-model="formData.customerName"
-            clearable
-            placeholder="请选择客户"
-            :disabled="formData.type === OrderType.PLAN && (formData.plan && formData.plan.customer)"
-            @clear="formData.exclude('customer', 'customerId')"
-            @click="selectCustomer()"
+          <ASelector
+            v-model="formData.customer"
+            :selector="CustomerSelector"
+            placeholder="请选择客户..."
+            :disabled="(formData.type === OrderType.PLAN) && !!formData.plan && !!formData.plan.customer"
           />
         </el-form-item>
       </AGroup>
@@ -113,7 +109,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, AInput,
+  ADialog, AGroup, AInput, ASelector,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -133,11 +129,6 @@ const {
   title, formData, rules, formRef, isLoading,
   onSubmit,
 } = useAirEditor(props, OrderEntity, OrderService, {
-  afterGetDetail(detailData) {
-    detailData.customerName = detailData.customer.name
-    detailData.customerId = detailData.customer.id
-    return detailData
-  },
   beforeSubmit(submitData) {
     if (submitData.deliverTime < submitData.startTime) {
       AirNotification.warning('交付日期不能早于开始日期')
@@ -147,21 +138,14 @@ const {
   },
 })
 
-async function selectCustomer() {
-  formData.value.customer = await AirDialog.select(CustomerSelector)
-  formData.value.customerId = formData.value.customer.id
-  formData.value.customerName = formData.value.customer.name
-}
-
 async function selectPlan() {
-  formData.value.plan = await AirDialog.select(PlanSelector)
-  formData.value.planBillCode = formData.value.plan.billCode
-  formData.value.planId = formData.value.plan.id
-  formData.value.customer = formData.value.plan.customer
-  formData.value.customerId = formData.value.customer.id
-  formData.value.customerName = formData.value.customer.name
-  formData.value.startTime = formData.value.plan.startTime
-  formData.value.deliverTime = formData.value.plan.deliverTime
+  if (formData.value.plan) {
+    formData.value.customer = formData.value.plan.customer
+    formData.value.startTime = formData.value.plan.startTime
+    formData.value.deliverTime = formData.value.plan.deliverTime
+  } else {
+    formData.value.exclude('customer', 'material')
+  }
 }
 
 async function selectMaterial() {
@@ -179,6 +163,8 @@ async function selectMaterial() {
 }
 
 async function orderTypeChanged() {
-  formData.value.expose('materialId', 'material')
+  if (formData.value.type === OrderType.PLAN) {
+    formData.value.exclude('materialId', 'material')
+  }
 }
 </script>
