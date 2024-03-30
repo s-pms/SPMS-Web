@@ -11,7 +11,7 @@
       v-loading="isLoading"
       :data-list="response.list"
       :entity="RoleEntity"
-      :ctrl-width="130"
+      :ctrl-width="160"
       @on-edit="onEdit"
       @on-delete="onDelete"
     >
@@ -19,15 +19,19 @@
         <AButton
           type="CONFIRM"
           tooltip="授权菜单"
-          icon-button
+          link-button
           @click="onMenuEditor(row.data)"
-        />
+        >
+          菜单
+        </AButton>
         <AButton
           type="LOCK"
           tooltip="授权权限"
-          icon-button
+          link-button
           @click="onPermissionEditor(row.data)"
-        />
+        >
+          权限
+        </AButton>
       </template>
     </ATable>
     <template #footerLeft>

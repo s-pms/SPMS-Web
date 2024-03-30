@@ -21,11 +21,13 @@
       <template #customRow="row">
         <AButton
           type="MONITOR"
-          icon-button
+          link-button
           tooltip="实时监控"
           :disabled="!(row.data as DeviceEntity).isReporting"
           @click="showMonitor(row.data)"
-        />
+        >
+          监控
+        </AButton>
       </template>
     </ATable>
     <template #footerLeft>

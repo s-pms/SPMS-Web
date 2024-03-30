@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    title="查看详情"
+    :title="param.action"
     @on-confirm="onConfirm()"
     @on-cancel="onCancel()"
   >

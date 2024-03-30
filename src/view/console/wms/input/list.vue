@@ -16,7 +16,7 @@
       :disable-edit="(row: InputEntity) => row.status !== InputStatus.REJECTED"
       hide-delete
       show-detail
-      :ctrl-width="155"
+      :ctrl-width="180"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort-change="onSortChanged"
@@ -27,26 +27,32 @@
       </template>
       <template #customRow="row">
         <AButton
-          icon-button
+          link-button
           tooltip="审核"
           type="CONFIRM"
           :disabled="(row.data as InputEntity).status !== InputStatus.AUDITING"
           @click="onAudit(row.data)"
-        />
+        >
+          审核
+        </AButton>
         <AButton
-          icon-button
+          link-button
           tooltip="驳回"
           type="LOCK"
           :disabled="(row.data as InputEntity).status !== InputStatus.AUDITING"
           @click="onReject(row.data)"
-        />
+        >
+          驳回
+        </AButton>
         <AButton
-          icon-button
+          link-button
           tooltip="完成"
           type="CHECKIN"
           :disabled="(row.data as InputEntity).status !== InputStatus.INPUTTING"
           @click="onFinish(row.data)"
-        />
+        >
+          完成
+        </AButton>
       </template>
     </ATable>
     <template #footerLeft>

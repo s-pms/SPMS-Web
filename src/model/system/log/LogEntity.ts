@@ -8,6 +8,7 @@ export class LogEntity extends BaseEntity {
   @TableField()
   @TableField({
     orderNumber: 66,
+    forceShow: true,
   })
   @FieldName('动作') action!: string
 
@@ -40,6 +41,7 @@ export class LogEntity extends BaseEntity {
     label: '发起时间',
     width: 150,
     orderNumber: 99,
+    forceShow: true,
   })
   declare createTime: number
 
@@ -48,6 +50,14 @@ export class LogEntity extends BaseEntity {
     label: '响应时间',
     orderNumber: 88,
     width: 150,
+    forceShow: true,
   })
   declare updateTime: number
+
+  @TableField({
+    width: 120,
+    orderNumber: -1,
+    align: 'right',
+  })
+  @FieldName('总耗时') penddingTime!: number
 }

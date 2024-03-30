@@ -12,7 +12,7 @@
       :data-list="list"
       :entity="StructureEntity"
       show-add
-      :ctrl-width="105"
+      :ctrl-width="130"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-sort-change="onSortChanged"

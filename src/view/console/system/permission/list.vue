@@ -11,7 +11,7 @@
       v-loading="isLoading"
       :data-list="list"
       :entity="PermissionEntity"
-      :ctrl-width="105"
+      :ctrl-width="130"
       show-add
       :default-expand-all="false"
       :disable-delete="(row: PermissionEntity) => row.isSystem"
