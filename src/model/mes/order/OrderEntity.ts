@@ -34,10 +34,13 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
 
   @TableField({
     copyField: true,
+    orderNumber: 88,
   })
   @FieldName('物料编码') materialCode!: string
 
-  @TableField()
+  @TableField({
+    orderNumber: 77,
+  })
   @FieldName('物料名称') materialName!: string
 
   @FieldName('生产数量')
@@ -48,20 +51,9 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @TableField({
     align: 'right',
     width: 150,
-    orderNumber: -2,
+    orderNumber: 66,
   })
   @Type(Number) quantity!: number
-
-  @TableField({
-    copyField: true,
-    hide: true,
-  })
-  @FieldName('客户编码') customerCode!: string
-
-  @TableField({
-    hide: true,
-  })
-  @FieldName('客户名称') customerName!: string
 
   @TableField({
     copyField: true,
@@ -133,6 +125,10 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Type(CustomerEntity)
   @FormField({
     requiredPayload: true,
+  })
+  @TableField({
+    orderNumber: 44,
+    hide: true,
   })
   @FieldName('客户信息') customer!: CustomerEntity
 
