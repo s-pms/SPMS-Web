@@ -21,6 +21,7 @@ export class DeviceEntity extends BaseEntity {
   })
   @FormField({
     requiredString: true,
+    suffixText: 'Hello',
   })
   @FieldName('设备名称') name!: string
 
@@ -87,6 +88,9 @@ export class DeviceEntity extends BaseEntity {
     placeholder: '采集间隔毫秒数,最小200ms',
     requiredNumber: true,
     defaultValue: 200,
+    number: true,
+    min: 200,
+    suffixText: 'ms',
   })
   @FieldName('采集频率') rate!: number
 

@@ -32,7 +32,6 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
   @FormField({
     requiredNumber: true,
     number: true,
-    suffixText: '-',
   })
   @TableField({
     align: 'right',

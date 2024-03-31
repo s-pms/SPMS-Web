@@ -23,11 +23,10 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   @FieldName('物料')
   @Type(Number) materialId!: number
 
-  @FieldName('采购单价')
+  @FieldName('销售单价')
   @FormField({
     requiredNumber: true,
     number: true,
-    suffixText: '元',
   })
   @TableField({
     width: 150,
@@ -41,7 +40,6 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   @FormField({
     requiredNumber: true,
     number: true,
-    suffixText: '-',
   })
   @TableField({
     align: 'right',
