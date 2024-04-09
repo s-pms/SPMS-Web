@@ -18,14 +18,26 @@ import { IUser } from '@/airpower/interface/IUser'
 })
 export class UserEntity extends BaseEntity implements IUser {
   /**
-   * # 邮箱
+   * # 账号
    */
   @FormField({
-    email: true,
+    requiredString: true,
   })
   @TableField()
   @SearchField()
   @FieldName('账号') account!: string
+
+  /**
+   * # 昵称
+   */
+  @FormField({
+    requiredString: true,
+  })
+  @TableField({
+    forceShow: true,
+  })
+  @SearchField()
+  @FieldName('昵称') nickname!: string
 
   /**
    * # 手机
@@ -56,18 +68,6 @@ export class UserEntity extends BaseEntity implements IUser {
     password: true,
   })
   @FieldName('密码') password!: string
-
-  /**
-   * # 昵称
-   */
-  @FormField({
-    requiredString: true,
-  })
-  @TableField({
-    forceShow: true,
-  })
-  @SearchField()
-  @FieldName('昵称') nickname!: string
 
   /**
    * # 头像

@@ -2,9 +2,19 @@ import { ClassName, FieldName } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { FormField } from '@/airpower/decorator/FormField'
 import { TableField } from '@/airpower/decorator/TableField'
+import { ISelector } from '@/airpower/interface/ISelector'
+import { IDetailButton } from '@/interface/IDetailButton'
 
 @ClassName('客户')
-export class CustomerEntity extends BaseEntity {
+export class CustomerEntity extends BaseEntity implements ISelector, IDetailButton {
+  getSelectorLabel(): string {
+    return this.name
+  }
+
+  getDetailButtonLabel(): string {
+    return this.name
+  }
+
   /**
    * # 客户名称
    */

@@ -71,9 +71,9 @@
           prop="customerId"
         >
           <el-input
-            v-model="formData.customerName"
+            :value="formData.customer?.name"
             clearable
-            placeholder="请选择计划关联客户"
+            placeholder="未选择客户"
             disabled
           />
         </el-form-item>

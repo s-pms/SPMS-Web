@@ -39,7 +39,6 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @FormField({
     requiredNumber: true,
     number: true,
-    suffixText: '元',
   })
   @TableField({
     width: 150,
@@ -53,7 +52,6 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @FormField({
     requiredNumber: true,
     number: true,
-    suffixText: '-',
   })
   @TableField({
     align: 'right',

@@ -27,14 +27,20 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   })
   @FieldName('生产订单号') billCode!: string
 
+  @FormField({
+    requiredPayload: true,
+  })
   @Type(MaterialEntity) material!: MaterialEntity
 
   @TableField({
     copyField: true,
+    orderNumber: 88,
   })
   @FieldName('物料编码') materialCode!: string
 
-  @TableField()
+  @TableField({
+    orderNumber: 77,
+  })
   @FieldName('物料名称') materialName!: string
 
   @FieldName('生产数量')
@@ -45,7 +51,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @TableField({
     align: 'right',
     width: 150,
-    orderNumber: -2,
+    orderNumber: 66,
   })
   @Type(Number) quantity!: number
 
@@ -53,26 +59,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     copyField: true,
     hide: true,
   })
-  @FieldName('客户编码') customerCode!: string
-
-  @TableField({
-    hide: true,
-  })
-  @FieldName('客户名称') customerName!: string
-
-  @FormField()
-  @FieldName('客户信息') customerId!: number
-
-  @TableField({
-    copyField: true,
-    hide: true,
-  })
   @FieldName('生产计划号') planBillCode!: string
-
-  @FormField({
-    requiredNumber: true,
-  })
-  @FieldName('生产计划') planId!: number
 
   @FormField({
     requiredNumber: true,
@@ -136,8 +123,18 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Type(OrderDetailEntity, true) details: OrderDetailEntity[] = []
 
   @Type(CustomerEntity)
+  @FormField({
+    requiredPayload: true,
+  })
+  @TableField({
+    orderNumber: 44,
+    hide: true,
+  })
   @FieldName('客户信息') customer!: CustomerEntity
 
   @Type(PlanEntity)
-  @FieldName('计划信息') plan!: PlanEntity
+  @FormField({
+    requiredPayload: true,
+  })
+  @FieldName('关联计划') plan!: PlanEntity
 }

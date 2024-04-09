@@ -21,11 +21,16 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #customerCode="row">
-        {{ (row.data as OrderEntity).customer?.code || "-" }}
-      </template>
-      <template #customerName="row">
-        {{ (row.data as OrderEntity).customer?.name || "-" }}
+      <template #customer="row">
+        <el-link
+          v-if="(row.data as OrderEntity).customer"
+          @click="AirDialog.show(CustomerDetail,(row.data as OrderEntity).customer)"
+        >
+          {{ (row.data as OrderEntity).customer.name }}
+        </el-link>
+        <template v-else>
+          -
+        </template>
       </template>
       <template #materialCode="row">
         {{ (row.data as OrderEntity).material.code }}
@@ -75,6 +80,8 @@ import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderStatus } from '@/model/mes/order/OrderStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { CustomerDetail } from '../../channel/customer/component'
+import { AirDialog } from '@/airpower/helper/AirDialog'
 
 const {
   isLoading,
