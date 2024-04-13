@@ -443,8 +443,6 @@ const statusList = computed(() => {
       percent: getStatusPercent(item, index),
     })
   })
-  console.log(arr)
-
   return arr
 })
 

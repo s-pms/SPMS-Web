@@ -20,7 +20,7 @@ export class DeviceService extends AbstractBaseService<DeviceEntity> {
   async getDeviceByUuid(uuid: string): Promise<DeviceEntity> {
     const device = new DeviceEntity()
     device.uuid = uuid
-    const json = await this.api('getDevice').post(device)
+    const json = await this.api('getDeviceConfig').post(device)
     return DeviceEntity.fromJson(json)
   }
 }
