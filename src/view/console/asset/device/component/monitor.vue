@@ -180,7 +180,7 @@ async function showHistory(item: CollectionEntity) {
     .card-body:hover {
       transform: scale(1.05);
       z-index: 1;
-      box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.2);
+      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
     }
   }
 }

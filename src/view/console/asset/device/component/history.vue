@@ -191,7 +191,7 @@ const shortcuts = [
     value: () => {
       const end = new Date()
       const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 1)
+      start.setTime(start.getTime() - 3600 * 1000)
       return [start, end]
     },
   },
@@ -650,9 +650,8 @@ function onFull() {
         .label {
           font-size: 12px;
           background-color: #333;
-          box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.3);
-          padding: 50px;
-          padding-bottom: 2px;
+          box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.3);
+          padding: 50px 50px 2px;
           position: absolute;
           right: -60px;
           top: -30px;

@@ -40,7 +40,6 @@
 </template>
 <script lang="ts" setup>
 import logo from '@/assets/img/logo.svg'
-
 </script>
 <style scoped lang="scss">
 .home {
@@ -61,7 +60,7 @@ import logo from '@/assets/img/logo.svg'
 
   .intro {
     img {
-      margin: 0px 5px;
+      margin: 0 5px;
     }
   }
 
@@ -71,7 +70,7 @@ import logo from '@/assets/img/logo.svg'
     margin-top: 20px;
 
     a {
-      margin: 0px 5px;
+      margin: 0 5px;
       font-size: 16px;
       color: var(--el-color-primary);
       text-decoration: none;

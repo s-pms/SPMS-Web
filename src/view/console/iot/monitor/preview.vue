@@ -90,11 +90,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
-import {
-  AEmpty,
-  AGroup,
-  APanel,
-} from '@/airpower/component'
+import { AEmpty, AGroup, APanel } from '@/airpower/component'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { AirRequest } from '@/airpower/model/AirRequest'
@@ -126,7 +122,7 @@ function showMonitor(device: DeviceEntity) {
 </script>
 <style scoped lang="scss">
 .device-view {
-  margin: 0px 8px;
+  margin: 0 8px;
   overflow: hidden;
 
   .device-item {
@@ -136,13 +132,13 @@ function showMonitor(device: DeviceEntity) {
 
     .device-card {
       overflow: hidden;
-      padding: 2px 0px;
+      padding: 2px 0;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       color: white;
-      text-shadow: 0px 1px 5px rgba($color: #000, $alpha: 0.3);
+      text-shadow: 0 1px 5px rgba($color: #000, $alpha: 0.3);
       text-align: center;
       font-size: 12px;
 
@@ -174,7 +170,7 @@ function showMonitor(device: DeviceEntity) {
       transition: all .3s;
       position: relative;
       overflow: hidden;
-      text-shadow: 0px 1px 1px rgba($color: #fff, $alpha: 1);
+      text-shadow: 0 1px 1px rgba($color: #fff, $alpha: 1);
 
       .bg {
         position: absolute;
@@ -234,7 +230,7 @@ function showMonitor(device: DeviceEntity) {
             flex-direction: row;
             align-items: center;
             border: 1px solid transparent;
-            padding: 0px 3px;
+            padding: 0 3px;
             border-radius: 5px;
             font-size: 13px;
 
@@ -252,7 +248,7 @@ function showMonitor(device: DeviceEntity) {
 
     .device-card:hover {
       transform: scale(1.05);
-      box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.1);
+      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
       z-index: 1;
     }
   }

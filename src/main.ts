@@ -4,6 +4,7 @@ import { AirConfig } from '@/airpower/config/AirConfig'
 import { routes } from '@/config/routes'
 import '@/assets/css/main.scss'
 
-AirConfig.tableLinkButton = true
+AirConfig.appKey = 'spms'
 
-app.use(AirConfig.createRouter(routes)).mount('#app')
+app.use(AirConfig.createRouter(routes))
+  .mount('#app')

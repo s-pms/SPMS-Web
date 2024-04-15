@@ -38,7 +38,7 @@ const props = defineProps({
   },
 })
 
-const auditUserList = ref(props.modelValue)
+const auditUserList = ref<UserEntity[]>(props.modelValue)
 
 const emits = defineEmits(['update:modelValue'])
 
@@ -76,12 +76,12 @@ async function selectUser() {
     line-height: 20px;
     text-align: center;
     border-radius: 100%;
-    margin: 0px 5px;
+    margin: 0 5px;
     font-size: 14px;
     font-weight: bolder;
   }
 
-  >* {
+  > * {
     margin-bottom: 10px;
   }
 }

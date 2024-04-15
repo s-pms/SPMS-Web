@@ -19,9 +19,6 @@
           :tree="menuList"
           :entity="UserEntity"
         />
-        <template #setting>
-          可选插槽
-        </template>
       </AUser>
     </template>
     <router-view />
@@ -30,11 +27,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import {
-  AFrame, AUser, AImage, AInput,
+  AFrame, AImage, AInput, AUser,
 } from '@/airpower/component'
 import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirRouter } from '@/airpower/helper/AirRouter'
-import { AirClassTransformer } from '@/airpower/helper/AirClassTransformer'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
@@ -44,16 +40,20 @@ const menuList = ref([] as MenuEntity[])
 const isLoading = ref(false)
 
 async function getMenuList() {
-  menuList.value = await UserService.create(isLoading).getMyMenuList()
+  menuList.value = await UserService.create(isLoading)
+    .getMyMenuList()
   AirRouter.initVueRouter(menuList.value, 'console')
 }
 
 async function init() {
-  currentUserInfo.value = await UserService.create().getMyInfo()
-  AirConfig.permissionList = []
-
-  const permissionList = await UserService.create(isLoading).getMyPermissionList()
-  AirConfig.permissionList = AirClassTransformer.treeList2List(permissionList).map((item) => item.identity)
+  currentUserInfo.value = await UserService.create()
+    .getMyInfo()
+  let permissions = AirConfig.getPermissionList()
+  if (permissions.length === 0) {
+    permissions = await UserService.create(isLoading)
+      .getMyPermissionList()
+  }
+  AirConfig.savePermissionList(permissions)
   await getMenuList()
 }
 

@@ -86,7 +86,6 @@ function getTreeData(obj: IJson): IJson[] {
   .value {
     color: var(--primary-color);
     flex: 1;
-    overflow: hidden;
     display: flex;
     justify-content: flex-end;
     width: 0;
@@ -96,7 +95,6 @@ function getTreeData(obj: IJson): IJson[] {
     text-overflow: ellipsis;
 
     .box {
-      text-align: left;
       display: flex;
       text-align: left;
       max-width: 100%;

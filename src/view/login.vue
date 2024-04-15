@@ -475,7 +475,7 @@ getAppInfo()
 
       .item {
         position: relative;
-        margin: 0px 4px;
+        margin: 0 4px;
         padding: 4px 16px;
         border-radius: 10px;
         cursor: pointer;
@@ -506,12 +506,12 @@ getAppInfo()
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding: 20px 0px 10px 0px;
+        padding: 20px 0 10px 0;
 
         .item {
           height: 50px;
           background-color: white;
-          margin: 5px 0px;
+          margin: 5px 0;
           font-size: 14px;
           border-radius: 10px;
           overflow: hidden;
@@ -555,7 +555,7 @@ getAppInfo()
       margin-top: 20px;
 
       a {
-        margin: 0px 5px;
+        margin: 0 5px;
         text-decoration: none;
         color: #333;
         transition: all .3s;
@@ -595,7 +595,7 @@ getAppInfo()
 
       .el-input__wrapper {
         box-shadow: none;
-        padding: 0px;
+        padding: 0;
 
         .el-button {
           margin-right: -10px;
@@ -618,7 +618,7 @@ getAppInfo()
   text-align: center;
   color: #aaa;
   font-size: 12px;
-  text-shadow: 0px 1px 1px rgba($color: #fff, $alpha: 1);
+  text-shadow: 0 1px 1px rgba($color: #fff, $alpha: 1);
 }
 
 @media screen and ((orientation:portrait) and (max-width: 600px)) {

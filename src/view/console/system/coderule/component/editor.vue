@@ -89,9 +89,9 @@
           v-if="formData.prefix || demoCode"
           label="示例编码"
         >
-          <span style="margin: 0px 2px;color:red;font-weight: bold;">{{ formData.prefix }}</span>
-          <span style="margin: 0px 2px;color:darkgreen;font-weight: bold;">{{ demoCode }}</span>
-          <span style="margin: 0px 2px;color:blue;font-weight: bold;">{{ Array.from({
+          <span style="margin: 0 2px;color:red;font-weight: bold;">{{ formData.prefix }}</span>
+          <span style="margin: 0 2px;color:darkgreen;font-weight: bold;">{{ demoCode }}</span>
+          <span style="margin: 0 2px;color:blue;font-weight: bold;">{{ Array.from({
             length:
               Math.min(formData.snLength, 10) - 1
           }, (_,
@@ -169,7 +169,7 @@ const demoCode = computed(() => {
 
 <style lang="scss" scoped>
 .param-item {
-  margin: 0px 2px;
+  margin: 0 2px;
   cursor: pointer;
 }
 </style>

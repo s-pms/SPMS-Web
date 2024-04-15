@@ -73,7 +73,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import {
-  ADialog, AGroup, ATable, AButton, AInput,
+  AButton, ADialog, AGroup, AInput, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -106,12 +106,7 @@ const {
 
 formData.value.type = formData.value.type ?? OutputType.NORMAL
 
-const isDetailEditable = computed(() => {
-  if (formData.value.type !== OutputType.NORMAL) {
-    return false
-  }
-  return true
-})
+const isDetailEditable = computed(() => formData.value.type === OutputType.NORMAL)
 
 async function addDetail() {
   const detail: OutputDetailEntity = await AirDialog.show(OutputDetailEditor)

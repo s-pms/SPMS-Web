@@ -1,4 +1,3 @@
-import { AirColor } from '@/airpower/enum/AirColor'
 import { AirDictionaryArray } from '@/airpower/model/extend/AirDictionaryArray'
 import { ParameterType } from './ParameterType'
 
