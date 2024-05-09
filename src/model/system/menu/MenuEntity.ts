@@ -1,11 +1,11 @@
 import {
-  ClassName,
-  FieldName, Type,
+  Field,
+  Model, Type,
 } from '@/airpower/decorator/Custom'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
-import { FormField } from '@/airpower/decorator/FormField'
-import { SearchField } from '@/airpower/decorator/SearchField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Search } from '@/airpower/decorator/SearchField'
+import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { IMenu } from '@/airpower/interface/IMenu'
 import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
@@ -15,70 +15,70 @@ import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
  * @author Hamm
  */
 @EntityConfig()
-@ClassName('菜单')
+@Model('菜单')
 export class MenuEntity extends BaseEntity implements IMenu {
   /**
    * # 菜单名称
    */
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @SearchField()
-  @FormField({
+  @Search()
+  @Form({
     requiredString: true,
   })
   @Type(String)
-  @FieldName('菜单名称') name!: string
+  @Field('菜单名称') name!: string
 
   /**
    * # 菜单路径
    */
-  @TableField({
+  @Table({
     copyField: true,
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
   @Type(String)
-  @FieldName('菜单路径') path!: string
+  @Field('菜单路径') path!: string
 
   /**
    * # 菜单图标
    */
-  @FormField()
+  @Form()
   @Type(String)
-  @FieldName('菜单图标') icon!: string
+  @Field('菜单图标') icon!: string
 
   /**
    * # 组件地址
    */
-  @TableField({
+  @Table({
     copyField: true,
   })
-  @FormField()
+  @Form()
   @Type(String)
-  @FieldName('组件地址') component!: string
+  @Field('组件地址') component!: string
 
   /**
    * # 排序编号
    */
-  @FormField({
+  @Form({
     dictionary: OrderNumberDictionary,
     filterable: true,
     requiredNumber: true,
     defaultValue: 1,
   })
-  @TableField({
+  @Table({
     width: 100,
   })
   @Type(Number)
-  @FieldName('排序编号') orderNo!: number
+  @Field('排序编号') orderNo!: number
 
   /**
    * # 父菜单ID
    */
-  @FieldName('父级ID') parentId!: number
+  @Field('父级ID') parentId!: number
 
   /**
    * # 子菜单列表
@@ -92,12 +92,12 @@ export class MenuEntity extends BaseEntity implements IMenu {
   // eslint-disable-next-line no-use-before-define
   @Type(MenuEntity) parent!: this
 
-  @TableField({
+  @Table({
     removed: true,
   })
   declare createTime: number
 
-  @TableField({
+  @Table({
     removed: true,
   })
   declare isDisabled: boolean

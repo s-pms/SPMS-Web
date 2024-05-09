@@ -1,46 +1,46 @@
-import { ClassName, FieldName, Type } from '@/airpower/decorator/Custom'
+import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 
-@ClassName('销售价')
+@Model('销售价')
 export class SalePriceEntity extends BaseEntity {
   @Type(MaterialEntity) material!: MaterialEntity
 
   @Type(CustomerEntity) customer!: CustomerEntity
 
-  @TableField()
-  @FieldName('物料编码') materialCode!: string
+  @Table()
+  @Field('物料编码') materialCode!: string
 
-  @TableField()
-  @FieldName('物料名称') materialName!: string
+  @Table()
+  @Field('物料名称') materialName!: string
 
-  @TableField()
-  @FieldName('客户编码') customerName!: string
+  @Table()
+  @Field('客户编码') customerName!: string
 
-  @TableField()
-  @FieldName('客户名称') customerCode!: string
+  @Table()
+  @Field('客户名称') customerCode!: string
 
-  @FormField({
+  @Form({
     requiredNumber: true,
   })
-  @FieldName('物料')
+  @Field('物料')
   @Type(Number) materialId!: number
 
-  @FormField({
+  @Form({
     requiredNumber: true,
   })
-  @FieldName('客户')
+  @Field('客户')
   @Type(Number) customerId!: number
 
-  @FieldName('销售单价')
-  @FormField({
+  @Field('销售单价')
+  @Form({
     requiredNumber: true,
     number: true,
   })
-  @TableField({
+  @Table({
     width: 150,
     suffixText: '元',
     align: 'right',

@@ -1,11 +1,13 @@
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 import {
-  ClassName, FieldName, Type,
+  Field,
+  Model,
+  Type,
 } from '@/airpower/decorator/Custom'
 import { AirEntity } from '@/airpower/base/AirEntity'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 
 /**
  * # 数据库实体基类
@@ -15,13 +17,13 @@ import { AirEntity } from '@/airpower/base/AirEntity'
 @EntityConfig({
   addChildPermission: 'add',
 })
-@ClassName('记录')
+@Model('记录')
 export class BaseEntity extends AirEntity {
-  @FieldName('创建时间')
+  @Field('创建时间')
   @Type(Number) createTime!: number
 
-  @FieldName('更新时间')
-  @TableField({
+  @Field('更新时间')
+  @Table({
     width: 170,
     orderNumber: -99,
     dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
@@ -29,12 +31,12 @@ export class BaseEntity extends AirEntity {
   })
   @Type(Number) updateTime!: number
 
-  // @FieldName('状态')
-  // @SearchField({
+  // @Field('状态')
+  // @Search({
   //   orderNumber: -100,
   // })
   // @Dictionary(DisableDictionary)
-  // @TableField({
+  // @Table({
   //   showColor: true,
   //   width: 80,
   //   orderNumber: -100,
@@ -42,8 +44,8 @@ export class BaseEntity extends AirEntity {
   // })
   // @Type(Boolean) isDisabled!: boolean
 
-  @FieldName('备注')
-  @FormField({
+  @Field('备注')
+  @Form({
     textarea: true,
     orderNumber: -100,
     hide: true,

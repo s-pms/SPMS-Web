@@ -1,69 +1,69 @@
 import {
-  ClassName, Dictionary, FieldName, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
 import { SaleStatus } from './SaleStatus'
 import { SaleStatusDictionary } from './SaleStatusDictionary'
 import { SaleDetailEntity } from './SaleDetailEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 
-@ClassName('销售单')
+@Model('销售单')
 export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
-  @TableField({
+  @Table({
     orderNumber: 99,
     forceShow: true,
   })
-  @FormField({
+  @Form({
     placeholder: '不填写按编码规则自动生成',
   })
-  @FieldName('销售单号') billCode!: string
+  @Field('销售单号') billCode!: string
 
-  @TableField()
-  @FieldName('客户编码') customerCode!: string
+  @Table()
+  @Field('客户编码') customerCode!: string
 
-  @TableField()
-  @FieldName('客户名称') customerName!: string
+  @Table()
+  @Field('客户名称') customerName!: string
 
-  @FormField({
+  @Form({
     requiredNumber: true,
     placeholder: '请选择销售客户',
   })
-  @FieldName('客户') customerId!: number
+  @Field('客户') customerId!: number
 
-  @TableField({
+  @Table({
     nowrap: true,
   })
-  @FormField({
+  @Form({
     textarea: true,
     maxLength: 80,
   })
-  @FieldName('销售说明') reason!: string
+  @Field('销售说明') reason!: string
 
-  @TableField({
+  @Table({
     width: 150,
     suffixText: '元',
     align: 'right',
     forceShow: true,
   })
-  @FormField({
+  @Form({
     suffixText: '元',
   })
-  @FieldName('总金额') totalPrice!: number
+  @Field('总金额') totalPrice!: number
 
-  @TableField({
+  @Table({
     width: 150,
     showColor: true,
     orderNumber: -80,
     forceShow: true,
   })
   @Dictionary(SaleStatusDictionary)
-  @FieldName('销售状态') status!: SaleStatus
+  @Field('销售状态') status!: SaleStatus
 
-  @FieldName('销售明细')
+  @Field('销售明细')
   @Type(SaleDetailEntity, true) details: SaleDetailEntity[] = []
 
-  @FieldName('客户')
+  @Field('客户')
   @Type(CustomerEntity) customer!: CustomerEntity
 }

@@ -1,30 +1,32 @@
-import { ClassName, FieldName } from '@/airpower/decorator/Custom'
+import {
+  Field, Model,
+} from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 
-@ClassName('计量单位')
+@Model('计量单位')
 export class UnitEntity extends BaseEntity {
   /**
    * # 单位名称
    */
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @FieldName('单位名称') name!: string
+  @Field('单位名称') name!: string
 
   /**
    * # 单位编码
    */
-  @TableField({
+  @Table({
     copyField: true,
     forceShow: true,
   })
-  @FormField({
+  @Form({
     placeholder: '不输入按编码规则自动生成',
   })
-  @FieldName('单位编码') code!: string
+  @Field('单位编码') code!: string
 }

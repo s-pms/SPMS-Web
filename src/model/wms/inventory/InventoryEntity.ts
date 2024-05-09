@@ -1,25 +1,25 @@
 import {
-  ClassName, FieldName, Type,
+  Field, Model, Type,
 } from '@/airpower/decorator/Custom'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { InventoryType } from './InventoryType'
 
-@ClassName('库存')
+@Model('库存')
 export class InventoryEntity extends BaseEntity {
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FieldName('物料编码') materialCode!: string
+  @Field('物料编码') materialCode!: string
 
-  @TableField({ forceShow: true })
-  @FieldName('物料名称') materialName!: string
+  @Table({ forceShow: true })
+  @Field('物料名称') materialName!: string
 
-  @FieldName('库存数量')
-  @TableField({
+  @Field('库存数量')
+  @Table({
     align: 'right',
     width: 150,
     orderNumber: -2,
@@ -27,24 +27,24 @@ export class InventoryEntity extends BaseEntity {
   })
   @Type(Number) quantity!: number
 
-  @FieldName('计量单位')
-  @TableField({
+  @Field('计量单位')
+  @Table({
     width: 100,
     orderNumber: -3,
   })
   @Type(Number) unitName!: string
 
-  @FieldName('存储资源')
+  @Field('存储资源')
   @Type(StorageEntity) storage!: StorageEntity
 
-  @TableField()
-  @FieldName('存储资源') storageName!: string
+  @Table()
+  @Field('存储资源') storageName!: string
 
-  @FieldName('库存类型') type!: InventoryType
+  @Field('库存类型') type!: InventoryType
 
-  @FieldName('存储资源')
+  @Field('存储资源')
   @Type(MaterialEntity) material!: MaterialEntity
 
-  @FieldName('工厂结构')
+  @Field('工厂结构')
   @Type(StructureEntity) structure!: StructureEntity
 }

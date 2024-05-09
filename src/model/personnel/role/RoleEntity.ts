@@ -1,11 +1,12 @@
 import {
-  ClassName,
-  FieldName, Type,
+  Field,
+  Model,
+  Type,
 } from '@/airpower/decorator/Custom'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
-import { FormField } from '@/airpower/decorator/FormField'
-import { SearchField } from '@/airpower/decorator/SearchField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Search } from '@/airpower/decorator/SearchField'
+import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
@@ -16,33 +17,33 @@ import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
  */
 @EntityConfig({
 })
-@ClassName('角色')
+@Model('角色')
 export class RoleEntity extends BaseEntity {
   /**
    * # 角色名称
    */
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @SearchField()
-  @FormField({
+  @Search()
+  @Form({
     requiredString: true,
   })
   @Type(String)
-  @FieldName('角色名称') name!: string
+  @Field('角色名称') name!: string
 
   /**
    * # 角色编码
    */
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @SearchField()
-  @FormField({
+  @Search()
+  @Form({
     placeholder: '不填按编码规则自动生成',
   })
   @Type(String)
-  @FieldName('角色编码') code!: string
+  @Field('角色编码') code!: string
 
   /**
    * # 菜单列表

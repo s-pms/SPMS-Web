@@ -1,4 +1,4 @@
-import { TableField } from '@/airpower/decorator/TableField'
+import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 
 /**
@@ -12,7 +12,7 @@ export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
    */
   abstract billId: number
 
-  @TableField({
+  @Table({
     removed: true,
   })
   declare updateTime: number

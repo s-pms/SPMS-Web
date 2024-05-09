@@ -1,18 +1,20 @@
 import {
-  ClassName, FieldName, Type,
+  Field,
+  Model,
+  Type,
 } from '@/airpower/decorator/Custom'
-import { FormField } from '@/airpower/decorator/FormField'
-import { SearchField } from '@/airpower/decorator/SearchField'
-import { TableField } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { RoleEntity } from '../role/RoleEntity'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { IUser } from '@/airpower/interface/IUser'
+import { Form } from '@/airpower/decorator/FormField'
+import { Search } from '@/airpower/decorator/SearchField'
+import { Table } from '@/airpower/decorator/TableField'
 
 /**
  * # 用户实体
  */
-@ClassName('用户')
+@Model('用户')
 @EntityConfig({
   addTitle: '添加用户',
 })
@@ -20,65 +22,65 @@ export class UserEntity extends BaseEntity implements IUser {
   /**
    * # 账号
    */
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @TableField()
-  @SearchField()
-  @FieldName('账号') account!: string
+  @Table()
+  @Search()
+  @Field('账号') account!: string
 
   /**
    * # 昵称
    */
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @SearchField()
-  @FieldName('昵称') nickname!: string
+  @Search()
+  @Field('昵称') nickname!: string
 
   /**
    * # 手机
    */
-  @FormField({
+  @Form({
     mobilePhone: true,
   })
-  @TableField({
+  @Table({
     phone: true,
   })
-  @SearchField()
-  @FieldName('手机') phone!: string
+  @Search()
+  @Field('手机') phone!: string
 
   /**
    * # 邮箱
    */
-  @FormField({
+  @Form({
     email: true,
   })
-  @TableField()
-  @SearchField()
-  @FieldName('邮箱') email!: string
+  @Table()
+  @Search()
+  @Field('邮箱') email!: string
 
   /**
    * # 密码
    */
-  @FormField({
+  @Form({
     password: true,
   })
-  @FieldName('密码') password!: string
+  @Field('密码') password!: string
 
   /**
    * # 头像
    */
-  @FieldName('头像') avatar!: string
+  @Field('头像') avatar!: string
 
   /**
    * # 角色列表
    */
-  @FieldName('角色')
-  @TableField({
+  @Field('角色')
+  @Table({
     payloadArray: true,
     payloadField: 'name',
   })

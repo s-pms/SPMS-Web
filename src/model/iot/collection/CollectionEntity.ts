@@ -1,44 +1,44 @@
-import { ClassName, Dictionary, FieldName } from '@/airpower/decorator/Custom'
+import { Dictionary, Field, Model } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
 import { CollectionGranularity } from './CollectionGranularity'
 import { CollectionGranularityDictionary } from './CollectionGranularityDictionary'
 import { ParameterType } from '../parameter/ParameterType'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 
-@ClassName('采集参数')
+@Model('采集参数')
 export class CollectionEntity extends BaseEntity {
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @FieldName('参数名称') code!: string
+  @Field('参数名称') code!: string
 
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @FieldName('参数标题') label!: string
+  @Field('参数标题') label!: string
 
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @FieldName('参数采集值') value!: string
+  @Field('参数采集值') value!: string
 
-  @FieldName('最后变更') timestamp!: number
+  @Field('最后变更') timestamp!: number
 
-  @FieldName('uuid') uuid!: string
+  @Field('uuid') uuid!: string
 
   @Dictionary(CollectionGranularityDictionary)
-  @FormField()
-  @FieldName('颗粒度') reportGranularity!: CollectionGranularity
+  @Form()
+  @Field('颗粒度') reportGranularity!: CollectionGranularity
 
   intValue!: number
 

@@ -1,42 +1,42 @@
-import { ClassName, FieldName, Type } from '@/airpower/decorator/Custom'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Field, Model, Type } from '@/airpower/decorator/Custom'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 
-@ClassName('计划明细')
+@Model('计划明细')
 export class PlanDetailEntity extends AbstractBaseBillDetailEntity {
   billId!: number
 
   @Type(MaterialEntity) material!: MaterialEntity
 
-  @TableField()
-  @FieldName('物料编码') materialCode!: string
+  @Table()
+  @Field('物料编码') materialCode!: string
 
-  @TableField()
-  @FieldName('物料名称') materialName!: string
+  @Table()
+  @Field('物料名称') materialName!: string
 
-  @FormField({
+  @Form({
     requiredNumber: true,
   })
-  @FieldName('物料')
+  @Field('物料')
   @Type(Number) materialId!: number
 
-  @FieldName('计划数量')
-  @FormField({
+  @Field('计划数量')
+  @Form({
     requiredNumber: true,
     number: true,
     suffixText: '-',
   })
-  @TableField({
+  @Table({
     align: 'right',
     width: 150,
     orderNumber: -2,
   })
   @Type(Number) quantity!: number
 
-  @FieldName('已完成数量')
-  @TableField({
+  @Field('已完成数量')
+  @Table({
     align: 'right',
     width: 150,
     orderNumber: -3,

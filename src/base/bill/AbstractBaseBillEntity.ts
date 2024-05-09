@@ -1,7 +1,7 @@
-import { FieldName } from '@/airpower/decorator/Custom'
+import { Field } from '@/airpower/decorator/Custom'
+import { Form } from '@/airpower/decorator/FormField'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
-import { FormField } from '@/airpower/decorator/FormField'
 import { ISelector } from '@/airpower/interface/ISelector'
 
 /**
@@ -25,10 +25,10 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
    */
   abstract details: D[]
 
-  @FormField({
+  @Form({
     textarea: true,
   })
-  @FieldName('驳回原因') rejectReason!: string
+  @Field('驳回原因') rejectReason!: string
 
   getSelectorLabel(): string {
     return this.billCode

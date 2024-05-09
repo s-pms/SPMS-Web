@@ -1,89 +1,89 @@
 import {
-  ClassName, Dictionary, FieldName, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Table } from '@/airpower/decorator/TableField'
 import { DeviceStatus } from './DeviceStatus'
 import { DeviceStatusDictionary } from './DeviceStatusDictionary'
 import { AlarmStatus } from './AlarmStatus'
 import { AlarmStatusDictionary } from './AlarmStatusDictionary'
 import { DeviceReportingDictionary } from './DeviceReportingDictionary'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
+import { Form } from '@/airpower/decorator/FormField'
 
-@ClassName('设备')
+@Model('设备')
 export class DeviceEntity extends BaseEntity {
     /**
      * # 设备名称
      */
-    @TableField({
+    @Table({
       forceShow: true,
     })
-    @FormField({
+    @Form({
       requiredString: true,
     })
-    @FieldName('设备名称') name!: string
+    @Field('设备名称') name!: string
 
     /**
      * # 设备编码
      */
-    @TableField({
+    @Table({
       copyField: true,
       forceShow: true,
     })
-    @FormField({
+    @Form({
       placeholder: '不输入按编码规则自动生成',
     })
-    @FieldName('设备编码') code!: string
+    @Field('设备编码') code!: string
 
     /**
      * # 设备UUID
      */
-    @TableField({
+    @Table({
       copyField: true,
       forceShow: true,
     })
-    @FormField({
+    @Form({
       placeholder: '与采集端协商匹配后即可采集',
     })
-    @FieldName('UUID') uuid!: string
+    @Field('UUID') uuid!: string
 
-    @TableField({
+    @Table({
       copyField: true,
       orderNumber: -79,
       width: 80,
       showColor: true,
     })
-    @FormField({
+    @Form({
       defaultValue: true,
       clearable: false,
     })
     @Dictionary(DeviceReportingDictionary)
-    @FieldName('开启采集') isReporting!: boolean
+    @Field('开启采集') isReporting!: boolean
 
-    @TableField({
+    @Table({
       copyField: true,
       align: 'right',
     })
-    @FieldName('实时产量') partCount!: string
+    @Field('实时产量') partCount!: string
 
     @Dictionary(DeviceStatusDictionary)
-    @TableField({
+    @Table({
       showColor: true,
       width: 80,
       orderNumber: -80,
     })
-    @FieldName('运行状态') status!: DeviceStatus
+    @Field('运行状态') status!: DeviceStatus
 
     @Dictionary(AlarmStatusDictionary)
-    @TableField({
+    @Table({
       showColor: true,
       width: 100,
       orderNumber: -80,
     })
-    @FieldName('报警状态') alarm!: AlarmStatus
+    @Field('报警状态') alarm!: AlarmStatus
 
-    @FormField({
+    @Form({
       placeholder: '采集间隔毫秒数,最小200ms',
       requiredNumber: true,
       defaultValue: 200,
@@ -91,7 +91,7 @@ export class DeviceEntity extends BaseEntity {
       min: 200,
       suffixText: 'ms',
     })
-    @FieldName('采集频率') rate!: number
+    @Field('采集频率') rate!: number
 
     @Type(ParameterEntity, true) parameters: ParameterEntity[] = []
 }

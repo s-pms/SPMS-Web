@@ -1,22 +1,22 @@
-import { ClassName, FieldName, Type } from '@/airpower/decorator/Custom'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Field, Model, Type } from '@/airpower/decorator/Custom'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 
-@ClassName('工厂结构')
+@Model('工厂结构')
 export class StructureEntity extends BaseEntity implements ITree {
-  @TableField()
-  @FormField({
+  @Table()
+  @Form({
     requiredString: true,
   })
-  @FieldName('工厂结构名称') name!: string
+  @Field('工厂结构名称') name!: string
 
-  @TableField()
-  @FormField({
+  @Table()
+  @Form({
     placeholder: '不输入按编码规则自动生成',
   })
-  @FieldName('工厂结构编码') code!: string
+  @Field('工厂结构编码') code!: string
 
   // eslint-disable-next-line no-use-before-define
   @Type(StructureEntity, true) children!: this[]
@@ -25,5 +25,5 @@ export class StructureEntity extends BaseEntity implements ITree {
 
   // eslint-disable-next-line no-use-before-define
   @Type(StructureEntity)
-  @FieldName('所属上级') parent!: this
+  @Field('所属上级') parent!: this
 }

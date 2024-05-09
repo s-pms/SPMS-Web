@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    :title="CustomerEntity.getClassName() + title"
+    :title="CustomerEntity.getModelName() + title"
     :loading="isLoading"
     @on-confirm="onConfirm()"
     @on-cancel="onCancel()"

@@ -13,20 +13,20 @@ export function useBillTable<D extends AbstractBaseBillDetailEntity, B extends A
   const result = useAirTable(entityClass, serviceClass, option)
 
   async function onAudit(bill: B) {
-    await AirConfirm.warning(`是否确认审核选择的${result.entity.getClassName()}？`)
+    await AirConfirm.warning(`是否确认审核选择的${result.entity.getModelName()}？`)
     await result.service.audit(bill)
     result.onReloadData()
   }
 
   async function onFinish(bill: B) {
-    await AirConfirm.warning(`是否确认手动完成选择的${result.entity.getClassName()}？`)
+    await AirConfirm.warning(`是否确认手动完成选择的${result.entity.getModelName()}？`)
     await result.service.finish(bill)
     result.onReloadData()
   }
 
   async function onReject(bill: B) {
-    const rejectReason: string = await AirDialog.show(BillRejectDialog, `驳回${result.entity.getClassName()}的原因`)
-    await AirConfirm.warning(`是否确认驳回选择的${result.entity.getClassName()}？`)
+    const rejectReason: string = await AirDialog.show(BillRejectDialog, `驳回${result.entity.getModelName()}的原因`)
+    await AirConfirm.warning(`是否确认驳回选择的${result.entity.getModelName()}？`)
     bill.rejectReason = rejectReason
     await result.service.reject(bill)
     result.onReloadData()

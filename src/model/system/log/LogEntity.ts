@@ -1,41 +1,43 @@
-import { ClassName, FieldName } from '@/airpower/decorator/Custom'
+import {
+  Field, Model,
+} from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Table } from '@/airpower/decorator/TableField'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 
-@ClassName('日志')
+@Model('日志')
 export class LogEntity extends BaseEntity {
-  @TableField()
-  @TableField({
+  @Table()
+  @Table({
     orderNumber: 66,
     forceShow: true,
   })
-  @FieldName('动作') action!: string
+  @Field('动作') action!: string
 
-  @TableField({
+  @Table({
     width: 100,
   })
-  @FieldName('版本号') version!: number
+  @Field('版本号') version!: number
 
-  @TableField()
-  @FieldName('平台') platform!: string
+  @Table()
+  @Field('平台') platform!: string
 
-  @TableField({
+  @Table({
     orderNumber: 77,
     width: 160,
   })
-  @FieldName('IP') ip!: string
+  @Field('IP') ip!: string
 
-  @FieldName('请求体') request!: string
+  @Field('请求体') request!: string
 
-  @FieldName('响应数据') response!: string
+  @Field('响应数据') response!: string
 
-  @TableField({
+  @Table({
     width: 60,
   })
-  @FieldName('用户ID') userId!: number
+  @Field('用户ID') userId!: number
 
-  @TableField({
+  @Table({
     hide: false,
     dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
     label: '发起时间',
@@ -45,7 +47,7 @@ export class LogEntity extends BaseEntity {
   })
   declare createTime: number
 
-  @TableField({
+  @Table({
     hide: false,
     label: '响应时间',
     orderNumber: 88,
@@ -54,10 +56,10 @@ export class LogEntity extends BaseEntity {
   })
   declare updateTime: number
 
-  @TableField({
+  @Table({
     width: 120,
     orderNumber: -1,
     align: 'right',
   })
-  @FieldName('总耗时') penddingTime!: number
+  @Field('总耗时') penddingTime!: number
 }

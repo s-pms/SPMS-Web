@@ -1,49 +1,46 @@
-import { ClassName, FieldName } from '@/airpower/decorator/Custom'
+import {
+  Field, Model,
+} from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 import { ISelector } from '@/airpower/interface/ISelector'
-import { IDetailButton } from '@/interface/IDetailButton'
 
-@ClassName('客户')
-export class CustomerEntity extends BaseEntity implements ISelector, IDetailButton {
+@Model('客户')
+export class CustomerEntity extends BaseEntity implements ISelector {
   getSelectorLabel(): string {
-    return this.name
-  }
-
-  getDetailButtonLabel(): string {
     return this.name
   }
 
   /**
    * # 客户名称
    */
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @FieldName('客户名称') name!: string
+  @Field('客户名称') name!: string
 
   /**
    * # 客户编码
    */
-  @TableField({
+  @Table({
     copyField: true,
     forceShow: true,
   })
-  @FormField({
+  @Form({
     placeholder: '不输入按编码规则自动生成',
   })
-  @FieldName('客户编码') code!: string
+  @Field('客户编码') code!: string
 
   /**
    * # 联系电话
    */
-  @TableField()
-  @FormField({
+  @Table()
+  @Form({
     phone: true,
   })
-  @FieldName('联系电话') phone!: string
+  @Field('联系电话') phone!: string
 }

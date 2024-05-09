@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    :title="RoleEntity.getClassName() + '菜单授权'"
+    :title="RoleEntity.getModelName() + '菜单授权'"
     :form-ref="formRef"
     :loading="isLoading"
     :fullable="false"

@@ -1,67 +1,67 @@
 import {
-  ClassName, Dictionary, FieldName, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 import { PurchaseStatus } from './PurchaseStatus'
 import { PurchaseStatusDictionary } from './PurchaseStatusDictionary'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { SearchField } from '@/airpower/decorator/SearchField'
+import { Search } from '@/airpower/decorator/SearchField'
 
-@ClassName('采购单')
+@Model('采购单')
 export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity> {
-  @TableField({
+  @Table({
     orderNumber: 99,
     forceShow: true,
   })
-  @FormField({
+  @Form({
     placeholder: '不填写按编码规则自动生成',
   })
-  @FieldName('采购单号') billCode!: string
+  @Field('采购单号') billCode!: string
 
-  @TableField({
+  @Table({
     nowrap: true,
   })
-  @FormField({
+  @Form({
     textarea: true,
     maxLength: 80,
     requiredString: true,
   })
-  @FieldName('采购事由') reason!: string
+  @Field('采购事由') reason!: string
 
-  @TableField({
+  @Table({
     width: 150,
     suffixText: '元',
     align: 'right',
     forceShow: true,
   })
-  @FormField({
+  @Form({
     suffixText: '元',
   })
-  @FieldName('总金额') totalPrice!: number
+  @Field('总金额') totalPrice!: number
 
-  @TableField({
+  @Table({
     width: 150,
     suffixText: '元',
     align: 'right',
     forceShow: true,
   })
-  @FormField({
+  @Form({
     suffixText: '元',
   })
-  @FieldName('实际金额') totalRealPrice!: number
+  @Field('实际金额') totalRealPrice!: number
 
-  @TableField({
+  @Table({
     width: 100,
     showColor: true,
     orderNumber: -80,
     forceShow: true,
   })
   @Dictionary(PurchaseStatusDictionary)
-  @SearchField()
-  @FieldName('采购状态') status!: PurchaseStatus
+  @Search()
+  @Field('采购状态') status!: PurchaseStatus
 
-  @FieldName('采购明细')
+  @Field('采购明细')
   @Type(PurchaseDetailEntity, true) details: PurchaseDetailEntity[] = []
 }

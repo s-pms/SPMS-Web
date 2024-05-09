@@ -1,79 +1,79 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { SerialNumberType } from './SerialNumberType'
 import {
-  ClassName, Dictionary, FieldName, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
 import { SerialNumberUpdateDictionary } from './SerialNumberUpdateDictionary'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 /**
  * # 编码规则实体
  *
  * @author Hamm
  */
-@ClassName('编码规则')
+@Model('编码规则')
 @EntityConfig({
   permissionPrefix: 'coderule_',
 })
 export class CodeRuleEntity extends BaseEntity {
-  @FormField({
+  @Form({
     requiredNumber: true,
   })
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FieldName('编码所属字段') ruleField!: number
+  @Field('编码所属字段') ruleField!: number
 
-  @FormField({
+  @Form({
     maxLength: 10,
     minLength: 1,
     requiredString: true,
     defaultValue: '',
   })
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FieldName('规则前缀') prefix!: string
+  @Field('规则前缀') prefix!: string
 
-  @FormField({
+  @Form({
     max: 10,
     min: 1,
     number: true,
     requiredNumber: true,
     defaultValue: 4,
   })
-  @TableField({
+  @Table({
     width: 160,
     forceShow: true,
   })
-  @FieldName('序列号初始长度') snLength!: number
+  @Field('序列号初始长度') snLength!: number
 
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     defaultValue: '',
     clearable: true,
     maxLength: 64,
   })
-  @FieldName('规则模板') template!: string
+  @Field('规则模板') template!: string
 
   @Dictionary(SerialNumberUpdateDictionary)
-  @FormField({
+  @Form({
     clearable: false,
     defaultValue: SerialNumberType.DAY,
     requiredNumber: true,
   })
-  @TableField({
+  @Table({
     showColor: true,
     width: 100,
     forceShow: true,
   })
-  @FieldName('序列号更新') snType!: SerialNumberType
+  @Field('序列号更新') snType!: SerialNumberType
 
-  @TableField()
-  @FieldName('下一个编码') nextCode!: string
+  @Table()
+  @Field('下一个编码') nextCode!: string
 
   @Type(Number) currentSn!: number
 }

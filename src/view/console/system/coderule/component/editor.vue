@@ -1,6 +1,6 @@
 <template>
   <ADialog
-    :title="title + CodeRuleEntity.getClassName()"
+    :title="title + CodeRuleEntity.getModelName()"
     :form-ref="formRef"
     :loading="isLoading"
     width="800px"

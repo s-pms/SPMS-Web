@@ -1,99 +1,99 @@
 import {
-  ClassName, Dictionary, FieldName, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { FormField } from '@/airpower/decorator/FormField'
-import { TableField } from '@/airpower/decorator/TableField'
+import { Form } from '@/airpower/decorator/FormField'
+import { Table } from '@/airpower/decorator/TableField'
 import { MaterialTypeDictionary } from './MaterialTypeDictionary'
 import { MaterialType } from './MaterialType'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 
-@ClassName('物料')
+@Model('物料')
 export class MaterialEntity extends BaseEntity {
   /**
    * # 物料名称
    */
-  @TableField({
+  @Table({
     forceShow: true,
   })
-  @FormField({
+  @Form({
     requiredString: true,
   })
-  @FieldName('物料名称') name!: string
+  @Field('物料名称') name!: string
 
   /**
    * # 物料编码
    */
-  @TableField({
+  @Table({
     copyField: true,
     forceShow: true,
   })
-  @FormField({
+  @Form({
     placeholder: '不输入按编码规则自动生成',
   })
-  @FieldName('物料编码') code!: string
+  @Field('物料编码') code!: string
 
   /**
    * # 物料类型
    */
-  @TableField({
+  @Table({
     showColor: true,
     width: 100,
   })
-  @FormField({
+  @Form({
     clearable: false,
     defaultValue: MaterialType.PRODUCT,
     requiredNumber: true,
   })
   @Dictionary(MaterialTypeDictionary)
-  @FieldName('物料类型') materialType!: MaterialType
+  @Field('物料类型') materialType!: MaterialType
 
   /**
    * # 规格型号
    */
-  @TableField({
+  @Table({
     copyField: true,
   })
-  @FormField()
-  @FieldName('规格型号') spc!: string
+  @Form()
+  @Field('规格型号') spc!: string
 
-  @TableField({
+  @Table({
     payloadField: 'name',
     width: 100,
   })
   @Type(UnitEntity)
-  @FieldName('计量单位') unitInfo!: UnitEntity
+  @Field('计量单位') unitInfo!: UnitEntity
 
-  @FormField({
+  @Form({
     requiredNumber: true,
   })
-  @FieldName('计量单位') unitId!: number
+  @Field('计量单位') unitId!: number
 
-  @TableField({
+  @Table({
     width: 150,
     suffixText: '元',
     align: 'right',
     hide: true,
   })
-  @FormField({
+  @Form({
     number: true,
     defaultValue: 0,
     requiredNumber: true,
   })
   @Type(Number)
-  @FieldName('采购单价') purchasePrice!: number
+  @Field('采购单价') purchasePrice!: number
 
-  @TableField({
+  @Table({
     width: 150,
     suffixText: '元',
     align: 'right',
     hide: true,
   })
-  @FormField({
+  @Form({
     number: true,
     defaultValue: 0,
     requiredNumber: true,
   })
   @Type(Number)
-  @FieldName('销售单价') salePrice!: number
+  @Field('销售单价') salePrice!: number
 }
