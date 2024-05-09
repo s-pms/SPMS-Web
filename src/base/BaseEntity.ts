@@ -31,19 +31,6 @@ export class BaseEntity extends AirEntity {
   })
   @Type(Number) updateTime!: number
 
-  // @Field('状态')
-  // @Search({
-  //   orderNumber: -100,
-  // })
-  // @Dictionary(DisableDictionary)
-  // @Table({
-  //   showColor: true,
-  //   width: 80,
-  //   orderNumber: -100,
-  //   removed: true,
-  // })
-  // @Type(Boolean) isDisabled!: boolean
-
   @Field('备注')
   @Form({
     textarea: true,
