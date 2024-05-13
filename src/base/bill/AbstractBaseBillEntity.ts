@@ -3,6 +3,7 @@ import { Form } from '@/airpower/decorator/FormField'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 import { ISelector } from '@/airpower/interface/ISelector'
+import { Table } from '@/airpower/decorator/TableField'
 
 /**
  * # 单据基类
@@ -13,7 +14,14 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   /**
    * # 单据编号
    */
-  abstract billCode: string
+  @Table({
+    orderNumber: 99,
+    forceShow: true,
+  })
+  @Form({
+    placeholder: '不填写按编码规则自动生成',
+  })
+  @Field('单据编号') billCode!: string
 
   /**
    * # 单据状态码

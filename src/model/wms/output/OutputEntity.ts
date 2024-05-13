@@ -15,15 +15,7 @@ import { MoveEntity } from '../move/MoveEntity'
 
 @Model('出库单')
 export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
-  @Table({
-    orderNumber: 99,
-    forceShow: true,
-  })
-  @Form({
-    placeholder: '不填写按编码规则自动生成',
-  })
-  @Search()
-  @Field('出库单号') billCode!: string
+  @Field('出库单号') declare billCode: string
 
   @Table({
     width: 100,

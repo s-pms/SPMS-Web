@@ -16,11 +16,7 @@ import { Form } from '@/airpower/decorator/FormField'
 
 @Model('生产计划')
 export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
-  @Table()
-  @Form({
-    placeholder: '不填写按编码规则自动生成',
-  })
-  @Field('生产计划号') billCode!: string
+  @Field('生产计划号') declare billCode: string
 
   @Table()
   @Field('客户编码') customerCode!: string

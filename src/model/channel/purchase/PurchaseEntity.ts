@@ -11,14 +11,7 @@ import { Search } from '@/airpower/decorator/SearchField'
 
 @Model('采购单')
 export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity> {
-  @Table({
-    orderNumber: 99,
-    forceShow: true,
-  })
-  @Form({
-    placeholder: '不填写按编码规则自动生成',
-  })
-  @Field('采购单号') billCode!: string
+  @Field('采购单号') declare billCode: string
 
   @Table({
     nowrap: true,

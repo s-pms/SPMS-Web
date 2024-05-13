@@ -18,14 +18,7 @@ import { Table } from '@/airpower/decorator/TableField'
 
 @Model('生产订单')
 export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
-  @Table({
-    copyField: true,
-    orderNumber: 99,
-  })
-  @Form({
-    placeholder: '不填写按编码规则自动生成',
-  })
-  @Field('生产订单号') billCode!: string
+  @Field('生产订单号') declare billCode: string
 
   @Form({
     requiredPayload: true,

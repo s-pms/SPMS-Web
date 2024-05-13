@@ -11,15 +11,7 @@ import { MoveStatusDictionary } from './MoveStatusDictionary'
 
 @Model('移库单')
 export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
-  @Table({
-    orderNumber: 99,
-    forceShow: true,
-  })
-  @Form({
-    placeholder: '不填写按编码规则自动生成',
-    orderNumber: 99,
-  })
-  @Field('移库单号') billCode!: string
+  @Field('移库单号') declare billCode: string
 
   @Table()
   @Field('目标存储资源') storageName!: string
