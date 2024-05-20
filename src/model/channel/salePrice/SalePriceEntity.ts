@@ -42,8 +42,7 @@ export class SalePriceEntity extends BaseEntity {
   })
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     orderNumber: -1,
   })
   @Type(Number) price!: number

@@ -25,8 +25,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
 
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     forceShow: true,
   })
   @Form({
@@ -36,8 +35,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
 
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     forceShow: true,
   })
   @Form({

@@ -28,8 +28,7 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     orderNumber: -1,
   })
   @Type(Number) price!: number

@@ -71,8 +71,7 @@ export class MaterialEntity extends BaseEntity {
 
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     hide: true,
   })
   @Form({
@@ -85,8 +84,7 @@ export class MaterialEntity extends BaseEntity {
 
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     hide: true,
   })
   @Form({

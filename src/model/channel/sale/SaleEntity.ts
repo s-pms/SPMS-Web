@@ -36,8 +36,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
 
   @Table({
     width: 150,
-    suffixText: '元',
-    align: 'right',
+    money: true,
     forceShow: true,
   })
   @Form({
