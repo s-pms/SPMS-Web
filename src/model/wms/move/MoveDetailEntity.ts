@@ -1,6 +1,4 @@
-import {
-  Field, Model, Type,
-} from '@/airpower/decorator/Custom'
+import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
@@ -8,8 +6,6 @@ import { InventoryEntity } from '../inventory/InventoryEntity'
 
 @Model('移库明细')
 export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
-  billId!: number
-
   @Type(InventoryEntity) inventory!: InventoryEntity
 
   @Table({ forceShow: true })

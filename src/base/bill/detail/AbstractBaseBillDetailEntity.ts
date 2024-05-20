@@ -8,9 +8,9 @@ import { BaseEntity } from '@/base/BaseEntity'
  */
 export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
   /**
-   * # 明细所属编号
+   * # 单据ID
    */
-  abstract billId: number
+  billId!: number
 
   @Table({
     removed: true,

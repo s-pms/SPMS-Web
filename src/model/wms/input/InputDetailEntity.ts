@@ -1,6 +1,4 @@
-import {
-  Field, Model, Type,
-} from '@/airpower/decorator/Custom'
+import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
@@ -9,8 +7,6 @@ import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 
 @Model('入库明细')
 export class InputDetailEntity extends AbstractBaseBillDetailEntity {
-  billId!: number
-
   @Type(StorageEntity) storage!: StorageEntity
 
   @Type(MaterialEntity) material!: MaterialEntity

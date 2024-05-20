@@ -83,7 +83,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, AInput, ATable, AButton,
+  AButton, ADialog, AGroup, AInput, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -98,7 +98,11 @@ import { AirNotification } from '@/airpower/feedback/AirNotification'
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
 const {
-  title, formData, rules, formRef, isLoading,
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
   onSubmit,
 } = useAirEditor(props, PurchaseEntity, PurchaseService, {
   afterGetDetail(detailData) {

@@ -1,6 +1,4 @@
-import {
-  Field, Model, Type,
-} from '@/airpower/decorator/Custom'
+import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
@@ -69,6 +67,4 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
     orderNumber: -3,
   })
   @Type(Number) finishQuantity!: number
-
-  billId!: number
 }

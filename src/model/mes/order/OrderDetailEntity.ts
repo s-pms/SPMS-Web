@@ -6,6 +6,4 @@ export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
   quantity!: number
 
   finishQuantity!: number
-
-  billId!: number
 }

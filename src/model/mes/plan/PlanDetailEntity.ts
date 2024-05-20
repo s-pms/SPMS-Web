@@ -6,8 +6,6 @@ import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 
 @Model('计划明细')
 export class PlanDetailEntity extends AbstractBaseBillDetailEntity {
-  billId!: number
-
   @Type(MaterialEntity) material!: MaterialEntity
 
   @Table()

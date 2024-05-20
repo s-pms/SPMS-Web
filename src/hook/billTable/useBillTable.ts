@@ -9,7 +9,15 @@ import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { BillRejectDialog } from '@/component'
 
-export function useBillTable<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>, S extends AbstractBaseBillService<D, B>>(entityClass: ClassConstructor<B>, serviceClass: ClassConstructor<S>, option: IUseTableOption<B> = {}): IUseBillTableResult<D, B, S> {
+export function useBillTable<
+  D extends AbstractBaseBillDetailEntity,
+  B extends AbstractBaseBillEntity<D>,
+  S extends AbstractBaseBillService<D, B>
+>(
+  entityClass: ClassConstructor<B>,
+  serviceClass: ClassConstructor<S>,
+  option: IUseTableOption<B> = {},
+): IUseBillTableResult<D, B, S> {
   const result = useAirTable(entityClass, serviceClass, option)
 
   async function onAudit(bill: B) {
@@ -33,6 +41,9 @@ export function useBillTable<D extends AbstractBaseBillDetailEntity, B extends A
   }
 
   return {
-    onFinish, onAudit, onReject, ...result,
+    onFinish,
+    onAudit,
+    onReject,
+    ...result,
   } as IUseBillTableResult<D, B, S>
 }

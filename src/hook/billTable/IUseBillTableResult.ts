@@ -9,7 +9,11 @@ import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBil
  *
  * @author Hamm
  */
-export interface IUseBillTableResult<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>, S extends AbstractBaseBillService<D, B>> extends IUseTableResult<B, S> {
+export interface IUseBillTableResult<
+  D extends AbstractBaseBillDetailEntity,
+  B extends AbstractBaseBillEntity<D>,
+  S extends AbstractBaseBillService<D, B>
+> extends IUseTableResult<B, S> {
   /**
    * # 审核
    * @param bill 单据

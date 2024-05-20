@@ -54,7 +54,7 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar, AButton,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { PurchaseDetail, PurchaseEditor } from './component'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
@@ -66,7 +66,15 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onReject, onAudit,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onReject,
+  onAudit,
 } = useBillTable(PurchaseEntity, PurchaseService, {
   editView: PurchaseEditor,
   detailView: PurchaseDetail,
