@@ -19,15 +19,7 @@
         title="移库单"
         :column="2"
       >
-        <el-form-item
-          :label="MoveEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="MoveEntity"
-          />
-        </el-form-item>
+        <AFormField field="billCode" />
         <el-form-item
           label="目标存储资源"
           prop="storageId"
@@ -79,7 +71,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AButton, AInput,
+  ADialog, AGroup, ATable, AButton, AFormField,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -103,7 +95,6 @@ const {
 } = useAirEditor(props, MoveEntity, MoveService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
-    detailData.storageCode = detailData.storage.code
     detailData.storageId = detailData.storage.id
     return detailData
   },

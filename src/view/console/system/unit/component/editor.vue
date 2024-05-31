@@ -13,27 +13,20 @@
       :rules="rules"
       @submit.prevent
     >
-      <el-form-item
+      <AFormField
         v-for="item in UnitEntity.getFormFieldConfigList()"
         :key="item.key"
         :label="item.label"
-        :prop="item.key"
-      >
-        <AInput
-          v-model="(formData as IJson)[item.key]"
-          :modifier="item.key"
-          :entity="UnitEntity"
-        />
-      </el-form-item>
+        :field="item.label"
+      />
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AInput } from '@/airpower/component'
+import { ADialog, AFormField } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { IJson } from '@/airpower/interface/IJson'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
 

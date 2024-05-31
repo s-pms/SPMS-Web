@@ -19,25 +19,11 @@
         title="生产计划"
         :column="2"
       >
-        <el-form-item
-          :label="OrderEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="OrderEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('type')"
-          prop="type"
-        >
-          <AInput
-            v-model.type="formData.type"
-            :entity="OrderEntity"
-            @on-change="orderTypeChanged"
-          />
-        </el-form-item>
+        <AFormField field="billCode" />
+        <AFormField
+          field="type"
+          @on-change="orderTypeChanged"
+        />
         <template v-if="formData.type === OrderType.PLAN">
           <el-form-item
             label="关联计划"
@@ -64,33 +50,9 @@
             @click="selectMaterial()"
           />
         </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('quantity')"
-          prop="quantity"
-        >
-          <AInput
-            v-model.quantity="formData.quantity"
-            :entity="OrderEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('startTime')"
-          prop="startTime"
-        >
-          <AInput
-            v-model.startTime="formData.startTime"
-            :entity="OrderEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('deliverTime')"
-          prop="deliverTime"
-        >
-          <AInput
-            v-model.deliverTime="formData.deliverTime"
-            :entity="OrderEntity"
-          />
-        </el-form-item>
+        <AFormField field="quantity" />
+        <AFormField field="startTime" />
+        <AFormField field="deliverTime" />
         <el-form-item
           label="客户信息"
           prop="customer"
@@ -109,7 +71,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, AInput, ASelector,
+  ADialog, AFormField, AGroup, ASelector,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

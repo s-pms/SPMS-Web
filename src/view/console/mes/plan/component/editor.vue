@@ -19,42 +19,10 @@
         title="生产计划"
         :column="2"
       >
-        <el-form-item
-          :label="PlanEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="PlanEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="PlanEntity.getFieldName('startTime')"
-          prop="startTime"
-        >
-          <AInput
-            v-model.startTime="formData.startTime"
-            :entity="PlanEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="PlanEntity.getFieldName('deliverTime')"
-          prop="deliverTime"
-        >
-          <AInput
-            v-model.deliverTime="formData.deliverTime"
-            :entity="PlanEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="PlanEntity.getFieldName('type')"
-          prop="type"
-        >
-          <AInput
-            v-model.type="formData.type"
-            :entity="PlanEntity"
-          />
-        </el-form-item>
+        <AFormField field="billCode" />
+        <AFormField field="startTime" />
+        <AFormField field="deliverTime" />
+        <AFormField field="type" />
         <el-form-item
           v-if="formData.type === PlanType.SALE"
           label="关联客户"
@@ -107,7 +75,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, AInput, ATable, AButton,
+  ADialog, AGroup, ATable, AButton, AFormField,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

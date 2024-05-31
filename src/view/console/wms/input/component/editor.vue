@@ -19,15 +19,7 @@
         title="入库单"
         :column="2"
       >
-        <el-form-item
-          :label="InputEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="InputEntity"
-          />
-        </el-form-item>
+        <AFormField field="billCode" />
         <el-form-item
           v-if="formData.type === InputType.PURCHASE"
           label="采购单号"
@@ -80,7 +72,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import {
-  AButton, ADialog, AGroup, AInput, ATable,
+  AButton, ADialog, AFormField, AGroup, AInput, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

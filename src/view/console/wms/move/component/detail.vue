@@ -15,48 +15,30 @@
         title="移库单"
         :column="2"
       >
-        <el-form-item
-          :label="MoveEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="MoveEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          label="目标存储资源"
-        >
-          <el-input
-            v-model="formData.storageName"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item :label="MoveEntity.getFieldName('createTime')">
+        <AFormField
+          field="billCode"
+          disabled
+        />
+        <AFormField
+          field="storageName"
+          disabled
+        />
+        <AFormField field="createTime">
           <ADateTime :time="formData.createTime" />
-        </el-form-item>
-        <el-form-item :label="MoveEntity.getFieldName('updateTime')">
+        </AFormField>
+        <AFormField field="updateTime">
           <ADateTime :time="formData.updateTime" />
-        </el-form-item>
-        <el-form-item :label="MoveEntity.getFieldName('status')">
-          <AInput
-            v-model.status="formData.status"
-            :entity="MoveEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
+        </AFormField>
+        <AFormField
+          disabled
+          field="status"
+        />
+        <AFormField
           v-if="formData.status === MoveStatus.REJECTED"
-          style="width: 100%;"
-          :label="MoveEntity.getFieldName('rejectReason')"
-        >
-          <AInput
-            v-model.rejectReason="formData.rejectReason"
-            :entity="MoveEntity"
-            disabled
-          />
-        </el-form-item>
+          style="width: 100%"
+          field="rejectReason"
+          disabled
+        />
       </AGroup>
       <AGroup title="移库明细">
         <ATable
@@ -92,7 +74,8 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AInput, AButton, ADateTime,
+  ADialog, AGroup, ATable, AButton, ADateTime,
+  AFormField,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'

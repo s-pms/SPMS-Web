@@ -33,37 +33,12 @@
                 label: item.label
               } as IDictionary
             })"
-            clearable
             @on-change="fieldChanged"
           />
         </el-form-item>
-        <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('snType')"
-          prop="snType"
-        >
-          <AInput
-            v-model.snType="formData.snType"
-            :entity="CodeRuleEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('prefix')"
-          prop="prefix"
-        >
-          <AInput
-            v-model.prefix="formData.prefix"
-            :entity="CodeRuleEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('snLength')"
-          prop="snLength"
-        >
-          <AInput
-            v-model.snLength="formData.snLength"
-            :entity="CodeRuleEntity"
-          />
-        </el-form-item>
+        <AFormField field="snType" />
+        <AFormField field="prefix" />
+        <AFormField field="snLength" />
       </AGroup>
       <AGroup title="模板配置">
         <el-form-item label="可选参数">
@@ -76,15 +51,7 @@
             {{ param.desc }}
           </el-tag>
         </el-form-item>
-        <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('template')"
-          prop="template"
-        >
-          <AInput
-            v-model.template="formData.template"
-            :entity="CodeRuleEntity"
-          />
-        </el-form-item>
+        <AFormField field="template" />
         <el-form-item
           v-if="formData.prefix || demoCode"
           label="示例编码"
@@ -104,7 +71,9 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { ADialog, AGroup, AInput } from '@/airpower/component'
+import {
+  ADialog, AFormField, AGroup, AInput,
+} from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirInputType } from '@/airpower/enum/AirInputType'
 import { AirValidator } from '@/airpower/helper/AirValidator'

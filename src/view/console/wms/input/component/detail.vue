@@ -17,36 +17,30 @@
         title="入库单"
         :column="2"
       >
-        <el-form-item :label="InputEntity.getFieldName('billCode')">
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="InputEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="InputEntity.getFieldName('type')"
-          prop="type"
+        <AFormField
+          field="billCode"
+          disabled
+        />
+        <AFormField
+          field="type"
+          disabled
+        />
+        <AFormField
+          field="createTime"
+          disabled
         >
-          <AInput
-            v-model.type="formData.type"
-            :entity="InputEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item :label="InputEntity.getFieldName('createTime')">
           <ADateTime :time="formData.createTime" />
-        </el-form-item>
-        <el-form-item :label="InputEntity.getFieldName('updateTime')">
+        </AFormField>
+        <AFormField
+          field="updateTime"
+          disabled
+        >
           <ADateTime :time="formData.updateTime" />
-        </el-form-item>
-        <el-form-item :label="InputEntity.getFieldName('status')">
-          <AInput
-            v-model.status="formData.status"
-            :entity="InputEntity"
-            disabled
-          />
-        </el-form-item>
+        </AFormField>
+        <AFormField
+          field="status"
+          disabled
+        />
         <el-form-item
           v-if="formData.type===InputType.PURCHASE"
           label="采购单号"
@@ -63,17 +57,12 @@
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
-        <el-form-item
+        <AFormField
           v-if="formData.status === InputStatus.REJECTED"
-          style="width: 100%;"
-          :label="InputEntity.getFieldName('rejectReason')"
-        >
-          <AInput
-            v-model.rejectReason="formData.rejectReason"
-            :entity="InputEntity"
-            disabled
-          />
-        </el-form-item>
+          style="width: 100%"
+          field="rejectReason"
+          disabled
+        />
       </AGroup>
       <AGroup title="入库明细">
         <ATable
@@ -111,7 +100,7 @@
 import {
   AButton,
   ADateTime,
-  ADialog, AGroup, AInput, ATable,
+  ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'

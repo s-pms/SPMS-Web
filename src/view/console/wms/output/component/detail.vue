@@ -15,39 +15,24 @@
         title="出库单"
         :column="2"
       >
-        <el-form-item
-          :label="OutputEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="OutputEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OutputEntity.getFieldName('type')"
-          prop="type"
-        >
-          <AInput
-            v-model.type="formData.type"
-            :entity="OutputEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item :label="OutputEntity.getFieldName('createTime')">
+        <AFormField
+          disabled
+          field="billCode"
+        />
+        <AFormField
+          disabled
+          field="type"
+        />
+        <AFormField field="createTime">
           <ADateTime :time="formData.createTime" />
-        </el-form-item>
-        <el-form-item :label="OutputEntity.getFieldName('updateTime')">
+        </AFormField>
+        <AFormField field="updateTime">
           <ADateTime :time="formData.updateTime" />
-        </el-form-item>
-        <el-form-item :label="OutputEntity.getFieldName('status')">
-          <AInput
-            v-model.status="formData.status"
-            :entity="OutputEntity"
-            disabled
-          />
-        </el-form-item>
+        </AFormField>
+        <AFormField
+          disabled
+          field="status"
+        />
         <el-form-item
           v-if="formData.type===OutputType.SALE"
           label="销售单号"
@@ -64,17 +49,12 @@
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
-        <el-form-item
+        <AFormField
           v-if="formData.status === OutputStatus.REJECTED"
-          style="width: 100%;"
-          :label="OutputEntity.getFieldName('rejectReason')"
-        >
-          <AInput
-            v-model.rejectReason="formData.rejectReason"
-            :entity="OutputEntity"
-            disabled
-          />
-        </el-form-item>
+          style="width: 100%"
+          field="rejectReason"
+          disabled
+        />
       </AGroup>
       <AGroup title="出库明细">
         <ATable
@@ -110,7 +90,8 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AInput, AButton, ADateTime,
+  ADialog, AGroup, ATable, AButton, ADateTime,
+  AFormField,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'

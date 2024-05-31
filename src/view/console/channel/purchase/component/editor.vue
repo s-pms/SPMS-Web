@@ -19,25 +19,11 @@
         title="采购单"
         :column="2"
       >
-        <el-form-item
-          :label="PurchaseEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="PurchaseEntity"
-          />
-        </el-form-item>
-        <el-form-item
+        <AFormField field="billCode" />
+        <AFormField
+          field="reason"
           style="width: 100%;"
-          :label="PurchaseEntity.getFieldName('reason')"
-          prop="reason"
-        >
-          <AInput
-            v-model.reason="formData.reason"
-            :entity="PurchaseEntity"
-          />
-        </el-form-item>
+        />
       </AGroup>
       <AGroup title="采购明细">
         <ATable
@@ -83,7 +69,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADialog, AGroup, AInput, ATable,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

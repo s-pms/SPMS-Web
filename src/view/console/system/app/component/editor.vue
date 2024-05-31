@@ -13,39 +13,15 @@
       :rules="rules"
       @submit.prevent
     >
-      <el-form-item
-        :label="AppEntity.getFormFieldLabel('appKey')"
-        prop="appKey"
-      >
-        <AInput
-          v-model.appKey="formData.appKey"
-          :entity="AppEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="AppEntity.getFormFieldLabel('appName')"
-        prop="appName"
-      >
-        <AInput
-          v-model.appName="formData.appName"
-          :entity="AppEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="AppEntity.getFormFieldLabel('url')"
-        prop="url"
-      >
-        <AInput
-          v-model.url="formData.url"
-          :entity="AppEntity"
-        />
-      </el-form-item>
+      <AFormField field="appKey" />
+      <AFormField field="appName" />
+      <AFormField field="url" />
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AInput } from '@/airpower/component'
+import { ADialog, AFormField } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { AppEntity } from '@/model/system/app/AppEntity'

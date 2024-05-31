@@ -19,27 +19,19 @@
       >
         {{ formData.parent.name }}({{ formData.parent.code }})
       </el-form-item>
-      <el-form-item
+      <AFormField
         v-for="item in StructureEntity.getFormFieldConfigList()"
         :key="item.key"
-        :label="item.label"
-        :prop="item.key"
-      >
-        <AInput
-          v-model="(formData as IJson)[item.key]"
-          :modifier="item.key"
-          :entity="StructureEntity"
-        />
-      </el-form-item>
+        :field="item.key"
+      />
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AInput } from '@/airpower/component'
+import { ADialog, AFormField } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { IJson } from '@/airpower/interface/IJson'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 

@@ -17,55 +17,31 @@
         title="生产订单"
         :column="2"
       >
-        <el-form-item
-          :label="OrderEntity.getFieldName('billCode')"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="OrderEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('startTime')"
-          prop="startTime"
-        >
-          <AInput
-            v-model.startTime="formData.startTime"
-            :entity="OrderEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('deliverTime')"
-          prop="deliverTime"
-        >
-          <AInput
-            v-model.deliverTime="formData.deliverTime"
-            :entity="OrderEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('createTime')"
-        >
+        <AFormField
+          field="billCode"
+          disabled
+        />
+
+        <AFormField field="startTime">
+          <ADateTime :time="formData.startTime" />
+        </AFormField>
+
+        <AFormField field="deliverTime">
+          <ADateTime :time="formData.deliverTime" />
+        </AFormField>
+
+        <AFormField field="createTime">
           <ADateTime :time="formData.createTime" />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('updateTime')"
-        >
+        </AFormField>
+
+        <AFormField field="updateTime">
           <ADateTime :time="formData.updateTime" />
-        </el-form-item>
-        <el-form-item
-          :label="OrderEntity.getFieldName('type')"
-          prop="type"
-        >
-          <AInput
-            v-model.type="formData.type"
-            :entity="OrderEntity"
-            disabled
-          />
-        </el-form-item>
+        </AFormField>
+
+        <AFormField
+          field="type"
+          disabled
+        />
         <el-form-item
           label="关联客户"
           prop="customerId"
@@ -77,24 +53,17 @@
             disabled
           />
         </el-form-item>
-        <el-form-item :label="OrderEntity.getFieldName('status')">
-          <AInput
-            v-model.status="formData.status"
-            :entity="OrderEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
+
+        <AFormField
+          field="status"
+          disabled
+        />
+        <AFormField
           v-if="formData.status === OrderStatus.REJECTED"
-          style="width: 100%;"
-          :label="OrderEntity.getFieldName('rejectReason')"
-        >
-          <AInput
-            v-model.rejectReason="formData.rejectReason"
-            :entity="OrderEntity"
-            disabled
-          />
-        </el-form-item>
+          style="width: 100%"
+          field="rejectReason"
+          disabled
+        />
       </AGroup>
     </el-form>
   </ADialog>
@@ -102,8 +71,7 @@
 
 <script lang="ts" setup>
 import {
-  ADateTime,
-  ADialog, AGroup, AInput,
+  ADateTime, ADialog, AFormField, AGroup,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'

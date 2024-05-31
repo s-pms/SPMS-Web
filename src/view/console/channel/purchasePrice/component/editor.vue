@@ -37,21 +37,13 @@
           @click="selectSupplier()"
         />
       </el-form-item>
-      <el-form-item
-        :label="PurchasePriceEntity.getFieldName('price')"
-        prop="price"
-      >
-        <AInput
-          v-model.price="formData.price"
-          :entity="PurchasePriceEntity"
-        />
-      </el-form-item>
+      <AFormField field="price" />
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AInput } from '@/airpower/component'
+import { ADialog, AFormField } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'

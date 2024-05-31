@@ -19,15 +19,7 @@
         title="入库单"
         :column="2"
       >
-        <el-form-item
-          :label="OutputEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="OutputEntity"
-          />
-        </el-form-item>
+        <AFormField field="billCode" />
       </AGroup>
       <AGroup title="出库明细">
         <ATable
@@ -73,7 +65,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import {
-  AButton, ADialog, AGroup, AInput, ATable,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

@@ -21,57 +21,17 @@
       >
         {{ param.parent.name }}
       </el-form-item>
-      <el-form-item
-        :label="MenuEntity.getFormFieldLabel('name')"
-        prop="name"
-      >
-        <AInput
-          v-model.name="formData.name"
-          :entity="MenuEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MenuEntity.getFormFieldLabel('path')"
-        prop="path"
-      >
-        <AInput
-          v-model.path="formData.path"
-          :entity="MenuEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MenuEntity.getFormFieldLabel('component')"
-        prop="component"
-      >
-        <AInput
-          v-model.path="formData.component"
-          :entity="MenuEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MenuEntity.getFormFieldLabel('orderNo')"
-        prop="orderNo"
-      >
-        <AInput
-          v-model.orderNo="formData.orderNo"
-          :entity="MenuEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MenuEntity.getFormFieldLabel('icon')"
-        prop="icon"
-      >
-        <AInput
-          v-model.icon="formData.icon"
-          :entity="MenuEntity"
-        />
-      </el-form-item>
+      <AFormField field="name" />
+      <AFormField field="path" />
+      <AFormField field="component" />
+      <AFormField field="orderNo" />
+      <AFormField field="icon" />
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AInput } from '@/airpower/component'
+import { ADialog, AFormField } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'

@@ -13,42 +13,10 @@
       :rules="rules"
       @submit.prevent
     >
-      <el-form-item
-        :label="MaterialEntity.getFieldName('name')"
-        prop="name"
-      >
-        <AInput
-          v-model.name="formData.name"
-          :entity="MaterialEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MaterialEntity.getFieldName('code')"
-        prop="code"
-      >
-        <AInput
-          v-model.code="formData.code"
-          :entity="MaterialEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MaterialEntity.getFieldName('materialType')"
-        prop="materialType"
-      >
-        <AInput
-          v-model.materialType="formData.materialType"
-          :entity="MaterialEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MaterialEntity.getFieldName('spc')"
-        prop="spc"
-      >
-        <AInput
-          v-model.spc="formData.spc"
-          :entity="MaterialEntity"
-        />
-      </el-form-item>
+      <AFormField field="name" />
+      <AFormField field="code" />
+      <AFormField field="materialType" />
+      <AFormField field="spc" />
       <el-form-item
         label="计量单位"
         prop="unitId"
@@ -61,31 +29,15 @@
           @click="selectUnit()"
         />
       </el-form-item>
-      <el-form-item
-        :label="MaterialEntity.getFieldName('purchasePrice')"
-        prop="purchasePrice"
-      >
-        <AInput
-          v-model.purchasePrice="formData.purchasePrice"
-          :entity="MaterialEntity"
-        />
-      </el-form-item>
-      <el-form-item
-        :label="MaterialEntity.getFieldName('salePrice')"
-        prop="salePrice"
-      >
-        <AInput
-          v-model.salePrice="formData.salePrice"
-          :entity="MaterialEntity"
-        />
-      </el-form-item>
+      <AFormField field="purchasePrice" />
+      <AFormField field="salePrice" />
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
 import { ElInput } from 'element-plus'
-import { ADialog, AInput } from '@/airpower/component'
+import { ADialog, AFormField } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'

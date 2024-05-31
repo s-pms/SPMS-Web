@@ -19,58 +19,22 @@
         title="基本信息"
         :column="2"
       >
-        <el-form-item
-          :label="DeviceEntity.getFieldName('name')"
-          prop="name"
-        >
-          <AInput
-            v-model.name="formData.name"
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
-        <el-form-item
-          :label="DeviceEntity.getFieldName('code')"
-          prop="code"
-        >
-          <AInput
-            v-model.code="formData.code"
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
+        <AFormField field="name" />
+        <AFormField field="code" />
       </AGroup>
       <AGroup
         :column="2"
         title="采集配置"
       >
-        <el-form-item
-          :label="DeviceEntity.getFieldName('isReporting')"
-          prop="isReporting"
-        >
-          <AInput
-            v-model.isReporting="formData.isReporting"
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
-        <el-form-item
+        <AFormField field="isReporting" />
+        <AFormField
           v-if="formData.isReporting"
-          :label="DeviceEntity.getFieldName('uuid')"
-          prop="uuid"
-        >
-          <AInput
-            v-model.uuid="formData.uuid"
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
-        <el-form-item
+          field="uuid"
+        />
+        <AFormField
           v-if="formData.isReporting"
-          :label="DeviceEntity.getFieldName('rate')"
-          prop="rate"
-        >
-          <AInput
-            v-model.rate="formData.rate"
-            :entity="DeviceEntity"
-          />
-        </el-form-item>
+          field="rate"
+        />
       </AGroup>
       <AGroup
         title="采集参数"
@@ -101,7 +65,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADialog, AGroup, AInput,
+  AButton, ADialog, AFormField, AGroup,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

@@ -17,54 +17,41 @@
         title="采购单"
         :column="2"
       >
-        <el-form-item :label="PurchaseEntity.getFieldName('billCode')">
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="PurchaseEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item :label="PurchaseEntity.getFieldName('totalPrice')">
-          <AInput
-            v-model.totalPrice="formData.totalPrice"
-            :entity="PurchaseEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item :label="PurchaseEntity.getFieldName('createTime')">
+        <AFormField
+          field="billCode"
+          disabled
+        />
+        <AFormField
+          field="totalPrice"
+          disabled
+        />
+        <AFormField
+          field="createTime"
+          disabled
+        >
           <ADateTime :time="formData.createTime" />
-        </el-form-item>
-        <el-form-item :label="PurchaseEntity.getFieldName('updateTime')">
+        </AFormField>
+        <AFormField
+          field="updateTime"
+          disabled
+        >
           <ADateTime :time="formData.updateTime" />
-        </el-form-item>
-        <el-form-item
+        </AFormField>
+        <AFormField
           style="width: 100%;"
-          :label="PurchaseEntity.getFieldName('reason')"
-        >
-          <AInput
-            v-model.reason="formData.reason"
-            :entity="PurchaseEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item :label="PurchaseEntity.getFieldName('status')">
-          <AInput
-            v-model.status="formData.status"
-            :entity="PurchaseEntity"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
+          field="reason"
+          disabled
+        />
+        <AFormField
+          field="status"
+          disabled
+        />
+        <AFormField
           v-if="formData.status === PurchaseStatus.REJECTED"
-          style="width: 100%;"
-          :label="PurchaseEntity.getFieldName('rejectReason')"
-        >
-          <AInput
-            v-model.rejectReason="formData.rejectReason"
-            :entity="PurchaseEntity"
-            disabled
-          />
-        </el-form-item>
+          style="width: 100%"
+          field="rejectReason"
+          disabled
+        />
       </AGroup>
       <AGroup title="采购明细">
         <ATable
@@ -102,9 +89,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton,
-  ADateTime,
-  ADialog, AGroup, AInput, ATable,
+  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'

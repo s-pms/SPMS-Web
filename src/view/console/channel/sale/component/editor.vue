@@ -19,15 +19,7 @@
         title="采购单"
         :column="2"
       >
-        <el-form-item
-          :label="SaleEntity.getFieldName('billCode')"
-          prop="billCode"
-        >
-          <AInput
-            v-model.billCode="formData.billCode"
-            :entity="SaleEntity"
-          />
-        </el-form-item>
+        <AFormField field="billCode" />
         <el-form-item
           label="销售客户"
           prop="customerId"
@@ -40,16 +32,10 @@
             @click="selectCustomer()"
           />
         </el-form-item>
-        <el-form-item
+        <AFormField
+          field="reason"
           style="width: 100%;"
-          :label="SaleEntity.getFieldName('reason')"
-          prop="reason"
-        >
-          <AInput
-            v-model.reason="formData.reason"
-            :entity="SaleEntity"
-          />
-        </el-form-item>
+        />
       </AGroup>
       <AGroup title="采购明细">
         <ATable
@@ -89,7 +75,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, AInput, ATable, AButton,
+  ADialog, AGroup, ATable, AButton, AFormField,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
