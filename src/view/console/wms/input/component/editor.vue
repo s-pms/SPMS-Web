@@ -21,7 +21,7 @@
       >
         <AFormField field="billCode" />
         <el-form-item
-          v-if="formData.type === InputType.PURCHASE"
+          v-if="InputTypeEnum.PURCHASE.equalsKey(formData.type)"
           label="采购单号"
         >
           <AInput
@@ -83,7 +83,7 @@ import { InputService } from '@/model/wms/input/InputService'
 import { InputDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { InputType } from '@/model/wms/input/InputType'
+import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
@@ -103,9 +103,9 @@ const {
   },
 })
 
-formData.value.type = formData.value.type ?? InputType.NORMAL
+formData.value.type = formData.value.type ?? InputTypeEnum.NORMAL.key
 
-const isDetailEditable = computed(() => formData.value.type === InputType.NORMAL)
+const isDetailEditable = computed(() => InputTypeEnum.NORMAL.equalsKey(formData.value.type))
 
 async function addDetail() {
   const detail: InputDetailEntity = await AirDialog.show(InputDetailEditor)

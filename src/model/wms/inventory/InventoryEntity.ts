@@ -1,12 +1,12 @@
 import {
-  Field, Model, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
 import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { InventoryType } from './InventoryType'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
 @Model('库存')
 export class InventoryEntity extends BaseEntity {
@@ -40,7 +40,8 @@ export class InventoryEntity extends BaseEntity {
   @Table()
   @Field('存储资源') storageName!: string
 
-  @Field('库存类型') type!: InventoryType
+  @Dictionary(InventoryTypeEnum)
+  @Field('库存类型') type!: number
 
   @Field('存储资源')
   @Type(MaterialEntity) material!: MaterialEntity

@@ -71,7 +71,7 @@ import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleEditor } from '.'
-import { SaleStatus } from '@/model/channel/sale/SaleStatus'
+import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 
 const props = defineProps(airPropsSelector(new SaleEntity()))
 
@@ -81,7 +81,7 @@ const {
 } = useAirSelector(props, SaleEntity, SaleService, {
   editView: SaleEditor,
   beforeSearch(requestData) {
-    requestData.filter.status = SaleStatus.OUTPUTING
+    requestData.filter.status = SaleStatusEnum.OUTPUTING.key
     return requestData
   },
 })

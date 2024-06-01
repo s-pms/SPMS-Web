@@ -34,7 +34,7 @@
           field="status"
         />
         <el-form-item
-          v-if="formData.type===OutputType.SALE"
+          v-if="OutputTypeEnum.SALE.equalsKey(formData.type)"
           label="销售单号"
         >
           <el-link @click="AirDialog.show(SaleDetail,formData.sale)">
@@ -42,7 +42,7 @@
           </el-link>
         </el-form-item>
         <el-form-item
-          v-if="formData.type===OutputType.MOVE"
+          v-if="OutputTypeEnum.MOVE.equalsKey(formData.type)"
           label="移库单号"
         >
           <el-link @click="AirDialog.show(MoveDetail,formData.move)">
@@ -50,7 +50,7 @@
           </el-link>
         </el-form-item>
         <AFormField
-          v-if="formData.status === OutputStatus.REJECTED"
+          v-if="OutputStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -65,7 +65,9 @@
           hide-delete
         >
           <template #storageName="row">
-            {{ (row.data as OutputDetailEntity).inventory?.storage.name || "-" }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
+            {{
+              (row.data as OutputDetailEntity).inventory?.storage.name || "-"
+            }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
           </template>
           <template #materialCode="row">
             {{ (row.data as OutputDetailEntity).material.code }}
@@ -77,7 +79,7 @@
             <AButton
               icon-button
               tooltip="添加完成"
-              :disabled="formData.status !== OutputStatus.OUTPUTTING"
+              :disabled=" OutputStatusEnum.OUTPUTTING.notEqualsKey(formData.status)"
               type="CHECKIN"
               @click="(row.data as OutputDetailEntity).billId = formData.id; onAddFinish(row.data)"
             />
@@ -90,21 +92,20 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AButton, ADateTime,
-  AFormField,
+  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { OutputStatus } from '@/model/wms/output/OutputStatus'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OutputAddFinishEditor } from '.'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { OutputType } from '@/model/wms/output/OutputType'
 import { MoveDetail } from '../../move/component'
 import { SaleDetail } from '@/view/console/channel/sale/component'
+import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
+import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 

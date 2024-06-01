@@ -30,7 +30,9 @@
           hide-delete
         >
           <template #storageName="row">
-            {{ (row.data as OutputDetailEntity).inventory?.storage.name || "-" }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
+            {{
+              (row.data as OutputDetailEntity).inventory?.storage.name || "-"
+            }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
           </template>
           <template #materialCode="row">
             {{ (row.data as OutputDetailEntity).material.code }}
@@ -76,7 +78,7 @@ import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { OutputType } from '@/model/wms/output/OutputType'
+import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 
@@ -96,9 +98,9 @@ const {
   },
 })
 
-formData.value.type = formData.value.type ?? OutputType.NORMAL
+formData.value.type = formData.value.type ?? OutputTypeEnum.NORMAL.key
 
-const isDetailEditable = computed(() => formData.value.type === OutputType.NORMAL)
+const isDetailEditable = computed(() => OutputTypeEnum.NORMAL.equalsKey(formData.value.type))
 
 async function addDetail() {
   const detail: OutputDetailEntity = await AirDialog.show(OutputDetailEditor)

@@ -7,10 +7,8 @@ import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDateTimeType } from '@/airpower/enum/AirDateTimeType'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { OrderStatus } from './OrderStatus'
-import { OrderStatusDictionary } from './OrderStatusDictionary'
-import { OrderType } from './OrderType'
-import { OrderTypeDictionary } from './OrderTypeDictionary'
+import { OrderStatusEnum } from './OrderStatusEnum'
+import { OrderTypeEnum } from './OrderTypeEnum'
 import { OrderDetailEntity } from './OrderDetailEntity'
 import { PlanEntity } from '../plan/PlanEntity'
 import { Form } from '@/airpower/decorator/FormField'
@@ -64,20 +62,20 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     width: 100,
     showColor: true,
   })
-  @Dictionary(OrderStatusDictionary)
-  @Field('订单状态') status!: OrderStatus
+  @Dictionary(OrderStatusEnum)
+  @Field('订单状态') status!: number
 
   @Table({
     width: 100,
     showColor: true,
   })
   @Form({
-    defaultValue: OrderType.OTHER,
+    defaultValue: OrderTypeEnum.OTHER.key,
     clearable: false,
     requiredNumber: true,
   })
-  @Dictionary(OrderTypeDictionary)
-  @Field('订单类型') type!: OrderType
+  @Dictionary(OrderTypeEnum)
+  @Field('订单类型') type!: number
 
   @Table({
     width: 110,

@@ -3,13 +3,11 @@ import {
 } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Table } from '@/airpower/decorator/TableField'
-import { DeviceStatus } from './DeviceStatus'
-import { DeviceStatusDictionary } from './DeviceStatusDictionary'
-import { AlarmStatus } from './AlarmStatus'
-import { AlarmStatusDictionary } from './AlarmStatusDictionary'
+import { DeviceStatusEnum } from './DeviceStatusEnum'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { DeviceReportingEnum } from '@/model/asset/device/DeviceReportingEnum'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 
 @Model('设备')
 export class DeviceEntity extends BaseEntity {
@@ -67,21 +65,21 @@ export class DeviceEntity extends BaseEntity {
   })
   @Field('实时产量') partCount!: string
 
-  @Dictionary(DeviceStatusDictionary)
+  @Dictionary(DeviceStatusEnum)
   @Table({
     showColor: true,
     width: 80,
     orderNumber: -80,
   })
-  @Field('运行状态') status!: DeviceStatus
+  @Field('运行状态') status!: number
 
-  @Dictionary(AlarmStatusDictionary)
+  @Dictionary(AlarmStatusEnum)
   @Table({
     showColor: true,
     width: 100,
     orderNumber: -80,
   })
-  @Field('报警状态') alarm!: AlarmStatus
+  @Field('报警状态') alarm!: number
 
   @Form({
     placeholder: '采集间隔毫秒数,最小200ms',

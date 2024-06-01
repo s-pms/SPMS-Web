@@ -13,7 +13,7 @@
       :data-list="response.list"
       :entity="PurchaseEntity"
       :select-list="selectList"
-      :disable-edit="(row: PurchaseEntity) => row.status !== PurchaseStatus.REJECTED"
+      :disable-edit="(row: PurchaseEntity) => row.status !== PurchaseStatusEnum.REJECTED.key"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -27,7 +27,7 @@
           link-button
           tooltip="审核"
           type="CONFIRM"
-          :disabled="(row.data as PurchaseEntity).status !== PurchaseStatus.AUDITING"
+          :disabled="(row.data as PurchaseEntity).status !== PurchaseStatusEnum.AUDITING.key"
           @click="onAudit(row.data)"
         >
           审核
@@ -36,7 +36,7 @@
           link-button
           tooltip="驳回"
           type="LOCK"
-          :disabled="(row.data as PurchaseEntity).status !== PurchaseStatus.AUDITING"
+          :disabled="(row.data as PurchaseEntity).status !== PurchaseStatusEnum.AUDITING.key"
           @click="onReject(row.data)"
         >
           驳回
@@ -59,8 +59,8 @@ import {
 import { PurchaseDetail, PurchaseEditor } from './component'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 
 const {
   isLoading,

@@ -71,7 +71,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AButton, AFormField,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -84,8 +84,8 @@ import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { StorageSelector } from '@/view/console/factory/storage/component'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryType } from '@/model/wms/inventory/InventoryType'
 import { InventorySelector } from '../../inventory/component'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
@@ -109,7 +109,7 @@ const {
 
 async function addDetail() {
   let inventory = new InventoryEntity()
-  inventory.type = InventoryType.STORAGE
+  inventory.type = InventoryTypeEnum.STORAGE.key
   inventory = await AirDialog.select(InventorySelector, inventory)
   let detail = new MoveDetailEntity()
   detail.inventory = inventory

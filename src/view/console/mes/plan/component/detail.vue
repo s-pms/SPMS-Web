@@ -60,7 +60,7 @@
           disabled
         />
         <AFormField
-          v-if="formData.status === PlanStatus.REJECTED"
+          v-if="PlanStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -88,20 +88,19 @@
 
 <script lang="ts" setup>
 import {
-  ADateTime, ADialog, AGroup, ATable,
+  ADateTime, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { PlanStatus } from '@/model/mes/plan/PlanStatus'
+import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
 
 const props = defineProps(airPropsParam(new PlanEntity()))
 
 const {
   title, formData, isLoading,
-} = useAirDetail(props, PlanEntity, PlanService, {
-})
+} = useAirDetail(props, PlanEntity, PlanService, {})
 
 </script>

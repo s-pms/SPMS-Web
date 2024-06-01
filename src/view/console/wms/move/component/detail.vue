@@ -34,7 +34,7 @@
           field="status"
         />
         <AFormField
-          v-if="formData.status === MoveStatus.REJECTED"
+          v-if="MoveStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -49,7 +49,9 @@
           hide-delete
         >
           <template #storageName="row">
-            {{ (row.data as MoveDetailEntity).inventory.storage.name }}({{ (row.data as MoveDetailEntity).inventory.storage.code }})
+            {{
+              (row.data as MoveDetailEntity).inventory.storage.name
+            }}({{ (row.data as MoveDetailEntity).inventory.storage.code }})
           </template>
           <template #materialCode="row">
             {{ (row.data as MoveDetailEntity).inventory.material.code }}
@@ -61,7 +63,7 @@
             <AButton
               icon-button
               tooltip="添加完成"
-              :disabled="formData.status !== MoveStatus.MOVING"
+              :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
               type="CHECKIN"
               @click="(row.data as MoveDetailEntity).billId = formData.id; onAddFinish(row.data)"
             />
@@ -74,15 +76,14 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AButton, ADateTime,
-  AFormField,
+  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { MoveStatus } from '@/model/wms/move/MoveStatus'
+import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 

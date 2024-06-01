@@ -7,10 +7,8 @@ import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Search } from '@/airpower/decorator/SearchField'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { OutputDetailEntity } from './OutputDetailEntity'
-import { OutputTypeDictionary } from './OutputTypeDictionary'
-import { OutputType } from './OutputType'
-import { OutputStatusDictionary } from './OutputStatusDictionary'
-import { OutputStatus } from './OutputStatus'
+import { OutputTypeEnum } from './OutputTypeEnum'
+import { OutputStatusEnum } from './OutputStatusEnum'
 import { MoveEntity } from '../move/MoveEntity'
 
 @Model('出库单')
@@ -23,13 +21,13 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     forceShow: true,
   })
   @Form({
-    defaultValue: OutputType.NORMAL,
+    defaultValue: OutputTypeEnum.NORMAL.key,
     clearable: false,
     requiredNumber: true,
   })
   @Search()
-  @Dictionary(OutputTypeDictionary)
-  @Field('出库类型') type!: OutputType
+  @Dictionary(OutputTypeEnum)
+  @Field('出库类型') type!: number
 
   @Table({
     width: 100,
@@ -38,8 +36,8 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     forceShow: true,
   })
   @Search()
-  @Dictionary(OutputStatusDictionary)
-  @Field('出库状态') status!: OutputStatus
+  @Dictionary(OutputStatusEnum)
+  @Field('出库状态') status!: number
 
   @Field('出库明细')
   @Type(OutputDetailEntity, true) details: OutputDetailEntity[] = []

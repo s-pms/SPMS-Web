@@ -6,8 +6,7 @@ import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { MoveDetailEntity } from './MoveDetailEntity'
-import { MoveStatus } from './MoveStatus'
-import { MoveStatusDictionary } from './MoveStatusDictionary'
+import { MoveStatusEnum } from './MoveStatusEnum'
 
 @Model('移库单')
 export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
@@ -28,8 +27,8 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
     orderNumber: -80,
     forceShow: true,
   })
-  @Dictionary(MoveStatusDictionary)
-  @Field('移库状态') status!: MoveStatus
+  @Dictionary(MoveStatusEnum)
+  @Field('移库状态') status!: number
 
   @Field('目标存储资源')
   @Type(StorageEntity) storage!: StorageEntity

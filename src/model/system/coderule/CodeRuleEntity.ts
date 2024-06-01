@@ -1,12 +1,12 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { SerialNumberType } from './SerialNumberType'
 import {
   Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
-import { SerialNumberUpdateDictionary } from './SerialNumberUpdateDictionary'
+import { SerialNumberUpdateEnum } from './SerialNumberUpdateEnum'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
+
 /**
  * # 编码规则实体
  *
@@ -59,10 +59,10 @@ export class CodeRuleEntity extends BaseEntity {
   })
   @Field('规则模板') template!: string
 
-  @Dictionary(SerialNumberUpdateDictionary)
+  @Dictionary(SerialNumberUpdateEnum)
   @Form({
     clearable: false,
-    defaultValue: SerialNumberType.DAY,
+    defaultValue: SerialNumberUpdateEnum.DAY.key,
     requiredNumber: true,
   })
   @Table({
@@ -70,7 +70,7 @@ export class CodeRuleEntity extends BaseEntity {
     width: 100,
     forceShow: true,
   })
-  @Field('序列号更新') snType!: SerialNumberType
+  @Field('序列号更新') snType!: number
 
   @Table()
   @Field('下一个编码') nextCode!: string

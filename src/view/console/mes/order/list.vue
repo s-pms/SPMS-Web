@@ -46,7 +46,7 @@
           link-button
           tooltip="审核"
           type="CONFIRM"
-          :disabled="(row.data as OrderEntity).status !== OrderStatus.AUDITING"
+          :disabled="OrderStatusEnum.AUDITING.notEqualsKey((row.data as OrderEntity).status)"
           @click="onAudit(row.data)"
         >
           审核
@@ -55,7 +55,7 @@
           link-button
           tooltip="驳回"
           type="LOCK"
-          :disabled="(row.data as OrderEntity).status !== OrderStatus.AUDITING"
+          :disabled=" OrderStatusEnum.AUDITING.notEqualsKey((row.data as OrderEntity).status) "
           @click="onReject(row.data)"
         >
           驳回
@@ -73,15 +73,15 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar, AButton,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { OrderDetail, OrderEditor } from './component'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
-import { OrderStatus } from '@/model/mes/order/OrderStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { CustomerDetail } from '../../channel/customer/component'
 import { AirDialog } from '@/airpower/helper/AirDialog'
+import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 
 const {
   isLoading,

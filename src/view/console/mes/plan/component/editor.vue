@@ -24,7 +24,7 @@
         <AFormField field="deliverTime" />
         <AFormField field="type" />
         <el-form-item
-          v-if="formData.type === PlanType.SALE"
+          v-if="PlanTypeEnum.SALE.equalsKey(formData.type)"
           label="关联客户"
           prop="customerId"
         >
@@ -75,7 +75,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AButton, AFormField,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -87,7 +87,7 @@ import { PlanDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
-import { PlanType } from '@/model/mes/plan/PlanType'
+import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 
 const props = defineProps(airPropsParam(new PlanEntity()))
 

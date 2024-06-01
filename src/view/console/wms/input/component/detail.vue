@@ -42,7 +42,7 @@
           disabled
         />
         <el-form-item
-          v-if="formData.type===InputType.PURCHASE"
+          v-if="InputTypeEnum.PURCHASE.equalsKey(formData.type)"
           label="采购单号"
         >
           <el-link @click="AirDialog.show(PurchaseDetail,formData.purchase)">
@@ -50,7 +50,7 @@
           </el-link>
         </el-form-item>
         <el-form-item
-          v-if="formData.type===InputType.MOVE"
+          v-if="InputTypeEnum.MOVE.equalsKey(formData.type)"
           label="移库单号"
         >
           <el-link @click="AirDialog.show(MoveDetail,formData.move)">
@@ -58,7 +58,7 @@
           </el-link>
         </el-form-item>
         <AFormField
-          v-if="formData.status === InputStatus.REJECTED"
+          v-if="InputStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -73,7 +73,9 @@
           hide-edit
         >
           <template #storageName="row">
-            {{ (row.data as InputDetailEntity).storage?.name || "-" }}({{ (row.data as InputDetailEntity).storage?.code || "-" }})
+            {{
+              (row.data as InputDetailEntity).storage?.name || "-"
+            }}({{ (row.data as InputDetailEntity).storage?.code || "-" }})
           </template>
           <template #materialCode="row">
             {{ (row.data as InputDetailEntity).material.code }}
@@ -85,7 +87,7 @@
             <AButton
               icon-button
               tooltip="添加完成"
-              :disabled="formData.status !== InputStatus.INPUTTING"
+              :disabled=" InputStatusEnum.INPUTTING.notEqualsKey(formData.status)"
               type="CHECKIN"
               @click="onAddFinish(row.data)"
             />
@@ -98,22 +100,20 @@
 
 <script lang="ts" setup>
 import {
-  AButton,
-  ADateTime,
-  ADialog, AFormField, AGroup, ATable,
+  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
-import { InputStatus } from '@/model/wms/input/InputStatus'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { InputType } from '@/model/wms/input/InputType'
 import { InputAddFinishEditor } from '.'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { MoveDetail } from '../../move/component'
 import { PurchaseDetail } from '@/view/console/channel/purchase/component'
+import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
+import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 

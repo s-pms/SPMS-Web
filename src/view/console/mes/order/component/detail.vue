@@ -59,7 +59,7 @@
           disabled
         />
         <AFormField
-          v-if="formData.status === OrderStatus.REJECTED"
+          v-if="OrderStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -77,13 +77,12 @@ import { airPropsParam } from '@/airpower/config/AirProps'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { OrderStatus } from '@/model/mes/order/OrderStatus'
+import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
 const {
   title, formData, isLoading,
-} = useAirDetail(props, OrderEntity, OrderService, {
-})
+} = useAirDetail(props, OrderEntity, OrderService, {})
 
 </script>

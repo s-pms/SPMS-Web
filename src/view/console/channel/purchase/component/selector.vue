@@ -49,14 +49,14 @@
 
 <script lang="ts" setup>
 import {
-  APage, ATable, ADialog, AButton,
+  AButton, ADialog, APage, ATable,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseEditor } from '.'
-import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
+import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 
 const props = defineProps(airPropsSelector(new PurchaseEntity()))
 
@@ -66,7 +66,7 @@ const {
 } = useAirSelector(props, PurchaseEntity, PurchaseService, {
   editView: PurchaseEditor,
   beforeSearch(requestData) {
-    requestData.filter.status = PurchaseStatus.DONE
+    requestData.filter.status = PurchaseStatusEnum.DONE.key
     return requestData
   },
 })

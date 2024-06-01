@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="SaleEntity"
       :select-list="selectList"
-      :disable-edit="(row: SaleEntity) => row.status !== SaleStatus.REJECTED"
+      :disable-edit="(row: SaleEntity) => !SaleStatusEnum.REJECTED.equalsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -25,14 +25,14 @@
         {{ (row.data as SaleEntity).customer?.code || "-" }}
       </template>
       <template #customerName="row">
-        {{ (row.data as SaleEntity).customer?.name ||"-" }}
+        {{ (row.data as SaleEntity).customer?.name || "-" }}
       </template>
       <template #customRow="row">
         <AButton
           link-button
           tooltip="审核"
           type="CONFIRM"
-          :disabled="(row.data as SaleEntity).status !== SaleStatus.AUDITING"
+          :disabled="SaleStatusEnum.AUDITING.notEqualsKey((row.data as SaleEntity).status)"
           @click="onAudit(row.data)"
         >
           审核
@@ -41,7 +41,7 @@
           link-button
           tooltip="驳回"
           type="LOCK"
-          :disabled="(row.data as SaleEntity).status !== SaleStatus.AUDITING"
+          :disabled="SaleStatusEnum.AUDITING.notEqualsKey((row.data as SaleEntity).status)"
           @click="onReject(row.data)"
         >
           驳回
@@ -59,13 +59,13 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar, AButton,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { SaleDetail, SaleEditor } from './component'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
-import { SaleStatus } from '@/model/channel/sale/SaleStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 
 const {
   isLoading,

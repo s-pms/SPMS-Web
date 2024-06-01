@@ -3,12 +3,10 @@ import {
 } from '@/airpower/decorator/Custom'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { PlanDetailEntity } from './PlanDetailEntity'
-import { PlanStatus } from './PlanStatus'
-import { PlanStatusDictionary } from './PlanStatusDictionary'
+import { PlanStatusEnum } from './PlanStatusEnum'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { PlanType } from './PlanType'
-import { PlanTypeDictionary } from './PlanTypeDictionary'
+import { PlanTypeEnum } from './PlanTypeEnum'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDateTimeType } from '@/airpower/enum/AirDateTimeType'
 import { Table } from '@/airpower/decorator/TableField'
@@ -33,20 +31,20 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
     width: 100,
     showColor: true,
   })
-  @Dictionary(PlanStatusDictionary)
-  @Field('计划状态') status!: PlanStatus
+  @Dictionary(PlanStatusEnum)
+  @Field('计划状态') status!: number
 
   @Table({
     width: 100,
     showColor: true,
   })
   @Form({
-    defaultValue: PlanType.SALE,
+    defaultValue: PlanTypeEnum.SALE.key,
     clearable: false,
     requiredNumber: true,
   })
-  @Dictionary(PlanTypeDictionary)
-  @Field('计划类型') type!: PlanType
+  @Dictionary(PlanTypeEnum)
+  @Field('计划类型') type!: number
 
   @Table({
     width: 110,

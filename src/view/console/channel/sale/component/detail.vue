@@ -47,7 +47,7 @@
           disabled
         />
         <AFormField
-          v-if="formData.status === SaleStatus.REJECTED"
+          v-if="SaleStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -82,13 +82,12 @@ import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { SaleStatus } from '@/model/channel/sale/SaleStatus'
+import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 
 const props = defineProps(airPropsParam(new SaleEntity()))
 
 const {
   title, formData, isLoading,
-} = useAirDetail(props, SaleEntity, SaleService, {
-})
+} = useAirDetail(props, SaleEntity, SaleService, {})
 
 </script>

@@ -1,8 +1,6 @@
 import { Dictionary, Field, Model } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { CollectionGranularity } from './CollectionGranularity'
-import { CollectionGranularityDictionary } from './CollectionGranularityDictionary'
-import { ParameterType } from '../parameter/ParameterType'
+import { CollectionGranularityEnum } from './CollectionGranularityEnum'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 
@@ -36,9 +34,9 @@ export class CollectionEntity extends BaseEntity {
 
   @Field('uuid') uuid!: string
 
-  @Dictionary(CollectionGranularityDictionary)
+  @Dictionary(CollectionGranularityEnum)
   @Form()
-  @Field('颗粒度') reportGranularity!: CollectionGranularity
+  @Field('颗粒度') reportGranularity!: number
 
   intValue!: number
 
@@ -50,5 +48,5 @@ export class CollectionEntity extends BaseEntity {
 
   endTime!: number
 
-  dataType!: ParameterType
+  dataType!: number
 }

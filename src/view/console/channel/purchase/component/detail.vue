@@ -47,7 +47,7 @@
           disabled
         />
         <AFormField
-          v-if="formData.status === PurchaseStatus.REJECTED"
+          v-if="PurchaseStatusEnum.REJECTED.equalsKey(formData.status)"
           style="width: 100%"
           field="rejectReason"
           disabled
@@ -76,7 +76,7 @@
             <AButton
               icon-button
               tooltip="添加完成"
-              :disabled="formData.status !== PurchaseStatus.PURCHASING"
+              :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"
               type="CHECKIN"
               @click="onAddFinish(row.data)"
             />
@@ -95,14 +95,13 @@ import { airPropsParam } from '@/airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { PurchaseStatus } from '@/model/channel/purchase/PurchaseStatus'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
 const {
   title, formData, isLoading, onAddFinish,
-} = useBillDetail(props, PurchaseEntity, PurchaseService, {
-})
+} = useBillDetail(props, PurchaseEntity, PurchaseService, {})
 
 </script>

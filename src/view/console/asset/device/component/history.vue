@@ -27,14 +27,15 @@
           @command="handleCommand"
         >
           <el-button type="primary">
-            {{ CollectionGranularityDictionary.getLabel(currentGranularity) }}<el-icon class="el-icon--right">
+            {{ CollectionGranularityEnum.getLabel(currentGranularity.key) }}
+            <el-icon class="el-icon--right">
               <arrow-down />
             </el-icon>
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
-                v-for="item in CollectionGranularityDictionary"
+                v-for="item in CollectionGranularityEnum.toDictionary()"
                 :key="item.key"
                 :command="item.key"
               >
@@ -71,9 +72,11 @@
               :style="{ backgroundColor: getColor(item) }"
             >
               <div class="quantity">
-                {{ getFriendlyTime(parseInt(((collectionList[collectionList.length - 1].timestamp -
-                  collectionList[0].timestamp) *
-                  getPercent(item) / 100).toString())) }}
+                {{
+                  getFriendlyTime(parseInt(((collectionList[collectionList.length - 1].timestamp -
+                    collectionList[0].timestamp) *
+                    getPercent(item) / 100).toString()))
+                }}
               </div>
               <div class="percent">
                 {{ getPercent(item) }}%
@@ -131,7 +134,8 @@
             <div class="time-icon">
               <el-icon>
                 <Clock />
-              </el-icon> {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
+              </el-icon>
+              {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
             </div>
           </el-timeline-item>
         </el-timeline>
@@ -158,17 +162,15 @@ import { DeviceService } from '@/model/asset/device/DeviceService'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
-import { CollectionGranularity } from '@/model/iot/collection/CollectionGranularity'
-import { CollectionGranularityDictionary } from '@/model/iot/collection/CollectionGranularityDictionary'
+import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { ParameterType } from '@/model/iot/parameter/ParameterType'
-import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDictionary'
+import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { AirColor } from '@/airpower/enum/AirColor'
 import { IDictionary } from '@/airpower/interface/IDictionary'
 import { AirRand } from '@/airpower/helper/AirRand'
 import { IJson } from '@/airpower/interface/IJson'
-import { DeviceStatus } from '@/model/asset/device/DeviceStatus'
-import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
+import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
 
 const currentLabel = ref('')
 const currentColor = ref('')
@@ -182,7 +184,7 @@ const maxLength = 500
 
 const SECOND_PER_DAY = 86400
 const SECOND_PER_HOUR = 3600
-const currentGranularity = ref(CollectionGranularity.ONE_MINUTE)
+const currentGranularity = ref(CollectionGranularityEnum.ONE_MINUTE)
 const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()] as Date[])
 
 const shortcuts = [
@@ -290,9 +292,9 @@ const shortcuts = [
 const dictionary = computed(() => {
   switch (props.param.code) {
     case 'Status':
-      return DeviceStatusDictionary.filter((item) => item.key !== DeviceStatus.UNKNOWN)
+      return DeviceStatusEnum.toDictionary().filter((item) => item.key !== DeviceStatusEnum.UNKNOWN.key)
     case 'Alarm':
-      return AlarmStatusDictionary
+      return AlarmStatusEnum.toDictionary()
     default:
   }
   return []
@@ -304,46 +306,46 @@ const dictionary = computed(() => {
 function validDateTimeRange() {
   if (dateTimeRange.value && dateTimeRange.value.length === 2) {
     switch (props.param.dataType) {
-      case ParameterType.QUANTITY:
+      case ParameterTypeEnum.QUANTITY.key:
         switch (currentGranularity.value) {
-          case CollectionGranularity.ONE_MINUTE:
+          case CollectionGranularityEnum.ONE_MINUTE:
             // 每分钟 最多允许查看最近6小时
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > 6 * SECOND_PER_HOUR) {
               AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - 6 * SECOND_PER_HOUR) * 1000)
             }
             break
-          case CollectionGranularity.FIVE_MINUTES:
+          case CollectionGranularityEnum.FIVE_MINUTES:
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY) {
               AirNotification.warning('该时间粒度下最多允许查看24小时内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY) * 1000)
             }
             break
-          case CollectionGranularity.THIRTY_MINUTES:
+          case CollectionGranularityEnum.THIRTY_MINUTES:
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 3) {
               AirNotification.warning('该时间粒度下最多允许查看72小时内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 3) * 1000)
             }
             break
-          case CollectionGranularity.ONE_HOUR:
+          case CollectionGranularityEnum.ONE_HOUR:
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 7) {
               AirNotification.warning('该时间粒度下最多允许查看7天内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 7) * 1000)
             }
             break
-          case CollectionGranularity.ONE_DAY:
+          case CollectionGranularityEnum.ONE_DAY:
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365) {
               AirNotification.warning('该时间粒度下最多允许查看一年内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365) * 1000)
             }
             break
-          case CollectionGranularity.ONE_WEEK:
+          case CollectionGranularityEnum.ONE_WEEK:
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 3) {
               AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 3) * 1000)
             }
             break
-          case CollectionGranularity.ONE_MONTH:
+          case CollectionGranularityEnum.ONE_MONTH:
             if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 10) {
               AirNotification.warning('该时间粒度下最多允许查看十年内的数据')
               dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 10) * 1000)
@@ -356,7 +358,7 @@ function validDateTimeRange() {
     }
   } else {
     dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()] as Date[]
-    currentGranularity.value = CollectionGranularity.ONE_MINUTE
+    currentGranularity.value = CollectionGranularityEnum.ONE_MINUTE
   }
   // eslint-disable-next-line no-use-before-define
   getDevicePayloadHistory()
@@ -369,9 +371,9 @@ function validDateTimeRange() {
 function getStatusColor(item: CollectionEntity) {
   switch (props.param.code) {
     case 'Status':
-      return DeviceStatusDictionary.getColor(item.intValue, AirColor.NORMAL)
+      return DeviceStatusEnum.getColor(item.intValue, AirColor.NORMAL)
     case 'Alarm':
-      return AlarmStatusDictionary.getColor(item.intValue, AirColor.NORMAL)
+      return AlarmStatusEnum.getColor(item.intValue, AirColor.NORMAL)
     default:
   }
   return AirColor.NORMAL
@@ -389,7 +391,7 @@ function getStatusLabel(item: CollectionEntity, index: number) {
   let label = ''
   switch (props.param.code) {
     case 'Status':
-      label = DeviceStatusDictionary.getLabel(item.intValue)
+      label = DeviceStatusEnum.getLabel(item.intValue)
       label += ' [ '
       label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp)
       label += ' ~ '
@@ -397,7 +399,7 @@ function getStatusLabel(item: CollectionEntity, index: number) {
       label += ' ]'
       return label
     case 'Alarm':
-      label = AlarmStatusDictionary.getLabel(item.intValue)
+      label = AlarmStatusEnum.getLabel(item.intValue)
       label += ' [ '
       label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp)
       label += ' ~ '
@@ -424,7 +426,7 @@ function getStatusPercent(item: CollectionEntity, index: number) {
   }
   return parseFloat(((
     (item.timestamp - startTime)
-    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(6)
+      / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(6)
 }
 
 /**
@@ -449,9 +451,11 @@ const statusList = computed(() => {
 function getLabel(item: IDictionary) {
   return dictionary.value.find((i) => i.key === item.key)?.label || '未知'
 }
+
 function getColor(item: IDictionary) {
   return dictionary.value.find((i) => i.key === item.key)?.color || `#${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}`
 }
+
 function getPercent(dictionary: IDictionary) {
   let percent = 0
   statusList.value.forEach((item) => {
@@ -479,7 +483,7 @@ function getFriendlyTime(milSecond: number) {
 }
 
 function handleCommand(cmd: string) {
-  currentGranularity.value = parseInt(cmd, 10)
+  currentGranularity.value = CollectionGranularityEnum.get(parseInt(cmd, 10)) as CollectionGranularityEnum
   validDateTimeRange()
 }
 
@@ -540,7 +544,7 @@ function initLine() {
 
 function loadData() {
   switch (props.param.dataType) {
-    case ParameterType.QUANTITY:
+    case ParameterTypeEnum.QUANTITY.key:
       myChart = echarts.init(document.getElementById('echart'))
       initLine()
       break
@@ -554,17 +558,18 @@ async function getDevicePayloadHistory() {
     return
   }
   const postData = props.param.copy()
-  postData.reportGranularity = currentGranularity.value
+  postData.reportGranularity = currentGranularity.value.key
   postData.startTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
   postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
   const list = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
-  if (props.param.dataType === ParameterType.INFORMATION) {
+  if (ParameterTypeEnum.INFORMATION.equalsKey(props.param.dataType)) {
     collectionList.value = list.reverse()
   } else {
     collectionList.value = list
   }
   loadData()
 }
+
 onMounted(() => {
   getDevicePayloadHistory()
 })
@@ -593,7 +598,7 @@ function onFull() {
     flex-direction: row;
     align-items: center;
 
-    >div {
+    > div {
       margin-left: 5px;
     }
   }
@@ -715,7 +720,7 @@ function onFull() {
     align-items: center;
     margin-top: 10px;
 
-    >div {
+    > div {
       flex: 1;
       font-size: 14px;
       color: #333;

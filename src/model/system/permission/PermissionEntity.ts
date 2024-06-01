@@ -1,7 +1,5 @@
 import {
-  Dictionary,
-  Field,
-  Model, Type,
+  Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { Form } from '@/airpower/decorator/FormField'
@@ -9,7 +7,7 @@ import { Search } from '@/airpower/decorator/SearchField'
 import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { ITree } from '@/airpower/interface/ITree'
-import { PermissionSystemDictionary } from './PermissionSystemDictionary'
+import { PermissionSystemEnum } from './PermissionSystemEnum'
 
 /**
  * # 权限
@@ -46,7 +44,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
   /**
    * # 权限类别
    */
-  @Dictionary(PermissionSystemDictionary)
+  @Dictionary(PermissionSystemEnum)
   @Table({
     showColor: true,
     width: 100,

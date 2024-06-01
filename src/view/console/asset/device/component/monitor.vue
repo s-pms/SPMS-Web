@@ -39,7 +39,8 @@
       </div>
     </div>
     <AEmpty v-else>
-      暂无已添加的监控属性 <el-link @click="addParameter()">
+      暂无已添加的监控属性
+      <el-link @click="addParameter()">
         去添加
       </el-link>
     </AEmpty>
@@ -53,11 +54,11 @@ import { airPropsParam } from '@/airpower/config/AirProps'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
-import { DeviceStatusDictionary } from '@/model/asset/device/DeviceStatusDictionary'
+import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
-import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusDictionary'
+import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceCollectHistory } from '.'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
@@ -74,7 +75,9 @@ async function getCurrentReport() {
   monitorList.value = await DeviceService.create().getCurrentReport(props.param.id)
 }
 
-let timer = setInterval(() => { getCurrentReport() }, 1000)
+let timer = setInterval(() => {
+  getCurrentReport()
+}, 1000)
 
 onUnmounted(() => {
   clearInterval(timer)
@@ -85,7 +88,7 @@ getDetail()
 function getValue(item: CollectionEntity) {
   switch (item.code) {
     case CollectionDefault.STATUS:
-      return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
+      return DeviceStatusEnum.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
     case CollectionDefault.ALARM:
       return AlarmStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
     default:
@@ -96,7 +99,7 @@ function getValue(item: CollectionEntity) {
 function getColor(item: CollectionEntity) {
   switch (item.code) {
     case CollectionDefault.STATUS:
-      return DeviceStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
+      return DeviceStatusEnum.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
     case CollectionDefault.ALARM:
       return AlarmStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
     default:
@@ -114,7 +117,9 @@ async function showHistory(item: CollectionEntity) {
   try {
     await AirDialog.show(DeviceCollectHistory, item)
   } finally {
-    timer = setInterval(() => { getCurrentReport() }, 1000)
+    timer = setInterval(() => {
+      getCurrentReport()
+    }, 1000)
   }
 }
 </script>

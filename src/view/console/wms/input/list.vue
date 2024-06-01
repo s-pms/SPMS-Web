@@ -13,7 +13,7 @@
       :data-list="response.list"
       :entity="InputEntity"
       :select-list="selectList"
-      :disable-edit="(row: InputEntity) => row.status !== InputStatus.REJECTED"
+      :disable-edit="(row: InputEntity) => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="180"
@@ -30,7 +30,7 @@
           link-button
           tooltip="审核"
           type="CONFIRM"
-          :disabled="(row.data as InputEntity).status !== InputStatus.AUDITING"
+          :disabled="InputStatusEnum.AUDITING.notEqualsKey((row.data as InputEntity).status)"
           @click="onAudit(row.data)"
         >
           审核
@@ -39,7 +39,7 @@
           link-button
           tooltip="驳回"
           type="LOCK"
-          :disabled="(row.data as InputEntity).status !== InputStatus.AUDITING"
+          :disabled="InputStatusEnum.AUDITING.notEqualsKey((row.data as InputEntity).status)"
           @click="onReject(row.data)"
         >
           驳回
@@ -48,7 +48,7 @@
           link-button
           tooltip="完成"
           type="CHECKIN"
-          :disabled="(row.data as InputEntity).status !== InputStatus.INPUTTING"
+          :disabled="InputStatusEnum.INPUTTING.notEqualsKey((row.data as InputEntity).status)"
           @click="onFinish(row.data)"
         >
           完成
@@ -66,13 +66,13 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar, AButton,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { InputDetail, InputEditor } from './component'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
-import { InputStatus } from '@/model/wms/input/InputStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
 
 const {
   isLoading,

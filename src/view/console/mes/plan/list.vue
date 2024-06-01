@@ -32,7 +32,7 @@
           link-button
           tooltip="审核"
           type="CONFIRM"
-          :disabled="(row.data as PlanEntity).status !== PlanStatus.AUDITING"
+          :disabled="PlanStatusEnum.AUDITING.notEqualsKey((row.data as PlanEntity).status)"
           @click="onAudit(row.data)"
         >
           审核
@@ -41,7 +41,7 @@
           link-button
           tooltip="驳回"
           type="LOCK"
-          :disabled="(row.data as PlanEntity).status !== PlanStatus.AUDITING"
+          :disabled="PlanStatusEnum.AUDITING.notEqualsKey((row.data as PlanEntity).status)"
           @click="onReject(row.data)"
         >
           驳回
@@ -59,13 +59,13 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar, AButton,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { PlanDetail, PlanEditor } from './component'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
-import { PlanStatus } from '@/model/mes/plan/PlanStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
 
 const {
   isLoading,

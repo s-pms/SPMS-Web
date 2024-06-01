@@ -18,7 +18,7 @@
             @change="inventoryTypeChanged"
           >
             <el-radio-button
-              v-for="view in InventoryTypeDictionary"
+              v-for="view in InventoryTypeEnum.toDictionary()"
               :key="view.key"
               :label="view.key"
               :value="view.key"
@@ -58,8 +58,7 @@ import {
   APanel, ATable, AToolBar, ATreeBox,
 } from '@/airpower/component'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryType } from '@/model/wms/inventory/InventoryType'
-import { InventoryTypeDictionary } from '@/model/wms/inventory/InventoryTypeDictionary'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { ITree } from '@/airpower/interface/ITree'
 import { StorageService } from '@/model/factory/storage/StorageService'
@@ -74,13 +73,14 @@ const list = ref([] as InventoryEntity[])
 const isLoading = ref(false)
 const isLoadingTree = ref(false)
 
-const inventoryType = ref(InventoryType.STORAGE)
+const inventoryType = ref(InventoryTypeEnum.STORAGE.key)
 
 const treeData = ref([] as ITree[])
 
 async function getStorage() {
   treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
 }
+
 async function getStructure() {
   treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
 }
@@ -89,11 +89,11 @@ const treePlaceHolder = ref('搜索...')
 
 async function inventoryTypeChanged() {
   switch (inventoryType.value) {
-    case InventoryType.STORAGE:
+    case InventoryTypeEnum.STORAGE.key:
       treePlaceHolder.value = '搜索存储资源...'
       getStorage()
       break
-    case InventoryType.STRUCTURE:
+    case InventoryTypeEnum.STRUCTURE.key:
       treePlaceHolder.value = '搜索工厂结构...'
       getStructure()
       break
@@ -113,13 +113,13 @@ async function treeChanged(current: ITree | undefined) {
   list.value = []
   if (current) {
     switch (inventoryType.value) {
-      case InventoryType.STORAGE:
+      case InventoryTypeEnum.STORAGE.key:
         request.value.filter.storage = (current as StorageEntity).copy()
-        request.value.filter.storage.expose('id')
+        request.value.filter.storage.exposeId()
         break
-      case InventoryType.STRUCTURE:
+      case InventoryTypeEnum.STRUCTURE.key:
         request.value.filter.structure = (current as StructureEntity).copy()
-        request.value.filter.structure.expose('id')
+        request.value.filter.structure.exposeId()
         break
       default:
     }

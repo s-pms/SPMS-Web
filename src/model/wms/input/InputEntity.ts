@@ -6,10 +6,8 @@ import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { InputDetailEntity } from './InputDetailEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { InputStatus } from './InputStatus'
-import { InputStatusDictionary } from './InputStatusDictionary'
-import { InputType } from './InputType'
-import { InputTypeDictionary } from './InputTypeDictionary'
+import { InputStatusEnum } from './InputStatusEnum'
+import { InputTypeEnum } from './InputTypeEnum'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { Search } from '@/airpower/decorator/SearchField'
 import { MoveEntity } from '../move/MoveEntity'
@@ -24,13 +22,13 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     forceShow: true,
   })
   @Form({
-    defaultValue: InputType.NORMAL,
+    defaultValue: InputTypeEnum.NORMAL.key,
     clearable: false,
     requiredNumber: true,
   })
   @Search()
-  @Dictionary(InputTypeDictionary)
-  @Field('入库类型') type!: InputType
+  @Dictionary(InputTypeEnum)
+  @Field('入库类型') type!: number
 
   @Table({
     width: 100,
@@ -39,8 +37,8 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     forceShow: true,
   })
   @Search()
-  @Dictionary(InputStatusDictionary)
-  @Field('入库状态') status!: InputStatus
+  @Dictionary(InputStatusEnum)
+  @Field('入库状态') status!: number
 
   @Field('存储资源')
   @Type(StorageEntity) storage!: StorageEntity

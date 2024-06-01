@@ -3,8 +3,7 @@ import {
 } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
-import { PurchaseStatus } from './PurchaseStatus'
-import { PurchaseStatusDictionary } from './PurchaseStatusDictionary'
+import { PurchaseStatusEnum } from './PurchaseStatusEnum'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Search } from '@/airpower/decorator/SearchField'
@@ -49,9 +48,9 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
     orderNumber: -80,
     forceShow: true,
   })
-  @Dictionary(PurchaseStatusDictionary)
+  @Dictionary(PurchaseStatusEnum)
   @Search()
-  @Field('采购状态') status!: PurchaseStatus
+  @Field('采购状态') status!: number
 
   @Field('采购明细')
   @Type(PurchaseDetailEntity, true) details: PurchaseDetailEntity[] = []

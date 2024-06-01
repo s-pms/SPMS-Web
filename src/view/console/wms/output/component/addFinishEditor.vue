@@ -77,9 +77,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ADialog, AInput,
-} from '@/airpower/component'
+import { ADialog, AInput } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'
@@ -87,8 +85,8 @@ import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { InventorySelector } from '../../inventory/component'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryType } from '@/model/wms/inventory/InventoryType'
 import { OutputService } from '@/model/wms/output/OutputService'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
 const props = defineProps(airPropsParam(new OutputDetailEntity()))
 
@@ -109,7 +107,7 @@ formData.value.expose('id', 'quantity')
 
 async function selectInventory() {
   let inventory = new InventoryEntity()
-  inventory.type = InventoryType.STORAGE
+  inventory.type = InventoryTypeEnum.STORAGE.key
   inventory = await AirDialog.show(InventorySelector, inventory)
   formData.value.inventory = inventory.copy()
   formData.value.inventoryId = formData.value.inventory.id

@@ -1,8 +1,7 @@
 import { Dictionary, Field, Model } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { ParameterSystemDictionary } from './ParameterSystemDictionary'
-import { ParameterType } from './ParameterType'
-import { ParameterTypeDictionary } from './ParameterTypeDictionary'
+import { ParameterSystemEnum } from './ParameterSystemEnum'
+import { ParameterTypeEnum } from './ParameterTypeEnum'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 
@@ -24,19 +23,19 @@ export class ParameterEntity extends BaseEntity {
   })
   @Field('参数标题') label!: string
 
-  @Dictionary(ParameterTypeDictionary)
+  @Dictionary(ParameterTypeEnum)
   @Table({
     showColor: true,
     width: 100,
   })
   @Form({
-    defaultValue: ParameterType.QUANTITY,
+    defaultValue: ParameterTypeEnum.QUANTITY.key,
     clearable: false,
     requiredNumber: true,
   })
-  @Field('数据类型') dataType!: ParameterType
+  @Field('数据类型') dataType!: number
 
-  @Dictionary(ParameterSystemDictionary)
+  @Dictionary(ParameterSystemEnum)
   @Table({
     showColor: true,
     width: 100,

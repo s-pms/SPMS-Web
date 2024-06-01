@@ -61,7 +61,7 @@
             v-model="formData.customer"
             :selector="CustomerSelector"
             placeholder="请选择客户..."
-            :disabled="(formData.type === OrderType.PLAN) && !!formData.plan && !!formData.plan.customer"
+            :disabled="OrderTypeEnum.PLAN.equalsKey(formData.type) && !!formData.plan && !!formData.plan.customer"
           />
         </el-form-item>
       </AGroup>
@@ -80,10 +80,10 @@ import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
-import { OrderType } from '@/model/mes/order/OrderType'
 import { PlanDetailSelector, PlanSelector } from '../../plan/component'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
@@ -111,7 +111,7 @@ async function selectPlan() {
 }
 
 async function selectMaterial() {
-  if (formData.value.type === OrderType.OTHER) {
+  if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
     formData.value.material = await AirDialog.select(MaterialSelector)
     formData.value.materialId = formData.value.material.id
     formData.value.materialName = formData.value.material.name
@@ -125,7 +125,7 @@ async function selectMaterial() {
 }
 
 async function orderTypeChanged() {
-  if (formData.value.type === OrderType.PLAN) {
+  if (OrderTypeEnum.PLAN.equalsKey(formData.value.type)) {
     formData.value.exclude('materialId', 'material')
   }
 }

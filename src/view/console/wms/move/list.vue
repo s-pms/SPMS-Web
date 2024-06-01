@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="MoveEntity"
       :select-list="selectList"
-      :disable-edit="(row: MoveEntity) => row.status !== MoveStatus.REJECTED"
+      :disable-edit="(row: MoveEntity) => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -29,7 +29,7 @@
           link-button
           tooltip="审核"
           type="CONFIRM"
-          :disabled="(row.data as MoveEntity).status !== MoveStatus.AUDITING"
+          :disabled="MoveStatusEnum.AUDITING.notEqualsKey((row.data as MoveEntity).status)"
           @click="onAudit(row.data)"
         >
           审核
@@ -38,7 +38,7 @@
           link-button
           tooltip="驳回"
           type="LOCK"
-          :disabled="(row.data as MoveEntity).status !== MoveStatus.AUDITING"
+          :disabled="MoveStatusEnum.AUDITING.notEqualsKey((row.data as MoveEntity).status)"
           @click="onReject(row.data)"
         >
           驳回
@@ -56,13 +56,13 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar, AButton,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { MoveDetail, MoveEditor } from './component'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
-import { MoveStatus } from '@/model/wms/move/MoveStatus'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 
 const {
   isLoading,

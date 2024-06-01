@@ -1,8 +1,7 @@
 import {
   Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
-import { SaleStatus } from './SaleStatus'
-import { SaleStatusDictionary } from './SaleStatusDictionary'
+import { SaleStatusEnum } from './SaleStatusEnum'
 import { SaleDetailEntity } from './SaleDetailEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
@@ -50,8 +49,8 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
     orderNumber: -80,
     forceShow: true,
   })
-  @Dictionary(SaleStatusDictionary)
-  @Field('销售状态') status!: SaleStatus
+  @Dictionary(SaleStatusEnum)
+  @Field('销售状态') status!: number
 
   @Field('销售明细')
   @Type(SaleDetailEntity, true) details: SaleDetailEntity[] = []
