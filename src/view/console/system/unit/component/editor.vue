@@ -16,8 +16,7 @@
       <AFormField
         v-for="item in UnitEntity.getFormFieldConfigList()"
         :key="item.key"
-        :label="item.label"
-        :field="item.label"
+        :field="item.key"
       />
     </el-form>
   </ADialog>

@@ -4,9 +4,8 @@ import {
 import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
-import { MaterialTypeDictionary } from './MaterialTypeDictionary'
-import { MaterialType } from './MaterialType'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
+import { MaterialTypeEnum } from './MaterialTypeEnum'
 
 @Model('物料')
 export class MaterialEntity extends BaseEntity {
@@ -42,11 +41,11 @@ export class MaterialEntity extends BaseEntity {
   })
   @Form({
     clearable: false,
-    defaultValue: MaterialType.PRODUCT,
+    defaultValue: MaterialTypeEnum.PRODUCT.key,
     requiredNumber: true,
   })
-  @Dictionary(MaterialTypeDictionary)
-  @Field('物料类型') materialType!: MaterialType
+  @Dictionary(MaterialTypeEnum)
+  @Field('物料类型') materialType!: number
 
   /**
    * # 规格型号
