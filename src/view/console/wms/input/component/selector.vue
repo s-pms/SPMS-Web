@@ -47,7 +47,7 @@
         />
       </template>
     </ATable>
-    <template #footerRight>
+    <template #status>
       <APage
         :response="response"
         @changed="onPageChanged"
@@ -58,7 +58,7 @@
 
 <script lang="ts" setup>
 import {
-  APage, ATable, AToolBar, ADialog, AButton,
+  AButton, ADialog, APage, ATable, AToolBar,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'

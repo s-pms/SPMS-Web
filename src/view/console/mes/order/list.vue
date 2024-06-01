@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="OrderEntity"
       :select-list="selectList"
-      :disable-edit="(row: OrderEntity) => row.status !== OrderStatus.REJECTED"
+      :disable-edit="(row: OrderEntity) => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"

@@ -58,8 +58,8 @@ import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
-import { AlarmStatusDictionary } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceCollectHistory } from '.'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
@@ -88,9 +88,9 @@ getDetail()
 function getValue(item: CollectionEntity) {
   switch (item.code) {
     case CollectionDefault.STATUS:
-      return DeviceStatusEnum.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
+      return DeviceStatusEnum.getLabel(parseInt(item.value, 10))
     case CollectionDefault.ALARM:
-      return AlarmStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.label || '-'
+      return AlarmStatusEnum.getLabel(parseInt(item.value, 10))
     default:
       return item.value
   }
@@ -99,9 +99,9 @@ function getValue(item: CollectionEntity) {
 function getColor(item: CollectionEntity) {
   switch (item.code) {
     case CollectionDefault.STATUS:
-      return DeviceStatusEnum.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
+      return DeviceStatusEnum.getColor(parseInt(item.value, 10))
     case CollectionDefault.ALARM:
-      return AlarmStatusDictionary.find((i) => i.key === parseInt(item.value, 10))?.color || '-'
+      return AlarmStatusEnum.getColor(parseInt(item.value, 10))
     default:
       return item.value
   }

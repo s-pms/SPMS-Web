@@ -75,7 +75,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AGroup, ATable, AButton, AFormField,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'

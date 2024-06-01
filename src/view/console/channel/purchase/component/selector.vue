@@ -38,7 +38,7 @@
         />
       </template>
     </ATable>
-    <template #footerRight>
+    <template #status>
       <APage
         :response="response"
         @changed="onPageChanged"

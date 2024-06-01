@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="PlanEntity"
       :select-list="selectList"
-      :disable-edit="(row: PlanEntity) => row.status !== PlanStatus.REJECTED"
+      :disable-edit="(row: PlanEntity) => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"

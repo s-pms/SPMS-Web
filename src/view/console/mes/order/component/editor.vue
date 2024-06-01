@@ -24,7 +24,7 @@
           field="type"
           @on-change="orderTypeChanged"
         />
-        <template v-if="formData.type === OrderType.PLAN">
+        <template v-if="OrderTypeEnum.PLAN.equalsKey(formData.type)">
           <el-form-item
             label="关联计划"
             prop="plan"

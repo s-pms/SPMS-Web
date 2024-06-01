@@ -22,7 +22,7 @@
         />
 
         <el-dropdown
-          v-if="ParameterType.QUANTITY === param.dataType"
+          v-if="ParameterTypeEnum.QUANTITY.equalsKey(param.dataType)"
           trigger="click"
           @command="handleCommand"
         >
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div
-      v-if="ParameterType.QUANTITY === param.dataType"
+      v-if="ParameterTypeEnum.QUANTITY.equalsKey(param.dataType)"
       v-loading="isLoading"
       class="view"
     >
