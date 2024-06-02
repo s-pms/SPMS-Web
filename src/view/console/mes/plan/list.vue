@@ -28,24 +28,11 @@
         {{ (row.data as PlanEntity).customer?.name || "-" }}
       </template>
       <template #customRow="row">
-        <AButton
-          link-button
-          tooltip="审核"
-          type="CONFIRM"
-          :disabled="PlanStatusEnum.AUDITING.notEqualsKey((row.data as PlanEntity).status)"
-          @click="onAudit(row.data)"
-        >
-          审核
-        </AButton>
-        <AButton
-          link-button
-          tooltip="驳回"
-          type="LOCK"
-          :disabled="PlanStatusEnum.AUDITING.notEqualsKey((row.data as PlanEntity).status)"
-          @click="onReject(row.data)"
-        >
-          驳回
-        </AButton>
+        <BillAuditOrReject
+          :bill="row.data"
+          @on-audit="onAudit"
+          @on-reject="onReject"
+        />
       </template>
     </ATable>
     <template #footerLeft>
@@ -59,13 +46,14 @@
 
 <script lang="ts" setup>
 import {
-  AButton, APage, APanel, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { PlanDetail, PlanEditor } from './component'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
+import { BillAuditOrReject } from '@/component'
 
 const {
   isLoading,

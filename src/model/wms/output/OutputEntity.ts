@@ -10,6 +10,7 @@ import { OutputDetailEntity } from './OutputDetailEntity'
 import { OutputTypeEnum } from './OutputTypeEnum'
 import { OutputStatusEnum } from './OutputStatusEnum'
 import { MoveEntity } from '../move/MoveEntity'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('出库单')
 export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
@@ -47,4 +48,16 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
 
   @Field('移库单')
   @Type(MoveEntity) move!: MoveEntity
+
+  getAuditingStatus(): AirEnum {
+    return OutputStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return OutputStatusEnum.OUTPUTTING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return OutputStatusEnum.REJECTED
+  }
 }

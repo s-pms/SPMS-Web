@@ -11,6 +11,7 @@ import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDateTimeType } from '@/airpower/enum/AirDateTimeType'
 import { Table } from '@/airpower/decorator/TableField'
 import { Form } from '@/airpower/decorator/FormField'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('生产计划')
 export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
@@ -42,6 +43,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
     defaultValue: PlanTypeEnum.SALE.key,
     clearable: false,
     requiredNumber: true,
+    showColor: true,
   })
   @Dictionary(PlanTypeEnum)
   @Field('计划类型') type!: number
@@ -83,4 +85,16 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Type(CustomerEntity)
   @Field('客户信息') customer!: CustomerEntity
+
+  getAuditingStatus(): AirEnum {
+    return PlanStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return PlanStatusEnum.PRODUCING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return PlanStatusEnum.REJECTED
+  }
 }

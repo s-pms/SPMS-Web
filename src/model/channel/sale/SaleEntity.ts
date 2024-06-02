@@ -7,6 +7,7 @@ import { CustomerEntity } from '../customer/CustomerEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('销售单')
 export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
@@ -57,4 +58,16 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
 
   @Field('客户')
   @Type(CustomerEntity) customer!: CustomerEntity
+
+  getAuditingStatus(): AirEnum {
+    return SaleStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return SaleStatusEnum.OUTPUTING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return SaleStatusEnum.REJECTED
+  }
 }

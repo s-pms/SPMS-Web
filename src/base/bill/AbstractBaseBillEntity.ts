@@ -4,6 +4,7 @@ import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 import { ISelector } from '@/airpower/interface/ISelector'
 import { Table } from '@/airpower/decorator/TableField'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 /**
  * # 单据基类
@@ -11,6 +12,21 @@ import { Table } from '@/airpower/decorator/TableField'
  * @author Hamm
  */
 export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEntity> extends BaseEntity implements ISelector {
+  /**
+   * # 审核中的状态
+   */
+  abstract getAuditingStatus(): AirEnum;
+
+  /**
+   * # 已审核的状态
+   */
+  abstract getAuditedStatus(): AirEnum;
+
+  /**
+   * # 已拒绝的状态
+   */
+  abstract getRejectedStatus(): AirEnum;
+
   /**
    * # 单据编号
    */
@@ -26,6 +42,9 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   /**
    * # 单据状态码
    */
+  @Form({
+    showColor: true,
+  })
   abstract status: number
 
   /**
@@ -40,5 +59,26 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
 
   getSelectorLabel(): string {
     return this.billCode
+  }
+
+  /**
+   * # 是否可拒绝
+   */
+  canReject() {
+    return this.getAuditingStatus().equalsKey(this.status)
+  }
+
+  /**
+   * # 是否可审核
+   */
+  canAudit() {
+    return this.getAuditingStatus().equalsKey(this.status)
+  }
+
+  /**
+   * # 是否已拒绝
+   */
+  isRejected() {
+    return this.getRejectedStatus().equalsKey(this.status)
   }
 }

@@ -42,24 +42,11 @@
         {{ (row.data as OrderEntity).plan?.billCode || '-' }}
       </template>
       <template #customRow="row">
-        <AButton
-          link-button
-          tooltip="审核"
-          type="CONFIRM"
-          :disabled="OrderStatusEnum.AUDITING.notEqualsKey((row.data as OrderEntity).status)"
-          @click="onAudit(row.data)"
-        >
-          审核
-        </AButton>
-        <AButton
-          link-button
-          tooltip="驳回"
-          type="LOCK"
-          :disabled=" OrderStatusEnum.AUDITING.notEqualsKey((row.data as OrderEntity).status) "
-          @click="onReject(row.data)"
-        >
-          驳回
-        </AButton>
+        <BillAuditOrReject
+          :bill="row.data"
+          @on-audit="onAudit"
+          @on-reject="onReject"
+        />
       </template>
     </ATable>
     <template #footerLeft>
@@ -73,7 +60,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, APage, APanel, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { OrderDetail, OrderEditor } from './component'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
@@ -82,6 +69,7 @@ import { useBillTable } from '@/hook/billTable/useBillTable'
 import { CustomerDetail } from '../../channel/customer/component'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
+import { BillAuditOrReject } from '@/component'
 
 const {
   isLoading,

@@ -13,25 +13,12 @@
     >
       <AGroup
         title="出库单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          disabled
-          field="billCode"
-        />
+        <BillFormCode :bill="formData" />
         <AFormField
           disabled
           field="type"
-        />
-        <AFormField field="createTime">
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-        <AFormField field="updateTime">
-          <ADateTime :time="formData.updateTime" />
-        </AFormField>
-        <AFormField
-          disabled
-          field="status"
         />
         <el-form-item
           v-if="OutputTypeEnum.SALE.equalsKey(formData.type)"
@@ -49,13 +36,8 @@
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
-        <AFormField
-          v-if="OutputStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
       <AGroup title="出库明细">
         <ATable
           :entity="OutputDetailEntity"
@@ -92,7 +74,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
@@ -106,6 +88,7 @@ import { MoveDetail } from '../../move/component'
 import { SaleDetail } from '@/view/console/channel/sale/component'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 

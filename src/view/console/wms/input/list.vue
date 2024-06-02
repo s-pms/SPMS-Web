@@ -26,24 +26,11 @@
         {{ (row.data as InputEntity).storage?.name || "-" }}({{ (row.data as InputEntity).storage?.code || "-" }})
       </template>
       <template #customRow="row">
-        <AButton
-          link-button
-          tooltip="审核"
-          type="CONFIRM"
-          :disabled="InputStatusEnum.AUDITING.notEqualsKey((row.data as InputEntity).status)"
-          @click="onAudit(row.data)"
-        >
-          审核
-        </AButton>
-        <AButton
-          link-button
-          tooltip="驳回"
-          type="LOCK"
-          :disabled="InputStatusEnum.AUDITING.notEqualsKey((row.data as InputEntity).status)"
-          @click="onReject(row.data)"
-        >
-          驳回
-        </AButton>
+        <BillAuditOrReject
+          :bill="row.data"
+          @on-audit="onAudit"
+          @on-reject="onReject"
+        />
         <AButton
           link-button
           tooltip="完成"
@@ -73,6 +60,7 @@ import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
+import { BillAuditOrReject } from '@/component'
 
 const {
   isLoading,

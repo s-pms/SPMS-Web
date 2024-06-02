@@ -11,6 +11,7 @@ import { InputTypeEnum } from './InputTypeEnum'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { Search } from '@/airpower/decorator/SearchField'
 import { MoveEntity } from '../move/MoveEntity'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('入库单')
 export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
@@ -51,4 +52,16 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
 
   @Field('移库单')
   @Type(MoveEntity) move!: MoveEntity
+
+  getAuditingStatus(): AirEnum {
+    return InputStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return InputStatusEnum.INPUTTING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return InputStatusEnum.REJECTED
+  }
 }

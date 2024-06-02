@@ -15,30 +15,11 @@
     >
       <AGroup
         title="入库单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          field="billCode"
-          disabled
-        />
+        <BillFormCode :bill="formData" />
         <AFormField
           field="type"
-          disabled
-        />
-        <AFormField
-          field="createTime"
-          disabled
-        >
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-        <AFormField
-          field="updateTime"
-          disabled
-        >
-          <ADateTime :time="formData.updateTime" />
-        </AFormField>
-        <AFormField
-          field="status"
           disabled
         />
         <el-form-item
@@ -57,13 +38,8 @@
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
-        <AFormField
-          v-if="InputStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
       <AGroup title="入库明细">
         <ATable
           :entity="InputDetailEntity"
@@ -100,7 +76,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
@@ -114,6 +90,7 @@ import { MoveDetail } from '../../move/component'
 import { PurchaseDetail } from '@/view/console/channel/purchase/component'
 import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 

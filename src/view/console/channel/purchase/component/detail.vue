@@ -15,44 +15,20 @@
     >
       <AGroup
         title="采购单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          field="billCode"
-          disabled
-        />
+        <BillFormCode :bill="formData" />
         <AFormField
           field="totalPrice"
           disabled
         />
         <AFormField
-          field="createTime"
-          disabled
-        >
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-        <AFormField
-          field="updateTime"
-          disabled
-        >
-          <ADateTime :time="formData.updateTime" />
-        </AFormField>
-        <AFormField
           style="width: 100%;"
           field="reason"
           disabled
         />
-        <AFormField
-          field="status"
-          disabled
-        />
-        <AFormField
-          v-if="PurchaseStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
       <AGroup title="采购明细">
         <ATable
           :entity="PurchaseDetailEntity"
@@ -89,7 +65,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
@@ -97,6 +73,7 @@ import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 

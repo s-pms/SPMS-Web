@@ -15,44 +15,20 @@
     >
       <AGroup
         title="采购单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          field="billCode"
-          disabled
-        />
+        <BillFormCode :bill="formData" />
         <AFormField
           field="totalPrice"
           disabled
         />
         <AFormField
-          field="createTime"
-          disabled
-        >
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-        <AFormField
-          field="updateTime"
-          disabled
-        >
-          <ADateTime :time="formData.updateTime" />
-        </AFormField>
-        <AFormField
           style="width: 100%;"
           field="reason"
           disabled
         />
-        <AFormField
-          field="status"
-          disabled
-        />
-        <AFormField
-          v-if="SaleStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
       <AGroup title="采购明细">
         <ATable
           :entity="SaleDetailEntity"
@@ -75,14 +51,14 @@
 
 <script lang="ts" setup>
 import {
-  ADateTime, ADialog, AFormField, AGroup, ATable,
+  ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new SaleEntity()))
 

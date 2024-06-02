@@ -7,6 +7,7 @@ import { PurchaseStatusEnum } from './PurchaseStatusEnum'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Search } from '@/airpower/decorator/SearchField'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('采购单')
 export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity> {
@@ -54,4 +55,16 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
 
   @Field('采购明细')
   @Type(PurchaseDetailEntity, true) details: PurchaseDetailEntity[] = []
+
+  getAuditingStatus(): AirEnum {
+    return PurchaseStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return PurchaseStatusEnum.PURCHASING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return PurchaseStatusEnum.REJECTED
+  }
 }

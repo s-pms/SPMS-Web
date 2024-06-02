@@ -7,6 +7,7 @@ import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { MoveDetailEntity } from './MoveDetailEntity'
 import { MoveStatusEnum } from './MoveStatusEnum'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('移库单')
 export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
@@ -35,4 +36,16 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
 
   @Field('移库明细')
   @Type(MoveDetailEntity, true) details: MoveDetailEntity[] = []
+
+  getAuditingStatus(): AirEnum {
+    return MoveStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return MoveStatusEnum.MOVING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return MoveStatusEnum.REJECTED
+  }
 }

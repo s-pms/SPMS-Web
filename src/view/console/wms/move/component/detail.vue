@@ -13,33 +13,15 @@
     >
       <AGroup
         title="移库单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          field="billCode"
-          disabled
-        />
+        <BillFormCode :bill="formData" />
         <AFormField
           field="storageName"
           disabled
         />
-        <AFormField field="createTime">
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-        <AFormField field="updateTime">
-          <ADateTime :time="formData.updateTime" />
-        </AFormField>
-        <AFormField
-          disabled
-          field="status"
-        />
-        <AFormField
-          v-if="MoveStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
       <AGroup title="移库明细">
         <ATable
           :entity="MoveDetailEntity"
@@ -76,7 +58,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADateTime, ADialog, AFormField, AGroup, ATable,
+  AButton, ADialog, AFormField, AGroup, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
@@ -84,6 +66,7 @@ import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 

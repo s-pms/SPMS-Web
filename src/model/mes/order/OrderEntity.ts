@@ -13,6 +13,7 @@ import { OrderDetailEntity } from './OrderDetailEntity'
 import { PlanEntity } from '../plan/PlanEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model('生产订单')
 export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
@@ -128,4 +129,16 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     requiredPayload: true,
   })
   @Field('关联计划') plan!: PlanEntity
+
+  getAuditingStatus(): AirEnum {
+    return OrderStatusEnum.AUDITING
+  }
+
+  getAuditedStatus(): AirEnum {
+    return OrderStatusEnum.PRODUCING
+  }
+
+  getRejectedStatus(): AirEnum {
+    return OrderStatusEnum.REJECTED
+  }
 }

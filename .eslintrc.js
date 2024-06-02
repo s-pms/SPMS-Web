@@ -21,6 +21,7 @@ module.exports = {
       },
       MemberExpression: 1,
     }],
+    'class-methods-use-this': 'off',
     'import/named': 'off',
     'max-len': 'off', // 强制一行的最大长度
     'import/extensions': 'off', // 不验证导入文件扩展名

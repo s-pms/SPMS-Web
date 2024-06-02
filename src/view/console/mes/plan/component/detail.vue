@@ -15,27 +15,15 @@
     >
       <AGroup
         title="采购单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          field="billCode"
-          disabled
-        />
-
+        <BillFormCode :bill="formData" />
         <AFormField field="startTime">
           <ADateTime :time="formData.startTime" />
         </AFormField>
 
         <AFormField field="deliverTime">
           <ADateTime :time="formData.deliverTime" />
-        </AFormField>
-
-        <AFormField field="createTime">
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-
-        <AFormField field="updateTime">
-          <ADateTime :time="formData.updateTime" />
         </AFormField>
 
         <AFormField
@@ -54,18 +42,8 @@
             disabled
           />
         </el-form-item>
-
-        <AFormField
-          field="status"
-          disabled
-        />
-        <AFormField
-          v-if="PlanStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
       <AGroup title="采购明细">
         <ATable
           :entity="PlanDetailEntity"
@@ -95,7 +73,7 @@ import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new PlanEntity()))
 

@@ -28,24 +28,11 @@
         {{ (row.data as SaleEntity).customer?.name || "-" }}
       </template>
       <template #customRow="row">
-        <AButton
-          link-button
-          tooltip="审核"
-          type="CONFIRM"
-          :disabled="SaleStatusEnum.AUDITING.notEqualsKey((row.data as SaleEntity).status)"
-          @click="onAudit(row.data)"
-        >
-          审核
-        </AButton>
-        <AButton
-          link-button
-          tooltip="驳回"
-          type="LOCK"
-          :disabled="SaleStatusEnum.AUDITING.notEqualsKey((row.data as SaleEntity).status)"
-          @click="onReject(row.data)"
-        >
-          驳回
-        </AButton>
+        <BillAuditOrReject
+          :bill="row.data"
+          @on-audit="onAudit"
+          @on-reject="onReject"
+        />
       </template>
     </ATable>
     <template #footerLeft>
@@ -59,13 +46,14 @@
 
 <script lang="ts" setup>
 import {
-  AButton, APage, APanel, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { SaleDetail, SaleEditor } from './component'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
+import { BillAuditOrReject } from '@/component'
 
 const {
   isLoading,

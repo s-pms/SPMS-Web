@@ -22,24 +22,11 @@
       @on-select="onSelected"
     >
       <template #customRow="row">
-        <AButton
-          link-button
-          tooltip="审核"
-          type="CONFIRM"
-          :disabled="OutputStatusEnum.AUDITING.notEqualsKey((row.data as OutputEntity).status)"
-          @click="onAudit(row.data)"
-        >
-          审核
-        </AButton>
-        <AButton
-          link-button
-          tooltip="驳回"
-          type="LOCK"
-          :disabled="OutputStatusEnum.AUDITING.notEqualsKey((row.data as OutputEntity).status)"
-          @click="onReject(row.data)"
-        >
-          驳回
-        </AButton>
+        <BillAuditOrReject
+          :bill="row.data"
+          @on-audit="onAudit"
+          @on-reject="onReject"
+        />
       </template>
     </ATable>
     <template #footerLeft>
@@ -53,13 +40,14 @@
 
 <script lang="ts" setup>
 import {
-  AButton, APage, APanel, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { OutputDetail, OutputEditor } from './component'
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
+import { BillAuditOrReject } from '@/component'
 
 const {
   isLoading,

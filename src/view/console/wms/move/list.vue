@@ -25,24 +25,11 @@
         {{ (row.data as MoveEntity).storage.name }}({{ (row.data as MoveEntity).storage.code }})
       </template>
       <template #customRow="row">
-        <AButton
-          link-button
-          tooltip="审核"
-          type="CONFIRM"
-          :disabled="MoveStatusEnum.AUDITING.notEqualsKey((row.data as MoveEntity).status)"
-          @click="onAudit(row.data)"
-        >
-          审核
-        </AButton>
-        <AButton
-          link-button
-          tooltip="驳回"
-          type="LOCK"
-          :disabled="MoveStatusEnum.AUDITING.notEqualsKey((row.data as MoveEntity).status)"
-          @click="onReject(row.data)"
-        >
-          驳回
-        </AButton>
+        <BillAuditOrReject
+          :bill="row.data"
+          @on-audit="onAudit"
+          @on-reject="onReject"
+        />
       </template>
     </ATable>
     <template #footerLeft>
@@ -56,13 +43,14 @@
 
 <script lang="ts" setup>
 import {
-  AButton, APage, APanel, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { MoveDetail, MoveEditor } from './component'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
+import { BillAuditOrReject } from '@/component'
 
 const {
   isLoading,

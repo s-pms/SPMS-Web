@@ -15,12 +15,9 @@
     >
       <AGroup
         title="生产订单"
-        :column="2"
+        :column="3"
       >
-        <AFormField
-          field="billCode"
-          disabled
-        />
+        <BillFormCode :bill="formData" />
 
         <AFormField field="startTime">
           <ADateTime :time="formData.startTime" />
@@ -28,14 +25,6 @@
 
         <AFormField field="deliverTime">
           <ADateTime :time="formData.deliverTime" />
-        </AFormField>
-
-        <AFormField field="createTime">
-          <ADateTime :time="formData.createTime" />
-        </AFormField>
-
-        <AFormField field="updateTime">
-          <ADateTime :time="formData.updateTime" />
         </AFormField>
 
         <AFormField
@@ -53,18 +42,8 @@
             disabled
           />
         </el-form-item>
-
-        <AFormField
-          field="status"
-          disabled
-        />
-        <AFormField
-          v-if="OrderStatusEnum.REJECTED.equalsKey(formData.status)"
-          style="width: 100%"
-          field="rejectReason"
-          disabled
-        />
       </AGroup>
+      <BillFormMoreDetail :bill="formData" />
     </el-form>
   </ADialog>
 </template>
@@ -77,7 +56,7 @@ import { airPropsParam } from '@/airpower/config/AirProps'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
