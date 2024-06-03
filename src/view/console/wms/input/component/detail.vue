@@ -48,11 +48,6 @@
           hide-delete
           hide-edit
         >
-          <template #storageName="row">
-            {{
-              (row.data as InputDetailEntity).storage?.name || "-"
-            }}({{ (row.data as InputDetailEntity).storage?.code || "-" }})
-          </template>
           <template #materialCode="row">
             {{ (row.data as InputDetailEntity).material.code }}
           </template>

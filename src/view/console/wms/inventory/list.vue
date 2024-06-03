@@ -34,6 +34,7 @@
         :entity="InventoryEntity"
         hide-delete
         hide-edit
+        :ctrl-width="40"
       >
         <template #materialCode="row">
           {{ (row.data as InventoryEntity).material.code }}

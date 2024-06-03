@@ -17,7 +17,6 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({ forceShow: true })
   @Field('物料名称') materialName!: string
 
-  @Table({ forceShow: true })
   @Field('目标存储资源') storageName!: string
 
   @Form({
