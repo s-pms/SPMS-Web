@@ -53,10 +53,10 @@
           :ctrl-width="60"
         >
           <template #materialCode="row">
-            {{ (row.data as PlanDetailEntity).material.code }}
+            {{ row.data.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as PlanDetailEntity).material.name }}
+            {{ row.data.material.name }}
           </template>
         </ATable>
       </AGroup>

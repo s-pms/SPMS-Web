@@ -47,10 +47,10 @@
           hide-delete
         >
           <template #materialCode="row">
-            {{ (row.data as OutputDetailEntity).material.code }}
+            {{ row.data.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as OutputDetailEntity).material.name }}
+            {{ row.data.material.name }}
           </template>
           <template #endRow="row">
             <AButton
@@ -58,7 +58,7 @@
               tooltip="添加完成"
               :disabled=" OutputStatusEnum.OUTPUTTING.notEqualsKey(formData.status)"
               type="CHECKIN"
-              @click="(row.data as OutputDetailEntity).billId = formData.id; onAddFinish(row.data)"
+              @click="row.data.billId = formData.id; onAddFinish(row.data)"
             />
           </template>
         </ATable>

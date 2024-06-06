@@ -26,7 +26,7 @@
           effect="dark"
           disable-transitions
         >
-          {{ (row.data as LogEntity).updateTime - (row.data as LogEntity).createTime }}ms
+          {{ row.data.updateTime - row.data.createTime }}ms
         </el-tag>
       </template>
     </ATable>

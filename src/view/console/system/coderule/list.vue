@@ -20,8 +20,7 @@
         {{ getFieldName(row.data) }}
       </template>
       <template #nextCode="row">
-        {{ (row.data as CodeRuleEntity).prefix }}{{ nextCode(row.data) }}{{ padZero((row.data as
-          CodeRuleEntity).currentSn + 1, (row.data as CodeRuleEntity).snLength) }}
+        {{ row.data.prefix }}{{ nextCode(row.data) }}{{ (row.data.currentSn + 1).toString().padStart(row.data.snLength,"0") }}
       </template>
     </ATable>
     <template #footerLeft>
@@ -85,9 +84,5 @@ function nextCode(codeRule: CodeRuleEntity) {
   return code
 }
 
-function padZero(num: number, length: number) {
-  const str = num.toString()
-  return str.length < length ? '0'.repeat(length - str.length) + str : str
-}
 </script>
 <style scoped lang="scss"></style>

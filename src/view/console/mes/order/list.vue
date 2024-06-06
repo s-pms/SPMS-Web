@@ -23,23 +23,23 @@
     >
       <template #customer="row">
         <el-link
-          v-if="(row.data as OrderEntity).customer"
-          @click="AirDialog.show(CustomerDetail,(row.data as OrderEntity).customer)"
+          v-if="row.data.customer"
+          @click="AirDialog.show(CustomerDetail,row.data.customer)"
         >
-          {{ (row.data as OrderEntity).customer.name }}
+          {{ row.data.customer.name }}
         </el-link>
         <template v-else>
           -
         </template>
       </template>
       <template #materialCode="row">
-        {{ (row.data as OrderEntity).material.code }}
+        {{ row.data.material.code }}
       </template>
       <template #materialName="row">
-        {{ (row.data as OrderEntity).material.name }}
+        {{ row.data.material.name }}
       </template>
       <template #planBillCode="row">
-        {{ (row.data as OrderEntity).plan?.billCode || '-' }}
+        {{ row.data.plan?.billCode || '-' }}
       </template>
       <template #customRow="row">
         <BillAuditOrReject

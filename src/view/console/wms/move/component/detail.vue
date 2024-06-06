@@ -32,14 +32,14 @@
         >
           <template #storageName="row">
             {{
-              (row.data as MoveDetailEntity).inventory.storage.name
-            }}({{ (row.data as MoveDetailEntity).inventory.storage.code }})
+              row.data.inventory.storage.name
+            }}({{ row.data.inventory.storage.code }})
           </template>
           <template #materialCode="row">
-            {{ (row.data as MoveDetailEntity).inventory.material.code }}
+            {{ row.data.inventory.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as MoveDetailEntity).inventory.material.name }}
+            {{ row.data.inventory.material.name }}
           </template>
           <template #endRow="row">
             <AButton
@@ -47,7 +47,7 @@
               tooltip="添加完成"
               :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
               type="CHECKIN"
-              @click="(row.data as MoveDetailEntity).billId = formData.id; onAddFinish(row.data)"
+              @click="row.data.billId = formData.id; onAddFinish(row.data)"
             />
           </template>
         </ATable>

@@ -29,10 +29,10 @@
       @on-select="onSelected"
     >
       <template #customerCode="row">
-        {{ (row.data as PlanEntity).customer?.code || "-" }}
+        {{ row.data.customer?.code || "-" }}
       </template>
       <template #customerName="row">
-        {{ (row.data as PlanEntity).customer?.name || "-" }}
+        {{ row.data.customer?.name || "-" }}
       </template>
       <template
         v-if="!mult"

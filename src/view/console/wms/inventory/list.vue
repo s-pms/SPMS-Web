@@ -37,16 +37,16 @@
         :ctrl-width="40"
       >
         <template #materialCode="row">
-          {{ (row.data as InventoryEntity).material.code }}
+          {{ row.data.material.code }}
         </template>
         <template #materialName="row">
-          {{ (row.data as InventoryEntity).material.name }}
+          {{ row.data.material.name }}
         </template>
         <template #storageName="row">
-          {{ (row.data as InventoryEntity).storage.name }}({{ (row.data as InventoryEntity).storage.code }})
+          {{ row.data.storage.name }}({{ row.data.storage.code }})
         </template>
         <template #unitName="row">
-          {{ (row.data as InventoryEntity).material.unitInfo.name }}
+          {{ row.data.material.unitInfo.name }}
         </template>
       </ATable>
     </APanel>
@@ -69,14 +69,14 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 
 const request = ref(new AirRequest(InventoryEntity))
-const list = ref([] as InventoryEntity[])
+const list = ref<InventoryEntity[]>([])
 
 const isLoading = ref(false)
 const isLoadingTree = ref(false)
 
 const inventoryType = ref(InventoryTypeEnum.STORAGE.key)
 
-const treeData = ref([] as ITree[])
+const treeData = ref<ITree[]>([])
 
 async function getStorage() {
   treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))

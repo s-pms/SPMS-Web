@@ -22,10 +22,10 @@
       @on-select="onSelected"
     >
       <template #materialCode="row">
-        {{ (row.data as PurchaseDetailEntity).material.code }}
+        {{ row.data.material.code }}
       </template>
       <template #materialName="row">
-        {{ (row.data as PurchaseDetailEntity).material.name }}
+        {{ row.data.material.name }}
       </template>
       <template
         v-if="!mult"

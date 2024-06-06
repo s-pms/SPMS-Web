@@ -18,16 +18,16 @@
       @on-select="onSelected"
     >
       <template #materialCode="row">
-        {{ (row.data as PurchasePriceEntity).material.code }}
+        {{ row.data.material.code }}
       </template>
       <template #materialName="row">
-        {{ (row.data as PurchasePriceEntity).material.name }}
+        {{ row.data.material.name }}
       </template>
       <template #supplierCode="row">
-        {{ (row.data as PurchasePriceEntity).supplier.code }}
+        {{ row.data.supplier.code }}
       </template>
       <template #supplierName="row">
-        {{ (row.data as PurchasePriceEntity).supplier.name }}
+        {{ row.data.supplier.name }}
       </template>
     </ATable>
     <template #footerLeft>

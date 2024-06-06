@@ -30,16 +30,16 @@
         @on-select="onConfirm($event)"
       >
         <template #materialCode="row">
-          {{ (row.data as InventoryEntity).material.code }}
+          {{ row.data.material.code }}
         </template>
         <template #materialName="row">
-          {{ (row.data as InventoryEntity).material.name }}
+          {{ row.data.material.name }}
         </template>
         <template #storageName="row">
-          {{ (row.data as InventoryEntity).storage.name }}({{ (row.data as InventoryEntity).storage.code }})
+          {{ row.data.storage.name }}({{ row.data.storage.code }})
         </template>
         <template #unitName="row">
-          {{ (row.data as InventoryEntity).material.unitInfo.name }}
+          {{ row.data.material.unitInfo.name }}
         </template>
         <template
           v-if="!mult"
@@ -67,7 +67,6 @@ import {
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { AirRequest } from '@/airpower/model/AirRequest'
 import { ITree } from '@/airpower/interface/ITree'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
@@ -76,10 +75,10 @@ import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
-const props = defineProps(airPropsSelector(new InventoryEntity()))
+const props = defineProps(airPropsSelector<InventoryEntity>())
 
 const request = ref(new AirRequest(InventoryEntity))
-const list = ref([] as InventoryEntity[])
+const list = ref<InventoryEntity[]>([] as InventoryEntity[])
 
 const isLoading = ref(false)
 const isLoadingTree = ref(false)
@@ -117,11 +116,11 @@ async function inventoryTypeChanged() {
 async function getList() {
   request.value.filter = request.value.filter || new InventoryEntity()
   request.value.filter.type = inventoryType.value
-  list.value = await InventoryService.create(isLoading).getList(request.value)
+  // list.value = await InventoryService.create(isLoading).getList(request.value)
 }
 
 async function treeChanged(current: ITree | undefined) {
-  list.value = []
+  // list.value = []
   if (current) {
     switch (inventoryType.value) {
       case InventoryTypeEnum.STORAGE.key:

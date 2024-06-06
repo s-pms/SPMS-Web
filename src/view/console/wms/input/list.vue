@@ -23,7 +23,7 @@
       @on-select="onSelected"
     >
       <template #storageName="row">
-        {{ (row.data as InputEntity).storage?.name || "-" }}({{ (row.data as InputEntity).storage?.code || "-" }})
+        {{ row.data.storage?.name || "-" }}({{ row.data.storage?.code || "-" }})
       </template>
       <template #customRow="row">
         <BillAuditOrReject
@@ -35,7 +35,7 @@
           link-button
           tooltip="完成"
           type="CHECKIN"
-          :disabled="InputStatusEnum.INPUTTING.notEqualsKey((row.data as InputEntity).status)"
+          :disabled="InputStatusEnum.INPUTTING.notEqualsKey(row.data.status)"
           @click="onFinish(row.data)"
         >
           完成

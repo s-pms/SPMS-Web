@@ -22,7 +22,7 @@
       @on-select="onSelected"
     >
       <template #storageName="row">
-        {{ (row.data as MoveEntity).storage.name }}({{ (row.data as MoveEntity).storage.code }})
+        {{ row.data.storage.name }}({{ row.data.storage.code }})
       </template>
       <template #customRow="row">
         <BillAuditOrReject

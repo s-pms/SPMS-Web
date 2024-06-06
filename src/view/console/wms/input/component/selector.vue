@@ -30,7 +30,7 @@
       @on-select="onSelected"
     >
       <template #storageName="row">
-        {{ (row.data as InputEntity).storage.name }}({{ (row.data as InputEntity).storage.code }})
+        {{ row.data.storage.name }}({{ row.data.storage.code }})
       </template>
       <template
         v-if="!mult"

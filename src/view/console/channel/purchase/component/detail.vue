@@ -37,16 +37,16 @@
           hide-ctrl
         >
           <template #materialCode="row">
-            {{ (row.data as PurchaseDetailEntity).material.code }}
+            {{ row.data.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as PurchaseDetailEntity).material.name }}
+            {{ row.data.material.name }}
           </template>
           <template #supplierCode="row">
-            {{ (row.data as PurchaseDetailEntity).supplier.code }}
+            {{ row.data.supplier.code }}
           </template>
           <template #supplierName="row">
-            {{ (row.data as PurchaseDetailEntity).supplier.name }}
+            {{ row.data.supplier.name }}
           </template>
           <template #endRow="row">
             <AButton

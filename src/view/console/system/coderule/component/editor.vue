@@ -58,11 +58,7 @@
         >
           <span style="margin: 0 2px;color:red;font-weight: bold;">{{ formData.prefix }}</span>
           <span style="margin: 0 2px;color:darkgreen;font-weight: bold;">{{ demoCode }}</span>
-          <span style="margin: 0 2px;color:blue;font-weight: bold;">{{ Array.from({
-            length:
-              Math.min(formData.snLength, 10) - 1
-          }, (_,
-              i) => 0).join('') }}1</span>
+          <span style="margin: 0 2px;color:blue;font-weight: bold;">{{ "1".padStart(Math.min(formData.snLength, 10),"0") }}</span>
         </el-form-item>
       </AGroup>
     </el-form>

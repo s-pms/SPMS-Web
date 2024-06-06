@@ -28,6 +28,9 @@
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
+      <template #user="row">
+        {{ row.data.salePrice }}
+      </template>
       <template
         v-if="!mult"
         #customRow="{ data }"

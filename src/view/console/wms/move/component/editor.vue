@@ -42,10 +42,10 @@
           hide-delete
         >
           <template #materialCode="row">
-            {{ (row.data as MoveDetailEntity).inventory.material.code }}
+            {{ row.data.inventory.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as MoveDetailEntity).inventory.material.name }}
+            {{ row.data.inventory.material.name }}
           </template>
           <template #addButton>
             <AButton

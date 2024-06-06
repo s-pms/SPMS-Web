@@ -23,7 +23,7 @@
           type="MONITOR"
           link-button
           tooltip="实时监控"
-          :disabled="!(row.data as DeviceEntity).isReporting"
+          :disabled="!row.data.isReporting"
           @click="showMonitor(row.data)"
         >
           监控

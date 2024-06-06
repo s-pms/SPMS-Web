@@ -31,14 +31,14 @@
         >
           <template #storageName="row">
             {{
-              (row.data as OutputDetailEntity).inventory?.storage.name || "-"
-            }}({{ (row.data as OutputDetailEntity).inventory?.storage.code || "-" }})
+              row.data.inventory?.storage.name || "-"
+            }}({{ row.data.inventory?.storage.code || "-" }})
           </template>
           <template #materialCode="row">
-            {{ (row.data as OutputDetailEntity).material.code }}
+            {{ row.data.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as OutputDetailEntity).material.name }}
+            {{ row.data.material.name }}
           </template>
           <template #addButton>
             <AButton

@@ -49,10 +49,10 @@
           hide-edit
         >
           <template #materialCode="row">
-            {{ (row.data as InputDetailEntity).material.code }}
+            {{ row.data.material.code }}
           </template>
           <template #materialName="row">
-            {{ (row.data as InputDetailEntity).material.name }}
+            {{ row.data.material.name }}
           </template>
           <template #endRow="row">
             <AButton
