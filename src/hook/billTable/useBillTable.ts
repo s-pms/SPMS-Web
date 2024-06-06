@@ -45,5 +45,5 @@ export function useBillTable<
     onAudit,
     onReject,
     ...result,
-  } as IUseBillTableResult<D, B, S>
+  }
 }

@@ -58,7 +58,7 @@ import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 const props = defineProps(airPropsSelector<PurchaseDetailEntity, PurchaseEntity>())
 
 const isLoading = ref(false)
-const list = ref([] as PurchaseDetailEntity[])
+const list = ref<PurchaseDetailEntity[]>([])
 
 const selectList = ref(props.selectList)
 

@@ -64,7 +64,7 @@
         <div class="status-list">
           <div
             v-for="item in dictionary"
-            :key="(item.key as number)"
+            :key="item.key"
             class="item"
           >
             <div
@@ -176,7 +176,7 @@ const currentLabel = ref('')
 const currentColor = ref('')
 const props = defineProps(airPropsParam(new CollectionEntity()))
 
-const collectionList = ref([] as CollectionEntity[])
+const collectionList = ref<CollectionEntity[]>([])
 
 const isLoading = ref(false)
 
@@ -185,7 +185,7 @@ const maxLength = 500
 const SECOND_PER_DAY = 86400
 const SECOND_PER_HOUR = 3600
 const currentGranularity = ref(CollectionGranularityEnum.ONE_MINUTE)
-const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()] as Date[])
+const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()])
 
 const shortcuts = [
   {
@@ -357,7 +357,7 @@ function validDateTimeRange() {
       default:
     }
   } else {
-    dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()] as Date[]
+    dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()]
     currentGranularity.value = CollectionGranularityEnum.ONE_MINUTE
   }
   // eslint-disable-next-line no-use-before-define
@@ -426,7 +426,7 @@ function getStatusPercent(item: CollectionEntity, index: number) {
   }
   return parseFloat(((
     (item.timestamp - startTime)
-      / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(6)
+    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(6)
 }
 
 /**
@@ -598,7 +598,7 @@ function onFull() {
     flex-direction: row;
     align-items: center;
 
-    > div {
+    >div {
       margin-left: 5px;
     }
   }
@@ -720,7 +720,7 @@ function onFull() {
     align-items: center;
     margin-top: 10px;
 
-    > div {
+    >div {
       flex: 1;
       font-size: 14px;
       color: #333;

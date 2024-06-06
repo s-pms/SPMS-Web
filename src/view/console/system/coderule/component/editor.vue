@@ -31,7 +31,7 @@
               return {
                 key: item.key,
                 label: item.label
-              } as IDictionary
+              }
             })"
             @on-change="fieldChanged"
           />
@@ -77,7 +77,6 @@ import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
-import { IDictionary } from '@/airpower/interface/IDictionary'
 import { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
 
@@ -97,14 +96,14 @@ const {
   },
 })
 
-const fieldList = ref([] as CodeRuleField[])
+const fieldList = ref<CodeRuleField[]>([])
 
 async function getFieldList() {
   fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
 }
 getFieldList()
 
-const paramList = ref([] as CodeRuleParam[])
+const paramList = ref<CodeRuleParam[]>([])
 async function getParamList() {
   paramList.value = await CodeRuleService.create(isLoading).getParamList()
 }

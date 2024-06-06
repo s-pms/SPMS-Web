@@ -58,7 +58,7 @@ import { PlanService } from '@/model/mes/plan/PlanService'
 const props = defineProps(airPropsSelector<PlanDetailEntity, PlanEntity>())
 
 const isLoading = ref(false)
-const list = ref([] as PlanDetailEntity[])
+const list = ref<PlanDetailEntity[]>([])
 
 const selectList = ref(props.selectList)
 

@@ -53,7 +53,7 @@ const {
   editView: CodeRuleEditor,
 })
 
-const fieldList = ref([] as CodeRuleField[])
+const fieldList = ref<CodeRuleField[]>([])
 
 async function getFieldList() {
   fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
@@ -65,7 +65,7 @@ function getFieldName(codeRule: CodeRuleEntity) {
   return fieldList.value.find((item) => item.key === codeRule.ruleField)?.label || ''
 }
 
-const paramList = ref([] as CodeRuleParam[])
+const paramList = ref<CodeRuleParam[]>([])
 async function getParamList() {
   paramList.value = await CodeRuleService.create(isLoading).getParamList()
 }

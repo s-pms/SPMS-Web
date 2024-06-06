@@ -51,7 +51,7 @@ async function onSelect(current: MenuEntity, more: IJson) {
   formData.value.menuList = more.checkedNodes
 }
 
-const treeList = ref([] as MenuEntity[])
+const treeList = ref<MenuEntity[]>([])
 
 async function getMenuTreeList() {
   treeList.value = await MenuService.create(isLoading).getList(new AirRequest(MenuEntity))

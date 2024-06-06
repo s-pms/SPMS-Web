@@ -54,7 +54,7 @@ async function onSelect(selectList: PermissionEntity[]) {
   formData.value.permissionList = selectList
 }
 
-const treeList = ref([] as PermissionEntity[])
+const treeList = ref<PermissionEntity[]>([])
 
 async function getPermissionList() {
   treeList.value = await PermissionService.create(isLoading).getList(new AirRequest(PermissionEntity))

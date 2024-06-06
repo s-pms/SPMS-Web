@@ -58,7 +58,7 @@ import { InputService } from '@/model/wms/input/InputService'
 const props = defineProps(airPropsSelector<InputDetailEntity, InputEntity>())
 
 const isLoading = ref(false)
-const list = ref([] as InputDetailEntity[])
+const list = ref<InputDetailEntity[]>([])
 
 const selectList = ref(props.selectList)
 

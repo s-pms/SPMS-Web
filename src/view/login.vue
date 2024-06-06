@@ -328,7 +328,7 @@ function loginRedirect(result: string) {
     location.href = `${decodeURIComponent(redirectUri)}?code=${result}`
     return
   }
-  AirConfig.saveAccessToken(result as string)
+  AirConfig.saveAccessToken(result)
   // 正常登录 保存 AccessToken
   // eslint-disable-next-line no-restricted-globals
   location.href = redirectUri

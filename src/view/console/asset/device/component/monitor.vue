@@ -65,7 +65,7 @@ const props = defineProps(airPropsParam(new DeviceEntity()))
 
 const formData = ref(props.param.copy())
 
-const monitorList = ref([] as CollectionEntity[])
+const monitorList = ref<CollectionEntity[]>([])
 
 async function getDetail() {
   formData.value = await DeviceService.create().getDetail(props.param.id)

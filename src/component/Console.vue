@@ -36,7 +36,7 @@ import { UserService } from '@/model/personnel/user/UserService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 
 const currentUserInfo = ref(new UserEntity())
-const menuList = ref([] as MenuEntity[])
+const menuList = ref<MenuEntity[]>([])
 const isLoading = ref(false)
 
 async function getMenuList() {

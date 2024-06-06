@@ -8,7 +8,7 @@
       <div class="device-view">
         <div
           v-for="item in DeviceStatusEnum.toArray()"
-          :key="(item.key as number)"
+          :key="item.key"
           class="device-item"
           :style="{ width: (deviceList.filter(i => i.status === item.key).length / deviceList.length * 100) + '%' }"
         >
@@ -99,7 +99,7 @@ import { AirDialog } from '@/airpower/helper/AirDialog'
 import { DeviceMonitor } from '../../asset/device/component'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 
-const deviceList = ref([] as DeviceEntity[])
+const deviceList = ref<DeviceEntity[]>([])
 
 const request = ref(new AirRequest(DeviceEntity))
 request.value.filter = new DeviceEntity()

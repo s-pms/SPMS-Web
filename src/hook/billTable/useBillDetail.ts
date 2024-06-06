@@ -23,5 +23,5 @@ export function useBillDetail<D extends AbstractBaseBillDetailEntity, B extends 
 
   return {
     onAddFinish, ...result,
-  } as IUseBillDetailResult<D, B, S>
+  }
 }

@@ -1,23 +1,3 @@
-<script setup lang="ts">
-import { PropType } from 'vue'
-import { AButton } from '@/airpower/component'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-
-defineProps({
-  /**
-   * # 单据
-   */
-  bill: {
-    type: Object as PropType<AbstractBaseBillEntity<AbstractBaseBillDetailEntity>>,
-    required: true,
-  },
-})
-
-const emits = defineEmits(['onReject', 'onAudit'])
-
-</script>
-
 <template>
   <AButton
     link-button
@@ -38,7 +18,25 @@ const emits = defineEmits(['onReject', 'onAudit'])
     驳回
   </AButton>
 </template>
+<script setup lang="ts">
+import { PropType } from 'vue'
+import { AButton } from '@/airpower/component'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
+defineProps({
+  /**
+   * # 单据
+   */
+  bill: {
+    type: Object as PropType<AbstractBaseBillEntity<AbstractBaseBillDetailEntity>>,
+    required: true,
+  },
+})
+
+const emits = defineEmits(['onReject', 'onAudit'])
+
+</script>
 <style scoped lang="scss">
 
 </style>

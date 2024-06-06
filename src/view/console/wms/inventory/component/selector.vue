@@ -78,14 +78,14 @@ import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 const props = defineProps(airPropsSelector<InventoryEntity>())
 
 const request = ref(new AirRequest(InventoryEntity))
-const list = ref<InventoryEntity[]>([] as InventoryEntity[])
+const list = ref<InventoryEntity[]>([])
 
 const isLoading = ref(false)
 const isLoadingTree = ref(false)
 
 const inventoryType = ref(props.param.type)
 
-const treeData = ref([] as ITree[])
+const treeData = ref<ITree[]>([])
 
 async function getStorage() {
   treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))

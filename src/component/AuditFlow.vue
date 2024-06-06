@@ -25,7 +25,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { ref } from 'vue'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserSelector } from '@/view/console/personnel/user/component'
@@ -33,7 +33,7 @@ import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps({
   modelValue: {
-    type: Array as PropType<UserEntity[]>,
+    type: Array<UserEntity>,
     default: () => [],
   },
 })
