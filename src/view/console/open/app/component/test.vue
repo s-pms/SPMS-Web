@@ -32,6 +32,12 @@
           v-model="app"
           field="arithmetic"
           :entity="OpenAppEntity"
+          :list="OpenAppArithmeticEnum.toArray().map(item => {
+            if (OpenAppArithmeticEnum.RSA.equalsKey(item.key)) {
+              item.disabled = true
+            }
+            return item
+          })"
         />
         <el-form-item label="版本号">
           <el-input
@@ -66,9 +72,7 @@
           />
         </template>
       </AGroup>
-      <AGroup
-        title="业务数据"
-      >
+      <AGroup title="业务数据">
         <el-form-item label="业务数据">
           <el-input
             v-model="json"
