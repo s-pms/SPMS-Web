@@ -254,9 +254,9 @@ import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirAlert } from '@/airpower/feedback/AirAlert'
 import { UserRequestVo } from '@/model/personnel/user/UserRequestVo'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AppEntity } from '@/model/system/app/AppEntity'
-import { AppService } from '@/model/system/app/AppService'
 import { MailService } from '@/model/system/mail/MailService'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 
 const currentAction = ref(LoginAction.LOGIN_VIA_PASSWORD)
 
@@ -270,7 +270,7 @@ const requestVo = ref(new UserRequestVo())
 const appKey = (AirConfig.router.currentRoute.value.query.appKey || '').toString()
 const redirectUri = (AirConfig.router.currentRoute.value.query.redirectUri || '/console').toString()
 
-const appInfo = ref(new AppEntity())
+const appInfo = ref(new OpenAppEntity())
 
 requestVo.value.email = 'admin@hamm.cn'
 requestVo.value.phone = '18523749565'
@@ -314,7 +314,7 @@ const isButtonDisabled = computed(() => {
 async function getAppInfo() {
   if (appKey) {
     requestVo.value.appKey = appKey
-    appInfo.value = await AppService.create(isLoadingApp).getAppByKey(appKey)
+    appInfo.value = await OpenAppService.create(isLoadingApp).getAppByKey(appKey)
   }
 }
 
