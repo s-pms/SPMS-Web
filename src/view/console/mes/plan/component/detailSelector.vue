@@ -21,11 +21,11 @@
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
-      <template #materialCode="row">
-        {{ row.data.material.code }}
+      <template #materialCode="{ data }">
+        {{ data.material.code }}
       </template>
-      <template #materialName="row">
-        {{ row.data.material.name }}
+      <template #materialName="{ data }">
+        {{ data.material.name }}
       </template>
       <template
         v-if="!mult"

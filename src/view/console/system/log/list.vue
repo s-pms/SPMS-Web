@@ -20,13 +20,13 @@
       @on-select="onSelected"
       @on-detail="onDetail"
     >
-      <template #penddingTime="row">
+      <template #penddingTime="{ data }">
         <el-tag
-          :color="getColor(row.data)"
+          :color="getColor(data)"
           effect="dark"
           disable-transitions
         >
-          {{ row.data.updateTime - row.data.createTime }}ms
+          {{ data.updateTime - data.createTime }}ms
         </el-tag>
       </template>
     </ATable>

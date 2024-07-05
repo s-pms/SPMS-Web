@@ -29,16 +29,16 @@
           hide-edit
           hide-delete
         >
-          <template #storageName="row">
+          <template #storageName="{ data }">
             {{
-              row.data.inventory?.storage.name || "-"
-            }}({{ row.data.inventory?.storage.code || "-" }})
+              data.inventory?.storage.name || "-"
+            }}({{ data.inventory?.storage.code || "-" }})
           </template>
-          <template #materialCode="row">
-            {{ row.data.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.material.name }}
+          <template #materialName="{ data }">
+            {{ data.material.name }}
           </template>
           <template #addButton>
             <AButton
@@ -49,13 +49,13 @@
               添加{{ OutputEntity.getFieldName('details') }}
             </AButton>
           </template>
-          <template #customRow="row">
+          <template #customRow="{ index }">
             <AButton
               v-if="isDetailEditable"
               type="DELETE"
               danger
               icon-button
-              @click="deleteDetail(row.index)"
+              @click="deleteDetail(index)"
             />
           </template>
         </ATable>

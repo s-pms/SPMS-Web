@@ -18,13 +18,13 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <AButton
           type="MONITOR"
           link-button
           tooltip="实时监控"
-          :disabled="!row.data.isReporting"
-          @click="showMonitor(row.data)"
+          :disabled="!data.isReporting"
+          @click="showMonitor(data)"
         >
           监控
         </AButton>

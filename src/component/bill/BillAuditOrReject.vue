@@ -4,39 +4,45 @@
     tooltip="审核"
     type="CONFIRM"
     :disabled="!bill.canAudit()"
-    @click="emits('onAudit',bill)"
+    @click="onAudit"
   >
     审核
   </AButton>
+  {{ bill }}
   <AButton
     link-button
     tooltip="驳回"
     type="LOCK"
     :disabled="!bill.canReject()"
-    @click="emits('onReject',bill)"
+    @click="onReject"
   >
     驳回
   </AButton>
 </template>
-<script setup lang="ts">
-import { PropType } from 'vue'
+<script setup lang="ts" generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity">
 import { AButton } from '@/airpower/component'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
-defineProps({
+const { bill } = defineProps<{
   /**
    * # 单据
    */
-  bill: {
-    type: Object as PropType<AbstractBaseBillEntity<AbstractBaseBillDetailEntity>>,
-    required: true,
-  },
-})
+  bill: B
+}>()
 
-const emits = defineEmits(['onReject', 'onAudit'])
+const emits = defineEmits<{
+  onReject: [bill: B],
+  onAudit: [bill: B],
+}>()
+
+function onReject() {
+  emits('onReject', bill)
+}
+
+function onAudit() {
+  emits('onAudit', bill)
+}
 
 </script>
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

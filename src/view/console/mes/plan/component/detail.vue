@@ -52,11 +52,11 @@
           hide-ctrl
           :ctrl-width="60"
         >
-          <template #materialCode="row">
-            {{ row.data.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.material.name }}
+          <template #materialName="{ data }">
+            {{ data.material.name }}
           </template>
         </ATable>
       </AGroup>

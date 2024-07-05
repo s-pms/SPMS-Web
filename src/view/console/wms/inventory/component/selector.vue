@@ -29,17 +29,17 @@
         :hide-ctrl="mult"
         @on-select="onConfirm($event)"
       >
-        <template #materialCode="row">
-          {{ row.data.material.code }}
+        <template #materialCode="{ data }">
+          {{ data.material.code }}
         </template>
-        <template #materialName="row">
-          {{ row.data.material.name }}
+        <template #materialName="{ data }">
+          {{ data.material.name }}
         </template>
-        <template #storageName="row">
-          {{ row.data.storage.name }}({{ row.data.storage.code }})
+        <template #storageName="{ data }">
+          {{ data.storage.name }}({{ data.storage.code }})
         </template>
-        <template #unitName="row">
-          {{ row.data.material.unitInfo.name }}
+        <template #unitName="{ data }">
+          {{ data.material.unitInfo.name }}
         </template>
         <template
           v-if="!mult"

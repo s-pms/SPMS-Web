@@ -13,7 +13,7 @@
       :data-list="response.list"
       :entity="PurchaseEntity"
       :select-list="selectList"
-      :disable-edit="(row: PurchaseEntity) => row.status !== PurchaseStatusEnum.REJECTED.key"
+      :disable-edit="row => row.status !== PurchaseStatusEnum.REJECTED.key"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -22,9 +22,9 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <BillAuditOrReject
-          :bill="row.data"
+          :bill="data"
           @on-audit="onAudit"
           @on-reject="onReject"
         />

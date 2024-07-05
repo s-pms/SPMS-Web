@@ -17,17 +17,17 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #materialCode="row">
-        {{ row.data.material.code }}
+      <template #materialCode="{ data }">
+        {{ data.material.code }}
       </template>
-      <template #materialName="row">
-        {{ row.data.material.name }}
+      <template #materialName="{ data }">
+        {{ data.material.name }}
       </template>
-      <template #customerCode="row">
-        {{ row.data.customer.code }}
+      <template #customerCode="{ data }">
+        {{ data.customer.code }}
       </template>
-      <template #customerName="row">
-        {{ row.data.customer.name }}
+      <template #customerName="{ data }">
+        {{ data.customer.name }}
       </template>
     </ATable>
     <template #footerLeft>

@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="OrderEntity"
       :select-list="selectList"
-      :disable-edit="(row: OrderEntity) => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="row => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -21,29 +21,29 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #customer="row">
+      <template #customer="{ data }">
         <el-link
-          v-if="row.data.customer"
-          @click="AirDialog.show(CustomerDetail,row.data.customer)"
+          v-if="data.customer"
+          @click="AirDialog.show(CustomerDetail, data.customer)"
         >
-          {{ row.data.customer.name }}
+          {{ data.customer.name }}
         </el-link>
         <template v-else>
           -
         </template>
       </template>
-      <template #materialCode="row">
-        {{ row.data.material.code }}
+      <template #materialCode="{ data }">
+        {{ data.material.code }}
       </template>
-      <template #materialName="row">
-        {{ row.data.material.name }}
+      <template #materialName="{ data }">
+        {{ data.material.name }}
       </template>
-      <template #planBillCode="row">
-        {{ row.data.plan?.billCode || '-' }}
+      <template #planBillCode="{ data }">
+        {{ data.plan?.billCode || '-' }}
       </template>
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <BillAuditOrReject
-          :bill="row.data"
+          :bill="data"
           @on-audit="onAudit"
           @on-reject="onReject"
         />

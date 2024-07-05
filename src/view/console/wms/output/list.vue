@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="OutputEntity"
       :select-list="selectList"
-      :disable-edit="(row: OutputEntity) => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="row => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -21,9 +21,9 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <BillAuditOrReject
-          :bill="row.data"
+          :bill="data"
           @on-audit="onAudit"
           @on-reject="onReject"
         />

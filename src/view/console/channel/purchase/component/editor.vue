@@ -33,17 +33,17 @@
           hide-edit
           hide-delete
         >
-          <template #materialCode="row">
-            {{ row.data.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.material.name }}
+          <template #materialName="{ data }">
+            {{ data.material.name }}
           </template>
-          <template #supplierCode="row">
-            {{ row.data.supplier.code }}
+          <template #supplierCode="{ data }">
+            {{ data.supplier.code }}
           </template>
-          <template #supplierName="row">
-            {{ row.data.supplier.name }}
+          <template #supplierName="{ data }">
+            {{ data.supplier.name }}
           </template>
           <template #addButton>
             <AButton
@@ -53,12 +53,12 @@
               添加{{ PurchaseEntity.getFieldName('details') }}
             </AButton>
           </template>
-          <template #customRow="row">
+          <template #customRow="{ index }">
             <AButton
               type="DELETE"
               danger
               icon-button
-              @click="deleteDetail(row.index)"
+              @click="deleteDetail(index)"
             />
           </template>
         </ATable>

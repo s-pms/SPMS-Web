@@ -39,11 +39,11 @@
           hide-edit
           hide-delete
         >
-          <template #materialCode="row">
-            {{ row.data.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.material.name }}
+          <template #materialName="{ data }">
+            {{ data.material.name }}
           </template>
           <template #addButton>
             <AButton
@@ -54,13 +54,13 @@
               添加{{ InputEntity.getFieldName('details') }}
             </AButton>
           </template>
-          <template #customRow="row">
+          <template #customRow="{ index }">
             <AButton
               v-if="isDetailEditable"
               type="DELETE"
               danger
               icon-button
-              @click="deleteDetail(row.index)"
+              @click="deleteDetail(index)"
             />
           </template>
         </ATable>

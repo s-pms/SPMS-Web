@@ -13,7 +13,7 @@
       show-add
       :entity="MenuEntity"
       :ctrl-width="130"
-      :disable-delete="(row: MenuEntity) => row.children.length > 0"
+      :disable-delete="row => row.children.length > 0"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-add="onAddRow"

@@ -14,9 +14,9 @@
       :ctrl-width="130"
       show-add
       :default-expand-all="false"
-      :disable-delete="(row: PermissionEntity) => row.isSystem"
-      :disable-edit="(row: PermissionEntity) => row.isSystem"
-      :disable-add="(row: PermissionEntity) => row.isSystem"
+      :disable-delete="row => row.isSystem"
+      :disable-edit="row => row.isSystem"
+      :disable-add="row => row.isSystem"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-add="onAddRow"

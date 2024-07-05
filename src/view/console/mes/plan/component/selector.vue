@@ -28,11 +28,11 @@
       :hide-ctrl="mult"
       @on-select="onSelected"
     >
-      <template #customerCode="row">
-        {{ row.data.customer?.code || "-" }}
+      <template #customerCode="{ data }">
+        {{ data.customer?.code || "-" }}
       </template>
-      <template #customerName="row">
-        {{ row.data.customer?.name || "-" }}
+      <template #customerName="{ data }">
+        {{ data.customer?.name || "-" }}
       </template>
       <template
         v-if="!mult"

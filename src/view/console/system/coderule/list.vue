@@ -16,11 +16,11 @@
       @on-edit="onEdit"
       @on-sort-change="onSortChanged"
     >
-      <template #ruleField="row">
-        {{ getFieldName(row.data) }}
+      <template #ruleField="{ data }">
+        {{ getFieldName(data) }}
       </template>
-      <template #nextCode="row">
-        {{ row.data.prefix }}{{ nextCode(row.data) }}{{ (row.data.currentSn + 1).toString().padStart(row.data.snLength,"0") }}
+      <template #nextCode="{ data }">
+        {{ data.prefix }}{{ nextCode(data) }}{{ (data.currentSn + 1).toString().padStart(data.snLength,"0") }}
       </template>
     </ATable>
     <template #footerLeft>

@@ -15,12 +15,12 @@
       @on-edit="onEdit"
       @on-delete="onDelete"
     >
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <AButton
           type="CONFIRM"
           tooltip="授权菜单"
           link-button
-          @click="onMenuEditor(row.data)"
+          @click="onMenuEditor(data)"
         >
           菜单
         </AButton>
@@ -28,7 +28,7 @@
           type="LOCK"
           tooltip="授权权限"
           link-button
-          @click="onPermissionEditor(row.data)"
+          @click="onPermissionEditor(data)"
         >
           权限
         </AButton>

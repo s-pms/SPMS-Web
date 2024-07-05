@@ -41,11 +41,11 @@
           hide-edit
           hide-delete
         >
-          <template #materialCode="row">
-            {{ row.data.inventory.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.inventory.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.inventory.material.name }}
+          <template #materialName="{ data }">
+            {{ data.inventory.material.name }}
           </template>
           <template #addButton>
             <AButton
@@ -55,12 +55,12 @@
               添加{{ MoveEntity.getFieldName('details') }}
             </AButton>
           </template>
-          <template #customRow="row">
+          <template #customRow="{ index }">
             <AButton
               type="DELETE"
               danger
               icon-button
-              @click="deleteDetail(row.index)"
+              @click="deleteDetail(index)"
             />
           </template>
         </ATable>

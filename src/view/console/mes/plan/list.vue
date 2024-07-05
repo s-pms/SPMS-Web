@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="PlanEntity"
       :select-list="selectList"
-      :disable-edit="(row: PlanEntity) => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="row => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -21,15 +21,15 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #customerCode="row">
-        {{ row.data.customer?.code || "-" }}
+      <template #customerCode="{ data }">
+        {{ data.customer?.code || "-" }}
       </template>
-      <template #customerName="row">
-        {{ row.data.customer?.name || "-" }}
+      <template #customerName="{ data }">
+        {{ data.customer?.name || "-" }}
       </template>
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <BillAuditOrReject
-          :bill="row.data"
+          :bill="data"
           @on-audit="onAudit"
           @on-reject="onReject"
         />

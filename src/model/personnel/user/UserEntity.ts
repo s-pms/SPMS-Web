@@ -1,15 +1,12 @@
-import {
-  Field,
-  Model,
-  Type,
-} from '@/airpower/decorator/Custom'
-import { BaseEntity } from '@/base/BaseEntity'
-import { RoleEntity } from '../role/RoleEntity'
-import { EntityConfig } from '@/airpower/decorator/EntityConfig'
-import { IUser } from '@/airpower/interface/IUser'
-import { Form } from '@/airpower/decorator/FormField'
-import { Search } from '@/airpower/decorator/SearchField'
-import { Table } from '@/airpower/decorator/TableField'
+/* eslint-disable */
+import {Field, Model, Type} from '@/airpower/decorator/Custom'
+import {BaseEntity} from '@/base/BaseEntity'
+import {RoleEntity} from '../role/RoleEntity'
+import {EntityConfig} from '@/airpower/decorator/EntityConfig'
+import {IUser} from '@/airpower/interface/IUser'
+import {Form} from '@/airpower/decorator/FormField'
+import {Search} from '@/airpower/decorator/SearchField'
+import {Table} from '@/airpower/decorator/TableField'
 
 /**
  * # 用户实体

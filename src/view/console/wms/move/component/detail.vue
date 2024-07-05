@@ -30,24 +30,24 @@
           hide-edit
           hide-delete
         >
-          <template #storageName="row">
+          <template #storageName="{ data }">
             {{
-              row.data.inventory.storage.name
-            }}({{ row.data.inventory.storage.code }})
+              data.inventory.storage.name
+            }}({{ data.inventory.storage.code }})
           </template>
-          <template #materialCode="row">
-            {{ row.data.inventory.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.inventory.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.inventory.material.name }}
+          <template #materialName="{ data }">
+            {{ data.inventory.material.name }}
           </template>
-          <template #endRow="row">
+          <template #endRow="{ data }">
             <AButton
               icon-button
               tooltip="添加完成"
               :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
               type="CHECKIN"
-              @click="row.data.billId = formData.id; onAddFinish(row.data)"
+              @click="data.billId = formData.id; onAddFinish(data)"
             />
           </template>
         </ATable>

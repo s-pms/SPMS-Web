@@ -48,19 +48,19 @@
           hide-delete
           hide-edit
         >
-          <template #materialCode="row">
-            {{ row.data.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.material.name }}
+          <template #materialName="{ data }">
+            {{ data.material.name }}
           </template>
-          <template #endRow="row">
+          <template #endRow="{ data }">
             <AButton
               icon-button
               tooltip="添加完成"
               :disabled=" InputStatusEnum.INPUTTING.notEqualsKey(formData.status)"
               type="CHECKIN"
-              @click="onAddFinish(row.data)"
+              @click="onAddFinish(data)"
             />
           </template>
         </ATable>

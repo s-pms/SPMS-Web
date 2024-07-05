@@ -12,7 +12,7 @@
       :data-list="response.list"
       :entity="MoveEntity"
       :select-list="selectList"
-      :disable-edit="(row: MoveEntity) => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="row => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
       :ctrl-width="160"
@@ -21,12 +21,12 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
-      <template #storageName="row">
-        {{ row.data.storage.name }}({{ row.data.storage.code }})
+      <template #storageName="{ data }">
+        {{ data.storage.name }}({{ data.storage.code }})
       </template>
-      <template #customRow="row">
+      <template #customRow="{ data }">
         <BillAuditOrReject
-          :bill="row.data"
+          :bill="data"
           @on-audit="onAudit"
           @on-reject="onReject"
         />

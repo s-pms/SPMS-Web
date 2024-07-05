@@ -36,25 +36,25 @@
           :field-list="PurchaseDetailEntity.getTableFieldConfigList()"
           hide-ctrl
         >
-          <template #materialCode="row">
-            {{ row.data.material.code }}
+          <template #materialCode="{ data }">
+            {{ data.material.code }}
           </template>
-          <template #materialName="row">
-            {{ row.data.material.name }}
+          <template #materialName="{ data }">
+            {{ data.material.name }}
           </template>
-          <template #supplierCode="row">
-            {{ row.data.supplier.code }}
+          <template #supplierCode="{ data }">
+            {{ data.supplier.code }}
           </template>
-          <template #supplierName="row">
-            {{ row.data.supplier.name }}
+          <template #supplierName="{ data }">
+            {{ data.supplier.name }}
           </template>
-          <template #endRow="row">
+          <template #endRow="{ data }">
             <AButton
               icon-button
               tooltip="添加完成"
               :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"
               type="CHECKIN"
-              @click="onAddFinish(row.data)"
+              @click="onAddFinish(data)"
             />
           </template>
         </ATable>
