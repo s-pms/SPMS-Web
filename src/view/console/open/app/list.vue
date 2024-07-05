@@ -24,7 +24,7 @@
       :ctrl-width="280"
       show-enable-and-disable
       hide-delete
-      :disable-edit="(app: OpenAppEntity) => app.isDisabled"
+      :disable-edit="row => row.isDisabled"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-sort-change="onSortChanged"
