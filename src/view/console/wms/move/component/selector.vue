@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -68,8 +68,8 @@ import { MoveService } from '@/model/wms/move/MoveService'
 const props = defineProps(airPropsSelector<MoveEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response, disableConfirm,
+  onSearch, onPageChanged, onSelected,
 } = useAirSelector(props, MoveEntity, MoveService)
 </script>
 <style scoped lang="scss"></style>

@@ -5,7 +5,7 @@
     is-selector
     width="60%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -70,8 +70,8 @@ import { PlanService } from '@/model/mes/plan/PlanService'
 const props = defineProps(airPropsSelector<PlanEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response, disableConfirm,
+  onSearch, onPageChanged, onSelected,
 } = useAirSelector(props, PlanEntity, PlanService)
 </script>
 <style scoped lang="scss"></style>

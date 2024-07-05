@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -66,7 +66,7 @@ import { SupplierEditor } from '.'
 const props = defineProps(airPropsSelector<SupplierEntity>())
 
 const {
-  title, selectList, isLoading, response,
+  title, selectList, isLoading, response, disableConfirm,
   onSearch, onPageChanged, onSelected, onAdd,
 } = useAirSelector(props, SupplierEntity, SupplierService, {
   editView: SupplierEditor,

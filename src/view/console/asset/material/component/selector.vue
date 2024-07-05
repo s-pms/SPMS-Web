@@ -5,7 +5,7 @@
     is-selector
     width="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -68,7 +68,7 @@ import { MaterialEditor } from '.'
 const props = defineProps(airPropsSelector<MaterialEntity>())
 
 const {
-  title, selectList, isLoading, response,
+  title, selectList, isLoading, response, disableConfirm,
   onSearch, onPageChanged, onSelected, onAdd,
 } = useAirSelector(props, MaterialEntity, MaterialService, {
   editView: MaterialEditor,

@@ -6,7 +6,7 @@
     :title="title"
     is-selector
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -67,7 +67,7 @@ import { UnitEditor } from '.'
 const props = defineProps(airPropsSelector<UnitEntity>())
 
 const {
-  title, selectList, isLoading, response,
+  title, selectList, isLoading, response, disableConfirm,
   onSearch, onPageChanged, onReloadData, onSelected,
 } = useAirSelector(props, UnitEntity, UnitService)
 

@@ -5,7 +5,7 @@
     is-selector
     width="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -64,8 +64,8 @@ import { DeviceService } from '@/model/asset/device/DeviceService'
 const props = defineProps(airPropsSelector<DeviceEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  disableConfirm, title, selectList, isLoading, response,
+  onSearch, onPageChanged, onSelected,
 } = useAirSelector(props, DeviceEntity, DeviceService)
 </script>
 <style scoped lang="scss"></style>

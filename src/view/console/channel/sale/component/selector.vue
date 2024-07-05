@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -74,7 +74,7 @@ import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 const props = defineProps(airPropsSelector(new SaleEntity()))
 
 const {
-  selectList, isLoading, response,
+  selectList, isLoading, response, disableConfirm,
   onPageChanged, onSelected, onSearch, onAdd,
 } = useAirSelector(props, SaleEntity, SaleService, {
   editView: SaleEditor,

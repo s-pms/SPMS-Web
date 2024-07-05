@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -61,7 +61,7 @@ import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 const props = defineProps(airPropsSelector(new PurchaseEntity()))
 
 const {
-  selectList, isLoading, response,
+  selectList, isLoading, response, disableConfirm,
   onPageChanged, onSelected,
 } = useAirSelector(props, PurchaseEntity, PurchaseService, {
   editView: PurchaseEditor,

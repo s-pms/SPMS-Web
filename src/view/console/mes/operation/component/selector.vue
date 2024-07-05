@@ -6,7 +6,7 @@
     :title="title"
     is-selector
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -65,8 +65,8 @@ import { OperationService } from '@/model/mes/operation/OperationService'
 const props = defineProps(airPropsSelector<OperationEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response, disableConfirm,
+  onSearch, onPageChanged, onSelected,
 } = useAirSelector(props, OperationEntity, OperationService)
 </script>
 <style scoped lang="scss"></style>

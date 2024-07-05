@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -57,7 +57,7 @@ import { StorageService } from '@/model/factory/storage/StorageService'
 const props = defineProps(airPropsSelector<StorageEntity>())
 
 const {
-  title, selectList, isLoading, list,
+  title, selectList, isLoading, list, disableConfirm,
   onSearch, onSelected,
 } = useAirSelector(props, StorageEntity, StorageService, {
   unPaginate: true,

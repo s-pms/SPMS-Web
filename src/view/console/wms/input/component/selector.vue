@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -68,8 +68,8 @@ import { InputService } from '@/model/wms/input/InputService'
 const props = defineProps(airPropsSelector<InputEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response, disableConfirm,
+  onSearch, onPageChanged, onSelected,
 } = useAirSelector(props, InputEntity, InputService)
 </script>
 <style scoped lang="scss"></style>

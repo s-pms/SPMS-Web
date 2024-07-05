@@ -6,7 +6,7 @@
     width="70%"
     height="70%"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    :disable-confirm="disableConfirm"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel()"
   >
@@ -65,8 +65,8 @@ import { OutputService } from '@/model/wms/output/OutputService'
 const props = defineProps(airPropsSelector<OutputEntity>())
 
 const {
-  title, selectList, onSelected, isLoading, response,
-  onSearch, onPageChanged,
+  title, selectList, isLoading, response, disableConfirm,
+  onSearch, onPageChanged, onSelected,
 } = useAirSelector(props, OutputEntity, OutputService)
 </script>
 <style scoped lang="scss"></style>
