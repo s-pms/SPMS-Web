@@ -1,4 +1,4 @@
-import { IUseTableOption } from '@/airpower/interface/IUseTableOption'
+import { IUseTableOption } from '@/airpower/interface/hooks/IUseTableOption'
 import { ClassConstructor } from '@/airpower/type/ClassConstructor'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'

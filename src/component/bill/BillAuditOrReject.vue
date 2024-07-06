@@ -8,7 +8,6 @@
   >
     审核
   </AButton>
-  {{ bill }}
   <AButton
     link-button
     tooltip="驳回"

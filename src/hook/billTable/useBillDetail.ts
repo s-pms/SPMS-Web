@@ -5,7 +5,7 @@ import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { IUseBillDetailResult } from './IUseBillDetailResult'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { IJson } from '@/airpower/interface/IJson'
-import { IUseDetailOption } from '@/airpower/interface/IUseDetailOption'
+import { IUseDetailOption } from '@/airpower/interface/hooks/IUseDetailOption'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { BillAddFinishDialog } from '@/component'
 

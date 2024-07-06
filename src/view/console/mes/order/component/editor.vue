@@ -29,7 +29,7 @@
             label="关联计划"
             prop="plan"
           >
-            <ASelector
+            <ASelect
               v-model="formData.plan"
               :selector="PlanSelector"
               placeholder="请选择订单关联计划"
@@ -57,7 +57,7 @@
           label="客户信息"
           prop="customer"
         >
-          <ASelector
+          <ASelect
             v-model="formData.customer"
             :selector="CustomerSelector"
             placeholder="请选择客户..."
@@ -71,7 +71,7 @@
 
 <script lang="ts" setup>
 import {
-  ADialog, AFormField, AGroup, ASelector,
+  ADialog, AFormField, AGroup, ASelect,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -88,7 +88,11 @@ import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
 const props = defineProps(airPropsParam(new OrderEntity()))
 
 const {
-  title, formData, rules, formRef, isLoading,
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
   onSubmit,
 } = useAirEditor(props, OrderEntity, OrderService, {
   beforeSubmit(submitData) {
