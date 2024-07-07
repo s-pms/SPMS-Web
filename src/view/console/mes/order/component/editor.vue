@@ -117,13 +117,11 @@ async function selectPlan() {
 async function selectMaterial() {
   if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
     formData.value.material = await AirDialog.select(MaterialSelector)
-    formData.value.materialId = formData.value.material.id
     formData.value.materialName = formData.value.material.name
     return
   }
   const planDetail: PlanDetailEntity = await AirDialog.show(PlanDetailSelector, formData.value.plan)
   formData.value.material = planDetail.material
-  formData.value.materialId = formData.value.material.id
   formData.value.materialName = formData.value.material.name
   formData.value.quantity = planDetail.quantity
 }

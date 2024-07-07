@@ -26,14 +26,11 @@
         <el-form-item
           v-if="PlanTypeEnum.SALE.equalsKey(formData.type)"
           label="关联客户"
-          prop="customerId"
+          prop="customer"
         >
-          <el-input
-            v-model="formData.customerName"
-            clearable
-            placeholder="请选择计划关联客户"
-            @clear="formData.exclude('customer', 'customerId')"
-            @click="selectCustomer()"
+          <ASelect
+            v-model="formData.customer"
+            :selector="CustomerSelector"
           />
         </el-form-item>
       </AGroup>
@@ -75,7 +72,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADialog, AFormField, AGroup, ATable,
+  AButton, ADialog, AFormField, AGroup, ASelect, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -121,11 +118,5 @@ async function addDetail() {
 async function deleteDetail(index: number) {
   await AirConfirm.warning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
-}
-
-async function selectCustomer() {
-  formData.value.customer = await AirDialog.select(CustomerSelector)
-  formData.value.customerId = formData.value.customer.id
-  formData.value.customerName = formData.value.customer.name
 }
 </script>

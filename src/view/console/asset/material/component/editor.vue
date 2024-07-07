@@ -19,14 +19,11 @@
       <AFormField field="spc" />
       <el-form-item
         label="计量单位"
-        prop="unitId"
+        prop="unit"
       >
-        <el-input
-          :value="formData.unitInfo?.name || ''"
-          clearable
-          placeholder="请选择默认的计量单位"
-          @clear="formData.exclude('unitInfo','unitId')"
-          @click="selectUnit()"
+        <ASelect
+          v-model="formData.unit"
+          :selector="UnitSelector"
         />
       </el-form-item>
       <AFormField field="purchasePrice" />
@@ -36,10 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ElInput } from 'element-plus'
-import { ADialog, AFormField } from '@/airpower/component'
+import { ADialog, AFormField, ASelect } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
@@ -52,7 +47,7 @@ const {
   onSubmit,
 } = useAirEditor(props, MaterialEntity, MaterialService, {
   afterGetDetail(detailData) {
-    detailData.unitId = detailData.unitInfo.id
+    detailData.unitId = detailData.unit.id
     return detailData
   },
   beforeSubmit(submitData) {
@@ -61,8 +56,4 @@ const {
   },
 })
 
-async function selectUnit() {
-  formData.value.unitInfo = await AirDialog.select(UnitSelector)
-  formData.value.unitId = formData.value.unitInfo.id
-}
 </script>

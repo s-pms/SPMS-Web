@@ -16,15 +16,11 @@
     >
       <el-form-item
         label="入库物料"
-        prop="materialId"
+        prop="material"
       >
-        <el-input
-          v-model="formData.materialName"
-          clearable
-          placeholder="请选择物料"
-          :disabled="props.param.material"
-          @clear="formData.exclude('material', 'materialId')"
-          @click="selectMaterial()"
+        <ASelect
+          v-model="formData.material"
+          :selector="MaterialSelector"
         />
       </el-form-item>
       <el-form-item
@@ -40,7 +36,7 @@
             v-if="formData.material"
             #append
           >
-            {{ formData.material.unitInfo.name }}
+            {{ formData.material.unit.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -50,13 +46,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ADialog, AInput,
-} from '@/airpower/component'
+import { ADialog, AInput, ASelect } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { InputDetailService } from '@/model/wms/input/InputDetailService'
 
@@ -71,12 +64,6 @@ if (formData.value.material) {
 const isLoading = ref(false)
 
 const formRef = ref<AirFormInstance>()
-
-async function selectMaterial() {
-  formData.value.material = await AirDialog.select(MaterialSelector)
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-}
 
 async function onSubmit() {
   props.onConfirm(formData.value)

@@ -39,7 +39,7 @@
           {{ data.storage.name }}({{ data.storage.code }})
         </template>
         <template #unitName="{ data }">
-          {{ data.material.unitInfo.name }}
+          {{ data.material.unit.name }}
         </template>
         <template
           v-if="!mult"

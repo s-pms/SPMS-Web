@@ -57,6 +57,9 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   @Type(SaleDetailEntity, true) details: SaleDetailEntity[] = []
 
   @Field('客户')
+  @Form({
+    requiredPayload: true,
+  })
   @Type(CustomerEntity) customer!: CustomerEntity
 
   getAuditingStatus(): AirEnum {

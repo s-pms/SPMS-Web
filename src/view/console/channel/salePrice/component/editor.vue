@@ -15,26 +15,20 @@
     >
       <el-form-item
         label="采购物料"
-        prop="materialId"
+        prop="material"
       >
-        <el-input
-          v-model="formData.materialName"
-          clearable
-          placeholder="请选择物料"
-          @clear="formData.exclude('material','materialId')"
-          @click="selectMaterial()"
+        <ASelect
+          v-model="formData.material"
+          :selector="MaterialSelector"
         />
       </el-form-item>
       <el-form-item
         label="客户"
-        prop="customerId"
+        prop="customer"
       >
-        <el-input
-          v-model="formData.customerName"
-          clearable
-          placeholder="请选择客户"
-          @clear="formData.exclude('customer','customerId')"
-          @click="selectSupplier()"
+        <ASelect
+          v-model="formData.customer"
+          :selector="CustomerSelector"
         />
       </el-form-item>
       <AFormField
@@ -45,9 +39,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField } from '@/airpower/component'
+import { ADialog, AFormField, ASelect } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
@@ -72,16 +65,4 @@ const {
     return submitData
   },
 })
-
-async function selectMaterial() {
-  formData.value.material = await AirDialog.select(MaterialSelector)
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-}
-
-async function selectSupplier() {
-  formData.value.customer = await AirDialog.select(CustomerSelector)
-  formData.value.customerId = formData.value.customer.id
-  formData.value.customerName = formData.value.customer.name
-}
 </script>

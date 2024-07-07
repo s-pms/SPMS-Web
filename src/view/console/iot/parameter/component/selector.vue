@@ -1,77 +1,21 @@
 <template>
-  <ADialog
+  <ASelector
+    :entity="ParameterEntity"
+    :service="ParameterService"
+    :props="props"
     width="600px"
-    height="70%"
-    :hide-footer="!mult"
-    :title="title"
-    is-selector
-    :loading="isLoading"
-    :disable-confirm="disableConfirm"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel()"
-  >
-    <AToolBar
-      hide-add
-      :loading="isLoading"
-      :entity="ParameterEntity"
-      :service="ParameterService"
-      @on-search="onSearch"
-    />
-    <ATable
-      :data-list="response.list"
-      :show-select="mult"
-      hide-delete
-      hide-edit
-      :select-list="selectList"
-      :entity="ParameterEntity"
-      :ctrl-width="80"
-      hide-field-selector
-      :hide-ctrl="mult"
-      @on-select="onSelected"
-    >
-      <template
-        v-if="!mult"
-        #customRow="{ data }"
-      >
-        <AButton
-          type="SELECT"
-          icon-button
-          :disabled="data.isDisabled"
-          tooltip="选择"
-          @click="
-            onConfirm(data)
-          "
-        />
-      </template>
-    </ATable>
-    <template #status>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
-  </ADialog>
+    :editor="ParameterEditor"
+  />
 </template>
 
 <script lang="ts" setup>
-import {
-  AButton, ADialog, APage, ATable, AToolBar,
-} from '@/airpower/component'
+import { ASelector } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
-import { useAirSelector } from '@/airpower/hook/useAirSelector'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
+import { ParameterEditor } from '.'
 
-const props = defineProps(airPropsSelector<ParameterEntity, ParameterEntity>())
+const props = defineProps(airPropsSelector<ParameterEntity>())
 
-const {
-  title, selectList, isLoading, response, disableConfirm,
-  onSearch, onPageChanged, onSelected,
-} = useAirSelector(props, ParameterEntity, ParameterService, {
-  beforeSearch(requestData) {
-    requestData.filter.recoverBy(props.param)
-    return requestData
-  },
-})
 </script>
 <style scoped lang="scss"></style>

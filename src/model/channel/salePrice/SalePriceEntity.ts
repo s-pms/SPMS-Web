@@ -7,8 +7,14 @@ import { Table } from '@/airpower/decorator/TableField'
 
 @Model('销售价')
 export class SalePriceEntity extends BaseEntity {
+  @Form({
+    requiredPayload: true,
+  })
   @Type(MaterialEntity) material!: MaterialEntity
 
+  @Form({
+    requiredPayload: true,
+  })
   @Type(CustomerEntity) customer!: CustomerEntity
 
   @Table()
@@ -28,12 +34,6 @@ export class SalePriceEntity extends BaseEntity {
   })
   @Field('物料')
   @Type(Number) materialId!: number
-
-  @Form({
-    requiredNumber: true,
-  })
-  @Field('客户')
-  @Type(Number) customerId!: number
 
   @Field('销售单价')
   @Form({

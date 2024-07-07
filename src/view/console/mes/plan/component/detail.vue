@@ -33,7 +33,7 @@
 
         <el-form-item
           label="关联客户"
-          prop="customerId"
+          prop="customer"
         >
           <el-input
             v-model="formData.customerName"

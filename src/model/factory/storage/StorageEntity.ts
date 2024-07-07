@@ -3,9 +3,10 @@ import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
+import { ISelector } from '@/airpower/interface/ISelector'
 
 @Model('存储资源')
-export class StorageEntity extends BaseEntity implements ITree {
+export class StorageEntity extends BaseEntity implements ITree, ISelector {
   @Table()
   @Form({
     requiredString: true,
@@ -26,4 +27,8 @@ export class StorageEntity extends BaseEntity implements ITree {
   // eslint-disable-next-line no-use-before-define
   @Type(StorageEntity)
   @Field('所属上级') parent!: this
+
+  getSelectorLabel(): string {
+    return this.name
+  }
 }

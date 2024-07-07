@@ -22,14 +22,11 @@
         <AFormField field="billCode" />
         <el-form-item
           label="目标存储资源"
-          prop="storageId"
+          prop="storage"
         >
-          <el-input
-            v-model="formData.storageName"
-            clearable
-            placeholder="请选择目标存储资源"
-            @clear="formData.exclude('storage', 'storageId')"
-            @click="selectStorage()"
+          <ASelect
+            v-model="formData.storage"
+            :selector="StorageSelector"
           />
         </el-form-item>
       </AGroup>
@@ -71,7 +68,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADialog, AFormField, AGroup, ATable,
+  AButton, ADialog, AFormField, AGroup, ASelect, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
@@ -82,10 +79,10 @@ import { MoveService } from '@/model/wms/move/MoveService'
 import { MoveDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { StorageSelector } from '@/view/console/factory/storage/component'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventorySelector } from '../../inventory/component'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { StorageSelector } from '@/view/console/factory/storage/component'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
@@ -122,9 +119,4 @@ async function deleteDetail(index: number) {
   formData.value.details.splice(index, 1)
 }
 
-async function selectStorage() {
-  formData.value.storage = await AirDialog.select(StorageSelector)
-  formData.value.storageId = formData.value.storage.id
-  formData.value.storageName = formData.value.storage.name
-}
 </script>

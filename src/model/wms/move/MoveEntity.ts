@@ -16,12 +16,6 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @Table()
   @Field('目标存储资源') storageName!: string
 
-  @Form({
-    requiredNumber: true,
-  })
-  @Field('目标存储资源')
-  @Type(Number) storageId!: number
-
   @Table({
     width: 100,
     showColor: true,
@@ -32,6 +26,9 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @Field('移库状态') status!: number
 
   @Field('目标存储资源')
+  @Form({
+    requiredPayload: true,
+  })
   @Type(StorageEntity) storage!: StorageEntity
 
   @Field('移库明细')

@@ -41,7 +41,7 @@
           disabled
         >
           <template #append>
-            {{ material.unitInfo.name }}
+            {{ material.unit.name }}
           </template>
         </el-input>
       </el-form-item>
@@ -53,7 +53,7 @@
           disabled
         >
           <template #append>
-            {{ material.unitInfo.name }}
+            {{ material.unit.name }}
           </template>
         </el-input>
       </el-form-item>
@@ -67,7 +67,7 @@
           <template
             #append
           >
-            {{ material.unitInfo.name }}
+            {{ material.unit.name }}
           </template>
         </el-input>
       </el-form-item>

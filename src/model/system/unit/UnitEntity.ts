@@ -1,12 +1,11 @@
-import {
-  Field, Model,
-} from '@/airpower/decorator/Custom'
+import { Field, Model } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { ISelector } from '@/airpower/interface/ISelector'
 
 @Model('计量单位')
-export class UnitEntity extends BaseEntity {
+export class UnitEntity extends BaseEntity implements ISelector {
   /**
    * # 单位名称
    */
@@ -29,4 +28,8 @@ export class UnitEntity extends BaseEntity {
     placeholder: '不输入按编码规则自动生成',
   })
   @Field('单位编码') code!: string
+
+  getSelectorLabel(): string {
+    return `${this.name}(${this.code})`
+  }
 }
