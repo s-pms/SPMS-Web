@@ -1,5 +1,5 @@
 import {
-  Dictionary, Field, Model, Type,
+  Alias, Dictionary, Field, Model, Type,
 } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
@@ -65,6 +65,7 @@ export class MaterialEntity extends BaseEntity implements ISelector {
   @Form({
     requiredPayload: true,
   })
+  @Alias('unitInfo')
   @Field('计量单位') unit!: UnitEntity
 
   @Table({

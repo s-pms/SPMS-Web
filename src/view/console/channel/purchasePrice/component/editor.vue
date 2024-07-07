@@ -45,7 +45,7 @@ import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePric
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { SupplierSelector } from '../../supplier/component'
 
-const props = defineProps(airPropsParam<PurchasePriceEntity>())
+const props = defineProps(airPropsParam(new PurchasePriceEntity()))
 
 const {
   title, formData, rules, formRef, isLoading,

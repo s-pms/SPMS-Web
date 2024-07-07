@@ -52,7 +52,7 @@ import { AirFormInstance } from '@/airpower/type/AirType'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
 
-const props = defineProps(airPropsParam<PlanDetailEntity>())
+const props = defineProps(airPropsParam(new PlanDetailEntity()))
 
 const formData = ref(props.param.copy())
 

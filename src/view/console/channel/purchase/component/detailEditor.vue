@@ -83,7 +83,7 @@ import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePric
 import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 
-const props = defineProps(airPropsParam<PurchaseDetailEntity>())
+const props = defineProps(airPropsParam(new PurchaseDetailEntity()))
 
 const formData = ref(props.param.copy())
 
@@ -92,8 +92,8 @@ const isLoading = ref(false)
 const formRef = ref<AirFormInstance>()
 
 async function getPurchasePrice() {
-  if (formData.value.materialId && formData.value.supplierId) {
-    const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(formData.value.materialId, formData.value.supplierId)
+  if (formData.value.material && formData.value.supplier) {
+    const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(formData.value.material.id, formData.value.supplier.id)
     if (purchasePrice) {
       formData.value.price = purchasePrice.price
       return

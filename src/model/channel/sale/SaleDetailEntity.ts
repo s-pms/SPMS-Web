@@ -7,6 +7,9 @@ import { Table } from '@/airpower/decorator/TableField'
 
 @Model('销售明细')
 export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
+  @Form({
+    requiredPayload: true,
+  })
   @Type(MaterialEntity) material!: MaterialEntity
 
   @Table()

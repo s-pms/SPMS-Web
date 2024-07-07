@@ -36,7 +36,7 @@
             v-if="formData.material"
             #append
           >
-            元/{{ formData.material.unit.name }}
+            元/{{ formData.material?.unit?.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -53,7 +53,7 @@
             v-if="formData.material"
             #append
           >
-            {{ formData.material.unit.name }}
+            {{ formData.material?.unit?.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -72,7 +72,7 @@ import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 
-const props = defineProps(airPropsParam<SaleDetailEntity>())
+const props = defineProps(airPropsParam(new SaleDetailEntity()))
 
 const formData = ref(props.param.copy())
 const isLoading = ref(false)

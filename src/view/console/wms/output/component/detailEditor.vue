@@ -53,7 +53,7 @@ import {AirFormInstance} from '@/airpower/type/AirType'
 import {OutputDetailService} from '@/model/wms/output/OutputDetailService'
 import {MaterialSelector} from '@/view/console/asset/material/component'
 
-const props = defineProps(airPropsParam<OutputDetailEntity>())
+const props = defineProps(airPropsParam(new OutputDetailEntity()))
 
 const formData = ref(props.param.copy())
 
