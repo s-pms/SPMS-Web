@@ -45,13 +45,13 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {ADialog, AInput, ASelect,} from '@/airpower/component'
-import {airPropsParam} from '@/airpower/config/AirProps'
-import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
-import {AirFormInstance} from '@/airpower/type/AirType'
-import {OutputDetailService} from '@/model/wms/output/OutputDetailService'
-import {MaterialSelector} from '@/view/console/asset/material/component'
+import { ref } from 'vue'
+import { ADialog, AInput, ASelect } from '@/airpower/component'
+import { airPropsParam } from '@/airpower/config/AirProps'
+import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
+import { AirFormInstance } from '@/airpower/type/AirType'
+import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
 
 const props = defineProps(airPropsParam(new OutputDetailEntity()))
 
@@ -63,5 +63,5 @@ const formRef = ref<AirFormInstance>()
 
 async function onSubmit() {
   props.onConfirm(formData.value)
-
+}
 </script>
