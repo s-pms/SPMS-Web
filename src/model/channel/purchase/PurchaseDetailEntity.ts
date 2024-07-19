@@ -1,14 +1,22 @@
+import { types } from 'sass'
 import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import Number = types.Number;
 
 @Model('采购明细')
 export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
+  @Form({
+    requiredPayload: true,
+  })
   @Type(MaterialEntity) material!: MaterialEntity
 
+  @Form({
+    requiredPayload: true,
+  })
   @Type(SupplierEntity) supplier!: SupplierEntity
 
   @Table()
@@ -22,18 +30,6 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table()
   @Field('供应商编码') supplierCode!: string
-
-  @Form({
-    requiredNumber: true,
-  })
-  @Field('物料')
-  @Type(Number) materialId!: number
-
-  @Form({
-    requiredNumber: true,
-  })
-  @Field('供应商')
-  @Type(Number) supplierId!: number
 
   @Field('采购单价')
   @Form({

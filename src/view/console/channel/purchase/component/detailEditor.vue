@@ -16,26 +16,22 @@
     >
       <el-form-item
         label="采购物料"
-        prop="materialId"
+        prop="material"
       >
-        <el-input
-          v-model="formData.materialName"
-          clearable
-          placeholder="请选择物料"
-          @clear="formData.exclude('material', 'materialId')"
-          @click="selectMaterial()"
+        <ASelect
+          v-model="formData.material"
+          :selector="MaterialSelector"
+          @change="getPurchasePrice()"
         />
       </el-form-item>
       <el-form-item
         label="供应商"
-        prop="supplierId"
+        prop="supplier"
       >
-        <el-input
-          v-model="formData.supplierName"
-          clearable
-          placeholder="请选择供应商"
-          @clear="formData.exclude('supplier', 'supplierId')"
-          @click="selectSupplier()"
+        <ASelect
+          v-model="formData.supplier"
+          :selector="SupplierSelector"
+          @change="getPurchasePrice()"
         />
       </el-form-item>
       <el-form-item
@@ -50,7 +46,7 @@
             v-if="formData.material"
             #append
           >
-            元/{{ formData.material.unitInfo.name }}
+            元/{{ formData.material.unit.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -67,7 +63,7 @@
             v-if="formData.material"
             #append
           >
-            {{ formData.material.unitInfo.name }}
+            {{ formData.material.unit.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -77,13 +73,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ADialog, AInput,
-} from '@/airpower/component'
+import { ADialog, AInput, ASelect } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { SupplierSelector } from '../../supplier/component'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
@@ -99,8 +92,8 @@ const isLoading = ref(false)
 const formRef = ref<AirFormInstance>()
 
 async function getPurchasePrice() {
-  if (formData.value.materialId && formData.value.supplierId) {
-    const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(formData.value.materialId, formData.value.supplierId)
+  if (formData.value.material && formData.value.supplier) {
+    const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(formData.value.material.id, formData.value.supplier.id)
     if (purchasePrice) {
       formData.value.price = purchasePrice.price
       return
@@ -108,20 +101,6 @@ async function getPurchasePrice() {
     AirNotification.create().setDuration(5000).info('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
     formData.value.price = formData.value.material.purchasePrice
   }
-}
-
-async function selectMaterial() {
-  formData.value.material = await AirDialog.select(MaterialSelector)
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-  getPurchasePrice()
-}
-
-async function selectSupplier() {
-  formData.value.supplier = await AirDialog.select(SupplierSelector)
-  formData.value.supplierId = formData.value.supplier.id
-  formData.value.supplierName = formData.value.supplier.name
-  getPurchasePrice()
 }
 
 async function onSubmit() {

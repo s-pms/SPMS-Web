@@ -38,7 +38,7 @@
           disabled
         >
           <template #append>
-            {{ material.unitInfo.name }}
+            {{ material.unit.name }}
           </template>
         </el-input>
       </el-form-item>
@@ -48,7 +48,7 @@
           type="number"
         >
           <template #append>
-            {{ material.unitInfo.name }}
+            {{ material.unit.name }}
           </template>
         </el-input>
       </el-form-item>
@@ -58,9 +58,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ADialog, AInput,
-} from '@/airpower/component'
+import { ADialog, AInput } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'

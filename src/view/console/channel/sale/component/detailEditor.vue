@@ -16,14 +16,12 @@
     >
       <el-form-item
         label="销售物料"
-        prop="materialId"
+        prop="material"
       >
-        <el-input
-          v-model="formData.materialName"
-          clearable
-          placeholder="请选择物料"
-          @clear="formData.exclude('material', 'materialId')"
-          @click="selectMaterial()"
+        <ASelect
+          v-model="formData.material"
+          :selector="MaterialSelector"
+          @change="getSalePrice()"
         />
       </el-form-item>
       <el-form-item
@@ -38,7 +36,7 @@
             v-if="formData.material"
             #append
           >
-            元/{{ formData.material.unitInfo.name }}
+            元/{{ formData.material?.unit?.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -55,7 +53,7 @@
             v-if="formData.material"
             #append
           >
-            {{ formData.material.unitInfo.name }}
+            {{ formData.material?.unit?.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -65,13 +63,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ADialog, AInput,
-} from '@/airpower/component'
+import { ADialog, AInput, ASelect } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
@@ -80,7 +75,6 @@ import { AirNotification } from '@/airpower/feedback/AirNotification'
 const props = defineProps(airPropsParam(new SaleDetailEntity()))
 
 const formData = ref(props.param.copy())
-
 const isLoading = ref(false)
 
 const formRef = ref<AirFormInstance>()
@@ -95,13 +89,6 @@ async function getSalePrice() {
     AirNotification.create().setDuration(5000).info('未配置该物料对该客户的特别销售价，将自动填写该物料的参考销售价')
     formData.value.price = formData.value.material.salePrice
   }
-}
-
-async function selectMaterial() {
-  formData.value.material = await AirDialog.select(MaterialSelector)
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-  getSalePrice()
 }
 
 async function onSubmit() {

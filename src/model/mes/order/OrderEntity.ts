@@ -53,12 +53,6 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   })
   @Field('生产计划号') planBillCode!: string
 
-  @Form({
-    requiredNumber: true,
-  })
-  @Field('物料')
-  @Type(Number) materialId!: number
-
   @Table({
     width: 100,
     showColor: true,

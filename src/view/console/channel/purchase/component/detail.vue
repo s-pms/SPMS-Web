@@ -37,16 +37,16 @@
           hide-ctrl
         >
           <template #materialCode="{ data }">
-            {{ data.material.code }}
+            {{ data.material?.code }}
           </template>
           <template #materialName="{ data }">
-            {{ data.material.name }}
+            {{ data.material?.name }}
           </template>
           <template #supplierCode="{ data }">
-            {{ data.supplier.code }}
+            {{ data.supplier?.code }}
           </template>
           <template #supplierName="{ data }">
-            {{ data.supplier.name }}
+            {{ data.supplier?.name }}
           </template>
           <template #endRow="{ data }">
             <AButton
@@ -79,6 +79,6 @@ const props = defineProps(airPropsParam(new PurchaseEntity()))
 
 const {
   title, formData, isLoading, onAddFinish,
-} = useBillDetail(props, PurchaseEntity, PurchaseService, {})
+} = useBillDetail(props, PurchaseEntity, PurchaseService)
 
 </script>

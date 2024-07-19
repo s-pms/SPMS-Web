@@ -36,7 +36,7 @@
             v-if="formData.inventory"
             #append
           >
-            {{ formData.inventory.material.unitInfo.name }}
+            {{ formData.inventory.material.unit.name }}
           </template>
         </AInput>
       </el-form-item>
@@ -46,9 +46,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ADialog, AInput,
-} from '@/airpower/component'
+import { ADialog, AInput } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { AirFormInstance } from '@/airpower/type/AirType'
