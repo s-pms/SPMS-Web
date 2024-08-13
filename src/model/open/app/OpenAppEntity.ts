@@ -1,4 +1,6 @@
-import { Dictionary, Field, Model } from '@/airpower/decorator/Custom'
+import {
+  Dictionary, Field, Model, Type,
+} from '@/airpower/decorator/Custom'
 import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
@@ -74,4 +76,12 @@ export class OpenAppEntity extends BaseEntity {
     placeholder: '带协议头,无需/结尾',
   })
   @Field('应用地址') url!: string
+
+  @Field('IP白名单')
+  @Form({
+    textarea: true,
+    defaultValue: '',
+    placeholder: '请输入IP白名单，一行一个',
+  })
+  @Type(String) ipWhiteList!: string
 }

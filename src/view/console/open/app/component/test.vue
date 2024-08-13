@@ -73,6 +73,12 @@
         </template>
       </AGroup>
       <AGroup title="业务数据">
+        <el-form-item label="URL">
+          <el-input
+            v-model="url"
+            placeholder="请输入请求的URL"
+          />
+        </el-form-item>
         <el-form-item label="业务数据">
           <el-input
             v-model="json"
@@ -135,9 +141,10 @@ import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { AirCrypto } from '@/airpower/helper/AirCrypto'
 import { AirHttp } from '@/airpower/helper/AirHttp'
 import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { AirAlert } from '@/airpower/feedback/AirAlert'
 import { AirRand } from '@/airpower/helper/AirRand'
+
+import { AirApi } from '@/airpower/config/AirApi'
 
 const props = defineProps(airPropsParam())
 
@@ -151,7 +158,12 @@ const json = ref('{"name":"Hamm","age":"18","len":"18cm"}')
 
 const version = 10000
 
+const APP_KEY = 'APP_KEY_TEST'
+const APP_SECRET = 'APP_SECRET_TEST'
+
 const timestamp = ref(new Date().valueOf())
+
+const url = ref('openApi/test/test')
 
 const nonce = ref(AirRand.getRandMixedCharString())
 
@@ -160,7 +172,12 @@ if (OpenAppArithmeticEnum.RSA.equalsKey(app.value.arithmetic)) {
   props.onCancel()
 }
 
+app.value.appKey = AirApi.getStorage(APP_KEY) || ''
+app.value.appSecret = AirApi.getStorage(APP_SECRET) || ''
+
 const content = computed(() => {
+  AirApi.setStorage(APP_KEY, app.value.appKey)
+  AirApi.setStorage(APP_SECRET, app.value.appSecret)
   switch (app.value.arithmetic) {
     case OpenAppArithmeticEnum.AES.key:
       if (!app.value.appSecret) {
@@ -175,7 +192,7 @@ const source = computed(() => app.value.appSecret + app.value.appKey + version +
 const signature = computed(() => AirCrypto.sha1(source.value))
 
 async function onTest() {
-  const res = await new AirHttp(`${window.location.origin}/api/open/test/test`).send({
+  const res = await new AirHttp(`${window.location.origin}/api/${url.value}`).send({
     appKey: app.value.appKey,
     content: content.value,
     signature: signature.value,
@@ -185,9 +202,9 @@ async function onTest() {
   })
 
   AirRand.getRandCharString()
-  AirNotification.success(JSON.stringify(res))
+  const data = AirCrypto.aesDecrypt(res, app.value.appSecret)
+  AirAlert.success(data, '响应数据')
 }
-
 </script>
 
 <style lang="scss" scoped>
