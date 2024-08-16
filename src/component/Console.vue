@@ -6,7 +6,7 @@
     <template #logo>
       <img
         src="@/assets/img/logo.svg"
-        style="height: 40px;"
+        style="height: 100%;"
       >
     </template>
     <template #user>

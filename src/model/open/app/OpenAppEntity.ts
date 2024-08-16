@@ -10,7 +10,6 @@ import { Search } from '@/airpower/decorator/SearchField'
 
 @EntityConfig({
   hideFieldSelector: true,
-  permissionPrefix: 'open/app_',
 })
 @Model('应用')
 export class OpenAppEntity extends BaseEntity {
