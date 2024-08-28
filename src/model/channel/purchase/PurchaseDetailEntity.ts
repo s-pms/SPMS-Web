@@ -1,11 +1,9 @@
-import { types } from 'sass'
 import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import Number = types.Number;
 
 @Model('采购明细')
 export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {

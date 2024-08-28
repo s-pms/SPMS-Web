@@ -92,7 +92,6 @@ const {
 } = useAirEditor(props, MoveEntity, MoveService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
-    detailData.storageId = detailData.storage.id
     return detailData
   },
   beforeSubmit(submitData) {

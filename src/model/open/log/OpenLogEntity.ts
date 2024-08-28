@@ -37,5 +37,6 @@ export class OpenLogEntity extends BaseEntity {
     dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
     width: 180,
   })
-  @Field('响应时间') updateTime!: number
+  @Field('响应时间')
+  declare updateTime: number
 }

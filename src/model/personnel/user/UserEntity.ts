@@ -90,4 +90,15 @@ export class UserEntity extends BaseEntity implements IUser {
   isRootUser() {
     return this.id === 1
   }
+
+
+  /**
+   * # 验证码
+   */
+  code!: string
+
+  /**
+   * # 所属应用AppKey
+   */
+  appKey!: string
 }

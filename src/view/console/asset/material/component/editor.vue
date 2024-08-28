@@ -47,11 +47,9 @@ const {
   onSubmit,
 } = useAirEditor(props, MaterialEntity, MaterialService, {
   afterGetDetail(detailData) {
-    detailData.unitId = detailData.unit.id
     return detailData
   },
   beforeSubmit(submitData) {
-    submitData.exclude('unitId')
     return submitData
   },
 })

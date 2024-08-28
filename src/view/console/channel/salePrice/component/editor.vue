@@ -54,7 +54,6 @@ const {
   onSubmit,
 } = useAirEditor(props, SalePriceEntity, SalePriceService, {
   afterGetDetail(detailData) {
-    detailData.customerId = detailData.customer.id
     detailData.customerName = detailData.customer.name
     detailData.materialId = detailData.material.id
     detailData.materialName = detailData.material.name
