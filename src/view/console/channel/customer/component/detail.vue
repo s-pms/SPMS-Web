@@ -2,8 +2,8 @@
   <ADialog
     :title="CustomerEntity.getModelName() + title"
     :loading="isLoading"
-    @on-confirm="onConfirm()"
-    @on-cancel="onCancel()"
+    @on-confirm="onConfirm"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

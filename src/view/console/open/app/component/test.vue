@@ -5,8 +5,8 @@
     :fullable="false"
     with="1000px"
     :disable-confirm="!app.appKey || !app.appSecret || !app.arithmetic || (OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic) && !app.publicKey)"
-    @on-confirm="onTest()"
-    @on-cancel="onCancel()"
+    @on-confirm="onTest"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

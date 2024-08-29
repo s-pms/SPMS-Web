@@ -6,8 +6,8 @@
     :fullable="false"
     height="70%"
     confirm-text="保存"
-    @on-confirm="onSubmit()"
-    @on-cancel="onCancel()"
+    @on-confirm="onSubmit"
+    @on-cancel="onCancel"
   >
     <el-tree
       ref="treeRef"

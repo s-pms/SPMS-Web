@@ -1,8 +1,8 @@
 <template>
   <ADialog
     :title="param.action"
-    @on-confirm="onConfirm()"
-    @on-cancel="onCancel()"
+    @on-confirm="onConfirm"
+    @on-cancel="onCancel"
   >
     <el-tabs type="border-card">
       <el-tab-pane label="请求">

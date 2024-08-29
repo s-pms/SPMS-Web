@@ -5,8 +5,8 @@
     :loading="isLoading"
     width="800px"
     height="550px"
-    @on-confirm="onSubmit()"
-    @on-cancel="onCancel()"
+    @on-confirm="onSubmit"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

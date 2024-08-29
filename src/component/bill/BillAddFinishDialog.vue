@@ -6,7 +6,7 @@
     :fullable="false"
     confirm-text="添加完成"
     @on-confirm="onConfirm(num)"
-    @on-cancel="onCancel()"
+    @on-cancel="onCancel"
   >
     <el-input
       v-model="num"

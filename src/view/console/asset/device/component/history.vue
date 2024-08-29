@@ -5,8 +5,8 @@
     width="65%"
     height="50%"
     hide-footer
-    @on-cancel="onCancel()"
-    @on-full="onFull()"
+    @on-cancel="onCancel"
+    @on-full="onFull"
   >
     <div class="filter">
       <div class="left" />

@@ -5,8 +5,8 @@
     :fullable="false"
     :loading="isLoading"
     confirm-text="保存"
-    @on-confirm="onSubmit()"
-    @on-cancel="onCancel()"
+    @on-confirm="onSubmit"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

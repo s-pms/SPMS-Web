@@ -4,7 +4,7 @@
       :loading="isLoading"
       :entity="RoleEntity"
       :service="RoleService"
-      @on-add="onAdd()"
+      @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable

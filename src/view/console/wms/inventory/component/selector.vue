@@ -8,7 +8,7 @@
     :loading="isLoading"
     :disable-confirm="mult && selectList.length === 0"
     @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel()"
+    @on-cancel="onCancel"
   >
     <ATreeBox
       v-loading="isLoadingTree"
@@ -27,7 +27,7 @@
         :ctrl-width="80"
         hide-field-selector
         :hide-ctrl="mult"
-        @on-select="onConfirm($event)"
+        @on-select="onConfirm"
       >
         <template #materialCode="{ data }">
           {{ data.material.code }}

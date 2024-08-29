@@ -4,7 +4,7 @@
     hide-confirm
     width="70%"
     height="70%"
-    @on-cancel="onCancel()"
+    @on-cancel="onCancel"
   >
     <div
       v-if="monitorList.length > 0"

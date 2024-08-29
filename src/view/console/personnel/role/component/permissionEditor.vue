@@ -7,8 +7,8 @@
     height="70%"
     width="70%"
     confirm-text="保存"
-    @on-confirm="onSubmit()"
-    @on-cancel="onCancel()"
+    @on-confirm="onSubmit"
+    @on-cancel="onCancel"
   >
     <ATable
       :select-list="formData.permissionList"

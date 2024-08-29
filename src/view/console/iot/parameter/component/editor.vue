@@ -3,8 +3,8 @@
     :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    @on-confirm="onSubmit()"
-    @on-cancel="onCancel()"
+    @on-confirm="onSubmit"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

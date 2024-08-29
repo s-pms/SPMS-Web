@@ -3,8 +3,8 @@
     title="请求日志"
     width="80%"
     height="80%"
-    @on-cancel="onCancel()"
-    @on-confirm="onConfirm()"
+    @on-cancel="onCancel"
+    @on-confirm="onConfirm"
   >
     <ATable
       v-loading="isLoading"

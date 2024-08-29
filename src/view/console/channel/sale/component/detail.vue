@@ -4,8 +4,8 @@
     :loading="isLoading"
     width="80%"
     height="80%"
-    @on-confirm="onConfirm()"
-    @on-cancel="onCancel()"
+    @on-confirm="onConfirm"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

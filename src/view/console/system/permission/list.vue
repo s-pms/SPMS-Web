@@ -4,7 +4,7 @@
       :loading="isLoading"
       :entity="PermissionEntity"
       :service="PermissionService"
-      @on-add="onAdd()"
+      @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable

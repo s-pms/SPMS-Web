@@ -5,8 +5,8 @@
     :loading="isLoading"
     :fullable="false"
     min-height="100px"
-    @on-confirm="formData.id ? onSubmit() : onAdd()"
-    @on-cancel="onCancel()"
+    @on-confirm="formData.id ? onSubmit : onAdd"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

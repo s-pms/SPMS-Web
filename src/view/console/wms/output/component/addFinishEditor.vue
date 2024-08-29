@@ -5,8 +5,8 @@
     :loading="isLoading"
     width="600px"
     :disable-confirm="formData.quantity <= 0"
-    @on-confirm="onSubmit()"
-    @on-cancel="onCancel()"
+    @on-confirm="onSubmit"
+    @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"

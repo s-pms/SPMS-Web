@@ -3,8 +3,8 @@
     title="请求和响应数据"
     width="600px"
     height="70%"
-    @on-confirm="onConfirm()"
-    @on-cancel="onCancel()"
+    @on-confirm="onConfirm"
+    @on-cancel="onCancel"
   >
     <el-tabs type="border-card">
       <el-tab-pane label="请求">

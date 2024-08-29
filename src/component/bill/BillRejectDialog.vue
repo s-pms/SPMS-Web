@@ -5,7 +5,7 @@
     min-height="200px"
     :fullable="false"
     @on-confirm="onConfirm(rejectReason)"
-    @on-cancel="onCancel()"
+    @on-cancel="onCancel"
   >
     <el-input
       v-model="rejectReason"
