@@ -27,7 +27,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { ADialog, ATable } from '@/airpower/component'
-import { AirTreeInstance } from '@/airpower/type/AirType'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirRequest } from '@/airpower/model/AirRequest'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
@@ -37,16 +36,11 @@ import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
 
-const treeRef = ref<AirTreeInstance>()
-
 const props = defineProps(airPropsParam(new RoleEntity()))
 
 const {
   isLoading, formRef, formData,
 } = useAirEditor(props, RoleEntity, RoleService, {
-  afterGetDetail() {
-    treeRef.value?.setCheckedKeys(formData.value.permissionList.map((item) => item.id))
-  },
 })
 
 async function onSelect(selectList: PermissionEntity[]) {
