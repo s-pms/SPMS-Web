@@ -1,6 +1,5 @@
 import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { RoleEntity } from './RoleEntity'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 
@@ -20,9 +19,8 @@ export class RoleService extends AbstractBaseService<RoleEntity> {
    */
   async authorizeMenu(id: number, menuList: MenuEntity[]): Promise<void> {
     const role = new RoleEntity(id)
-    role.menuList = menuList.map((item) => new MenuEntity(item.id))
+    role.menuList = menuList.map((item) => item.copyExposeId())
     await this.api('authorizeMenu').post(role)
-    AirNotification.success('授权菜单成功')
   }
 
   /**
@@ -32,8 +30,7 @@ export class RoleService extends AbstractBaseService<RoleEntity> {
    */
   async authorizePermission(id: number, permissionList: PermissionEntity[]): Promise<void> {
     const role = new RoleEntity(id)
-    role.permissionList = permissionList.map((item) => new PermissionEntity(item.id))
+    role.permissionList = permissionList.map((item) => item.copyExposeId())
     await this.api('authorizePermission').post(role)
-    AirNotification.success('授权权限成功')
   }
 }

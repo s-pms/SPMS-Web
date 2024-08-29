@@ -17,6 +17,7 @@
       show-checkbox
       node-key="id"
       :props="AirConfig.treeProps"
+      :default-checked-keys="formData.menuList.map(item => item.id)"
       @check="onSelect"
     />
   </ADialog>
@@ -35,12 +36,12 @@ import { RoleService } from '@/model/personnel/role/RoleService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
 import { AirConfig } from '@/airpower/config/AirConfig'
+import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new RoleEntity()))
 
 const {
   isLoading, formRef, formData,
-  onSubmit,
 } = useAirEditor(props, RoleEntity, RoleService, {
   successMessage: '角色菜单授权成功',
 })
@@ -55,6 +56,12 @@ const treeList = ref<MenuEntity[]>([])
 
 async function getMenuTreeList() {
   treeList.value = await MenuService.create(isLoading).getList(new AirRequest(MenuEntity))
+}
+
+async function onSubmit() {
+  await RoleService.create(isLoading).authorizeMenu(formData.value.id, formData.value.menuList)
+  AirNotification.success('授权菜单成功')
+  props.onConfirm()
 }
 
 getMenuTreeList()
