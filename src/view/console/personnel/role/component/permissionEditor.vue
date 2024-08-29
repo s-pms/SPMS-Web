@@ -47,7 +47,6 @@ const {
   afterGetDetail() {
     treeRef.value?.setCheckedKeys(formData.value.permissionList.map((item) => item.id))
   },
-  successMessage: '角色权限授权成功',
 })
 
 async function onSelect(selectList: PermissionEntity[]) {

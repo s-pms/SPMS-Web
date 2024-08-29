@@ -43,7 +43,6 @@ const props = defineProps(airPropsParam(new RoleEntity()))
 const {
   isLoading, formRef, formData,
 } = useAirEditor(props, RoleEntity, RoleService, {
-  successMessage: '角色菜单授权成功',
 })
 
 const treeRef = ref<AirTreeInstance>()
