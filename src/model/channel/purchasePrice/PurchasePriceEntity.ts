@@ -15,6 +15,7 @@ export class PurchasePriceEntity extends BaseEntity {
   @Form({
     requiredPayload: true,
   })
+  @Table()
   @Type(SupplierEntity) supplier!: SupplierEntity
 
   @Table()

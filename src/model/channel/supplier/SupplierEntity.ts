@@ -2,10 +2,10 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { Field, Model } from '@/airpower/decorator/Custom'
-import { ISelector } from '@/airpower/interface/ISelector'
+import { IPayload } from '@/airpower/interface/IPayload'
 
 @Model('供应商')
-export class SupplierEntity extends BaseEntity implements ISelector {
+export class SupplierEntity extends BaseEntity implements IPayload {
   /**
    * # 供应商名称
    */
@@ -38,7 +38,7 @@ export class SupplierEntity extends BaseEntity implements ISelector {
   })
   @Field('联系电话') phone!: string
 
-  getSelectorLabel(): string {
+  getPayloadLabel(): string {
     return this.name
   }
 }

@@ -17,6 +17,12 @@
       @on-sort-change="onSortChanged"
       @on-select="onSelected"
     >
+      <template #supplier="{ data }">
+        <ATablePayload
+          :view="SupplierDetail"
+          :payload="data.supplier"
+        />
+      </template>
       <template #materialCode="{ data }">
         {{ data.material.code }}
       </template>
@@ -42,11 +48,13 @@
 <script lang="ts" setup>
 import {
   APanel, APage, ATable, AToolBar,
+  ATablePayload,
 } from '@/airpower/component'
 import { useAirTable } from '@/airpower/hook/useAirTable'
 import { PurchasePriceEditor } from './component'
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+import { SupplierDetail } from '../supplier/component'
 
 const {
   isLoading,

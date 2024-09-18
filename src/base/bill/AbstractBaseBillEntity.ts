@@ -2,16 +2,16 @@ import { Field } from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
-import { ISelector } from '@/airpower/interface/ISelector'
 import { Table } from '@/airpower/decorator/TableField'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { IPayload } from '@/airpower/interface/IPayload'
 
 /**
  * # 单据基类
  *
  * @author Hamm
  */
-export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEntity> extends BaseEntity implements ISelector {
+export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEntity> extends BaseEntity implements IPayload {
   /**
    * # 审核中的状态
    */
@@ -57,7 +57,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   })
   @Field('驳回原因') rejectReason!: string
 
-  getSelectorLabel(): string {
+  getPayloadLabel(): string {
     return this.billCode
   }
 

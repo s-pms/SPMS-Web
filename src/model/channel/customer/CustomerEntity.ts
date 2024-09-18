@@ -4,11 +4,11 @@ import {
 import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
-import { ISelector } from '@/airpower/interface/ISelector'
+import { IPayload } from '@/airpower/interface/IPayload'
 
 @Model('客户')
-export class CustomerEntity extends BaseEntity implements ISelector {
-  getSelectorLabel(): string {
+export class CustomerEntity extends BaseEntity implements IPayload {
+  getPayloadLabel(): string {
     return this.name
   }
 

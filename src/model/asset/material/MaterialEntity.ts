@@ -6,10 +6,10 @@ import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { MaterialTypeEnum } from './MaterialTypeEnum'
-import { ISelector } from '@/airpower/interface/ISelector'
+import { IPayload } from '@/airpower/interface/IPayload'
 
 @Model('物料')
-export class MaterialEntity extends BaseEntity implements ISelector {
+export class MaterialEntity extends BaseEntity implements IPayload {
   /**
    * # 物料名称
    */
@@ -94,7 +94,7 @@ export class MaterialEntity extends BaseEntity implements ISelector {
   @Type(Number)
   @Field('销售单价') salePrice!: number
 
-  getSelectorLabel(): string {
+  getPayloadLabel(): string {
     return `${this.name}(${this.code})`
   }
 }
