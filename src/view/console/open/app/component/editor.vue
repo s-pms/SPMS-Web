@@ -5,7 +5,7 @@
     :loading="isLoading"
     :fullable="false"
     min-height="100px"
-    @on-confirm="formData.id ? onSubmit : onAdd"
+    @on-confirm="onSave"
     @on-cancel="onCancel"
   >
     <el-form
@@ -49,5 +49,13 @@ async function onAdd() {
   const result = await OpenAppService.create(isLoading)
     .addAndGetSecret(formData.value)
   props.onConfirm(result)
+}
+
+async function onSave() {
+  if (formData.value.id) {
+    onSubmit()
+    return
+  }
+  onAdd()
 }
 </script>
