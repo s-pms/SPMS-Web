@@ -43,5 +43,5 @@ soon...
 
 如果有定制需求，欢迎联系我们：
 
-Email: admin@hamm.cn
+Email: admin#hamm.cn
 
