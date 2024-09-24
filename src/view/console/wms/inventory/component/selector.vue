@@ -74,6 +74,7 @@ import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { InventoryService } from '@/model/wms/inventory/InventoryService'
 
 const props = defineProps(airPropsSelector<InventoryEntity>())
 
@@ -116,7 +117,7 @@ async function inventoryTypeChanged() {
 async function getList() {
   request.value.filter = request.value.filter || new InventoryEntity()
   request.value.filter.type = inventoryType.value
-  // list.value = await InventoryService.create(isLoading).getList(request.value)
+  list.value = await InventoryService.create(isLoading).getList(request.value)
 }
 
 async function treeChanged(current: ITree | undefined) {

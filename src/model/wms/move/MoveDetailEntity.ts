@@ -21,7 +21,6 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
   @Form({
     requiredNumber: true,
     number: true,
-    suffixText: '-',
   })
   @Table({
     align: 'right',
