@@ -19,7 +19,7 @@
       :ctrl-width="180"
       @on-detail="onDetail"
       @on-edit="onEdit"
-      @on-sort-change="onSortChanged"
+      @on-sort="onSortChanged"
       @on-select="onSelected"
     >
       <template #storageName="{ data }">
