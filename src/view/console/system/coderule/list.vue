@@ -14,7 +14,7 @@
       :ctrl-width="105"
       hide-delete
       @on-edit="onEdit"
-      @on-sort-change="onSortChanged"
+      @on-sort="onSortChanged"
     >
       <template #ruleField="{ data }">
         {{ getFieldName(data) }}

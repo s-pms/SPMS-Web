@@ -16,7 +16,7 @@
       hide-delete
       hide-edit
       :ctrl-width="60"
-      @on-sort-change="onSortChanged"
+      @on-sort="onSortChanged"
       @on-select="onSelected"
       @on-detail="onDetail"
     >

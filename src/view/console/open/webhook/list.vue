@@ -14,7 +14,7 @@
       :field-list="fieldList"
       @on-edit="onEdit"
       @on-delete="onDelete"
-      @on-sort-change="onSortChanged"
+      @on-sort="onSortChanged"
       @on-disable="onDisable"
       @on-enable="onEnable"
     />

@@ -15,7 +15,7 @@
       :ctrl-width="130"
       @on-edit="onEdit"
       @on-delete="onDelete"
-      @on-sort-change="onSortChanged"
+      @on-sort="onSortChanged"
       @on-select="onSelected"
     >
       <template #customRow="{ data }">

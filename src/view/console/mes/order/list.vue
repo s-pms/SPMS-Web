@@ -18,7 +18,7 @@
       :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
-      @on-sort-change="onSortChanged"
+      @on-sort="onSortChanged"
       @on-select="onSelected"
     >
       <template #customer="{ data }">
