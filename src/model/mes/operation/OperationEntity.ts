@@ -1,21 +1,17 @@
-import {
-  Field,
-  Model,
-  Type,
-} from '@/airpower/decorator/Custom'
-import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { Form } from '@/airpower/decorator/FormField'
 import { Search } from '@/airpower/decorator/SearchField'
 import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 工序
  * @author Hamm
  */
-@EntityConfig({
+@Model({
+  label: '工序',
 })
-@Model('工序')
 export class OperationEntity extends BaseEntity {
   /**
    * # 工序名称
@@ -27,8 +23,11 @@ export class OperationEntity extends BaseEntity {
   @Form({
     requiredString: true,
   })
-  @Type(String)
-  @Field('工序名称') name!: string
+  @Field({
+    label: '工序名称',
+    type: String,
+  })
+    name!: string
 
   /**
    * # 工序编码
@@ -40,6 +39,9 @@ export class OperationEntity extends BaseEntity {
   @Form({
     placeholder: '不填按编码规则自动生成',
   })
-  @Type(String)
-  @Field('工序编码') code!: string
+  @Field({
+    label: '工序编码',
+    type: String,
+  })
+    code!: string
 }

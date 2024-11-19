@@ -1,41 +1,64 @@
-import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('销售价')
+@Model({
+  label: '销售价',
+})
 export class SalePriceEntity extends BaseEntity {
   @Form({
     requiredPayload: true,
   })
-  @Type(MaterialEntity) material!: MaterialEntity
+  @Field({
+    type: MaterialEntity,
+  })
+    material!: MaterialEntity
 
   @Form({
     requiredPayload: true,
   })
-  @Type(CustomerEntity) customer!: CustomerEntity
+  @Field({
+    type: CustomerEntity,
+  })
+    customer!: CustomerEntity
 
   @Table()
-  @Field('物料编码') materialCode!: string
+  @Field({
+    label: '物料编码',
+  })
+    materialCode!: string
 
   @Table()
-  @Field('物料名称') materialName!: string
+  @Field({
+    label: '物料名称',
+  })
+    materialName!: string
 
   @Table()
-  @Field('客户编码') customerName!: string
+  @Field({
+    label: '客户编码',
+  })
+    customerName!: string
 
   @Table()
-  @Field('客户名称') customerCode!: string
+  @Field({
+    label: '客户名称',
+  })
+    customerCode!: string
 
   @Form({
     requiredNumber: true,
   })
-  @Field('物料')
-  @Type(Number) materialId!: number
+  @Field({
+    label: '物料',
+    type: Number,
+  })
+    materialId!: number
 
-  @Field('销售单价')
   @Form({
     requiredNumber: true,
     number: true,
@@ -45,5 +68,9 @@ export class SalePriceEntity extends BaseEntity {
     money: true,
     orderNumber: -1,
   })
-  @Type(Number) price!: number
+  @Field({
+    label: '销售单价',
+    type: Number,
+  })
+    price!: number
 }

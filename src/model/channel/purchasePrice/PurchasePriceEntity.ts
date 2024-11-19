@@ -1,36 +1,56 @@
-import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('采购价')
+@Model({
+  label: '采购价',
+})
 export class PurchasePriceEntity extends BaseEntity {
   @Form({
     requiredPayload: true,
   })
-  @Type(MaterialEntity) material!: MaterialEntity
+  @Field({
+    type: MaterialEntity,
+  })
+    material!: MaterialEntity
 
   @Form({
     requiredPayload: true,
   })
   @Table()
-  @Type(SupplierEntity) supplier!: SupplierEntity
+  @Field({
+    type: SupplierEntity,
+  })
+    supplier!: SupplierEntity
 
   @Table()
-  @Field('物料编码') materialCode!: string
+  @Field({
+    label: '物料编码',
+  })
+    materialCode!: string
 
   @Table()
-  @Field('物料名称') materialName!: string
+  @Field({
+    label: '物料名称',
+  })
+    materialName!: string
 
   @Table()
-  @Field('供应商名称') supplierName!: string
+  @Field({
+    label: '供应商名称',
+  })
+    supplierName!: string
 
   @Table()
-  @Field('供应商编码') supplierCode!: string
+  @Field({
+    label: '供应商编码',
+  })
+    supplierCode!: string
 
-  @Field('采购单价')
   @Form({
     requiredNumber: true,
     number: true,
@@ -40,5 +60,9 @@ export class PurchasePriceEntity extends BaseEntity {
     money: true,
     orderNumber: -1,
   })
-  @Type(Number) price!: number
+  @Field({
+    label: '采购单价',
+    type: Number,
+  })
+    price!: number
 }

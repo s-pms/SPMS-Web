@@ -1,6 +1,3 @@
-import {
-  Dictionary, Field, Model, Type,
-} from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
@@ -12,10 +9,17 @@ import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { Search } from '@/airpower/decorator/SearchField'
 import { MoveEntity } from '../move/MoveEntity'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('入库单')
+@Model({
+  label: '入库单',
+})
 export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
-  @Field('入库单号') declare billCode: string
+  @Field({
+    label: '入库单号',
+  })
+  declare billCode: string
 
   @Table({
     width: 100,
@@ -28,8 +32,11 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     requiredNumber: true,
   })
   @Search()
-  @Dictionary(InputTypeEnum)
-  @Field('入库类型') type!: number
+  @Field({
+    label: '入库类型',
+    dictionary: InputTypeEnum,
+  })
+    type!: number
 
   @Table({
     width: 100,
@@ -38,20 +45,36 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     forceShow: true,
   })
   @Search()
-  @Dictionary(InputStatusEnum)
-  @Field('入库状态') status!: number
+  @Field({
+    label: '入库状态',
+    dictionary: InputStatusEnum,
+  })
+    status!: number
 
-  @Field('存储资源')
-  @Type(StorageEntity) storage!: StorageEntity
+  @Field({
+    label: '存储资源',
+    type: StorageEntity,
+  })
+    storage!: StorageEntity
 
-  @Field('入库明细')
-  @Type(InputDetailEntity, true) details: InputDetailEntity[] = []
+  @Field({
+    label: '入库明细',
+    type: InputDetailEntity,
+    array: true,
+  })
+    details: InputDetailEntity[] = []
 
-  @Field('采购单')
-  @Type(PurchaseEntity) purchase!: PurchaseEntity
+  @Field({
+    label: '采购单',
+    type: PurchaseEntity,
+  })
+    purchase!: PurchaseEntity
 
-  @Field('移库单')
-  @Type(MoveEntity) move!: MoveEntity
+  @Field({
+    label: '移库单',
+    type: MoveEntity,
+  })
+    move!: MoveEntity
 
   getAuditingStatus(): AirEnum {
     return InputStatusEnum.AUDITING

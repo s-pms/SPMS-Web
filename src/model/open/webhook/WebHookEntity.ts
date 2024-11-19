@@ -1,11 +1,14 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Dictionary, Field, Model } from '@/airpower/decorator/Custom'
 import { Table } from '@/airpower/decorator/TableField'
 import { Form } from '@/airpower/decorator/FormField'
 import { WebHookTypeEnum } from '@/model/open/webhook/WebHookTypeEnum'
 import { Search } from '@/airpower/decorator/SearchField'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('通知')
+@Model({
+  label: '通知',
+})
 export class WebHookEntity extends BaseEntity {
   @Form({
     requiredNumber: true,
@@ -14,7 +17,10 @@ export class WebHookEntity extends BaseEntity {
     orderNumber: 99,
     forceShow: true,
   })
-  @Field('场景') scene !: number
+  @Field({
+    label: '场景',
+  })
+    scene !: number
 
   @Search({
     orderNumber: -1,
@@ -26,8 +32,11 @@ export class WebHookEntity extends BaseEntity {
     forceShow: true,
     width: 100,
   })
-  @Dictionary(WebHookTypeEnum)
-  @Field('类型') type !: number
+  @Field({
+    label: '类型',
+    dictionary: WebHookTypeEnum,
+  })
+    type !: number
 
   @Form({
     requiredString: true,
@@ -35,12 +44,18 @@ export class WebHookEntity extends BaseEntity {
     textarea: true,
   })
   @Table()
-  @Field('网址') url !: string
+  @Field({
+    label: '网址',
+  })
+    url !: string
 
   @Form({
     maxLength: 200,
     textarea: true,
     placeholder: '将在发起请求时携带此令牌作为校验凭证',
   })
-  @Field('令牌') token !: string
+  @Field({
+    label: '令牌',
+  })
+    token !: string
 }
