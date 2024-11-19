@@ -1,4 +1,3 @@
-import { ClassConstructor } from '@/airpower/type/ClassConstructor'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
@@ -8,6 +7,7 @@ import { IJson } from '@/airpower/interface/IJson'
 import { IUseDetailOption } from '@/airpower/interface/hooks/IUseDetailOption'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { BillAddFinishDialog } from '@/component'
+import { ClassConstructor } from '@/airpower/type/AirType'
 
 export function useBillDetail<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>, S extends AbstractBaseBillService<D, B>>(props: IJson, entityClass: ClassConstructor<B>, serviceClass: ClassConstructor<S>, option: IUseDetailOption<B> = {}): IUseBillDetailResult<D, B, S> {
   const result = useAirDetail(props, entityClass, serviceClass, option)
