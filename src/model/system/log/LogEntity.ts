@@ -4,7 +4,9 @@ import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 import { Model } from '@/airpower/decorator/Model'
 import { Field } from '@/airpower/decorator/Field'
 
-@Model('日志')
+@Model({
+  label: '日志',
+})
 export class LogEntity extends BaseEntity {
   @Table()
   @Table({

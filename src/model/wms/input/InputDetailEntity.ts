@@ -15,6 +15,9 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
   })
     storage!: StorageEntity
 
+  @Form({
+    requiredPayload: true,
+  })
   @Field({
     type: MaterialEntity,
   })

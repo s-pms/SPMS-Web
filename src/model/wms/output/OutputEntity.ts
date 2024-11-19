@@ -52,14 +52,14 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
 
   @Field({
     label: '出库明细',
-    dictionary: OutputDetailEntity,
+    type: OutputDetailEntity,
     array: true,
   })
     details: OutputDetailEntity[] = []
 
   @Field({
     label: '采购单',
-    dictionary: SaleEntity,
+    type: SaleEntity,
   })
     sale!: SaleEntity
 

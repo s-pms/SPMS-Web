@@ -11,12 +11,12 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
-    label: InventoryEntity,
+    type: InventoryEntity,
   })
     inventory!: InventoryEntity
 
   @Field({
-    label: MaterialEntity,
+    type: MaterialEntity,
   })
     material!: MaterialEntity
 

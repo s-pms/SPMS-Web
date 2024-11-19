@@ -16,7 +16,7 @@
       :disable-edit="row => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="180"
+      :ctrl-width="200"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
