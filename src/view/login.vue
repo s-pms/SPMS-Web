@@ -15,8 +15,8 @@
           <div
             v-for="item in [LoginAction.LOGIN_VIA_PASSWORD, LoginAction.LOGIN_VIA_QRCODE, LoginAction.LOGIN_VIA_PHONE, LoginAction.LOGIN_VIA_EMAIL]"
             :key="item"
-            class="item"
             :class="currentAction === item ? 'active' : ''"
+            class="item"
             @click="currentAction = item"
           >
             {{ item }}
@@ -28,8 +28,8 @@
         >
           <div class="item">
             <div
-              class="label"
               :class="!isValidAccount ? 'error' : ''"
+              class="label"
             >
               ID / 账号
             </div>
@@ -54,8 +54,8 @@
         >
           <div class="item">
             <div
-              class="label"
               :class="!AirValidator.isEmail(user.email) ? 'error' : ''"
+              class="label"
             >
               你的邮箱
             </div>
@@ -65,10 +65,10 @@
             >
               <template #suffix>
                 <el-button
-                  text
-                  type="primary"
                   :disabled="!AirValidator.isEmail(user.email)"
                   :loading="isEmailCodeLoading"
+                  text
+                  type="primary"
                   @click="onSendEmailCode()"
                 >
                   发送
@@ -78,15 +78,15 @@
           </div>
           <div class="item">
             <div
-              class="label"
               :class="!isValidCode ? 'error' : ''"
+              class="label"
             >
               验证码
             </div>
             <el-input
               v-model="user.code"
-              type="text"
               maxlength="8"
+              type="text"
             />
           </div>
         </div>
@@ -96,8 +96,8 @@
         >
           <div class="item">
             <div
-              class="label"
               :class="!AirValidator.isMobilePhone(user.phone) ? 'error' : ''"
+              class="label"
             >
               手机号
             </div>
@@ -107,9 +107,9 @@
             >
               <template #suffix>
                 <el-button
+                  :disabled="!AirValidator.isMobilePhone(user.phone)"
                   text
                   type="primary"
-                  :disabled="!AirValidator.isMobilePhone(user.phone)"
                 >
                   发送
                 </el-button>
@@ -118,15 +118,15 @@
           </div>
           <div class="item">
             <div
-              class="label"
               :class="!isValidCode ? 'error' : ''"
+              class="label"
             >
               验证码
             </div>
             <el-input
               v-model="user.code"
-              type="text"
               maxlength="8"
+              type="text"
             />
           </div>
         </div>
@@ -136,8 +136,8 @@
         >
           <div class="item">
             <div
-              class="label"
               :class="!AirValidator.isEmail(user.email) ? 'error' : ''"
+              class="label"
             >
               邮箱
             </div>
@@ -147,10 +147,10 @@
             >
               <template #suffix>
                 <el-button
-                  text
-                  type="primary"
                   :disabled="!AirValidator.isEmail(user.email)"
                   :loading="isEmailCodeLoading"
+                  text
+                  type="primary"
                   @click="onSendEmailCode()"
                 >
                   发送
@@ -160,21 +160,21 @@
           </div>
           <div class="item">
             <div
-              class="label"
               :class="!isValidCode ? 'error' : ''"
+              class="label"
             >
               验证码
             </div>
             <el-input
               v-model="user.code"
-              type="text"
               maxlength="8"
+              type="text"
             />
           </div>
           <div class="item">
             <div
-              class="label"
               :class="!isValidPassword ? 'error' : ''"
+              class="label"
             >
               你的密码
             </div>
@@ -197,7 +197,7 @@
         </div>
         <template v-else>
           <div class="rules">
-            <el-checkbox v-model="isReaded">
+            <el-checkbox v-model="isRead">
               我已阅读并同意 <a href="">
                 隐私政策
               </a> 以及 <a href="">
@@ -209,18 +209,18 @@
             <div class="submit">
               <el-button
                 v-if="LoginAction.REGISTER_VIA_EMAIL === currentAction"
+                :disabled="isButtonDisabled"
                 :loading="isLoadingReg"
                 type="primary"
-                :disabled="isButtonDisabled"
                 @click="onSubmit()"
               >
                 注册账号
               </el-button>
               <el-button
                 v-else
+                :disabled="isButtonDisabled"
                 :loading="isLoadingLogin"
                 type="primary"
-                :disabled="isButtonDisabled"
                 @click="onSubmit()"
               >
                 立即登录
@@ -263,7 +263,7 @@ const currentAction = ref(LoginAction.LOGIN_VIA_PASSWORD)
 /**
  * # 是否已阅读
  */
-const isReaded = ref(true)
+const isRead = ref(true)
 
 const user = ref(new UserEntity())
 
@@ -314,7 +314,8 @@ const isButtonDisabled = computed(() => {
 async function getAppInfo() {
   if (appKey) {
     user.value.appKey = appKey
-    appInfo.value = await OpenAppService.create(isLoadingApp).getAppByKey(appKey)
+    appInfo.value = await OpenAppService.create(isLoadingApp)
+      .getAppByKey(appKey)
   }
 }
 
@@ -343,7 +344,8 @@ async function onLogin() {
     request.id = parseInt(request.email, 10)
     request.exclude('email')
   }
-  const result = await UserService.create(isLoadingLogin).login(request)
+  const result = await UserService.create(isLoadingLogin)
+    .login(request)
   loginRedirect(result)
 }
 
@@ -351,7 +353,8 @@ async function onLogin() {
  * # 邮箱+验证码登录
  */
 async function onEmailLogin() {
-  const result = await UserService.create(isLoadingLogin).loginViaEmail(user.value)
+  const result = await UserService.create(isLoadingLogin)
+    .loginViaEmail(user.value)
   loginRedirect(result)
 }
 
@@ -360,8 +363,11 @@ async function onEmailLogin() {
  */
 async function onReg() {
   // eslint-disable-next-line no-case-declarations
-  await UserService.create(isLoadingLogin).register(user.value)
-  AirAlert.create().setConfirmText('去登录').show('账号注册成功, 你可以使用账号密码去登录了!')
+  await UserService.create(isLoadingLogin)
+    .register(user.value)
+  AirAlert.create()
+    .setConfirmText('去登录')
+    .show('账号注册成功, 你可以使用账号密码去登录了!')
   currentAction.value = LoginAction.LOGIN_VIA_PASSWORD
 }
 
@@ -369,9 +375,11 @@ async function onReg() {
  * # 登录/注册按钮事件
  */
 async function onSubmit() {
-  if (!isReaded.value) {
-    await AirConfirm.create().setConfirmText('我已阅读并同意').show('请阅读并同意隐私政策以及服务条款相关内容。', '确认提示')
-    isReaded.value = true
+  if (!isRead.value) {
+    await AirConfirm.create()
+      .setConfirmText('我已阅读并同意')
+      .show('请阅读并同意隐私政策以及服务条款相关内容。', '确认提示')
+    isRead.value = true
   }
   switch (currentAction.value) {
     case LoginAction.LOGIN_VIA_PASSWORD:
@@ -393,13 +401,14 @@ async function onSubmit() {
 async function onSendEmailCode() {
   const request = new UserEntity()
   request.email = user.value.email
-  await MailService.create(isEmailCodeLoading).sendCode(request)
+  await MailService.create(isEmailCodeLoading)
+    .sendCode(request)
   AirNotification.success('邮箱验证码发送成功, 请注意查看是否被拦截')
 }
 
 getAppInfo()
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .login {
   position: fixed;
   left: 0;

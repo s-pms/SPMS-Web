@@ -1,24 +1,24 @@
 <template>
   <ADialog
-    :hide-footer="!mult"
-    title="选择采购明细"
-    is-selector
-    width="70%"
+    :disable-confirm="isMultiple && selectList.length === 0"
+    :hide-footer="!isMultiple"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    is-selector
+    title="选择采购明细"
+    width="70%"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel"
   >
     <ATable
+      :ctrl-width="80"
       :data-list="list"
-      :show-select="mult"
+      :entity="PurchaseDetailEntity"
+      :hide-ctrl="isMultiple"
+      :select-list="selectList"
+      :show-select="isMultiple"
       hide-delete
       hide-edit
-      :select-list="selectList"
-      :entity="PurchaseDetailEntity"
-      :ctrl-width="80"
       hide-field-selector
-      :hide-ctrl="mult"
       @on-select="onSelected"
     >
       <template #materialCode="{ data }">
@@ -28,14 +28,14 @@
         {{ data.material.name }}
       </template>
       <template
-        v-if="!mult"
+        v-if="!isMultiple"
         #customRow="{ data }"
       >
         <AButton
-          type="SELECT"
-          icon-button
           :disabled="data.isDisabled"
+          icon-button
           tooltip="选择"
+          type="SELECT"
           @click="
             onConfirm(data)
           "
@@ -47,9 +47,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  ATable, ADialog, AButton,
-} from '@/airpower/component'
+import { AButton, ADialog, ATable } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
@@ -69,10 +67,11 @@ function onSelected(data: PurchaseDetailEntity[]) {
 const plan = ref(new PurchaseEntity())
 
 async function getInput() {
-  plan.value = await PurchaseService.create(isLoading).getDetail(props.param.id)
+  plan.value = await PurchaseService.create(isLoading)
+    .getDetail(props.param.id)
   list.value = plan.value.details
 }
 
 getInput()
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

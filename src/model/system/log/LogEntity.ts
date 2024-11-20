@@ -86,5 +86,5 @@ export class LogEntity extends BaseEntity {
   @Field({
     label: '总耗时',
   })
-    penddingTime!: number
+    pendingTime!: number
 }

@@ -1,19 +1,19 @@
 <template>
   <ASelector
-    :entity="SaleEntity"
-    :service="SaleService"
-    :props="props"
     :before-search="requestData => {
-      requestData.filter.status = SaleStatusEnum.OUTPUTING.key
+      requestData.filter.status = SaleStatusEnum.OUTPUTTING.key
       return requestData
     }"
     :editor="SaleEditor"
+    :entity="SaleEntity"
+    :props="props"
+    :service="SaleService"
   >
     <template #customerCode="{ data }">
-      {{ data.customer?.code || "-" }}
+      {{ data.customer?.code || '-' }}
     </template>
     <template #customerName="{ data }">
-      {{ data.customer?.name || "-" }}
+      {{ data.customer?.name || '-' }}
     </template>
   </ASelector>
 </template>
@@ -29,4 +29,4 @@ import { SaleEditor } from '.'
 const props = defineProps(airPropsSelector<SaleEntity>())
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

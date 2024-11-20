@@ -96,7 +96,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   }
 
   getAuditedStatus(): AirEnum {
-    return SaleStatusEnum.OUTPUTING
+    return SaleStatusEnum.OUTPUTTING
   }
 
   getRejectedStatus(): AirEnum {
