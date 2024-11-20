@@ -1,18 +1,18 @@
 <template>
   <ADialog
-    title="添加完成数量"
+    :allow-fullscreen="false"
     :disable-confirm="num <= 0"
-    min-height="200px"
-    :fullable="false"
     confirm-text="添加完成"
+    min-height="200px"
+    title="添加完成数量"
     @on-confirm="onConfirm(num)"
     @on-cancel="onCancel"
   >
     <el-input
       v-model="num"
-      type="number"
       clearable
       placeholder="请输入本次完成数量..."
+      type="number"
     />
   </ADialog>
 </template>

@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
+    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
-    :fullable="false"
+    :title="title"
     min-height="100px"
     @on-confirm="onSave"
     @on-cancel="onCancel"
@@ -11,8 +11,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AFormField field="appName" />

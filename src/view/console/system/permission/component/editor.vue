@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
+    :allow-fullscreen="false"
     :form-ref="formRef"
-    :fullable="false"
     :loading="isLoading"
+    :title="title"
     confirm-text="保存"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -11,8 +11,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="PermissionService.createValidator(param)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item
@@ -36,9 +36,12 @@ import { PermissionService } from '@/model/system/permission/PermissionService'
 
 const props = defineProps(airPropsParam(new PermissionEntity()))
 const {
-  isLoading, formData, formRef, title,
+  isLoading,
+  formData,
+  formRef,
+  title,
   onSubmit,
 } = useAirEditor(props, PermissionEntity, PermissionService)
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

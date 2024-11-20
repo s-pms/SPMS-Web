@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
+    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
-    :fullable="false"
+    :title="title"
     confirm-text="保存"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -11,8 +11,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AFormField field="name" />
@@ -31,9 +31,13 @@ import { OperationService } from '@/model/mes/operation/OperationService'
 const props = defineProps(airPropsParam(new OperationEntity()))
 
 const {
-  formRef, isLoading, formData, rules, title,
+  formRef,
+  isLoading,
+  formData,
+  rules,
+  title,
   onSubmit,
 } = useAirEditor(props, OperationEntity, OperationService)
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

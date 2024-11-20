@@ -1,17 +1,17 @@
 <template>
   <ADialog
-    :title="param"
+    :allow-fullscreen="false"
     :disable-confirm="rejectReason === ''"
+    :title="param"
     min-height="200px"
-    :fullable="false"
     @on-confirm="onConfirm(rejectReason)"
     @on-cancel="onCancel"
   >
     <el-input
       v-model="rejectReason"
-      type="textarea"
       :rows="3"
       placeholder="请输入驳回原因..."
+      type="textarea"
     />
   </ADialog>
 </template>
