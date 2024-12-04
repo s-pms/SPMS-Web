@@ -1,20 +1,19 @@
-import {
-  Dictionary, Field, Model, Type,
-} from '@/airpower/decorator/Custom'
-import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { Form } from '@/airpower/decorator/FormField'
 import { Search } from '@/airpower/decorator/SearchField'
 import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { ITree } from '@/airpower/interface/ITree'
 import { PermissionSystemEnum } from './PermissionSystemEnum'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 权限
  * @author Hamm
  */
-@EntityConfig()
-@Model('权限')
+@Model({
+  label: '权限',
+})
 export class PermissionEntity extends BaseEntity implements ITree {
   /**
    * # 权限名称
@@ -26,8 +25,10 @@ export class PermissionEntity extends BaseEntity implements ITree {
   @Form({
     requiredString: true,
   })
-  @Type(String)
-  @Field('权限名称') name!: string
+  @Field({
+    label: '权限名称',
+  })
+    name!: string
 
   /**
    * # 权限唯一标识
@@ -39,35 +40,49 @@ export class PermissionEntity extends BaseEntity implements ITree {
   @Form({
     requiredString: '请输入权限标识...',
   })
-  @Field('权限标识') identity!: string
+  @Field({
+    label: '权限标识',
+  })
+    identity!: string
 
   /**
    * # 权限类别
    */
-  @Dictionary(PermissionSystemEnum)
   @Table({
     showColor: true,
     width: 100,
     orderNumber: -100,
   })
-  @Field('类别') isSystem!: boolean
+  @Field({
+    label: '类别',
+    dictionary: PermissionSystemEnum,
+  })
+    isSystem!: boolean
 
   /**
    * # 父权限ID
    */
-  @Field('父级ID') parentId!: number
+  @Field({
+    label: '父级ID',
+  })
+    parentId!: number
 
   /**
    * # 子权限列表
    */
-  // eslint-disable-next-line no-use-before-define
-  @Type(PermissionEntity, true) children!: this[]
+  @Field({
+    // eslint-disable-next-line no-use-before-define
+    type: PermissionEntity,
+    array: true,
+  }) children!: this[]
 
   /**
    * # 父权限
    */
-  // eslint-disable-next-line no-use-before-define
-  @Type(PermissionEntity) parent!: this
+  @Field({
+    // eslint-disable-next-line no-use-before-define
+    type: PermissionEntity,
+  }) parent!: this
 
   @Table({
     removed: true,

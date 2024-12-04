@@ -1,6 +1,3 @@
-import {
-  Dictionary, Field, Model, Type,
-} from '@/airpower/decorator/Custom'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
@@ -11,10 +8,17 @@ import { OutputTypeEnum } from './OutputTypeEnum'
 import { OutputStatusEnum } from './OutputStatusEnum'
 import { MoveEntity } from '../move/MoveEntity'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('出库单')
+@Model({
+  label: '出库单',
+})
 export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
-  @Field('出库单号') declare billCode: string
+  @Field({
+    label: '出库单号',
+  })
+  declare billCode: string
 
   @Table({
     width: 100,
@@ -27,8 +31,11 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     requiredNumber: true,
   })
   @Search()
-  @Dictionary(OutputTypeEnum)
-  @Field('出库类型') type!: number
+  @Field({
+    label: '出库类型',
+    dictionary: OutputTypeEnum,
+  })
+    type!: number
 
   @Table({
     width: 100,
@@ -37,17 +44,30 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     forceShow: true,
   })
   @Search()
-  @Dictionary(OutputStatusEnum)
-  @Field('出库状态') status!: number
+  @Field({
+    label: '出库状态',
+    dictionary: OutputStatusEnum,
+  })
+    status!: number
 
-  @Field('出库明细')
-  @Type(OutputDetailEntity, true) details: OutputDetailEntity[] = []
+  @Field({
+    label: '出库明细',
+    type: OutputDetailEntity,
+    array: true,
+  })
+    details: OutputDetailEntity[] = []
 
-  @Field('采购单')
-  @Type(SaleEntity) sale!: SaleEntity
+  @Field({
+    label: '采购单',
+    type: SaleEntity,
+  })
+    sale!: SaleEntity
 
-  @Field('移库单')
-  @Type(MoveEntity) move!: MoveEntity
+  @Field({
+    label: '移库单',
+    type: MoveEntity,
+  })
+    move!: MoveEntity
 
   getAuditingStatus(): AirEnum {
     return OutputStatusEnum.AUDITING

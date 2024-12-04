@@ -14,7 +14,7 @@
       @submit.prevent
     >
       <AGroup
-        title="采购单"
+        title="销售单"
         :column="3"
       >
         <BillFormCode :bill="formData" />
@@ -29,7 +29,7 @@
         />
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
-      <AGroup title="采购明细">
+      <AGroup title="销售明细">
         <ATable
           :entity="SaleDetailEntity"
           :data-list="formData.details"

@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
+    :allow-fullscreen="false"
     :form-ref="formRef"
-    :fullable="false"
     :loading="isLoading"
+    :title="title"
     confirm-text="保存"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -11,8 +11,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item
@@ -40,9 +40,13 @@ import { MenuService } from '@/model/system/menu/MenuService'
 const props = defineProps(airPropsParam(new MenuEntity()))
 
 const {
-  title, formData, formRef, isLoading, rules,
+  title,
+  formData,
+  formRef,
+  isLoading,
+  rules,
   onSubmit,
 } = useAirEditor(props, MenuEntity, MenuService)
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

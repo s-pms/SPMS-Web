@@ -11,7 +11,7 @@ export class SaleStatusEnum extends AirEnum {
 
   static readonly REJECTED = new SaleStatusEnum(2, '已驳回', AirColor.DANGER)
 
-  static readonly OUTPUTING = new SaleStatusEnum(3, '出库中', AirColor.SUCCESS)
+  static readonly OUTPUTTING = new SaleStatusEnum(3, '出库中', AirColor.SUCCESS)
 
   static readonly DONE = new SaleStatusEnum(4, '已完成', AirColor.NORMAL)
 }

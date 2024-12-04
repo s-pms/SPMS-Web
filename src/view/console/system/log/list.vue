@@ -1,30 +1,30 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="LogEntity"
+      :loading="isLoading"
       :service="LogService"
       hide-add
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="60"
       :data-list="response.list"
       :entity="LogEntity"
       :select-list="selectList"
-      show-detail
       hide-delete
       hide-edit
-      :ctrl-width="60"
+      show-detail
       @on-sort="onSortChanged"
       @on-select="onSelected"
       @on-detail="onDetail"
     >
-      <template #penddingTime="{ data }">
+      <template #pendingTime="{ data }">
         <el-tag
           :color="getColor(data)"
-          effect="dark"
           disable-transitions
+          effect="dark"
         >
           {{ data.updateTime - data.createTime }}ms
         </el-tag>
@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import {
-  APanel, APage, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { useAirTable } from '@/airpower/hook/useAirTable'
 import { LogEntity } from '@/model/system/log/LogEntity'
@@ -53,7 +53,11 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onPageChanged, onSortChanged, onSelected, onDetail,
+  onSearch,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
 } = useAirTable(LogEntity, LogService, {
   detailView: Detail,
 })
@@ -72,4 +76,4 @@ function getColor(log: LogEntity) {
   return AirColor.NORMAL
 }
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

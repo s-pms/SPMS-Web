@@ -1,11 +1,14 @@
-import { Dictionary, Field, Model } from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
-import { ParameterSystemEnum } from './ParameterSystemEnum'
 import { ParameterTypeEnum } from './ParameterTypeEnum'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
+import { ParameterSystemEnum } from '@/model/iot/parameter/ParameterSystemEnum'
 
-@Model('采集参数')
+@Model({
+  label: '采集参数',
+})
 export class ParameterEntity extends BaseEntity {
   @Table({
     forceShow: true,
@@ -13,7 +16,10 @@ export class ParameterEntity extends BaseEntity {
   @Form({
     requiredString: true,
   })
-  @Field('参数名称') code!: string
+  @Field({
+    label: '参数名称',
+  })
+    code!: string
 
   @Table({
     forceShow: true,
@@ -21,9 +27,11 @@ export class ParameterEntity extends BaseEntity {
   @Form({
     requiredString: true,
   })
-  @Field('参数标题') label!: string
+  @Field({
+    label: '参数标题',
+  })
+    label!: string
 
-  @Dictionary(ParameterTypeEnum)
   @Table({
     showColor: true,
     width: 100,
@@ -33,13 +41,20 @@ export class ParameterEntity extends BaseEntity {
     clearable: false,
     requiredNumber: true,
   })
-  @Field('数据类型') dataType!: number
+  @Field({
+    label: '数据类型',
+    dictionary: ParameterTypeEnum,
+  })
+    dataType!: number
 
-  @Dictionary(ParameterSystemEnum)
   @Table({
     showColor: true,
     width: 100,
     orderNumber: -100,
   })
-  @Field('参数类别') isSystem!: boolean
+  @Field({
+    label: '参数类别',
+    dictionary: ParameterSystemEnum,
+  })
+    isSystem!: boolean
 }

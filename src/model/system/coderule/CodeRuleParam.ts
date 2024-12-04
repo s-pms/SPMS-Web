@@ -1,5 +1,5 @@
 import { AirModel } from '@/airpower/base/AirModel'
-import { Field, Type } from '@/airpower/decorator/Custom'
+import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 编码规则参数
@@ -7,12 +7,24 @@ import { Field, Type } from '@/airpower/decorator/Custom'
  * @author Hamm
  */
 export class CodeRuleParam extends AirModel {
-  @Field('占位符') label!: string
+  @Field({
+    label: '占位符',
+  })
+    label!: string
 
-  @Type(Number)
-  @Field('参数值') value!: number
+  @Field({
+    label: '参数值',
+    type: Number,
+  })
+    value!: number
 
-  @Field('示例') demo!: string
+  @Field({
+    label: '示例',
+  })
+    demo!: string
 
-  @Field('标题') desc!: string
+  @Field({
+    label: '标题',
+  })
+    desc!: string
 }

@@ -1,32 +1,32 @@
 <template>
   <ADialog
-    :hide-footer="!mult"
-    title="选择库存"
-    is-selector
-    width="70%"
-    height="70%"
+    :disable-confirm="isMultiple && selectList.length === 0"
+    :hide-footer="!isMultiple"
     :loading="isLoading"
-    :disable-confirm="mult && selectList.length === 0"
+    height="70%"
+    is-selector
+    title="选择库存"
+    width="70%"
     @on-confirm="onConfirm(selectList)"
     @on-cancel="onCancel"
   >
     <ATreeBox
       v-loading="isLoadingTree"
+      :placeholder="treePlaceHolder"
       :tree-data="treeData"
       searchable
-      :placeholder="treePlaceHolder"
       @on-change="treeChanged"
     >
       <ATable
+        :ctrl-width="80"
         :data-list="list"
-        :show-select="mult"
+        :entity="InventoryEntity"
+        :hide-ctrl="isMultiple"
+        :select-list="selectList"
+        :show-select="isMultiple"
         hide-delete
         hide-edit
-        :select-list="selectList"
-        :entity="InventoryEntity"
-        :ctrl-width="80"
         hide-field-selector
-        :hide-ctrl="mult"
         @on-select="onConfirm"
       >
         <template #materialCode="{ data }">
@@ -42,14 +42,14 @@
           {{ data.material.unit.name }}
         </template>
         <template
-          v-if="!mult"
+          v-if="!isMultiple"
           #customRow="{ data }"
         >
           <AButton
-            type="SELECT"
-            icon-button
             :disabled="data.isDisabled"
+            icon-button
             tooltip="选择"
+            type="SELECT"
             @click="
               onConfirm(data)
             "
@@ -89,11 +89,13 @@ const inventoryType = ref(props.param.type)
 const treeData = ref<ITree[]>([])
 
 async function getStorage() {
-  treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
+  treeData.value = await StorageService.create(isLoadingTree)
+    .getList(new AirRequest(StorageEntity))
 }
 
 async function getStructure() {
-  treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
+  treeData.value = await StructureService.create(isLoadingTree)
+    .getList(new AirRequest(StructureEntity))
 }
 
 const treePlaceHolder = ref('搜索...')
@@ -117,7 +119,8 @@ async function inventoryTypeChanged() {
 async function getList() {
   request.value.filter = request.value.filter || new InventoryEntity()
   request.value.filter.type = inventoryType.value
-  list.value = await InventoryService.create(isLoading).getList(request.value)
+  list.value = await InventoryService.create(isLoading)
+    .getList(request.value)
 }
 
 async function treeChanged(current: ITree | undefined) {
@@ -142,4 +145,4 @@ async function treeChanged(current: ITree | undefined) {
 
 inventoryTypeChanged()
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

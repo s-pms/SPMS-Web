@@ -1,18 +1,17 @@
-/* eslint-disable */
-import {Field, Model, Type} from '@/airpower/decorator/Custom'
-import {BaseEntity} from '@/base/BaseEntity'
-import {RoleEntity} from '../role/RoleEntity'
-import {EntityConfig} from '@/airpower/decorator/EntityConfig'
-import {IUser} from '@/airpower/interface/IUser'
-import {Form} from '@/airpower/decorator/FormField'
-import {Search} from '@/airpower/decorator/SearchField'
-import {Table} from '@/airpower/decorator/TableField'
+import { BaseEntity } from '@/base/BaseEntity'
+import { RoleEntity } from '../role/RoleEntity'
+import { IUser } from '@/airpower/interface/IUser'
+import { Form } from '@/airpower/decorator/FormField'
+import { Search } from '@/airpower/decorator/SearchField'
+import { Table } from '@/airpower/decorator/TableField'
+import { Field } from '@/airpower/decorator/Field'
+import { Model } from '@/airpower/decorator/Model'
 
 /**
  * # 用户实体
  */
-@Model('用户')
-@EntityConfig({
+@Model({
+  label: '用户',
   addTitle: '添加用户',
 })
 export class UserEntity extends BaseEntity implements IUser {
@@ -24,7 +23,10 @@ export class UserEntity extends BaseEntity implements IUser {
   })
   @Table()
   @Search()
-  @Field('账号') account!: string
+  @Field({
+    label: '账号',
+  })
+    account!: string
 
   /**
    * # 昵称
@@ -36,7 +38,10 @@ export class UserEntity extends BaseEntity implements IUser {
     forceShow: true,
   })
   @Search()
-  @Field('昵称') nickname!: string
+  @Field({
+    label: '昵称',
+  })
+    nickname!: string
 
   /**
    * # 手机
@@ -48,7 +53,10 @@ export class UserEntity extends BaseEntity implements IUser {
     phone: true,
   })
   @Search()
-  @Field('手机') phone!: string
+  @Field({
+    label: '手机',
+  })
+    phone!: string
 
   /**
    * # 邮箱
@@ -58,7 +66,10 @@ export class UserEntity extends BaseEntity implements IUser {
   })
   @Table()
   @Search()
-  @Field('邮箱') email!: string
+  @Field({
+    label: '邮箱',
+  })
+    email!: string
 
   /**
    * # 密码
@@ -66,31 +77,32 @@ export class UserEntity extends BaseEntity implements IUser {
   @Form({
     password: true,
   })
-  @Field('密码') password!: string
+  @Field({
+    label: '密码',
+  })
+    password!: string
 
   /**
    * # 头像
    */
-  @Field('头像') avatar!: string
+  @Field({
+    label: '头像',
+  })
+    avatar!: string
 
   /**
    * # 角色列表
    */
-  @Field('角色')
   @Table({
     payloadArray: true,
     payloadField: 'name',
   })
-  @Type(RoleEntity, true) roleList!: RoleEntity[]
-
-  /**
-   * # 是否超级管理员
-   * @returns 是否超管
-   */
-  isRootUser() {
-    return this.id === 1
-  }
-
+  @Field({
+    label: '角色',
+    type: RoleEntity,
+    array: true,
+  })
+    roleList!: RoleEntity[]
 
   /**
    * # 验证码
@@ -101,4 +113,12 @@ export class UserEntity extends BaseEntity implements IUser {
    * # 所属应用AppKey
    */
   appKey!: string
+
+  /**
+   * # 是否超级管理员
+   * @returns 是否超管
+   */
+  isRootUser() {
+    return this.id === 1
+  }
 }
