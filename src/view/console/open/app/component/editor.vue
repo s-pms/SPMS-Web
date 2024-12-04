@@ -19,7 +19,6 @@
       <AFormField field="arithmetic" />
       <AFormField field="url" />
       <AFormField field="ipWhiteList" />
-      <AFormField field="remark" />
     </el-form>
   </ADialog>
 </template>

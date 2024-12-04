@@ -1,6 +1,5 @@
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 import { AirEntity } from '@/airpower/base/AirEntity'
-import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { Model } from '@/airpower/decorator/Model'
 import { Field } from '@/airpower/decorator/Field'
@@ -31,15 +30,4 @@ export class BaseEntity extends AirEntity {
     type: Number,
   })
     updateTime!: number
-
-  @Form({
-    textarea: true,
-    orderNumber: -100,
-    hide: true,
-  })
-  @Field({
-    label: '备注',
-    type: String,
-  })
-    remark!: string
 }

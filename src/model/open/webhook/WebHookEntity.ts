@@ -58,4 +58,15 @@ export class WebHookEntity extends BaseEntity {
     label: '令牌',
   })
     token !: string
+
+  @Form({
+    textarea: true,
+    orderNumber: -100,
+    hide: true,
+  })
+  @Field({
+    label: '备注',
+    type: String,
+  })
+    remark!: string
 }
