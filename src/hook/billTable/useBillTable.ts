@@ -1,5 +1,4 @@
 import { IUseTableOption } from '@/airpower/interface/hooks/IUseTableOption'
-import { ClassConstructor } from '@/airpower/type/ClassConstructor'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { IUseBillTableResult } from './IUseBillTableResult'
@@ -8,6 +7,7 @@ import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { BillRejectDialog } from '@/component'
+import { ClassConstructor } from '@/airpower/type/AirType'
 
 export function useBillTable<
   D extends AbstractBaseBillDetailEntity,

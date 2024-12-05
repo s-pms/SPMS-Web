@@ -1,41 +1,63 @@
-import {
-  Field, Model,
-} from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Table } from '@/airpower/decorator/TableField'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('日志')
+@Model({
+  label: '日志',
+})
 export class LogEntity extends BaseEntity {
   @Table()
   @Table({
     orderNumber: 66,
     forceShow: true,
   })
-  @Field('动作') action!: string
+  @Field({
+    label: '动作',
+  })
+    action!: string
 
   @Table({
     width: 100,
   })
-  @Field('版本号') version!: number
+  @Field({
+    label: '版本号',
+  })
+    version!: number
 
   @Table()
-  @Field('平台') platform!: string
+  @Field({
+    label: '平台',
+  })
+    platform!: string
 
   @Table({
     orderNumber: 77,
     width: 160,
   })
-  @Field('IP') ip!: string
+  @Field({
+    label: 'IP',
+  })
+    ip!: string
 
-  @Field('请求体') request!: string
+  @Field({
+    label: '请求体',
+  })
+    request!: string
 
-  @Field('响应数据') response!: string
+  @Field({
+    label: '响应数据',
+  })
+    response!: string
 
   @Table({
     width: 60,
   })
-  @Field('用户ID') userId!: number
+  @Field({
+    label: '用户ID',
+  })
+    userId!: number
 
   @Table({
     hide: false,
@@ -61,5 +83,8 @@ export class LogEntity extends BaseEntity {
     orderNumber: -1,
     align: 'right',
   })
-  @Field('总耗时') penddingTime!: number
+  @Field({
+    label: '总耗时',
+  })
+    pendingTime!: number
 }

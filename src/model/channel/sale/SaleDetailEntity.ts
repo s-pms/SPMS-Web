@@ -1,30 +1,44 @@
-import { Field, Model, Type } from '@/airpower/decorator/Custom'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('销售明细')
+@Model({
+  label: '销售明细',
+})
 export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   @Form({
     requiredPayload: true,
   })
-  @Type(MaterialEntity) material!: MaterialEntity
+  @Field({
+    type: MaterialEntity,
+  })
+    material!: MaterialEntity
 
   @Table()
-  @Field('物料编码') materialCode!: string
+  @Field({
+    label: '物料编码',
+  })
+    materialCode!: string
 
   @Table()
-  @Field('物料名称') materialName!: string
+  @Field({
+    label: '物料名称',
+  })
+    materialName!: string
 
   @Form({
     requiredNumber: true,
   })
-  @Field('物料')
-  @Type(Number) materialId!: number
+  @Field({
+    label: '物料',
+    type: Number,
+  })
+    materialId!: number
 
-  @Field('销售单价')
   @Form({
     requiredNumber: true,
     number: true,
@@ -34,9 +48,12 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
     money: true,
     orderNumber: -1,
   })
-  @Type(Number) price!: number
+  @Field({
+    label: '销售单价',
+    type: Number,
+  })
+    price!: number
 
-  @Field('销售数量')
   @Form({
     requiredNumber: true,
     number: true,
@@ -46,9 +63,19 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
     width: 150,
     orderNumber: -2,
   })
-  @Type(Number) quantity!: number
+  @Field({
+    label: '销售数量',
+    type: Number,
+  })
+    quantity!: number
 
-  @Type(Number) finishQuantity!: number
+  @Field({
+    type: Number,
+  })
+    finishQuantity!: number
 
-  @Type(CustomerEntity) customer!: CustomerEntity
+  @Field({
+    type: CustomerEntity,
+  })
+    customer!: CustomerEntity
 }

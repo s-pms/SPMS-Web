@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { ITree } from '@/airpower/interface/ITree'
-import { Type } from '@/airpower/decorator/Custom'
+import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 部门实体
@@ -15,6 +15,11 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   /**
    * # 下级部门
    */
-  // eslint-disable-next-line no-use-before-define
-  @Type(DepartmentEntity, true) children: this[] = []
+
+  @Field({
+    // eslint-disable-next-line no-use-before-define
+    type: DepartmentEntity,
+    array: true,
+  })
+    children: this[] = []
 }

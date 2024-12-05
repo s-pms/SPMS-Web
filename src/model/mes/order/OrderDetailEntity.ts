@@ -1,7 +1,9 @@
-import { Model } from '@/airpower/decorator/Custom'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import { Model } from '@/airpower/decorator/Model'
 
-@Model('订单明细')
+@Model({
+  label: '订单明细',
+})
 export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
   quantity!: number
 

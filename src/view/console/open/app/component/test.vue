@@ -1,10 +1,10 @@
 <template>
   <ADialog
-    title="测试应用"
-    :loading="isLoading"
-    :fullable="false"
-    with="1000px"
+    :allow-fullscreen="false"
     :disable-confirm="!app.appKey || !app.appSecret || !app.arithmetic || (OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic) && !app.publicKey)"
+    :loading="isLoading"
+    title="测试应用"
+    with="1000px"
     @on-confirm="onTest"
     @on-cancel="onCancel"
   >
@@ -15,22 +15,21 @@
       @submit.prevent
     >
       <AGroup
-        title="应用信息"
         :column="2"
+        title="应用信息"
       >
         <AFormField
           v-model="app"
+          :entity="OpenAppEntity"
           field="appKey"
-          :entity="OpenAppEntity"
         />
         <AFormField
           v-model="app"
+          :entity="OpenAppEntity"
           field="appSecret"
-          :entity="OpenAppEntity"
         />
         <AFormField
           v-model="app"
-          field="arithmetic"
           :entity="OpenAppEntity"
           :list="OpenAppArithmeticEnum.toArray().map(item => {
             if (OpenAppArithmeticEnum.RSA.equalsKey(item.key)) {
@@ -38,6 +37,7 @@
             }
             return item
           })"
+          field="arithmetic"
         />
         <el-form-item label="版本号">
           <el-input
@@ -67,8 +67,8 @@
         <template v-if="OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic)">
           <AFormField
             v-model="app"
-            field="publicKey"
             :entity="OpenAppEntity"
+            field="publicKey"
           />
         </template>
       </AGroup>
@@ -113,15 +113,15 @@
         <el-form-item label="签名">
           <el-input
             v-model="signature"
-            type="textarea"
             readonly
+            type="textarea"
           />
         </el-form-item>
         <el-form-item label="加密数据">
           <el-input
             v-model="content"
-            type="textarea"
             readonly
+            type="textarea"
           />
         </el-form-item>
       </AGroup>
@@ -130,12 +130,8 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  computed, ref,
-} from 'vue'
-import {
-  ADialog, AFormField, AGroup,
-} from '@/airpower/component'
+import { computed, ref } from 'vue'
+import { ADialog, AFormField, AGroup } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { AirCrypto } from '@/airpower/helper/AirCrypto'
@@ -209,7 +205,7 @@ async function onTest() {
 
 <style lang="scss" scoped>
 .source {
-  >font {
+  > font {
     margin: 0px 3px;
   }
 

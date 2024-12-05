@@ -1,41 +1,33 @@
-import { EntityConfig } from '@/airpower/decorator/EntityConfig'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
-import {
-  Field,
-  Model,
-  Type,
-} from '@/airpower/decorator/Custom'
 import { AirEntity } from '@/airpower/base/AirEntity'
-import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 数据库实体基类
  * @author Hamm
  */
 
-@EntityConfig({
+@Model({
   addChildPermission: 'add',
 })
-@Model('记录')
 export class BaseEntity extends AirEntity {
-  @Field('创建时间')
-  @Type(Number) createTime!: number
+  @Field({
+    label: '创建时间',
+    type: Number,
+  })
+    createTime!: number
 
-  @Field('更新时间')
   @Table({
     width: 170,
     orderNumber: -99,
     dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
     hide: true,
   })
-  @Type(Number) updateTime!: number
-
-  @Field('备注')
-  @Form({
-    textarea: true,
-    orderNumber: -100,
-    hide: true,
+  @Field({
+    label: '更新时间',
+    type: Number,
   })
-  @Type(String) remark!: string
+    updateTime!: number
 }

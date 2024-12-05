@@ -1,17 +1,14 @@
-import {
-  Field, Model,
-} from '@/airpower/decorator/Custom'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Form } from '@/airpower/decorator/FormField'
 import { Table } from '@/airpower/decorator/TableField'
 import { IPayload } from '@/airpower/interface/IPayload'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('客户')
+@Model({
+  label: '客户',
+})
 export class CustomerEntity extends BaseEntity implements IPayload {
-  getPayloadLabel(): string {
-    return this.name
-  }
-
   /**
    * # 客户名称
    */
@@ -21,7 +18,10 @@ export class CustomerEntity extends BaseEntity implements IPayload {
   @Form({
     requiredString: true,
   })
-  @Field('客户名称') name!: string
+  @Field({
+    label: '客户名称',
+  })
+    name!: string
 
   /**
    * # 客户编码
@@ -33,7 +33,10 @@ export class CustomerEntity extends BaseEntity implements IPayload {
   @Form({
     placeholder: '不输入按编码规则自动生成',
   })
-  @Field('客户编码') code!: string
+  @Field({
+    label: '客户编码',
+  })
+    code!: string
 
   /**
    * # 联系电话
@@ -42,5 +45,12 @@ export class CustomerEntity extends BaseEntity implements IPayload {
   @Form({
     phone: true,
   })
-  @Field('联系电话') phone!: string
+  @Field({
+    label: '联系电话',
+  })
+    phone!: string
+
+  getPayloadLabel(): string {
+    return this.name
+  }
 }

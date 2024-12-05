@@ -1,51 +1,77 @@
-import {
-  Dictionary, Field, Model, Type,
-} from '@/airpower/decorator/Custom'
 import { Table } from '@/airpower/decorator/TableField'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { Model } from '@/airpower/decorator/Model'
+import { Field } from '@/airpower/decorator/Field'
 
-@Model('库存')
+@Model({
+  label: '库存',
+})
 export class InventoryEntity extends BaseEntity {
   @Table({
     forceShow: true,
   })
-  @Field('物料编码') materialCode!: string
+  @Field({
+    label: '物料编码',
+  })
+    materialCode!: string
 
   @Table({ forceShow: true })
-  @Field('物料名称') materialName!: string
+  @Field({
+    label: '物料名称',
+  })
+    materialName!: string
 
-  @Field('库存数量')
   @Table({
     align: 'right',
     width: 150,
     orderNumber: -2,
     forceShow: true,
   })
-  @Type(Number) quantity!: number
+  @Field({
+    label: '库存数量',
+  })
+    quantity!: number
 
-  @Field('计量单位')
   @Table({
     width: 100,
     orderNumber: -3,
   })
-  @Type(Number) unitName!: string
+  @Field({
+    label: '计量单位',
+  })
+    unitName!: string
 
-  @Field('存储资源')
-  @Type(StorageEntity) storage!: StorageEntity
+  @Field({
+    label: '存储资源',
+    type: StorageEntity,
+  })
+    storage!: StorageEntity
 
   @Table()
-  @Field('存储资源') storageName!: string
+  @Field({
+    label: '存储资源',
+  })
+    storageName!: string
 
-  @Dictionary(InventoryTypeEnum)
-  @Field('库存类型') type!: number
+  @Field({
+    label: '库存类型',
+    dictionary: InventoryTypeEnum,
+  })
+    type!: number
 
-  @Field('存储资源')
-  @Type(MaterialEntity) material!: MaterialEntity
+  @Field({
+    label: '存储资源',
+    type: MaterialEntity,
+  })
+    material!: MaterialEntity
 
-  @Field('工厂结构')
-  @Type(StructureEntity) structure!: StructureEntity
+  @Field({
+    label: '工厂结构',
+    type: StructureEntity,
+  })
+    structure!: StructureEntity
 }

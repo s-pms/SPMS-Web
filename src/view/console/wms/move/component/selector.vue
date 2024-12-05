@@ -1,13 +1,13 @@
 <template>
   <ASelector
-    :entity="MoveEntity"
-    :service="MoveService"
-    :props="props"
     :before-search="requestData => {
-      requestData.filter.status = SaleStatusEnum.OUTPUTING.key
+      requestData.filter.status = SaleStatusEnum.OUTPUTTING.key
       return requestData
     }"
     :editor="MoveEditor"
+    :entity="MoveEntity"
+    :props="props"
+    :service="MoveService"
   >
     <template #storageName="{ data }">
       {{ data.storage.name }}({{ data.storage.code }})
@@ -26,4 +26,4 @@ import { MoveEditor } from '.'
 const props = defineProps(airPropsSelector<MoveEntity>())
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

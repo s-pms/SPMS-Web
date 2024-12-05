@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="RoleEntity.getModelName() + '菜单授权'"
+    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
-    :fullable="false"
-    height="70%"
+    :title="RoleEntity.getModelName() + '菜单授权'"
     confirm-text="保存"
+    height="70%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-tree
       ref="treeRef"
+      :data="treeList"
+      :default-checked-keys="formData.menuList.map(item => item.id)"
+      :props="AirConfig.treeProps"
       check-strictly
       default-expand-all
-      :data="treeList"
-      show-checkbox
       node-key="id"
-      :props="AirConfig.treeProps"
-      :default-checked-keys="formData.menuList.map(item => item.id)"
+      show-checkbox
       @check="onSelect"
     />
   </ADialog>
@@ -41,9 +41,10 @@ import { AirNotification } from '@/airpower/feedback/AirNotification'
 const props = defineProps(airPropsParam(new RoleEntity()))
 
 const {
-  isLoading, formRef, formData,
-} = useAirEditor(props, RoleEntity, RoleService, {
-})
+  isLoading,
+  formRef,
+  formData,
+} = useAirEditor(props, RoleEntity, RoleService, {})
 
 const treeRef = ref<AirTreeInstance>()
 
@@ -54,11 +55,13 @@ async function onSelect(current: MenuEntity, more: IJson) {
 const treeList = ref<MenuEntity[]>([])
 
 async function getMenuTreeList() {
-  treeList.value = await MenuService.create(isLoading).getList(new AirRequest(MenuEntity))
+  treeList.value = await MenuService.create(isLoading)
+    .getList(new AirRequest(MenuEntity))
 }
 
 async function onSubmit() {
-  await RoleService.create(isLoading).authorizeMenu(formData.value.id, formData.value.menuList)
+  await RoleService.create(isLoading)
+    .authorizeMenu(formData.value.id, formData.value.menuList)
   AirNotification.success('授权菜单成功')
   props.onConfirm()
 }
@@ -67,4 +70,4 @@ getMenuTreeList()
 
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
