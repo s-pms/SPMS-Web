@@ -1,31 +1,31 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="SaleEntity"
+      :loading="isLoading"
       :service="SaleService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => !SaleStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="SaleEntity"
       :select-list="selectList"
-      :disable-edit="row => !SaleStatusEnum.REJECTED.equalsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
       <template #customerCode="{ data }">
-        {{ data.customer?.code || "-" }}
+        {{ data.customer?.code || '-' }}
       </template>
       <template #customerName="{ data }">
-        {{ data.customer?.name || "-" }}
+        {{ data.customer?.name || '-' }}
       </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
@@ -59,10 +59,19 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
 } = useBillTable(SaleEntity, SaleService, {
   editView: SaleEditor,
   detailView: SaleDetail,
 })
+
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
