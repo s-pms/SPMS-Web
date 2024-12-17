@@ -10,7 +10,7 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class UnitEntity extends BaseEntity implements IPayload {
   /**
-   * # 单位名称
+   * ### 单位名称
    */
   @Table({
     forceShow: true,
@@ -24,7 +24,7 @@ export class UnitEntity extends BaseEntity implements IPayload {
     name!: string
 
   /**
-   * # 单位编码
+   * ### 单位编码
    */
   @Table({
     copyField: true,

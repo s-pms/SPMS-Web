@@ -9,6 +9,13 @@ import { AirDialog } from '@/airpower/helper/AirDialog'
 import { BillRejectDialog } from '@/component'
 import { ClassConstructor } from '@/airpower/type/AirType'
 
+/**
+ * # 单据的表格Hooks
+ * @param entityClass 单据类
+ * @param serviceClass 单据服务类
+ * @param option (可选) 可选配置项
+ * @author Hamm.cn
+ */
 export function useBillTable<
   D extends AbstractBaseBillDetailEntity,
   B extends AbstractBaseBillEntity<D>,
@@ -20,18 +27,30 @@ export function useBillTable<
 ): IUseBillTableResult<D, B, S> {
   const result = useAirTable(entityClass, serviceClass, option)
 
+  /**
+   * ### 单据审核
+   * @param bill 单据
+   */
   async function onAudit(bill: B) {
     await AirConfirm.warning(`是否确认审核选择的${result.entity.getModelName()}？`)
     await result.service.audit(bill)
     result.onReloadData()
   }
 
+  /**
+   * ### 单据手动完成
+   * @param bill 单据
+   */
   async function onFinish(bill: B) {
     await AirConfirm.warning(`是否确认手动完成选择的${result.entity.getModelName()}？`)
     await result.service.finish(bill)
     result.onReloadData()
   }
 
+  /**
+   * ### 单据驳回
+   * @param bill 单据
+   */
   async function onReject(bill: B) {
     const rejectReason: string = await AirDialog.show(BillRejectDialog, `驳回${result.entity.getModelName()}的原因`)
     await AirConfirm.warning(`是否确认驳回选择的${result.entity.getModelName()}？`)

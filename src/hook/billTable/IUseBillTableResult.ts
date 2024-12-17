@@ -15,19 +15,19 @@ export interface IUseBillTableResult<
   S extends AbstractBaseBillService<D, B>
 > extends IUseTableResult<B, S> {
   /**
-   * # 审核
+   * ### 审核
    * @param bill 单据
    */
   onAudit: (bill: B) => void
 
   /**
-   * # 驳回
+   * ### 驳回
    * @param bill 单据
    */
   onReject: (bill: B) => void
 
   /**
-   * # 完成单据
+   * ### 完成单据
    * @param bill
    */
   onFinish: (bill: B) => void

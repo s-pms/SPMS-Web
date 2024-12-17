@@ -8,12 +8,12 @@ import { Field } from '@/airpower/decorator/Field'
  */
 export class DepartmentEntity extends BaseEntity implements ITree {
   /**
-   * # 部门名称
+   * ### 部门名称
    */
   name!: string
 
   /**
-   * # 下级部门
+   * ### 下级部门
    */
 
   @Field({

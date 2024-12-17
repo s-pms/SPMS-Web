@@ -16,7 +16,7 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class PermissionEntity extends BaseEntity implements ITree {
   /**
-   * # 权限名称
+   * ### 权限名称
    */
   @Table({
     forceShow: true,
@@ -31,7 +31,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
     name!: string
 
   /**
-   * # 权限唯一标识
+   * ### 权限唯一标识
    */
   @Table({
     forceShow: true,
@@ -46,7 +46,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
     identity!: string
 
   /**
-   * # 权限类别
+   * ### 权限类别
    */
   @Table({
     showColor: true,
@@ -60,7 +60,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
     isSystem!: boolean
 
   /**
-   * # 父权限ID
+   * ### 父权限ID
    */
   @Field({
     label: '父级ID',
@@ -68,7 +68,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
     parentId!: number
 
   /**
-   * # 子权限列表
+   * ### 子权限列表
    */
   @Field({
     // eslint-disable-next-line no-use-before-define
@@ -77,7 +77,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
   }) children!: this[]
 
   /**
-   * # 父权限
+   * ### 父权限
    */
   @Field({
     // eslint-disable-next-line no-use-before-define

@@ -1,19 +1,18 @@
 <template>
   <div class="login">
     <div
-      v-loading="isLoadingApp"
       class="card"
     >
       <div class="logo">
         <img src="@/assets/img/logo.svg">
       </div>
       <div class="app-name">
-        {{ appInfo.appName }}
+        请先登录
       </div>
       <div class="login-form">
         <div class="tabs">
           <div
-            v-for="item in [LoginAction.LOGIN_VIA_PASSWORD, LoginAction.LOGIN_VIA_QRCODE, LoginAction.LOGIN_VIA_PHONE, LoginAction.LOGIN_VIA_EMAIL]"
+            v-for="item in [LoginAction.LOGIN_VIA_PASSWORD, LoginAction.LOGIN_VIA_PHONE, LoginAction.LOGIN_VIA_EMAIL,LoginAction.LOGIN_VIA_QRCODE]"
             :key="item"
             :class="currentAction === item ? 'active' : ''"
             class="item"
@@ -250,12 +249,10 @@ import { LoginAction } from '@/model/common/LoginAction'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirValidator } from '@/airpower/helper/AirValidator'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
+import { AirRouter } from '@/airpower/helper/AirRouter'
 import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirAlert } from '@/airpower/feedback/AirAlert'
 import { UserService } from '@/model/personnel/user/UserService'
-import { MailService } from '@/model/system/mail/MailService'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 
 const currentAction = ref(LoginAction.LOGIN_VIA_PASSWORD)
@@ -267,18 +264,15 @@ const isRead = ref(true)
 
 const user = ref(new UserEntity())
 
-const appKey = (AirConfig.router.currentRoute.value.query.appKey || '').toString()
-const redirectUri = (AirConfig.router.currentRoute.value.query.redirectUri || '/console').toString()
-
-const appInfo = ref(new OpenAppEntity())
+const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
+const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
 
 user.value.email = 'admin@hamm.cn'
-user.value.phone = '18523749565'
+user.value.phone = '17666666666'
 user.value.account = 'hamm'
 user.value.password = 'Aa123456'
 
 // 一些Loading状态
-const isLoadingApp = ref(false)
 const isLoadingLogin = ref(false)
 const isLoadingReg = ref(false)
 const isEmailCodeLoading = ref(false)
@@ -307,17 +301,6 @@ const isButtonDisabled = computed(() => {
       return true
   }
 })
-
-/**
- * # 获取当前应用信息
- */
-async function getAppInfo() {
-  if (appKey) {
-    user.value.appKey = appKey
-    appInfo.value = await OpenAppService.create(isLoadingApp)
-      .getAppByKey(appKey)
-  }
-}
 
 /**
  * # 处理登录重定向
@@ -401,12 +384,10 @@ async function onSubmit() {
 async function onSendEmailCode() {
   const request = new UserEntity()
   request.email = user.value.email
-  await MailService.create(isEmailCodeLoading)
-    .sendCode(request)
+  await UserService.create(isEmailCodeLoading)
+    .sendMail(request)
   AirNotification.success('邮箱验证码发送成功, 请注意查看是否被拦截')
 }
-
-getAppInfo()
 </script>
 <style lang="scss" scoped>
 .login {

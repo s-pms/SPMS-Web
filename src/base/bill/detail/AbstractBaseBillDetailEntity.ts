@@ -8,7 +8,7 @@ import { BaseEntity } from '@/base/BaseEntity'
  */
 export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
   /**
-   * # 单据ID
+   * ### 单据ID
    */
   billId!: number
 
@@ -18,12 +18,12 @@ export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
   declare updateTime: number
 
   /**
-   * # 数量
+   * ### 数量
    */
   abstract quantity: number
 
   /**
-   * # 已完成数量
+   * ### 已完成数量
    */
   abstract finishQuantity: number
 }
