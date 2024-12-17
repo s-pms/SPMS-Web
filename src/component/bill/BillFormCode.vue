@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="D extends AbstractBaseBillDetailEntity,B extends AbstractBaseBillEntity<D>">
+<script generic="D extends AbstractBaseBillDetailEntity,B extends AbstractBaseBillEntity<D>" lang="ts" setup>
 import {
   inject, PropType, ref, Ref,
 } from 'vue'
@@ -9,7 +9,7 @@ import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 const props = defineProps({
 
   /**
-   * # 手动绑定的表单对象
+   * ### 手动绑定的表单对象
    */
   modelValue: {
     type: Object as PropType<B>,
@@ -17,7 +17,7 @@ const props = defineProps({
   },
 
   /**
-   * # 是否禁用输入
+   * ### 是否禁用输入
    */
   disabled: {
     type: Boolean,
@@ -53,6 +53,6 @@ if (!formData.value) {
   </AFormField>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

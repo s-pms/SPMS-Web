@@ -16,7 +16,7 @@ import { Model } from '@/airpower/decorator/Model'
 })
 export class UserEntity extends BaseEntity implements IUser {
   /**
-   * # 账号
+   * ### 账号
    */
   @Form({
     requiredString: true,
@@ -29,7 +29,7 @@ export class UserEntity extends BaseEntity implements IUser {
     account!: string
 
   /**
-   * # 昵称
+   * ### 昵称
    */
   @Form({
     requiredString: true,
@@ -44,7 +44,7 @@ export class UserEntity extends BaseEntity implements IUser {
     nickname!: string
 
   /**
-   * # 手机
+   * ### 手机
    */
   @Form({
     mobilePhone: true,
@@ -59,7 +59,7 @@ export class UserEntity extends BaseEntity implements IUser {
     phone!: string
 
   /**
-   * # 邮箱
+   * ### 邮箱
    */
   @Form({
     email: true,
@@ -72,7 +72,7 @@ export class UserEntity extends BaseEntity implements IUser {
     email!: string
 
   /**
-   * # 密码
+   * ### 密码
    */
   @Form({
     password: true,
@@ -83,7 +83,7 @@ export class UserEntity extends BaseEntity implements IUser {
     password!: string
 
   /**
-   * # 头像
+   * ### 头像
    */
   @Field({
     label: '头像',
@@ -91,7 +91,7 @@ export class UserEntity extends BaseEntity implements IUser {
     avatar!: string
 
   /**
-   * # 角色列表
+   * ### 角色列表
    */
   @Table({
     payloadArray: true,
@@ -105,17 +105,17 @@ export class UserEntity extends BaseEntity implements IUser {
     roleList!: RoleEntity[]
 
   /**
-   * # 验证码
+   * ### 验证码
    */
   code!: string
 
   /**
-   * # 所属应用AppKey
+   * ### 所属应用AppKey
    */
   appKey!: string
 
   /**
-   * # 是否超级管理员
+   * ### 是否超级管理员
    * @returns 是否超管
    */
   isRootUser() {

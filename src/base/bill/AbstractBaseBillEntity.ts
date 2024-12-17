@@ -13,7 +13,7 @@ import { Field } from '@/airpower/decorator/Field'
  */
 export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEntity> extends BaseEntity implements IPayload {
   /**
-   * # 单据编号
+   * ### 单据编号
    */
   @Table({
     orderNumber: 99,
@@ -28,7 +28,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
     billCode!: string
 
   /**
-   * # 单据状态码
+   * ### 单据状态码
    */
   @Form({
     showColor: true,
@@ -36,7 +36,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   abstract status: number
 
   /**
-   * # 单据明细列表
+   * ### 单据明细列表
    */
   abstract details: D[]
 
@@ -49,17 +49,17 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
     rejectReason!: string
 
   /**
-   * # 审核中的状态
+   * ### 审核中的状态
    */
   abstract getAuditingStatus(): AirEnum;
 
   /**
-   * # 已审核的状态
+   * ### 已审核的状态
    */
   abstract getAuditedStatus(): AirEnum;
 
   /**
-   * # 已拒绝的状态
+   * ### 已拒绝的状态
    */
   abstract getRejectedStatus(): AirEnum;
 
@@ -68,7 +68,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   }
 
   /**
-   * # 是否可拒绝
+   * ### 是否可拒绝
    */
   canReject() {
     return this.getAuditingStatus()
@@ -76,7 +76,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   }
 
   /**
-   * # 是否可审核
+   * ### 是否可审核
    */
   canAudit() {
     return this.getAuditingStatus()
@@ -84,7 +84,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   }
 
   /**
-   * # 是否已拒绝
+   * ### 是否已拒绝
    */
   isRejected() {
     return this.getRejectedStatus()

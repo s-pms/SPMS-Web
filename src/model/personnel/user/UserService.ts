@@ -11,7 +11,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   entityClass = UserEntity
 
   /**
-   * # App登录
+   * ### App登录
    * @param user 用户
    */
   async login(user: UserEntity): Promise<string> {
@@ -21,7 +21,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   /**
-   * # 邮箱验证码登录
+   * ### 邮箱验证码登录
    * @param user 用户
    */
   async loginViaEmail(user: UserEntity): Promise<string> {
@@ -31,7 +31,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   /**
-   * # 注册
+   * ### 注册
    * @param user 用户
    */
   async register(user: UserEntity): Promise<void> {
@@ -40,7 +40,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   /**
-   * # 重置密码
+   * ### 重置密码
    * @param user 用户
    */
   async resetMyPassword(user: UserEntity): Promise<void> {
@@ -49,7 +49,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   /**
-   * # 获取我有权限的菜单列表
+   * ### 获取我有权限的菜单列表
    */
   async getMyMenuList(): Promise<MenuEntity[]> {
     const jsonArray = await this.api('getMyMenuList')
@@ -58,7 +58,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   /**
-   * # 获取我的权限列表
+   * ### 获取我的权限列表
    */
   async getMyPermissionList(): Promise<string[]> {
     const arr = await this.api('getMyPermissionList')
@@ -67,7 +67,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   /**
-   * # 获取我的个人信息
+   * ### 获取我的个人信息
    */
   async getMyInfo(): Promise<UserEntity> {
     const json = await this.api('getMyInfo')

@@ -1,11 +1,11 @@
-<script setup lang="ts" generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity">
+<script generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity" lang="ts" setup>
 import { ADateTime, AFormField, AGroup } from '@/airpower/component'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
 const { bill } = defineProps<{
   /**
-   * # 单据
+   * ### 单据
    */
   bill: B
 }>()
@@ -14,32 +14,32 @@ const { bill } = defineProps<{
 
 <template>
   <AGroup
-    hide-title
     :column="3"
+    hide-title
   >
     <AFormField
-      field="createTime"
       disabled
+      field="createTime"
     >
       <ADateTime :time="bill.createTime" />
     </AFormField>
     <AFormField
-      field="updateTime"
       disabled
+      field="updateTime"
     >
       <ADateTime :time="bill.updateTime" />
     </AFormField>
     <AFormField
-      field="status"
       disabled
+      field="status"
     />
     <AFormField
       v-if="bill.isRejected()"
-      style="width: 100%"
-      field="rejectReason"
       disabled
+      field="rejectReason"
+      style="width: 100%"
     />
   </AGroup>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

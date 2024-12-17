@@ -14,7 +14,7 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class OperationEntity extends BaseEntity {
   /**
-   * # 工序名称
+   * ### 工序名称
    */
   @Table({
     forceShow: true,
@@ -30,7 +30,7 @@ export class OperationEntity extends BaseEntity {
     name!: string
 
   /**
-   * # 工序编码
+   * ### 工序编码
    */
   @Table({
     forceShow: true,

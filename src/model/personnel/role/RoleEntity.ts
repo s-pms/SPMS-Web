@@ -17,7 +17,7 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class RoleEntity extends BaseEntity {
   /**
-   * # 角色名称
+   * ### 角色名称
    */
   @Table({
     forceShow: true,
@@ -32,7 +32,7 @@ export class RoleEntity extends BaseEntity {
     name!: string
 
   /**
-   * # 角色编码
+   * ### 角色编码
    */
   @Table({
     forceShow: true,
@@ -47,7 +47,7 @@ export class RoleEntity extends BaseEntity {
     code!: string
 
   /**
-   * # 菜单列表
+   * ### 菜单列表
    */
   @Field({
     type: MenuEntity,
@@ -56,7 +56,7 @@ export class RoleEntity extends BaseEntity {
     menuList!: MenuEntity[]
 
   /**
-   * # 权限列表
+   * ### 权限列表
    */
   @Field({
     type: PermissionEntity,

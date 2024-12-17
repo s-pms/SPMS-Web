@@ -28,7 +28,7 @@ export function useBillTable<
   const result = useAirTable(entityClass, serviceClass, option)
 
   /**
-   * ## 单据审核
+   * ### 单据审核
    * @param bill 单据
    */
   async function onAudit(bill: B) {
@@ -38,7 +38,7 @@ export function useBillTable<
   }
 
   /**
-   * ## 单据手动完成
+   * ### 单据手动完成
    * @param bill 单据
    */
   async function onFinish(bill: B) {
@@ -48,7 +48,7 @@ export function useBillTable<
   }
 
   /**
-   * ## 单据驳回
+   * ### 单据驳回
    * @param bill 单据
    */
   async function onReject(bill: B) {

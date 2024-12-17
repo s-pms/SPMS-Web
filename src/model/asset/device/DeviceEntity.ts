@@ -13,7 +13,7 @@ import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 })
 export class DeviceEntity extends BaseEntity {
   /**
-   * # 设备名称
+   * ### 设备名称
    */
   @Table({
     forceShow: true,
@@ -27,7 +27,7 @@ export class DeviceEntity extends BaseEntity {
     name!: string
 
   /**
-   * # 设备编码
+   * ### 设备编码
    */
   @Table({
     copyField: true,
@@ -42,7 +42,7 @@ export class DeviceEntity extends BaseEntity {
     code!: string
 
   /**
-   * # 设备UUID
+   * ### 设备UUID
    */
   @Table({
     copyField: true,

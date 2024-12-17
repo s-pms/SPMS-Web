@@ -8,12 +8,12 @@ import { AirColor } from '@/airpower/enum/AirColor'
  */
 export class DeviceReportingEnum extends AirEnum<boolean> {
   /**
-   * # 开启
+   * ### 开启
    */
   static readonly ENABLE = new DeviceReportingEnum(true, '开启', AirColor.SUCCESS)
 
   /**
-   * # 关闭
+   * ### 关闭
    */
   static readonly DISABLE = new DeviceReportingEnum(false, '关闭', AirColor.NORMAL)
 }

@@ -12,7 +12,7 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class MaterialEntity extends BaseEntity implements IPayload {
   /**
-   * # 物料名称
+   * ### 物料名称
    */
   @Table({
     forceShow: true,
@@ -23,7 +23,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   @Field({}) name!: string
 
   /**
-   * # 物料编码
+   * ### 物料编码
    */
   @Table({
     copyField: true,
@@ -35,7 +35,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   @Field({}) code!: string
 
   /**
-   * # 物料类型
+   * ### 物料类型
    */
   @Table({
     showColor: true,
@@ -53,7 +53,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
     materialType!: number
 
   /**
-   * # 规格型号
+   * ### 规格型号
    */
   @Table({
     copyField: true,

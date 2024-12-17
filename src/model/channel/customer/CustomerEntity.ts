@@ -10,7 +10,7 @@ import { Field } from '@/airpower/decorator/Field'
 })
 export class CustomerEntity extends BaseEntity implements IPayload {
   /**
-   * # 客户名称
+   * ### 客户名称
    */
   @Table({
     forceShow: true,
@@ -24,7 +24,7 @@ export class CustomerEntity extends BaseEntity implements IPayload {
     name!: string
 
   /**
-   * # 客户编码
+   * ### 客户编码
    */
   @Table({
     copyField: true,
@@ -39,7 +39,7 @@ export class CustomerEntity extends BaseEntity implements IPayload {
     code!: string
 
   /**
-   * # 联系电话
+   * ### 联系电话
    */
   @Table()
   @Form({

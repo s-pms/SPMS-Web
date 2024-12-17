@@ -83,7 +83,7 @@ export class OpenAppEntity extends BaseEntity {
     privateKey!: string
 
   /**
-   * # 应用URL
+   * ### 应用URL
    */
   @Table()
   @Form({

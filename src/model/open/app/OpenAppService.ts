@@ -7,18 +7,19 @@ export class OpenAppService extends AbstractBaseService<OpenAppEntity> {
   baseUrl = 'open/app'
 
   /**
-   * # 通过应用Key获取一个应用
+   * ### 通过应用Key获取一个应用
    * @param appKey 应用Key
    */
   async getAppByKey(appKey: string): Promise<OpenAppEntity> {
     const app = new OpenAppEntity()
     app.appKey = appKey
-    const json = await this.api('getByAppKey').post(app)
+    const json = await this.api('getByAppKey')
+      .post(app)
     return OpenAppEntity.fromJson(json)
   }
 
   /**
-   * # 重置指定应用的秘钥
+   * ### 重置指定应用的秘钥
    * @param app 应用
    */
   async resetSecret(app: OpenAppEntity): Promise<string> {

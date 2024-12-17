@@ -1,31 +1,31 @@
 <template>
   <AButton
+    :disabled="!bill.canAudit()"
     link-button
     tooltip="审核"
     type="CONFIRM"
-    :disabled="!bill.canAudit()"
     @click="onAudit"
   >
     审核
   </AButton>
   <AButton
+    :disabled="!bill.canReject()"
     link-button
     tooltip="驳回"
     type="LOCK"
-    :disabled="!bill.canReject()"
     @click="onReject"
   >
     驳回
   </AButton>
 </template>
-<script setup lang="ts" generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity">
+<script generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity" lang="ts" setup>
 import { AButton } from '@/airpower/component'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
 const { bill } = defineProps<{
   /**
-   * # 单据
+   * ### 单据
    */
   bill: B
 }>()
@@ -44,4 +44,4 @@ function onAudit() {
 }
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
