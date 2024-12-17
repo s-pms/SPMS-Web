@@ -74,4 +74,14 @@ export class UserService extends AbstractBaseService<UserEntity> {
       .post()
     return UserEntity.fromJson(json)
   }
+
+  /**
+   * ### 发送验证码
+   * @param user 用户
+   */
+  async sendMail(user: UserEntity): Promise<void> {
+    await this.api('sendMail')
+      .setTimeout(10000)
+      .post(user)
+  }
 }

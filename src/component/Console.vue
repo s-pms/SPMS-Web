@@ -16,8 +16,8 @@
         </div>
         <AInput
           v-model.nickname="currentUserInfo.nickname"
-          :tree="menuList"
           :entity="UserEntity"
+          :tree="menuList"
         />
       </AUser>
     </template>
@@ -29,11 +29,11 @@ import { ref } from 'vue'
 import {
   AFrame, AImage, AInput, AUser,
 } from '@/airpower/component'
-import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirRouter } from '@/airpower/helper/AirRouter'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
+import { AirPermission } from '@/airpower/helper/AirPermission'
 
 const currentUserInfo = ref(new UserEntity())
 const menuList = ref<MenuEntity[]>([])
@@ -48,18 +48,18 @@ async function getMenuList() {
 async function init() {
   currentUserInfo.value = await UserService.create()
     .getMyInfo()
-  let permissions = AirConfig.getPermissionList()
+  let permissions = AirPermission.getList()
   if (permissions.length === 0) {
     permissions = await UserService.create(isLoading)
       .getMyPermissionList()
   }
-  AirConfig.savePermissionList(permissions)
+  AirPermission.saveList(permissions)
   await getMenuList()
 }
 
 init()
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .logo {
   text-decoration: none;
   color: white;
