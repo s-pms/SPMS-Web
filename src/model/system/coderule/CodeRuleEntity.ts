@@ -1,10 +1,9 @@
 import { BaseEntity } from '@/base/BaseEntity'
 
 import { SerialNumberUpdateEnum } from './SerialNumberUpdateEnum'
-import { Form } from '@/airpower/decorator/FormField'
-import { Table } from '@/airpower/decorator/TableField'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
 
 /**
  * # 编码规则实体

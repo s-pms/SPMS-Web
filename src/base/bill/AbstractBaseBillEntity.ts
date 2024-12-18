@@ -1,10 +1,8 @@
-import { Form } from '@/airpower/decorator/FormField'
+import { Field, Form, Table } from '@/airpower/decorator'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
-import { Table } from '@/airpower/decorator/TableField'
 import { AirEnum } from '@/airpower/base/AirEnum'
 import { IPayload } from '@/airpower/interface/IPayload'
-import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 单据基类

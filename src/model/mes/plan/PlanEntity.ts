@@ -6,11 +6,10 @@ import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { PlanTypeEnum } from './PlanTypeEnum'
 import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { AirDateTimeType } from '@/airpower/enum/AirDateTimeType'
-import { Table } from '@/airpower/decorator/TableField'
-import { Form } from '@/airpower/decorator/FormField'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
 import { AirEnum } from '@/airpower/base/AirEnum'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 
 @Model({
   label: '生产计划',

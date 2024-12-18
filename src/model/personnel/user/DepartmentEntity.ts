@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { ITree } from '@/airpower/interface/ITree'
-import { Field } from '@/airpower/decorator/Field'
+import { Field } from '@/airpower/decorator'
 
 /**
  * # 部门实体

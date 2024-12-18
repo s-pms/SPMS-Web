@@ -1,9 +1,8 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { CollectionGranularityEnum } from './CollectionGranularityEnum'
-import { Form } from '@/airpower/decorator/FormField'
-import { Table } from '@/airpower/decorator/TableField'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
 
 @Model({
   label: '采集参数',

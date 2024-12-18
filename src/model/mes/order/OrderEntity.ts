@@ -8,11 +8,10 @@ import { OrderStatusEnum } from './OrderStatusEnum'
 import { OrderTypeEnum } from './OrderTypeEnum'
 import { OrderDetailEntity } from './OrderDetailEntity'
 import { PlanEntity } from '../plan/PlanEntity'
-import { Form } from '@/airpower/decorator/FormField'
-import { Table } from '@/airpower/decorator/TableField'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
 import { AirEnum } from '@/airpower/base/AirEnum'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 
 @Model({
   label: '生产订单',

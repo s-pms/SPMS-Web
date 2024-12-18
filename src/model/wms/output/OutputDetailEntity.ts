@@ -1,10 +1,9 @@
-import { Form } from '@/airpower/decorator/FormField'
-import { Table } from '@/airpower/decorator/TableField'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { InventoryEntity } from '../inventory/InventoryEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 
 @Model({
   label: '出库明细',

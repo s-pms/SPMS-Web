@@ -1,8 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Table } from '@/airpower/decorator/TableField'
+import { Field, Model, Table } from '@/airpower/decorator'
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 
 @Model({
   label: '日志',

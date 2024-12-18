@@ -1,10 +1,9 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Table } from '@/airpower/decorator/TableField'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { Form } from '@/airpower/decorator/FormField'
 import { DeviceReportingEnum } from '@/model/asset/device/DeviceReportingEnum'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 

@@ -1,11 +1,9 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { RoleEntity } from '../role/RoleEntity'
 import { IUser } from '@/airpower/interface/IUser'
-import { Form } from '@/airpower/decorator/FormField'
-import { Search } from '@/airpower/decorator/SearchField'
-import { Table } from '@/airpower/decorator/TableField'
-import { Field } from '@/airpower/decorator/Field'
-import { Model } from '@/airpower/decorator/Model'
+import {
+  Field, Form, Model, Search, Table,
+} from '@/airpower/decorator'
 
 /**
  * # 用户实体

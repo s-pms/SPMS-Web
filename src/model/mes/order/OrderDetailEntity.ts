@@ -1,5 +1,5 @@
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { Model } from '@/airpower/decorator/Model'
+import { Model } from '@/airpower/decorator'
 
 @Model({
   label: '订单明细',
