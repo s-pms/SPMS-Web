@@ -8,19 +8,19 @@ export class DeviceService extends AbstractBaseService<DeviceEntity> {
   baseUrl = 'device'
 
   async getCurrentReport(id: number): Promise<CollectionEntity[]> {
-    const jsonArray = await this.api('getCurrentReport').post(new DeviceEntity(id))
-    return CollectionEntity.fromJsonArray(jsonArray)
+    return this.api('getCurrentReport')
+      .requestArray(new DeviceEntity(id), CollectionEntity)
   }
 
   async getDevicePayloadHistory(item: CollectionEntity): Promise<CollectionEntity[]> {
-    const jsonArray = await this.api('getDevicePayloadHistory').post(item)
-    return CollectionEntity.fromJsonArray(jsonArray)
+    return this.api('getDevicePayloadHistory')
+      .requestArray(item, CollectionEntity)
   }
 
   async getDeviceByUuid(uuid: string): Promise<DeviceEntity> {
     const device = new DeviceEntity()
     device.uuid = uuid
-    const json = await this.api('getDeviceConfig').post(device)
-    return DeviceEntity.fromJson(json)
+    return this.api('getDeviceConfig')
+      .request(device, DeviceEntity)
   }
 }

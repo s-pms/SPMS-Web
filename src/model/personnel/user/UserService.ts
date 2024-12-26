@@ -52,9 +52,8 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * ### 获取我有权限的菜单列表
    */
   async getMyMenuList(): Promise<MenuEntity[]> {
-    const jsonArray = await this.api('getMyMenuList')
-      .post()
-    return MenuEntity.fromJsonArray(jsonArray)
+    return this.api('getMyMenuList')
+      .requestArray(undefined, MenuEntity)
   }
 
   /**
@@ -70,9 +69,8 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * ### 获取我的个人信息
    */
   async getMyInfo(): Promise<UserEntity> {
-    const json = await this.api('getMyInfo')
-      .post()
-    return UserEntity.fromJson(json)
+    return this.api('getMyInfo')
+      .request(undefined, UserEntity)
   }
 
   /**
