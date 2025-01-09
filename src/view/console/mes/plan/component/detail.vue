@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -14,8 +14,8 @@
       @submit.prevent
     >
       <AGroup
-        title="采购单"
         :column="3"
+        title="采购单"
       >
         <BillFormCode :bill="formData" />
         <AFormField field="startTime">
@@ -27,18 +27,17 @@
         </AFormField>
 
         <AFormField
-          field="type"
           disabled
+          field="type"
         />
 
         <el-form-item
           label="关联客户"
           prop="customer"
         >
-          <el-input
-            v-model="formData.customerName"
-            clearable
-            placeholder="请选择计划关联客户"
+          <ASelect
+            v-model="formData.customer"
+            :selector="CustomerSelector"
             disabled
           />
         </el-form-item>
@@ -46,11 +45,11 @@
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="采购明细">
         <ATable
-          :entity="PlanDetailEntity"
+          :ctrl-width="60"
           :data-list="formData.details"
+          :entity="PlanDetailEntity"
           :field-list="PlanDetailEntity.getTableFieldConfigList()"
           hide-ctrl
-          :ctrl-width="60"
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -66,7 +65,7 @@
 
 <script lang="ts" setup>
 import {
-  ADateTime, ADialog, AFormField, AGroup, ATable,
+  ADateTime, ADialog, AFormField, AGroup, ASelect, ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
@@ -74,11 +73,14 @@ import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { CustomerSelector } from '@/view/console/channel/customer/component'
 
 const props = defineProps(airPropsParam(new PlanEntity()))
 
 const {
-  title, formData, isLoading,
+  title,
+  formData,
+  isLoading,
 } = useAirDetail(props, PlanEntity, PlanService, {})
 
 </script>

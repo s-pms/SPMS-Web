@@ -17,6 +17,9 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     type: MaterialEntity,
   })
+  @Form({
+    requiredPayload: true,
+  })
     material!: MaterialEntity
 
   @Table({ forceShow: true })

@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="InputEntity"
+      :loading="isLoading"
       :service="InputService"
       show-filter
       @on-add="onAdd"
@@ -10,20 +10,20 @@
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="200"
       :data-list="response.list"
+      :disable-edit="row => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="InputEntity"
       :select-list="selectList"
-      :disable-edit="row => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="200"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
       <template #storageName="{ data }">
-        {{ data.storage?.name || "-" }}({{ data.storage?.code || "-" }})
+        {{ data.storage?.name || '-' }}({{ data.storage?.code || '-' }})
       </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
@@ -31,15 +31,6 @@
           @on-audit="onAudit"
           @on-reject="onReject"
         />
-        <AButton
-          link-button
-          tooltip="完成"
-          type="CHECKIN"
-          :disabled="InputStatusEnum.INPUTTING.notEqualsKey(data.status)"
-          @click="onFinish(data)"
-        >
-          完成
-        </AButton>
       </template>
     </ATable>
     <template #footerLeft>
@@ -53,7 +44,7 @@
 
 <script lang="ts" setup>
 import {
-  AButton, APage, APanel, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { InputDetail, InputEditor } from './component'
 import { InputEntity } from '@/model/wms/input/InputEntity'
@@ -66,10 +57,18 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject, onFinish,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
 } = useBillTable(InputEntity, InputService, {
   editView: InputEditor,
   detailView: InputDetail,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

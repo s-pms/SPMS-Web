@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="生产计划"
         :column="2"
+        title="生产计划"
       >
         <AFormField field="billCode" />
         <AFormField
@@ -43,9 +43,9 @@
           prop="material"
         >
           <el-input
+            :value="formData.material?.name || ''"
             clearable
             placeholder="请选择物料"
-            :value="formData.material?.name || ''"
             @clear="formData.exclude('material')"
             @click="selectMaterial()"
           />
@@ -59,9 +59,9 @@
         >
           <ASelect
             v-model="formData.customer"
+            :disabled="OrderTypeEnum.PLAN.equalsKey(formData.type) && !!formData.plan && !!formData.plan.customer"
             :selector="CustomerSelector"
             placeholder="请选择客户..."
-            :disabled="OrderTypeEnum.PLAN.equalsKey(formData.type) && !!formData.plan && !!formData.plan.customer"
           />
         </el-form-item>
       </AGroup>
