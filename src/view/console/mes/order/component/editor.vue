@@ -15,6 +15,7 @@
       label-width="120px"
       @submit.prevent
     >
+      {{ formData }}
       <AGroup
         :column="2"
         title="生产计划"
@@ -44,11 +45,17 @@
         >
           <el-input
             :value="formData.material?.name || ''"
-            clearable
             placeholder="请选择物料"
-            @clear="formData.exclude('material')"
-            @click="selectMaterial()"
-          />
+            readonly
+          >
+            <template #append>
+              <el-button
+                @click="formData.material ? formData.exclude('material') : selectMaterial() "
+              >
+                {{ formData.material ? '清除' : '选择' }}
+              </el-button>
+            </template>
+          </el-input>
         </el-form-item>
         <AFormField field="quantity" />
         <AFormField field="startTime" />
@@ -59,7 +66,7 @@
         >
           <ASelect
             v-model="formData.customer"
-            :disabled="OrderTypeEnum.PLAN.equalsKey(formData.type) && !!formData.plan && !!formData.plan.customer"
+            :disabled="isCustomerDisabled"
             :selector="CustomerSelector"
             placeholder="请选择客户..."
           />
@@ -70,6 +77,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
   ADialog, AFormField, AGroup, ASelect,
 } from '@/airpower/component'
@@ -84,6 +92,7 @@ import { PlanDetailSelector, PlanSelector } from '../../plan/component'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
+import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
@@ -117,13 +126,15 @@ async function selectPlan() {
 async function selectMaterial() {
   if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
     formData.value.material = await AirDialog.select(MaterialSelector)
-    formData.value.materialName = formData.value.material.name
     return
   }
   const planDetail: PlanDetailEntity = await AirDialog.show(PlanDetailSelector, formData.value.plan)
   formData.value.material = planDetail.material
-  formData.value.materialName = formData.value.material.name
   formData.value.quantity = planDetail.quantity
+  if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
+    // 如果是外销计划
+    formData.value.customer = formData.value.plan.customer
+  }
 }
 
 async function orderTypeChanged() {
@@ -131,4 +142,14 @@ async function orderTypeChanged() {
     formData.value.exclude('materialId', 'material')
   }
 }
+
+const isCustomerDisabled = computed(() => {
+  if (formData.value.type === OrderTypeEnum.PLAN.key) {
+    if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
+      // 如果是外销计划 则禁用选择客户 自动从外销计划带出
+      return true
+    }
+  }
+  return false
+})
 </script>

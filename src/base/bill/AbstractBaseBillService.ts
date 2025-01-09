@@ -7,7 +7,10 @@ import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEnt
  *
  * @author Hamm
  */
-export abstract class AbstractBaseBillService<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>> extends AbstractBaseService<B> {
+export abstract class AbstractBaseBillService<
+  D extends AbstractBaseBillDetailEntity,
+  B extends AbstractBaseBillEntity<D>
+> extends AbstractBaseService<B> {
   /**
    * ### 审核单据
    * @param bill 单据

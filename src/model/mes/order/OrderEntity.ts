@@ -145,9 +145,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   })
     details: OrderDetailEntity[] = []
 
-  @Form({
-    requiredPayload: true,
-  })
+  @Form({})
   @Table({
     orderNumber: 44,
     hide: true,

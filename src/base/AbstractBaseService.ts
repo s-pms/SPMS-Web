@@ -4,7 +4,7 @@ import { AirAbstractEntityService } from '@/airpower/base/AirAbstractEntityServi
 
 /**
  * # 抽象服务基类
- * @author Hamm
+ * @author Hamm.cn
  */
 export abstract class AbstractBaseService<E extends BaseEntity> extends AirAbstractEntityService<E> {
   api(url: string, baseUrl?: string | undefined): AirHttp {

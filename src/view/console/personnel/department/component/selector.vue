@@ -19,11 +19,14 @@
     />
     <ATable
       :ctrl-width="80"
-      :data-list="response.list"
+      :data-list="list"
       :entity="DepartmentEntity"
       :hide-ctrl="isMultiple"
       :select-list="selectList"
       :show-select="isMultiple"
+      :tree-props="{
+        checkStrictly:true
+      }"
       hide-delete
       hide-edit
       hide-field-selector
@@ -42,18 +45,12 @@
         />
       </template>
     </ATable>
-    <template #status>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
 import {
-  AButton, ADialog, APage, ATable, AToolBar,
+  AButton, ADialog, ATable, AToolBar,
 } from '@/airpower/component'
 import { airPropsSelector } from '@/airpower/config/AirProps'
 import { useAirSelector } from '@/airpower/hook/useAirSelector'
@@ -66,11 +63,12 @@ const {
   title,
   selectList,
   isLoading,
-  response,
+  list,
   onSearch,
-  onPageChanged,
   onSelected,
-} = useAirSelector(props, DepartmentEntity, DepartmentService)
+} = useAirSelector(props, DepartmentEntity, DepartmentService, {
+  unPaginate: true,
+})
 
 </script>
 <style lang="scss" scoped></style>

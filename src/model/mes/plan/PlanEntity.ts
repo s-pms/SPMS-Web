@@ -118,6 +118,9 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
     label: '客户信息',
     type: CustomerEntity,
   })
+  @Form({
+    requiredPayload: true,
+  })
     customer!: CustomerEntity
 
   getAuditingStatus(): AirEnum {

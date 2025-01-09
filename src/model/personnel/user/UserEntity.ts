@@ -6,6 +6,7 @@ import { RoleEntity } from '../role/RoleEntity'
 import { IUser } from '@/airpower/interface/IUser'
 import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
+import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 
 /**
  * # 用户实体
@@ -73,6 +74,7 @@ export class UserEntity extends BaseEntity implements IUser {
     forceShow: true,
     copyField: true,
     width: 100,
+    hide: true,
   })
   @Search()
   @Field({
@@ -82,7 +84,7 @@ export class UserEntity extends BaseEntity implements IUser {
 
   @Form({})
   @Table({
-    forceShow: true,
+    hide: true,
     copyField: true,
     width: 200,
   })
@@ -125,6 +127,17 @@ export class UserEntity extends BaseEntity implements IUser {
   }) roleList!: RoleEntity[]
 
   @Field({
+    type: RoleEntity,
+    array: true,
+    label: '部门',
+  })
+  @Table({
+    payloadArray: true,
+    payloadField: 'name',
+  })
+    departmentList!: DepartmentEntity[]
+
+  @Field({
     label: '性别',
     dictionary: UserGenderEnum,
   })
@@ -163,6 +176,8 @@ export class UserEntity extends BaseEntity implements IUser {
     label: '个人签名',
   })
     bio!: string
+
+  departmentId?: number
 
   /**
    * ### 设置邮箱
