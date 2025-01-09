@@ -1,19 +1,22 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="UserEntity"
+      :loading="isLoading"
       :service="UserService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="150"
       :data-list="response.list"
       :entity="UserEntity"
-      :disable-delete="row => row.isRootUser()"
+      show-enable-and-disable
       @on-edit="onEdit"
       @on-delete="onDelete"
+      @on-enable="onEnable"
+      @on-disable="onDisable"
     />
     <template #footerLeft>
       <APage
@@ -26,19 +29,25 @@
 
 <script lang="ts" setup>
 import {
-  APanel, ATable, AToolBar, APage,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
-import { UserEditor } from './component'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
+import { useAirTable } from '@/airpower/hook/useAirTable'
+import { UserEditor } from './component'
 
 const {
-  isLoading, response,
-  onPageChanged, onDelete, onEdit, onAdd, onSearch,
+  isLoading,
+  response,
+  onPageChanged,
+  onDelete,
+  onEdit,
+  onAdd,
+  onSearch,
+  onEnable,
+  onDisable,
 } = useAirTable(UserEntity, UserService, {
   editView: UserEditor,
 })
-
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

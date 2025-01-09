@@ -9,7 +9,6 @@
 import { ref } from 'vue'
 import { AirRouter } from '@/airpower/helper/AirRouter'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirConfig } from '@/airpower/config/AirConfig'
 import { AirAlert } from '@/airpower/feedback/AirAlert'
 import { AirAny } from '@/airpower/type/AirType'
 
@@ -19,20 +18,15 @@ async function init() {
   const platform = AirRouter.router.currentRoute.value.params.platform.toString()
   const code = AirRouter.router.currentRoute.value.query.code?.toString() || ''
   try {
-    const accessToken = await UserService.create(isLoading)
-      .callbackCode(platform, code)
-    AirConfig.saveAccessToken(accessToken)
+    await UserService.create(isLoading)
+      .thirdBind(platform, code)
   } catch (e) {
     await AirAlert.create()
       .hideClose()
       .error((e as AirAny).message, '登录失败')
   }
-  // 判断当前窗口是否由 window.open 打开
-  if (window.opener) {
-    window.close()
-  } else {
-    window.location.replace('/console')
-  }
+  await AirAlert.success('绑定第三方账号成功', '绑定成功')
+  window.close()
 }
 
 init()

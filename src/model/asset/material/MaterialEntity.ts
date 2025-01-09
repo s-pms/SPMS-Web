@@ -10,20 +10,16 @@ import { IPayload } from '@/airpower/interface/IPayload'
   label: '物料',
 })
 export class MaterialEntity extends BaseEntity implements IPayload {
-  /**
-   * ### 物料名称
-   */
   @Table({
     forceShow: true,
   })
   @Form({
     requiredString: true,
   })
-  @Field({}) name!: string
+  @Field({
+    label: '物料名称',
+  }) name!: string
 
-  /**
-   * ### 物料编码
-   */
   @Table({
     copyField: true,
     forceShow: true,
@@ -31,11 +27,10 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   @Form({
     placeholder: '不输入按编码规则自动生成',
   })
-  @Field({}) code!: string
+  @Field({
+    label: '物料编码',
+  }) code!: string
 
-  /**
-   * ### 物料类型
-   */
   @Table({
     showColor: true,
     width: 100,
@@ -51,9 +46,6 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   })
     materialType!: number
 
-  /**
-   * ### 规格型号
-   */
   @Table({
     copyField: true,
   })
