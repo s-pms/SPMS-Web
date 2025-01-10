@@ -1,8 +1,8 @@
 <template>
   <ADialog
-    title="计划明细"
     :form-ref="formRef"
     :loading="isLoading"
+    title="计划明细"
     width="600px"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -10,12 +10,12 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="PlanDetailService.createValidator(formData)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item
-        label="销售物料"
+        label="计划物料"
         prop="material"
       >
         <ASelect

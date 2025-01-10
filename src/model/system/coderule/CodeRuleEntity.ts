@@ -1,18 +1,16 @@
 import { BaseEntity } from '@/base/BaseEntity'
-
-import { SerialNumberUpdateEnum } from './SerialNumberUpdateEnum'
-import { Form } from '@/airpower/decorator/FormField'
-import { Table } from '@/airpower/decorator/TableField'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
+import {
+  Field, Form, Model, Table,
+} from '@/airpower/decorator'
+import { SerialNumberUpdateEnum } from '@/model/system/coderule/SerialNumberUpdateEnum'
 
 /**
  * # 编码规则实体
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 @Model({
-  permissionPrefix: 'coderule_',
+  permissionPrefix: 'coderule',
   label: '编码规则',
 })
 export class CodeRuleEntity extends BaseEntity {

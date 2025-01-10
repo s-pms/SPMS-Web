@@ -1,17 +1,17 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="CodeRuleEntity"
+      :loading="isLoading"
       :service="CodeRuleService"
       hide-add
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="105"
       :data-list="response.list"
       :entity="CodeRuleEntity"
-      :ctrl-width="105"
       hide-delete
       @on-edit="onEdit"
       @on-sort="onSortChanged"
@@ -20,7 +20,10 @@
         {{ getFieldName(data) }}
       </template>
       <template #nextCode="{ data }">
-        {{ data.prefix }}{{ nextCode(data) }}{{ (data.currentSn + 1).toString().padStart(data.snLength,"0") }}
+        {{ data.prefix }}{{ nextCode(data) }}{{
+          (data.currentSn + 1).toString()
+            .padStart(data.snLength, '0')
+        }}
       </template>
     </ATable>
     <template #footerLeft>
@@ -35,20 +38,23 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import {
-  APanel, APage, ATable, AToolBar,
+  APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { useAirTable } from '@/airpower/hook/useAirTable'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
-import { CodeRuleEditor } from './component'
+import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 import { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
+import { AirDateTime } from '@/airpower/helper/AirDateTime'
 
 const {
   isLoading,
   response,
-  onSearch, onEdit, onPageChanged, onSortChanged,
+  onSearch,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
 } = useAirTable(CodeRuleEntity, CodeRuleService, {
   editView: CodeRuleEditor,
 })
@@ -56,7 +62,8 @@ const {
 const fieldList = ref<CodeRuleField[]>([])
 
 async function getFieldList() {
-  fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
+  fieldList.value = await CodeRuleService.create(isLoading)
+    .getFieldList()
 }
 
 getFieldList()
@@ -66,9 +73,12 @@ function getFieldName(codeRule: CodeRuleEntity) {
 }
 
 const paramList = ref<CodeRuleParam[]>([])
+
 async function getParamList() {
-  paramList.value = await CodeRuleService.create(isLoading).getParamList()
+  paramList.value = await CodeRuleService.create(isLoading)
+    .getParamList()
 }
+
 getParamList()
 
 function nextCode(codeRule: CodeRuleEntity) {
@@ -78,11 +88,12 @@ function nextCode(codeRule: CodeRuleEntity) {
       code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), item.label.toUpperCase()))
     }
     if (['yy'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY').substring(2))
+      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY')
+        .substring(2))
     }
   }
   return code
 }
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

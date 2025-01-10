@@ -1,24 +1,25 @@
 <template>
   <ATreeBox
     v-loading="isLoadingTree"
+    :placeholder="treePlaceHolder"
     :tree-data="treeData"
     searchable
-    :placeholder="treePlaceHolder"
     @on-change="treeChanged"
   >
     <APanel>
       <AToolBar
-        hide-add
         :entity="InventoryEntity"
         :service="InventoryService"
+        hide-add
       >
         <template #afterButton>
           <el-radio-group
+            v-if="false"
             v-model="inventoryType"
             @change="inventoryTypeChanged"
           >
             <el-radio-button
-              v-for="view in InventoryTypeEnum.toDictionary()"
+              v-for="view in InventoryTypeEnum.toDictionary().filter(item=>!item.disabled)"
               :key="view.key"
               :label="view.key"
               :value="view.key"
@@ -30,11 +31,11 @@
       </AToolBar>
       <ATable
         v-loading="isLoading"
-        :data-list="list"
+        :ctrl-width="40"
+        :data-list="response.list"
         :entity="InventoryEntity"
         hide-delete
         hide-edit
-        :ctrl-width="40"
       >
         <template #materialCode="{ data }">
           {{ data.material.code }}
@@ -49,6 +50,12 @@
           {{ data.material.unit.name }}
         </template>
       </ATable>
+      <template #footerLeft>
+        <APage
+          :response="response"
+          @on-change="onPageChanged"
+        />
+      </template>
     </APanel>
   </ATreeBox>
 </template>
@@ -56,7 +63,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import {
-  APanel, ATable, AToolBar, ATreeBox,
+  APage, APanel, ATable, AToolBar, ATreeBox,
 } from '@/airpower/component'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
@@ -67,9 +74,12 @@ import { AirRequest } from '@/airpower/model/AirRequest'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { AirResponsePage } from '@/airpower/model/AirResponsePage'
+import { AirPage } from '@/airpower/model/AirPage'
+import { AirRequestPage } from '@/airpower/model/AirRequestPage'
 
-const request = ref(new AirRequest(InventoryEntity))
-const list = ref<InventoryEntity[]>([])
+const request = ref(new AirRequestPage(InventoryEntity))
+const response = ref<AirResponsePage<InventoryEntity>>(new AirResponsePage())
 
 const isLoading = ref(false)
 const isLoadingTree = ref(false)
@@ -79,11 +89,25 @@ const inventoryType = ref(InventoryTypeEnum.STORAGE.key)
 const treeData = ref<ITree[]>([])
 
 async function getStorage() {
-  treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
+  treeData.value = await StorageService.create(isLoadingTree)
+    .getList(new AirRequest(StorageEntity))
 }
 
 async function getStructure() {
-  treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
+  treeData.value = await StructureService.create(isLoadingTree)
+    .getList(new AirRequest(StructureEntity))
+}
+
+async function getList() {
+  request.value.filter = request.value.filter || new InventoryEntity()
+  request.value.filter.type = inventoryType.value
+  response.value = await InventoryService.create(isLoading)
+    .getPage(request.value)
+}
+
+async function onPageChanged(page: AirPage) {
+  request.value.page = page
+  getList()
 }
 
 const treePlaceHolder = ref('搜索...')
@@ -104,14 +128,8 @@ async function inventoryTypeChanged() {
   treeChanged(undefined)
 }
 
-async function getList() {
-  request.value.filter = request.value.filter || new InventoryEntity()
-  request.value.filter.type = inventoryType.value
-  list.value = await InventoryService.create(isLoading).getList(request.value)
-}
-
 async function treeChanged(current: ITree | undefined) {
-  list.value = []
+  response.value = new AirResponsePage()
   if (current) {
     switch (inventoryType.value) {
       case InventoryTypeEnum.STORAGE.key:
@@ -132,4 +150,4 @@ async function treeChanged(current: ITree | undefined) {
 
 inventoryTypeChanged()
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

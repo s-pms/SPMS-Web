@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title + CodeRuleEntity.getModelName()"
     :form-ref="formRef"
     :loading="isLoading"
-    width="800px"
+    :title="title + CodeRuleEntity.getModelName()"
     height="550px"
+    width="800px"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="140px"
       :rules="rules"
+      label-width="140px"
       @submit.prevent
     >
       <AGroup
-        title="基础配置"
         :column="2"
+        title="基础配置"
       >
         <el-form-item
           :label="CodeRuleEntity.getFormFieldLabel('ruleField')"
@@ -25,8 +25,8 @@
         >
           <AInput
             v-model.ruleField="formData.ruleField"
-            :entity="CodeRuleEntity"
             :disabled="!!formData.id"
+            :entity="CodeRuleEntity"
             :list="fieldList.map(item => {
               return {
                 key: item.key,
@@ -58,7 +58,9 @@
         >
           <span style="margin: 0 2px;color:red;font-weight: bold;">{{ formData.prefix }}</span>
           <span style="margin: 0 2px;color:darkgreen;font-weight: bold;">{{ demoCode }}</span>
-          <span style="margin: 0 2px;color:blue;font-weight: bold;">{{ "1".padStart(Math.min(formData.snLength, 10),"0") }}</span>
+          <span style="margin: 0 2px;color:blue;font-weight: bold;">{{
+            '1'.padStart(Math.min(formData.snLength, 10), '0')
+          }}</span>
         </el-form-item>
       </AGroup>
     </el-form>
@@ -83,15 +85,21 @@ import { AirDateTime } from '@/airpower/helper/AirDateTime'
 const props = defineProps(airPropsParam(new CodeRuleEntity()))
 
 const {
-  title, formData, rules, formRef, isLoading,
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
   onSubmit,
 } = useAirEditor(props, CodeRuleEntity, CodeRuleService, {
   customRules: {
     prefix: [
-      AirValidator.show('前缀只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
+      AirValidator.show('前缀只允许字母/数字/横线/下划线')
+        .ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
     ],
     template: [
-      AirValidator.show('模板只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
+      AirValidator.show('模板只允许字母/数字/横线/下划线')
+        .ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
     ],
   },
 })
@@ -99,14 +107,19 @@ const {
 const fieldList = ref<CodeRuleField[]>([])
 
 async function getFieldList() {
-  fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
+  fieldList.value = await CodeRuleService.create(isLoading)
+    .getFieldList()
 }
+
 getFieldList()
 
 const paramList = ref<CodeRuleParam[]>([])
+
 async function getParamList() {
-  paramList.value = await CodeRuleService.create(isLoading).getParamList()
+  paramList.value = await CodeRuleService.create(isLoading)
+    .getParamList()
 }
+
 getParamList()
 
 function fieldChanged(fieldId: number) {
@@ -124,7 +137,8 @@ const demoCode = computed(() => {
       code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), item.label.toUpperCase()))
     }
     if (['yy'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY').substring(2))
+      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY')
+        .substring(2))
     }
   }
   return code

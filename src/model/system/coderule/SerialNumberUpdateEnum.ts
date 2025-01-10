@@ -4,7 +4,7 @@ import { AirEnum } from '@/airpower/base/AirEnum'
 /**
  * # 序列号更新方式字典
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export class SerialNumberUpdateEnum extends AirEnum {
   static readonly DAY = new SerialNumberUpdateEnum(1, '每日更新', AirColor.SUCCESS)

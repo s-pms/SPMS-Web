@@ -1,11 +1,9 @@
-import { Form } from '@/airpower/decorator/FormField'
-import { Search } from '@/airpower/decorator/SearchField'
-import { Table } from '@/airpower/decorator/TableField'
+import {
+  Field, Form, Model, Search, Table,
+} from '@/airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { IMenu } from '@/airpower/interface/IMenu'
 import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 
 /**
  * # 菜单

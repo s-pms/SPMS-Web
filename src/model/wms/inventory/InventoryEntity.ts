@@ -1,11 +1,9 @@
-import { Table } from '@/airpower/decorator/TableField'
+import { Field, Model, Table } from '@/airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { Model } from '@/airpower/decorator/Model'
-import { Field } from '@/airpower/decorator/Field'
 
 @Model({
   label: '库存',

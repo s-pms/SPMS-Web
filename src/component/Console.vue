@@ -1,39 +1,30 @@
 <template>
   <AFrame
+    :header-height="50"
     :menu-list="menuList"
-    :unique-opened="false"
   >
     <template #logo>
       <img
+        class="logo"
+        height="40"
         src="@/assets/img/logo.svg"
-        style="height: 100%;"
       >
     </template>
     <template #user>
-      <AUser :user="currentUserInfo">
-        <div>
-          <AImage :src="currentUserInfo.avatar" />
-        </div>
-        <AInput
-          v-model.nickname="currentUserInfo.nickname"
-          :entity="UserEntity"
-          :tree="menuList"
-        />
-      </AUser>
+      <UserCard :user="currentUserInfo" />
     </template>
     <router-view />
   </AFrame>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  AFrame, AImage, AInput, AUser,
-} from '@/airpower/component'
+import { AFrame } from '@/airpower/component'
 import { AirRouter } from '@/airpower/helper/AirRouter'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { AirPermission } from '@/airpower/helper/AirPermission'
+import UserCard from '@/component/UserCard.vue'
 
 const currentUserInfo = ref(new UserEntity())
 const menuList = ref<MenuEntity[]>([])
@@ -58,10 +49,12 @@ async function init() {
 }
 
 init()
+
 </script>
 <style lang="scss" scoped>
 .logo {
   text-decoration: none;
   color: white;
+  margin-top: 5px;
 }
 </style>

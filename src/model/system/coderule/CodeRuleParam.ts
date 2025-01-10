@@ -1,10 +1,10 @@
 import { AirModel } from '@/airpower/base/AirModel'
-import { Field } from '@/airpower/decorator/Field'
+import { Field } from '@/airpower/decorator'
 
 /**
  * # 编码规则参数
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export class CodeRuleParam extends AirModel {
   @Field({
