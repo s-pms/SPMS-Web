@@ -15,7 +15,6 @@
       label-width="120px"
       @submit.prevent
     >
-      {{ formData }}
       <AGroup
         :column="2"
         title="生产计划"
