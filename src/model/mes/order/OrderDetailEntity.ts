@@ -9,6 +9,7 @@ export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Form({
     requiredNumber: true,
+    number: true,
   })
   @Field({
     label: '完成数量',
@@ -17,6 +18,7 @@ export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Form({
     requiredNumber: true,
+    number: true,
   })
   @Field({
     label: '异常数量',
