@@ -21,6 +21,12 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
+      <template #billCode="{data}">
+        <PayloadLink
+          :payload="data"
+          :view="SaleDetail"
+        />
+      </template>
       <template #customerCode="{ data }">
         {{ data.customer?.code || '-' }}
       </template>
@@ -54,6 +60,7 @@ import { SaleService } from '@/model/channel/sale/SaleService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,

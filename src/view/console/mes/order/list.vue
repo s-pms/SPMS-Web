@@ -1,26 +1,32 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="OrderEntity"
+      :loading="isLoading"
       :service="OrderService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="OrderEntity"
       :select-list="selectList"
-      :disable-edit="row => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
+      <template #billCode="{data}">
+        <PayloadLink
+          :payload="data"
+          :view="OrderDetail"
+        />
+      </template>
       <template #customer="{ data }">
         <el-link
           v-if="data.customer"
@@ -70,15 +76,24 @@ import { CustomerDetail } from '../../channel/customer/component'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
 } = useBillTable(OrderEntity, OrderService, {
   editView: OrderEditor,
   detailView: OrderDetail,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

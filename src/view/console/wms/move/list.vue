@@ -1,26 +1,32 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="MoveEntity"
+      :loading="isLoading"
       :service="MoveService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="MoveEntity"
       :select-list="selectList"
-      :disable-edit="row => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
+      <template #billCode="{data}">
+        <PayloadLink
+          :payload="data"
+          :view="MoveDetail"
+        />
+      </template>
       <template #storageName="{ data }">
         {{ data.storage.name }}({{ data.storage.code }})
       </template>
@@ -51,15 +57,24 @@ import { MoveService } from '@/model/wms/move/MoveService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
 } = useBillTable(MoveEntity, MoveService, {
   editView: MoveEditor,
   detailView: MoveDetail,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

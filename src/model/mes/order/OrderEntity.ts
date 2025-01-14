@@ -41,6 +41,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
 
   @Table({
     orderNumber: 77,
+    nowrap: true,
   })
   @Field({
     label: '物料名称',

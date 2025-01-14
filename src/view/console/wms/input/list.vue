@@ -22,6 +22,12 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
+      <template #billCode="{data}">
+        <PayloadLink
+          :payload="data"
+          :view="InputDetail"
+        />
+      </template>
       <template #storageName="{ data }">
         {{ data.storage?.name || '-' }}({{ data.storage?.code || '-' }})
       </template>
@@ -52,6 +58,7 @@ import { InputService } from '@/model/wms/input/InputService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,

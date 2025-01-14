@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="PurchaseEntity"
+      :loading="isLoading"
       :service="PurchaseService"
       show-filter
       @on-add="onAdd"
@@ -10,18 +10,24 @@
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => row.status !== PurchaseStatusEnum.REJECTED.key"
       :entity="PurchaseEntity"
       :select-list="selectList"
-      :disable-edit="row => row.status !== PurchaseStatusEnum.REJECTED.key"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
+      <template #billCode="{data}">
+        <PayloadLink
+          :payload="data"
+          :view="PurchaseDetail"
+        />
+      </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
           :bill="data"
@@ -49,6 +55,7 @@ import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,
@@ -69,4 +76,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

@@ -1,31 +1,37 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="PlanEntity"
+      :loading="isLoading"
       :service="PlanService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="PlanEntity"
       :select-list="selectList"
-      :disable-edit="row => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
+      <template #billCode="{data}">
+        <PayloadLink
+          :payload="data"
+          :view="PlanDetail"
+        />
+      </template>
       <template #customerCode="{ data }">
-        {{ data.customer?.code || "-" }}
+        {{ data.customer?.code || '-' }}
       </template>
       <template #customerName="{ data }">
-        {{ data.customer?.name || "-" }}
+        {{ data.customer?.name || '-' }}
       </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
@@ -54,15 +60,24 @@ import { PlanService } from '@/model/mes/plan/PlanService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
 } = useBillTable(PlanEntity, PlanService, {
   editView: PlanEditor,
   detailView: PlanDetail,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
