@@ -5,7 +5,7 @@
     confirm-text="添加完成"
     min-height="200px"
     title="添加完成数量"
-    @on-confirm="onConfirm(num)"
+    @on-confirm="onConfirm(orderDetail)"
     @on-cancel="onCancel"
   >
     <el-form
@@ -60,7 +60,5 @@ orderDetail.value.finishQuantity = props.param
 orderDetail.value.ngQuantity = 0
 
 const rules = OrderDetailService.createValidator(orderDetail.value)
-console.log(rules)
-const num = ref(props.param)
 
 </script>

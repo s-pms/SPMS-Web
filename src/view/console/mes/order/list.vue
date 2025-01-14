@@ -84,6 +84,7 @@ import { CustomerDetail } from '../../channel/customer/component'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 import { BillAuditOrReject } from '@/component'
+import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 
 const {
   isLoading,
@@ -99,14 +100,18 @@ const {
   onAudit,
   onReject,
   onFinish,
+  onGetList,
 } = useBillTable(OrderEntity, OrderService, {
   editView: OrderEditor,
   detailView: OrderDetail,
 })
 
 async function onAddDetail(order: OrderEntity) {
-  const detail = await AirDialog.show(OrderFinishEditor, order.quantity)
-  console.log(detail)
+  const detail = await AirDialog.show<OrderDetailEntity>(OrderFinishEditor, order.quantity)
+  detail.billId = order.id
+  await OrderService.create(isLoading)
+    .addFinish(detail)
+  onGetList()
 }
 </script>
 <style lang="scss" scoped></style>
