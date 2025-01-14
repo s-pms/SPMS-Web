@@ -1,4 +1,6 @@
-import { Field, Form, Table } from '@/airpower/decorator'
+import {
+  Field, Form, Search, Table,
+} from '@/airpower/decorator'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 import { AirEnum } from '@/airpower/base/AirEnum'
@@ -19,6 +21,7 @@ export abstract class AbstractBaseBillEntity<
     orderNumber: 99,
     forceShow: true,
   })
+  @Search()
   @Form({
     placeholder: '不填写按编码规则自动生成',
   })
@@ -33,6 +36,7 @@ export abstract class AbstractBaseBillEntity<
   @Form({
     showColor: true,
   })
+  @Search()
   abstract status: number
 
   /**
