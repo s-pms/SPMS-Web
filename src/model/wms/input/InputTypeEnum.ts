@@ -4,7 +4,7 @@ import { AirEnum } from '@/airpower/base/AirEnum'
 /**
  * # 入库类型枚举字典
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export class InputTypeEnum extends AirEnum {
   static readonly NORMAL = new InputTypeEnum(1, '普通入库', AirColor.WARNING)

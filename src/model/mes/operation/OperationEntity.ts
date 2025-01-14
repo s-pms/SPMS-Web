@@ -5,7 +5,7 @@ import { BaseEntity } from '@/base/BaseEntity'
 
 /**
  * # 工序
- * @author Hamm
+ * @author Hamm.cn
  */
 @Model({
   label: '工序',

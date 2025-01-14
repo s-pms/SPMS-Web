@@ -4,7 +4,7 @@ import { Field, Model, Table } from '@/airpower/decorator'
 
 /**
  * # 数据库实体基类
- * @author Hamm
+ * @author Hamm.cn
  */
 
 @Model({

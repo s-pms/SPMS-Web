@@ -7,7 +7,7 @@ import { PermissionSystemEnum } from './PermissionSystemEnum'
 
 /**
  * # 权限
- * @author Hamm
+ * @author Hamm.cn
  */
 @Model({
   label: '权限',

@@ -9,7 +9,7 @@ import { IPayload } from '@/airpower/interface/IPayload'
 /**
  * # 单据基类
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export abstract class AbstractBaseBillEntity<
   D extends AbstractBaseBillDetailEntity

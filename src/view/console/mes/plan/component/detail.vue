@@ -15,7 +15,7 @@
     >
       <AGroup
         :column="3"
-        title="采购单"
+        title="生产计划"
       >
         <BillFormCode :bill="formData" />
         <AFormField field="startTime">
@@ -43,7 +43,7 @@
         </el-form-item>
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
-      <AGroup title="采购明细">
+      <AGroup title="计划明细">
         <ATable
           :ctrl-width="60"
           :data-list="formData.details"

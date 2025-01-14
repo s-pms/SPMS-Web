@@ -7,7 +7,7 @@ import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBil
 /**
  * # 单据表格Hook
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export interface IUseBillTableResult<
   D extends AbstractBaseBillDetailEntity,

@@ -4,7 +4,7 @@ import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEnt
 /**
  * # 单据明细抽象服务基类
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export abstract class AbstractBaseBillDetailService<D extends AbstractBaseBillDetailEntity> extends AbstractBaseService<D> {
 }

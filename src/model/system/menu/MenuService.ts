@@ -3,7 +3,7 @@ import { MenuEntity } from './MenuEntity'
 
 /**
  * # 菜单接口服务
- * @author Hamm
+ * @author Hamm.cn
  */
 export class MenuService extends AbstractBaseService<MenuEntity> {
   baseUrl = 'menu'

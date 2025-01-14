@@ -4,7 +4,7 @@ import { AirEnum } from '@/airpower/base/AirEnum'
 /**
  * # 计划状态枚举字典
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export class OrderStatusEnum extends AirEnum {
   static readonly AUDITING = new OrderStatusEnum(1, '审核中', AirColor.WARNING)

@@ -4,7 +4,7 @@ import { BaseEntity } from '@/base/BaseEntity'
 /**
  * # 单据明细抽象基类
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export abstract class AbstractBaseBillDetailEntity extends BaseEntity {
   /**
