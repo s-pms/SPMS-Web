@@ -13,7 +13,7 @@ export class OrderStatusEnum extends AirEnum {
 
   static readonly PRODUCING = new OrderStatusEnum(3, '生产中', AirColor.WARNING)
 
-  static readonly DONE = new OrderStatusEnum(4, '已完成', AirColor.NORMAL)
+  static readonly INPUTTING = new OrderStatusEnum(4, '入库中', AirColor.NORMAL)
 
-  static readonly CANCELED = new OrderStatusEnum(5, '已取消', AirColor.NORMAL)
+  static readonly DONE = new OrderStatusEnum(5, '已完成', AirColor.SUCCESS)
 }

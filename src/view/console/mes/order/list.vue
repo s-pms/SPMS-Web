@@ -9,7 +9,7 @@
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
+      :ctrl-width="240"
       :data-list="response.list"
       :disable-edit="row => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="OrderEntity"
@@ -42,6 +42,20 @@
         {{ data.plan?.billCode || '-' }}
       </template>
       <template #customRow="{ data }">
+        <AButton
+          :disabled="OrderStatusEnum.PRODUCING.notEqualsKey(data.status)"
+          link-button
+          @click="onFinish(data)"
+        >
+          完成
+        </AButton>
+        <AButton
+          :disabled="OrderStatusEnum.PRODUCING.notEqualsKey(data.status)"
+          link-button
+          @click="onAddDetail(data)"
+        >
+          报工
+        </AButton>
         <BillAuditOrReject
           :bill="data"
           @on-audit="onAudit"
@@ -60,9 +74,9 @@
 
 <script lang="ts" setup>
 import {
-  APage, APanel, ATable, AToolBar,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
-import { OrderDetail, OrderEditor } from './component'
+import { OrderDetail, OrderEditor, OrderFinishEditor } from './component'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
@@ -84,9 +98,15 @@ const {
   onDetail,
   onAudit,
   onReject,
+  onFinish,
 } = useBillTable(OrderEntity, OrderService, {
   editView: OrderEditor,
   detailView: OrderDetail,
 })
+
+async function onAddDetail(order: OrderEntity) {
+  const detail = await AirDialog.show(OrderFinishEditor, order.quantity)
+  console.log(detail)
+}
 </script>
 <style lang="scss" scoped></style>
