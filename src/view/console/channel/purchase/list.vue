@@ -22,12 +22,6 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
-      <template #billCode="{data}">
-        <PayloadLink
-          :payload="data"
-          :view="PurchaseDetail"
-        />
-      </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
           :bill="data"
@@ -55,7 +49,6 @@ import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 import { BillAuditOrReject } from '@/component'
-import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,

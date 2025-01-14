@@ -21,12 +21,6 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
-      <template #billCode="{data}">
-        <PayloadLink
-          :payload="data"
-          :view="MoveDetail"
-        />
-      </template>
       <template #storageName="{ data }">
         {{ data.storage.name }}({{ data.storage.code }})
       </template>
@@ -57,7 +51,6 @@ import { MoveService } from '@/model/wms/move/MoveService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 import { BillAuditOrReject } from '@/component'
-import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,

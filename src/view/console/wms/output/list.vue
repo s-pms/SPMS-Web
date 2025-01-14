@@ -21,12 +21,6 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
-      <template #billCode="{data}">
-        <PayloadLink
-          :payload="data"
-          :view="OutputDetail"
-        />
-      </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
           :bill="data"
@@ -54,7 +48,6 @@ import { OutputService } from '@/model/wms/output/OutputService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { BillAuditOrReject } from '@/component'
-import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,

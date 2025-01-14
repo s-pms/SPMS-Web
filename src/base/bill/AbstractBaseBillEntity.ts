@@ -20,6 +20,7 @@ export abstract class AbstractBaseBillEntity<
   @Table({
     orderNumber: 99,
     forceShow: true,
+    copyField: true,
   })
   @Search()
   @Form({

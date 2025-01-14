@@ -21,12 +21,6 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
-      <template #billCode="{data}">
-        <PayloadLink
-          :payload="data"
-          :view="OrderDetail"
-        />
-      </template>
       <template #customer="{ data }">
         <el-link
           v-if="data.customer"
@@ -76,7 +70,6 @@ import { CustomerDetail } from '../../channel/customer/component'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 import { BillAuditOrReject } from '@/component'
-import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,

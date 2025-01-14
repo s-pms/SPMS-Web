@@ -21,12 +21,6 @@
       @on-sort="onSortChanged"
       @on-select="onSelected"
     >
-      <template #billCode="{data}">
-        <PayloadLink
-          :payload="data"
-          :view="PlanDetail"
-        />
-      </template>
       <template #customerCode="{ data }">
         {{ data.customer?.code || '-' }}
       </template>
@@ -60,7 +54,6 @@ import { PlanService } from '@/model/mes/plan/PlanService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
 import { BillAuditOrReject } from '@/component'
-import PayloadLink from '@/component/PayloadLink.vue'
 
 const {
   isLoading,
