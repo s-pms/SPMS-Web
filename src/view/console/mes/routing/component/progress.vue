@@ -79,7 +79,6 @@ import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
-import { RoutingOperationService } from '@/model/mes/routing/operation/RoutingOperationService'
 import { AirRequest } from '@/airpower/model/AirRequest'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OperationSelector } from '@/view/console/mes/operation/component'
@@ -88,21 +87,21 @@ import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new RoutingEntity()))
 const drag = ref(false)
+const current = ref(new RoutingOperationEntity())
+const list = ref<RoutingOperationEntity[]>([])
 const {
   formRef,
   isLoading,
   formData,
-} = useAirEditor(props, RoutingEntity, RoutingService)
-const current = ref(new RoutingOperationEntity())
-const list = ref<RoutingOperationEntity[]>([])
+} = useAirEditor(props, RoutingEntity, RoutingService, {
+  afterGetDetail(detailData) {
+    list.value = detailData.details
+    return detailData
+  },
+})
 
 const request = ref(new AirRequest(RoutingOperationEntity))
 request.value.filter.routingId = formData.value.id
-
-async function getList() {
-  list.value = await RoutingOperationService.create()
-    .getList(request.value)
-}
 
 function onStart() {
   drag.value = true
@@ -133,7 +132,6 @@ async function onAddOperation() {
   list.value.push(item)
 }
 
-getList()
 </script>
 
 <style lang="scss" scoped>
