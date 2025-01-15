@@ -185,6 +185,7 @@ function isAutoNextChanged() {
 
 function bomChanged() {
   list.value[current.value].bom = currentModel.value.bom
+  getBomDetails(currentModel.value.bom.id)
 }
 
 async function currentChanged(index: number, item: RoutingOperationEntity) {
