@@ -1,11 +1,10 @@
 import {
   Field, Form, Model, Search, Table,
 } from '@/airpower/decorator'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
-import { BomStatusEnum } from '@/model/mes/bom/BomStatusEnum'
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { IPayload } from '@/airpower/interface/IPayload'
+import { BaseEntity } from '@/base/BaseEntity'
 
 /**
  * # 生产配方
@@ -15,7 +14,7 @@ import { AirEnum } from '@/airpower/base/AirEnum'
 @Model({
   label: '生产配方',
 })
-export class BomEntity extends AbstractBaseBillEntity<BomDetailEntity> {
+export class BomEntity extends BaseEntity implements IPayload {
   @Table({
     forceShow: true,
   })
@@ -26,7 +25,7 @@ export class BomEntity extends AbstractBaseBillEntity<BomDetailEntity> {
   @Field({
     label: '配方编码',
   })
-    billCode!: string
+    code!: string
 
   @Table({
     forceShow: true,
@@ -56,16 +55,6 @@ export class BomEntity extends AbstractBaseBillEntity<BomDetailEntity> {
   @Search()
     type!: number
 
-  @Table({
-    width: 100,
-    showColor: true,
-  })
-  @Field({
-    label: '配方状态',
-    dictionary: BomStatusEnum,
-  })
-    status!: number
-
   @Field({
     label: '配方明细',
     type: BomDetailEntity,
@@ -73,15 +62,12 @@ export class BomEntity extends AbstractBaseBillEntity<BomDetailEntity> {
   })
     details: BomDetailEntity[] = []
 
-  getAuditingStatus(): AirEnum {
-    return BomStatusEnum.AUDITING
-  }
+  @Table({
+    removed: false,
+  })
+  declare isPublished: boolean
 
-  getAuditedStatus(): AirEnum {
-    return BomStatusEnum.PUBLISHED
-  }
-
-  getRejectedStatus(): AirEnum {
-    return BomStatusEnum.REJECTED
+  getPayloadLabel(): string {
+    return this.name
   }
 }

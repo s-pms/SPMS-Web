@@ -19,7 +19,7 @@
         :column="2"
         title="配方信息"
       >
-        <AFormField field="billCode" />
+        <AFormField field="code" />
         <AFormField field="name" />
         <AFormField field="type" />
       </AGroup>

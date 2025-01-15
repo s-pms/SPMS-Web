@@ -19,7 +19,7 @@
       >
         <AFormField
           disabled
-          field="billCode"
+          field="code"
         />
         <AFormField
           disabled
@@ -28,15 +28,6 @@
         <AFormField
           disabled
           field="type"
-        />
-        <AFormField
-          disabled
-          field="status"
-        />
-        <AFormField
-          v-if="BomStatusEnum.REJECTED.equalsKey(formData.status)"
-          disabled
-          field="rejectReason"
         />
       </AGroup>
       <AGroup title="配方物料清单">
@@ -70,7 +61,6 @@ import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { BomStatusEnum } from '@/model/mes/bom/BomStatusEnum'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 

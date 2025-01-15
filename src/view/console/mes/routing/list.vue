@@ -1,9 +1,9 @@
 <template>
   <APanel>
     <AToolBar
-      :entity="BomEntity"
+      :entity="RoutingEntity"
       :loading="isLoading"
-      :service="BomService"
+      :service="RoutingService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
@@ -13,14 +13,22 @@
       :data-list="response.list"
       :disable-delete="row=>row.isPublished"
       :disable-edit="row => row.isPublished"
-      :entity="BomEntity"
-      show-detail
-      @on-detail="onDetail"
-      @on-delete="onDelete"
+      :entity="RoutingEntity"
       @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @on-delete="onDelete"
     >
+      <template #materialCode="{ data }">
+        {{ data.material.code }}
+      </template>
+      <template #materialName="{ data }">
+        {{ data.material.name }}
+      </template>
+      <template #bomCode="{ data }">
+        {{ data.bom.code }}
+      </template>
+      <template #bomName="{ data }">
+        {{ data.bom.name }}
+      </template>
       <template #customRow="{ data }">
         <PublishButton
           :data
@@ -41,11 +49,11 @@
 import {
   APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
-import { BomDetail, BomEditor } from './component'
-import { BomEntity } from '@/model/mes/bom/BomEntity'
-import { BomService } from '@/model/mes/bom/BomService'
-import { useTable } from '@/hook/useTable'
+import { RoutingEditor } from './component'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
+import { RoutingService } from '@/model/mes/routing/RoutingService'
 import PublishButton from '@/component/PublishButton.vue'
+import { useTable } from '@/hook/useTable'
 
 const {
   isLoading,
@@ -53,15 +61,12 @@ const {
   onSearch,
   onAdd,
   onEdit,
-  onSortChanged,
-  onSelected,
-  onPageChanged,
-  onDetail,
   onDelete,
+  onPageChanged,
   onPublish,
-} = useTable(BomEntity, BomService, {
-  editView: BomEditor,
-  detailView: BomDetail,
+} = useTable(RoutingEntity, RoutingService, {
+  editView: RoutingEditor,
 })
+
 </script>
 <style lang="scss" scoped></style>
