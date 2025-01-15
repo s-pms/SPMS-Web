@@ -24,7 +24,7 @@ function onLogin(item: ThirdLoginPlatform) {
 <template>
   <div class="third-login">
     <div
-      v-for="item in ThirdLoginPlatform.toArray()"
+      v-for="item in ThirdLoginPlatform.toArray().filter(item => !item.disabled)"
       :key="item.key"
       v-tip="item.label"
       class="item"
