@@ -34,6 +34,12 @@
           :data
           @click="onPublish"
         />
+        <AButton
+          link-button
+          @click="onProgress(data)"
+        >
+          流程
+        </AButton>
       </template>
     </ATable>
     <template #footerLeft>
@@ -47,13 +53,14 @@
 
 <script lang="ts" setup>
 import {
-  APage, APanel, ATable, AToolBar,
+  AButton, APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
-import { RoutingEditor } from './component'
+import { RoutingEditor, RoutingProgress } from './component'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import PublishButton from '@/component/PublishButton.vue'
 import { useTable } from '@/hook/useTable'
+import { AirDialog } from '@/airpower/helper/AirDialog'
 
 const {
   isLoading,
@@ -68,5 +75,8 @@ const {
   editView: RoutingEditor,
 })
 
+async function onProgress(data: RoutingEntity) {
+  await AirDialog.show(RoutingProgress, data)
+}
 </script>
 <style lang="scss" scoped></style>

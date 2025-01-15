@@ -5,6 +5,7 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { IPayload } from '@/airpower/interface/IPayload'
+import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
 
 /**
  * # 生产工艺
@@ -98,6 +99,15 @@ export class RoutingEntity extends BaseEntity implements IPayload {
     removed: false,
   })
   declare isPublished: boolean
+
+  @Form({
+    requiredPayload: true,
+  })
+  @Field({
+    type: RoutingOperationEntity,
+    array: true,
+  })
+    details: RoutingOperationEntity[] = []
 
   getPayloadLabel(): string {
     return this.name
