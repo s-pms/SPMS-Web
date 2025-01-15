@@ -30,4 +30,6 @@ export class RoutingOperationEntity extends BaseEntity {
   routingId!: number
 
   sortNo!: number
+
+  isAutoNext!: boolean
 }

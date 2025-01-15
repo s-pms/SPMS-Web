@@ -41,18 +41,24 @@
                 v-if="list.length>0"
               >
                 <div
-                  v-for="(item) in list"
+                  v-for="(item,index) in list"
                   :key="item.id"
+                  :class="current===index?'current':''"
                   class="item"
-                  @click="current=item"
+                  @click="currentChanged(index,item)"
                 >
                   <div class="title">
                     <span>{{ item.operation.code }}</span> {{ item.operation.name }}
                   </div>
-                  <div class="detail">
-                    <el-tag v-if="item.bom">
-                      物料清单
-                    </el-tag>
+                  <div
+                    class="status"
+                  >
+                    <span
+                      v-if="item.bom"
+                    >物料清单</span>
+                    <span
+                      v-if="item.isAutoNext"
+                    >自动流转</span>
                   </div>
                 </div>
               </template>
@@ -63,7 +69,42 @@
           </VueDraggable>
         </div>
         <div class="right">
-          123
+          <AGroup title="工序配置">
+            <el-form v-if="current>=0">
+              <el-form-item label="自动工序流转">
+                <el-switch
+                  v-model="currentModel.isAutoNext"
+                  @click="isAutoNextChanged"
+                />
+              </el-form-item>
+              <el-form-item label="工序配方">
+                <ASelect
+                  v-model="currentModel.bom"
+                  :selector="BomSelector"
+                  @change="bomChanged"
+                />
+              </el-form-item>
+            </el-form>
+          </AGroup>
+          <AGroup
+            v-if="currentModel.bom"
+            :column="1"
+            title="物料清单"
+          >
+            <ATable
+              :data-list="bomDetails"
+              :entity="BomDetailEntity"
+              hide-delete
+              hide-edit
+            >
+              <template #materialCode="{ data }">
+                {{ data.material.code }}
+              </template>
+              <template #materialName="{ data }">
+                {{ data.material.name }}
+              </template>
+            </ATable>
+          </AGroup>
         </div>
       </div>
     </div>
@@ -73,7 +114,9 @@
 <script lang="ts" setup>
 import { VueDraggable } from 'vue-draggable-plus'
 import { nextTick, ref } from 'vue'
-import { AButton, ADialog, AEmpty } from '@/airpower/component'
+import {
+  AButton, ADialog, AEmpty, AGroup, ASelect, ATable,
+} from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
@@ -84,11 +127,16 @@ import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OperationSelector } from '@/view/console/mes/operation/component'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
+import { BomSelector } from '@/view/console/mes/bom/component'
+import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
+import { BomService } from '@/model/mes/bom/BomService'
 
 const props = defineProps(airPropsParam(new RoutingEntity()))
 const drag = ref(false)
-const current = ref(new RoutingOperationEntity())
+const current = ref(-1)
+const currentModel = ref(new RoutingOperationEntity())
 const list = ref<RoutingOperationEntity[]>([])
+const bomDetails = ref<BomDetailEntity[]>([])
 const {
   formRef,
   isLoading,
@@ -122,6 +170,30 @@ async function onSubmit() {
     .update(formData.value)
   AirNotification.success('编辑工艺流程成功')
   props.onConfirm()
+}
+
+async function getBomDetails(bomId: number) {
+  const bom = await BomService.create(isLoading)
+    .getDetail(bomId)
+
+  bomDetails.value = bom.details
+}
+
+function isAutoNextChanged() {
+  list.value[current.value].isAutoNext = !list.value[current.value].isAutoNext
+}
+
+function bomChanged() {
+  list.value[current.value].bom = currentModel.value.bom
+}
+
+async function currentChanged(index: number, item: RoutingOperationEntity) {
+  current.value = index
+  currentModel.value = item.copy()
+  bomDetails.value = []
+  if (item.bom) {
+    getBomDetails(item.bom.id)
+  }
 }
 
 async function onAddOperation() {
@@ -168,14 +240,15 @@ async function onAddOperation() {
         .item {
           cursor: grab;
           border-radius: 10px;
-          border: 1px solid #f5f5f5;
+          border: 1px solid #f8f8f8;
           margin: 8px 0;
-          background-color: #f5f5f5;
+          background-color: #f8f8f8;
           font-size: 16px;
           padding: 10px 15px;
           user-select: none;
           transition: all .3s;
           min-height: 50px;
+          position: relative;
 
           .title {
             display: flex;
@@ -191,20 +264,34 @@ async function onAddOperation() {
             }
           }
 
+          .detail {
+            position: relative;
+          }
+
+          .status {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            font-size: 12px;
+            color: var(--el-color-primary-light-3);
+
+            span {
+              margin-left: 5px;
+            }
+          }
+
           * {
             user-select: none
           }
         }
 
-        .end {
-          height: auto !important;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        .item.current {
+          border-color: var(--el-color-primary-light-7);
+          background-color: var(--el-color-primary-light-8);
         }
 
         .item:hover {
-          background-color: #eee;
+          background-color: var(--el-color-primary-light-8);
         }
       }
     }
@@ -212,6 +299,17 @@ async function onAddOperation() {
     .right {
       flex: 1;
       width: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+
+      ::v-deep(.air-group) {
+        height: auto !important;
+
+        .group-body {
+          height: 100%;
+        }
+      }
     }
   }
 }
