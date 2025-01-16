@@ -26,7 +26,7 @@
           v-if="InputTypeEnum.PURCHASE.equalsKey(formData.type)"
           label="采购单号"
         >
-          <el-link @click="AirDialog.show(PurchaseDetail,formData.purchase)">
+          <el-link @click="AirDialog.show(PurchaseDetail, formData.purchase)">
             {{ formData.purchase.billCode }}
           </el-link>
         </el-form-item>
@@ -34,7 +34,7 @@
           v-if="InputTypeEnum.MOVE.equalsKey(formData.type)"
           label="移库单号"
         >
-          <el-link @click="AirDialog.show(MoveDetail,formData.move)">
+          <el-link @click="AirDialog.show(MoveDetail, formData.move)">
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
@@ -42,7 +42,7 @@
           v-if="InputTypeEnum.PRODUCTION.equalsKey(formData.type)"
           label="生产订单"
         >
-          <el-link @click="AirDialog.show(OrderDetail,formData.order)">
+          <el-link @click="AirDialog.show(OrderDetail, formData.order)">
             {{ formData.order.billCode }}
           </el-link>
         </el-form-item>
@@ -64,7 +64,7 @@
           </template>
           <template #endRow="{ data }">
             <AButton
-              :disabled=" InputStatusEnum.INPUTTING.notEqualsKey(formData.status)"
+              :disabled="InputStatusEnum.INPUTTING.notEqualsKey(formData.status)"
               icon-button
               tooltip="添加完成"
               type="CHECKIN"

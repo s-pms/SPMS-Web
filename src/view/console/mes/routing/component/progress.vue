@@ -39,15 +39,13 @@
               tag="div"
               type="transition"
             >
-              <template
-                v-if="list.length>0"
-              >
+              <template v-if="list.length > 0">
                 <div
-                  v-for="(item,index) in list"
+                  v-for="(item, index) in list"
                   :key="item.id"
-                  :class="current===index?'current':''"
+                  :class="current === index ? 'current' : ''"
                   class="item"
-                  @click="currentChanged(index,item)"
+                  @click="currentChanged(index, item)"
                 >
                   <div class="title">
                     <span>{{ item.operation.code }}</span> {{ item.operation.name }}
@@ -55,19 +53,13 @@
                   <div
                     v-if="!formData.isPublished"
                     class="delete"
-                    @click.stop="current=-1;list.splice(index,1);"
+                    @click.stop="current = -1; list.splice(index, 1);"
                   >
                     删除
                   </div>
-                  <div
-                    class="status"
-                  >
-                    <span
-                      v-if="item.bom"
-                    >物料清单</span>
-                    <span
-                      v-if="item.isAutoNext"
-                    >自动流转</span>
+                  <div class="status">
+                    <span v-if="item.bom">物料清单</span>
+                    <span v-if="item.isAutoNext">自动流转</span>
                   </div>
                 </div>
               </template>
@@ -78,12 +70,10 @@
           </VueDraggable>
         </div>
         <div
-          v-if="current>=0"
+          v-if="current >= 0"
           class="right"
         >
-          <AGroup
-            title="工序配置"
-          >
+          <AGroup title="工序配置">
             <el-form>
               <el-form-item label="自动工序流转">
                 <el-switch
@@ -248,9 +238,7 @@ async function onAddOperation() {
       display: flex;
       flex-direction: column;
 
-      .button {
-
-      }
+      .button {}
 
       .list {
         flex: 1;

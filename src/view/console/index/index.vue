@@ -2,7 +2,7 @@
   <APanel>
     <div class="index">
       <div
-        v-for="(module,index) in modules"
+        v-for="(module, index) in modules"
         :key="index"
         class="module"
       >

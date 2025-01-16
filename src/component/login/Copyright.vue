@@ -15,7 +15,6 @@
 </template>
 
 <style lang="scss" scoped>
-
 .copyright {
   position: fixed;
   right: 0;

@@ -41,9 +41,7 @@ if (!formData.value) {
 </script>
 
 <template>
-  <AFormField
-    field="billCode"
-  >
+  <AFormField field="billCode">
     <ACopy
       v-if="formData.id"
       :content="formData.billCode"
@@ -53,6 +51,4 @@ if (!formData.value) {
   </AFormField>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

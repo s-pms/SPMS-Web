@@ -11,7 +11,7 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-delete="row=>row.isPublished"
+      :disable-delete="row => row.isPublished"
       :disable-edit="row => row.isPublished"
       :entity="BomEntity"
       show-detail

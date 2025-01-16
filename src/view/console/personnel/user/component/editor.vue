@@ -125,8 +125,8 @@ async function selectDepartment() {
 </script>
 
 <style lang="scss" scoped>
-.role-list > *,
-.department-list > * {
+.role-list>*,
+.department-list>* {
   margin-right: 5px;
 }
 </style>

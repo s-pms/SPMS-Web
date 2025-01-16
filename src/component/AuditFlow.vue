@@ -81,7 +81,7 @@ async function selectUser() {
     font-weight: bolder;
   }
 
-  > * {
+  >* {
     margin-bottom: 10px;
   }
 }

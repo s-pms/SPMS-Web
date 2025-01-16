@@ -48,9 +48,7 @@
             readonly
           >
             <template #append>
-              <el-button
-                @click="formData.material ? clearMaterial() : selectMaterial() "
-              >
+              <el-button @click="formData.material ? clearMaterial() : selectMaterial()">
                 {{ formData.material ? '清除' : '选择' }}
               </el-button>
             </template>

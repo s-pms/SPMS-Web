@@ -16,12 +16,10 @@ const emits = defineEmits(['click'])
   <AButton
     :disabled="data.isPublished"
     link-button
-    @click="emits('click',data)"
+    @click="emits('click', data)"
   >
     发布
   </AButton>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

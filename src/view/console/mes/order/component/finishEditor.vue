@@ -1,7 +1,7 @@
 <template>
   <ADialog
     :allow-fullscreen="false"
-    :disable-confirm="orderDetail.finishQuantity <= 0 && orderDetail.ngQuantity <=0"
+    :disable-confirm="orderDetail.finishQuantity <= 0 && orderDetail.ngQuantity <= 0"
     confirm-text="添加完成"
     min-height="200px"
     title="订单报工"
