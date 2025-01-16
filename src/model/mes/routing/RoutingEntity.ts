@@ -6,6 +6,7 @@ import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { IPayload } from '@/airpower/interface/IPayload'
 import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
+import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 
 /**
  * # 生产工艺
@@ -98,6 +99,9 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Table({
     removed: false,
   })
+  @Search({
+    hide: false,
+  })
   declare isPublished: boolean
 
   @Form({
@@ -108,6 +112,22 @@ export class RoutingEntity extends BaseEntity implements IPayload {
     array: true,
   })
     details: RoutingOperationEntity[] = []
+
+  @Field({
+    label: '工艺配方',
+    type: Boolean,
+    dictionary: BooleanYesNoDictionary,
+  })
+  @Form({
+    defaultValue: BooleanYesNoDictionary.NO.key,
+    clearable: false,
+  })
+  @Table({
+    showColor: true,
+    orderNumber: 22,
+    width: 100,
+  })
+    isRoutingBom!: boolean
 
   getPayloadLabel(): string {
     return this.name

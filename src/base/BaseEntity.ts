@@ -1,6 +1,8 @@
 import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 import { AirEntity } from '@/airpower/base/AirEntity'
-import { Field, Model, Table } from '@/airpower/decorator'
+import {
+  Field, Model, Search, Table,
+} from '@/airpower/decorator'
 import { PublishStatusEnum } from '@/model/common/PublishStatusEnum'
 
 /**
@@ -23,6 +25,10 @@ export class BaseEntity extends AirEntity {
     label: '发布状态',
     type: Boolean,
     dictionary: PublishStatusEnum,
+  })
+  @Search({
+    orderNumber: -1,
+    hide: true,
   })
     isPublished!: boolean
 

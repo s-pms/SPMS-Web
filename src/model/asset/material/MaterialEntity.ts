@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import {
-  Field, Form, Model, Table,
+  Field, Form, Model, Search, Table,
 } from '@/airpower/decorator'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { MaterialTypeEnum } from './MaterialTypeEnum'
@@ -16,6 +16,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   @Form({
     requiredString: true,
   })
+  @Search()
   @Field({
     label: '物料名称',
   }) name!: string
@@ -24,6 +25,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
     copyField: true,
     forceShow: true,
   })
+  @Search()
   @Form({
     placeholder: '不输入按编码规则自动生成',
   })
@@ -40,6 +42,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
     defaultValue: MaterialTypeEnum.PRODUCT.key,
     requiredNumber: true,
   })
+  @Search()
   @Field({
     label: '物料类型',
     dictionary: MaterialTypeEnum,

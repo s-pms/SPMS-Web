@@ -24,10 +24,10 @@
         {{ data.material.name }}
       </template>
       <template #bomCode="{ data }">
-        {{ data.bom.code }}
+        {{ data.bom?.code || '-' }}
       </template>
       <template #bomName="{ data }">
-        {{ data.bom.name }}
+        {{ data.bom?.name || '-' }}
       </template>
       <template #customRow="{ data }">
         <PublishButton

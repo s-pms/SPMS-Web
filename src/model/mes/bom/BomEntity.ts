@@ -65,6 +65,9 @@ export class BomEntity extends BaseEntity implements IPayload {
   @Table({
     removed: false,
   })
+  @Search({
+    hide: false,
+  })
   declare isPublished: boolean
 
   getPayloadLabel(): string {
