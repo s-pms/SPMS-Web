@@ -16,6 +16,7 @@
         <div class="left">
           <div class="button">
             <AButton
+              v-if="!formData.isPublished"
               type="ADD"
               @click="onAddOperation"
             >
@@ -26,6 +27,7 @@
             ref="el"
             v-model="list"
             :animation="150"
+            :disabled="formData.isPublished"
             class="list"
             target=".sort-target"
             @end="onEnd"
@@ -51,6 +53,13 @@
                     <span>{{ item.operation.code }}</span> {{ item.operation.name }}
                   </div>
                   <div
+                    v-if="!formData.isPublished"
+                    class="delete"
+                    @click.stop="current=-1;list.splice(index,1);"
+                  >
+                    删除
+                  </div>
+                  <div
                     class="status"
                   >
                     <span
@@ -68,18 +77,25 @@
             </TransitionGroup>
           </VueDraggable>
         </div>
-        <div class="right">
-          <AGroup title="工序配置">
-            <el-form v-if="current>=0">
+        <div
+          v-if="current>=0"
+          class="right"
+        >
+          <AGroup
+            title="工序配置"
+          >
+            <el-form>
               <el-form-item label="自动工序流转">
                 <el-switch
                   v-model="currentModel.isAutoNext"
+                  :disabled="formData.isPublished"
                   @click="isAutoNextChanged"
                 />
               </el-form-item>
               <el-form-item label="工序配方">
                 <ASelect
                   v-model="currentModel.bom"
+                  :disabled="formData.isPublished"
                   :selector="BomSelector"
                   @change="bomChanged"
                 />
@@ -180,6 +196,9 @@ async function getBomDetails(bomId: number) {
 }
 
 function isAutoNextChanged() {
+  if (formData.value.isPublished) {
+    return
+  }
   list.value[current.value].isAutoNext = !list.value[current.value].isAutoNext
 }
 
@@ -269,6 +288,15 @@ async function onAddOperation() {
             position: relative;
           }
 
+          .delete {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            font-size: 12px;
+            color: var(--el-color-danger-light-3);
+            display: none;
+          }
+
           .status {
             position: absolute;
             right: 5px;
@@ -289,10 +317,16 @@ async function onAddOperation() {
         .item.current {
           border-color: var(--el-color-primary-light-7);
           background-color: var(--el-color-primary-light-8);
+
+          .delete {
+            display: inline-block;
+            cursor: pointer;
+          }
         }
 
         .item:hover {
           background-color: var(--el-color-primary-light-8);
+
         }
       }
     }
