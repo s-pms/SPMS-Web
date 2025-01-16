@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /**
  * # 登录方式枚举
- * @author Hamm
+ * @author Hamm.cn
  */
 export enum LoginAction {
   /**

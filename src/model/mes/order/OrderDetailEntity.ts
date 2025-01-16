@@ -1,5 +1,5 @@
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { Model } from '@/airpower/decorator'
+import { Field, Form, Model } from '@/airpower/decorator'
 
 @Model({
   label: '订单明细',
@@ -7,5 +7,21 @@ import { Model } from '@/airpower/decorator'
 export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
   quantity!: number
 
-  finishQuantity!: number
+  @Form({
+    requiredNumber: true,
+    number: true,
+  })
+  @Field({
+    label: '完成数量',
+  })
+    finishQuantity!: number
+
+  @Form({
+    requiredNumber: true,
+    number: true,
+  })
+  @Field({
+    label: '异常数量',
+  })
+    ngQuantity!: number
 }

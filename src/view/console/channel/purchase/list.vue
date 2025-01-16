@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="PurchaseEntity"
+      :loading="isLoading"
       :service="PurchaseService"
       show-filter
       @on-add="onAdd"
@@ -10,13 +10,13 @@
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => row.status !== PurchaseStatusEnum.REJECTED.key"
       :entity="PurchaseEntity"
       :select-list="selectList"
-      :disable-edit="row => row.status !== PurchaseStatusEnum.REJECTED.key"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
@@ -69,4 +69,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

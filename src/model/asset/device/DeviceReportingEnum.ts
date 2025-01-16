@@ -4,7 +4,7 @@ import { AirColor } from '@/airpower/enum/AirColor'
 /**
  * # 设备上报状态
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export class DeviceReportingEnum extends AirEnum<boolean> {
   /**

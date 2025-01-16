@@ -14,7 +14,7 @@
       <div
         v-for="item in ThirdLoginPlatform.toArray()"
         :key="item.key"
-        :class="isBind(item) ? 'active':''"
+        :class="isBind(item) ? 'active' : ''"
         class="account"
       >
         <div class="left">

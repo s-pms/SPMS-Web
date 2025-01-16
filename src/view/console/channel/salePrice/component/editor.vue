@@ -31,9 +31,7 @@
           :selector="CustomerSelector"
         />
       </el-form-item>
-      <AFormField
-        field="price"
-      />
+      <AFormField field="price" />
     </el-form>
   </ADialog>
 </template>

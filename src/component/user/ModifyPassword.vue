@@ -76,7 +76,7 @@ async function onSubmit() {
 </script>
 
 <style lang="scss" scoped>
-.role-list > * {
+.role-list>* {
   margin-right: 5px;
 }
 </style>

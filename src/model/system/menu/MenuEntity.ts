@@ -7,7 +7,7 @@ import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
 
 /**
  * # 菜单
- * @author Hamm
+ * @author Hamm.cn
  */
 @Model({
   label: '菜单',

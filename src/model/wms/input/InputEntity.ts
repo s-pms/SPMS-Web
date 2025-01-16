@@ -9,6 +9,7 @@ import { InputTypeEnum } from './InputTypeEnum'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { MoveEntity } from '../move/MoveEntity'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { OrderEntity } from '@/model/mes/order/OrderEntity'
 
 @Model({
   label: '入库单',
@@ -73,6 +74,12 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     type: MoveEntity,
   })
     move!: MoveEntity
+
+  @Field({
+    label: '生产订单',
+    type: OrderEntity,
+  })
+    order!: OrderEntity
 
   getAuditingStatus(): AirEnum {
     return InputStatusEnum.AUDITING

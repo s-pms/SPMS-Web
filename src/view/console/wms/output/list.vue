@@ -1,21 +1,21 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="OutputEntity"
+      :loading="isLoading"
       :service="OutputService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
+      :disable-edit="row => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="OutputEntity"
       :select-list="selectList"
-      :disable-edit="row => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
       hide-delete
       show-detail
-      :ctrl-width="160"
       @on-detail="onDetail"
       @on-edit="onEdit"
       @on-sort="onSortChanged"
@@ -53,10 +53,18 @@ const {
   isLoading,
   response,
   selectList,
-  onSearch, onAdd, onEdit, onPageChanged, onSortChanged, onSelected, onDetail, onAudit, onReject,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
 } = useBillTable(OutputEntity, OutputService, {
   editView: OutputEditor,
   detailView: OutputDetail,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

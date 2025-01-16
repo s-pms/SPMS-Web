@@ -52,7 +52,7 @@
             :key="parameter.id"
             size="large"
             :closable="!parameter.isSystem"
-            :type="parameter.isSystem?'info':'primary'"
+            :type="parameter.isSystem ? 'info' : 'primary'"
             @close="formData.parameters.splice(index, 1)"
           >
             {{ parameter.label }}({{ parameter.code }})
@@ -102,9 +102,8 @@ async function selectParameter() {
 }
 </script>
 <style scoped lang="scss">
-
-.parameter-list{
-  >*{
+.parameter-list {
+  >* {
     margin-right: 5px;
   }
 }

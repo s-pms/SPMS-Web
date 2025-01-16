@@ -9,9 +9,10 @@ import { OrderTypeEnum } from './OrderTypeEnum'
 import { OrderDetailEntity } from './OrderDetailEntity'
 import { PlanEntity } from '../plan/PlanEntity'
 import {
-  Field, Form, Model, Table,
+  Field, Form, Model, Search, Table,
 } from '@/airpower/decorator'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 
 @Model({
   label: '生产订单',
@@ -41,6 +42,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
 
   @Table({
     orderNumber: 77,
+    nowrap: true,
   })
   @Field({
     label: '物料名称',
@@ -61,6 +63,37 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     type: Number,
   })
     quantity!: number
+
+  @Form({
+    requiredNumber: true,
+    number: true,
+  })
+  @Table({
+    align: 'right',
+    width: 150,
+    orderNumber: 66,
+  })
+  @Field({
+    label: '完成数量',
+    type: Number,
+  })
+    finishQuantity!: number
+
+  @Form({
+    requiredNumber: true,
+    number: true,
+  })
+  @Table({
+    align: 'right',
+    width: 150,
+    orderNumber: 66,
+    hide: true,
+  })
+  @Field({
+    label: '异常数量',
+    type: Number,
+  })
+    ngQuantity!: number
 
   @Table({
     copyField: true,
@@ -94,12 +127,14 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '订单类型',
     dictionary: OrderTypeEnum,
   })
+  @Search()
     type!: number
 
   @Table({
     width: 110,
     showColor: true,
     dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    hide: true,
   })
   @Form({
     defaultValue: AirDateTime.getMilliTimeStamps(),
@@ -155,6 +190,15 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     type: CustomerEntity,
   })
     customer!: CustomerEntity
+
+  @Form({
+    requiredPayload: true,
+  })
+  @Field({
+    label: '生产工艺',
+    type: RoutingEntity,
+  })
+    routing!: RoutingEntity
 
   @Form({
     requiredPayload: true,

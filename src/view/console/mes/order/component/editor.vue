@@ -17,7 +17,7 @@
     >
       <AGroup
         :column="2"
-        title="生产计划"
+        title="生产订单"
       >
         <AFormField field="billCode" />
         <AFormField
@@ -48,9 +48,7 @@
             readonly
           >
             <template #append>
-              <el-button
-                @click="formData.material ? formData.exclude('material') : selectMaterial() "
-              >
+              <el-button @click="formData.material ? clearMaterial() : selectMaterial()">
                 {{ formData.material ? '清除' : '选择' }}
               </el-button>
             </template>
@@ -71,12 +69,29 @@
           />
         </el-form-item>
       </AGroup>
+      <AGroup
+        title="生产工艺"
+        :column="2"
+      >
+        <el-form-item
+          label="生产工艺"
+          prop="routing"
+        >
+          <ASelect
+            v-model="formData.routing"
+            :selector="RoutingSelector"
+            placeholder="请选择生产工艺..."
+            :param="routingFilter"
+            :disabled="!formData.material"
+          />
+        </el-form-item>
+      </AGroup>
     </el-form>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import {
   ADialog, AFormField, AGroup, ASelect,
 } from '@/airpower/component'
@@ -92,6 +107,8 @@ import { MaterialSelector } from '@/view/console/asset/material/component'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
+import { RoutingSelector } from '../../routing/component'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
@@ -112,6 +129,10 @@ const {
   },
 })
 
+const routingFilter = ref(new RoutingEntity())
+routingFilter.value.isPublished = true
+routingFilter.value.material = formData.value.material
+
 async function selectPlan() {
   if (formData.value.plan) {
     formData.value.customer = formData.value.plan.customer
@@ -125,15 +146,21 @@ async function selectPlan() {
 async function selectMaterial() {
   if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
     formData.value.material = await AirDialog.select(MaterialSelector)
+    routingFilter.value.material = formData.value.material
     return
   }
   const planDetail: PlanDetailEntity = await AirDialog.show(PlanDetailSelector, formData.value.plan)
   formData.value.material = planDetail.material
+  routingFilter.value.material = formData.value.material
   formData.value.quantity = planDetail.quantity
   if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
     // 如果是外销计划
     formData.value.customer = formData.value.plan.customer
   }
+}
+
+async function clearMaterial() {
+  formData.value.exclude('material')
 }
 
 async function orderTypeChanged() {

@@ -3,7 +3,7 @@ import { PermissionEntity } from './PermissionEntity'
 
 /**
  * # 权限接口服务
- * @author Hamm
+ * @author Hamm.cn
  */
 export class PermissionService extends AbstractBaseService<PermissionEntity> {
   baseUrl = 'permission'

@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -14,8 +14,8 @@
       @submit.prevent
     >
       <AGroup
-        title="生产订单"
         :column="3"
+        title="生产订单"
       >
         <BillFormCode :bill="formData" />
 
@@ -27,10 +27,23 @@
           <ADateTime :time="formData.deliverTime" />
         </AFormField>
 
+        <AFormField field="materialName">
+          {{ formData.material?.name }}
+        </AFormField>
+        <AFormField field="quantity">
+          {{ formData.quantity }}
+        </AFormField>
         <AFormField
-          field="type"
           disabled
+          field="type"
         />
+        <AFormField field="materialCode">
+          {{ formData.material?.code }}
+        </AFormField>
+        <AFormField field="finishQuantity">
+          {{ formData.finishQuantity }}
+        </AFormField>
+
         <el-form-item
           label="关联客户"
           prop="customerId"
@@ -38,12 +51,15 @@
           <el-input
             :value="formData.customer?.name"
             clearable
-            placeholder="未选择客户"
             disabled
+            placeholder="未选择客户"
           />
         </el-form-item>
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
+      <AGroup title="生产工艺">
+        123
+      </AGroup>
     </el-form>
   </ADialog>
 </template>
@@ -61,7 +77,9 @@ import { BillFormCode, BillFormMoreDetail } from '@/component'
 const props = defineProps(airPropsParam(new OrderEntity()))
 
 const {
-  title, formData, isLoading,
+  title,
+  formData,
+  isLoading,
 } = useAirDetail(props, OrderEntity, OrderService, {})
 
 </script>

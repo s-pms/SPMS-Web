@@ -7,7 +7,7 @@ import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 
 /**
  * # 角色
- * @author Hamm
+ * @author Hamm.cn
  */
 
 @Model({

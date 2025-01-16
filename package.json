@@ -17,16 +17,17 @@
     "@types/crypto-js": "^4.2.2",
     "@vue/eslint-config-standard": "^8.0.1",
     "axios": "^1.7.2",
-    "qrcode.vue": "3.4.1",
     "core-js": "^3.37.1",
     "crypto-js": "^4.2.0",
     "echarts": "^5.5.0",
     "element-plus": "^2.8.0",
     "js-base64": "^3.7.7",
     "pinia": "^2.1.7",
+    "qrcode.vue": "3.4.1",
     "register-service-worker": "^1.7.2",
     "vue": "^3.4.27",
     "vue-clipboard3": "^2.0.0",
+    "vue-draggable-plus": "^0.6.0",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {

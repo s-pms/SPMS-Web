@@ -25,7 +25,7 @@
       :select-list="selectList"
       :show-select="isMultiple"
       :tree-props="{
-        checkStrictly:true
+        checkStrictly: true
       }"
       hide-delete
       hide-edit

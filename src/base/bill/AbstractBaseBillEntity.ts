@@ -1,4 +1,6 @@
-import { Field, Form, Table } from '@/airpower/decorator'
+import {
+  Field, Form, Search, Table,
+} from '@/airpower/decorator'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 import { AirEnum } from '@/airpower/base/AirEnum'
@@ -7,7 +9,7 @@ import { IPayload } from '@/airpower/interface/IPayload'
 /**
  * # 单据基类
  *
- * @author Hamm
+ * @author Hamm.cn
  */
 export abstract class AbstractBaseBillEntity<
   D extends AbstractBaseBillDetailEntity
@@ -18,7 +20,9 @@ export abstract class AbstractBaseBillEntity<
   @Table({
     orderNumber: 99,
     forceShow: true,
+    copyField: true,
   })
+  @Search()
   @Form({
     placeholder: '不填写按编码规则自动生成',
   })
@@ -33,6 +37,7 @@ export abstract class AbstractBaseBillEntity<
   @Form({
     showColor: true,
   })
+  @Search()
   abstract status: number
 
   /**
