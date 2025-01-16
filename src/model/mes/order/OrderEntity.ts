@@ -12,6 +12,7 @@ import {
   Field, Form, Model, Search, Table,
 } from '@/airpower/decorator'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 
 @Model({
   label: '生产订单',
@@ -189,6 +190,15 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     type: CustomerEntity,
   })
     customer!: CustomerEntity
+
+  @Form({
+    requiredPayload: true,
+  })
+  @Field({
+    label: '生产工艺',
+    type: RoutingEntity,
+  })
+    routing!: RoutingEntity
 
   @Form({
     requiredPayload: true,

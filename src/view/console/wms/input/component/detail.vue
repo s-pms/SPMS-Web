@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -14,13 +14,13 @@
       @submit.prevent
     >
       <AGroup
-        title="入库单"
         :column="3"
+        title="入库单"
       >
         <BillFormCode :bill="formData" />
         <AFormField
-          field="type"
           disabled
+          field="type"
         />
         <el-form-item
           v-if="InputTypeEnum.PURCHASE.equalsKey(formData.type)"
@@ -38,12 +38,20 @@
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
+        <el-form-item
+          v-if="InputTypeEnum.PRODUCTION.equalsKey(formData.type)"
+          label="生产订单"
+        >
+          <el-link @click="AirDialog.show(OrderDetail,formData.order)">
+            {{ formData.order.billCode }}
+          </el-link>
+        </el-form-item>
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="入库明细">
         <ATable
-          :entity="InputDetailEntity"
           :data-list="formData.details"
+          :entity="InputDetailEntity"
           :field-list="InputDetailEntity.getTableFieldConfigList()"
           hide-delete
           hide-edit
@@ -56,9 +64,9 @@
           </template>
           <template #endRow="{ data }">
             <AButton
+              :disabled=" InputStatusEnum.INPUTTING.notEqualsKey(formData.status)"
               icon-button
               tooltip="添加完成"
-              :disabled=" InputStatusEnum.INPUTTING.notEqualsKey(formData.status)"
               type="CHECKIN"
               @click="onAddFinish(data)"
             />
@@ -86,11 +94,14 @@ import { PurchaseDetail } from '@/view/console/channel/purchase/component'
 import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { OrderDetail } from '@/view/console/mes/order/component'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
 const {
-  title, formData, isLoading,
+  title,
+  formData,
+  isLoading,
   getDetail,
 } = useBillDetail(props, InputEntity, InputService, {
   afterGetDetail(detailData) {
