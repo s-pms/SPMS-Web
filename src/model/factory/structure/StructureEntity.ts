@@ -3,6 +3,7 @@ import {
 } from '@/airpower/decorator'
 import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
+import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 
 @Model({
   label: '工厂结构',
@@ -17,7 +18,10 @@ export class StructureEntity extends BaseEntity implements ITree {
   })
     name!: string
 
-  @Table()
+  @Table({
+    width: 300,
+    copyField: true,
+  })
   @Form({
     placeholder: '不输入按编码规则自动生成',
   })
@@ -41,4 +45,15 @@ export class StructureEntity extends BaseEntity implements ITree {
     type: StructureEntity,
   })
     parent!: this
+
+  @Field({
+    type: OperationEntity,
+    array: true,
+    label: '可执行工序',
+  })
+  @Table({
+    payloadArray: true,
+    payloadField: 'name',
+  })
+    operationList!: OperationEntity[]
 }

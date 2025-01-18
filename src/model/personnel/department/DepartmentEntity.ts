@@ -29,6 +29,8 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   @Table({
     forceShow: true,
     orderNumber: 88,
+    width: 300,
+    copyField: true,
   })
   @Search()
   @Form({

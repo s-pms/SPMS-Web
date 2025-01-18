@@ -18,7 +18,10 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
   })
     name!: string
 
-  @Table()
+  @Table({
+    width: 300,
+    copyField: true,
+  })
   @Form({
     placeholder: '不输入按编码规则自动生成',
   })
