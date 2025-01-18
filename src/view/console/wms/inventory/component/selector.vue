@@ -103,11 +103,11 @@ const treePlaceHolder = ref('搜索...')
 async function inventoryTypeChanged() {
   switch (inventoryType.value) {
     case InventoryTypeEnum.STORAGE.key:
-      treePlaceHolder.value = '搜索存储资源...'
+      treePlaceHolder.value = '搜索仓库...'
       getStorage()
       break
     case InventoryTypeEnum.STRUCTURE.key:
-      treePlaceHolder.value = '搜索工厂结构...'
+      treePlaceHolder.value = '搜索生产单元...'
       getStructure()
       break
     default:

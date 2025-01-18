@@ -8,6 +8,7 @@ import { OutputTypeEnum } from './OutputTypeEnum'
 import { OutputStatusEnum } from './OutputStatusEnum'
 import { MoveEntity } from '../move/MoveEntity'
 import { AirEnum } from '@/airpower/base/AirEnum'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 
 @Model({
   label: '出库单',
@@ -66,6 +67,12 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     type: MoveEntity,
   })
     move!: MoveEntity
+
+  @Field({
+    label: '领料单',
+    type: PickingEntity,
+  })
+    picking!: PickingEntity
 
   getAuditingStatus(): AirEnum {
     return OutputStatusEnum.AUDITING

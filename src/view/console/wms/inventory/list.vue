@@ -14,12 +14,11 @@
       >
         <template #afterButton>
           <el-radio-group
-            v-if="false"
             v-model="inventoryType"
             @change="inventoryTypeChanged"
           >
             <el-radio-button
-              v-for="view in InventoryTypeEnum.toDictionary().filter(item=>!item.disabled)"
+              v-for="view in InventoryTypeEnum.toDictionary()"
               :key="view.key"
               :label="view.key"
               :value="view.key"
@@ -34,6 +33,7 @@
         :ctrl-width="40"
         :data-list="response.list"
         :entity="InventoryEntity"
+        :field-list="tableField"
         hide-delete
         hide-edit
       >
@@ -44,7 +44,10 @@
           {{ data.material.name }}
         </template>
         <template #storageName="{ data }">
-          {{ data.storage.name }}({{ data.storage.code }})
+          {{ data.storage?.name }}({{ data.storage?.code }})
+        </template>
+        <template #structureName="{ data }">
+          {{ data.structure?.name }}({{ data.structure?.code }})
         </template>
         <template #unitName="{ data }">
           {{ data.material.unit.name }}
@@ -61,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import {
   APage, APanel, ATable, AToolBar, ATreeBox,
 } from '@/airpower/component'
@@ -115,11 +118,11 @@ const treePlaceHolder = ref('搜索...')
 async function inventoryTypeChanged() {
   switch (inventoryType.value) {
     case InventoryTypeEnum.STORAGE.key:
-      treePlaceHolder.value = '搜索存储资源...'
+      treePlaceHolder.value = '搜索仓库...'
       getStorage()
       break
     case InventoryTypeEnum.STRUCTURE.key:
-      treePlaceHolder.value = '搜索工厂结构...'
+      treePlaceHolder.value = '搜索生产单元...'
       getStructure()
       break
     default:
@@ -147,6 +150,18 @@ async function treeChanged(current: ITree | undefined) {
   }
   getList()
 }
+
+const tableField = computed(() => {
+  const list = InventoryEntity.getTableFieldConfigList()
+  switch (inventoryType.value) {
+    case InventoryTypeEnum.STORAGE.key:
+      return list.filter((item) => item.key !== 'structureName')
+    case InventoryTypeEnum.STRUCTURE.key:
+      return list.filter((item) => item.key !== 'storageName')
+    default:
+  }
+  return list
+})
 
 inventoryTypeChanged()
 </script>

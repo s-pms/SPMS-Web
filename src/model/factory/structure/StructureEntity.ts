@@ -1,20 +1,21 @@
 import {
   Field, Form, Model, Table,
 } from '@/airpower/decorator'
+import { IPayload } from '@/airpower/interface/IPayload'
 import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 
 @Model({
-  label: '工厂结构',
+  label: '生产单元',
 })
-export class StructureEntity extends BaseEntity implements ITree {
+export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table()
   @Form({
     requiredString: true,
   })
   @Field({
-    label: '工厂结构名称',
+    label: '生产单元名称',
   })
     name!: string
 
@@ -26,7 +27,7 @@ export class StructureEntity extends BaseEntity implements ITree {
     placeholder: '不输入按编码规则自动生成',
   })
   @Field({
-    label: '工厂结构编码',
+    label: '生产单元编码',
   })
     code!: string
 
@@ -56,4 +57,8 @@ export class StructureEntity extends BaseEntity implements ITree {
     payloadField: 'name',
   })
     operationList!: OperationEntity[]
+
+  getPayloadLabel(): string {
+    return this.name
+  }
 }

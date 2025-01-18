@@ -6,7 +6,7 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { IPayload } from '@/airpower/interface/IPayload'
 
 @Model({
-  label: '存储资源',
+  label: '仓库',
 })
 export class StorageEntity extends BaseEntity implements ITree, IPayload {
   @Table()
@@ -14,7 +14,7 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
     requiredString: true,
   })
   @Field({
-    label: '存储资源名称',
+    label: '仓库名称',
   })
     name!: string
 
@@ -26,7 +26,7 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
     placeholder: '不输入按编码规则自动生成',
   })
   @Field({
-    label: '存储资源编码',
+    label: '仓库编码',
   })
     code!: string
 

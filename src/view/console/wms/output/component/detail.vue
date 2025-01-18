@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    title="出库单详情"
     :loading="isLoading"
-    width="80%"
     height="80%"
+    title="出库单详情"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -12,8 +12,8 @@
       @submit.prevent
     >
       <AGroup
-        title="出库单"
         :column="3"
+        title="出库单"
       >
         <BillFormCode :bill="formData" />
         <AFormField
@@ -36,15 +36,23 @@
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
+        <el-form-item
+          v-if="OutputTypeEnum.PICKING.equalsKey(formData.type)"
+          label="领料单号"
+        >
+          <el-link @click="AirDialog.show(PickingDetail,formData.picking)">
+            {{ formData.picking.billCode }}
+          </el-link>
+        </el-form-item>
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="出库明细">
         <ATable
-          :entity="OutputDetailEntity"
           :data-list="formData.details"
+          :entity="OutputDetailEntity"
           :field-list="OutputDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -54,9 +62,9 @@
           </template>
           <template #endRow="{ data }">
             <AButton
+              :disabled=" OutputStatusEnum.OUTPUTTING.notEqualsKey(formData.status)"
               icon-button
               tooltip="添加完成"
-              :disabled=" OutputStatusEnum.OUTPUTTING.notEqualsKey(formData.status)"
               type="CHECKIN"
               @click="data.billId = formData.id; onAddFinish(data)"
             />
@@ -84,11 +92,14 @@ import { SaleDetail } from '@/view/console/channel/sale/component'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { PickingDetail } from '@/view/console/mes/picking/component'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 
 const {
-  formData, isLoading, getDetail,
+  formData,
+  isLoading,
+  getDetail,
 } = useBillDetail(props, OutputEntity, OutputService, {
   afterGetDetail(detailData) {
     return detailData

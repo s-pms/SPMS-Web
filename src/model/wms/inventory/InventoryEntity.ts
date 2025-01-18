@@ -44,16 +44,22 @@ export class InventoryEntity extends BaseEntity {
     unitName!: string
 
   @Field({
-    label: '存储资源',
+    label: '仓库',
     type: StorageEntity,
   })
     storage!: StorageEntity
 
   @Table()
   @Field({
-    label: '存储资源',
+    label: '仓库',
   })
     storageName!: string
+
+  @Table()
+  @Field({
+    label: '生产单元',
+  })
+    structureName!: string
 
   @Field({
     label: '库存类型',
@@ -62,13 +68,13 @@ export class InventoryEntity extends BaseEntity {
     type!: number
 
   @Field({
-    label: '存储资源',
+    label: '物料信息',
     type: MaterialEntity,
   })
     material!: MaterialEntity
 
   @Field({
-    label: '工厂结构',
+    label: '生产单元',
     type: StructureEntity,
   })
     structure!: StructureEntity

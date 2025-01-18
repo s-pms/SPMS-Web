@@ -18,7 +18,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
 
   @Table()
   @Field({
-    label: '目标存储资源',
+    label: '目标仓库',
   })
     storageName!: string
 
@@ -26,7 +26,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
     requiredPayload: true,
   })
   @Field({
-    label: '目标存储资源',
+    label: '目标仓库',
     type: StorageEntity,
   })
     storage!: StorageEntity

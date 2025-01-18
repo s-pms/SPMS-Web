@@ -1,18 +1,18 @@
 <template>
   <ADialog
-    title="确认出库"
+    :disable-confirm="formData.quantity <= 0"
     :form-ref="formRef"
     :loading="isLoading"
+    title="确认出库"
     width="600px"
-    :disable-confirm="formData.quantity <= 0"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="OutputDetailService.createValidator(formData)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item label="物料信息">
@@ -97,7 +97,9 @@ const isLoading = ref(false)
 const formRef = ref<AirFormInstance>()
 
 async function onSubmit() {
-  await OutputService.create(isLoading).addFinish(formData.value.copy().expose('id', 'quantity', 'billId', 'inventory'))
+  await OutputService.create(isLoading)
+    .addFinish(formData.value.copy()
+      .expose('id', 'quantity', 'billId', 'inventory'))
   props.onConfirm()
 }
 
@@ -108,6 +110,7 @@ formData.value.expose('id', 'quantity')
 async function selectInventory() {
   let inventory = new InventoryEntity()
   inventory.type = InventoryTypeEnum.STORAGE.key
+  inventory.material = material.value.copy()
   inventory = await AirDialog.show(InventorySelector, inventory)
   formData.value.inventory = inventory.copy()
   formData.value.inventoryId = formData.value.inventory.id

@@ -2,7 +2,7 @@
   <ADialog
     :form-ref="formRef"
     :loading="isLoading"
-    :title="title"
+    :title="title + PickingEntity.getModelName()"
     height="80%"
     width="80%"
     @on-confirm="onSubmit"
@@ -17,39 +17,39 @@
     >
       <AGroup
         :column="2"
-        title="移库单"
+        title="领料单"
       >
         <AFormField field="billCode" />
         <el-form-item
-          label="目标仓库"
-          prop="storage"
+          :label="PickingEntity.getFieldName('structure')"
+          prop="structure"
         >
           <ASelect
-            v-model="formData.storage"
-            :selector="StorageSelector"
+            v-model="formData.structure"
+            :selector="StructureSelector"
           />
         </el-form-item>
       </AGroup>
-      <AGroup title="移库明细">
+      <AGroup title="申领明细">
         <ATable
           :data-list="formData.details"
-          :entity="MoveDetailEntity"
-          :field-list="MoveDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :entity="PickingDetailEntity"
+          :field-list="PickingDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
           <template #materialCode="{ data }">
-            {{ data.inventory.material.code }}
+            {{ data.material.code }}
           </template>
           <template #materialName="{ data }">
-            {{ data.inventory.material.name }}
+            {{ data.material.name }}
           </template>
           <template #addButton>
             <AButton
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ MoveEntity.getFieldName('details') }}
+              添加{{ PickingEntity.getFieldName('details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">
@@ -73,18 +73,15 @@ import {
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { MoveEntity } from '@/model/wms/move/MoveEntity'
-import { MoveService } from '@/model/wms/move/MoveService'
-import { MoveDetailEditor } from '.'
+import { PickingDetailEditor } from '.'
 import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventorySelector } from '../../inventory/component'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { StorageSelector } from '@/view/console/factory/storage/component'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { PickingService } from '@/model/mes/picking/PickingService'
+import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
+import { StructureSelector } from '@/view/console/factory/structure/component'
 
-const props = defineProps(airPropsParam(new MoveEntity()))
+const props = defineProps(airPropsParam(new PickingEntity()))
 
 const {
   title,
@@ -93,9 +90,8 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, MoveEntity, MoveService, {
+} = useAirEditor(props, PickingEntity, PickingService, {
   afterGetDetail(detailData) {
-    detailData.storageName = detailData.storage.name
     return detailData
   },
   beforeSubmit(submitData) {
@@ -108,18 +104,12 @@ const {
 })
 
 async function addDetail() {
-  let inventory = new InventoryEntity()
-  inventory.type = InventoryTypeEnum.STORAGE.key
-  inventory = await AirDialog.select(InventorySelector, inventory)
-  let detail = new MoveDetailEntity()
-  detail.inventory = inventory
-  detail = await AirDialog.show(MoveDetailEditor, detail)
+  const detail: PickingDetailEntity = await AirDialog.show(PickingDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的计划明细？')
+  await AirConfirm.warning('是否删除选中行的申领明细？')
   formData.value.details.splice(index, 1)
 }
-
 </script>

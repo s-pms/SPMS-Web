@@ -1,18 +1,18 @@
 <template>
   <ADialog
-    title="确认入库"
+    :disable-confirm="formData.quantity <= 0"
     :form-ref="formRef"
     :loading="isLoading"
+    title="确认入库"
     width="600px"
-    :disable-confirm="formData.quantity <= 0"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="InputDetailService.createValidator(formData)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item label="物料信息">
@@ -22,13 +22,13 @@
         />
       </el-form-item>
       <el-form-item
-        label="目标存储资源"
+        label="目标仓库"
         prop="storageId"
       >
         <AInput
           v-model="formData.storageName"
           :entity="InputDetailEntity"
-          placeholder="请选择目标存储资源..."
+          placeholder="请选择目标仓库..."
           @click="selectStorage"
         />
       </el-form-item>
@@ -76,7 +76,9 @@ const isLoading = ref(false)
 const formRef = ref<AirFormInstance>()
 
 async function onSubmit() {
-  await InputService.create(isLoading).addFinish(formData.value.copy().expose('id', 'quantity', 'billId', 'storage'))
+  await InputService.create(isLoading)
+    .addFinish(formData.value.copy()
+      .expose('id', 'quantity', 'billId', 'storage'))
   props.onConfirm()
 }
 

@@ -75,7 +75,7 @@
           <AButton
             :disabled="OrderStatusEnum.PRODUCING.notEqualsKey(data.status)"
             link-button
-            @click="onFinish(data)"
+            @click="setBillDetailsAllFinished(data)"
           >
             完成
           </AButton>
@@ -119,7 +119,7 @@ const {
   onDetail,
   onAudit,
   onReject,
-  onFinish,
+  setBillDetailsAllFinished,
   onGetList,
 } = useBillTable(OrderEntity, OrderService, {
   editView: OrderEditor,
@@ -130,7 +130,7 @@ async function onAddDetail(order: OrderEntity) {
   const detail = await AirDialog.show<OrderDetailEntity>(OrderFinishEditor, order.quantity)
   detail.billId = order.id
   await OrderService.create(isLoading)
-    .addFinish(detail)
+    .addOrderDetail(detail)
   onGetList()
 }
 

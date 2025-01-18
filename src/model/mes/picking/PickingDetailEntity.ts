@@ -1,35 +1,32 @@
 import {
   Field, Form, Model, Table,
 } from '@/airpower/decorator'
+import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { InventoryEntity } from '../inventory/InventoryEntity'
 
 @Model({
-  label: '移库明细',
+  label: '领料明细',
 })
-export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
-  @Field({
-    type: InventoryEntity,
+export class PickingDetailEntity extends AbstractBaseBillDetailEntity {
+  @Form({
+    requiredPayload: true,
   })
-    inventory!: InventoryEntity
+  @Field({
+    type: MaterialEntity,
+  })
+    material!: MaterialEntity
 
-  @Table({ forceShow: true })
+  @Table()
   @Field({
     label: '物料编码',
   })
     materialCode!: string
 
-  @Table({ forceShow: true })
+  @Table()
   @Field({
     label: '物料名称',
   })
     materialName!: string
-
-  @Table()
-  @Field({
-    label: '来源仓库',
-  })
-    storageName!: string
 
   @Form({
     requiredNumber: true,
@@ -39,10 +36,10 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
     align: 'right',
     width: 150,
     orderNumber: -2,
-    forceShow: true,
   })
   @Field({
-    label: '移动数量',
+    label: '申领数量',
+    type: Number,
   })
     quantity!: number
 
@@ -52,7 +49,8 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
     orderNumber: -3,
   })
   @Field({
-    label: '已移动数量',
+    label: '已出库数量',
+    type: Number,
   })
     finishQuantity!: number
 }

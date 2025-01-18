@@ -11,5 +11,5 @@ import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBil
  */
 export interface IUseBillDetailResult<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>, S extends AbstractBaseBillService<D, B>> extends IUseDetailResult<B, S> {
 
-  onAddFinish: (billDetail: D) => void
+  addDetailFinishQuantity: (billDetail: D) => void
 }
