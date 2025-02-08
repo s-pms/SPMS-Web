@@ -54,7 +54,7 @@
               tooltip="添加完成"
               :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"
               type="CHECKIN"
-              @click="onAddFinish(data)"
+              @click="addDetailFinishQuantity(data)"
             />
           </template>
         </ATable>
@@ -78,7 +78,7 @@ import { BillFormCode, BillFormMoreDetail } from '@/component'
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
 const {
-  title, formData, isLoading, onAddFinish,
+  title, formData, isLoading, addDetailFinishQuantity,
 } = useBillDetail(props, PurchaseEntity, PurchaseService)
 
 </script>

@@ -51,7 +51,7 @@ export abstract class AbstractBaseBillService<
    * ### 添加完成数量
    * @param bill 单据
    */
-  async addFinish(bill: D): Promise<void> {
+  async addDetailFinishQuantity(bill: D): Promise<void> {
     await this.api('addFinish')
       .post(bill)
   }
