@@ -6,5 +6,3 @@ export class RoutingOperationService extends AbstractBaseService<RoutingOperatio
 
   entityClass = RoutingOperationEntity
 }
-
-3
