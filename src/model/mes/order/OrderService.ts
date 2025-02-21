@@ -19,4 +19,10 @@ export class OrderService extends AbstractBaseBillService<OrderDetailEntity, Ord
       .post(order)
     AirNotification.success('订单暂停成功')
   }
+
+  async addOrderDetail(order: OrderDetailEntity): Promise<void> {
+    await this.api('addOrderDetail')
+      .post(order)
+    AirNotification.success('订单报工成功')
+  }
 }

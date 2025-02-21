@@ -33,8 +33,17 @@ export abstract class AbstractBaseBillService<
    * ### 完成单据
    * @param bill 单据
    */
-  async finish(bill: B): Promise<void> {
-    await this.api('finish')
+  async setBillFinished(bill: B): Promise<void> {
+    await this.api('setBillFinished')
+      .post(bill)
+  }
+
+  /**
+   * ### 完成单据所有明细
+   * @param bill 单据
+   */
+  async setBillDetailsAllFinished(bill: B): Promise<void> {
+    await this.api('setBillDetailsAllFinished')
       .post(bill)
   }
 
@@ -42,7 +51,7 @@ export abstract class AbstractBaseBillService<
    * ### 添加完成数量
    * @param bill 单据
    */
-  async addFinish(bill: D): Promise<void> {
+  async addDetailFinishQuantity(bill: D): Promise<void> {
     await this.api('addFinish')
       .post(bill)
   }

@@ -37,7 +37,7 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
     materialName!: string
 
   @Field({
-    label: '目标存储资源',
+    label: '目标仓库',
   })
     storageName!: string
 
@@ -81,7 +81,7 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
     requiredNumber: true,
   })
   @Field({
-    label: '目标存储资源',
+    label: '目标仓库',
   })
     storageId !: number
 }

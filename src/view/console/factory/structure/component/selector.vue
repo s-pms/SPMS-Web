@@ -1,8 +1,9 @@
 <template>
   <ASelector
     :entity="StructureEntity"
-    :service="StructureService"
     :props="props"
+    :service="StructureService"
+    :un-paginate="true"
   />
 </template>
 
@@ -15,4 +16,4 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 const props = defineProps(airPropsSelector<StructureEntity>())
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

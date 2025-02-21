@@ -1,10 +1,10 @@
 <template>
   <ADialog
     :title="currentLabel || param.label + '历史(最多500条记录)'"
-    hide-confirm
-    width="65%"
     height="50%"
+    hide-confirm
     hide-footer
+    width="65%"
     @on-cancel="onCancel"
     @on-full="onFull"
   >
@@ -13,11 +13,11 @@
       <div class="right">
         <el-date-picker
           v-model="dateTimeRange"
-          type="datetimerange"
-          start-placeholder="开始时间"
+          :shortcuts="shortcuts"
           end-placeholder="结束时间"
           format="YYYY-MM-DD HH:mm:ss"
-          :shortcuts="shortcuts"
+          start-placeholder="开始时间"
+          type="datetimerange"
           @change="validDateTimeRange"
         />
 
@@ -68,8 +68,8 @@
             class="item"
           >
             <div
-              class="card"
               :style="{ backgroundColor: getColor(item) }"
+              class="card"
             >
               <div class="quantity">
                 {{
@@ -88,8 +88,8 @@
           </div>
         </div>
         <div
-          class="cover"
           :style="{ backgroundColor: currentColor || 'transparent' }"
+          class="cover"
         />
       </div>
       <div class="timeline">
@@ -97,8 +97,8 @@
           <div
             v-for="(item, index) in statusList"
             :key="index"
-            class="item"
             :style="{ backgroundColor: item.color, width: item.percent + '%' }"
+            class="item"
             @mouseenter="currentLabel = item.label; currentColor = item.color"
             @mouseout="currentLabel = ''; currentColor = ''"
           />
@@ -171,6 +171,8 @@ import { AirRand } from '@/airpower/helper/AirRand'
 import { IJson } from '@/airpower/interface/IJson'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
+import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
+import { Constant } from '@/config/Constant'
 
 const currentLabel = ref('')
 const currentColor = ref('')
@@ -182,117 +184,24 @@ const isLoading = ref(false)
 
 const maxLength = 500
 
-const SECOND_PER_DAY = 86400
-const SECOND_PER_HOUR = 3600
 const currentGranularity = ref(CollectionGranularityEnum.ONE_MINUTE)
-const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()])
+const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.key), new Date()])
 
-const shortcuts = [
-  {
-    text: '近一小时',
+const shortcuts = computed(() => DeviceReportDuration.toDictionary()
+  .forEach((item) => ({
+    text: item.label,
     value: () => {
-      const end = new Date()
       const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000)
-      return [start, end]
+      start.setTime(start.getTime() - item.key * Constant.MILLISECOND_PER_SECOND)
+      return [start, new Date()]
     },
-  },
-  {
-    text: '近三小时',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 3)
-      return [start, end]
-    },
-  },
-  {
-    text: '近六小时',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 6)
-      return [start, end]
-    },
-  },
-  {
-    text: '近半天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 12)
-      return [start, end]
-    },
-  },
-  {
-    text: '近一天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24)
-      return [start, end]
-    },
-  },
-  {
-    text: '近三天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 3)
-      return [start, end]
-    },
-  },
-  {
-    text: '近一周',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-      return [start, end]
-    },
-  },
-  {
-    text: '近一月',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31)
-      return [start, end]
-    },
-  },
-  {
-    text: '近一季度',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31 * 3)
-      return [start, end]
-    },
-  },
-  {
-    text: '近半年',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31 * 6)
-      return [start, end]
-    },
-  },
-  {
-    text: '近一年',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 31 * 12)
-      return [start, end]
-    },
-  },
-]
+  })))
 
 const dictionary = computed(() => {
   switch (props.param.code) {
     case 'Status':
-      return DeviceStatusEnum.toDictionary().filter((item) => item.key !== DeviceStatusEnum.UNKNOWN.key)
+      return DeviceStatusEnum.toDictionary()
+        .filter((item) => item.key !== DeviceStatusEnum.UNKNOWN.key)
     case 'Alarm':
       return AlarmStatusEnum.toDictionary()
     default:
@@ -310,45 +219,40 @@ function validDateTimeRange() {
         switch (currentGranularity.value) {
           case CollectionGranularityEnum.ONE_MINUTE:
             // 每分钟 最多允许查看最近6小时
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > 6 * SECOND_PER_HOUR) {
+            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.SIX_HOUR.getMillisecond()) {
               AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - 6 * SECOND_PER_HOUR) * 1000)
+              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.SIX_HOUR.getMillisecond())
             }
             break
           case CollectionGranularityEnum.FIVE_MINUTES:
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY) {
+            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.ONE_DAY.getMillisecond()) {
               AirNotification.warning('该时间粒度下最多允许查看24小时内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY) * 1000)
+              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_DAY.getMillisecond())
             }
             break
           case CollectionGranularityEnum.THIRTY_MINUTES:
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 3) {
+            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.THREE_DAY.getMillisecond()) {
               AirNotification.warning('该时间粒度下最多允许查看72小时内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 3) * 1000)
+              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.THREE_DAY.getMillisecond())
             }
             break
           case CollectionGranularityEnum.ONE_HOUR:
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 7) {
+            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.ONE_WEEK.getMillisecond()) {
               AirNotification.warning('该时间粒度下最多允许查看7天内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 7) * 1000)
+              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_WEEK.getMillisecond())
             }
             break
           case CollectionGranularityEnum.ONE_DAY:
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365) {
+            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.ONE_YEAR.getMillisecond()) {
               AirNotification.warning('该时间粒度下最多允许查看一年内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365) * 1000)
+              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_YEAR.getMillisecond())
             }
             break
           case CollectionGranularityEnum.ONE_WEEK:
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 3) {
-              AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 3) * 1000)
-            }
-            break
           case CollectionGranularityEnum.ONE_MONTH:
-            if (AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - AirDateTime.getUnixTimeStamps(dateTimeRange.value[0]) > SECOND_PER_DAY * 365 * 10) {
-              AirNotification.warning('该时间粒度下最多允许查看十年内的数据')
-              dateTimeRange.value[0] = new Date((AirDateTime.getUnixTimeStamps(dateTimeRange.value[1]) - SECOND_PER_DAY * 365 * 10) * 1000)
+            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.THREE_YEAR.getMillisecond()) {
+              AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
+              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.THREE_YEAR.getMillisecond())
             }
             break
           default:
@@ -357,7 +261,7 @@ function validDateTimeRange() {
       default:
     }
   } else {
-    dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - SECOND_PER_HOUR * 6 * 1000), new Date()]
+    dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.getMillisecond()), new Date()]
     currentGranularity.value = CollectionGranularityEnum.ONE_MINUTE
   }
   // eslint-disable-next-line no-use-before-define
@@ -426,7 +330,8 @@ function getStatusPercent(item: CollectionEntity, index: number) {
   }
   return parseFloat(((
     (item.timestamp - startTime)
-    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString()).toFixed(6)
+    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString())
+    .toFixed(6)
 }
 
 /**
@@ -463,7 +368,8 @@ function getPercent(dictionary: IDictionary) {
       percent += parseFloat(item.percent)
     }
   })
-  return parseFloat(parseFloat(percent.toString()).toFixed(2))
+  return parseFloat(parseFloat(percent.toString())
+    .toFixed(2))
 }
 
 function getFriendlyTime(milSecond: number) {
@@ -535,7 +441,8 @@ function initLine() {
           ]),
         },
         smooth: true,
-        data: collectionList.value.map((item) => parseFloat(item.value).toFixed(2)),
+        data: collectionList.value.map((item) => parseFloat(item.value)
+          .toFixed(2)),
       },
     ],
   }
@@ -561,7 +468,8 @@ async function getDevicePayloadHistory() {
   postData.reportGranularity = currentGranularity.value.key
   postData.startTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
   postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-  const list = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
+  const list = await DeviceService.create(isLoading)
+    .getDevicePayloadHistory(postData)
   if (ParameterTypeEnum.INFORMATION.equalsKey(props.param.dataType)) {
     collectionList.value = list.reverse()
   } else {
@@ -598,7 +506,7 @@ function onFull() {
     flex-direction: row;
     align-items: center;
 
-    >div {
+    > div {
       margin-left: 5px;
     }
   }
@@ -720,7 +628,7 @@ function onFull() {
     align-items: center;
     margin-top: 10px;
 
-    >div {
+    > div {
       flex: 1;
       font-size: 14px;
       color: #333;

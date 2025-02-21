@@ -27,8 +27,14 @@ export interface IUseBillTableResult<
   onReject: (bill: B) => void
 
   /**
+   * ### 标记单据所有明细已完成
+   * @param bill
+   */
+  setBillDetailsAllFinished: (bill: B) => void
+
+  /**
    * ### 完成单据
    * @param bill
    */
-  onFinish: (bill: B) => void
+  setBillFinished: (bill: B) => void
 }

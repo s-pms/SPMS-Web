@@ -51,7 +51,7 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     status!: number
 
   @Field({
-    label: '存储资源',
+    label: '仓库',
     type: StorageEntity,
   })
     storage!: StorageEntity

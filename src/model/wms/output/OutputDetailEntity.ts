@@ -35,7 +35,7 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
     materialName!: string
 
   @Field({
-    label: '来源存储资源',
+    label: '来源仓库',
   })
     storageName!: string
 

@@ -38,12 +38,22 @@ export function useBillTable<
   }
 
   /**
-   * ### 单据手动完成
+   * ### 设置单据明细都已完成
    * @param bill 单据
    */
-  async function onFinish(bill: B) {
-    await AirConfirm.warning(`是否确认手动完成选择的${result.entity.getModelName()}？`)
-    await result.service.finish(bill)
+  async function setBillDetailsAllFinished(bill: B) {
+    await AirConfirm.warning(`是否确认设置${result.entity.getModelName()}已完成？`)
+    await result.service.setBillDetailsAllFinished(bill)
+    result.onReloadData()
+  }
+
+  /**
+   * ### 设置单据已完成
+   * @param bill 单据
+   */
+  async function setBillFinished(bill: B) {
+    await AirConfirm.warning(`是否确认设置所有${result.entity.getModelName()}明细都已完成？`)
+    await result.service.setBillFinished(bill)
     result.onReloadData()
   }
 
@@ -60,7 +70,8 @@ export function useBillTable<
   }
 
   return {
-    onFinish,
+    setBillFinished,
+    setBillDetailsAllFinished,
     onAudit,
     onReject,
     ...result,

@@ -6,7 +6,7 @@
       class="card"
     >
       <div class="app-name">
-        {{ appInfo.appName || '欢迎使用AirPower4T!' }}
+        {{ appInfo.appName || '请先登录 SPMS!' }}
       </div>
       <div class="tabs">
         <div
