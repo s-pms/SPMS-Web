@@ -124,7 +124,7 @@ yarn test           #测试环境 使用.env.test
 yarn production     #生产环境 使用.env.production
 ```
 
-### 四、其他命令
+### 其他命令
 
 ```shell
 #使用标准commit模板
