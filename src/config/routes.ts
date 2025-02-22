@@ -6,6 +6,11 @@ import { RouteRecordRaw } from 'vue-router'
  */
 export const routes: RouteRecordRaw[] = [
   {
+    path: '/chat',
+    name: 'Chat',
+    component: () => import('@/view/chat.vue'),
+  },
+  {
     path: '/login',
     name: '登录',
     // 如需启用Oauth2登录 请使用 @/airpower/view/login.vue

@@ -23,6 +23,7 @@ export class PurchasePriceEntity extends BaseEntity {
   @Table()
   @Field({
     type: SupplierEntity,
+    label: '供应商',
   })
     supplier!: SupplierEntity
 

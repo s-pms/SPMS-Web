@@ -1,38 +1,3 @@
-<script lang="ts" setup>
-
-import { computed } from 'vue'
-import defaultAvatar from '@/airpower/assets/img/avatar.svg'
-import { AirDesensitize } from '@/airpower/helper/AirDesensitize'
-import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
-import { AUser } from '@/airpower/component'
-import { AirFile } from '@/airpower/helper/AirFile'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import ThirdAccountList from '@/component/user/ThirdAccountList.vue'
-import ModifyPassword from '@/component/user/ModifyPassword.vue'
-
-const props = defineProps({
-  user: {
-    type: UserEntity,
-    required: true,
-  },
-})
-const userAvatar = computed(() => {
-  if (props.user.avatar) {
-    return AirFile.getStaticFileUrl(props.user.avatar)
-  }
-  return defaultAvatar
-})
-
-function onThirdPartyClicked() {
-  AirDialog.show(ThirdAccountList)
-}
-
-function onModifyPassword() {
-  AirDialog.show(ModifyPassword)
-}
-</script>
-
 <template>
   <AUser
     :height="200"
@@ -40,7 +5,14 @@ function onModifyPassword() {
   >
     <div class="user">
       <div class="user-left">
-        <el-image :src="userAvatar" />
+        <AImage
+          :header="{
+            category: 2
+          }"
+          :height="80"
+          :width="80"
+          upload
+        />
         <div
           :class="user.gender === 1 ? 'male' : 'female'"
           class="gender"
@@ -116,7 +88,40 @@ function onModifyPassword() {
     </div>
   </AUser>
 </template>
+<script lang="ts" setup>
 
+import { computed } from 'vue'
+import defaultAvatar from '@/airpower/assets/img/avatar.svg'
+import { AirDesensitize } from '@/airpower/helper/AirDesensitize'
+import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
+import { AImage, AUser } from '@/airpower/component'
+import { AirFile } from '@/airpower/helper/AirFile'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { AirDialog } from '@/airpower/helper/AirDialog'
+import ThirdAccountList from '@/component/user/ThirdAccountList.vue'
+import ModifyPassword from '@/component/user/ModifyPassword.vue'
+
+const props = defineProps({
+  user: {
+    type: UserEntity,
+    required: true,
+  },
+})
+const userAvatar = computed(() => {
+  if (props.user.avatar) {
+    return AirFile.getStaticFileUrl(props.user.avatar)
+  }
+  return defaultAvatar
+})
+
+function onThirdPartyClicked() {
+  AirDialog.show(ThirdAccountList)
+}
+
+function onModifyPassword() {
+  AirDialog.show(ModifyPassword)
+}
+</script>
 <style lang="scss" scoped>
 .user {
   display: flex;
