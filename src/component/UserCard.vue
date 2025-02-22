@@ -105,7 +105,7 @@ import { AirFileEntity } from '@/airpower/model/entity/AirFileEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { AppConfig } from '@/config/AppConfig'
 
-const props = defineProps({
+defineProps({
   user: {
     type: UserEntity,
     required: true,
