@@ -92,12 +92,10 @@
 </template>
 <script lang="ts" setup>
 
-import { computed, ref } from 'vue'
-import defaultAvatar from '@/airpower/assets/img/avatar.svg'
+import { ref } from 'vue'
 import { AirDesensitize } from '@/airpower/helper/AirDesensitize'
 import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
 import { AImage, AUser } from '@/airpower/component'
-import { AirFile } from '@/airpower/helper/AirFile'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import ThirdAccountList from '@/component/user/ThirdAccountList.vue'
@@ -112,12 +110,6 @@ const props = defineProps({
     type: UserEntity,
     required: true,
   },
-})
-const userAvatar = computed(() => {
-  if (props.user.avatar) {
-    return AirFile.getStaticFileUrl(props.user.avatar)
-  }
-  return defaultAvatar
 })
 
 function onThirdPartyClicked() {
