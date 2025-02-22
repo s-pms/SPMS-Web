@@ -6,12 +6,14 @@
     <div class="user">
       <div class="user-left">
         <AImage
-          :header="{
-            category: 2
+          v-loading="isLoading"
+          :data="{
+            category: FileCategory.AVATAR.key
           }"
           :height="80"
           :width="80"
           upload
+          @on-upload="onUploadAvatar"
         />
         <div
           :class="user.gender === 1 ? 'male' : 'female'"
@@ -90,7 +92,7 @@
 </template>
 <script lang="ts" setup>
 
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import defaultAvatar from '@/airpower/assets/img/avatar.svg'
 import { AirDesensitize } from '@/airpower/helper/AirDesensitize'
 import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
@@ -100,6 +102,10 @@ import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { AirDialog } from '@/airpower/helper/AirDialog'
 import ThirdAccountList from '@/component/user/ThirdAccountList.vue'
 import ModifyPassword from '@/component/user/ModifyPassword.vue'
+import { FileCategory } from '@/model/system/file/FileCategory'
+import { AirFileEntity } from '@/airpower/model/entity/AirFileEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { AppConfig } from '@/config/AppConfig'
 
 const props = defineProps({
   user: {
@@ -120,6 +126,18 @@ function onThirdPartyClicked() {
 
 function onModifyPassword() {
   AirDialog.show(ModifyPassword)
+}
+
+const isLoading = ref(false)
+
+async function onUploadAvatar(file: AirFileEntity) {
+  AppConfig.currentUser.value = await UserService.create(isLoading)
+    .getMyInfo()
+  AppConfig.currentUser.value.avatar = file.url
+  await UserService.create(isLoading)
+    .updateMyInfo(AppConfig.currentUser.value)
+  AppConfig.currentUser.value = await UserService.create(isLoading)
+    .getMyInfo()
 }
 </script>
 <style lang="scss" scoped>
