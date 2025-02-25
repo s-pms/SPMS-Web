@@ -16,7 +16,7 @@
     >
       <AGroup :column="2">
         <AFormField field="name" />
-        <div />
+        <AFormField field="type" />
         <AFormField field="code" />
         <el-form-item
           v-if="formData.parent"

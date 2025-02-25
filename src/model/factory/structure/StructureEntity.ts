@@ -1,10 +1,11 @@
 import {
-  Field, Form, Model, Table,
+  Field, Form, Model, Search, Table,
 } from '@/airpower/decorator'
 import { IPayload } from '@/airpower/interface/IPayload'
 import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { StructureTypeEnum } from '@/model/factory/structure/StructureTypeEnum'
 
 @Model({
   label: '生产单元',
@@ -30,6 +31,22 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
     label: '生产单元编码',
   })
     code!: string
+
+  @Table({
+    showColor: true,
+    width: 120,
+  })
+  @Form({
+    clearable: false,
+    defaultValue: StructureTypeEnum.SINGLE_STATION.key,
+    requiredNumber: true,
+  })
+  @Search()
+  @Field({
+    label: '生产单元类型',
+    dictionary: StructureTypeEnum,
+  })
+    type!: number
 
   @Field({
     // eslint-disable-next-line no-use-before-define
