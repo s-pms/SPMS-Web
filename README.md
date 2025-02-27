@@ -13,6 +13,10 @@
 <a href="https://github.com/s-pms/SPMS-Web">@Github</a> <a href="https://gitee.com/s-pms/SPMS-Web">@Gitee</a>
 </p>
 
+## 在线交流群
+
+我们开通了QQ群 **773726377**，如果你对本项目有任何疑问，或者是在智能制造、工业互联网、物联网行业进行交流，欢迎加入我们的交流群。
+
 ## S-PMS介绍（前端项目）
 
 **S-PMS** `(Smart Production Management System)` **智能生产管理系统** ，是一个集成化、智能化的企业级应用软件，它集成了多个核心的生产管理模块，包括
@@ -99,7 +103,7 @@ Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.
   git clone https://gitee.com/air-power/AirPower4T.git airpower && cd ../ &&
   yarn && cp .env.dev .env && yarn s
   ```
-  
+
 ### 修改环境变量
 
 按需修改配置
@@ -144,7 +148,6 @@ yarn l
 - SCSS Formatter
 
 > 如碰到其他兼容问题，建议在工作区禁用以上三个插件之外的其他插件，特别是`Vetur`。
-
 
 ## 联系我们
 
