@@ -6,6 +6,7 @@ import '@/assets/css/main.scss'
 import { AirRouter } from './airpower/helper/AirRouter'
 
 AirConfig.appKey = 'spms'
+AirConfig.uploadUrl = '/api/file/upload'
 
 app.use(AirRouter.createRouter(routes))
   .mount('#app')

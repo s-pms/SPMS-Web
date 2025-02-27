@@ -1,21 +1,22 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
+    :title="title"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AFormField field="name" />
       <AFormField field="code" />
       <AFormField field="materialType" />
+      <AFormField field="useType" />
       <AFormField field="spc" />
       <el-form-item
         label="计量单位"

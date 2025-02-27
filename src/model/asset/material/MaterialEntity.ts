@@ -5,6 +5,7 @@ import {
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { MaterialTypeEnum } from './MaterialTypeEnum'
 import { IPayload } from '@/airpower/interface/IPayload'
+import { MaterialUseTypeEnum } from '@/model/asset/material/MaterialUseTypeEnum'
 
 @Model({
   label: '物料',
@@ -48,6 +49,22 @@ export class MaterialEntity extends BaseEntity implements IPayload {
     dictionary: MaterialTypeEnum,
   })
     materialType!: number
+
+  @Table({
+    showColor: true,
+    width: 100,
+  })
+  @Form({
+    clearable: false,
+    defaultValue: MaterialUseTypeEnum.CONSUMABLE.key,
+    requiredNumber: true,
+  })
+  @Search()
+  @Field({
+    label: '使用类型',
+    dictionary: MaterialUseTypeEnum,
+  })
+    useType!: number
 
   @Table({
     copyField: true,
