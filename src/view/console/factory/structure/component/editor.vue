@@ -26,7 +26,7 @@
         </el-form-item>
       </AGroup>
       <AGroup title="可执行工序">
-        <div class="operation-list">
+        <div class="list">
           <AButton
             type="ADD"
             @click="selectOperation()"
@@ -44,6 +44,25 @@
           </el-tag>
         </div>
       </AGroup>
+      <AGroup title="所属部门">
+        <div class="list">
+          <AButton
+            type="ADD"
+            @click="selectDepartment()"
+          >
+            添加部门
+          </AButton>
+          <el-tag
+            v-for="(department, index) in formData.departmentList"
+            :key="department.id"
+            closable
+            size="large"
+            @close="formData.departmentList.splice(index, 1)"
+          >
+            {{ department.name }}
+          </el-tag>
+        </div>
+      </AGroup>
     </el-form>
   </ADialog>
 </template>
@@ -58,6 +77,7 @@ import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { OperationSelector } from '@/view/console/mes/operation/component'
 import { AirDialog } from '@/airpower/helper/AirDialog'
+import { DepartmentSelector } from '@/view/console/personnel/department/component'
 
 const props = defineProps(airPropsParam(new StructureEntity()))
 
@@ -73,9 +93,13 @@ const {
 async function selectOperation() {
   formData.value.operationList = await AirDialog.selectList(OperationSelector, formData.value.operationList)
 }
+
+async function selectDepartment() {
+  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
+}
 </script>
 <style lang="scss" scoped>
-.operation-list {
+.list {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
