@@ -7,11 +7,12 @@ import { IUser } from '@/airpower/interface/IUser'
 import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import { IPayload } from '@/airpower/interface/IPayload'
 
 /**
  * # 用户实体
  */
-export class UserEntity extends BaseEntity implements IUser {
+export class UserEntity extends BaseEntity implements IUser, IPayload {
   /**
    * ### 昵称
    */
@@ -187,5 +188,9 @@ export class UserEntity extends BaseEntity implements IUser {
   setEmail(email: string): this {
     this.email = email
     return this
+  }
+
+  getPayloadLabel(): string {
+    return this.nickname
   }
 }
