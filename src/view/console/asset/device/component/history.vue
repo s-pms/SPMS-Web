@@ -22,7 +22,7 @@
         />
 
         <el-dropdown
-          v-if="ParameterTypeEnum.QUANTITY.equalsKey(param.dataType)"
+          v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
           trigger="click"
           @command="handleCommand"
         >
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div
-      v-if="ParameterTypeEnum.QUANTITY.equalsKey(param.dataType)"
+      v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
       v-loading="isLoading"
       class="view"
     >
@@ -215,7 +215,7 @@ const dictionary = computed(() => {
 function validDateTimeRange() {
   if (dateTimeRange.value && dateTimeRange.value.length === 2) {
     switch (props.param.dataType) {
-      case ParameterTypeEnum.QUANTITY.key:
+      case ParameterTypeEnum.NUMBER.key:
         switch (currentGranularity.value) {
           case CollectionGranularityEnum.ONE_MINUTE:
             // 每分钟 最多允许查看最近6小时
@@ -451,7 +451,7 @@ function initLine() {
 
 function loadData() {
   switch (props.param.dataType) {
-    case ParameterTypeEnum.QUANTITY.key:
+    case ParameterTypeEnum.NUMBER.key:
       myChart = echarts.init(document.getElementById('echart'))
       initLine()
       break
@@ -470,7 +470,7 @@ async function getDevicePayloadHistory() {
   postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
   const list = await DeviceService.create(isLoading)
     .getDevicePayloadHistory(postData)
-  if (ParameterTypeEnum.INFORMATION.equalsKey(props.param.dataType)) {
+  if (ParameterTypeEnum.STRING.equalsKey(props.param.dataType)) {
     collectionList.value = list.reverse()
   } else {
     collectionList.value = list
