@@ -9,9 +9,20 @@ import { AirDialog } from '@/airpower/helper/AirDialog'
 import { BillAddFinishDialog } from '@/component'
 import { ClassConstructor } from '@/airpower/type/AirType'
 
+/**
+ * ### 单据明细
+ * @param props Props
+ * @param entityClass 实体类
+ * @param serviceClass 服务类
+ * @param option 配置项
+ */
 export function useBillDetail<D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>, S extends AbstractBaseBillService<D, B>>(props: IJson, entityClass: ClassConstructor<B>, serviceClass: ClassConstructor<S>, option: IUseDetailOption<B> = {}): IUseBillDetailResult<D, B, S> {
   const result = useAirDetail(props, entityClass, serviceClass, option)
 
+  /**
+   * ### 添加完成数量
+   * @param detail 明细
+   */
   async function addDetailFinishQuantity(detail: D) {
     const postData = detail.copy()
     const dec = 100000
@@ -22,6 +33,6 @@ export function useBillDetail<D extends AbstractBaseBillDetailEntity, B extends 
   }
 
   return {
-    addDetailFinishQuantity, ...result,
+    ...result, addDetailFinishQuantity,
   }
 }
