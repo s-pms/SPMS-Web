@@ -44,7 +44,7 @@ const {
   isLoading,
   rules,
   onSubmit,
-} = useAirEditor(props, DepartmentEntity, DepartmentService)
+} = useAirEditor(props, DepartmentEntity, DepartmentService, {})
 </script>
 
 <style lang="scss" scoped></style>

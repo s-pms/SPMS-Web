@@ -35,7 +35,6 @@ export function useChat(websocket: Ref<AirWebsocket | undefined>) {
 
   /**
    * ## 发送消息
-   * @param message 消息
    */
   function sendTextMessage() {
     if (!input.value) {

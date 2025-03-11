@@ -36,7 +36,7 @@ export class ParameterEntity extends BaseEntity {
     width: 100,
   })
   @Form({
-    defaultValue: ParameterTypeEnum.QUANTITY.key,
+    defaultValue: ParameterTypeEnum.NUMBER.key,
     clearable: false,
     requiredNumber: true,
   })

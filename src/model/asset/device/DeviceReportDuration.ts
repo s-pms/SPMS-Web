@@ -1,7 +1,7 @@
 import { AirEnum } from '@/airpower/base/AirEnum'
 import { Constant } from '@/config/Constant'
 
-export class DeviceReportDuration extends AirEnum<number> {
+export class DeviceReportDuration extends AirEnum {
   static readonly ONE_HOUR = new DeviceReportDuration(Constant.SECOND_PER_HOUR, '近一小时')
 
   static readonly THREE_HOUR = new DeviceReportDuration(Constant.SECOND_PER_HOUR * 3, '近三小时')

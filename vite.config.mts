@@ -10,8 +10,15 @@ export default defineConfig({
       '@': '/src/',
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
   build: {
-    assetsDir: 'assets-vite-config',
+    assetsDir: 'assets',
     // 暂时设置为false vite的BUG keep_classnames不生效导致反射获取类失败
     minify: false,
   },

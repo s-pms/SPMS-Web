@@ -6,12 +6,15 @@ import { ITree } from '@/airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { StructureTypeEnum } from '@/model/factory/structure/StructureTypeEnum'
+import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 
 @Model({
   label: '生产单元',
 })
 export class StructureEntity extends BaseEntity implements ITree, IPayload {
-  @Table()
+  @Table({
+    orderNumber: 99,
+  })
   @Form({
     requiredString: true,
   })
@@ -23,6 +26,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     width: 300,
     copyField: true,
+    orderNumber: 88,
   })
   @Form({
     placeholder: '不输入按编码规则自动生成',
@@ -35,6 +39,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     showColor: true,
     width: 120,
+    orderNumber: 77,
   })
   @Form({
     clearable: false,
@@ -72,8 +77,21 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     payloadArray: true,
     payloadField: 'name',
+    orderNumber: 11,
   })
     operationList!: OperationEntity[]
+
+  @Field({
+    type: DepartmentEntity,
+    array: true,
+    label: '所属部门',
+  })
+  @Table({
+    payloadArray: true,
+    payloadField: 'name',
+    orderNumber: 1,
+  })
+    departmentList!: DepartmentEntity[]
 
   getPayloadLabel(): string {
     return this.name
