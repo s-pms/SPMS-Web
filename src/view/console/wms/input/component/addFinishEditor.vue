@@ -77,7 +77,7 @@ const formRef = ref<AirFormInstance>()
 
 async function onSubmit() {
   await InputService.create(isLoading)
-    .addFinish(formData.value.copy()
+    .addDetailFinishQuantity(formData.value.copy()
       .expose('id', 'quantity', 'billId', 'storage'))
   props.onConfirm()
 }
