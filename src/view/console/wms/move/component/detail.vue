@@ -26,14 +26,16 @@
         <ATable
           :entity="MoveDetailEntity"
           :data-list="formData.details"
-          :field-list="MoveDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :field-list="
+            MoveDetailEntity.getTableFieldConfigList().filter(
+              (item) => !['createTime'].includes(item.key)
+            )
+          "
           hide-edit
           hide-delete
         >
           <template #storageName="{ data }">
-            {{
-              data.inventory.storage.name
-            }}({{ data.inventory.storage.code }})
+            {{ data.inventory.storage.name }}({{ data.inventory.storage.code }})
           </template>
           <template #materialCode="{ data }">
             {{ data.inventory.material.code }}
@@ -47,7 +49,10 @@
               tooltip="添加完成"
               :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
               type="CHECKIN"
-              @click="data.billId = formData.id; onAddFinish(data)"
+              @click="
+                data.billId = formData.id;
+                addDetailFinishQuantity(data);
+              "
             />
           </template>
         </ATable>
@@ -58,7 +63,11 @@
 
 <script lang="ts" setup>
 import {
-  AButton, ADialog, AFormField, AGroup, ATable,
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATable,
 } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
@@ -70,13 +79,15 @@ import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
-const {
-  formData, isLoading, onAddFinish,
-} = useBillDetail(props, MoveEntity, MoveService, {
-  afterGetDetail(detailData) {
-    detailData.storageName = detailData.storage.name
-    return detailData
+const { formData, isLoading, addDetailFinishQuantity } = useBillDetail(
+  props,
+  MoveEntity,
+  MoveService,
+  {
+    afterGetDetail(detailData) {
+      detailData.storageName = detailData.storage.name
+      return detailData
+    },
   },
-})
-
+)
 </script>
