@@ -16,4 +16,8 @@ export class Constant {
   static MONTH_PER_YEAR = 12
 
   static DAY_PER_YEAR = 365
+
+  static BOOLEAN_YES = '1'
+
+  static BOOLEAN_NO = '0'
 }
