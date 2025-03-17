@@ -172,7 +172,7 @@ import { IJson } from '@/airpower/interface/IJson'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
 import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
-import { Constant } from '@/config/Constant'
+import { AirConstant } from '@/airpower/config/AirConstant'
 
 const currentLabel = ref('')
 const currentColor = ref('')
@@ -192,7 +192,7 @@ const shortcuts = computed(() => DeviceReportDuration.toDictionary()
     text: item.label,
     value: () => {
       const start = new Date()
-      start.setTime(start.getTime() - item.key * Constant.MILLISECOND_PER_SECOND)
+      start.setTime(start.getTime() - item.key * AirConstant.MILLISECONDS_PER_SECOND)
       return [start, new Date()]
     },
   })))
