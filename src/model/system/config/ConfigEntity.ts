@@ -18,7 +18,6 @@ export class ConfigEntity extends BaseEntity {
   @Table({
     nowrap: true,
     copyField: true,
-    width: 200,
     orderNumber: 88,
   })
   @Form({
@@ -28,6 +27,11 @@ export class ConfigEntity extends BaseEntity {
     label: '配置名称',
   })
     name!: string
+
+  @Field({
+    label: '配置描述',
+  })
+    description!: string
 
   @Search()
   @Table({

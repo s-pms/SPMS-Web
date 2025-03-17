@@ -16,7 +16,24 @@
       @on-edit="onEdit"
       @on-sort="onSortChanged"
       @on-delete="onDelete"
-    />
+    >
+      <template #name="{data}">
+        <el-link v-tip="data.description">
+          {{ data.name }}
+        </el-link>
+      </template>
+      <template #config="{data}">
+        <template v-if="ConfigType.BOOLEAN.equalsKey(data.type)">
+          <el-switch
+            :model-value="data.config == Constant.BOOLEAN_YES"
+            disabled
+          />
+        </template>
+        <template v-else>
+          {{ data.config }}
+        </template>
+      </template>
+    </ATable>
     <template #footerLeft>
       <APage
         :response="response"
@@ -31,8 +48,10 @@ import {
   APage, APanel, ATable, AToolBar,
 } from '@/airpower/component'
 import { useAirTable } from '@/airpower/hook/useAirTable'
+import { Constant } from '@/config/Constant'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'
+import { ConfigType } from '@/model/system/config/ConfigType'
 import { ConfigurationEditor } from '@/view/console/system/config/component'
 
 const {
@@ -47,6 +66,5 @@ const {
 } = useAirTable(ConfigEntity, ConfigService, {
   editView: ConfigurationEditor,
 })
-
 </script>
 <style lang="scss" scoped></style>
