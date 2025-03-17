@@ -38,6 +38,13 @@
           <el-input v-model="formData.config" />
         </el-form-item>
       </template>
+      <el-form-item :label="ConfigEntity.getFieldName('description')">
+        <el-input
+          v-model="formData.description"
+          disabled
+          type="textarea"
+        />
+      </el-form-item>
     </el-form>
   </ADialog>
 </template>
