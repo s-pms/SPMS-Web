@@ -69,20 +69,17 @@
       </div>
     </div>
     <div class="setting">
+      <div
+        class="item"
+        @click="onUserAccount()"
+      >
+        账号安全
+      </div>
       <div class="item">
-        修改资料
+        我的设置
       </div>
-      <div
-        class="item"
-        @click="onModifyPassword()"
-      >
-        修改密码
-      </div>
-      <div
-        class="item"
-        @click="onThirdPartyClicked()"
-      >
-        社交账号
+      <div class="item">
+        我的设置
       </div>
       <div class="item">
         我的设置
@@ -98,12 +95,11 @@ import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
 import { AImage, AUser } from '@/airpower/component'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { AirDialog } from '@/airpower/helper/AirDialog'
-import ThirdAccountList from '@/component/user/ThirdAccountList.vue'
-import ModifyPassword from '@/component/user/ModifyPassword.vue'
 import { FileCategory } from '@/model/system/file/FileCategory'
 import { AirFileEntity } from '@/airpower/model/entity/AirFileEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { AppConfig } from '@/config/AppConfig'
+import UserAccount from './user/UserAccount.vue'
 
 defineProps({
   user: {
@@ -112,14 +108,9 @@ defineProps({
   },
 })
 
-function onThirdPartyClicked() {
-  AirDialog.show(ThirdAccountList)
+function onUserAccount() {
+  AirDialog.show(UserAccount)
 }
-
-function onModifyPassword() {
-  AirDialog.show(ModifyPassword)
-}
-
 const isLoading = ref(false)
 
 async function onUploadAvatar(file: AirFileEntity) {

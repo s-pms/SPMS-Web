@@ -1,14 +1,5 @@
 <template>
-  <ADialog
-    :allow-fullscreen="false"
-    :disable-confirm="!formData.password || !formData.oldPassword || !confirmPassword"
-    :form-ref="formRef"
-    :loading="isLoading"
-    confirm-text="确认修改"
-    title="修改登录密码"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
-  >
+  <div style="padding-top: 20px;">
     <el-form
       ref="formRef"
       :model="formData"
@@ -40,13 +31,21 @@
           type="password"
         />
       </el-form-item>
+      <el-form-item>
+        <el-button
+          type="primary"
+          :disabled="!formData.password || !formData.oldPassword || !confirmPassword"
+          @click="onSubmit"
+        >
+          确认修改密码
+        </el-button>
+      </el-form-item>
     </el-form>
-  </ADialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog } from '@/airpower/component'
 import { airPropsParam } from '@/airpower/config/AirProps'
 import { UserService } from '@/model/personnel/user/UserService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
