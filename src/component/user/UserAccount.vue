@@ -8,24 +8,49 @@
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
-    <ATabs>
-      <ATab label="修改密码">
-        <ModifyPassword />
-      </ATab>
-      <ATab label="社交账号">
-        <ThirdAccountList />
-      </ATab>
-    </ATabs>
+    <el-tabs
+      v-model="active"
+      type="card"
+    >
+      <el-tab-pane
+        :name="TABS.modifyPassword"
+        label="修改密码"
+      >
+        <ModifyPassword v-if="active === TABS.modifyPassword" />
+      </el-tab-pane>
+      <el-tab-pane
+        :name="TABS.thirdAccount"
+        label="社交账号"
+      >
+        <ThirdAccountList v-if="active === TABS.thirdAccount" />
+      </el-tab-pane>
+      <el-tab-pane
+        :name="TABS.personalToken"
+        label="私人令牌"
+      >
+        <PersonalToken v-if="active===TABS.personalToken" />
+      </el-tab-pane>
+    </el-tabs>
   </ADialog>
 </template>
 
 <script lang="ts" setup>
-import { ADialog, ATab, ATabs } from '@/airpower/component'
+import { ref } from 'vue'
+import { ADialog } from '@/airpower/component'
 import { airProps } from '@/airpower/config/AirProps'
 import ModifyPassword from './ModifyPassword.vue'
 import ThirdAccountList from './ThirdAccountList.vue'
+import PersonalToken from '@/component/user/PersonalToken.vue'
 
 defineProps(airProps())
+
+// eslint-disable-next-line no-unused-vars
+enum TABS {
+  // eslint-disable-next-line no-unused-vars
+  modifyPassword = 'modifyPassword', thirdAccount = 'thirdAccount', personalToken = 'personalToken'
+}
+
+const active = ref(TABS.modifyPassword)
 
 </script>
 <style lang="scss" scoped>
