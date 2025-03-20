@@ -4,6 +4,7 @@ import {
 import { BaseEntity } from '@/base/BaseEntity'
 import { ITree } from '@/airpower/interface/ITree'
 import { PermissionSystemEnum } from './PermissionSystemEnum'
+import { PermissionTypeEnum } from './PermissionTypeEnum'
 
 /**
  * # 权限
@@ -41,18 +42,27 @@ export class PermissionEntity extends BaseEntity implements ITree {
   @Field({
     label: '权限标识',
   })
+  @Search()
     identity!: string
 
-  /**
-   * ### 权限类别
-   */
+  @Table({
+    showColor: true,
+    width: 100,
+  })
+  @Search()
+  @Field({
+    label: '权限类型',
+    dictionary: PermissionTypeEnum,
+  })
+    type!: number
+
   @Table({
     showColor: true,
     width: 100,
     orderNumber: -100,
   })
   @Field({
-    label: '类别',
+    label: '系统权限',
     dictionary: PermissionSystemEnum,
   })
     isSystem!: boolean

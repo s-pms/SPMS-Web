@@ -1,62 +1,49 @@
 <template>
-  <ADialog
-    :allow-fullscreen="false"
-    :loading="isLoading"
-    hide-cancel
-    hide-confirm
-    min-height="100px"
-    title="绑定的社交账号"
-    width="600px"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
-  >
-    <div class="account-list">
-      <div
-        v-for="item in ThirdLoginPlatform.toArray()"
-        :key="item.key"
-        :class="isBind(item) ? 'active' : ''"
-        class="account"
-      >
-        <div class="left">
-          <img
-            :src="getIcon(item)"
-            class="logo"
-          >
-          <div class="name">
-            {{ item.label }}
-          </div>
-        </div>
-        <div class="right">
-          <template v-if="isBind(item)">
-            <div class="name">
-              {{ bindData(item)?.nickName || bindData(item)?.thirdUserId || '-' }}
-            </div>
-            <img
-              v-if="getAvatar(item)"
-              :src="getAvatar(item)"
-              class="avatar"
-            >
-            <el-link
-              class="unbind"
-              @click="onUnBind(item)"
-            >
-              解绑
-            </el-link>
-          </template>
-          <template v-else>
-            <el-link @click="onBind(item)">
-              绑定
-            </el-link>
-          </template>
+  <div class="account-list">
+    <div
+      v-for="item in ThirdLoginPlatform.toArray()"
+      :key="item.key"
+      :class="isBind(item) ? 'active' : ''"
+      class="account"
+    >
+      <div class="left">
+        <img
+          :src="getIcon(item)"
+          class="logo"
+        >
+        <div class="name">
+          {{ item.label }}
         </div>
       </div>
+      <div class="right">
+        <template v-if="isBind(item)">
+          <div class="name">
+            {{ bindData(item)?.nickName || bindData(item)?.thirdUserId || '-' }}
+          </div>
+          <img
+            v-if="getAvatar(item)"
+            :src="getAvatar(item)"
+            class="avatar"
+          >
+          <el-link
+            class="unbind"
+            @click="onUnBind(item)"
+          >
+            解绑
+          </el-link>
+        </template>
+        <template v-else>
+          <el-link @click="onBind(item)">
+            绑定
+          </el-link>
+        </template>
+      </div>
     </div>
-  </ADialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog } from '@/airpower/component'
 import { airProps } from '@/airpower/config/AirProps'
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
 import { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
