@@ -71,16 +71,16 @@
 import { computed, ref } from 'vue'
 import {
   ADialog, AFormField, AGroup, AInput,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirInputType } from '@/airpower/enum/AirInputType'
-import { AirValidator } from '@/airpower/helper/AirValidator'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirInputType } from '@airpower/enum/AirInputType'
+import { AirValidator } from '@airpower/helper/AirValidator'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
 
 const props = defineProps(airPropsParam(new CodeRuleEntity()))
 

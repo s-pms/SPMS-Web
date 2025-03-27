@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 /**
  * # 第三方登录平台

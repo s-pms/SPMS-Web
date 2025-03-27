@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -14,25 +14,25 @@
       @submit.prevent
     >
       <AGroup
-        title="采购单"
         :column="3"
+        title="采购单"
       >
         <BillFormCode :bill="formData" />
         <AFormField
-          field="totalPrice"
           disabled
+          field="totalPrice"
         />
         <AFormField
-          style="width: 100%;"
-          field="reason"
           disabled
+          field="reason"
+          style="width: 100%;"
         />
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="采购明细">
         <ATable
-          :entity="PurchaseDetailEntity"
           :data-list="formData.details"
+          :entity="PurchaseDetailEntity"
           :field-list="PurchaseDetailEntity.getTableFieldConfigList()"
           hide-ctrl
         >
@@ -50,9 +50,9 @@
           </template>
           <template #endRow="{ data }">
             <AButton
+              :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"
               icon-button
               tooltip="添加完成"
-              :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"
               type="CHECKIN"
               @click="addDetailFinishQuantity(data)"
             />
@@ -66,8 +66,8 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'

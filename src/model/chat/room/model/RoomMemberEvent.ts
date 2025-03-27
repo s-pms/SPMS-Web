@@ -1,5 +1,5 @@
+import { Field } from '@airpower/decorator'
 import { MemberEntity } from '@/model/chat/member/MemberEntity'
-import { Field } from '@/airpower/decorator'
 import { ChatEvent } from '@/model/chat/common/ChatEvent'
 
 /**

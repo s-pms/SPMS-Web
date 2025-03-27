@@ -1,9 +1,9 @@
 <template>
   <ASelector
-    :entity="InputEntity"
-    :service="InputService"
-    :props="props"
     :editor="InputEditor"
+    :entity="InputEntity"
+    :props="props"
+    :service="InputService"
   >
     <template #storageName="{ data }">
       {{ data.storage.name }}({{ data.storage.code }})
@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ASelector } from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+import { ASelector } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputEditor } from '.'
@@ -21,4 +21,4 @@ import { InputEditor } from '.'
 const props = defineProps(airPropsSelector<InputEntity>())
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

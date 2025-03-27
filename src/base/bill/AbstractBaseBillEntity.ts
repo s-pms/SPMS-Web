@@ -1,10 +1,10 @@
 import {
   Field, Form, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { IPayload } from '@airpower/interface/IPayload'
 import { BaseEntity } from '../BaseEntity'
 import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { IPayload } from '@/airpower/interface/IPayload'
 
 /**
  * # 单据基类

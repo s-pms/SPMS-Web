@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="70%"
+    :title="title"
     height="70%"
+    width="70%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="基本信息"
         :column="2"
+        title="基本信息"
       >
         <AFormField field="name" />
         <AFormField field="code" />
@@ -37,8 +37,8 @@
         />
       </AGroup>
       <AGroup
-        title="采集参数"
         :column="1"
+        title="采集参数"
       >
         <div class="parameter-list">
           <AButton
@@ -50,9 +50,9 @@
           <el-tag
             v-for="(parameter, index) in formData.parameters"
             :key="parameter.id"
-            size="large"
             :closable="!parameter.isSystem"
             :type="parameter.isSystem ? 'info' : 'primary'"
+            size="large"
             @close="formData.parameters.splice(index, 1)"
           >
             {{ parameter.label }}({{ parameter.code }})
@@ -66,10 +66,10 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
@@ -101,9 +101,9 @@ async function selectParameter() {
   formData.value.parameters = systemList.concat(customList)
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .parameter-list {
-  >* {
+  > * {
     margin-right: 5px;
   }
 }

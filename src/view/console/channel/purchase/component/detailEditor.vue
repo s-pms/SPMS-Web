@@ -1,8 +1,8 @@
 <template>
   <ADialog
-    title="采购明细"
     :form-ref="formRef"
     :loading="isLoading"
+    title="采购明细"
     width="600px"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -10,8 +10,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="PurchaseDetailService.createValidator(formData)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item
@@ -73,15 +73,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirFormInstance } from '@airpower/type/AirType'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-import { AirFormInstance } from '@/airpower/type/AirType'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { SupplierSelector } from '../../supplier/component'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
 import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new PurchaseDetailEntity()))
 

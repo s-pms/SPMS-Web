@@ -42,10 +42,10 @@
 </template>
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { ACopy, ADialog } from '@/airpower/component'
-import { AirConfig } from '@/airpower/config/AirConfig'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { IJson } from '@/airpower/interface/IJson'
+import { ACopy, ADialog } from '@airpower/component'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { IJson } from '@airpower/interface/IJson'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 
 const props = defineProps(airPropsParam(new OpenLogEntity()))

@@ -39,14 +39,14 @@
 import { ref } from 'vue'
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 import { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
 
 const {
   isLoading,

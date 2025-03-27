@@ -7,10 +7,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { AirRouter } from '@/airpower/helper/AirRouter'
+import { AirRouter } from '@airpower/helper/AirRouter'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirAny } from '@airpower/type/AirType'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirAlert } from '@/airpower/feedback/AirAlert'
-import { AirAny } from '@/airpower/type/AirType'
 
 const isLoading = ref(true)
 

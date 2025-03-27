@@ -90,13 +90,13 @@
 <script lang="ts" setup>
 
 import { ref } from 'vue'
-import { AirDesensitize } from '@/airpower/helper/AirDesensitize'
-import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
-import { AImage, AUser } from '@/airpower/component'
+import { AirDesensitize } from '@airpower/helper/AirDesensitize'
+import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
+import { AImage, AUser } from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirFileEntity } from '@airpower/model/entity/AirFileEntity'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { FileCategory } from '@/model/system/file/FileCategory'
-import { AirFileEntity } from '@/airpower/model/entity/AirFileEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { AppConfig } from '@/config/AppConfig'
 import UserAccount from './user/UserAccount.vue'
@@ -111,6 +111,7 @@ defineProps({
 function onUserAccount() {
   AirDialog.show(UserAccount)
 }
+
 const isLoading = ref(false)
 
 async function onUploadAvatar(file: AirFileEntity) {

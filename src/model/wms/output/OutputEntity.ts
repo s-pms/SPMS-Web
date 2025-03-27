@@ -1,13 +1,13 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { OutputDetailEntity } from './OutputDetailEntity'
 import { OutputTypeEnum } from './OutputTypeEnum'
 import { OutputStatusEnum } from './OutputStatusEnum'
 import { MoveEntity } from '../move/MoveEntity'
-import { AirEnum } from '@/airpower/base/AirEnum'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 
 @Model({

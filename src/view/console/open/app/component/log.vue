@@ -30,16 +30,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, APage, ATable } from '@/airpower/component'
+import { ADialog, APage, ATable } from '@airpower/component'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirTable } from '@/airpower/hook/useAirTable'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 import { OpenLogService } from '@/model/open/log/OpenLogService'
 import { OpenAppLogDetail } from './index'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 
 const props = defineProps(airPropsParam(new OpenAppEntity()))
 

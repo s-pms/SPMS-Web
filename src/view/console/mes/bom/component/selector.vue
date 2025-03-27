@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ASelector } from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+import { ASelector } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
 import { BomEditor } from '.'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'

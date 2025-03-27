@@ -1,13 +1,13 @@
 import {
   Field, Form, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { IUser } from '@airpower/interface/IUser'
+import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
+import { IPayload } from '@airpower/interface/IPayload'
 import { BaseEntity } from '@/base/BaseEntity'
 import { RoleEntity } from '../role/RoleEntity'
-import { IUser } from '@/airpower/interface/IUser'
-import { AirDesensitizeType } from '@/airpower/enum/AirDesensitizeType'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
-import { IPayload } from '@/airpower/interface/IPayload'
 
 /**
  * # 用户实体

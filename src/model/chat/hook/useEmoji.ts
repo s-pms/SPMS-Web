@@ -1,4 +1,4 @@
-import { IJson } from '@/airpower/interface/IJson'
+import { IJson } from '@airpower/interface/IJson'
 
 export function useEmoji() {
   const MESSAGE_EMOJI = 'emoji'

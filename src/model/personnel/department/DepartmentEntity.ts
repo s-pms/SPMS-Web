@@ -1,8 +1,8 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { ITree } from '@airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
-import { ITree } from '@/airpower/interface/ITree'
 import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
 
 /**

@@ -1,12 +1,12 @@
 import { ref, Ref } from 'vue'
-import { AirWebsocketEvent } from '@/airpower/websocket/AirWebSocketEvent'
-import { IJson } from '@/airpower/interface/IJson'
-import { ChatEventType } from '@/model/chat/enum/ChatEventType'
+import { AirWebsocketEvent } from '@airpower/websocket/AirWebSocketEvent'
+import { IJson } from '@airpower/interface/IJson'
+import { AirClassTransformer } from '@airpower/helper/AirClassTransformer'
+import AirEvent from '@airpower/event/AirEvent'
+import { AirWebsocket } from '@airpower/websocket/AirWebSocket'
+import { AirWebSocketPayload } from '@airpower/websocket/AirWebSocketPayload'
 import { AppConfig } from '@/config/AppConfig'
-import { AirClassTransformer } from '@/airpower/helper/AirClassTransformer'
-import AirEvent from '@/airpower/event/AirEvent'
-import { AirWebsocket } from '@/airpower/websocket/AirWebSocket'
-import { AirWebSocketPayload } from '@/airpower/websocket/AirWebSocketPayload'
+import { ChatEventType } from '@/model/chat/enum/ChatEventType'
 
 /**
  * # 聊天事件Hook

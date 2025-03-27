@@ -1,8 +1,8 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
-import { IPayload } from '@/airpower/interface/IPayload'
+} from '@airpower/decorator'
+import { IPayload } from '@airpower/interface/IPayload'
+import { BaseEntity } from '@/base/BaseEntity'
 
 @Model({
   label: '计量单位',

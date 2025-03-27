@@ -3,16 +3,16 @@ import { Bottom, ZoomIn } from '@element-plus/icons-vue'
 import {
   nextTick, PropType, ref, Ref,
 } from 'vue'
+import { AirFile } from '@airpower/helper/AirFile'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
+import AirEvent from '@airpower/event/AirEvent'
 import { ChatEventType } from '@/model/chat/enum/ChatEventType'
 import { RoomMemberTextMessageEvent } from '@/model/chat/room/event/RoomMemberTextMessageEvent'
-import { AirFile } from '@/airpower/helper/AirFile'
 import { RoomMemberImageMessageEvent } from '@/model/chat/room/event/RoomMemberImageMessageEvent'
 import ChatAvatar from '@/view/chat/components/ChatAvatar.vue'
 import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
 import { AppConfig } from '@/config/AppConfig'
 import { useEmoji } from '@/model/chat/hook/useEmoji'
-import AirEvent from '@/airpower/event/AirEvent'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
 import SystemMessage from '@/view/chat/components/SystemMessage.vue'
 
 defineProps({

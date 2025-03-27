@@ -2,7 +2,7 @@
 import {
   inject, PropType, ref, Ref,
 } from 'vue'
-import { ACopy, AFormField } from '@/airpower/component'
+import { ACopy, AFormField } from '@airpower/component'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 

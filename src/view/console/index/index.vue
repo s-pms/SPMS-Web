@@ -30,8 +30,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { APanel } from '@/airpower/component'
-import { IJson } from '@/airpower/interface/IJson'
+import { APanel } from '@airpower/component'
+import { IJson } from '@airpower/interface/IJson'
 
 const modules = ref<IJson[]>([
   {

@@ -69,13 +69,13 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { PickingDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'

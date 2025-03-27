@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
 import { MoveDetail, MoveEditor } from './component'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'

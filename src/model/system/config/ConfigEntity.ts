@@ -1,7 +1,7 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { BaseEntity } from '@/base/BaseEntity'
 import { ConfigType } from '@/model/system/config/ConfigType'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 

@@ -1,9 +1,9 @@
+import {
+  Field, Form, Model, Table,
+} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
-import {
-  Field, Form, Model, Table,
-} from '@/airpower/decorator'
 
 @Model({
   label: '销售价',

@@ -1,9 +1,9 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { AirSearchDataType } from '@airpower/enum/AirSearchDataType'
+import { BaseEntity } from '@/base/BaseEntity'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
-import { AirSearchDataType } from '@/airpower/enum/AirSearchDataType'
 
 @Model({
   label: '通知',

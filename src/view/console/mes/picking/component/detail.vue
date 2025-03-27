@@ -52,8 +52,8 @@
 <script lang="ts" setup>
 import {
   ADialog, AGroup, ASelect, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'

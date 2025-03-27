@@ -1,11 +1,11 @@
+import {
+  Field, Form, Model, Table,
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
 import { SaleStatusEnum } from './SaleStatusEnum'
 import { SaleDetailEntity } from './SaleDetailEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import {
-  Field, Form, Model, Table,
-} from '@/airpower/decorator'
-import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model({
   label: '销售单',

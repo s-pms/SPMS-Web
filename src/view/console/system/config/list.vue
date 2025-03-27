@@ -46,8 +46,8 @@
 <script lang="ts" setup>
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { Constant } from '@/config/Constant'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'

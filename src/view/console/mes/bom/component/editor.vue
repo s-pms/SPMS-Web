@@ -63,14 +63,14 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { BomDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 import { BomEntity } from '@/model/mes/bom/BomEntity'

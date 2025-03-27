@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    title="移库单明细"
     :loading="isLoading"
-    width="80%"
     height="80%"
+    title="移库单明细"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -12,27 +12,27 @@
       @submit.prevent
     >
       <AGroup
-        title="移库单"
         :column="3"
+        title="移库单"
       >
         <BillFormCode :bill="formData" />
         <AFormField
-          field="storageName"
           disabled
+          field="storageName"
         />
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="移库明细">
         <ATable
-          :entity="MoveDetailEntity"
           :data-list="formData.details"
+          :entity="MoveDetailEntity"
           :field-list="
             MoveDetailEntity.getTableFieldConfigList().filter(
               (item) => !['createTime'].includes(item.key)
             )
           "
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #storageName="{ data }">
             {{ data.inventory.storage.name }}({{ data.inventory.storage.code }})
@@ -45,9 +45,9 @@
           </template>
           <template #endRow="{ data }">
             <AButton
+              :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
               icon-button
               tooltip="添加完成"
-              :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
               type="CHECKIN"
               @click="
                 data.billId = formData.id;
@@ -68,8 +68,8 @@ import {
   AFormField,
   AGroup,
   ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'

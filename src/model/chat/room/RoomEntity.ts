@@ -1,6 +1,6 @@
+import { Field, Form, Model } from '@airpower/decorator'
 import { RoomPrivate } from './RoomPrivate'
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model } from '@/airpower/decorator'
 
 /**
  * # 房间实体

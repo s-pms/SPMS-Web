@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="采购单"
         :column="2"
+        title="采购单"
       >
         <AFormField field="billCode" />
         <el-form-item
@@ -36,11 +36,11 @@
       </AGroup>
       <AGroup title="采购明细">
         <ATable
-          :entity="SaleDetailEntity"
           :data-list="formData.details"
+          :entity="SaleDetailEntity"
           :field-list="SaleDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -58,9 +58,9 @@
           </template>
           <template #customRow="{ index }">
             <AButton
-              type="DELETE"
               danger
               icon-button
+              type="DELETE"
               @click="deleteDetail(index)"
             />
           </template>
@@ -73,16 +73,16 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { CustomerSelector } from '../../customer/component'
 
 const props = defineProps(airPropsParam(new SaleEntity()))

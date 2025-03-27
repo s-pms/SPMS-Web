@@ -27,12 +27,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { AButton, ADialog } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import CreateRoom from './CreateRoom.vue'
-import { AButton, ADialog } from '@/airpower/component'
-import { airProps } from '@/airpower/config/AirProps'
 import { RoomEntity } from '@/model/chat/room/RoomEntity'
 import { RoomService } from '@/model/chat/room/RoomService'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import RoomList from '@/view/chat/dialog/list/RoomList.vue'
 
 defineProps(airProps())

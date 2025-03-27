@@ -1,5 +1,5 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { AirColor } from '@/airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
 
 export class ConfigType extends AirEnum {
   static readonly STRING = new ConfigType(0, '字符串', AirColor.SUCCESS)

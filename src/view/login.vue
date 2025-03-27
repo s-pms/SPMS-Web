@@ -171,12 +171,12 @@
 </template>
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirValidator } from '@airpower/helper/AirValidator'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { AirRouter } from '@airpower/helper/AirRouter'
 import { LoginAction } from '@/model/common/LoginAction'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirValidator } from '@/airpower/helper/AirValidator'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { AirConfig } from '@/airpower/config/AirConfig'
-import { AirRouter } from '@/airpower/helper/AirRouter'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'

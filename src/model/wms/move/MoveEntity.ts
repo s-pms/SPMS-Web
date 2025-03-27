@@ -1,11 +1,11 @@
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { MoveDetailEntity } from './MoveDetailEntity'
 import { MoveStatusEnum } from './MoveStatusEnum'
-import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model({
   label: '移库单',

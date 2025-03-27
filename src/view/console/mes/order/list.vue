@@ -94,17 +94,17 @@
 <script lang="ts" setup>
 import {
   AButton, APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
 import { OrderDetail, OrderEditor, OrderFinishEditor } from './component'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { CustomerDetail } from '../../channel/customer/component'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 import { BillAuditOrReject } from '@/component'
 import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 
 const {
   isLoading,

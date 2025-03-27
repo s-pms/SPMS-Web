@@ -42,12 +42,12 @@
 <script lang="ts" setup>
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { AirColor } from '@airpower/enum/AirColor'
 import { LogEntity } from '@/model/system/log/LogEntity'
 import { LogService } from '@/model/system/log/LogService'
 import Detail from './detail.vue'
-import { AirColor } from '@/airpower/enum/AirColor'
 
 const {
   isLoading,

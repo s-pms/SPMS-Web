@@ -36,8 +36,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog } from '@/airpower/component'
-import { airProps } from '@/airpower/config/AirProps'
+import { ADialog } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
 import ModifyPassword from './ModifyPassword.vue'
 import ThirdAccountList from './ThirdAccountList.vue'
 import PersonalToken from '@/component/user/PersonalToken.vue'

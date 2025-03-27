@@ -1,7 +1,7 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { BaseEntity } from '@/base/BaseEntity'
 import { SerialNumberUpdateEnum } from '@/model/system/coderule/SerialNumberUpdateEnum'
 
 /**

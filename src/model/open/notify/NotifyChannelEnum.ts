@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 /**
  * # 通知渠道

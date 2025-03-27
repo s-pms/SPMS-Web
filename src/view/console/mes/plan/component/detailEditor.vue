@@ -45,10 +45,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirFormInstance } from '@airpower/type/AirType'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { AirFormInstance } from '@/airpower/type/AirType'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
 

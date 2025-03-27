@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="生产计划"
         :column="2"
+        title="生产计划"
       >
         <AFormField field="billCode" />
         <AFormField field="startTime" />
@@ -36,11 +36,11 @@
       </AGroup>
       <AGroup title="计划明细">
         <ATable
-          :entity="PlanDetailEntity"
           :data-list="formData.details"
+          :entity="PlanDetailEntity"
           :field-list="PlanDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -58,9 +58,9 @@
           </template>
           <template #customRow="{ index }">
             <AButton
-              type="DELETE"
               danger
               icon-button
+              type="DELETE"
               @click="deleteDetail(index)"
             />
           </template>
@@ -73,16 +73,16 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { PlanDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 

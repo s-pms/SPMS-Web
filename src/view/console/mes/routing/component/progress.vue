@@ -122,17 +122,17 @@ import { VueDraggable } from 'vue-draggable-plus'
 import { nextTick, ref } from 'vue'
 import {
   AButton, ADialog, AEmpty, AGroup, ASelect, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
-import { AirRequest } from '@/airpower/model/AirRequest'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { OperationSelector } from '@/view/console/mes/operation/component'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { BomSelector } from '@/view/console/mes/bom/component'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
@@ -238,7 +238,8 @@ async function onAddOperation() {
       display: flex;
       flex-direction: column;
 
-      .button {}
+      .button {
+      }
 
       .list {
         flex: 1;

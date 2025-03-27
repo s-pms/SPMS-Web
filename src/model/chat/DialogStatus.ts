@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class DialogStatus extends AirEnum {
   static NONE = new DialogStatus(0, '无')

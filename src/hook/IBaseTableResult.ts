@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { IUseTableResult } from '@/airpower/interface/hooks/IUseTableResult'
+import { IUseTableResult } from '@airpower/interface/hooks/IUseTableResult'
 import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { BaseEntity } from '@/base/BaseEntity'
 

@@ -25,18 +25,18 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog } from '@/airpower/component'
-import { AirTreeInstance } from '@/airpower/type/AirType'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirRequest } from '@/airpower/model/AirRequest'
-import { IJson } from '@/airpower/interface/IJson'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+import { ADialog } from '@airpower/component'
+import { AirTreeInstance } from '@airpower/type/AirType'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { IJson } from '@airpower/interface/IJson'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
-import { AirConfig } from '@/airpower/config/AirConfig'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new RoleEntity()))
 

@@ -1,7 +1,7 @@
+import { AirHttp } from '@airpower/helper/AirHttp'
+import { AirAbstractEntityService } from '@airpower/base/AirAbstractEntityService'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { BaseEntity } from './BaseEntity'
-import { AirHttp } from '@/airpower/helper/AirHttp'
-import { AirAbstractEntityService } from '@/airpower/base/AirAbstractEntityService'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 /**
  * # 抽象服务基类

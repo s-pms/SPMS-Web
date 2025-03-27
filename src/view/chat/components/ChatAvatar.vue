@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { AirFile } from '@/airpower/helper/AirFile'
+import { AirFile } from '@airpower/helper/AirFile'
 
 defineProps({
   url: {

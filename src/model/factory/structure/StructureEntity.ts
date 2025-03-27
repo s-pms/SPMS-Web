@@ -1,8 +1,8 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
-import { IPayload } from '@/airpower/interface/IPayload'
-import { ITree } from '@/airpower/interface/ITree'
+} from '@airpower/decorator'
+import { IPayload } from '@airpower/interface/IPayload'
+import { ITree } from '@airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { StructureTypeEnum } from '@/model/factory/structure/StructureTypeEnum'

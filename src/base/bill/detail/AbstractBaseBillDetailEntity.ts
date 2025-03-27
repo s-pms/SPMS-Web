@@ -1,4 +1,4 @@
-import { Table } from '@/airpower/decorator'
+import { Table } from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 
 /**

@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="MaterialEntity"
+      :loading="isLoading"
       :service="MaterialService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -29,8 +29,8 @@
 <script lang="ts" setup>
 import {
   APanel, APage, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { MaterialEditor } from './component'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
@@ -44,4 +44,4 @@ const {
   editView: MaterialEditor,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

@@ -1,33 +1,33 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="RoleEntity"
+      :loading="isLoading"
       :service="RoleService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="160"
       :data-list="response.list"
       :entity="RoleEntity"
-      :ctrl-width="160"
       @on-edit="onEdit"
       @on-delete="onDelete"
     >
       <template #customRow="{ data }">
         <AButton
-          type="CONFIRM"
-          tooltip="授权菜单"
           link-button
+          tooltip="授权菜单"
+          type="CONFIRM"
           @click="onMenuEditor(data)"
         >
           菜单
         </AButton>
         <AButton
-          type="LOCK"
-          tooltip="授权权限"
           link-button
+          tooltip="授权权限"
+          type="LOCK"
           @click="onPermissionEditor(data)"
         >
           权限
@@ -48,10 +48,10 @@ import {
   AButton,
   APage,
   APanel, ATable, AToolBar,
-} from '@/airpower/component'
-import { AirDialog } from '@/airpower/helper/AirDialog'
+} from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 
@@ -70,4 +70,4 @@ const {
   editView: RoleEditor,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

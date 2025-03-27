@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
+      '@airpower': '/airpower/',
       '@': '/src/',
     },
   },

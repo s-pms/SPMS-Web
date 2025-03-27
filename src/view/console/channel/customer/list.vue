@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="CustomerEntity"
+      :loading="isLoading"
       :service="CustomerService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -29,8 +29,8 @@
 <script lang="ts" setup>
 import {
   APanel, APage, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { CustomerEditor } from './component'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
@@ -44,4 +44,4 @@ const {
   editView: CustomerEditor,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

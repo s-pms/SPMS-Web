@@ -18,8 +18,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog } from '@/airpower/component'
-import { airProps } from '@/airpower/config/AirProps'
+import { ADialog } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
 
 defineProps(Object.assign(airProps(), {
   /**

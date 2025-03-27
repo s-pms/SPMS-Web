@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class FileCategory extends AirEnum {
   static readonly NORMAL = new FileCategory(1, '普通文件')

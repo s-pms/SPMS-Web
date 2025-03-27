@@ -1,6 +1,7 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { InputDetailEntity } from './InputDetailEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
@@ -8,7 +9,6 @@ import { InputStatusEnum } from './InputStatusEnum'
 import { InputTypeEnum } from './InputTypeEnum'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { MoveEntity } from '../move/MoveEntity'
-import { AirEnum } from '@/airpower/base/AirEnum'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 
 @Model({

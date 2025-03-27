@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 function getIcon(item: ThirdLoginPlatform) {
   return `/img/thirdlogin/${item.flag}.png`

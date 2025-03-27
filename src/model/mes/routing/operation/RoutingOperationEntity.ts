@@ -1,4 +1,4 @@
-import { Field, Form, Model } from '@/airpower/decorator'
+import { Field, Form, Model } from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'

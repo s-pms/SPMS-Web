@@ -67,11 +67,11 @@
 <script lang="ts" setup>
 import {
   ADateTime, ADialog, AFormField, AGroup,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new OrderEntity()))

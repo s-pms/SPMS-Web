@@ -1,5 +1,5 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { AirColor } from '@/airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
 
 export class StructureTypeEnum extends AirEnum {
   static readonly SINGLE_STATION = new StructureTypeEnum(1, '单人工位', AirColor.SUCCESS)

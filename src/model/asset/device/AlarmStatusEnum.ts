@@ -1,5 +1,5 @@
-import { AirColor } from '@/airpower/enum/AirColor'
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class AlarmStatusEnum extends AirEnum {
   static readonly NONE = new AlarmStatusEnum(0, '正常运行', AirColor.SUCCESS)

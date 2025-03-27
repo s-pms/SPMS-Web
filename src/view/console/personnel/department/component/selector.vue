@@ -51,9 +51,9 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, ATable, AToolBar,
-} from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
-import { useAirSelector } from '@/airpower/hook/useAirSelector'
+} from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+import { useAirSelector } from '@airpower/hook/useAirSelector'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 

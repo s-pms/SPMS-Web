@@ -1,10 +1,10 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
 import { PurchaseStatusEnum } from './PurchaseStatusEnum'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model({
   label: '采购单',

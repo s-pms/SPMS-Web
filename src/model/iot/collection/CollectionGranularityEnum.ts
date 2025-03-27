@@ -1,5 +1,5 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { AirConstant } from '@/airpower/config/AirConstant'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { AirConstant } from '@airpower/config/AirConstant'
 
 export class CollectionGranularityEnum extends AirEnum {
   static ONE_MINUTE = new CollectionGranularityEnum(AirConstant.SECOND_PER_MINUTE, '每分钟')

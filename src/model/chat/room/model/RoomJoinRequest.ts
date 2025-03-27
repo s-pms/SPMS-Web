@@ -1,4 +1,4 @@
-import { AirModel } from '@/airpower/base/AirModel'
+import { AirModel } from '@airpower/base/AirModel'
 
 /**
  * # 进房申请

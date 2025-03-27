@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="UnitEntity"
+      :loading="isLoading"
       :service="UnitService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -29,8 +29,8 @@
 <script lang="ts" setup>
 import {
   APanel, APage, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { UnitEditor } from './component'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
@@ -44,4 +44,4 @@ const {
   editView: UnitEditor,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

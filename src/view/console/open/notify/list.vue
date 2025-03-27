@@ -33,13 +33,13 @@
 import { computed, ref } from 'vue'
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { IDictionary } from '@airpower/interface/IDictionary'
+import { AirDictionaryArray } from '@airpower/model/extend/AirDictionaryArray'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 import { NotifyService } from '@/model/open/notify/NotifyService'
 import { NotifyEditor } from '@/view/console/open/notify/component'
-import { IDictionary } from '@/airpower/interface/IDictionary'
-import { AirDictionaryArray } from '@/airpower/model/extend/AirDictionaryArray'
 
 const {
   isLoading,

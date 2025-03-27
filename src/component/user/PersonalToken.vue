@@ -54,15 +54,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { airProps } from '@/airpower/config/AirProps'
-import { AButton, AEmpty } from '@/airpower/component'
-import { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
+import { airProps } from '@airpower/config/AirProps'
+import { AButton, AEmpty } from '@airpower/component'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirClipboard } from '@airpower/helper/AirClipboard'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirAlert } from '@/airpower/feedback/AirAlert'
-import { AirClipboard } from '@/airpower/helper/AirClipboard'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
+import { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
 
 defineProps(airProps())
 

@@ -1,19 +1,19 @@
 <template>
   <ASelector
-    :entity="DeviceEntity"
-    :service="DeviceService"
-    :props="props"
     :editor="DeviceEditor"
+    :entity="DeviceEntity"
+    :props="props"
+    :service="DeviceService"
   />
 </template>
 
 <script lang="ts" setup>
-import { ASelector } from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+import { ASelector } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceEditor } from '.'
 
 const props = defineProps(airPropsSelector<DeviceEntity>())
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

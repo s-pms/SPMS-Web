@@ -70,13 +70,13 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { OperationSelector } from '@/view/console/mes/operation/component'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
 
 const props = defineProps(airPropsParam(new StructureEntity()))

@@ -1,20 +1,20 @@
 <template>
   <APanel>
     <AGroup
-      title="设备实时状态"
       :column="1"
       disable-collapse
+      title="设备实时状态"
     >
       <div class="device-view">
         <div
           v-for="item in DeviceStatusEnum.toArray()"
           :key="item.key"
-          class="device-item"
           :style="{ width: (deviceList.filter(i => i.status === item.key).length / deviceList.length * 100) + '%' }"
+          class="device-item"
         >
           <div
-            class="device-card"
             :style="{ background: item.color }"
+            class="device-card"
           >
             <div class="device-status">
               <span :style="{ backgroundColor: item.color }" />{{ item.label }}
@@ -39,8 +39,8 @@
             @click="showMonitor(device)"
           >
             <div
-              class="bg"
               :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status), }"
+              class="bg"
             />
             <div class="device-header">
               <div class="device-name">
@@ -52,8 +52,8 @@
             </div>
             <div class="device-body">
               <div
-                class="device-partcnt"
                 :style="{ color: DeviceStatusEnum.getColor(device.status) }"
+                class="device-partcnt"
               >
                 {{ device.partCount }}
 
@@ -62,16 +62,16 @@
               <div class="device-info">
                 <div
                   v-if="device.status === DeviceStatusEnum.ALARM.key && device.alarm !== AlarmStatusEnum.NONE.key"
-                  class="device-status"
                   :style="{ borderColor: AlarmStatusEnum.getColor(device.alarm), color: AlarmStatusEnum.getColor(device.alarm) }"
+                  class="device-status"
                 >
                   <span :style="{ backgroundColor: AlarmStatusEnum.getColor(device.alarm), }" />
                   {{ AlarmStatusEnum.getLabel(device.alarm, "未知") }}
                 </div>
 
                 <div
-                  class="device-status"
                   :style="{ borderColor: DeviceStatusEnum.getColor(device.status), color: DeviceStatusEnum.getColor(device.status) }"
+                  class="device-status"
                 >
                   <span :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status), }" />
                   {{ DeviceStatusEnum.getLabel(device.status, "未知") }}
@@ -90,12 +90,12 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
-import { AEmpty, AGroup, APanel } from '@/airpower/component'
+import { AEmpty, AGroup, APanel } from '@airpower/component'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
-import { AirRequest } from '@/airpower/model/AirRequest'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { DeviceMonitor } from '../../asset/device/component'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 
@@ -121,7 +121,7 @@ function showMonitor(device: DeviceEntity) {
   AirDialog.show(DeviceMonitor, device)
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .device-view {
   margin: 0 8px;
   overflow: hidden;

@@ -1,5 +1,5 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { AirConstant } from '@/airpower/config/AirConstant'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { AirConstant } from '@airpower/config/AirConstant'
 
 export class DeviceReportDuration extends AirEnum {
   static readonly ONE_HOUR = new DeviceReportDuration(AirConstant.SECOND_PER_HOUR, '近一小时')

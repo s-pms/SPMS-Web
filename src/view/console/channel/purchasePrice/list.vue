@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="PurchasePriceEntity"
+      :loading="isLoading"
       :service="PurchasePriceService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -19,8 +19,8 @@
     >
       <template #supplier="{ data }">
         <ATablePayload
-          :view="SupplierDetail"
           :payload="data.supplier"
+          :view="SupplierDetail"
         />
       </template>
       <template #materialCode="{ data }">
@@ -49,8 +49,8 @@
 import {
   APanel, APage, ATable, AToolBar,
   ATablePayload,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { PurchasePriceEditor } from './component'
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
@@ -66,4 +66,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

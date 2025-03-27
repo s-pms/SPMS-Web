@@ -1,18 +1,18 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="StorageEntity"
+      :loading="isLoading"
       :service="StorageService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="130"
       :data-list="list"
       :entity="StorageEntity"
       show-add
-      :ctrl-width="130"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-sort="onSortChanged"
@@ -25,11 +25,11 @@
 <script lang="ts" setup>
 import {
   APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { StorageEditor } from './component'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
-import { useAirTableTree } from '@/airpower/hook/useAirTableTree'
 
 const {
   isLoading,
@@ -44,4 +44,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

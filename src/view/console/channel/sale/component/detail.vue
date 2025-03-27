@@ -1,9 +1,9 @@
 <template>
   <ADialog
-    :title="title"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -14,28 +14,28 @@
       @submit.prevent
     >
       <AGroup
-        title="销售单"
         :column="3"
+        title="销售单"
       >
         <BillFormCode :bill="formData" />
         <AFormField
-          field="totalPrice"
           disabled
+          field="totalPrice"
         />
         <AFormField
-          style="width: 100%;"
-          field="reason"
           disabled
+          field="reason"
+          style="width: 100%;"
         />
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="销售明细">
         <ATable
-          :entity="SaleDetailEntity"
+          :ctrl-width="60"
           :data-list="formData.details"
+          :entity="SaleDetailEntity"
           :field-list="SaleDetailEntity.getTableFieldConfigList()"
           hide-ctrl
-          :ctrl-width="60"
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -52,12 +52,12 @@
 <script lang="ts" setup>
 import {
   ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 
 const props = defineProps(airPropsParam(new SaleEntity()))

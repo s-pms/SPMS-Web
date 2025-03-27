@@ -66,12 +66,12 @@
 <script lang="ts" setup>
 import {
   ADateTime, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 
