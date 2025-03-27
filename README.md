@@ -92,8 +92,8 @@ Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.
 
   ```shell
   git clone https://github.com/s-pms/SPMS-Web.git &&
-  cd SPMS-Web/src && 
-  git clone https://github.com/HammCn/AirPower4T.git airpower && cd ../ &&
+  cd SPMS-Web && 
+  git clone https://github.com/HammCn/AirPower4T.git airpower &&
   yarn && cp .env.dev .env && yarn s
   ```
 
@@ -102,8 +102,8 @@ Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.
 
   ```shell
   git clone https://gitee.com/s-pms/SPMS-Web.git &&
-  cd SPMS-Web/src && 
-  git clone https://gitee.com/air-power/AirPower4T.git airpower && cd ../ &&
+  cd SPMS-Web && 
+  git clone https://gitee.com/air-power/AirPower4T.git airpower &&
   yarn && cp .env.dev .env && yarn s
   ```
 
