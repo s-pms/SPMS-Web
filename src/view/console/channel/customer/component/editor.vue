@@ -1,16 +1,16 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
+    :title="title"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AFormField
@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
 

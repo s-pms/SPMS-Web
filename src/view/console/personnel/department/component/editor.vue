@@ -29,9 +29,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 

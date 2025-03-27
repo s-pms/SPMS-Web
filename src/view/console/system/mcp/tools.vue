@@ -22,11 +22,11 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { AButton, APanel, ATable } from '@/airpower/component'
+import { AButton, APanel, ATable } from '@airpower/component'
+import { AirClipboard } from '@airpower/helper/AirClipboard'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { McpToolModel } from '@/model/system/mcp/McpToolModel'
 import { McpToolService } from '@/model/system/mcp/McpToolService'
-import { AirClipboard } from '@/airpower/helper/AirClipboard'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const isLoading = ref(false)
 const list = ref([] as McpToolModel[])

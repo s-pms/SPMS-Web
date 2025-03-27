@@ -1,5 +1,5 @@
-import { AirEntity } from '@/airpower/base/AirEntity'
-import { Field, Model, Table } from '@/airpower/decorator'
+import { AirEntity } from '@airpower/base/AirEntity'
+import { Field, Model, Table } from '@airpower/decorator'
 
 @Model({
   hideFieldSelector: true,

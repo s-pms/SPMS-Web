@@ -1,18 +1,18 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="StructureEntity"
+      :loading="isLoading"
       :service="StructureService"
       @on-add="onAdd"
       @on-search="onSearch"
     />
     <ATable
       v-loading="isLoading"
+      :ctrl-width="130"
       :data-list="list"
       :entity="StructureEntity"
       show-add
-      :ctrl-width="130"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-sort="onSortChanged"
@@ -25,11 +25,11 @@
 <script lang="ts" setup>
 import {
   APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { StructureEditor } from './component'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
-import { useAirTableTree } from '@/airpower/hook/useAirTableTree'
 
 const {
   isLoading,
@@ -44,4 +44,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

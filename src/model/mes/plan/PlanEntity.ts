@@ -1,15 +1,15 @@
+import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
+import {
+  Field, Form, Model, Table,
+} from '@airpower/decorator'
+import { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { PlanDetailEntity } from './PlanDetailEntity'
 import { PlanStatusEnum } from './PlanStatusEnum'
-import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { PlanTypeEnum } from './PlanTypeEnum'
-import { AirDateTime } from '@/airpower/helper/AirDateTime'
-import { AirDateTimeType } from '@/airpower/enum/AirDateTimeType'
-import {
-  Field, Form, Model, Table,
-} from '@/airpower/decorator'
-import { AirEnum } from '@/airpower/base/AirEnum'
 
 @Model({
   label: '生产计划',

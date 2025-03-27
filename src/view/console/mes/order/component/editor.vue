@@ -70,8 +70,8 @@
         </el-form-item>
       </AGroup>
       <AGroup
-        title="生产工艺"
         :column="2"
+        title="生产工艺"
       >
         <el-form-item
           label="生产工艺"
@@ -79,10 +79,10 @@
         >
           <ASelect
             v-model="formData.routing"
+            :disabled="!formData.material"
+            :param="routingFilter"
             :selector="RoutingSelector"
             placeholder="请选择生产工艺..."
-            :param="routingFilter"
-            :disabled="!formData.material"
           />
         </el-form-item>
       </AGroup>
@@ -94,13 +94,13 @@
 import { computed, ref } from 'vue'
 import {
   ADialog, AFormField, AGroup, ASelect,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 import { PlanDetailSelector, PlanSelector } from '../../plan/component'
 import { MaterialSelector } from '@/view/console/asset/material/component'

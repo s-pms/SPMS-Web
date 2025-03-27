@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="ParameterEntity"
+      :loading="isLoading"
       :service="ParameterService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -10,10 +10,10 @@
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
-      :entity="ParameterEntity"
-      :select-list="selectList"
       :disable-delete="row => row.isSystem"
       :disable-edit="row => row.isSystem"
+      :entity="ParameterEntity"
+      :select-list="selectList"
       @on-edit="onEdit"
       @on-delete="onDelete"
       @on-sort="onSortChanged"
@@ -31,8 +31,8 @@
 <script lang="ts" setup>
 import {
   APanel, APage, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { ParameterEditor } from './component'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
@@ -46,4 +46,4 @@ const {
   editView: ParameterEditor,
 })
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

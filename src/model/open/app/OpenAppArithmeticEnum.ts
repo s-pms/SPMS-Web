@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { AirColor } from '@/airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
 
 /**
  * # 开放应用加密方式

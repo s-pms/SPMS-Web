@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ref, Ref } from 'vue'
+import AirEvent from '@airpower/event/AirEvent'
 import { DialogStatus } from '@/model/chat/DialogStatus'
 import { AppConfig } from '@/config/AppConfig'
 import UserCard from '@/component/UserCard.vue'
-import AirEvent from '@/airpower/event/AirEvent'
 import { ChatEventType } from '@/model/chat/enum/ChatEventType'
 
 function copyToClipboard() {

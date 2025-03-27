@@ -33,8 +33,8 @@
       </el-form-item>
       <el-form-item>
         <el-button
-          type="primary"
           :disabled="!formData.password || !formData.oldPassword || !confirmPassword"
+          type="primary"
           @click="onSubmit"
         >
           确认修改密码
@@ -46,12 +46,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { UserService } from '@/model/personnel/user/UserService'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirAlert } from '@airpower/feedback/AirAlert'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { AirAlert } from '@/airpower/feedback/AirAlert'
+import { UserService } from '@/model/personnel/user/UserService'
 
 const props = defineProps(airPropsParam(new UserEntity()))
 const confirmPassword = ref('')
@@ -75,7 +75,7 @@ async function onSubmit() {
 </script>
 
 <style lang="scss" scoped>
-.role-list>* {
+.role-list > * {
   margin-right: 5px;
 }
 </style>

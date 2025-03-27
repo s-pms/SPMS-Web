@@ -1,9 +1,9 @@
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
-import { ITree } from '@/airpower/interface/ITree'
+} from '@airpower/decorator'
+import { ITree } from '@airpower/interface/ITree'
+import { IPayload } from '@airpower/interface/IPayload'
 import { BaseEntity } from '@/base/BaseEntity'
-import { IPayload } from '@/airpower/interface/IPayload'
 
 @Model({
   label: '仓库',

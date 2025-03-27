@@ -1,5 +1,5 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
-import { AirColor } from '@/airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
 
 export class MaterialTypeEnum extends AirEnum {
   static readonly PRODUCT = new MaterialTypeEnum(1, '自产品', AirColor.SUCCESS)

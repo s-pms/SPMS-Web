@@ -80,15 +80,15 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { InputAddFinishEditor } from '.'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { MoveDetail } from '../../move/component'
 import { PurchaseDetail } from '@/view/console/channel/purchase/component'
 import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'

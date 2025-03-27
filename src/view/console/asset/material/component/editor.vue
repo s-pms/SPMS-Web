@@ -34,9 +34,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField, ASelect } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+import { ADialog, AFormField, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
 import { UnitSelector } from '@/view/console/system/unit/component'

@@ -13,7 +13,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: '登录',
-    // 如需启用Oauth2登录 请使用 @/airpower/view/login.vue
+    // 如需启用Oauth2登录 请使用 @airpower/view/login.vue
     component: () => import('@/view/login.vue'),
   },
   {
@@ -44,7 +44,7 @@ export const routes: RouteRecordRaw[] = [
     children: [
       {
         path: ':catchAll(.*)',
-        component: () => import('@/airpower/view/error.vue'),
+        component: () => import('@airpower/view/error.vue'),
       },
     ],
   },

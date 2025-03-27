@@ -1,7 +1,7 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { BaseEntity } from '@/base/BaseEntity'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { DeviceReportingEnum } from '@/model/asset/device/DeviceReportingEnum'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'

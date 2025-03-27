@@ -19,8 +19,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog } from '@/airpower/component'
-import { airProps } from '@/airpower/config/AirProps'
+import { airProps } from '@airpower/config/AirProps'
+import { ADialog } from '@airpower/component'
 
 const props = defineProps(Object.assign(airProps(), {
   /**

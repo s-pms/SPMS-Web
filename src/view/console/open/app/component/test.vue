@@ -131,16 +131,16 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { ADialog, AFormField, AGroup } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { AirCrypto } from '@/airpower/helper/AirCrypto'
-import { AirHttp } from '@/airpower/helper/AirHttp'
-import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
-import { AirAlert } from '@/airpower/feedback/AirAlert'
-import { AirRand } from '@/airpower/helper/AirRand'
+import { ADialog, AFormField, AGroup } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirCrypto } from '@airpower/helper/AirCrypto'
+import { AirHttp } from '@airpower/helper/AirHttp'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirRand } from '@airpower/helper/AirRand'
 
-import { AirApi } from '@/airpower/config/AirApi'
+import { AirApi } from '@airpower/config/AirApi'
+import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 
 const props = defineProps(airPropsParam())
 

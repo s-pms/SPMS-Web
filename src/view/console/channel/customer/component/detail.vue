@@ -1,7 +1,7 @@
 <template>
   <ADialog
-    :title="CustomerEntity.getModelName() + title"
     :loading="isLoading"
+    :title="CustomerEntity.getModelName() + title"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
 

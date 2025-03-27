@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="OperationEntity"
+      :loading="isLoading"
       :service="OperationService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -27,9 +27,9 @@
 import {
   APage,
   APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { OperationEditor } from './component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
 
@@ -41,4 +41,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

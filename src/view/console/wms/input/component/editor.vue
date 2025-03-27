@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="入库单"
         :column="2"
+        title="入库单"
       >
         <AFormField field="billCode" />
         <el-form-item
@@ -33,11 +33,11 @@
       </AGroup>
       <AGroup title="入库明细">
         <ATable
-          :entity="InputDetailEntity"
           :data-list="formData.details"
+          :entity="InputDetailEntity"
           :field-list="InputDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -57,9 +57,9 @@
           <template #customRow="{ index }">
             <AButton
               v-if="isDetailEditable"
-              type="DELETE"
               danger
               icon-button
+              type="DELETE"
               @click="deleteDetail(index)"
             />
           </template>
@@ -73,16 +73,16 @@
 import { computed } from 'vue'
 import {
   AButton, ADialog, AFormField, AGroup, AInput, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 
 const props = defineProps(airPropsParam(new InputEntity()))

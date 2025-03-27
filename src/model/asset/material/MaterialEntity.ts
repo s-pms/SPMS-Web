@@ -1,10 +1,10 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { IPayload } from '@airpower/interface/IPayload'
+import { BaseEntity } from '@/base/BaseEntity'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { MaterialTypeEnum } from './MaterialTypeEnum'
-import { IPayload } from '@/airpower/interface/IPayload'
 import { MaterialUseTypeEnum } from '@/model/asset/material/MaterialUseTypeEnum'
 
 @Model({

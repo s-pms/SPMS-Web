@@ -34,11 +34,11 @@
 </template>
 <script lang="ts" setup>
 import { PropType } from 'vue'
-import { AEmpty } from '@/airpower/component'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AEmpty } from '@airpower/component'
+import AirEvent from '@airpower/event/AirEvent'
 import { RoomEntity } from '@/model/chat/room/RoomEntity'
 import { AppConfig } from '@/config/AppConfig'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import AirEvent from '@/airpower/event/AirEvent'
 
 defineProps({
   roomList: {

@@ -44,12 +44,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { airProps } from '@/airpower/config/AirProps'
+import { airProps } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
 import { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
 
 defineProps(airProps())
 

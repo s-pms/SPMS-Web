@@ -45,7 +45,7 @@
 <script lang="ts" setup>
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
 import { InputDetail, InputEditor } from './component'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'

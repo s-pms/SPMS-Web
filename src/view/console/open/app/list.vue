@@ -74,16 +74,16 @@
 <script lang="ts" setup>
 import {
   AButton, APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirClipboard } from '@airpower/helper/AirClipboard'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirAlert } from '@/airpower/feedback/AirAlert'
-import { AirClipboard } from '@/airpower/helper/AirClipboard'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
-import { AirDialog } from '@/airpower/helper/AirDialog'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 
 const {
   isLoading,

@@ -1,5 +1,5 @@
-import { AirColor } from '@/airpower/enum/AirColor'
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class PublishStatusEnum extends AirEnum<boolean> {
   static readonly YES = new PublishStatusEnum(true, '已发布', AirColor.SUCCESS)

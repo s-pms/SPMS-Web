@@ -18,12 +18,12 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { AFrame } from '@/airpower/component'
-import { AirRouter } from '@/airpower/helper/AirRouter'
+import { AFrame } from '@airpower/component'
+import { AirRouter } from '@airpower/helper/AirRouter'
+import { AirPermission } from '@airpower/helper/AirPermission'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { AirPermission } from '@/airpower/helper/AirPermission'
 import UserCard from '@/component/UserCard.vue'
 
 const currentUserInfo = ref(new UserEntity())
@@ -33,6 +33,7 @@ const isLoading = ref(false)
 async function getMenuList() {
   menuList.value = await UserService.create(isLoading)
     .getMyMenuList()
+  console.log(menuList.value)
   AirRouter.initVueRouter(menuList.value, 'console')
 }
 

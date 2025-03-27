@@ -1,8 +1,8 @@
 <template>
   <APanel>
     <AToolBar
-      :loading="isLoading"
       :entity="SalePriceEntity"
+      :loading="isLoading"
       :service="SalePriceService"
       @on-add="onAdd"
       @on-search="onSearch"
@@ -42,8 +42,8 @@
 <script lang="ts" setup>
 import {
   APanel, APage, ATable, AToolBar,
-} from '@/airpower/component'
-import { useAirTable } from '@/airpower/hook/useAirTable'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 import { SalePriceEditor } from './component'
 import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
@@ -58,4 +58,4 @@ const {
 })
 
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

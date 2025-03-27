@@ -1,7 +1,7 @@
 <template>
   <ADialog
-    :title="title"
     :loading="isLoading"
+    :title="title"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -27,11 +27,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 
 const props = defineProps(airPropsParam(new SupplierEntity()))
 

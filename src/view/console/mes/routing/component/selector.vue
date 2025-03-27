@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ASelector } from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+import { ASelector } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
 import { RoutingEditor } from '.'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'

@@ -36,12 +36,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AFormField } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { IDictionary } from '@airpower/interface/IDictionary'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 import { NotifyService } from '@/model/open/notify/NotifyService'
-import { IDictionary } from '@/airpower/interface/IDictionary'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
 
 const props = defineProps(airPropsParam(new NotifyEntity()))

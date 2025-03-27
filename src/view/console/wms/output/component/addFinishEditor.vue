@@ -77,12 +77,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AInput } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AInput } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirFormInstance } from '@airpower/type/AirType'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { AirFormInstance } from '@/airpower/type/AirType'
 import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { InventorySelector } from '../../inventory/component'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { OutputService } from '@/model/wms/output/OutputService'

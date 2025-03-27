@@ -1,8 +1,8 @@
-import { BaseEntity } from '@/base/BaseEntity'
-import { ParameterTypeEnum } from './ParameterTypeEnum'
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { BaseEntity } from '@/base/BaseEntity'
+import { ParameterTypeEnum } from './ParameterTypeEnum'
 import { ParameterSystemEnum } from '@/model/iot/parameter/ParameterSystemEnum'
 
 @Model({

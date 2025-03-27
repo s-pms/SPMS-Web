@@ -1,33 +1,33 @@
 <template>
   <ADialog
-    :title="title"
     :form-ref="formRef"
     :loading="isLoading"
-    width="80%"
+    :title="title"
     height="80%"
+    width="80%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="入库单"
         :column="2"
+        title="入库单"
       >
         <AFormField field="billCode" />
       </AGroup>
       <AGroup title="出库明细">
         <ATable
-          :entity="OutputDetailEntity"
           :data-list="formData.details"
+          :entity="OutputDetailEntity"
           :field-list="OutputDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #storageName="{ data }">
             {{
@@ -52,9 +52,9 @@
           <template #customRow="{ index }">
             <AButton
               v-if="isDetailEditable"
-              type="DELETE"
               danger
               icon-button
+              type="DELETE"
               @click="deleteDetail(index)"
             />
           </template>
@@ -68,16 +68,16 @@
 import { computed } from 'vue'
 import {
   AButton, ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 
 const props = defineProps(airPropsParam(new OutputEntity()))

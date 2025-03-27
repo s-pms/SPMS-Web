@@ -1,14 +1,14 @@
 import { Ref, ref } from 'vue'
-import { AirWebsocket } from '@/airpower/websocket/AirWebSocket'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
+import { AirWebsocket } from '@airpower/websocket/AirWebSocket'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirWebSocketPayload } from '@airpower/websocket/AirWebSocketPayload'
+import AirEvent from '@airpower/event/AirEvent'
+import { AirAlert } from '@airpower/feedback/AirAlert'
 import { AppConfig } from '@/config/AppConfig'
-import { AirWebSocketPayload } from '@/airpower/websocket/AirWebSocketPayload'
 import { ChatEventType } from '@/model/chat/enum/ChatEventType'
 import { RoomJoinRequest } from '@/model/chat/room/model/RoomJoinRequest'
-import AirEvent from '@/airpower/event/AirEvent'
 import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
 import { RoomService } from '@/model/chat/room/RoomService'
-import { AirAlert } from '@/airpower/feedback/AirAlert'
 
 /**
  * # 房间Hook

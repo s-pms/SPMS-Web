@@ -22,18 +22,21 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@airpower": [
+        "airpower/index"
+      ],
+      "@airpower/*": [
+        "airpower/*"
       ]
     }
   },
   "include": [
+    "vite.config.mts",
+    "airpower",
+    "airpower/**/*.ts",
+    "airpower/**/*.vue",
     "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
     "src/**/*.vue"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
   ]
 }

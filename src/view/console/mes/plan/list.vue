@@ -47,7 +47,7 @@
 <script lang="ts" setup>
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
 import { PlanDetail, PlanEditor } from './component'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'

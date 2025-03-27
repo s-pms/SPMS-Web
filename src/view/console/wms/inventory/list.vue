@@ -67,19 +67,19 @@
 import { computed, ref } from 'vue'
 import {
   APage, APanel, ATable, AToolBar, ATreeBox,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { ITree } from '@airpower/interface/ITree'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { AirResponsePage } from '@airpower/model/AirResponsePage'
+import { AirPage } from '@airpower/model/AirPage'
+import { AirRequestPage } from '@airpower/model/AirRequestPage'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
-import { ITree } from '@/airpower/interface/ITree'
 import { StorageService } from '@/model/factory/storage/StorageService'
-import { AirRequest } from '@/airpower/model/AirRequest'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { AirResponsePage } from '@/airpower/model/AirResponsePage'
-import { AirPage } from '@/airpower/model/AirPage'
-import { AirRequestPage } from '@/airpower/model/AirRequestPage'
 
 const request = ref(new AirRequestPage(InventoryEntity))
 const response = ref<AirResponsePage<InventoryEntity>>(new AirResponsePage())

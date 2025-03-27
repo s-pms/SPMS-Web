@@ -1,8 +1,8 @@
 <template>
   <ADialog
-    title="销售明细"
     :form-ref="formRef"
     :loading="isLoading"
+    title="销售明细"
     width="600px"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -10,8 +10,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="SaleDetailService.createValidator(formData)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item
@@ -63,14 +63,14 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirFormInstance } from '@airpower/type/AirType'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-import { AirFormInstance } from '@/airpower/type/AirType'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new SaleDetailEntity()))
 

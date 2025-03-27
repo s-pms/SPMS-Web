@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class MemberRole extends AirEnum {
   static readonly ADMIN = new MemberRole(1, '超管')

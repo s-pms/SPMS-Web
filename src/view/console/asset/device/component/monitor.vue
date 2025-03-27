@@ -1,9 +1,9 @@
 <template>
   <ADialog
     :title="formData.name + '(' + formData.code + ') 采集实时监控'"
+    height="70%"
     hide-confirm
     width="70%"
-    height="70%"
     @on-cancel="onCancel"
   >
     <div
@@ -30,8 +30,8 @@
           <div class="value">
             <div
               v-if="[CollectionDefault.ALARM.toString(), CollectionDefault.STATUS.toString()].includes(item.code)"
-              class="light"
               :style="{ backgroundColor: getColor(item) }"
+              class="light"
             />
             {{ getValue(item) }}
           </div>
@@ -49,13 +49,13 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
-import { ADialog, AEmpty } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AEmpty } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
 import { DeviceCollectHistory } from '.'

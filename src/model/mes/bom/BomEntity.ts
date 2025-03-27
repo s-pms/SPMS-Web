@@ -1,9 +1,9 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { IPayload } from '@airpower/interface/IPayload'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
-import { IPayload } from '@/airpower/interface/IPayload'
 import { BaseEntity } from '@/base/BaseEntity'
 
 /**

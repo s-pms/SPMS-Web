@@ -54,13 +54,13 @@
 <script lang="ts" setup>
 import {
   AButton, APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
 import { RoutingEditor, RoutingProgress } from './component'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import PublishButton from '@/component/PublishButton.vue'
 import { useTable } from '@/hook/useTable'
-import { AirDialog } from '@/airpower/helper/AirDialog'
 
 const {
   isLoading,

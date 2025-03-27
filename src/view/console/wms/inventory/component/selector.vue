@@ -64,11 +64,11 @@
 import { ref } from 'vue'
 import {
   AButton, ADialog, ATable, ATreeBox,
-} from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { ITree } from '@airpower/interface/ITree'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { AirRequest } from '@/airpower/model/AirRequest'
-import { ITree } from '@/airpower/interface/ITree'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'

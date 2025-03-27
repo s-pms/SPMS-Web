@@ -1,7 +1,7 @@
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { OrderDetailEntity } from './OrderDetailEntity'
 import { OrderEntity } from './OrderEntity'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 export class OrderService extends AbstractBaseBillService<OrderDetailEntity, OrderEntity> {
   entityClass = OrderEntity

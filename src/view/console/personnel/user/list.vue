@@ -37,14 +37,14 @@
 import { Ref, ref } from 'vue'
 import {
   APage, APanel, ATable, AToolBar, ATreeBox,
-} from '@/airpower/component'
+} from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { AirRequest } from '@airpower/model/AirRequest'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { useAirTable } from '@/airpower/hook/useAirTable'
 import { UserEditor } from './component'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { AirRequest } from '@/airpower/model/AirRequest'
 
 const {
   isLoading,

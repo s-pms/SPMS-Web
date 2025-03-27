@@ -54,13 +54,13 @@
 <script lang="ts" setup>
 import {
   ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'
-import { useAirDetail } from '@/airpower/hook/useAirDetail'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 

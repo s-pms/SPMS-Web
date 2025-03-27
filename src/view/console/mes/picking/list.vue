@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import {
   APage, APanel, ATable, AToolBar,
-} from '@/airpower/component'
+} from '@airpower/component'
 import { PickingDetail, PickingEditor } from './component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { BillAuditOrReject } from '@/component'

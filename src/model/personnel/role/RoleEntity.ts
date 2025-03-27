@@ -1,6 +1,6 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'

@@ -1,9 +1,9 @@
-import { app } from '@/airpower'
-import { AirConfig } from '@/airpower/config/AirConfig'
+import { app } from '@airpower'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { AirRouter } from '@airpower/helper/AirRouter'
 
 import { routes } from '@/config/routes'
 import '@/assets/css/main.scss'
-import { AirRouter } from './airpower/helper/AirRouter'
 
 AirConfig.appKey = 'spms'
 AirConfig.uploadUrl = '/api/file/upload'

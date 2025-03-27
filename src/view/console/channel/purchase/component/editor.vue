@@ -1,23 +1,23 @@
 <template>
   <ADialog
-    :title="title + PurchaseEntity.getModelName()"
     :form-ref="formRef"
     :loading="isLoading"
-    width="80%"
+    :title="title + PurchaseEntity.getModelName()"
     height="80%"
+    width="80%"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="rules"
+      label-width="120px"
       @submit.prevent
     >
       <AGroup
-        title="采购单"
         :column="2"
+        title="采购单"
       >
         <AFormField field="billCode" />
         <AFormField
@@ -27,11 +27,11 @@
       </AGroup>
       <AGroup title="采购明细">
         <ATable
-          :entity="PurchaseDetailEntity"
           :data-list="formData.details"
+          :entity="PurchaseDetailEntity"
           :field-list="PurchaseDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
-          hide-edit
           hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -55,9 +55,9 @@
           </template>
           <template #customRow="{ index }">
             <AButton
-              type="DELETE"
               danger
               icon-button
+              type="DELETE"
               @click="deleteDetail(index)"
             />
           </template>
@@ -70,16 +70,16 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AFormField, AGroup, ATable,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseDetailEditor } from '.'
-import { AirConfirm } from '@/airpower/feedback/AirConfirm'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 

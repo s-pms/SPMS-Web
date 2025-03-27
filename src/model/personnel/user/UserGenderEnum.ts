@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class UserGenderEnum extends AirEnum {
   static MALE = new UserGenderEnum(1, '男')

@@ -6,8 +6,8 @@
       class="audit-item"
     >
       <el-tag
-        effect="dark"
         closable
+        effect="dark"
         type="warning"
         @close="auditUserList.splice(index, 1); emitList()"
       >
@@ -15,8 +15,8 @@
       </el-tag>
     </div>
     <el-tag
-      style="cursor:pointer;margin-left: 10px;"
       icon="add"
+      style="cursor:pointer;margin-left: 10px;"
       type="primary"
       @click="selectUser()"
     >
@@ -24,12 +24,12 @@
     </el-tag>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
-import { AirDialog } from '@/airpower/helper/AirDialog'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserSelector } from '@/view/console/personnel/user/component'
-import { AirNotification } from '@/airpower/feedback/AirNotification'
 
 const props = defineProps({
   modelValue: {
@@ -81,7 +81,7 @@ async function selectUser() {
     font-weight: bolder;
   }
 
-  >* {
+  > * {
     margin-bottom: 10px;
   }
 }

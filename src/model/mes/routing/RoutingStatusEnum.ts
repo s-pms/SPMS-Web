@@ -1,5 +1,5 @@
-import { AirColor } from '@/airpower/enum/AirColor'
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 /**
  * # 工艺状态枚举字典

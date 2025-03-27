@@ -1,4 +1,4 @@
-import { AirEnum } from '@/airpower/base/AirEnum'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 export class DeviceStatusEnum extends AirEnum {
   static readonly UNKNOWN = new DeviceStatusEnum(0, '未知', '#999')

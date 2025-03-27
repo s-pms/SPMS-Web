@@ -1,4 +1,4 @@
-import { AirModel } from '@/airpower/base/AirModel'
+import { AirModel } from '@airpower/base/AirModel'
 
 /**
  * # Oauth 创建授权码 请求

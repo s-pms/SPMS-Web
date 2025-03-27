@@ -38,11 +38,11 @@
     </el-tabs>
   </ADialog>
 </template>
-<script setup lang="ts">
-import { ACopy, ADialog } from '@/airpower/component'
-import { AirConfig } from '@/airpower/config/AirConfig'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { IJson } from '@/airpower/interface/IJson'
+<script lang="ts" setup>
+import { ACopy, ADialog } from '@airpower/component'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { IJson } from '@airpower/interface/IJson'
 import { LogEntity } from '@/model/system/log/LogEntity'
 
 defineProps(airPropsParam(new LogEntity()))
@@ -71,7 +71,7 @@ function getTreeData(obj: IJson): IJson[] {
   return treeData
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .custom-tree-node {
   display: flex;
   flex-direction: row;

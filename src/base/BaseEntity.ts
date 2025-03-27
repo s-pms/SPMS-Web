@@ -1,8 +1,8 @@
-import { AirDateTimeFormatter } from '@/airpower/enum/AirDateTimeFormatter'
-import { AirEntity } from '@/airpower/base/AirEntity'
+import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
+import { AirEntity } from '@airpower/base/AirEntity'
 import {
   Field, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
 import { PublishStatusEnum } from '@/model/common/PublishStatusEnum'
 
 /**

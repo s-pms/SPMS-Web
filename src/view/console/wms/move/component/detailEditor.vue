@@ -1,8 +1,8 @@
 <template>
   <ADialog
-    title="移库明细"
     :form-ref="formRef"
     :loading="isLoading"
+    title="移库明细"
     width="600px"
     @on-confirm="onSubmit"
     @on-cancel="onCancel"
@@ -10,8 +10,8 @@
     <el-form
       ref="formRef"
       :model="formData"
-      label-width="120px"
       :rules="MoveDetailService.createValidator(formData)"
+      label-width="120px"
       @submit.prevent
     >
       <el-form-item
@@ -46,10 +46,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AInput } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
+import { ADialog, AInput } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirFormInstance } from '@airpower/type/AirType'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { AirFormInstance } from '@/airpower/type/AirType'
 import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
 
 const props = defineProps(airPropsParam(new MoveDetailEntity()))

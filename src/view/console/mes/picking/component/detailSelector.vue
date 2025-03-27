@@ -47,8 +47,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { AButton, ADialog, ATable } from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+import { AButton, ADialog, ATable } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'

@@ -1,8 +1,8 @@
 import {
   Field, Form, Model, Search, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { IMenu } from '@airpower/interface/IMenu'
 import { BaseEntity } from '@/base/BaseEntity'
-import { IMenu } from '@/airpower/interface/IMenu'
 import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
 
 /**

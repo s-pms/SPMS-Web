@@ -50,9 +50,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ADialog, AFormField } from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
 import { Constant } from '@/config/Constant'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'

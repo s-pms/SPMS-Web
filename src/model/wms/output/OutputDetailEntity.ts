@@ -1,6 +1,6 @@
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { InventoryEntity } from '../inventory/InventoryEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'

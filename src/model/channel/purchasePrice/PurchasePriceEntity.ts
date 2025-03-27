@@ -1,7 +1,7 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import {
   Field, Form, Model, Table,
-} from '@/airpower/decorator'
+} from '@airpower/decorator'
+import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
 

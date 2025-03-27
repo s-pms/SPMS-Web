@@ -95,11 +95,11 @@
 <script lang="ts" setup>
 import {
   AButton, ADialog, AGroup, AInput,
-} from '@/airpower/component'
-import { airPropsParam } from '@/airpower/config/AirProps'
-import { AirDialog } from '@/airpower/helper/AirDialog'
+} from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
 import { RoleSelector } from '../../role/component'
-import { useAirEditor } from '@/airpower/hook/useAirEditor'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
@@ -125,8 +125,8 @@ async function selectDepartment() {
 </script>
 
 <style lang="scss" scoped>
-.role-list>*,
-.department-list>* {
+.role-list > *,
+.department-list > * {
   margin-right: 5px;
 }
 </style>

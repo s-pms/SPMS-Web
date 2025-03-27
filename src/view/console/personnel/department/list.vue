@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts" setup>
-import { APanel, ATable, AToolBar } from '@/airpower/component'
-import { useAirTableTree } from '@/airpower/hook/useAirTableTree'
+import { APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { DepartmentEditor } from './component'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'

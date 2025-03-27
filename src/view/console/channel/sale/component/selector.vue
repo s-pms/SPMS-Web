@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ASelector } from '@/airpower/component'
-import { airPropsSelector } from '@/airpower/config/AirProps'
+import { ASelector } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'

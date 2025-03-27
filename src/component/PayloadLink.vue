@@ -5,8 +5,8 @@
 </template>
 <script generic="P extends IPayload" lang="ts" setup>
 import { Component } from 'vue'
-import { AirDialog } from '@/airpower/helper/AirDialog'
-import { IPayload } from '@/airpower/interface/IPayload'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { IPayload } from '@airpower/interface/IPayload'
 
 const {
   payload,

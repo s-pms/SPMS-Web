@@ -1,4 +1,4 @@
-import { Field } from '@/airpower/decorator'
+import { Field } from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 
 export class PersonalTokenEntity extends BaseEntity {

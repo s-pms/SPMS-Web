@@ -40,8 +40,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ADialog, AInput } from '@/airpower/component'
-import { airProps } from '@/airpower/config/AirProps'
+import { ADialog, AInput } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
 import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { OrderDetailService } from '@/model/mes/order/OrderDetailService'
 
