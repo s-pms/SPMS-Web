@@ -1,3 +1,49 @@
+<script lang="ts" setup>
+import type { IJson } from '@airpower/interface/IJson'
+import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
+import { ACopy, ADialog } from '@airpower/component'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { computed } from 'vue'
+
+const props = defineProps(airPropsParam(new OpenLogEntity()))
+
+function getTreeData(obj: IJson): IJson[] {
+  const treeData = []
+  const keys = Object.keys(obj || {})
+
+  for (let i = 0; i < keys.length; i += 1) {
+    if (typeof obj[keys[i]] === 'object') {
+      treeData.push({
+        key: i,
+        name: keys[i],
+        children: getTreeData(obj[keys[i]]),
+        value: '',
+      })
+    }
+    else {
+      treeData.push({
+        key: i,
+        name: `${keys[i]}`,
+        children: [],
+        value: obj[keys[i]],
+      })
+    }
+  }
+  return treeData
+}
+
+const json = computed(() => {
+  try {
+    return JSON.parse(props.param.request)
+  }
+  catch (e) {
+    console.error(e)
+    return {}
+  }
+})
+</script>
+
 <template>
   <ADialog
     height="70%"
@@ -40,48 +86,7 @@
     </el-tabs>
   </ADialog>
 </template>
-<script lang="ts" setup>
-import { computed } from 'vue'
-import { ACopy, ADialog } from '@airpower/component'
-import { AirConfig } from '@airpower/config/AirConfig'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { IJson } from '@airpower/interface/IJson'
-import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 
-const props = defineProps(airPropsParam(new OpenLogEntity()))
-
-function getTreeData(obj: IJson): IJson[] {
-  const treeData = []
-  const keys = Object.keys(obj || {})
-
-  for (let i = 0; i < keys.length; i += 1) {
-    if (typeof obj[keys[i]] === 'object') {
-      treeData.push({
-        key: i,
-        name: keys[i],
-        children: getTreeData(obj[keys[i]]),
-        value: '',
-      })
-    } else {
-      treeData.push({
-        key: i,
-        name: `${keys[i]}`,
-        children: [],
-        value: obj[keys[i]],
-      })
-    }
-  }
-  return treeData
-}
-
-const json = computed(() => {
-  try {
-    return JSON.parse(props.param.request)
-  } catch (e) {
-    return {}
-  }
-})
-</script>
 <style lang="scss" scoped>
 .custom-tree-node {
   display: flex;

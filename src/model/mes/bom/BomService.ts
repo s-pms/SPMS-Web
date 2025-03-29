@@ -1,5 +1,5 @@
-import { BomEntity } from './BomEntity'
 import { AbstractBaseService } from '@/base/AbstractBaseService'
+import { BomEntity } from './BomEntity'
 
 /**
  * # BOM接口服务

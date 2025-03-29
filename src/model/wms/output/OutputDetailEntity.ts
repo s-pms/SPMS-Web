@@ -1,6 +1,4 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { InventoryEntity } from '../inventory/InventoryEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
@@ -12,7 +10,7 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     type: InventoryEntity,
   })
-    inventory!: InventoryEntity
+  inventory!: InventoryEntity
 
   @Field({
     type: MaterialEntity,
@@ -20,24 +18,24 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Form({
     requiredPayload: true,
   })
-    material!: MaterialEntity
+  material!: MaterialEntity
 
   @Table({ forceShow: true })
   @Field({
     label: '物料编码',
   })
-    materialCode!: string
+  materialCode!: string
 
   @Table({ forceShow: true })
   @Field({
     label: '物料名称',
   })
-    materialName!: string
+  materialName!: string
 
   @Field({
     label: '来源仓库',
   })
-    storageName!: string
+  storageName!: string
 
   @Form({
     requiredNumber: true,
@@ -45,7 +43,7 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     label: '物料信息',
   })
-    materialId!: number
+  materialId!: number
 
   @Form({
     requiredNumber: true,
@@ -60,7 +58,7 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     label: '出库数量',
   })
-    quantity!: number
+  quantity!: number
 
   @Table({
     align: 'right',
@@ -70,7 +68,7 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     label: '已出库数量',
   })
-    finishQuantity!: number
+  finishQuantity!: number
 
   @Form({
     requiredNumber: true,
@@ -78,5 +76,5 @@ export class OutputDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     label: '库存来源',
   })
-    inventoryId !: number
+  inventoryId!: number
 }

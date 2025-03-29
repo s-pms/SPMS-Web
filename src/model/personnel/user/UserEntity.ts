@@ -1,13 +1,11 @@
-import {
-  Field, Form, Search, Table,
-} from '@airpower/decorator'
-import { IUser } from '@airpower/interface/IUser'
-import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
-import { IPayload } from '@airpower/interface/IPayload'
+import type { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import type { IPayload } from '@airpower/interface/IPayload'
+import type { IUser } from '@airpower/interface/IUser'
 import { BaseEntity } from '@/base/BaseEntity'
-import { RoleEntity } from '../role/RoleEntity'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
-import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import { Field, Form, Search, Table } from '@airpower/decorator'
+import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
+import { RoleEntity } from '../role/RoleEntity'
 
 /**
  * # 用户实体
@@ -26,7 +24,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '昵称',
   })
-    nickname!: string
+  nickname!: string
 
   /**
    * ### 手机
@@ -46,7 +44,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '手机',
   })
-    phone!: string
+  phone!: string
 
   /**
    * ### 邮箱
@@ -64,7 +62,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '邮箱',
   })
-    email!: string
+  email!: string
 
   @Form({
     mobilePhone: true,
@@ -81,7 +79,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '姓名',
   })
-    realName!: string
+  realName!: string
 
   @Form({})
   @Table({
@@ -93,7 +91,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '身份证号',
   })
-    idCard!: string
+  idCard!: string
 
   /**
    * ### 头像
@@ -101,7 +99,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '头像',
   })
-    avatar!: string
+  avatar!: string
 
   /**
    * ### 密码
@@ -112,7 +110,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '密码',
   })
-    password!: string
+  password!: string
 
   /**
    * ### 角色列表
@@ -125,7 +123,8 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     type: RoleEntity,
     array: true,
     label: '角色',
-  }) roleList!: RoleEntity[]
+  })
+  roleList!: RoleEntity[]
 
   @Field({
     type: RoleEntity,
@@ -136,7 +135,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     payloadArray: true,
     payloadField: 'name',
   })
-    departmentList!: DepartmentEntity[]
+  departmentList!: DepartmentEntity[]
 
   @Field({
     label: '性别',
@@ -147,7 +146,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     clearable: false,
     radio: true,
   })
-    gender!: number
+  gender!: number
 
   @Table({
     removed: false,
@@ -176,14 +175,13 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Field({
     label: '个人签名',
   })
-    bio!: string
+  bio!: string
 
   departmentId?: number
 
   /**
    * ### 设置邮箱
    * @param email 邮箱
-   * @returns
    */
   setEmail(email: string): this {
     this.email = email

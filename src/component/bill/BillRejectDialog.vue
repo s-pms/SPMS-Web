@@ -1,3 +1,23 @@
+<script lang="ts" setup>
+import { ADialog } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+defineProps(
+  Object.assign(airProps(), {
+    /**
+     * ### 弹出标题
+     */
+    param: {
+      type: String,
+      default: '驳回',
+    },
+  }),
+)
+
+const rejectReason = ref('')
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -15,22 +35,3 @@
     />
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
-
-defineProps(Object.assign(airProps(), {
-  /**
-   * ### 弹出标题
-   */
-  param: {
-    type: String,
-    default: '驳回',
-  },
-}))
-
-const rejectReason = ref('')
-
-</script>

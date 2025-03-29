@@ -1,9 +1,7 @@
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { AirEntity } from '@airpower/base/AirEntity'
-import {
-  Field, Model, Search, Table,
-} from '@airpower/decorator'
 import { PublishStatusEnum } from '@/model/common/PublishStatusEnum'
+import { AirEntity } from '@airpower/base/AirEntity'
+import { Field, Model, Search, Table } from '@airpower/decorator'
+import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
 
 /**
  * # 数据库实体基类
@@ -30,13 +28,13 @@ export class BaseEntity extends AirEntity {
     orderNumber: -1,
     hide: true,
   })
-    isPublished!: boolean
+  isPublished!: boolean
 
   @Field({
     label: '创建时间',
     type: Number,
   })
-    createTime!: number
+  createTime!: number
 
   @Table({
     width: 170,
@@ -48,5 +46,5 @@ export class BaseEntity extends AirEntity {
     label: '更新时间',
     type: Number,
   })
-    updateTime!: number
+  updateTime!: number
 }

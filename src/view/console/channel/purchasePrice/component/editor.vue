@@ -1,3 +1,22 @@
+<script lang="ts" setup>
+import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
+import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AFormField, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { SupplierSelector } from '../../supplier/component'
+
+const props = defineProps(airPropsParam(new PurchasePriceEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(
+  props,
+  PurchasePriceEntity,
+  PurchasePriceService,
+  {},
+)
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -35,20 +54,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
-import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { SupplierSelector } from '../../supplier/component'
-
-const props = defineProps(airPropsParam(new PurchasePriceEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, PurchasePriceEntity, PurchasePriceService, {})
-</script>

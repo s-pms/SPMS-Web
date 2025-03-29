@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-import { IUseTableResult } from '@airpower/interface/hooks/IUseTableResult'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
-import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
+import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import type { IUseTableResult } from '@airpower/interface/hooks/IUseTableResult'
 
 /**
  * # 单据表格Hook
@@ -12,7 +11,7 @@ import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBil
 export interface IUseBillTableResult<
   D extends AbstractBaseBillDetailEntity,
   B extends AbstractBaseBillEntity<D>,
-  S extends AbstractBaseBillService<D, B>
+  S extends AbstractBaseBillService<D, B>,
 > extends IUseTableResult<B, S> {
   /**
    * ### 审核

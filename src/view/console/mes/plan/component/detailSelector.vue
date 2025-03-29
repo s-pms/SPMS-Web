@@ -1,3 +1,32 @@
+<script lang="ts" setup>
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
+import { AButton, ADialog, ATable } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsSelector<PlanDetailEntity, PlanEntity>())
+
+const isLoading = ref(false)
+const list = ref<PlanDetailEntity[]>([])
+
+const selectList = ref(props.selectList)
+
+function onSelected(data: PlanDetailEntity[]) {
+  selectList.value = data
+}
+
+const plan = ref(new PlanEntity())
+
+async function getPlan() {
+  plan.value = await PlanService.create(isLoading).getDetail(props.param.id)
+  list.value = plan.value.details
+}
+
+getPlan()
+</script>
+
 <template>
   <ADialog
     :disable-confirm="isMultiple && selectList.length === 0"
@@ -36,42 +65,11 @@
           icon-button
           tooltip="选择"
           type="SELECT"
-          @click="
-            onConfirm(data)
-          "
+          @click="onConfirm(data)"
         />
       </template>
     </ATable>
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
-
-const props = defineProps(airPropsSelector<PlanDetailEntity, PlanEntity>())
-
-const isLoading = ref(false)
-const list = ref<PlanDetailEntity[]>([])
-
-const selectList = ref(props.selectList)
-
-function onSelected(data: PlanDetailEntity[]) {
-  selectList.value = data
-}
-
-const plan = ref(new PlanEntity())
-
-async function getPlan() {
-  plan.value = await PlanService.create(isLoading)
-    .getDetail(props.param.id)
-  list.value = plan.value.details
-}
-
-getPlan()
-</script>
 <style lang="scss" scoped></style>

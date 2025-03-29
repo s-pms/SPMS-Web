@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { InputEntity } from '@/model/wms/input/InputEntity'
+import { InputService } from '@/model/wms/input/InputService'
+import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { InputDetail, InputEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
+} = useBillTable(InputEntity, InputService, {
+  editView: InputEditor,
+  detailView: InputDetail,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -12,7 +40,7 @@
       v-loading="isLoading"
       :ctrl-width="200"
       :data-list="response.list"
-      :disable-edit="row => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="InputEntity"
       :select-list="selectList"
       hide-delete
@@ -42,33 +70,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { InputDetail, InputEditor } from './component'
-import { InputEntity } from '@/model/wms/input/InputEntity'
-import { InputService } from '@/model/wms/input/InputService'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
-import { BillAuditOrReject } from '@/component'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(InputEntity, InputService, {
-  editView: InputEditor,
-  detailView: InputDetail,
-})
-</script>
 <style lang="scss" scoped></style>

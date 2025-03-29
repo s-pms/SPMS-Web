@@ -1,7 +1,5 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 import { CollectionGranularityEnum } from './CollectionGranularityEnum'
 
 @Model({
@@ -17,7 +15,7 @@ export class CollectionEntity extends BaseEntity {
   @Field({
     label: '参数名称',
   })
-    code!: string
+  code!: string
 
   @Table({
     forceShow: true,
@@ -28,7 +26,7 @@ export class CollectionEntity extends BaseEntity {
   @Field({
     label: '参数标题',
   })
-    label!: string
+  label!: string
 
   @Table({
     forceShow: true,
@@ -39,24 +37,24 @@ export class CollectionEntity extends BaseEntity {
   @Field({
     label: '参数采集值',
   })
-    value!: string
+  value!: string
 
   @Field({
     label: '最后变更',
   })
-    timestamp!: number
+  timestamp!: number
 
   @Field({
     label: 'uuid',
   })
-    uuid!: string
+  uuid!: string
 
   @Form()
   @Field({
     label: '颗粒度',
     dictionary: CollectionGranularityEnum,
   })
-    reportGranularity!: number
+  reportGranularity!: number
 
   intValue!: number
 

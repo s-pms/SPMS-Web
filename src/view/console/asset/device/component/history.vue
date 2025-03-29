@@ -1,183 +1,29 @@
-<template>
-  <ADialog
-    :title="currentLabel || param.label + '历史(最多500条记录)'"
-    height="50%"
-    hide-confirm
-    hide-footer
-    width="65%"
-    @on-cancel="onCancel"
-    @on-full="onFull"
-  >
-    <div class="filter">
-      <div class="left" />
-      <div class="right">
-        <el-date-picker
-          v-model="dateTimeRange"
-          :shortcuts="shortcuts"
-          end-placeholder="结束时间"
-          format="YYYY-MM-DD HH:mm:ss"
-          start-placeholder="开始时间"
-          type="datetimerange"
-          @change="validDateTimeRange"
-        />
-
-        <el-dropdown
-          v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
-          trigger="click"
-          @command="handleCommand"
-        >
-          <el-button type="primary">
-            {{ CollectionGranularityEnum.getLabel(currentGranularity.key) }}
-            <el-icon class="el-icon--right">
-              <arrow-down />
-            </el-icon>
-          </el-button>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                v-for="item in CollectionGranularityEnum.toDictionary()"
-                :key="item.key"
-                :command="item.key"
-              >
-                {{ item.label }}
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-    </div>
-    <div
-      v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
-      v-loading="isLoading"
-      class="view"
-    >
-      <div
-        id="echart"
-        class="echart"
-      />
-    </div>
-    <template v-else-if="collectionList.length > 3 && dictionary.length > 0">
-      <div
-        v-loading="isLoading"
-        class="view"
-      >
-        <div class="status-list">
-          <div
-            v-for="item in dictionary"
-            :key="item.key"
-            class="item"
-          >
-            <div
-              :style="{ backgroundColor: getColor(item) }"
-              class="card"
-            >
-              <div class="quantity">
-                {{
-                  getFriendlyTime(parseInt(((collectionList[collectionList.length - 1].timestamp -
-                    collectionList[0].timestamp) *
-                    getPercent(item) / 100).toString()))
-                }}
-              </div>
-              <div class="percent">
-                {{ getPercent(item) }}%
-              </div>
-              <div class="label">
-                {{ getLabel(item) }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          :style="{ backgroundColor: currentColor || 'transparent' }"
-          class="cover"
-        />
-      </div>
-      <div class="timeline">
-        <div class="line">
-          <div
-            v-for="(item, index) in statusList"
-            :key="index"
-            :style="{ backgroundColor: item.color, width: item.percent + '%' }"
-            class="item"
-            @mouseenter="currentLabel = item.label; currentColor = item.color"
-            @mouseout="currentLabel = ''; currentColor = ''"
-          />
-        </div>
-        <div class="time">
-          <div class="left">
-            {{ AirDateTime.formatFromMilliSecond(collectionList[0].timestamp) }}
-          </div>
-          <div
-            v-if="collectionList.length < maxLength"
-            class="right"
-          >
-            {{ AirDateTime.formatFromMilliSecond(collectionList[collectionList.length - 1].timestamp) }}
-          </div>
-          <div
-            v-else
-            class="right"
-          >
-            仅最近{{ maxLength }}条数据, 可尝试缩小时间范围
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-else>
-      <template v-if="collectionList.length > 0">
-        <el-timeline>
-          <el-timeline-item
-            v-for="(item, index) in collectionList"
-            :key="index"
-            :icon="Clock"
-          >
-            <h3>{{ item.strValue }}</h3>
-            <div class="time-icon">
-              <el-icon>
-                <Clock />
-              </el-icon>
-              {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
-            </div>
-          </el-timeline-item>
-        </el-timeline>
-
-        <div class="more-data">
-          仅展示前{{ maxLength }}条, 可筛选后查看指定时间段的数据
-        </div>
-      </template>
-      <AEmpty v-else>
-        没有查询到相关历史信息
-      </AEmpty>
-    </template>
-  </ADialog>
-</template>
-
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
-import { ArrowDown, Clock } from '@element-plus/icons-vue'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import * as echarts from 'echarts'
+import type { IDictionary } from '@airpower/interface/IDictionary'
+import type { IJson } from '@airpower/interface/IJson'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
+import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
+import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
+import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
+import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
 import { ADialog, AEmpty } from '@airpower/component'
+import { AirConstant } from '@airpower/config/AirConstant'
 import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { AirColor } from '@airpower/enum/AirColor'
 import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
 import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirColor } from '@airpower/enum/AirColor'
-import { IDictionary } from '@airpower/interface/IDictionary'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
 import { AirRand } from '@airpower/helper/AirRand'
-import { IJson } from '@airpower/interface/IJson'
-import { AirConstant } from '@airpower/config/AirConstant'
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
-import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
-import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
-import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
-import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
+import { ArrowDown, Clock } from '@element-plus/icons-vue'
 
+import * as echarts from 'echarts'
+import { computed, onMounted, ref } from 'vue'
+
+const props = defineProps(airPropsParam(new CollectionEntity()))
 const currentLabel = ref('')
 const currentColor = ref('')
-const props = defineProps(airPropsParam(new CollectionEntity()))
-
 const collectionList = ref<CollectionEntity[]>([])
 
 const isLoading = ref(false)
@@ -187,21 +33,21 @@ const maxLength = 500
 const currentGranularity = ref(CollectionGranularityEnum.ONE_MINUTE)
 const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.key), new Date()])
 
-const shortcuts = computed(() => DeviceReportDuration.toDictionary()
-  .forEach((item) => ({
+const shortcuts = computed(() =>
+  DeviceReportDuration.toDictionary().forEach(item => ({
     text: item.label,
     value: () => {
       const start = new Date()
       start.setTime(start.getTime() - item.key * AirConstant.MILLISECONDS_PER_SECOND)
       return [start, new Date()]
     },
-  })))
+  })),
+)
 
 const dictionary = computed(() => {
   switch (props.param.code) {
     case 'Status':
-      return DeviceStatusEnum.toDictionary()
-        .filter((item) => item.key !== DeviceStatusEnum.UNKNOWN.key)
+      return DeviceStatusEnum.toDictionary().filter(item => item.key !== DeviceStatusEnum.UNKNOWN.key)
     case 'Alarm':
       return AlarmStatusEnum.toDictionary()
     default:
@@ -219,40 +65,78 @@ function validDateTimeRange() {
         switch (currentGranularity.value) {
           case CollectionGranularityEnum.ONE_MINUTE:
             // 每分钟 最多允许查看最近6小时
-            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.SIX_HOUR.getMillisecond()) {
+            if (
+              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              > DeviceReportDuration.SIX_HOUR.getMillisecond()
+            ) {
               AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
-              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.SIX_HOUR.getMillisecond())
+              dateTimeRange.value[0] = new Date(
+                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.SIX_HOUR.getMillisecond(),
+              )
             }
             break
           case CollectionGranularityEnum.FIVE_MINUTES:
-            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.ONE_DAY.getMillisecond()) {
+            if (
+              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              > DeviceReportDuration.ONE_DAY.getMillisecond()
+            ) {
               AirNotification.warning('该时间粒度下最多允许查看24小时内的数据')
-              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_DAY.getMillisecond())
+              dateTimeRange.value[0] = new Date(
+                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_DAY.getMillisecond(),
+              )
             }
             break
           case CollectionGranularityEnum.THIRTY_MINUTES:
-            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.THREE_DAY.getMillisecond()) {
+            if (
+              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              > DeviceReportDuration.THREE_DAY.getMillisecond()
+            ) {
               AirNotification.warning('该时间粒度下最多允许查看72小时内的数据')
-              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.THREE_DAY.getMillisecond())
+              dateTimeRange.value[0] = new Date(
+                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+                - DeviceReportDuration.THREE_DAY.getMillisecond(),
+              )
             }
             break
           case CollectionGranularityEnum.ONE_HOUR:
-            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.ONE_WEEK.getMillisecond()) {
+            if (
+              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              > DeviceReportDuration.ONE_WEEK.getMillisecond()
+            ) {
               AirNotification.warning('该时间粒度下最多允许查看7天内的数据')
-              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_WEEK.getMillisecond())
+              dateTimeRange.value[0] = new Date(
+                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_WEEK.getMillisecond(),
+              )
             }
             break
           case CollectionGranularityEnum.ONE_DAY:
-            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.ONE_YEAR.getMillisecond()) {
+            if (
+              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              > DeviceReportDuration.ONE_YEAR.getMillisecond()
+            ) {
               AirNotification.warning('该时间粒度下最多允许查看一年内的数据')
-              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_YEAR.getMillisecond())
+              dateTimeRange.value[0] = new Date(
+                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_YEAR.getMillisecond(),
+              )
             }
             break
           case CollectionGranularityEnum.ONE_WEEK:
           case CollectionGranularityEnum.ONE_MONTH:
-            if (AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0]) > DeviceReportDuration.THREE_YEAR.getMillisecond()) {
+            if (
+              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              > DeviceReportDuration.THREE_YEAR.getMillisecond()
+            ) {
               AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
-              dateTimeRange.value[0] = new Date(AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.THREE_YEAR.getMillisecond())
+              dateTimeRange.value[0] = new Date(
+                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+                - DeviceReportDuration.THREE_YEAR.getMillisecond(),
+              )
             }
             break
           default:
@@ -260,11 +144,15 @@ function validDateTimeRange() {
         break
       default:
     }
-  } else {
-    dateTimeRange.value = [new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.getMillisecond()), new Date()]
+  }
+  else {
+    dateTimeRange.value = [
+      new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.getMillisecond()),
+      new Date(),
+    ]
     currentGranularity.value = CollectionGranularityEnum.ONE_MINUTE
   }
-  // eslint-disable-next-line no-use-before-define
+
   getDevicePayloadHistory()
 }
 
@@ -328,10 +216,13 @@ function getStatusPercent(item: CollectionEntity, index: number) {
   if (index > 0) {
     startTime = collectionList.value[index - 1].timestamp
   }
-  return parseFloat(((
-    (item.timestamp - startTime)
-    / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp)) * 100).toString())
-    .toFixed(6)
+  return Number.parseFloat(
+    (
+      ((item.timestamp - startTime)
+        / (collectionList.value[collectionList.value.length - 1].timestamp - collectionList.value[0].timestamp))
+      * 100
+    ).toString(),
+  ).toFixed(6)
 }
 
 /**
@@ -354,32 +245,34 @@ const statusList = computed(() => {
 })
 
 function getLabel(item: IDictionary) {
-  return dictionary.value.find((i) => i.key === item.key)?.label || '未知'
+  return dictionary.value.find(i => i.key === item.key)?.label || '未知'
 }
 
 function getColor(item: IDictionary) {
-  return dictionary.value.find((i) => i.key === item.key)?.color || `#${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}`
+  return (
+    dictionary.value.find(i => i.key === item.key)?.color
+    || `#${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}`
+  )
 }
 
 function getPercent(dictionary: IDictionary) {
   let percent = 0
   statusList.value.forEach((item) => {
     if (dictionary.key === item.key) {
-      percent += parseFloat(item.percent)
+      percent += Number.parseFloat(item.percent)
     }
   })
-  return parseFloat(parseFloat(percent.toString())
-    .toFixed(2))
+  return Number.parseFloat(Number.parseFloat(percent.toString()).toFixed(2))
 }
 
 function getFriendlyTime(milSecond: number) {
-  const s = parseInt((milSecond / 1000).toString(), 10)
+  const s = Number.parseInt((milSecond / 1000).toString(), 10)
   const arr: string[] = []
-  const hour = parseInt((s / 3600).toString(), 10)
+  const hour = Number.parseInt((s / 3600).toString(), 10)
   if (hour > 0) {
     arr.push(`${hour}h`)
   }
-  const minute = parseInt(((s % 3600) / 60).toString(), 10)
+  const minute = Number.parseInt(((s % 3600) / 60).toString(), 10)
   if (minute > 0) {
     arr.push(`${minute}m`)
   }
@@ -389,7 +282,7 @@ function getFriendlyTime(milSecond: number) {
 }
 
 function handleCommand(cmd: string) {
-  currentGranularity.value = CollectionGranularityEnum.get(parseInt(cmd, 10)) as CollectionGranularityEnum
+  currentGranularity.value = CollectionGranularityEnum.get(Number.parseInt(cmd, 10)) as CollectionGranularityEnum
   validDateTimeRange()
 }
 
@@ -413,7 +306,9 @@ function initLine() {
         splitLine: {
           show: true,
         },
-        data: collectionList.value.map((item) => AirDateTime.formatFromMilliSecond(item.timestamp, AirDateTimeFormatter.MM_DD_HH_mm)),
+        data: collectionList.value.map(item =>
+          AirDateTime.formatFromMilliSecond(item.timestamp, AirDateTimeFormatter.MM_DD_HH_mm),
+        ),
       },
     ],
     yAxis: [
@@ -441,8 +336,7 @@ function initLine() {
           ]),
         },
         smooth: true,
-        data: collectionList.value.map((item) => parseFloat(item.value)
-          .toFixed(2)),
+        data: collectionList.value.map(item => Number.parseFloat(item.value).toFixed(2)),
       },
     ],
   }
@@ -468,11 +362,11 @@ async function getDevicePayloadHistory() {
   postData.reportGranularity = currentGranularity.value.key
   postData.startTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
   postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-  const list = await DeviceService.create(isLoading)
-    .getDevicePayloadHistory(postData)
+  const list = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
   if (ParameterTypeEnum.STRING.equalsKey(props.param.dataType)) {
     collectionList.value = list.reverse()
-  } else {
+  }
+  else {
     collectionList.value = list
   }
   loadData()
@@ -489,6 +383,171 @@ function onFull() {
   }, 500)
 }
 </script>
+
+<template>
+  <ADialog
+    :title="currentLabel || `${param.label}历史(最多500条记录)`"
+    height="50%"
+    hide-confirm
+    hide-footer
+    width="65%"
+    @on-cancel="onCancel"
+    @on-full="onFull"
+  >
+    <div class="filter">
+      <div class="left" />
+      <div class="right">
+        <el-date-picker
+          v-model="dateTimeRange"
+          :shortcuts="shortcuts"
+          end-placeholder="结束时间"
+          format="YYYY-MM-DD HH:mm:ss"
+          start-placeholder="开始时间"
+          type="datetimerange"
+          @change="validDateTimeRange"
+        />
+
+        <el-dropdown
+          v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
+          trigger="click"
+          @command="handleCommand"
+        >
+          <el-button type="primary">
+            {{ CollectionGranularityEnum.getLabel(currentGranularity.key) }}
+            <el-icon class="el-icon--right">
+              <ArrowDown />
+            </el-icon>
+          </el-button>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                v-for="item in CollectionGranularityEnum.toDictionary()"
+                :key="item.key"
+                :command="item.key"
+              >
+                {{ item.label }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+    </div>
+    <div
+      v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
+      v-loading="isLoading"
+      class="view"
+    >
+      <div
+        id="echart"
+        class="echart"
+      />
+    </div>
+    <template v-else-if="collectionList.length > 3 && dictionary.length > 0">
+      <div
+        v-loading="isLoading"
+        class="view"
+      >
+        <div class="status-list">
+          <div
+            v-for="item in dictionary"
+            :key="item.key"
+            class="item"
+          >
+            <div
+              :style="{ backgroundColor: getColor(item) }"
+              class="card"
+            >
+              <div class="quantity">
+                {{
+                  getFriendlyTime(
+                    parseInt(
+                      (
+                        ((collectionList[collectionList.length - 1].timestamp - collectionList[0].timestamp)
+                          * getPercent(item))
+                        / 100
+                      ).toString(),
+                    ),
+                  )
+                }}
+              </div>
+              <div class="percent">
+                {{ getPercent(item) }}%
+              </div>
+              <div class="label">
+                {{ getLabel(item) }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          :style="{ backgroundColor: currentColor || 'transparent' }"
+          class="cover"
+        />
+      </div>
+      <div class="timeline">
+        <div class="line">
+          <div
+            v-for="(item, index) in statusList"
+            :key="index"
+            :style="{ backgroundColor: item.color, width: `${item.percent}%` }"
+            class="item"
+            @mouseenter="
+              currentLabel = item.label
+              currentColor = item.color
+            "
+            @mouseout="
+              currentLabel = ''
+              currentColor = ''
+            "
+          />
+        </div>
+        <div class="time">
+          <div class="left">
+            {{ AirDateTime.formatFromMilliSecond(collectionList[0].timestamp) }}
+          </div>
+          <div
+            v-if="collectionList.length < maxLength"
+            class="right"
+          >
+            {{ AirDateTime.formatFromMilliSecond(collectionList[collectionList.length - 1].timestamp) }}
+          </div>
+          <div
+            v-else
+            class="right"
+          >
+            仅最近{{ maxLength }}条数据, 可尝试缩小时间范围
+          </div>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <template v-if="collectionList.length > 0">
+        <el-timeline>
+          <el-timeline-item
+            v-for="(item, index) in collectionList"
+            :key="index"
+            :icon="Clock"
+          >
+            <h3>{{ item.strValue }}</h3>
+            <div class="time-icon">
+              <el-icon>
+                <Clock />
+              </el-icon>
+              {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
+            </div>
+          </el-timeline-item>
+        </el-timeline>
+
+        <div class="more-data">
+          仅展示前{{ maxLength }}条, 可筛选后查看指定时间段的数据
+        </div>
+      </template>
+      <AEmpty v-else>
+        没有查询到相关历史信息
+      </AEmpty>
+    </template>
+  </ADialog>
+</template>
 
 <style lang="scss" scoped>
 .filter {

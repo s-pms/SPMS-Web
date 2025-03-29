@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { StructureService } from '@/model/factory/structure/StructureService'
+import { ASelector } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+
+const props = defineProps(airPropsSelector<StructureEntity>())
+</script>
+
 <template>
   <ASelector
     :entity="StructureEntity"
@@ -7,13 +16,4 @@
   />
 </template>
 
-<script lang="ts" setup>
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
-
-const props = defineProps(airPropsSelector<StructureEntity>())
-
-</script>
 <style lang="scss" scoped></style>

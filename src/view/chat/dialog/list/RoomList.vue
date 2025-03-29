@@ -1,44 +1,10 @@
-<template>
-  <div
-    v-if="roomList.length > 0"
-    class="room-list"
-  >
-    <div
-      v-for="room in roomList"
-      :key="room.id"
-      class="room"
-      @click="onRoomClick(room)"
-    >
-      <div class="room-title">
-        <div class="id">
-          {{ room.code }}
-        </div>
-        <div class="name">
-          {{ room.name }}
-        </div>
-        <div
-          v-if="room.isOfficial"
-          class="official"
-        >
-          官方
-        </div>
-      </div>
-      <div class="room-desc">
-        {{ room.description || "房主还没有填写介绍~" }}
-      </div>
-    </div>
-  </div>
-  <AEmpty v-else>
-    糟糕，你还没有创建房间哦～
-  </AEmpty>
-</template>
 <script lang="ts" setup>
-import { PropType } from 'vue'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import type { RoomEntity } from '@/model/chat/room/RoomEntity'
+import type { PropType } from 'vue'
+import { AppConfig } from '@/config/AppConfig'
 import { AEmpty } from '@airpower/component'
 import AirEvent from '@airpower/event/AirEvent'
-import { RoomEntity } from '@/model/chat/room/RoomEntity'
-import { AppConfig } from '@/config/AppConfig'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
 
 defineProps({
   roomList: {
@@ -68,6 +34,42 @@ async function onRoomClick(room: RoomEntity) {
   emitJoinRoom(room)
 }
 </script>
+
+<template>
+  <div
+    v-if="roomList.length > 0"
+    class="room-list"
+  >
+    <div
+      v-for="room in roomList"
+      :key="room.id"
+      class="room"
+      @click="onRoomClick(room)"
+    >
+      <div class="room-title">
+        <div class="id">
+          {{ room.code }}
+        </div>
+        <div class="name">
+          {{ room.name }}
+        </div>
+        <div
+          v-if="room.isOfficial"
+          class="official"
+        >
+          官方
+        </div>
+      </div>
+      <div class="room-desc">
+        {{ room.description || '房主还没有填写介绍~' }}
+      </div>
+    </div>
+  </div>
+  <AEmpty v-else>
+    糟糕，你还没有创建房间哦～
+  </AEmpty>
+</template>
+
 <style lang="scss" scoped>
 .room-list {
   display: flex;
@@ -82,7 +84,7 @@ async function onRoomClick(room: RoomEntity) {
     border-radius: 10px;
     border: 1px solid #f5f5f5;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
     margin-bottom: 10px;
 
     .room-title {

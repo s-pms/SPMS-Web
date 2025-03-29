@@ -1,19 +1,17 @@
-import {
-  Field, Form, Search, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
-import { IPayload } from '@airpower/interface/IPayload'
+import type { AirEnum } from '@airpower/base/AirEnum'
+import type { IPayload } from '@airpower/interface/IPayload'
+import type { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
+import { Field, Form, Search, Table } from '@airpower/decorator'
 import { BaseEntity } from '../BaseEntity'
-import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 
 /**
  * # 单据基类
  *
  * @author Hamm.cn
  */
-export abstract class AbstractBaseBillEntity<
-  D extends AbstractBaseBillDetailEntity
-> extends BaseEntity implements IPayload {
+export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEntity>
+  extends BaseEntity
+  implements IPayload {
   /**
    * ### 单据编号
    */
@@ -29,7 +27,7 @@ export abstract class AbstractBaseBillEntity<
   @Field({
     label: '单据编号',
   })
-    billCode!: string
+  billCode!: string
 
   /**
    * ### 单据状态码
@@ -51,22 +49,22 @@ export abstract class AbstractBaseBillEntity<
   @Field({
     label: '驳回原因',
   })
-    rejectReason!: string
+  rejectReason!: string
 
   /**
    * ### 审核中的状态
    */
-  abstract getAuditingStatus(): AirEnum;
+  abstract getAuditingStatus(): AirEnum
 
   /**
    * ### 已审核的状态
    */
-  abstract getAuditedStatus(): AirEnum;
+  abstract getAuditedStatus(): AirEnum
 
   /**
    * ### 已拒绝的状态
    */
-  abstract getRejectedStatus(): AirEnum;
+  abstract getRejectedStatus(): AirEnum
 
   getPayloadLabel(): string {
     return this.billCode
@@ -76,23 +74,20 @@ export abstract class AbstractBaseBillEntity<
    * ### 是否可拒绝
    */
   canReject() {
-    return this.getAuditingStatus()
-      .equalsKey(this.status)
+    return this.getAuditingStatus().equalsKey(this.status)
   }
 
   /**
    * ### 是否可审核
    */
   canAudit() {
-    return this.getAuditingStatus()
-      .equalsKey(this.status)
+    return this.getAuditingStatus().equalsKey(this.status)
   }
 
   /**
    * ### 是否已拒绝
    */
   isRejected() {
-    return this.getRejectedStatus()
-      .equalsKey(this.status)
+    return this.getRejectedStatus().equalsKey(this.status)
   }
 }

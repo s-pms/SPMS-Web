@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-import { Ref, ref } from 'vue'
-import { AirWebsocket } from '@airpower/websocket/AirWebSocket'
-import { AirConfig } from '@airpower/config/AirConfig'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import type { RoomEntity } from '@/model/chat/room/RoomEntity'
+import type { Ref } from 'vue'
 import { AppConfig } from '@/config/AppConfig'
-import { UserService } from '@/model/personnel/user/UserService'
 import { DialogStatus } from '@/model/chat/DialogStatus'
-import Emoji from '@/view/chat/panel/Emoji.vue'
-import { useRoom } from '@/model/chat/hook/useRoom'
 import { useChat } from '@/model/chat/hook/useChat'
-import RoomChatList from '@/view/chat/components/RoomChatList.vue'
+import { useRoom } from '@/model/chat/hook/useRoom'
+import { UserService } from '@/model/personnel/user/UserService'
 import ChatFormTool from '@/view/chat/components/ChatFormTool.vue'
+import RoomChatList from '@/view/chat/components/RoomChatList.vue'
 import RoomTop from '@/view/chat/components/RoomTop.vue'
 import HotRoomList from '@/view/chat/dialog/HotRoomList.vue'
-import { RoomEntity } from '@/model/chat/room/RoomEntity'
+import Emoji from '@/view/chat/panel/Emoji.vue'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirWebsocket } from '@airpower/websocket/AirWebSocket'
+import { ref } from 'vue'
 
 const isLoading = ref(false)
 
@@ -28,8 +29,7 @@ const { transferWebsocketEvent, sendTextMessage, input } = useChat(websocket)
 const { joinRoom } = useRoom(websocket)
 
 async function init() {
-  AppConfig.currentUser.value = await UserService.create(isLoading)
-    .getMyInfo()
+  AppConfig.currentUser.value = await UserService.create(isLoading).getMyInfo()
 
   websocket.value = AirWebsocket.create(`${AirConfig.websocketUrl}?${AirConfig.getAccessToken()}`, {
     onConnect() {
@@ -70,22 +70,17 @@ function onContextMenu(e: MouseEvent) {
   e.stopPropagation()
 }
 </script>
+
 <template>
   <div
     v-loading="!AppConfig.currentUser"
     class="chat"
     @contextmenu="onContextMenu"
   >
-    <div
-      class="chat-body"
-    >
-      <RoomTop
-        @open="openPanel($event)"
-      />
+    <div class="chat-body">
+      <RoomTop @open="openPanel($event)" />
       <div class="message">
-        <RoomChatList
-          @click="openPanel"
-        />
+        <RoomChatList @click="openPanel" />
 
         <div class="chat-form">
           <ChatFormTool @open="openPanel($event)" />
@@ -101,49 +96,52 @@ function onContextMenu(e: MouseEvent) {
         </div>
       </div>
       <transition-group name="slide">
-        <!--        <RoomList-->
-        <!--          v-if="dialogs.roomList && myInfo"-->
-        <!--          :key="roomList"-->
-        <!--          :user-info="myInfo"-->
-        <!--          @update="confirmToChangeRoom"-->
-        <!--          @create-room="hideTo('roomCreate')"-->
-        <!--          @return2-my-room="changeToMyRoom"-->
-        <!--        />-->
-        <!--        <Online-->
-        <!--          v-if="dialogs.online && roomInfo && myInfo"-->
-        <!--          :key="online"-->
-        <!--          :online-list="onlineList"-->
-        <!--          :room-info="roomInfo"-->
-        <!--          :user-info="myInfo"-->
-        <!--          @at="atUser"-->
-        <!--          @profile="showUserProfile"-->
-        <!--        />-->
-        <!--        <RoomSetting-->
-        <!--          v-if="dialogs.roomSetting"-->
-        <!--          :key="roomSetting"-->
-        <!--          :room_id="room_id"-->
-        <!--          @update="hideTo"-->
-        <!--        />-->
-        <!--        <RoomCreate-->
-        <!--          v-if="dialogs.roomCreate"-->
-        <!--          :key="roomCreate"-->
-        <!--          @close="hideTo"-->
-        <!--          @created="-->
-        <!--            getMyInfo(() => {-->
-        <!--              changeToMyRoom();-->
-        <!--            })-->
-        <!--          "-->
-        <!--        />-->
+        <!--        <RoomList -->
+        <!--          v-if="dialogs.roomList && myInfo" -->
+        <!--          :key="roomList" -->
+        <!--          :user-info="myInfo" -->
+        <!--          @update="confirmToChangeRoom" -->
+        <!--          @create-room="hideTo('roomCreate')" -->
+        <!--          @return2-my-room="changeToMyRoom" -->
+        <!--        /> -->
+        <!--        <Online -->
+        <!--          v-if="dialogs.online && roomInfo && myInfo" -->
+        <!--          :key="online" -->
+        <!--          :online-list="onlineList" -->
+        <!--          :room-info="roomInfo" -->
+        <!--          :user-info="myInfo" -->
+        <!--          @at="atUser" -->
+        <!--          @profile="showUserProfile" -->
+        <!--        /> -->
+        <!--        <RoomSetting -->
+        <!--          v-if="dialogs.roomSetting" -->
+        <!--          :key="roomSetting" -->
+        <!--          :room_id="room_id" -->
+        <!--          @update="hideTo" -->
+        <!--        /> -->
+        <!--        <RoomCreate -->
+        <!--          v-if="dialogs.roomCreate" -->
+        <!--          :key="roomCreate" -->
+        <!--          @close="hideTo" -->
+        <!--          @created=" -->
+        <!--            getMyInfo(() => { -->
+        <!--              changeToMyRoom(); -->
+        <!--            }) -->
+        <!--          " -->
+        <!--        /> -->
         <Emoji
           v-if="DialogStatus.EMOJI.equalsKey(dialogStatus.key)"
-          @click="input+= `[emoji${$event}]`;messageDom?.focus()"
+          @click="
+            input += `[emoji${$event}]`
+            messageDom?.focus()
+          "
         />
-        <!--        <Profile-->
-        <!--          v-if="dialogs.profile"-->
-        <!--          :key="profile"-->
-        <!--          :user-id="profileUserId"-->
-        <!--          @close="hideTo"-->
-        <!--        />-->
+        <!--        <Profile -->
+        <!--          v-if="dialogs.profile" -->
+        <!--          :key="profile" -->
+        <!--          :user-id="profileUserId" -->
+        <!--          @close="hideTo" -->
+        <!--        /> -->
       </transition-group>
     </div>
   </div>

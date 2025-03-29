@@ -1,10 +1,10 @@
-import { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import type { AbstractBaseService } from '@/base/AbstractBaseService'
+import type { BaseEntity } from '@/base/BaseEntity'
+import type { IBaseTableResult } from '@/hook/IBaseTableResult'
+import type { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
+import type { ClassConstructor } from '@airpower/type/AirType'
 import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { ClassConstructor } from '@airpower/type/AirType'
-import { IBaseTableResult } from '@/hook/IBaseTableResult'
-import { BaseEntity } from '@/base/BaseEntity'
-import { AbstractBaseService } from '@/base/AbstractBaseService'
+import { useAirTable } from '@airpower/hook/useAirTable'
 
 /**
  * # 单据的表格Hooks
@@ -13,10 +13,7 @@ import { AbstractBaseService } from '@/base/AbstractBaseService'
  * @param option (可选) 可选配置项
  * @author Hamm.cn
  */
-export function useTable<
-  E extends BaseEntity,
-  S extends AbstractBaseService<E>
->(
+export function useTable<E extends BaseEntity, S extends AbstractBaseService<E>>(
   entityClass: ClassConstructor<E>,
   serviceClass: ClassConstructor<S>,
   option: IUseTableOption<E> = {},

@@ -1,8 +1,6 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { SerialNumberUpdateEnum } from '@/model/system/coderule/SerialNumberUpdateEnum'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 
 /**
  * # 编码规则实体
@@ -23,7 +21,7 @@ export class CodeRuleEntity extends BaseEntity {
   @Field({
     label: '编码所属字段',
   })
-    ruleField!: number
+  ruleField!: number
 
   @Form({
     maxLength: 10,
@@ -37,7 +35,7 @@ export class CodeRuleEntity extends BaseEntity {
   @Field({
     label: '规则前缀',
   })
-    prefix!: string
+  prefix!: string
 
   @Form({
     max: 10,
@@ -53,7 +51,7 @@ export class CodeRuleEntity extends BaseEntity {
   @Field({
     label: '序列号初始长度',
   })
-    snLength!: number
+  snLength!: number
 
   @Table({
     forceShow: true,
@@ -66,7 +64,7 @@ export class CodeRuleEntity extends BaseEntity {
   @Field({
     label: '规则模板',
   })
-    template!: string
+  template!: string
 
   @Form({
     clearable: false,
@@ -82,16 +80,16 @@ export class CodeRuleEntity extends BaseEntity {
     label: '序列号更新',
     dictionary: SerialNumberUpdateEnum,
   })
-    snType!: number
+  snType!: number
 
   @Table()
   @Field({
     label: '下一个编码',
   })
-    nextCode!: string
+  nextCode!: string
 
   @Field({
     type: Number,
   })
-    currentSn!: number
+  currentSn!: number
 }

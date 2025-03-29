@@ -1,3 +1,41 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
+import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
+import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new SaleDetailEntity()))
+
+const formData = ref(props.param.copy())
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+async function getSalePrice() {
+  if (formData.value.materialId && formData.value.customer) {
+    const salePrice = await SalePriceService.create(isLoading).getByMaterialAndCustomer(
+      formData.value.materialId,
+      formData.value.customer.id,
+    )
+    if (salePrice) {
+      formData.value.price = salePrice.price
+      return
+    }
+    AirNotification.create().setDuration(5000).info('未配置该物料对该客户的特别销售价，将自动填写该物料的参考销售价')
+    formData.value.price = formData.value.material.salePrice
+  }
+}
+
+async function onSubmit() {
+  props.onConfirm(formData.value)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -60,38 +98,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
-
-const props = defineProps(airPropsParam(new SaleDetailEntity()))
-
-const formData = ref(props.param.copy())
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-async function getSalePrice() {
-  if (formData.value.materialId && formData.value.customer) {
-    const salePrice = await SalePriceService.create(isLoading).getByMaterialAndCustomer(formData.value.materialId, formData.value.customer.id)
-    if (salePrice) {
-      formData.value.price = salePrice.price
-      return
-    }
-    AirNotification.create().setDuration(5000).info('未配置该物料对该客户的特别销售价，将自动填写该物料的参考销售价')
-    formData.value.price = formData.value.material.salePrice
-  }
-}
-
-async function onSubmit() {
-  props.onConfirm(formData.value)
-}
-</script>

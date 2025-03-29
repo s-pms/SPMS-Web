@@ -1,3 +1,39 @@
+<script lang="ts" setup>
+import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
+import { ParameterSelector } from '@/view/console/iot/parameter/component'
+import { AButton, ADialog, AFormField, AGroup } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new DeviceEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, DeviceEntity, DeviceService, {
+  afterGetDetail(detailData) {
+    const systemList = detailData.parameters.filter(item => item.isSystem)
+    const customList = detailData.parameters.filter(item => !item.isSystem)
+    detailData.parameters = systemList.concat(customList)
+    return detailData
+  },
+  beforeSubmit(submitData) {
+    submitData.exclude('unitId')
+    return submitData
+  },
+})
+
+async function selectParameter() {
+  const filter = new ParameterEntity()
+  filter.isSystem = false
+  const systemList = formData.value.parameters.filter(item => item.isSystem)
+  const customList = (await AirDialog.selectList(ParameterSelector, formData.value.parameters, filter)).filter(
+    item => !item.isSystem,
+  )
+  formData.value.parameters = systemList.concat(customList)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -63,44 +99,6 @@
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AFormField, AGroup,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
-import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { ParameterSelector } from '@/view/console/iot/parameter/component'
-
-const props = defineProps(airPropsParam(new DeviceEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, DeviceEntity, DeviceService, {
-  afterGetDetail(detailData) {
-    const systemList = detailData.parameters.filter((item) => item.isSystem)
-    const customList = detailData.parameters.filter((item) => !item.isSystem)
-    detailData.parameters = systemList.concat(customList)
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    submitData.exclude('unitId')
-    return submitData
-  },
-})
-
-async function selectParameter() {
-  const filter = new ParameterEntity()
-  filter.isSystem = false
-  const systemList = formData.value.parameters.filter((item) => item.isSystem)
-  const customList = (await AirDialog.selectList(ParameterSelector, formData.value.parameters, filter)).filter((item) => !item.isSystem)
-  formData.value.parameters = systemList.concat(customList)
-}
-</script>
 <style lang="scss" scoped>
 .parameter-list {
   > * {

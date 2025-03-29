@@ -1,7 +1,4 @@
-import PermissionSelector from './selector.vue'
 import PermissionEditor from './editor.vue'
+import PermissionSelector from './selector.vue'
 
-export {
-  PermissionSelector,
-  PermissionEditor,
-}
+export { PermissionEditor, PermissionSelector }

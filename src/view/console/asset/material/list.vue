@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { MaterialService } from '@/model/asset/material/MaterialService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { MaterialEditor } from './component'
+
+const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
+  = useAirTable(MaterialEntity, MaterialService, {
+    editView: MaterialEditor,
+  })
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -26,22 +39,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, APage, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { MaterialEditor } from './component'
-import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { MaterialService } from '@/model/asset/material/MaterialService'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(MaterialEntity, MaterialService, {
-  editView: MaterialEditor,
-})
-</script>
 <style lang="scss" scoped></style>

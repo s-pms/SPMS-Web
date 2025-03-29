@@ -14,12 +14,10 @@ export class CodeRuleService extends AbstractBaseService<CodeRuleEntity> {
   entityClass = CodeRuleEntity
 
   async getFieldList(): Promise<CodeRuleField[]> {
-    return this.api('getFieldList')
-      .requestArray(undefined, CodeRuleField)
+    return this.api('getFieldList').requestArray(undefined, CodeRuleField)
   }
 
   async getParamList(): Promise<CodeRuleParam[]> {
-    return this.api('getParamList')
-      .requestArray(undefined, CodeRuleParam)
+    return this.api('getParamList').requestArray(undefined, CodeRuleParam)
   }
 }

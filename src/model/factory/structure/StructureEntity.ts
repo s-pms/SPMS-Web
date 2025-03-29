@@ -1,12 +1,10 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { IPayload } from '@airpower/interface/IPayload'
-import { ITree } from '@airpower/interface/ITree'
+import type { IPayload } from '@airpower/interface/IPayload'
+import type { ITree } from '@airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
-import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { StructureTypeEnum } from '@/model/factory/structure/StructureTypeEnum'
+import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 
 @Model({
   label: '生产单元',
@@ -21,7 +19,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '生产单元名称',
   })
-    name!: string
+  name!: string
 
   @Table({
     width: 300,
@@ -34,7 +32,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '生产单元编码',
   })
-    code!: string
+  code!: string
 
   @Table({
     showColor: true,
@@ -51,23 +49,23 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
     label: '生产单元类型',
     dictionary: StructureTypeEnum,
   })
-    type!: number
+  type!: number
 
   @Field({
-    // eslint-disable-next-line no-use-before-define
+
     type: StructureEntity,
     array: true,
   })
-    children!: this[]
+  children!: this[]
 
   parentId!: number
 
   @Field({
     label: '所属上级',
-    // eslint-disable-next-line no-use-before-define
+
     type: StructureEntity,
   })
-    parent!: this
+  parent!: this
 
   @Field({
     type: OperationEntity,
@@ -79,7 +77,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
     payloadField: 'name',
     orderNumber: 11,
   })
-    operationList!: OperationEntity[]
+  operationList!: OperationEntity[]
 
   @Field({
     type: DepartmentEntity,
@@ -91,7 +89,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
     payloadField: 'name',
     orderNumber: 1,
   })
-    departmentList!: DepartmentEntity[]
+  departmentList!: DepartmentEntity[]
 
   getPayloadLabel(): string {
     return this.name

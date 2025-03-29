@@ -11,7 +11,7 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="row => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="OutputEntity"
       :select-list="selectList"
       hide-delete
@@ -39,9 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
 import { OutputDetail, OutputEditor } from './component'
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'

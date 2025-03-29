@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+import { CustomerService } from '@/model/channel/customer/CustomerService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new CustomerEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, CustomerEntity, CustomerService)
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -21,19 +33,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { CustomerService } from '@/model/channel/customer/CustomerService'
-
-const props = defineProps(airPropsParam(new CustomerEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, CustomerEntity, CustomerService)
-
-</script>

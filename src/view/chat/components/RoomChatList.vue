@@ -1,19 +1,18 @@
 <script lang="ts" setup>
-import { Bottom, ZoomIn } from '@element-plus/icons-vue'
-import {
-  nextTick, PropType, ref, Ref,
-} from 'vue'
-import { AirFile } from '@airpower/helper/AirFile'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import AirEvent from '@airpower/event/AirEvent'
-import { ChatEventType } from '@/model/chat/enum/ChatEventType'
-import { RoomMemberTextMessageEvent } from '@/model/chat/room/event/RoomMemberTextMessageEvent'
-import { RoomMemberImageMessageEvent } from '@/model/chat/room/event/RoomMemberImageMessageEvent'
-import ChatAvatar from '@/view/chat/components/ChatAvatar.vue'
-import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
+import type { RoomMemberImageMessageEvent } from '@/model/chat/room/event/RoomMemberImageMessageEvent'
+import type { RoomMemberTextMessageEvent } from '@/model/chat/room/event/RoomMemberTextMessageEvent'
+import type { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
+import type { PropType, Ref } from 'vue'
 import { AppConfig } from '@/config/AppConfig'
+import { ChatEventType } from '@/model/chat/enum/ChatEventType'
 import { useEmoji } from '@/model/chat/hook/useEmoji'
+import ChatAvatar from '@/view/chat/components/ChatAvatar.vue'
 import SystemMessage from '@/view/chat/components/SystemMessage.vue'
+import AirEvent from '@airpower/event/AirEvent'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { AirFile } from '@airpower/helper/AirFile'
+import { Bottom, ZoomIn } from '@element-plus/icons-vue'
+import { nextTick, ref } from 'vue'
 
 defineProps({
   list: {
@@ -29,12 +28,7 @@ const listDom = ref<HTMLDivElement>()
 
 const isListScrollLocked = ref(false)
 
-const {
-  getEmojiUrl,
-  decodeEmojis,
-  MESSAGE_STRING,
-  MESSAGE_EMOJI,
-} = useEmoji()
+const { getEmojiUrl, decodeEmojis, MESSAGE_STRING, MESSAGE_EMOJI } = useEmoji()
 
 function autoScroll() {
   if (isListScrollLocked.value) {
@@ -71,28 +65,26 @@ function openNewTab(url: string) {
   window.open(url)
 }
 
-AirEvent.onAll([
-  AppConfig.EVENT_PREFIX + ChatEventType.ROOM_TEXT_MESSAGE.key,
-  AppConfig.EVENT_PREFIX + ChatEventType.ROOM_MEMBER_JOIN.key,
-  AppConfig.EVENT_PREFIX + ChatEventType.ROOM_MEMBER_LEAVE.key,
-], (event: RoomMemberTextMessageEvent) => {
-  messageList.value.push(event)
-  autoScroll()
-})
+AirEvent.onAll(
+  [
+    AppConfig.EVENT_PREFIX + ChatEventType.ROOM_TEXT_MESSAGE.key,
+    AppConfig.EVENT_PREFIX + ChatEventType.ROOM_MEMBER_JOIN.key,
+    AppConfig.EVENT_PREFIX + ChatEventType.ROOM_MEMBER_LEAVE.key,
+  ],
+  (event: RoomMemberTextMessageEvent) => {
+    messageList.value.push(event)
+    autoScroll()
+  },
+)
 
-AirEvent.onAll([
-  AppConfig.EVENT_PREFIX + ChatEventType.ROOM_JOIN_SUCCESS.key,
-], () => {
+AirEvent.onAll([AppConfig.EVENT_PREFIX + ChatEventType.ROOM_JOIN_SUCCESS.key], () => {
   messageList.value = []
   autoScroll()
 })
-
 </script>
 
 <template>
-  <div
-    class="list"
-  >
+  <div class="list">
     <div
       ref="listDom"
       class="history"
@@ -104,10 +96,7 @@ AirEvent.onAll([
         :key="item.id"
       >
         <template
-          v-if="[
-            ChatEventType.ROOM_TEXT_MESSAGE.key,
-            ChatEventType.ROOM_IMAGE_MESSAGE.key
-          ].includes(item.type)"
+          v-if="[ChatEventType.ROOM_TEXT_MESSAGE.key, ChatEventType.ROOM_IMAGE_MESSAGE.key].includes(item.type)"
         >
           <div
             :class="getMessageClass(item)"
@@ -127,10 +116,10 @@ AirEvent.onAll([
                     v-for="(tempItem, index) in decodeEmojis((item as RoomMemberTextMessageEvent).text)"
                     :key="index"
                   >
-                    <template v-if="tempItem.type == MESSAGE_STRING">
+                    <template v-if="tempItem.type === MESSAGE_STRING">
                       {{ tempItem.str }}
                     </template>
-                    <template v-if="tempItem.type ==MESSAGE_EMOJI">
+                    <template v-if="tempItem.type === MESSAGE_EMOJI">
                       <img :src="getEmojiUrl(tempItem.emoji)">
                     </template>
                   </template>
@@ -159,9 +148,7 @@ AirEvent.onAll([
                       </el-icon>
                       撤回消息
                     </el-dropdown-item>
-                    <el-dropdown-item
-                      @click="openNewTab((item as RoomMemberImageMessageEvent).img)"
-                    >
+                    <el-dropdown-item @click="openNewTab((item as RoomMemberImageMessageEvent).img)">
                       <el-icon>
                         <ZoomIn />
                       </el-icon>
@@ -177,10 +164,7 @@ AirEvent.onAll([
           </div>
         </template>
         <SystemMessage
-          v-if="[
-            ChatEventType.ROOM_MEMBER_JOIN.key,
-            ChatEventType.ROOM_MEMBER_LEAVE.key
-          ].includes(item.type)"
+          v-if="[ChatEventType.ROOM_MEMBER_JOIN.key, ChatEventType.ROOM_MEMBER_LEAVE.key].includes(item.type)"
           :message="item"
         />
       </template>
@@ -189,7 +173,10 @@ AirEvent.onAll([
       v-if="isListScrollLocked"
       class="scroll-button"
       size="small"
-      @click="isListScrollLocked=false;autoScroll()"
+      @click="
+        isListScrollLocked = false
+        autoScroll()
+      "
     >
       到最新
     </el-button>
@@ -260,7 +247,7 @@ AirEvent.onAll([
         }
 
         .text::before {
-          content: "";
+          content: '';
           position: absolute;
           top: -5px;
           left: -13px;
@@ -317,7 +304,7 @@ AirEvent.onAll([
         }
 
         .text::before {
-          content: "";
+          content: '';
           position: absolute;
           top: -5px;
           left: auto;
@@ -343,5 +330,4 @@ AirEvent.onAll([
     bottom: 10px;
   }
 }
-
 </style>

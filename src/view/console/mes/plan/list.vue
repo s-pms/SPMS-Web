@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
+import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { PlanDetail, PlanEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
+} = useBillTable(PlanEntity, PlanService, {
+  editView: PlanEditor,
+  detailView: PlanDetail,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -11,7 +39,7 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="row => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="PlanEntity"
       :select-list="selectList"
       hide-delete
@@ -44,33 +72,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { PlanDetail, PlanEditor } from './component'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
-import { BillAuditOrReject } from '@/component'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(PlanEntity, PlanService, {
-  editView: PlanEditor,
-  detailView: PlanDetail,
-})
-</script>
 <style lang="scss" scoped></style>

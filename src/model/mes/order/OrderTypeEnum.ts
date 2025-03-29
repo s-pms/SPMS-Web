@@ -1,5 +1,5 @@
-import { AirColor } from '@airpower/enum/AirColor'
 import { AirEnum } from '@airpower/base/AirEnum'
+import { AirColor } from '@airpower/enum/AirColor'
 
 /**
  * # 订单类型枚举字典

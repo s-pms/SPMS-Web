@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { PickingService } from '@/model/mes/picking/PickingService'
+import { PickingStatusEnum } from '@/model/mes/picking/PickingStatusEnum'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { PickingDetail, PickingEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onReject,
+  onAudit,
+} = useBillTable(PickingEntity, PickingService, {
+  editView: PickingEditor,
+  detailView: PickingDetail,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -12,7 +40,7 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="row => row.status !== PickingStatusEnum.REJECTED.key"
+      :disable-edit="(row) => row.status !== PickingStatusEnum.REJECTED.key"
       :entity="PickingEntity"
       :select-list="selectList"
       hide-delete
@@ -39,34 +67,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { PickingDetail, PickingEditor } from './component'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { BillAuditOrReject } from '@/component'
-import { PickingEntity } from '@/model/mes/picking/PickingEntity'
-import { PickingService } from '@/model/mes/picking/PickingService'
-import { PickingStatusEnum } from '@/model/mes/picking/PickingStatusEnum'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onReject,
-  onAudit,
-} = useBillTable(PickingEntity, PickingService, {
-  editView: PickingEditor,
-  detailView: PickingDetail,
-})
-
-</script>
 <style lang="scss" scoped></style>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { AirNotification } from '@airpower/feedback/AirNotification'
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
+import { AirNotification } from '@airpower/feedback/AirNotification'
 
 function getIcon(item: ThirdLoginPlatform) {
   return `/img/thirdlogin/${item.flag}.png`
@@ -12,8 +12,7 @@ function onLogin(item: ThirdLoginPlatform) {
     return
   }
   const redirectUri = `${window.location.origin}/callback/${item.flag}`
-  const url = item.oauthUrl.replace('APP_KEY', item.appKey)
-    .replace('REDIRECT_URI', redirectUri)
+  const url = item.oauthUrl.replace('APP_KEY', item.appKey).replace('REDIRECT_URI', redirectUri)
   // 使用window.open 小窗口 隐藏地址栏
 
   const features = `menubar=no,toolbar=no,status=no,width=${item.width},height=${item.height},left=${(window.screen.width - item.width) / 2},top=${(window.screen.height - item.height) / 2}`
@@ -24,7 +23,7 @@ function onLogin(item: ThirdLoginPlatform) {
 <template>
   <div class="third-login">
     <div
-      v-for="item in ThirdLoginPlatform.toArray().filter(item => !item.disabled)"
+      v-for="item in ThirdLoginPlatform.toArray().filter((item) => !item.disabled)"
       :key="item.key"
       v-tip="item.label"
       class="item"
@@ -61,7 +60,7 @@ function onLogin(item: ThirdLoginPlatform) {
       justify-content: center;
       align-items: center;
       color: white;
-      transition: all .5s;
+      transition: all 0.5s;
 
       img {
         width: 100%;

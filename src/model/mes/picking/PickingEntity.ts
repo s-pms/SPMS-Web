@@ -1,11 +1,9 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
-import { PickingStatusEnum } from './PickingStatusEnum'
-import { PickingDetailEntity } from './PickingDetailEntity'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { PickingDetailEntity } from './PickingDetailEntity'
+import { PickingStatusEnum } from './PickingStatusEnum'
 
 @Model({
   label: '领料单',
@@ -27,14 +25,14 @@ export class PickingEntity extends AbstractBaseBillEntity<PickingDetailEntity> {
     label: '申领状态',
     dictionary: PickingStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Field({
     label: '申领明细',
     type: PickingDetailEntity,
     array: true,
   })
-    details: PickingDetailEntity[] = []
+  details: PickingDetailEntity[] = []
 
   @Form({
     requiredPayload: true,
@@ -48,7 +46,7 @@ export class PickingEntity extends AbstractBaseBillEntity<PickingDetailEntity> {
     orderNumber: -70,
     payloadField: 'name',
   })
-    structure!: StructureEntity
+  structure!: StructureEntity
 
   getAuditingStatus(): AirEnum {
     return PickingStatusEnum.AUDITING

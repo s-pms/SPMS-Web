@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
-import { ConfigType } from '@/model/system/config/ConfigType'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
+import { ConfigType } from '@/model/system/config/ConfigType'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 
 /**
  * # 参数配置实体
@@ -26,12 +24,12 @@ export class ConfigEntity extends BaseEntity {
   @Field({
     label: '配置名称',
   })
-    name!: string
+  name!: string
 
   @Field({
     label: '配置描述',
   })
-    description!: string
+  description!: string
 
   @Search()
   @Table({
@@ -46,7 +44,7 @@ export class ConfigEntity extends BaseEntity {
   @Field({
     label: '配置标识',
   })
-    flag!: string
+  flag!: string
 
   @Search()
   @Table({
@@ -63,7 +61,7 @@ export class ConfigEntity extends BaseEntity {
     label: '配置类型',
     dictionary: ConfigType,
   })
-    type!: number
+  type!: number
 
   @Table({
     showColor: true,
@@ -75,7 +73,7 @@ export class ConfigEntity extends BaseEntity {
     type: Boolean,
     dictionary: BooleanYesNoDictionary,
   })
-    isSystem!: boolean
+  isSystem!: boolean
 
   @Table()
   @Form({
@@ -84,5 +82,5 @@ export class ConfigEntity extends BaseEntity {
   @Field({
     label: '配置参数',
   })
-    config!: string
+  config!: string
 }

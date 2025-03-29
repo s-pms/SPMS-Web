@@ -1,6 +1,4 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 import { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
@@ -34,7 +32,7 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     label: '出库类型',
     dictionary: OutputTypeEnum,
   })
-    type!: number
+  type!: number
 
   @Table({
     width: 100,
@@ -47,32 +45,32 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     label: '出库状态',
     dictionary: OutputStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Field({
     label: '出库明细',
     type: OutputDetailEntity,
     array: true,
   })
-    details: OutputDetailEntity[] = []
+  details: OutputDetailEntity[] = []
 
   @Field({
     label: '采购单',
     type: SaleEntity,
   })
-    sale!: SaleEntity
+  sale!: SaleEntity
 
   @Field({
     label: '移库单',
     type: MoveEntity,
   })
-    move!: MoveEntity
+  move!: MoveEntity
 
   @Field({
     label: '领料单',
     type: PickingEntity,
   })
-    picking!: PickingEntity
+  picking!: PickingEntity
 
   getAuditingStatus(): AirEnum {
     return OutputStatusEnum.AUDITING

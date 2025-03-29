@@ -1,3 +1,85 @@
+<script lang="ts" setup>
+import type { ITree } from '@airpower/interface/ITree'
+import { StorageEntity } from '@/model/factory/storage/StorageEntity'
+import { StorageService } from '@/model/factory/storage/StorageService'
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { StructureService } from '@/model/factory/structure/StructureService'
+import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
+import { InventoryService } from '@/model/wms/inventory/InventoryService'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { AButton, ADialog, ATable, ATreeBox } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsSelector<InventoryEntity>())
+
+const request = ref(new AirRequest(InventoryEntity))
+const list = ref<InventoryEntity[]>([])
+
+const isLoading = ref(false)
+const isLoadingTree = ref(false)
+
+const inventoryType = ref(props.param.type)
+
+const treeData = ref<ITree[]>([])
+
+async function getStorage() {
+  treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
+}
+
+async function getStructure() {
+  treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
+}
+
+const treePlaceHolder = ref('搜索...')
+
+async function inventoryTypeChanged() {
+  switch (inventoryType.value) {
+    case InventoryTypeEnum.STORAGE.key:
+      treePlaceHolder.value = '搜索仓库...'
+      getStorage()
+      break
+    case InventoryTypeEnum.STRUCTURE.key:
+      treePlaceHolder.value = '搜索生产单元...'
+      getStructure()
+      break
+    default:
+  }
+
+  treeChanged(undefined)
+}
+
+async function getList() {
+  request.value.filter = request.value.filter || new InventoryEntity()
+  request.value.filter.type = inventoryType.value
+  list.value = await InventoryService.create(isLoading).getList(request.value)
+}
+
+async function treeChanged(current: ITree | undefined) {
+  // list.value = []
+  if (current) {
+    switch (inventoryType.value) {
+      case InventoryTypeEnum.STORAGE.key:
+        request.value.filter.storage = (current as StorageEntity).copy()
+        request.value.filter.storage.expose('id')
+        break
+      case InventoryTypeEnum.STRUCTURE.key:
+        request.value.filter.structure = (current as StructureEntity).copy()
+        request.value.filter.structure.expose('id')
+        break
+      default:
+    }
+  }
+  else {
+    request.value.filter.exclude('storage', 'structure')
+  }
+  getList()
+}
+
+inventoryTypeChanged()
+</script>
+
 <template>
   <ADialog
     :disable-confirm="isMultiple && selectList.length === 0"
@@ -50,9 +132,7 @@
             icon-button
             tooltip="选择"
             type="SELECT"
-            @click="
-              onConfirm(data)
-            "
+            @click="onConfirm(data)"
           />
         </template>
       </ATable>
@@ -60,89 +140,4 @@
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import {
-  AButton, ADialog, ATable, ATreeBox,
-} from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { AirRequest } from '@airpower/model/AirRequest'
-import { ITree } from '@airpower/interface/ITree'
-import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { StorageService } from '@/model/factory/storage/StorageService'
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { InventoryService } from '@/model/wms/inventory/InventoryService'
-
-const props = defineProps(airPropsSelector<InventoryEntity>())
-
-const request = ref(new AirRequest(InventoryEntity))
-const list = ref<InventoryEntity[]>([])
-
-const isLoading = ref(false)
-const isLoadingTree = ref(false)
-
-const inventoryType = ref(props.param.type)
-
-const treeData = ref<ITree[]>([])
-
-async function getStorage() {
-  treeData.value = await StorageService.create(isLoadingTree)
-    .getList(new AirRequest(StorageEntity))
-}
-
-async function getStructure() {
-  treeData.value = await StructureService.create(isLoadingTree)
-    .getList(new AirRequest(StructureEntity))
-}
-
-const treePlaceHolder = ref('搜索...')
-
-async function inventoryTypeChanged() {
-  switch (inventoryType.value) {
-    case InventoryTypeEnum.STORAGE.key:
-      treePlaceHolder.value = '搜索仓库...'
-      getStorage()
-      break
-    case InventoryTypeEnum.STRUCTURE.key:
-      treePlaceHolder.value = '搜索生产单元...'
-      getStructure()
-      break
-    default:
-  }
-  // eslint-disable-next-line no-use-before-define
-  treeChanged(undefined)
-}
-
-async function getList() {
-  request.value.filter = request.value.filter || new InventoryEntity()
-  request.value.filter.type = inventoryType.value
-  list.value = await InventoryService.create(isLoading)
-    .getList(request.value)
-}
-
-async function treeChanged(current: ITree | undefined) {
-  // list.value = []
-  if (current) {
-    switch (inventoryType.value) {
-      case InventoryTypeEnum.STORAGE.key:
-        request.value.filter.storage = (current as StorageEntity).copy()
-        request.value.filter.storage.expose('id')
-        break
-      case InventoryTypeEnum.STRUCTURE.key:
-        request.value.filter.structure = (current as StructureEntity).copy()
-        request.value.filter.structure.expose('id')
-        break
-      default:
-    }
-  } else {
-    request.value.filter.exclude('storage', 'structure')
-  }
-  getList()
-}
-
-inventoryTypeChanged()
-</script>
 <style lang="scss" scoped></style>

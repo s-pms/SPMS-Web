@@ -1,11 +1,6 @@
-import OrderEditor from './editor.vue'
 import OrderDetail from './detail.vue'
 import OrderDetailEditor from './detailEditor.vue'
+import OrderEditor from './editor.vue'
 import OrderFinishEditor from './finishEditor.vue'
 
-export {
-  OrderEditor,
-  OrderDetail,
-  OrderDetailEditor,
-  OrderFinishEditor,
-}
+export { OrderDetail, OrderDetailEditor, OrderEditor, OrderFinishEditor }

@@ -45,9 +45,7 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item
-        label="待出数量"
-      >
+      <el-form-item label="待出数量">
         <el-input
           v-model="quantity"
           disabled
@@ -57,16 +55,12 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item
-        label="出库数量"
-      >
+      <el-form-item label="出库数量">
         <el-input
           v-model="formData.quantity"
           type="number"
         >
-          <template
-            #append
-          >
+          <template #append>
             {{ material.unit.name }}
           </template>
         </el-input>
@@ -97,9 +91,9 @@ const isLoading = ref(false)
 const formRef = ref<AirFormInstance>()
 
 async function onSubmit() {
-  await OutputService.create(isLoading)
-    .addDetailFinishQuantity(formData.value.copy()
-      .expose('id', 'quantity', 'billId', 'inventory'))
+  await OutputService.create(isLoading).addDetailFinishQuantity(
+    formData.value.copy().expose('id', 'quantity', 'billId', 'inventory'),
+  )
   props.onConfirm()
 }
 
@@ -117,5 +111,4 @@ async function selectInventory() {
   formData.value.storageName = formData.value.inventory.storage.name
   formData.value.quantity = Math.min(formData.value.inventory.quantity, quantity.value)
 }
-
 </script>

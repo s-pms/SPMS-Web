@@ -1,6 +1,4 @@
-<script lang="ts" setup>
-
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="logo">
@@ -26,7 +24,7 @@
   }
 }
 
-@media screen and ((orientation:portrait) and (max-width: 600px)) {
+@media screen and ((orientation: portrait) and (max-width: 600px)) {
   .logo {
     left: auto !important;
     top: 100px !important;

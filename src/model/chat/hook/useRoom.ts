@@ -1,14 +1,15 @@
-import { Ref, ref } from 'vue'
-import { AirWebsocket } from '@airpower/websocket/AirWebSocket'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirWebSocketPayload } from '@airpower/websocket/AirWebSocketPayload'
-import AirEvent from '@airpower/event/AirEvent'
-import { AirAlert } from '@airpower/feedback/AirAlert'
+import type { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
+import type { AirWebsocket } from '@airpower/websocket/AirWebSocket'
+import type { Ref } from 'vue'
 import { AppConfig } from '@/config/AppConfig'
 import { ChatEventType } from '@/model/chat/enum/ChatEventType'
 import { RoomJoinRequest } from '@/model/chat/room/model/RoomJoinRequest'
-import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
 import { RoomService } from '@/model/chat/room/RoomService'
+import AirEvent from '@airpower/event/AirEvent'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirWebSocketPayload } from '@airpower/websocket/AirWebSocketPayload'
+import { ref } from 'vue'
 
 /**
  * # 房间Hook
@@ -52,8 +53,7 @@ export function useRoom(websocket: Ref<AirWebsocket | undefined>, currentRoomCha
   AirEvent.on(AppConfig.EVENT_PREFIX + ChatEventType.ROOM_JOIN_SUCCESS.key, async (event: RoomMemberEvent) => {
     AppConfig.saveLastRoomCode(event.member.room.code)
     AppConfig.currentMember.value = event.member
-    AppConfig.currentRoom.value = await RoomService.create()
-      .getDetail(AppConfig.currentMember.value.room.id)
+    AppConfig.currentRoom.value = await RoomService.create().getDetail(AppConfig.currentMember.value.room.id)
     if (currentRoomChanged) {
       currentRoomChanged()
     }

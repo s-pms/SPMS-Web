@@ -1,21 +1,21 @@
 <script lang="ts" setup>
-import { ref, Ref } from 'vue'
-import AirEvent from '@airpower/event/AirEvent'
-import { DialogStatus } from '@/model/chat/DialogStatus'
-import { AppConfig } from '@/config/AppConfig'
+import type { Ref } from 'vue'
 import UserCard from '@/component/UserCard.vue'
+import { AppConfig } from '@/config/AppConfig'
+import { DialogStatus } from '@/model/chat/DialogStatus'
 import { ChatEventType } from '@/model/chat/enum/ChatEventType'
+import AirEvent from '@airpower/event/AirEvent'
+import { ref } from 'vue'
 
-function copyToClipboard() {
-}
+const emits = defineEmits(['open'])
+
+function copyToClipboard() {}
 
 function getIfCanModifyRoom() {
   return true
 }
 
 const onlineList: Ref<number[]> = ref([])
-
-const emits = defineEmits(['open'])
 
 AirEvent.on(AppConfig.EVENT_PREFIX + ChatEventType.ONLINE_COUNT_CHANGED.key, (event: string) => {
   onlineList.value = JSON.parse(event)
@@ -28,9 +28,7 @@ AirEvent.on(AppConfig.EVENT_PREFIX + ChatEventType.ONLINE_COUNT_CHANGED.key, (ev
     class="top"
   >
     <div class="room-info keep-1-line">
-      <div
-        class="room-id copy"
-      >
+      <div class="room-id copy">
         ID:{{ AppConfig.currentRoom.value.code }}
       </div>
       <div class="room-name copy">
@@ -49,19 +47,19 @@ AirEvent.on(AppConfig.EVENT_PREFIX + ChatEventType.ONLINE_COUNT_CHANGED.key, (ev
       <div
         v-if="getIfCanModifyRoom()"
         class="room-right-menu room-exit"
-        @click="emits('open',DialogStatus.ROOM_SETTING)"
+        @click="emits('open', DialogStatus.ROOM_SETTING)"
       >
         <i class="iconfont icon-changyongtubiao-mianxing-29" /><span>管理</span>
       </div>
       <div
         class="room-right-menu room-exit"
-        @click="emits('open',DialogStatus.ONLINE)"
+        @click="emits('open', DialogStatus.ONLINE)"
       >
         <i class="iconfont icon-icon_people_fill" /><span>在线({{ onlineList.length }})</span>
       </div>
       <div
         class="room-right-menu room-exit"
-        @click="emits('open',DialogStatus.ROOM_LIST)"
+        @click="emits('open', DialogStatus.ROOM_LIST)"
       >
         <i class="iconfont icon-icon_addresslist_fil" /><span>房间</span>
       </div>

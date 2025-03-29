@@ -1,3 +1,29 @@
+<script generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity" lang="ts" setup>
+import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import { AButton } from '@airpower/component'
+
+const { bill } = defineProps<{
+  /**
+   * ### 单据
+   */
+  bill: B
+}>()
+
+const emits = defineEmits<{
+  onReject: [bill: B]
+  onAudit: [bill: B]
+}>()
+
+function onReject() {
+  emits('onReject', bill)
+}
+
+function onAudit() {
+  emits('onAudit', bill)
+}
+</script>
+
 <template>
   <AButton
     :disabled="!bill.canAudit()"
@@ -18,32 +44,5 @@
     驳回
   </AButton>
 </template>
-<script generic="B extends AbstractBaseBillEntity<D>,
-D extends AbstractBaseBillDetailEntity" lang="ts" setup
->
-import { AButton } from '@airpower/component'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
-const { bill } = defineProps<{
-  /**
-   * ### 单据
-   */
-  bill: B
-}>()
-
-const emits = defineEmits<{
-  onReject: [bill: B],
-  onAudit: [bill: B],
-}>()
-
-function onReject() {
-  emits('onReject', bill)
-}
-
-function onAudit() {
-  emits('onAudit', bill)
-}
-
-</script>
 <style lang="scss" scoped></style>

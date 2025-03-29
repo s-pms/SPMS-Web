@@ -1,3 +1,29 @@
+<script lang="ts" setup>
+import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
+import { OrderDetailService } from '@/model/mes/order/OrderDetailService'
+import { ADialog, AInput } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(
+  Object.assign(airProps(), {
+    /**
+     * ### 添加完成数量
+     */
+    param: {
+      type: Number,
+      default: 0,
+    },
+  }),
+)
+
+const orderDetail = ref(new OrderDetailEntity())
+orderDetail.value.finishQuantity = props.param
+orderDetail.value.ngQuantity = 0
+
+const rules = OrderDetailService.createValidator(orderDetail.value)
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -37,28 +63,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
-import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
-import { OrderDetailService } from '@/model/mes/order/OrderDetailService'
-
-const props = defineProps(Object.assign(airProps(), {
-  /**
-   * ### 添加完成数量
-   */
-  param: {
-    type: Number,
-    default: 0,
-  },
-}))
-
-const orderDetail = ref(new OrderDetailEntity())
-orderDetail.value.finishQuantity = props.param
-orderDetail.value.ngQuantity = 0
-
-const rules = OrderDetailService.createValidator(orderDetail.value)
-
-</script>

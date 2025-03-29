@@ -10,16 +10,16 @@ export class CodeRuleField extends AirModel {
   @Field({
     label: '默认前缀',
   })
-    defaultPrefix!: string
+  defaultPrefix!: string
 
   @Field({
     label: '编码字段名称',
   })
-    label!: string
+  label!: string
 
   @Field({
     label: '表格ID',
     type: Number,
   })
-    key!: number
+  key!: number
 }

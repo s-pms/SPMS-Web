@@ -1,5 +1,29 @@
+<script lang="ts" setup>
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new UserEntity()))
+const confirmPassword = ref('')
+const { isLoading, formData, formRef, rules } = useAirEditor(props, UserEntity, UserService)
+
+async function onSubmit() {
+  if (confirmPassword.value !== formData.value.password) {
+    AirNotification.error('两次密码不一致')
+    return
+  }
+  await UserService.create(isLoading).updateMyPassword(formData.value)
+  await AirAlert.success('密码修改成功，请重新登录', '修改成功')
+  window.location.replace('/login')
+}
+</script>
+
 <template>
-  <div style="padding-top: 20px;">
+  <div style="padding-top: 20px">
     <el-form
       ref="formRef"
       :model="formData"
@@ -43,36 +67,6 @@
     </el-form>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-
-const props = defineProps(airPropsParam(new UserEntity()))
-const confirmPassword = ref('')
-const {
-  isLoading,
-  formData,
-  formRef,
-  rules,
-} = useAirEditor(props, UserEntity, UserService)
-
-async function onSubmit() {
-  if (confirmPassword.value !== formData.value.password) {
-    AirNotification.error('两次密码不一致')
-    return
-  }
-  await UserService.create(isLoading)
-    .updateMyPassword(formData.value)
-  await AirAlert.success('密码修改成功，请重新登录', '修改成功')
-  window.location.replace('/login')
-}
-</script>
 
 <style lang="scss" scoped>
 .role-list > * {

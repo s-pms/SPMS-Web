@@ -1,14 +1,12 @@
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
+import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
+import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
 import { PlanDetailEntity } from './PlanDetailEntity'
 import { PlanStatusEnum } from './PlanStatusEnum'
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { PlanTypeEnum } from './PlanTypeEnum'
 
 @Model({
@@ -24,13 +22,13 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   @Field({
     label: '客户编码',
   })
-    customerCode!: string
+  customerCode!: string
 
   @Table()
   @Field({
     label: '客户名称',
   })
-    customerName!: string
+  customerName!: string
 
   @Form({
     requiredNumber: true,
@@ -38,7 +36,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   @Field({
     label: '客户信息',
   })
-    customerId!: number
+  customerId!: number
 
   @Table({
     width: 100,
@@ -48,7 +46,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
     label: '计划状态',
     dictionary: PlanStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Table({
     width: 100,
@@ -64,7 +62,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
     label: '计划类型',
     dictionary: PlanTypeEnum,
   })
-    type!: number
+  type!: number
 
   @Table({
     width: 110,
@@ -80,7 +78,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   @Field({
     label: '开始时间',
   })
-    startTime!: number
+  startTime!: number
 
   @Table({
     width: 110,
@@ -95,7 +93,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   @Field({
     label: '交付时间',
   })
-    deliverTime!: number
+  deliverTime!: number
 
   @Table({
     width: 110,
@@ -105,14 +103,14 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   @Field({
     label: '完成时间',
   })
-    finishTime!: number
+  finishTime!: number
 
   @Field({
     label: '计划明细',
     type: PlanDetailEntity,
     array: true,
   })
-    details: PlanDetailEntity[] = []
+  details: PlanDetailEntity[] = []
 
   @Field({
     label: '客户信息',
@@ -121,7 +119,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   @Form({
     requiredPayload: true,
   })
-    customer!: CustomerEntity
+  customer!: CustomerEntity
 
   getAuditingStatus(): AirEnum {
     return PlanStatusEnum.AUDITING

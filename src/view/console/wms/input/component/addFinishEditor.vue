@@ -1,3 +1,41 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
+import { InputDetailService } from '@/model/wms/input/InputDetailService'
+import { InputService } from '@/model/wms/input/InputService'
+import { StorageSelector } from '@/view/console/factory/storage/component'
+import { ADialog, AInput } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new InputDetailEntity()))
+
+const formData = ref(props.param.copy())
+
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+async function onSubmit() {
+  await InputService.create(isLoading).addDetailFinishQuantity(
+    formData.value.copy().expose('id', 'quantity', 'billId', 'storage'),
+  )
+  props.onConfirm()
+}
+
+const quantity = ref(formData.value.quantity - formData.value.finishQuantity)
+const material = ref(formData.value.material.copy())
+formData.value.quantity = quantity.value
+formData.value.expose('id', 'quantity')
+
+async function selectStorage() {
+  formData.value.storage = await AirDialog.show(StorageSelector)
+  formData.value.storageName = formData.value.storage.name
+  formData.value.storageId = formData.value.storage.id
+}
+</script>
+
 <template>
   <ADialog
     :disable-confirm="formData.quantity <= 0"
@@ -55,42 +93,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
-import { InputDetailService } from '@/model/wms/input/InputDetailService'
-import { InputService } from '@/model/wms/input/InputService'
-import { StorageSelector } from '@/view/console/factory/storage/component'
-
-const props = defineProps(airPropsParam(new InputDetailEntity()))
-
-const formData = ref(props.param.copy())
-
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-async function onSubmit() {
-  await InputService.create(isLoading)
-    .addDetailFinishQuantity(formData.value.copy()
-      .expose('id', 'quantity', 'billId', 'storage'))
-  props.onConfirm()
-}
-
-const quantity = ref(formData.value.quantity - formData.value.finishQuantity)
-const material = ref(formData.value.material.copy())
-formData.value.quantity = quantity.value
-formData.value.expose('id', 'quantity')
-
-async function selectStorage() {
-  formData.value.storage = await AirDialog.show(StorageSelector)
-  formData.value.storageName = formData.value.storage.name
-  formData.value.storageId = formData.value.storage.id
-}
-
-</script>

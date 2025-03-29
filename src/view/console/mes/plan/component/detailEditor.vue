@@ -1,3 +1,25 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new PlanDetailEntity()))
+
+const formData = ref(props.param.copy())
+
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+async function onSubmit() {
+  props.onConfirm(formData.value)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -42,25 +64,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
-
-const props = defineProps(airPropsParam(new PlanDetailEntity()))
-
-const formData = ref(props.param.copy())
-
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-async function onSubmit() {
-  props.onConfirm(formData.value)
-}
-</script>

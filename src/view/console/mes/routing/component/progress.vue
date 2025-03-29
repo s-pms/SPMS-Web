@@ -1,3 +1,93 @@
+<script lang="ts" setup>
+import type { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
+import { BomService } from '@/model/mes/bom/BomService'
+import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
+import { RoutingService } from '@/model/mes/routing/RoutingService'
+import { BomSelector } from '@/view/console/mes/bom/component'
+import { OperationSelector } from '@/view/console/mes/operation/component'
+import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { nextTick, ref } from 'vue'
+import { VueDraggable } from 'vue-draggable-plus'
+
+const props = defineProps(airPropsParam(new RoutingEntity()))
+const drag = ref(false)
+const current = ref(-1)
+const currentModel = ref(new RoutingOperationEntity())
+const list = ref<RoutingOperationEntity[]>([])
+const bomDetails = ref<BomDetailEntity[]>([])
+const { formRef, isLoading, formData } = useAirEditor(props, RoutingEntity, RoutingService, {
+  afterGetDetail(detailData) {
+    list.value = detailData.details
+    return detailData
+  },
+})
+
+const request = ref(new AirRequest(RoutingOperationEntity))
+request.value.filter.routingId = formData.value.id
+
+function onStart() {
+  drag.value = true
+}
+
+function onEnd() {
+  nextTick(() => {
+    drag.value = false
+  })
+}
+
+async function onSubmit() {
+  formData.value.details = list.value
+  formData.value.details.forEach((item, index) => {
+    item.sortNo = index
+  })
+  await RoutingService.create().update(formData.value)
+  AirNotification.success('编辑工艺流程成功')
+  props.onConfirm()
+}
+
+async function getBomDetails(bomId: number) {
+  const bom = await BomService.create(isLoading).getDetail(bomId)
+
+  bomDetails.value = bom.details
+}
+
+function isAutoNextChanged() {
+  if (formData.value.isPublished) {
+    return
+  }
+  list.value[current.value].isAutoNext = !list.value[current.value].isAutoNext
+}
+
+function bomChanged() {
+  list.value[current.value].bom = currentModel.value.bom
+  getBomDetails(currentModel.value.bom.id)
+}
+
+async function currentChanged(index: number, item: RoutingOperationEntity) {
+  current.value = index
+  currentModel.value = item.copy()
+  bomDetails.value = []
+  if (item.bom) {
+    getBomDetails(item.bom.id)
+  }
+}
+
+async function onAddOperation() {
+  const operation = await AirDialog.select<OperationEntity>(OperationSelector)
+  const item = new RoutingOperationEntity()
+  item.operation = operation
+  item.id = Math.random()
+  list.value.push(item)
+}
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -23,8 +113,8 @@
               添加工序
             </AButton>
           </div>
+
           <VueDraggable
-            ref="el"
             v-model="list"
             :animation="150"
             :disabled="formData.isPublished"
@@ -53,7 +143,10 @@
                   <div
                     v-if="!formData.isPublished"
                     class="delete"
-                    @click.stop="current = -1; list.splice(index, 1);"
+                    @click.stop="
+                      current = -1
+                      list.splice(index, 1)
+                    "
                   >
                     删除
                   </div>
@@ -117,105 +210,6 @@
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { VueDraggable } from 'vue-draggable-plus'
-import { nextTick, ref } from 'vue'
-import {
-  AButton, ADialog, AEmpty, AGroup, ASelect, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirRequest } from '@airpower/model/AirRequest'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
-import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
-import { OperationSelector } from '@/view/console/mes/operation/component'
-import { OperationEntity } from '@/model/mes/operation/OperationEntity'
-import { BomSelector } from '@/view/console/mes/bom/component'
-import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
-import { BomService } from '@/model/mes/bom/BomService'
-
-const props = defineProps(airPropsParam(new RoutingEntity()))
-const drag = ref(false)
-const current = ref(-1)
-const currentModel = ref(new RoutingOperationEntity())
-const list = ref<RoutingOperationEntity[]>([])
-const bomDetails = ref<BomDetailEntity[]>([])
-const {
-  formRef,
-  isLoading,
-  formData,
-} = useAirEditor(props, RoutingEntity, RoutingService, {
-  afterGetDetail(detailData) {
-    list.value = detailData.details
-    return detailData
-  },
-})
-
-const request = ref(new AirRequest(RoutingOperationEntity))
-request.value.filter.routingId = formData.value.id
-
-function onStart() {
-  drag.value = true
-}
-
-function onEnd() {
-  nextTick(() => {
-    drag.value = false
-  })
-}
-
-async function onSubmit() {
-  formData.value.details = list.value
-  formData.value.details.forEach((item, index) => {
-    item.sortNo = index
-  })
-  await RoutingService.create()
-    .update(formData.value)
-  AirNotification.success('编辑工艺流程成功')
-  props.onConfirm()
-}
-
-async function getBomDetails(bomId: number) {
-  const bom = await BomService.create(isLoading)
-    .getDetail(bomId)
-
-  bomDetails.value = bom.details
-}
-
-function isAutoNextChanged() {
-  if (formData.value.isPublished) {
-    return
-  }
-  list.value[current.value].isAutoNext = !list.value[current.value].isAutoNext
-}
-
-function bomChanged() {
-  list.value[current.value].bom = currentModel.value.bom
-  getBomDetails(currentModel.value.bom.id)
-}
-
-async function currentChanged(index: number, item: RoutingOperationEntity) {
-  current.value = index
-  currentModel.value = item.copy()
-  bomDetails.value = []
-  if (item.bom) {
-    getBomDetails(item.bom.id)
-  }
-}
-
-async function onAddOperation() {
-  const operation = await AirDialog.select<OperationEntity>(OperationSelector)
-  const item = new RoutingOperationEntity()
-  item.operation = operation
-  item.id = Math.random()
-  list.value.push(item)
-}
-
-</script>
-
 <style lang="scss" scoped>
 .progress {
   position: absolute;
@@ -255,7 +249,7 @@ async function onAddOperation() {
           font-size: 16px;
           padding: 10px 15px;
           user-select: none;
-          transition: all .3s;
+          transition: all 0.3s;
           min-height: 50px;
           position: relative;
 
@@ -299,7 +293,7 @@ async function onAddOperation() {
           }
 
           * {
-            user-select: none
+            user-select: none;
           }
         }
 
@@ -315,7 +309,6 @@ async function onAddOperation() {
 
         .item:hover {
           background-color: var(--el-color-primary-light-8);
-
         }
       }
     }

@@ -1,3 +1,70 @@
+<script lang="ts" setup>
+import type { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
+import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
+import { UserService } from '@/model/personnel/user/UserService'
+import { airProps } from '@airpower/config/AirProps'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { ref } from 'vue'
+
+defineProps(airProps())
+
+const isLoading = ref(false)
+
+function getIcon(item: ThirdLoginPlatform) {
+  return `/img/thirdlogin/${item.flag}.png`
+}
+
+const list = ref([] as UserThirdLoginEntity[])
+
+async function init() {
+  list.value = await UserService.create(isLoading).getMyThirdList()
+}
+
+function isBind(item: ThirdLoginPlatform) {
+  return list.value.some(v => v.platform === item.key)
+}
+
+function bindData(item: ThirdLoginPlatform) {
+  return list.value.find(v => v.platform === item.key)
+}
+
+function getAvatar(item: ThirdLoginPlatform) {
+  return bindData(item)?.avatar || ''
+}
+
+function onBind(item: ThirdLoginPlatform) {
+  if (item.disabled) {
+    AirNotification.error(`暂不支持${item.label}`)
+    return
+  }
+  const redirectUri = `${window.location.origin}/bind/${item.flag}`
+  const url = item.oauthUrl.replace('APP_KEY', item.appKey).replace('REDIRECT_URI', redirectUri)
+  // 使用window.open 小窗口 隐藏地址栏
+
+  const features = `menubar=no,toolbar=no,status=no,width=${item.width},height=${item.height},left=${(window.screen.width - item.width) / 2},top=${(window.screen.height - item.height) / 2}`
+  const newWindow = window.open(url, '_blank', features)
+  const checkClosedInterval = setInterval(() => {
+    if (newWindow?.closed) {
+      clearInterval(checkClosedInterval)
+      init()
+    }
+  }, 100)
+}
+
+async function onUnBind(item: ThirdLoginPlatform) {
+  const data = bindData(item)
+  if (!data) {
+    return
+  }
+  await AirConfirm.warning(`是否确认解绑 ${item.label} 账号？`, '解绑提醒')
+  await UserService.create(isLoading).unBindThird(data)
+  init()
+}
+
+init()
+</script>
+
 <template>
   <div class="account-list">
     <div
@@ -42,75 +109,6 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { airProps } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
-import { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-
-defineProps(airProps())
-
-const isLoading = ref(false)
-
-function getIcon(item: ThirdLoginPlatform) {
-  return `/img/thirdlogin/${item.flag}.png`
-}
-
-const list = ref([] as UserThirdLoginEntity[])
-
-async function init() {
-  list.value = await UserService.create(isLoading)
-    .getMyThirdList()
-}
-
-function isBind(item: ThirdLoginPlatform) {
-  return list.value.some((v) => v.platform === item.key)
-}
-
-function bindData(item: ThirdLoginPlatform) {
-  return list.value.find((v) => v.platform === item.key)
-}
-
-function getAvatar(item: ThirdLoginPlatform) {
-  return bindData(item)?.avatar || ''
-}
-
-function onBind(item: ThirdLoginPlatform) {
-  if (item.disabled) {
-    AirNotification.error(`暂不支持${item.label}`)
-    return
-  }
-  const redirectUri = `${window.location.origin}/bind/${item.flag}`
-  const url = item.oauthUrl.replace('APP_KEY', item.appKey)
-    .replace('REDIRECT_URI', redirectUri)
-  // 使用window.open 小窗口 隐藏地址栏
-
-  const features = `menubar=no,toolbar=no,status=no,width=${item.width},height=${item.height},left=${(window.screen.width - item.width) / 2},top=${(window.screen.height - item.height) / 2}`
-  const newWindow = window.open(url, '_blank', features)
-  const checkClosedInterval = setInterval(() => {
-    if (newWindow?.closed) {
-      clearInterval(checkClosedInterval)
-      init()
-    }
-  }, 100)
-}
-
-async function onUnBind(item: ThirdLoginPlatform) {
-  const data = bindData(item)
-  if (!data) {
-    return
-  }
-  await AirConfirm.warning(`是否确认解绑 ${item.label} 账号？`, '解绑提醒')
-  await UserService.create(isLoading)
-    .unBindThird(data)
-  init()
-}
-
-init()
-</script>
 <style lang="scss" scoped>
 .account-list {
   overflow: hidden;

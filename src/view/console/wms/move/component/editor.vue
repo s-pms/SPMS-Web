@@ -1,3 +1,51 @@
+<script lang="ts" setup>
+import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
+import { MoveEntity } from '@/model/wms/move/MoveEntity'
+import { MoveService } from '@/model/wms/move/MoveService'
+import { StorageSelector } from '@/view/console/factory/storage/component'
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { MoveDetailEditor } from '.'
+import { InventorySelector } from '../../inventory/component'
+
+const props = defineProps(airPropsParam(new MoveEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, MoveEntity, MoveService, {
+  afterGetDetail(detailData) {
+    detailData.storageName = detailData.storage.name
+    return detailData
+  },
+  beforeSubmit(submitData) {
+    if (submitData.details.length === 0) {
+      AirNotification.warning('请添加明细后再提交')
+      return null
+    }
+    return submitData
+  },
+})
+
+async function addDetail() {
+  let inventory = new InventoryEntity()
+  inventory.type = InventoryTypeEnum.STORAGE.key
+  inventory = await AirDialog.select(InventorySelector, inventory)
+  let detail = new MoveDetailEntity()
+  detail.inventory = inventory
+  detail = await AirDialog.show(MoveDetailEditor, detail)
+  formData.value.details.push(detail)
+}
+
+async function deleteDetail(index: number) {
+  await AirConfirm.warning('是否删除选中行的计划明细？')
+  formData.value.details.splice(index, 1)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -34,7 +82,7 @@
         <ATable
           :data-list="formData.details"
           :entity="MoveDetailEntity"
-          :field-list="MoveDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :field-list="MoveDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -65,61 +113,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { MoveEntity } from '@/model/wms/move/MoveEntity'
-import { MoveService } from '@/model/wms/move/MoveService'
-import { MoveDetailEditor } from '.'
-import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventorySelector } from '../../inventory/component'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { StorageSelector } from '@/view/console/factory/storage/component'
-
-const props = defineProps(airPropsParam(new MoveEntity()))
-
-const {
-  title,
-  formData,
-  rules,
-  formRef,
-  isLoading,
-  onSubmit,
-} = useAirEditor(props, MoveEntity, MoveService, {
-  afterGetDetail(detailData) {
-    detailData.storageName = detailData.storage.name
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
-      return null
-    }
-    return submitData
-  },
-})
-
-async function addDetail() {
-  let inventory = new InventoryEntity()
-  inventory.type = InventoryTypeEnum.STORAGE.key
-  inventory = await AirDialog.select(InventorySelector, inventory)
-  let detail = new MoveDetailEntity()
-  detail.inventory = inventory
-  detail = await AirDialog.show(MoveDetailEditor, detail)
-  formData.value.details.push(detail)
-}
-
-async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的计划明细？')
-  formData.value.details.splice(index, 1)
-}
-
-</script>

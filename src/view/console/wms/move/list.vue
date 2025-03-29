@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { MoveEntity } from '@/model/wms/move/MoveEntity'
+import { MoveService } from '@/model/wms/move/MoveService'
+import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { MoveDetail, MoveEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
+} = useBillTable(MoveEntity, MoveService, {
+  editView: MoveEditor,
+  detailView: MoveDetail,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -11,7 +39,7 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="row => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="MoveEntity"
       :select-list="selectList"
       hide-delete
@@ -41,33 +69,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { MoveDetail, MoveEditor } from './component'
-import { MoveEntity } from '@/model/wms/move/MoveEntity'
-import { MoveService } from '@/model/wms/move/MoveService'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
-import { BillAuditOrReject } from '@/component'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(MoveEntity, MoveService, {
-  editView: MoveEditor,
-  detailView: MoveDetail,
-})
-</script>
 <style lang="scss" scoped></style>

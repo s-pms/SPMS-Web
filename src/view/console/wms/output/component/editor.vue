@@ -25,14 +25,14 @@
         <ATable
           :data-list="formData.details"
           :entity="OutputDetailEntity"
-          :field-list="OutputDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :field-list="
+            OutputDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))
+          "
           hide-delete
           hide-edit
         >
           <template #storageName="{ data }">
-            {{
-              data.inventory?.storage.name || "-"
-            }}({{ data.inventory?.storage.code || "-" }})
+            {{ data.inventory?.storage.name || '-' }}({{ data.inventory?.storage.code || '-' }})
           </template>
           <template #materialCode="{ data }">
             {{ data.material.code }}
@@ -66,9 +66,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import {
-  AButton, ADialog, AFormField, AGroup, ATable,
-} from '@airpower/component'
+import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
 import { airPropsParam } from '@airpower/config/AirProps'
 import { AirDialog } from '@airpower/helper/AirDialog'
 import { useAirEditor } from '@airpower/hook/useAirEditor'
@@ -82,10 +80,7 @@ import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, OutputEntity, OutputService, {
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, OutputEntity, OutputService, {
   afterGetDetail(detailData) {
     return detailData
   },
@@ -111,5 +106,4 @@ async function deleteDetail(index: number) {
   await AirConfirm.warning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
 }
-
 </script>

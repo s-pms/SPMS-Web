@@ -1,3 +1,161 @@
+<script lang="ts" setup>
+import Copyright from '@/component/login/Copyright.vue'
+import Logo from '@/component/login/Logo.vue'
+import ThirdLogin from '@/component/login/ThirdLogin.vue'
+import { LoginAction } from '@/model/common/LoginAction'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { AirConfig } from '@airpower/config/AirConfig'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirRouter } from '@airpower/helper/AirRouter'
+import { AirValidator } from '@airpower/helper/AirValidator'
+import { computed, ref } from 'vue'
+
+/**
+ * ### 是否二维码登录
+ */
+const isQrcodeLogin = ref(false)
+
+const currentAction = ref(LoginAction.LOGIN_VIA_PASSWORD)
+
+/**
+ * ### 是否已阅读
+ */
+const isRead = ref(true)
+
+const user = ref(new UserEntity())
+
+const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
+const scope = (AirRouter.router.currentRoute.value.query.scope || '').toString()
+const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
+
+const appInfo = ref(new OpenAppEntity())
+
+user.value.email = 'admin@hamm.cn'
+user.value.password = 'Aa123456'
+
+// 一些Loading状态
+const isLoadingApp = ref(false)
+const isLoadingLogin = ref(false)
+const isEmailCodeLoading = ref(false)
+
+// ! 判断是否输入有效格式的值
+const isValidCode = computed(() => user.value.code && user.value.code.length === 6)
+const isValidEmail = computed(() => user.value.email && AirValidator.isEmail(user.value.email))
+const isValidPhone = computed(() => user.value.phone && AirValidator.isMobilePhone(user.value.phone))
+const isValidAccount = computed(
+  () => user.value.email && (AirValidator.isEmail(user.value.email) || AirValidator.isNaturalNumber(user.value.email)),
+)
+
+/**
+ * ### 计算是否禁用登录/注册按钮
+ */
+const isButtonDisabled = computed(() => {
+  switch (currentAction.value) {
+    case LoginAction.LOGIN_VIA_PHONE:
+      return !isValidPhone.value || !isValidCode.value
+    case LoginAction.LOGIN_VIA_EMAIL:
+      return !isValidEmail.value || !isValidCode.value
+    case LoginAction.LOGIN_VIA_PASSWORD:
+      return !user.value.password || !isValidAccount.value
+    default:
+      return true
+  }
+})
+
+/**
+ * ### 获取当前应用信息
+ */
+async function getAppInfo() {
+  if (appKey) {
+    user.value.appKey = appKey
+    appInfo.value = await OpenAppService.create(isLoadingApp).getAppByKey(appKey)
+  }
+}
+
+/**
+ * ### 处理登录重定向
+ */
+async function loginRedirect(result: string) {
+  AirConfig.saveAccessToken(result)
+  if (appKey) {
+    if (appInfo.value.isInternal) {
+      const result = await UserService.create(isLoadingLogin).authorize(appKey, scope)
+      window.location.replace(`${redirectUri}?code=${result}`)
+      return
+    }
+    // Oauth登录 重定向code
+    window.location.replace(`/authorize${window.location.search}`)
+    return
+  }
+  // 正常登录 保存 AccessToken
+  window.location.replace(redirectUri)
+}
+
+/**
+ * ### 邮箱+密码登录
+ */
+async function onLogin() {
+  const request = user.value.copy()
+  if (AirValidator.isNumber(request.email)) {
+    request.id = Number.parseInt(request.email, 10)
+    request.exclude('email')
+  }
+  const result = await UserService.create(isLoadingLogin).login(request)
+  loginRedirect(result)
+}
+
+/**
+ * ### 邮箱+验证码登录
+ */
+async function onEmailLogin() {
+  const result = await UserService.create(isLoadingLogin).loginViaEmail(user.value)
+  loginRedirect(result)
+}
+
+/**
+ * ### 登录/注册按钮事件
+ */
+async function onSubmit() {
+  if (!isRead.value) {
+    await AirConfirm.create()
+      .setConfirmText('我已阅读并同意')
+      .show('请阅读并同意隐私政策以及服务条款相关内容。', '确认提示')
+    isRead.value = true
+  }
+  switch (currentAction.value) {
+    case LoginAction.LOGIN_VIA_PASSWORD:
+      onLogin()
+      break
+    case LoginAction.LOGIN_VIA_EMAIL:
+      onEmailLogin()
+      break
+    default:
+  }
+}
+
+/**
+ * ### 发送邮箱验证码事件
+ */
+async function onSendEmailCode() {
+  const request = new UserEntity()
+  request.email = user.value.email
+  await UserService.create(isEmailCodeLoading).sendEmail(request)
+  AirNotification.success('邮箱验证码发送成功, 请注意查看是否被拦截')
+}
+
+async function logout() {
+  AirConfig.removeAccessToken()
+  await UserService.create(isLoadingLogin).logout()
+}
+
+logout()
+getAppInfo()
+</script>
+
 <template>
   <div class="login">
     <Logo />
@@ -10,13 +168,18 @@
       </div>
       <div class="tabs">
         <div
-          v-for="(item,index) in [LoginAction.LOGIN_VIA_PASSWORD, LoginAction.LOGIN_VIA_EMAIL, LoginAction.LOGIN_VIA_PHONE, LoginAction.LOGIN_VIA_QRCODE]"
+          v-for="(item, index) in [
+            LoginAction.LOGIN_VIA_PASSWORD,
+            LoginAction.LOGIN_VIA_EMAIL,
+            LoginAction.LOGIN_VIA_PHONE,
+            LoginAction.LOGIN_VIA_QRCODE,
+          ]"
           :key="item"
           :class="(currentAction === item ? 'active item-' : 'item-') + index"
           class="item"
           @click="
-            currentAction = item;
-            isQrcodeLogin = LoginAction.LOGIN_VIA_QRCODE === item;
+            currentAction = item
+            isQrcodeLogin = LoginAction.LOGIN_VIA_QRCODE === item
           "
         >
           {{ item }}
@@ -169,167 +332,7 @@
     <Copyright />
   </div>
 </template>
-<script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirValidator } from '@airpower/helper/AirValidator'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirConfig } from '@airpower/config/AirConfig'
-import { AirRouter } from '@airpower/helper/AirRouter'
-import { LoginAction } from '@/model/common/LoginAction'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-import Logo from '@/component/login/Logo.vue'
-import Copyright from '@/component/login/Copyright.vue'
-import ThirdLogin from '@/component/login/ThirdLogin.vue'
 
-/**
- * ### 是否二维码登录
- */
-const isQrcodeLogin = ref(false)
-
-const currentAction = ref(LoginAction.LOGIN_VIA_PASSWORD)
-
-/**
- * ### 是否已阅读
- */
-const isRead = ref(true)
-
-const user = ref(new UserEntity())
-
-const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
-const scope = (AirRouter.router.currentRoute.value.query.scope || '').toString()
-const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
-
-const appInfo = ref(new OpenAppEntity())
-
-user.value.email = 'admin@hamm.cn'
-user.value.password = 'Aa123456'
-
-// 一些Loading状态
-const isLoadingApp = ref(false)
-const isLoadingLogin = ref(false)
-const isEmailCodeLoading = ref(false)
-
-// ! 判断是否输入有效格式的值
-const isValidCode = computed(() => user.value.code && user.value.code.length === 6)
-const isValidEmail = computed(() => user.value.email && AirValidator.isEmail(user.value.email))
-const isValidPhone = computed(() => user.value.phone && AirValidator.isMobilePhone(user.value.phone))
-const isValidAccount = computed(() => user.value.email && (AirValidator.isEmail(user.value.email) || AirValidator.isNaturalNumber(user.value.email)))
-
-/**
- * ### 计算是否禁用登录/注册按钮
- */
-const isButtonDisabled = computed(() => {
-  switch (currentAction.value) {
-    case LoginAction.LOGIN_VIA_PHONE:
-      return !isValidPhone.value || !isValidCode.value
-    case LoginAction.LOGIN_VIA_EMAIL:
-      return !isValidEmail.value || !isValidCode.value
-    case LoginAction.LOGIN_VIA_PASSWORD:
-      return !user.value.password || !isValidAccount.value
-    default:
-      return true
-  }
-})
-
-/**
- * ### 获取当前应用信息
- */
-async function getAppInfo() {
-  if (appKey) {
-    user.value.appKey = appKey
-    appInfo.value = await OpenAppService.create(isLoadingApp)
-      .getAppByKey(appKey)
-  }
-}
-
-/**
- * ### 处理登录重定向
- */
-async function loginRedirect(result: string) {
-  AirConfig.saveAccessToken(result)
-  if (appKey) {
-    if (appInfo.value.isInternal) {
-      const result = await UserService.create(isLoadingLogin)
-        .authorize(appKey, scope)
-      window.location.replace(`${redirectUri}?code=${result}`)
-      return
-    }
-    // Oauth登录 重定向code
-    window.location.replace(`/authorize${window.location.search}`)
-    return
-  }
-  // 正常登录 保存 AccessToken
-  window.location.replace(redirectUri)
-}
-
-/**
- * ### 邮箱+密码登录
- */
-async function onLogin() {
-  const request = user.value.copy()
-  if (AirValidator.isNumber(request.email)) {
-    request.id = parseInt(request.email, 10)
-    request.exclude('email')
-  }
-  const result = await UserService.create(isLoadingLogin)
-    .login(request)
-  loginRedirect(result)
-}
-
-/**
- * ### 邮箱+验证码登录
- */
-async function onEmailLogin() {
-  const result = await UserService.create(isLoadingLogin)
-    .loginViaEmail(user.value)
-  loginRedirect(result)
-}
-
-/**
- * ### 登录/注册按钮事件
- */
-async function onSubmit() {
-  if (!isRead.value) {
-    await AirConfirm.create()
-      .setConfirmText('我已阅读并同意')
-      .show('请阅读并同意隐私政策以及服务条款相关内容。', '确认提示')
-    isRead.value = true
-  }
-  switch (currentAction.value) {
-    case LoginAction.LOGIN_VIA_PASSWORD:
-      onLogin()
-      break
-    case LoginAction.LOGIN_VIA_EMAIL:
-      onEmailLogin()
-      break
-    default:
-  }
-}
-
-/**
- * ### 发送邮箱验证码事件
- */
-async function onSendEmailCode() {
-  const request = new UserEntity()
-  request.email = user.value.email
-  await UserService.create(isEmailCodeLoading)
-    .sendEmail(request)
-  AirNotification.success('邮箱验证码发送成功, 请注意查看是否被拦截')
-}
-
-async function logout() {
-  AirConfig.removeAccessToken()
-  await UserService.create(isLoadingLogin)
-    .logout()
-}
-
-logout()
-getAppInfo()
-</script>
 <style lang="scss" scoped>
 .login {
   position: fixed;
@@ -401,7 +404,7 @@ getAppInfo()
         border-radius: 10px;
         cursor: pointer;
         font-size: 14px;
-        transition: all .3s;
+        transition: all 0.3s;
         color: #333;
       }
 
@@ -488,7 +491,7 @@ getAppInfo()
       a {
         text-decoration: none;
         color: #000;
-        transition: all .3s;
+        transition: all 0.3s;
       }
 
       a:hover {
@@ -521,7 +524,7 @@ getAppInfo()
   }
 }
 
-@media screen and ((orientation:portrait) and (max-width: 600px)) {
+@media screen and ((orientation: portrait) and (max-width: 600px)) {
   .login {
     .logo {
       left: auto !important;

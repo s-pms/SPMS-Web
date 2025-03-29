@@ -1,5 +1,3 @@
 import PurchasePriceEditor from './editor.vue'
 
-export {
-  PurchasePriceEditor,
-}
+export { PurchasePriceEditor }

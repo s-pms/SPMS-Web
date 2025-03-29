@@ -1,3 +1,17 @@
+<script lang="ts" setup>
+import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
+import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+import { APage, APanel, ATable, ATablePayload, AToolBar } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { SupplierDetail } from '../supplier/component'
+import { PurchasePriceEditor } from './component'
+
+const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
+  = useAirTable(PurchasePriceEntity, PurchasePriceService, {
+    editView: PurchasePriceEditor,
+  })
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -45,25 +59,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, APage, ATable, AToolBar,
-  ATablePayload,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { PurchasePriceEditor } from './component'
-import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
-import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
-import { SupplierDetail } from '../supplier/component'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(PurchasePriceEntity, PurchasePriceService, {
-  editView: PurchasePriceEditor,
-})
-
-</script>
 <style lang="scss" scoped></style>

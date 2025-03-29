@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+import { RoleEntity } from '@/model/personnel/role/RoleEntity'
+import { RoleService } from '@/model/personnel/role/RoleService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirValidator } from '@airpower/helper/AirValidator'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new RoleEntity()))
+
+const { formRef, isLoading, formData, rules, title, onSubmit } = useAirEditor(props, RoleEntity, RoleService, {
+  customRules: {
+    name: [AirValidator.show('不允许带管理员三个字').ifContain('管理员')],
+  },
+})
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -20,32 +37,5 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirValidator } from '@airpower/helper/AirValidator'
-import { RoleEntity } from '@/model/personnel/role/RoleEntity'
-import { RoleService } from '@/model/personnel/role/RoleService'
-
-const props = defineProps(airPropsParam(new RoleEntity()))
-
-const {
-  formRef,
-  isLoading,
-  formData,
-  rules,
-  title,
-  onSubmit,
-} = useAirEditor(props, RoleEntity, RoleService, {
-  customRules: {
-    name: [
-      AirValidator.show('不允许带管理员三个字')
-        .ifContain('管理员'),
-    ],
-  },
-})
-</script>
 
 <style lang="scss" scoped></style>

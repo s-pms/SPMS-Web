@@ -1,4 +1,4 @@
-import { IJson } from '@airpower/interface/IJson'
+import type { IJson } from '@airpower/interface/IJson'
 
 export function useEmoji() {
   const MESSAGE_EMOJI = 'emoji'
@@ -6,7 +6,7 @@ export function useEmoji() {
 
   function decodeEmojis(message: string): IJson[] {
     try {
-      const emojiList = message.match(/\[emoji([1-9]|[1-9][0-9]|100)]/g)
+      const emojiList = message.match(/\[emoji([1-9]|[1-9]\d|100)\]/g)
       const domList = []
       if (emojiList) {
         const splitKey = 'fuc.kyo.ubb.bug'
@@ -14,9 +14,7 @@ export function useEmoji() {
           message = message.replace(emojiList[i], splitKey)
         }
         const strList = message.split(splitKey)
-        const maxLength = strList.length > emojiList.length
-          ? strList.length
-          : emojiList.length
+        const maxLength = strList.length > emojiList.length ? strList.length : emojiList.length
         const isEmojiFirst = emojiList.length > 0 && message.indexOf(emojiList[0]) === 0
         for (let i = 0; i < maxLength; i += 1) {
           if (isEmojiFirst) {
@@ -32,7 +30,8 @@ export function useEmoji() {
                 str: strList[i],
               })
             }
-          } else {
+          }
+          else {
             if (strList.length > i) {
               domList.push({
                 type: MESSAGE_STRING,
@@ -47,14 +46,17 @@ export function useEmoji() {
             }
           }
         }
-      } else {
+      }
+      else {
         domList.push({
           type: MESSAGE_STRING,
           str: message,
         })
       }
       return domList
-    } catch (e) {
+    }
+    catch (e) {
+      console.error(e)
       return [
         {
           type: MESSAGE_STRING,
@@ -65,8 +67,7 @@ export function useEmoji() {
   }
 
   function getEmojiUrl(str: string) {
-    str = str.replace('[emoji', '')
-      .replace(']', '')
+    str = str.replace('[emoji', '').replace(']', '')
     return `/img/emoji/${str}.png`
   }
 

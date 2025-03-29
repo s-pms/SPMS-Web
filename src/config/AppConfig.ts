@@ -1,7 +1,8 @@
-import { Ref, ref } from 'vue'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { RoomEntity } from '@/model/chat/room/RoomEntity'
+import type { Ref } from 'vue'
 import { MemberEntity } from '@/model/chat/member/MemberEntity'
+import { RoomEntity } from '@/model/chat/room/RoomEntity'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { ref } from 'vue'
 
 /**
  * # 应用配置

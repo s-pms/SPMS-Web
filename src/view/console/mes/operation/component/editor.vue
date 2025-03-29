@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { OperationService } from '@/model/mes/operation/OperationService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new OperationEntity()))
+
+const { formRef, isLoading, formData, rules, title, onSubmit } = useAirEditor(props, OperationEntity, OperationService)
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -20,24 +32,5 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { OperationEntity } from '@/model/mes/operation/OperationEntity'
-import { OperationService } from '@/model/mes/operation/OperationService'
-
-const props = defineProps(airPropsParam(new OperationEntity()))
-
-const {
-  formRef,
-  isLoading,
-  formData,
-  rules,
-  title,
-  onSubmit,
-} = useAirEditor(props, OperationEntity, OperationService)
-</script>
 
 <style lang="scss" scoped></style>

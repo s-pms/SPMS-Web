@@ -1,13 +1,13 @@
-import { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
+import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import type { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
+import type { ClassConstructor } from '@airpower/type/AirType'
+import type { IUseBillTableResult } from './IUseBillTableResult'
+import { BillRejectDialog } from '@/component'
 import { AirConfirm } from '@airpower/feedback/AirConfirm'
 import { AirDialog } from '@airpower/helper/AirDialog'
-import { ClassConstructor } from '@airpower/type/AirType'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { IUseBillTableResult } from './IUseBillTableResult'
-import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
-import { BillRejectDialog } from '@/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
 
 /**
  * # 单据的表格Hooks
@@ -19,7 +19,7 @@ import { BillRejectDialog } from '@/component'
 export function useBillTable<
   D extends AbstractBaseBillDetailEntity,
   B extends AbstractBaseBillEntity<D>,
-  S extends AbstractBaseBillService<D, B>
+  S extends AbstractBaseBillService<D, B>,
 >(
   entityClass: ClassConstructor<B>,
   serviceClass: ClassConstructor<S>,

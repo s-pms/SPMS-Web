@@ -1,6 +1,6 @@
-import { Field } from '@airpower/decorator'
-import { MemberEntity } from '@/model/chat/member/MemberEntity'
 import { ChatEvent } from '@/model/chat/common/ChatEvent'
+import { MemberEntity } from '@/model/chat/member/MemberEntity'
+import { Field } from '@airpower/decorator'
 
 /**
  * # 房间成员事件
@@ -9,5 +9,6 @@ import { ChatEvent } from '@/model/chat/common/ChatEvent'
 export class RoomMemberEvent extends ChatEvent {
   @Field({
     type: MemberEntity,
-  }) member!: MemberEntity
+  })
+  member!: MemberEntity
 }

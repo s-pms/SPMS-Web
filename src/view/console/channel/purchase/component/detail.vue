@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
+import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
+import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
+import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
+import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+
+const props = defineProps(airPropsParam(new PurchaseEntity()))
+
+const { title, formData, isLoading, addDetailFinishQuantity } = useBillDetail(props, PurchaseEntity, PurchaseService)
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -8,7 +23,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="formData"
       label-width="120px"
       @submit.prevent
@@ -25,7 +39,7 @@
         <AFormField
           disabled
           field="reason"
-          style="width: 100%;"
+          style="width: 100%"
         />
       </AGroup>
       <BillFormMoreDetail :bill="formData" />
@@ -62,23 +76,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AFormField, AGroup, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-
-const props = defineProps(airPropsParam(new PurchaseEntity()))
-
-const {
-  title, formData, isLoading, addDetailFinishQuantity,
-} = useBillDetail(props, PurchaseEntity, PurchaseService)
-
-</script>

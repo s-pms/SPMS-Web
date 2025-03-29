@@ -1,7 +1,4 @@
-import UserSelector from './selector.vue'
 import UserEditor from './editor.vue'
+import UserSelector from './selector.vue'
 
-export {
-  UserSelector,
-  UserEditor,
-}
+export { UserEditor, UserSelector }

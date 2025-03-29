@@ -1,6 +1,6 @@
 <script generic="E extends BaseEntity" lang="ts" setup>
+import type { BaseEntity } from '@/base/BaseEntity'
 import { AButton } from '@airpower/component'
-import { BaseEntity } from '@/base/BaseEntity'
 
 const { data } = defineProps<{
   /**

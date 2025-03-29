@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 import { MoveDetailEntity } from './MoveDetailEntity'
 import { MoveStatusEnum } from './MoveStatusEnum'
 
@@ -20,7 +18,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   @Field({
     label: '目标仓库',
   })
-    storageName!: string
+  storageName!: string
 
   @Form({
     requiredPayload: true,
@@ -29,7 +27,7 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
     label: '目标仓库',
     type: StorageEntity,
   })
-    storage!: StorageEntity
+  storage!: StorageEntity
 
   @Table({
     width: 100,
@@ -41,14 +39,14 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
     label: '移库状态',
     dictionary: MoveStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Field({
     label: '移库明细',
     type: MoveDetailEntity,
     array: true,
   })
-    details: MoveDetailEntity[] = []
+  details: MoveDetailEntity[] = []
 
   getAuditingStatus(): AirEnum {
     return MoveStatusEnum.AUDITING

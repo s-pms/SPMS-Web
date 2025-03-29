@@ -1,11 +1,6 @@
 import DeviceEditor from './editor.vue'
-import DeviceSelector from './selector.vue'
-import DeviceMonitor from './monitor.vue'
 import DeviceCollectHistory from './history.vue'
+import DeviceMonitor from './monitor.vue'
+import DeviceSelector from './selector.vue'
 
-export {
-  DeviceEditor,
-  DeviceSelector,
-  DeviceMonitor,
-  DeviceCollectHistory,
-}
+export { DeviceCollectHistory, DeviceEditor, DeviceMonitor, DeviceSelector }

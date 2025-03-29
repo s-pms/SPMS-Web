@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { ITree } from '@airpower/interface/ITree'
+import type { ITree } from '@airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 
 /**
  * # 部门
@@ -24,7 +22,8 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   })
   @Field({
     label: '部门名称',
-  }) name!: string
+  })
+  name!: string
 
   @Table({
     forceShow: true,
@@ -38,7 +37,8 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   })
   @Field({
     label: '部门编码',
-  }) code!: string
+  })
+  code!: string
 
   @Form({
     dictionary: OrderNumberDictionary,
@@ -51,23 +51,27 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   })
   @Field({
     label: '排序编号',
-  }) orderNo!: number
+  })
+  orderNo!: number
 
   @Field({
     label: '父级ID',
     type: Number,
-  }) parentId!: number
+  })
+  parentId!: number
 
   @Field({
-    // eslint-disable-next-line no-use-before-define
+
     type: DepartmentEntity,
     array: true,
-  }) children!: this[]
+  })
+  children!: this[]
 
   @Field({
-    // eslint-disable-next-line no-use-before-define
+
     type: DepartmentEntity,
-  }) parent!: this
+  })
+  parent!: this
 
   @Table({
     removed: true,

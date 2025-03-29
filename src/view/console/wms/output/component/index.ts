@@ -4,10 +4,4 @@ import OutputDetailEditor from './detailEditor.vue'
 import OutputSelector from './selector.vue'
 import OutputAddFinishEditor from './addFinishEditor.vue'
 
-export {
-  OutputEditor,
-  OutputDetail,
-  OutputDetailEditor,
-  OutputSelector,
-  OutputAddFinishEditor,
-}
+export { OutputEditor, OutputDetail, OutputDetailEditor, OutputSelector, OutputAddFinishEditor }
