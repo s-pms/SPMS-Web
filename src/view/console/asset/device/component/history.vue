@@ -382,6 +382,11 @@ function onFull() {
     loadData()
   }, 500)
 }
+
+function setCurrent(item?: IJson) {
+  currentLabel.value = item?.label || ''
+  currentColor.value = item?.color || ''
+}
 </script>
 
 <template>
@@ -491,14 +496,8 @@ function onFull() {
             :key="index"
             :style="{ backgroundColor: item.color, width: `${item.percent}%` }"
             class="item"
-            @mouseenter="
-              currentLabel = item.label
-              currentColor = item.color
-            "
-            @mouseout="
-              currentLabel = ''
-              currentColor = ''
-            "
+            @mouseenter="setCurrent(item)"
+            @mouseout="setCurrent(undefined)"
           />
         </div>
         <div class="time">

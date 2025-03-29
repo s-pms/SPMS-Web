@@ -30,6 +30,11 @@ async function selectUser() {
   auditUserList.value.push(user)
   emitList()
 }
+
+function deleteAuditUser(index: number) {
+  auditUserList.value.splice(index, 1)
+  emitList()
+}
 </script>
 
 <template>
@@ -43,10 +48,7 @@ async function selectUser() {
         closable
         effect="dark"
         type="warning"
-        @close="
-          auditUserList.splice(index, 1)
-          emitList()
-        "
+        @close="deleteAuditUser(index) "
       >
         {{ item.nickname }}
       </el-tag>

@@ -69,6 +69,11 @@ function onContextMenu(e: MouseEvent) {
   e.preventDefault()
   e.stopPropagation()
 }
+
+function addEmoji(emoji: string) {
+  input.value += `[emoji${emoji}]`
+  messageDom.value?.focus()
+}
 </script>
 
 <template>
@@ -131,10 +136,7 @@ function onContextMenu(e: MouseEvent) {
         <!--        /> -->
         <Emoji
           v-if="DialogStatus.EMOJI.equalsKey(dialogStatus.key)"
-          @click="
-            input += `[emoji${$event}]`
-            messageDom?.focus()
-          "
+          @click="addEmoji($event) "
         />
         <!--        <Profile -->
         <!--          v-if="dialogs.profile" -->

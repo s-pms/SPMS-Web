@@ -81,6 +81,11 @@ AirEvent.onAll([AppConfig.EVENT_PREFIX + ChatEventType.ROOM_JOIN_SUCCESS.key], (
   messageList.value = []
   autoScroll()
 })
+
+function unLockAndScroll() {
+  isListScrollLocked.value = false
+  autoScroll()
+}
 </script>
 
 <template>
@@ -173,10 +178,7 @@ AirEvent.onAll([AppConfig.EVENT_PREFIX + ChatEventType.ROOM_JOIN_SUCCESS.key], (
       v-if="isListScrollLocked"
       class="scroll-button"
       size="small"
-      @click="
-        isListScrollLocked = false
-        autoScroll()
-      "
+      @click="unLockAndScroll() "
     >
       到最新
     </el-button>

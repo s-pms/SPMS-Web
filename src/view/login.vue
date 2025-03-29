@@ -152,6 +152,11 @@ async function logout() {
   await UserService.create(isLoadingLogin).logout()
 }
 
+function switchQrcodeLogin(item: LoginAction) {
+  currentAction.value = item
+  isQrcodeLogin.value = LoginAction.LOGIN_VIA_QRCODE === item
+}
+
 logout()
 getAppInfo()
 </script>
@@ -177,10 +182,7 @@ getAppInfo()
           :key="item"
           :class="(currentAction === item ? 'active item-' : 'item-') + index"
           class="item"
-          @click="
-            currentAction = item
-            isQrcodeLogin = LoginAction.LOGIN_VIA_QRCODE === item
-          "
+          @click=" switchQrcodeLogin(item) "
         >
           {{ item }}
         </div>

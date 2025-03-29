@@ -31,8 +31,10 @@ export function useBillDetail<
   /**
    * ### 添加完成数量
    * @param detail 明细
+   * @param billId 单据ID
    */
-  async function addDetailFinishQuantity(detail: D) {
+  async function addDetailFinishQuantity(detail: D, billId: number) {
+    detail.billId = billId
     const postData = detail.copy()
     const dec = 100000
     const number: number = await AirDialog.show(

@@ -65,10 +65,7 @@ const { formData, isLoading, addDetailFinishQuantity } = useBillDetail(props, Mo
               icon-button
               tooltip="添加完成"
               type="CHECKIN"
-              @click="
-                data.billId = formData.id
-                addDetailFinishQuantity(data)
-              "
+              @click="addDetailFinishQuantity(data, formData.id)"
             />
           </template>
         </ATable>

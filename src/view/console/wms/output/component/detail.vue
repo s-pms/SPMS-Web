@@ -68,10 +68,7 @@
               icon-button
               tooltip="添加完成"
               type="CHECKIN"
-              @click="
-                data.billId = formData.id
-                onAddFinish(data)
-              "
+              @click="onAddFinish(data,formData.id) "
             />
           </template>
         </ATable>
@@ -105,7 +102,8 @@ const { formData, isLoading, getDetail } = useBillDetail(props, OutputEntity, Ou
   },
 })
 
-async function onAddFinish(detail: OutputDetailEntity) {
+async function onAddFinish(detail: OutputDetailEntity, billId: number) {
+  detail.billId = billId
   await AirDialog.show(OutputAddFinishEditor, detail)
   AirNotification.success('明细出库成功')
   getDetail()

@@ -86,6 +86,11 @@ async function onAddOperation() {
   item.id = Math.random()
   list.value.push(item)
 }
+
+function onDeleteRoutingOperation(index: number) {
+  current.value = -1
+  list.value.splice(index, 1)
+}
 </script>
 
 <template>
@@ -143,10 +148,7 @@ async function onAddOperation() {
                   <div
                     v-if="!formData.isPublished"
                     class="delete"
-                    @click.stop="
-                      current = -1
-                      list.splice(index, 1)
-                    "
+                    @click.stop="onDeleteRoutingOperation(index)"
                   >
                     删除
                   </div>

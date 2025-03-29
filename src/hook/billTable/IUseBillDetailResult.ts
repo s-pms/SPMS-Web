@@ -13,5 +13,5 @@ export interface IUseBillDetailResult<
   B extends AbstractBaseBillEntity<D>,
   S extends AbstractBaseBillService<D, B>,
 > extends IUseDetailResult<B, S> {
-  addDetailFinishQuantity: (billDetail: D) => void
+  addDetailFinishQuantity: (billDetail: D, billId: number) => void
 }
