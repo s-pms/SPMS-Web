@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
-import { ITree } from '@airpower/interface/ITree'
-import { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/interface/IPayload'
+import type { ITree } from '@airpower/interface/ITree'
 import { BaseEntity } from '@/base/BaseEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 
 @Model({
   label: '仓库',
@@ -16,7 +14,7 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '仓库名称',
   })
-    name!: string
+  name!: string
 
   @Table({
     width: 300,
@@ -28,23 +26,23 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '仓库编码',
   })
-    code!: string
+  code!: string
 
   @Field({
-    // eslint-disable-next-line no-use-before-define
+
     type: StorageEntity,
     array: true,
   })
-    children!: this[]
+  children!: this[]
 
   parentId!: number
 
   @Field({
     label: '所属上级',
-    // eslint-disable-next-line no-use-before-define
+
     type: StorageEntity,
   })
-    parent!: this
+  parent!: this
 
   getPayloadLabel(): string {
     return this.name

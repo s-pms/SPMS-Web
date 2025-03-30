@@ -1,3 +1,37 @@
+<script lang="ts" setup>
+import type { AirFileEntity } from '@airpower/model/entity/AirFileEntity'
+import { AppConfig } from '@/config/AppConfig'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { FileCategory } from '@/model/system/file/FileCategory'
+import { AImage, AUser } from '@airpower/component'
+import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
+import { AirDesensitize } from '@airpower/helper/AirDesensitize'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { ref } from 'vue'
+import UserAccount from './user/UserAccount.vue'
+
+defineProps({
+  user: {
+    type: UserEntity,
+    required: true,
+  },
+})
+
+function onUserAccount() {
+  AirDialog.show(UserAccount)
+}
+
+const isLoading = ref(false)
+
+async function onUploadAvatar(file: AirFileEntity) {
+  AppConfig.currentUser.value = await UserService.create(isLoading).getMyInfo()
+  AppConfig.currentUser.value.avatar = file.url
+  await UserService.create(isLoading).updateMyInfo(AppConfig.currentUser.value)
+  AppConfig.currentUser.value = await UserService.create(isLoading).getMyInfo()
+}
+</script>
+
 <template>
   <AUser
     :height="200"
@@ -8,7 +42,7 @@
         <AImage
           v-loading="isLoading"
           :data="{
-            category: FileCategory.AVATAR.key
+            category: FileCategory.AVATAR.key,
           }"
           :height="80"
           :width="80"
@@ -46,9 +80,7 @@
                 {{ AirDesensitize.desensitize(user.email, AirDesensitizeType.EMAIL) }}
                 <a>更换</a>
               </template>
-              <a v-else>
-                绑定邮箱
-              </a>
+              <a v-else> 绑定邮箱 </a>
             </div>
           </div>
           <div class="item">
@@ -60,9 +92,7 @@
                 {{ AirDesensitize.desensitize(user.phone, AirDesensitizeType.MOBILE) }}
                 <a>更换</a>
               </template>
-              <a v-else>
-                绑定手机
-              </a>
+              <a v-else> 绑定手机 </a>
             </div>
           </div>
         </div>
@@ -87,43 +117,7 @@
     </div>
   </AUser>
 </template>
-<script lang="ts" setup>
 
-import { ref } from 'vue'
-import { AirDesensitize } from '@airpower/helper/AirDesensitize'
-import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
-import { AImage, AUser } from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { AirFileEntity } from '@airpower/model/entity/AirFileEntity'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { FileCategory } from '@/model/system/file/FileCategory'
-import { UserService } from '@/model/personnel/user/UserService'
-import { AppConfig } from '@/config/AppConfig'
-import UserAccount from './user/UserAccount.vue'
-
-defineProps({
-  user: {
-    type: UserEntity,
-    required: true,
-  },
-})
-
-function onUserAccount() {
-  AirDialog.show(UserAccount)
-}
-
-const isLoading = ref(false)
-
-async function onUploadAvatar(file: AirFileEntity) {
-  AppConfig.currentUser.value = await UserService.create(isLoading)
-    .getMyInfo()
-  AppConfig.currentUser.value.avatar = file.url
-  await UserService.create(isLoading)
-    .updateMyInfo(AppConfig.currentUser.value)
-  AppConfig.currentUser.value = await UserService.create(isLoading)
-    .getMyInfo()
-}
-</script>
 <style lang="scss" scoped>
 .user {
   display: flex;
@@ -219,7 +213,7 @@ async function onUploadAvatar(file: AirFileEntity) {
     padding: 7px 0;
     border-radius: 5px;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
     user-select: none;
   }
 

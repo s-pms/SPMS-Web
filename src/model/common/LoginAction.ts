@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /**
  * # 登录方式枚举
  * @author Hamm.cn

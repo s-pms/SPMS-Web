@@ -7,7 +7,9 @@ import { AirEnum } from '@airpower/base/AirEnum'
 export class ThirdLoginPlatform extends AirEnum {
   static readonly WECOM = new ThirdLoginPlatform(1, '企业微信', 'wecom')
     .setAppKey('ww4df4e5d397585277')
-    .setOauthUrl('https://login.work.weixin.qq.com/wwlogin/sso/login?agentid=1000090&login_type=CorpApp&appid=APP_KEY&redirect_uri=REDIRECT_URI&state=STATE')
+    .setOauthUrl(
+      'https://login.work.weixin.qq.com/wwlogin/sso/login?agentid=1000090&login_type=CorpApp&appid=APP_KEY&redirect_uri=REDIRECT_URI&state=STATE',
+    )
 
   static readonly WECHAT = new ThirdLoginPlatform(2, '微信', 'wechat', true)
 

@@ -1,6 +1,4 @@
-import {
-  AbstractBaseService,
-} from '@/base/AbstractBaseService'
+import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { DepartmentEntity } from './DepartmentEntity'
 
 /**

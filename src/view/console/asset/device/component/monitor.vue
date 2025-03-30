@@ -1,6 +1,84 @@
+<script lang="ts" setup>
+import type { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
+import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
+import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
+import { ParameterEditor } from '@/view/console/iot/parameter/component'
+import { ADialog, AEmpty } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { onUnmounted, ref } from 'vue'
+import { DeviceCollectHistory } from '.'
+
+const props = defineProps(airPropsParam(new DeviceEntity()))
+
+const formData = ref(props.param.copy())
+
+const monitorList = ref<CollectionEntity[]>([])
+
+async function getDetail() {
+  formData.value = await DeviceService.create().getDetail(props.param.id)
+}
+
+async function getCurrentReport() {
+  monitorList.value = await DeviceService.create().getCurrentReport(props.param.id)
+}
+
+let timer = setInterval(() => {
+  getCurrentReport()
+}, 1000)
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
+
+getDetail()
+
+function getValue(item: CollectionEntity) {
+  switch (item.code) {
+    case CollectionDefault.STATUS:
+      return DeviceStatusEnum.getLabel(Number.parseInt(item.value, 10))
+    case CollectionDefault.ALARM:
+      return AlarmStatusEnum.getLabel(Number.parseInt(item.value, 10))
+    default:
+      return item.value
+  }
+}
+
+function getColor(item: CollectionEntity) {
+  switch (item.code) {
+    case CollectionDefault.STATUS:
+      return DeviceStatusEnum.getColor(Number.parseInt(item.value, 10))
+    case CollectionDefault.ALARM:
+      return AlarmStatusEnum.getColor(Number.parseInt(item.value, 10))
+    default:
+      return item.value
+  }
+}
+
+function addParameter() {
+  AirDialog.show(ParameterEditor)
+}
+
+async function showHistory(item: CollectionEntity) {
+  item.uuid = props.param.uuid
+  clearInterval(timer)
+  try {
+    await AirDialog.show(DeviceCollectHistory, item)
+  }
+  finally {
+    timer = setInterval(() => {
+      getCurrentReport()
+    }, 1000)
+  }
+}
+</script>
+
 <template>
   <ADialog
-    :title="formData.name + '(' + formData.code + ') 采集实时监控'"
+    :title="`${formData.name}(${formData.code}) 采集实时监控`"
     height="70%"
     hide-confirm
     width="70%"
@@ -47,83 +125,6 @@
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { onUnmounted, ref } from 'vue'
-import { ADialog, AEmpty } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
-import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
-import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { ParameterEditor } from '@/view/console/iot/parameter/component'
-import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
-import { DeviceCollectHistory } from '.'
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
-
-const props = defineProps(airPropsParam(new DeviceEntity()))
-
-const formData = ref(props.param.copy())
-
-const monitorList = ref<CollectionEntity[]>([])
-
-async function getDetail() {
-  formData.value = await DeviceService.create().getDetail(props.param.id)
-}
-
-async function getCurrentReport() {
-  monitorList.value = await DeviceService.create().getCurrentReport(props.param.id)
-}
-
-let timer = setInterval(() => {
-  getCurrentReport()
-}, 1000)
-
-onUnmounted(() => {
-  clearInterval(timer)
-})
-
-getDetail()
-
-function getValue(item: CollectionEntity) {
-  switch (item.code) {
-    case CollectionDefault.STATUS:
-      return DeviceStatusEnum.getLabel(parseInt(item.value, 10))
-    case CollectionDefault.ALARM:
-      return AlarmStatusEnum.getLabel(parseInt(item.value, 10))
-    default:
-      return item.value
-  }
-}
-
-function getColor(item: CollectionEntity) {
-  switch (item.code) {
-    case CollectionDefault.STATUS:
-      return DeviceStatusEnum.getColor(parseInt(item.value, 10))
-    case CollectionDefault.ALARM:
-      return AlarmStatusEnum.getColor(parseInt(item.value, 10))
-    default:
-      return item.value
-  }
-}
-
-function addParameter() {
-  AirDialog.show(ParameterEditor)
-}
-
-async function showHistory(item: CollectionEntity) {
-  item.uuid = props.param.uuid
-  clearInterval(timer)
-  try {
-    await AirDialog.show(DeviceCollectHistory, item)
-  } finally {
-    timer = setInterval(() => {
-      getCurrentReport()
-    }, 1000)
-  }
-}
-</script>
-
 <style lang="scss" scoped>
 .monitor-list {
   display: flex;
@@ -138,7 +139,7 @@ async function showHistory(item: CollectionEntity) {
 
     .card-body {
       cursor: pointer;
-      transition: all .3s;
+      transition: all 0.3s;
       margin: 5px;
       background-color: #f5f5f5;
       border-radius: 10px;

@@ -1,3 +1,43 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
+import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
+import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { ref } from 'vue'
+import { SupplierSelector } from '../../supplier/component'
+
+const props = defineProps(airPropsParam(new PurchaseDetailEntity()))
+
+const formData = ref(props.param.copy())
+
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+async function getPurchasePrice() {
+  if (formData.value.material && formData.value.supplier) {
+    const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(
+      formData.value.material.id,
+      formData.value.supplier.id,
+    )
+    if (purchasePrice) {
+      formData.value.price = purchasePrice.price
+      return
+    }
+    AirNotification.create().setDuration(5000).info('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
+    formData.value.price = formData.value.material.purchasePrice
+  }
+}
+
+async function onSubmit() {
+  props.onConfirm(formData.value)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -70,40 +110,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { SupplierSelector } from '../../supplier/component'
-import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
-import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
-
-const props = defineProps(airPropsParam(new PurchaseDetailEntity()))
-
-const formData = ref(props.param.copy())
-
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-async function getPurchasePrice() {
-  if (formData.value.material && formData.value.supplier) {
-    const purchasePrice = await PurchasePriceService.create(isLoading).getByMaterialAndSupplier(formData.value.material.id, formData.value.supplier.id)
-    if (purchasePrice) {
-      formData.value.price = purchasePrice.price
-      return
-    }
-    AirNotification.create().setDuration(5000).info('该供应商未提供该物料的采购报价，将自动填写该物料的参考报价')
-    formData.value.price = formData.value.material.purchasePrice
-  }
-}
-
-async function onSubmit() {
-  props.onConfirm(formData.value)
-}
-</script>

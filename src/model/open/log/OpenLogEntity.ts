@@ -1,32 +1,37 @@
+import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Table } from '@airpower/decorator'
 import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { BaseEntity } from '@/base/BaseEntity'
 import { OpenAppEntity } from '../app/OpenAppEntity'
 
 export class OpenLogEntity extends BaseEntity {
   @Field({
     type: OpenAppEntity,
-  }) openApp!: OpenAppEntity
+  })
+  openApp!: OpenAppEntity
 
   @Table({
     width: 200,
   })
   @Field({
     label: '来源IP',
-  }) ip!: string
+  })
+  ip!: string
 
   @Table()
   @Field({
     label: '请求地址',
-  }) url!: string
+  })
+  url!: string
 
   @Field({
     label: '请求数据',
-  }) request!: string
+  })
+  request!: string
 
   @Field({
     label: '响应数据',
-  }) response!: string
+  })
+  response!: string
 
   @Table({
     align: 'right',
@@ -34,7 +39,8 @@ export class OpenLogEntity extends BaseEntity {
   })
   @Field({
     label: '处理时间',
-  }) mSecond!: string
+  })
+  mSecond!: string
 
   @Table({
     removed: false,
@@ -52,5 +58,6 @@ export class OpenLogEntity extends BaseEntity {
   })
   @Field({
     label: '响应时间',
-  }) updateTime!: number
+  })
+  updateTime!: number
 }

@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import { UnitEntity } from '@/model/system/unit/UnitEntity'
+import { UnitService } from '@/model/system/unit/UnitService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { UnitEditor } from './component'
+
+const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
+  = useAirTable(UnitEntity, UnitService, {
+    editView: UnitEditor,
+  })
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -26,22 +39,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, APage, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { UnitEditor } from './component'
-import { UnitEntity } from '@/model/system/unit/UnitEntity'
-import { UnitService } from '@/model/system/unit/UnitService'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(UnitEntity, UnitService, {
-  editView: UnitEditor,
-})
-</script>
 <style lang="scss" scoped></style>

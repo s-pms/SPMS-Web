@@ -1,7 +1,4 @@
-import DepartmentSelector from './selector.vue'
 import DepartmentEditor from './editor.vue'
+import DepartmentSelector from './selector.vue'
 
-export {
-  DepartmentSelector,
-  DepartmentEditor,
-}
+export { DepartmentEditor, DepartmentSelector }

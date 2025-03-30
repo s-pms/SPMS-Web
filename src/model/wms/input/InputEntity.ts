@@ -1,15 +1,13 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { InputDetailEntity } from './InputDetailEntity'
+import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
+import { OrderEntity } from '@/model/mes/order/OrderEntity'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { MoveEntity } from '../move/MoveEntity'
+import { InputDetailEntity } from './InputDetailEntity'
 import { InputStatusEnum } from './InputStatusEnum'
 import { InputTypeEnum } from './InputTypeEnum'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { MoveEntity } from '../move/MoveEntity'
-import { OrderEntity } from '@/model/mes/order/OrderEntity'
 
 @Model({
   label: '入库单',
@@ -35,7 +33,7 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     label: '入库类型',
     dictionary: InputTypeEnum,
   })
-    type!: number
+  type!: number
 
   @Table({
     width: 100,
@@ -48,38 +46,38 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     label: '入库状态',
     dictionary: InputStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Field({
     label: '仓库',
     type: StorageEntity,
   })
-    storage!: StorageEntity
+  storage!: StorageEntity
 
   @Field({
     label: '入库明细',
     type: InputDetailEntity,
     array: true,
   })
-    details: InputDetailEntity[] = []
+  details: InputDetailEntity[] = []
 
   @Field({
     label: '采购单',
     type: PurchaseEntity,
   })
-    purchase!: PurchaseEntity
+  purchase!: PurchaseEntity
 
   @Field({
     label: '移库单',
     type: MoveEntity,
   })
-    move!: MoveEntity
+  move!: MoveEntity
 
   @Field({
     label: '生产订单',
     type: OrderEntity,
   })
-    order!: OrderEntity
+  order!: OrderEntity
 
   getAuditingStatus(): AirEnum {
     return InputStatusEnum.AUDITING

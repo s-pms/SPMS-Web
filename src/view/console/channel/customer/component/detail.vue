@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+import { CustomerService } from '@/model/channel/customer/CustomerService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
+
+const props = defineProps(airPropsParam(new CustomerEntity()))
+
+const { title, formData, isLoading } = useAirDetail(props, CustomerEntity, CustomerService)
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -6,7 +18,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="formData"
       label-width="120px"
       @submit.prevent
@@ -20,18 +31,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { CustomerService } from '@/model/channel/customer/CustomerService'
-
-const props = defineProps(airPropsParam(new CustomerEntity()))
-
-const {
-  title, formData, isLoading,
-} = useAirDetail(props, CustomerEntity, CustomerService)
-
-</script>

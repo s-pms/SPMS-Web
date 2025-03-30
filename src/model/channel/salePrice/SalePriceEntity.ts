@@ -1,8 +1,6 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 import { CustomerEntity } from '../customer/CustomerEntity'
 
 @Model({
@@ -15,7 +13,7 @@ export class SalePriceEntity extends BaseEntity {
   @Field({
     type: MaterialEntity,
   })
-    material!: MaterialEntity
+  material!: MaterialEntity
 
   @Form({
     requiredPayload: true,
@@ -23,31 +21,31 @@ export class SalePriceEntity extends BaseEntity {
   @Field({
     type: CustomerEntity,
   })
-    customer!: CustomerEntity
+  customer!: CustomerEntity
 
   @Table()
   @Field({
     label: '物料编码',
   })
-    materialCode!: string
+  materialCode!: string
 
   @Table()
   @Field({
     label: '物料名称',
   })
-    materialName!: string
+  materialName!: string
 
   @Table()
   @Field({
     label: '客户编码',
   })
-    customerName!: string
+  customerName!: string
 
   @Table()
   @Field({
     label: '客户名称',
   })
-    customerCode!: string
+  customerCode!: string
 
   @Form({
     requiredNumber: true,
@@ -56,7 +54,7 @@ export class SalePriceEntity extends BaseEntity {
     label: '物料',
     type: Number,
   })
-    materialId!: number
+  materialId!: number
 
   @Form({
     requiredNumber: true,
@@ -71,5 +69,5 @@ export class SalePriceEntity extends BaseEntity {
     label: '销售单价',
     type: Number,
   })
-    price!: number
+  price!: number
 }

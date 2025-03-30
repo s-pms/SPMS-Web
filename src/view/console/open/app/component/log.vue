@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
+import { OpenLogService } from '@/model/open/log/OpenLogService'
+import { ADialog, APage, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { OpenAppLogDetail } from './index'
+
+const props = defineProps(airPropsParam(new OpenAppEntity()))
+
+const { isLoading } = useAirDetail(props, OpenAppEntity, OpenAppService)
+
+const { onPageChanged, response } = useAirTable(OpenLogEntity, OpenLogService, {
+  beforeSearch(requestData) {
+    requestData.filter.openApp = props.param.copyExposeId()
+    return requestData
+  },
+})
+
+function onDetail(log: OpenLogEntity) {
+  AirDialog.show(OpenAppLogDetail, log)
+}
+</script>
+
 <template>
   <ADialog
     height="80%"
@@ -29,34 +57,4 @@
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { ADialog, APage, ATable } from '@airpower/component'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
-import { OpenLogService } from '@/model/open/log/OpenLogService'
-import { OpenAppLogDetail } from './index'
-
-const props = defineProps(airPropsParam(new OpenAppEntity()))
-
-const { isLoading } = useAirDetail(props, OpenAppEntity, OpenAppService)
-
-const {
-  onPageChanged,
-  response,
-} = useAirTable(OpenLogEntity, OpenLogService, {
-  beforeSearch(requestData) {
-    requestData.filter.openApp = props.param.copyExposeId()
-    return requestData
-  },
-})
-
-function onDetail(log: OpenLogEntity) {
-  AirDialog.show(OpenAppLogDetail, log)
-}
-</script>
 <style lang="scss" scoped></style>

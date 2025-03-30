@@ -1,11 +1,11 @@
-import { AirEnum } from '@airpower/base/AirEnum'
-import { ClassConstructor } from '@airpower/type/AirType'
+import type { ChatEvent } from '@/model/chat/common/ChatEvent'
+import type { ClassConstructor } from '@airpower/type/AirType'
+import { RoomMemberImageMessageEvent } from '@/model/chat/room/event/RoomMemberImageMessageEvent'
 import { RoomMemberJoinEvent } from '@/model/chat/room/event/RoomMemberJoinEvent'
 import { RoomMemberLeaveEvent } from '@/model/chat/room/event/RoomMemberLeaveEvent'
-import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
-import { ChatEvent } from '@/model/chat/common/ChatEvent'
 import { RoomMemberTextMessageEvent } from '@/model/chat/room/event/RoomMemberTextMessageEvent'
-import { RoomMemberImageMessageEvent } from '@/model/chat/room/event/RoomMemberImageMessageEvent'
+import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
+import { AirEnum } from '@airpower/base/AirEnum'
 
 /**
  * # 世界事件类型

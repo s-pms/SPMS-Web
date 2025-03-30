@@ -1,8 +1,6 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
-import { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/interface/IPayload'
 import { BaseEntity } from '@/base/BaseEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 
 @Model({
   label: '供应商',
@@ -20,7 +18,7 @@ export class SupplierEntity extends BaseEntity implements IPayload {
   @Field({
     label: '供应商名称',
   })
-    name!: string
+  name!: string
 
   /**
    * ### 供应商编码
@@ -35,7 +33,7 @@ export class SupplierEntity extends BaseEntity implements IPayload {
   @Field({
     label: '供应商编码',
   })
-    code!: string
+  code!: string
 
   /**
    * ### 联系电话
@@ -47,7 +45,7 @@ export class SupplierEntity extends BaseEntity implements IPayload {
   @Field({
     label: '联系电话',
   })
-    phone!: string
+  phone!: string
 
   getPayloadLabel(): string {
     return this.name

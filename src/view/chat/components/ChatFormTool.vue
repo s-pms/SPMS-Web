@@ -9,7 +9,7 @@ const emits = defineEmits(['open'])
     <div class="tool-left">
       <div
         class="tool-item"
-        @click="emits('open',DialogStatus.EMOJI)"
+        @click="emits('open', DialogStatus.EMOJI)"
       >
         <i class="iconfont icon-pic_fill" /><span>表情</span>
       </div>

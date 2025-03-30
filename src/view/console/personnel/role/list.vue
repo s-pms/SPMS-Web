@@ -1,3 +1,24 @@
+<script lang="ts" setup>
+import { RoleEntity } from '@/model/personnel/role/RoleEntity'
+import { RoleService } from '@/model/personnel/role/RoleService'
+import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
+
+async function onMenuEditor(role: RoleEntity) {
+  AirDialog.show(RoleMenuEditor, role)
+}
+
+async function onPermissionEditor(role: RoleEntity) {
+  AirDialog.show(RolePermissionEditor, role)
+}
+
+const { isLoading, response, onSearch, onAdd, onEdit, onDelete, onPageChanged } = useAirTable(RoleEntity, RoleService, {
+  editView: RoleEditor,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -43,31 +64,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  AButton,
-  APage,
-  APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
-import { RoleEntity } from '@/model/personnel/role/RoleEntity'
-import { RoleService } from '@/model/personnel/role/RoleService'
-
-async function onMenuEditor(role: RoleEntity) {
-  AirDialog.show(RoleMenuEditor, role)
-}
-
-async function onPermissionEditor(role: RoleEntity) {
-  AirDialog.show(RolePermissionEditor, role)
-}
-
-const {
-  isLoading, response,
-  onSearch, onAdd, onEdit, onDelete, onPageChanged,
-} = useAirTable(RoleEntity, RoleService, {
-  editView: RoleEditor,
-})
-</script>
 <style lang="scss" scoped></style>

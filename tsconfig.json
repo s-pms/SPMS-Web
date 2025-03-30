@@ -1,24 +1,17 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
     "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "types": [
-      "vite/client"
-    ],
     "lib": [
       "esnext",
       "dom"
     ],
+    "useDefineForClassFields": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
       "@/*": [
         "src/*"
@@ -29,7 +22,14 @@
       "@airpower/*": [
         "airpower/*"
       ]
-    }
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "vite/client"
+    ],
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true
   },
   "include": [
     "vite.config.mts",

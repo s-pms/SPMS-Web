@@ -1,3 +1,21 @@
+<script lang="ts" setup>
+import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { DeviceEditor, DeviceMonitor } from './component'
+
+const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
+  = useAirTable(DeviceEntity, DeviceService, {
+    editView: DeviceEditor,
+  })
+
+async function showMonitor(device: DeviceEntity) {
+  AirDialog.show(DeviceMonitor, device)
+}
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -39,27 +57,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, APage, ATable, AToolBar, AButton,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { DeviceEditor, DeviceMonitor } from './component'
-import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(DeviceEntity, DeviceService, {
-  editView: DeviceEditor,
-})
-
-async function showMonitor(device: DeviceEntity) {
-  AirDialog.show(DeviceMonitor, device)
-}
-</script>
 <style lang="scss" scoped></style>

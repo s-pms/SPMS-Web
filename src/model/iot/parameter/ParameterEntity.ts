@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
-import { ParameterTypeEnum } from './ParameterTypeEnum'
 import { ParameterSystemEnum } from '@/model/iot/parameter/ParameterSystemEnum'
+import { Field, Form, Model, Table } from '@airpower/decorator'
+import { ParameterTypeEnum } from './ParameterTypeEnum'
 
 @Model({
   label: '采集参数',
@@ -18,7 +16,7 @@ export class ParameterEntity extends BaseEntity {
   @Field({
     label: '参数名称',
   })
-    code!: string
+  code!: string
 
   @Table({
     forceShow: true,
@@ -29,7 +27,7 @@ export class ParameterEntity extends BaseEntity {
   @Field({
     label: '参数标题',
   })
-    label!: string
+  label!: string
 
   @Table({
     showColor: true,
@@ -44,7 +42,7 @@ export class ParameterEntity extends BaseEntity {
     label: '数据类型',
     dictionary: ParameterTypeEnum,
   })
-    dataType!: number
+  dataType!: number
 
   @Table({
     showColor: true,
@@ -55,5 +53,5 @@ export class ParameterEntity extends BaseEntity {
     label: '参数类别',
     dictionary: ParameterSystemEnum,
   })
-    isSystem!: boolean
+  isSystem!: boolean
 }

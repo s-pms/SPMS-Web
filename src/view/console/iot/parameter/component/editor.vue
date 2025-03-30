@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
+import { ParameterService } from '@/model/iot/parameter/ParameterService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new ParameterEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, ParameterEntity, ParameterService)
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -21,19 +33,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { ParameterService } from '@/model/iot/parameter/ParameterService'
-
-const props = defineProps(airPropsParam(new ParameterEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, ParameterEntity, ParameterService)
-
-</script>

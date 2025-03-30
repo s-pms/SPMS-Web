@@ -1,3 +1,27 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
+import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
+import { ADialog, AInput } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new MoveDetailEntity()))
+
+const formData = ref(props.param.copy())
+
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+formData.value.quantity = props.param.inventory.quantity
+formData.value.billId = props.param.billId
+
+async function onSubmit() {
+  props.onConfirm(formData.value)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -43,27 +67,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
-
-const props = defineProps(airPropsParam(new MoveDetailEntity()))
-
-const formData = ref(props.param.copy())
-
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-formData.value.quantity = props.param.inventory.quantity
-formData.value.billId = props.param.billId
-
-async function onSubmit() {
-  props.onConfirm(formData.value)
-}
-</script>

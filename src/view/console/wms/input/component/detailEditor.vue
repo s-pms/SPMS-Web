@@ -1,3 +1,29 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
+import { InputDetailService } from '@/model/wms/input/InputDetailService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new InputDetailEntity()))
+
+const formData = ref(props.param.copy())
+if (formData.value.material) {
+  formData.value.materialId = formData.value.material.id
+  formData.value.materialName = formData.value.material.name
+}
+
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+async function onSubmit() {
+  props.onConfirm(formData.value)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -43,29 +69,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { InputDetailService } from '@/model/wms/input/InputDetailService'
-
-const props = defineProps(airPropsParam(new InputDetailEntity()))
-
-const formData = ref(props.param.copy())
-if (formData.value.material) {
-  formData.value.materialId = formData.value.material.id
-  formData.value.materialName = formData.value.material.name
-}
-
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-async function onSubmit() {
-  props.onConfirm(formData.value)
-}
-</script>

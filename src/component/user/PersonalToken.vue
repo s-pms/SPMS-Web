@@ -1,3 +1,54 @@
+<script lang="ts" setup>
+import type { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { AButton, AEmpty } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirClipboard } from '@airpower/helper/AirClipboard'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { ref } from 'vue'
+
+defineProps(airProps())
+
+const list = ref([] as PersonalTokenEntity[])
+
+const isLoading = ref(false)
+
+const name = ref('')
+
+async function init() {
+  list.value = await UserService.create(isLoading).getMyPersonalTokenList()
+}
+
+async function createMyPersonalToken() {
+  await AirConfirm.warning('是否确认创建新的私人令牌？', '创建确认')
+  const token = await UserService.create(isLoading).createMyPersonalToken(name.value)
+
+  await AirAlert.create()
+    .setConfirmText('点击复制')
+    .hideClose()
+    .success('创建私人令牌成功，请点击复制，后续将不再显示令牌！', '创建成功')
+  await AirClipboard.copy(token)
+  AirNotification.success('已经成功复制到你的剪切板')
+  name.value = ''
+  init()
+}
+
+async function onDisableOrEnable(item: PersonalTokenEntity) {
+  await AirConfirm.warning(
+    `是否确认${item.isDisabled ? '启用' : '禁用'}这个私人令牌？`,
+    item.isDisabled ? '启用' : '禁用',
+  )
+  const service = UserService.create(isLoading)
+  await (item.isDisabled ? service.enableMyPersonalToken(item) : service.disableMyPersonalToken(item))
+  init()
+}
+
+init()
+</script>
+
 <template>
   <div class="personal-token">
     <div class="new">
@@ -30,9 +81,7 @@
           <div class="token">
             {{ item.token }}
           </div>
-          <div
-            class="status"
-          >
+          <div class="status">
             <el-switch
               :active-value="false"
               :inactive-value="true"
@@ -45,60 +94,13 @@
           </div>
         </div>
       </div>
-      <AEmpty v-if="list.length===0">
+      <AEmpty v-if="list.length === 0">
         没有创建任何身份令牌
       </AEmpty>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { airProps } from '@airpower/config/AirProps'
-import { AButton, AEmpty } from '@airpower/component'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirClipboard } from '@airpower/helper/AirClipboard'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { UserService } from '@/model/personnel/user/UserService'
-import { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
-
-defineProps(airProps())
-
-const list = ref([] as PersonalTokenEntity[])
-
-const isLoading = ref(false)
-
-const name = ref('')
-
-async function init() {
-  list.value = await UserService.create(isLoading)
-    .getMyPersonalTokenList()
-}
-
-async function createMyPersonalToken() {
-  await AirConfirm.warning('是否确认创建新的私人令牌？', '创建确认')
-  const token = await UserService.create(isLoading)
-    .createMyPersonalToken(name.value)
-
-  await AirAlert.create().setConfirmText('点击复制').hideClose().success('创建私人令牌成功，请点击复制，后续将不再显示令牌！', '创建成功')
-  await AirClipboard.copy(token)
-  AirNotification.success('已经成功复制到你的剪切板')
-  name.value = ''
-  init()
-}
-
-async function onDisableOrEnable(item: PersonalTokenEntity) {
-  await AirConfirm.warning(`是否确认${item.isDisabled ? '启用' : '禁用'}这个私人令牌？`, item.isDisabled ? '启用' : '禁用')
-  const service = UserService.create(isLoading)
-  await (item.isDisabled ? service.enableMyPersonalToken(item) : service.disableMyPersonalToken(item))
-  init()
-}
-
-init()
-
-</script>
 <style lang="scss" scoped>
 .personal-token {
   .new {

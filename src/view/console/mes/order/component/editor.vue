@@ -1,3 +1,85 @@
+<script lang="ts" setup>
+import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { OrderEntity } from '@/model/mes/order/OrderEntity'
+import { OrderService } from '@/model/mes/order/OrderService'
+import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
+import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { CustomerSelector } from '@/view/console/channel/customer/component'
+import { ADialog, AFormField, AGroup, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { computed, ref } from 'vue'
+import { PlanDetailSelector, PlanSelector } from '../../plan/component'
+import { RoutingSelector } from '../../routing/component'
+
+const props = defineProps(airPropsParam(new OrderEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, OrderEntity, OrderService, {
+  beforeSubmit(submitData) {
+    if (submitData.deliverTime < submitData.startTime) {
+      AirNotification.warning('交付日期不能早于开始日期')
+      return null
+    }
+    return submitData
+  },
+})
+
+const routingFilter = ref(new RoutingEntity())
+routingFilter.value.isPublished = true
+routingFilter.value.material = formData.value.material
+
+async function selectPlan() {
+  if (formData.value.plan) {
+    formData.value.customer = formData.value.plan.customer
+    formData.value.startTime = formData.value.plan.startTime
+    formData.value.deliverTime = formData.value.plan.deliverTime
+  }
+  else {
+    formData.value.exclude('customer', 'material')
+  }
+}
+
+async function selectMaterial() {
+  if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
+    formData.value.material = await AirDialog.select(MaterialSelector)
+    routingFilter.value.material = formData.value.material
+    return
+  }
+  const planDetail: PlanDetailEntity = await AirDialog.show(PlanDetailSelector, formData.value.plan)
+  formData.value.material = planDetail.material
+  routingFilter.value.material = formData.value.material
+  formData.value.quantity = planDetail.quantity
+  if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
+    // 如果是外销计划
+    formData.value.customer = formData.value.plan.customer
+  }
+}
+
+async function clearMaterial() {
+  formData.value.exclude('material')
+}
+
+async function orderTypeChanged() {
+  if (OrderTypeEnum.PLAN.equalsKey(formData.value.type)) {
+    formData.value.exclude('materialId', 'material')
+  }
+}
+
+const isCustomerDisabled = computed(() => {
+  if (formData.value.type === OrderTypeEnum.PLAN.key) {
+    if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
+      // 如果是外销计划 则禁用选择客户 自动从外销计划带出
+      return true
+    }
+  }
+  return false
+})
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -89,93 +171,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { computed, ref } from 'vue'
-import {
-  ADialog, AFormField, AGroup, ASelect,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { OrderEntity } from '@/model/mes/order/OrderEntity'
-import { OrderService } from '@/model/mes/order/OrderService'
-import { CustomerSelector } from '@/view/console/channel/customer/component'
-import { PlanDetailSelector, PlanSelector } from '../../plan/component'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
-import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
-import { RoutingSelector } from '../../routing/component'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
-
-const props = defineProps(airPropsParam(new OrderEntity()))
-
-const {
-  title,
-  formData,
-  rules,
-  formRef,
-  isLoading,
-  onSubmit,
-} = useAirEditor(props, OrderEntity, OrderService, {
-  beforeSubmit(submitData) {
-    if (submitData.deliverTime < submitData.startTime) {
-      AirNotification.warning('交付日期不能早于开始日期')
-      return null
-    }
-    return submitData
-  },
-})
-
-const routingFilter = ref(new RoutingEntity())
-routingFilter.value.isPublished = true
-routingFilter.value.material = formData.value.material
-
-async function selectPlan() {
-  if (formData.value.plan) {
-    formData.value.customer = formData.value.plan.customer
-    formData.value.startTime = formData.value.plan.startTime
-    formData.value.deliverTime = formData.value.plan.deliverTime
-  } else {
-    formData.value.exclude('customer', 'material')
-  }
-}
-
-async function selectMaterial() {
-  if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
-    formData.value.material = await AirDialog.select(MaterialSelector)
-    routingFilter.value.material = formData.value.material
-    return
-  }
-  const planDetail: PlanDetailEntity = await AirDialog.show(PlanDetailSelector, formData.value.plan)
-  formData.value.material = planDetail.material
-  routingFilter.value.material = formData.value.material
-  formData.value.quantity = planDetail.quantity
-  if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
-    // 如果是外销计划
-    formData.value.customer = formData.value.plan.customer
-  }
-}
-
-async function clearMaterial() {
-  formData.value.exclude('material')
-}
-
-async function orderTypeChanged() {
-  if (OrderTypeEnum.PLAN.equalsKey(formData.value.type)) {
-    formData.value.exclude('materialId', 'material')
-  }
-}
-
-const isCustomerDisabled = computed(() => {
-  if (formData.value.type === OrderTypeEnum.PLAN.key) {
-    if (formData.value.plan && PlanTypeEnum.SALE.equalsKey(formData.value.plan.type)) {
-      // 如果是外销计划 则禁用选择客户 自动从外销计划带出
-      return true
-    }
-  }
-  return false
-})
-</script>

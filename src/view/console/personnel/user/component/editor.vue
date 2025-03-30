@@ -1,3 +1,26 @@
+<script lang="ts" setup>
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { DepartmentSelector } from '@/view/console/personnel/department/component'
+import { AButton, ADialog, AGroup, AInput } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { RoleSelector } from '../../role/component'
+
+const props = defineProps(airPropsParam(new UserEntity()))
+
+const { isLoading, formData, formRef, title, rules, onSubmit } = useAirEditor(props, UserEntity, UserService)
+
+async function selectRole() {
+  formData.value.roleList = await AirDialog.selectList(RoleSelector, formData.value.roleList)
+}
+
+async function selectDepartment() {
+  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
+}
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -91,38 +114,6 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AGroup, AInput,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { RoleSelector } from '../../role/component'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-import { DepartmentSelector } from '@/view/console/personnel/department/component'
-
-const props = defineProps(airPropsParam(new UserEntity()))
-
-const {
-  isLoading,
-  formData,
-  formRef,
-  title,
-  rules,
-  onSubmit,
-} = useAirEditor(props, UserEntity, UserService)
-
-async function selectRole() {
-  formData.value.roleList = await AirDialog.selectList(RoleSelector, formData.value.roleList)
-}
-
-async function selectDepartment() {
-  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
-}
-</script>
 
 <style lang="scss" scoped>
 .role-list > *,

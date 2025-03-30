@@ -1,3 +1,43 @@
+<script lang="ts" setup>
+import { Constant } from '@/config/Constant'
+import { ConfigEntity } from '@/model/system/config/ConfigEntity'
+import { ConfigService } from '@/model/system/config/ConfigService'
+import { ConfigType } from '@/model/system/config/ConfigType'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new ConfigEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, ConfigEntity, ConfigService, {
+  afterGetDetail: (data) => {
+    switch (data.type) {
+      case ConfigType.NUMBER.key:
+        data.config = Number(data.config) as unknown as string
+        break
+      case ConfigType.BOOLEAN.key:
+        data.config = (data.config === Constant.BOOLEAN_YES) as unknown as string
+        break
+      default:
+    }
+    return data
+  },
+
+  beforeSubmit: (data) => {
+    switch (data.type) {
+      case ConfigType.NUMBER.key:
+        data.config = data.config.toString()
+        break
+      case ConfigType.BOOLEAN.key:
+        data.config = data.config ? Constant.BOOLEAN_YES : Constant.BOOLEAN_NO
+        break
+      default:
+    }
+    return data
+  },
+})
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -48,53 +88,6 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { Constant } from '@/config/Constant'
-import { ConfigEntity } from '@/model/system/config/ConfigEntity'
-import { ConfigService } from '@/model/system/config/ConfigService'
-import { ConfigType } from '@/model/system/config/ConfigType'
-
-const props = defineProps(airPropsParam(new ConfigEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading, onSubmit,
-} = useAirEditor(
-  props,
-  ConfigEntity,
-  ConfigService,
-  {
-    afterGetDetail: (data) => {
-      switch (data.type) {
-        case ConfigType.NUMBER.key:
-          data.config = Number(data.config) as unknown as string
-          break
-        case ConfigType.BOOLEAN.key:
-          data.config = (data.config === Constant.BOOLEAN_YES) as unknown as string
-          break
-        default:
-      }
-      return data
-    },
-
-    beforeSubmit: (data) => {
-      switch (data.type) {
-        case ConfigType.NUMBER.key:
-          data.config = data.config.toString()
-          break
-        case ConfigType.BOOLEAN.key:
-          data.config = data.config ? Constant.BOOLEAN_YES : Constant.BOOLEAN_NO
-          break
-        default:
-      }
-      return data
-    },
-  },
-)
-</script>
 
 <style lang="scss" scoped>
 .param-item {

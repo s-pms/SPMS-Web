@@ -1,3 +1,23 @@
+<script lang="ts" setup>
+import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { MaterialService } from '@/model/asset/material/MaterialService'
+import { UnitSelector } from '@/view/console/system/unit/component'
+import { ADialog, AFormField, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new MaterialEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, MaterialEntity, MaterialService, {
+  afterGetDetail(detailData) {
+    return detailData
+  },
+  beforeSubmit(submitData) {
+    return submitData
+  },
+})
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -32,27 +52,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { MaterialService } from '@/model/asset/material/MaterialService'
-import { UnitSelector } from '@/view/console/system/unit/component'
-
-const props = defineProps(airPropsParam(new MaterialEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, MaterialEntity, MaterialService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    return submitData
-  },
-})
-
-</script>

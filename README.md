@@ -92,17 +92,16 @@ Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.
 
   ```shell
   git clone https://github.com/s-pms/SPMS-Web.git &&
-  cd SPMS-Web && 
+  cd SPMS-Web &&
   git clone https://github.com/HammCn/AirPower4T.git airpower &&
   yarn && cp .env.dev .env && yarn s
   ```
-
 
 - 通过**Gitee**代码仓库初始化(推荐)
 
   ```shell
   git clone https://gitee.com/s-pms/SPMS-Web.git &&
-  cd SPMS-Web && 
+  cd SPMS-Web &&
   git clone https://gitee.com/air-power/AirPower4T.git airpower &&
   yarn && cp .env.dev .env && yarn s
   ```
@@ -135,13 +134,13 @@ yarn production     #生产环境 使用.env.production
 
 ```shell
 #使用标准commit模板
-yarn c   
+yarn c
 
 #更新项目和AirPower
-yarn u   
+yarn u
 
 #查看Git格式化日志
-yarn l           
+yarn l
 ```
 
 ### 推荐的VSCODE插件扩展
@@ -159,4 +158,3 @@ yarn l
 如果有定制需求，欢迎联系我们：
 
 Email: admin#hamm.cn
-

@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
-import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { SupplierEntity } from '../supplier/SupplierEntity'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
+import { SupplierEntity } from '../supplier/SupplierEntity'
 
 @Model({
   label: '采购明细',
@@ -15,7 +13,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     type: MaterialEntity,
   })
-    material!: MaterialEntity
+  material!: MaterialEntity
 
   @Form({
     requiredPayload: true,
@@ -23,31 +21,31 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     type: SupplierEntity,
   })
-    supplier!: SupplierEntity
+  supplier!: SupplierEntity
 
   @Table()
   @Field({
     label: '物料编码',
   })
-    materialCode!: string
+  materialCode!: string
 
   @Table()
   @Field({
     label: '物料名称',
   })
-    materialName!: string
+  materialName!: string
 
   @Table()
   @Field({
     label: '供应商名称',
   })
-    supplierName!: string
+  supplierName!: string
 
   @Table()
   @Field({
     label: '供应商编码',
   })
-    supplierCode!: string
+  supplierCode!: string
 
   @Form({
     requiredNumber: true,
@@ -62,7 +60,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
     label: '采购单价',
     type: Number,
   })
-    price!: number
+  price!: number
 
   @Form({
     requiredNumber: true,
@@ -77,7 +75,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
     label: '采购数量',
     type: Number,
   })
-    quantity!: number
+  quantity!: number
 
   @Table({
     align: 'right',
@@ -88,5 +86,5 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
     label: '已采购数量',
     type: Number,
   })
-    finishQuantity!: number
+  finishQuantity!: number
 }

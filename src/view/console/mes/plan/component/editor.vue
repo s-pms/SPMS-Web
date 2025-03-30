@@ -1,3 +1,49 @@
+<script lang="ts" setup>
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
+import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
+import { CustomerSelector } from '@/view/console/channel/customer/component'
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { PlanDetailEditor } from '.'
+
+const props = defineProps(airPropsParam(new PlanEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, PlanEntity, PlanService, {
+  afterGetDetail(detailData) {
+    detailData.customerName = detailData.customer.name
+    detailData.customerId = detailData.customer.id
+    return detailData
+  },
+  beforeSubmit(submitData) {
+    if (submitData.deliverTime < submitData.startTime) {
+      AirNotification.warning('交付日期不能早于开始日期')
+      return null
+    }
+    if (submitData.details.length === 0) {
+      AirNotification.warning('请添加明细后再提交')
+      return null
+    }
+    return submitData
+  },
+})
+
+async function addDetail() {
+  const detail: PlanDetailEntity = await AirDialog.show(PlanDetailEditor)
+  formData.value.details.push(detail)
+}
+
+async function deleteDetail(index: number) {
+  await AirConfirm.warning('是否删除选中行的计划明细？')
+  formData.value.details.splice(index, 1)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -38,7 +84,7 @@
         <ATable
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :field-list="PlanDetailEntity.getTableFieldConfigList().filter(item => !['createTime'].includes(item.key))"
+          :field-list="PlanDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -69,54 +115,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
-import { PlanDetailEditor } from '.'
-import { CustomerSelector } from '@/view/console/channel/customer/component'
-import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
-
-const props = defineProps(airPropsParam(new PlanEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, PlanEntity, PlanService, {
-  afterGetDetail(detailData) {
-    detailData.customerName = detailData.customer.name
-    detailData.customerId = detailData.customer.id
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    if (submitData.deliverTime < submitData.startTime) {
-      AirNotification.warning('交付日期不能早于开始日期')
-      return null
-    }
-    if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
-      return null
-    }
-    return submitData
-  },
-})
-
-async function addDetail() {
-  const detail: PlanDetailEntity = await AirDialog.show(PlanDetailEditor)
-  formData.value.details.push(detail)
-}
-
-async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的计划明细？')
-  formData.value.details.splice(index, 1)
-}
-</script>

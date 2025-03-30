@@ -1,3 +1,34 @@
+<script lang="ts" setup>
+import { LogEntity } from '@/model/system/log/LogEntity'
+import { LogService } from '@/model/system/log/LogService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { AirColor } from '@airpower/enum/AirColor'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import Detail from './detail.vue'
+
+const { isLoading, response, selectList, onSearch, onPageChanged, onSortChanged, onSelected, onDetail } = useAirTable(
+  LogEntity,
+  LogService,
+  {
+    detailView: Detail,
+  },
+)
+
+function getColor(log: LogEntity) {
+  const diff = log.updateTime - log.createTime
+  if (diff < 500) {
+    return AirColor.SUCCESS
+  }
+  if (diff < 2000) {
+    return AirColor.WARNING
+  }
+  if (diff < 5000) {
+    return AirColor.DANGER
+  }
+  return AirColor.NORMAL
+}
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -39,41 +70,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { AirColor } from '@airpower/enum/AirColor'
-import { LogEntity } from '@/model/system/log/LogEntity'
-import { LogService } from '@/model/system/log/LogService'
-import Detail from './detail.vue'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-} = useAirTable(LogEntity, LogService, {
-  detailView: Detail,
-})
-
-function getColor(log: LogEntity) {
-  const diff = log.updateTime - log.createTime
-  if (diff < 500) {
-    return AirColor.SUCCESS
-  }
-  if (diff < 2000) {
-    return AirColor.WARNING
-  }
-  if (diff < 5000) {
-    return AirColor.DANGER
-  }
-  return AirColor.NORMAL
-}
-</script>
 <style lang="scss" scoped></style>

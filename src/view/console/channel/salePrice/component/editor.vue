@@ -1,3 +1,33 @@
+<script lang="ts" setup>
+import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
+import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AFormField, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { CustomerSelector } from '../../customer/component'
+
+const props = defineProps(airPropsParam(new SalePriceEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(
+  props,
+  SalePriceEntity,
+  SalePriceService,
+  {
+    afterGetDetail(detailData) {
+      detailData.customerName = detailData.customer.name
+      detailData.materialId = detailData.material.id
+      detailData.materialName = detailData.material.name
+      return detailData
+    },
+    beforeSubmit(submitData) {
+      submitData.exclude('materialId', 'customerId')
+      return submitData
+    },
+  },
+)
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -35,31 +65,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
-import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { CustomerSelector } from '../../customer/component'
-
-const props = defineProps(airPropsParam(new SalePriceEntity()))
-
-const {
-  title, formData, rules, formRef, isLoading,
-  onSubmit,
-} = useAirEditor(props, SalePriceEntity, SalePriceService, {
-  afterGetDetail(detailData) {
-    detailData.customerName = detailData.customer.name
-    detailData.materialId = detailData.material.id
-    detailData.materialName = detailData.material.name
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    submitData.exclude('materialId', 'customerId')
-    return submitData
-  },
-})
-</script>

@@ -1,8 +1,6 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 
 @Model({
   label: '配方明细',
@@ -14,13 +12,13 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     type: MaterialEntity,
   })
-    material!: MaterialEntity
+  material!: MaterialEntity
 
   @Table({ forceShow: true })
   @Field({
     label: '物料编码',
   })
-    materialCode!: string
+  materialCode!: string
 
   @Table({
     forceShow: true,
@@ -28,7 +26,7 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     label: '物料名称',
   })
-    materialName!: string
+  materialName!: string
 
   @Form({
     requiredNumber: true,
@@ -41,7 +39,7 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
     align: 'right',
     width: 200,
   })
-    quantity!: number
+  quantity!: number
 
   finishQuantity!: number
 }
