@@ -1,3 +1,32 @@
+<script lang="ts" setup>
+import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { PickingService } from '@/model/mes/picking/PickingService'
+import { AButton, ADialog, ATable } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsSelector<PickingDetailEntity, PickingEntity>())
+
+const isLoading = ref(false)
+const list = ref<PickingDetailEntity[]>([])
+
+const selectList = ref(props.selectList)
+
+function onSelected(data: PickingDetailEntity[]) {
+  selectList.value = data
+}
+
+const plan = ref(new PickingEntity())
+
+async function getDetail() {
+  plan.value = await PickingService.create(isLoading).getDetail(props.param.id)
+  list.value = plan.value.details
+}
+
+getDetail()
+</script>
+
 <template>
   <ADialog
     :disable-confirm="isMultiple && selectList.length === 0"
@@ -36,42 +65,11 @@
           icon-button
           tooltip="选择"
           type="SELECT"
-          @click="
-            onConfirm(data)
-          "
+          @click="onConfirm(data)"
         />
       </template>
     </ATable>
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
-import { PickingEntity } from '@/model/mes/picking/PickingEntity'
-import { PickingService } from '@/model/mes/picking/PickingService'
-
-const props = defineProps(airPropsSelector<PickingDetailEntity, PickingEntity>())
-
-const isLoading = ref(false)
-const list = ref<PickingDetailEntity[]>([])
-
-const selectList = ref(props.selectList)
-
-function onSelected(data: PickingDetailEntity[]) {
-  selectList.value = data
-}
-
-const plan = ref(new PickingEntity())
-
-async function getDetail() {
-  plan.value = await PickingService.create(isLoading)
-    .getDetail(props.param.id)
-  list.value = plan.value.details
-}
-
-getDetail()
-</script>
 <style lang="scss" scoped></style>

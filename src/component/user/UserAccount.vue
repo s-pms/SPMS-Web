@@ -1,3 +1,23 @@
+<script lang="ts" setup>
+import PersonalToken from '@/component/user/PersonalToken.vue'
+import { ADialog } from '@airpower/component'
+import { airProps } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+import ModifyPassword from './ModifyPassword.vue'
+import ThirdAccountList from './ThirdAccountList.vue'
+
+defineProps(airProps())
+
+enum TABS {
+
+  modifyPassword = 'modifyPassword',
+  thirdAccount = 'thirdAccount',
+  personalToken = 'personalToken',
+}
+
+const active = ref(TABS.modifyPassword)
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -28,31 +48,12 @@
         :name="TABS.personalToken"
         label="私人令牌"
       >
-        <PersonalToken v-if="active===TABS.personalToken" />
+        <PersonalToken v-if="active === TABS.personalToken" />
       </el-tab-pane>
     </el-tabs>
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
-import ModifyPassword from './ModifyPassword.vue'
-import ThirdAccountList from './ThirdAccountList.vue'
-import PersonalToken from '@/component/user/PersonalToken.vue'
-
-defineProps(airProps())
-
-// eslint-disable-next-line no-unused-vars
-enum TABS {
-  // eslint-disable-next-line no-unused-vars
-  modifyPassword = 'modifyPassword', thirdAccount = 'thirdAccount', personalToken = 'personalToken'
-}
-
-const active = ref(TABS.modifyPassword)
-
-</script>
 <style lang="scss" scoped>
 .account-list {
   overflow: hidden;

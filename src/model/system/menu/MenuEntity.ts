@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { IMenu } from '@airpower/interface/IMenu'
+import type { IMenu } from '@airpower/interface/IMenu'
 import { BaseEntity } from '@/base/BaseEntity'
 import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 
 /**
  * # 菜单
@@ -26,7 +24,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '菜单名称',
   })
-    name!: string
+  name!: string
 
   /**
    * ### 菜单路径
@@ -41,7 +39,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '菜单路径',
   })
-    path!: string
+  path!: string
 
   /**
    * ### 菜单图标
@@ -50,7 +48,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '菜单图标',
   })
-    icon!: string
+  icon!: string
 
   /**
    * ### 组件地址
@@ -62,7 +60,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '组件地址',
   })
-    component!: string
+  component!: string
 
   /**
    * ### 排序编号
@@ -80,7 +78,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
     label: '排序编号',
     type: Number,
   })
-    orderNo!: number
+  orderNo!: number
 
   /**
    * ### 父菜单ID
@@ -88,26 +86,26 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '父级ID',
   })
-    parentId!: number
+  parentId!: number
 
   /**
    * ### 子菜单列表
    */
   @Field({
-    // eslint-disable-next-line no-use-before-define
+
     type: MenuEntity,
     array: true,
   })
-    children!: this[]
+  children!: this[]
 
   /**
    * ### 父菜单
    */
   @Field({
-    // eslint-disable-next-line no-use-before-define
+
     type: MenuEntity,
   })
-    parent!: this
+  parent!: this
 
   @Table({
     removed: true,

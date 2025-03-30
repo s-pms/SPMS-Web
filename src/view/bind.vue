@@ -1,16 +1,9 @@
-<template>
-  <div
-    v-loading="isLoading"
-    class="callback big-loading"
-  />
-</template>
-
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { AirRouter } from '@airpower/helper/AirRouter'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirAny } from '@airpower/type/AirType'
+import type { AirAny } from '@airpower/type/AirType'
 import { UserService } from '@/model/personnel/user/UserService'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirRouter } from '@airpower/helper/AirRouter'
+import { ref } from 'vue'
 
 const isLoading = ref(true)
 
@@ -18,9 +11,9 @@ async function init() {
   const platform = AirRouter.router.currentRoute.value.params.platform.toString()
   const code = AirRouter.router.currentRoute.value.query.code?.toString() || ''
   try {
-    await UserService.create(isLoading)
-      .thirdBind(platform, code)
-  } catch (e) {
+    await UserService.create(isLoading).thirdBind(platform, code)
+  }
+  catch (e) {
     await AirAlert.create()
       .hideClose()
       .error((e as AirAny).message, '登录失败')
@@ -31,6 +24,14 @@ async function init() {
 
 init()
 </script>
+
+<template>
+  <div
+    v-loading="isLoading"
+    class="callback big-loading"
+  />
+</template>
+
 <style lang="scss" scoped>
 .callback {
   position: fixed;

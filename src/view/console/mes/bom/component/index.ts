@@ -1,11 +1,6 @@
-import BomSelector from './selector.vue'
-import BomEditor from './editor.vue'
-import BomDetailEditor from './detailEditor.vue'
 import BomDetail from './detail.vue'
+import BomDetailEditor from './detailEditor.vue'
+import BomEditor from './editor.vue'
+import BomSelector from './selector.vue'
 
-export {
-  BomSelector,
-  BomEditor,
-  BomDetailEditor,
-  BomDetail,
-}
+export { BomDetail, BomDetailEditor, BomEditor, BomSelector }

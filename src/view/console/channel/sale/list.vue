@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { SaleEntity } from '@/model/channel/sale/SaleEntity'
+import { SaleService } from '@/model/channel/sale/SaleService'
+import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { SaleDetail, SaleEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
+} = useBillTable(SaleEntity, SaleService, {
+  editView: SaleEditor,
+  detailView: SaleDetail,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -11,7 +39,7 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="row => !SaleStatusEnum.REJECTED.equalsKey(row.status)"
+      :disable-edit="(row) => !SaleStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="SaleEntity"
       :select-list="selectList"
       hide-delete
@@ -44,34 +72,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { SaleDetail, SaleEditor } from './component'
-import { SaleEntity } from '@/model/channel/sale/SaleEntity'
-import { SaleService } from '@/model/channel/sale/SaleService'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
-import { BillAuditOrReject } from '@/component'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(SaleEntity, SaleService, {
-  editView: SaleEditor,
-  detailView: SaleDetail,
-})
-
-</script>
 <style lang="scss" scoped></style>

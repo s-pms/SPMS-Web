@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import { AirEnum } from '@airpower/base/AirEnum'
 import { AirColor } from '@airpower/enum/AirColor'
 

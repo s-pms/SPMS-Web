@@ -1,3 +1,23 @@
+<script lang="ts" setup>
+import { RoomEntity } from '@/model/chat/room/RoomEntity'
+import { RoomService } from '@/model/chat/room/RoomService'
+import { ADialog, AInput } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new RoomEntity()))
+
+const { isLoading, formData, formRef, rules } = useAirEditor(props, RoomEntity, RoomService)
+
+formData.value.name = '测试房间'
+
+async function onSubmit() {
+  await formRef.value?.validate()
+  await RoomService.create(isLoading).createRoom(formData.value)
+  props.onConfirm()
+}
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -46,27 +66,5 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { ADialog, AInput } from '@airpower/component'
-import { RoomEntity } from '@/model/chat/room/RoomEntity'
-import { RoomService } from '@/model/chat/room/RoomService'
-
-const props = defineProps(airPropsParam(new RoomEntity()))
-
-const {
-  isLoading, formData, formRef, rules,
-} = useAirEditor(props, RoomEntity, RoomService)
-
-formData.value.name = '测试房间'
-
-async function onSubmit() {
-  await formRef.value?.validate()
-  await RoomService.create(isLoading).createRoom(formData.value)
-  props.onConfirm()
-}
-</script>
 
 <style lang="scss" scoped></style>

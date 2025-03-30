@@ -1,3 +1,66 @@
+<script lang="ts" setup>
+import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { OrderEntity } from '@/model/mes/order/OrderEntity'
+import { OrderService } from '@/model/mes/order/OrderService'
+import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
+import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { CustomerDetail } from '../../channel/customer/component'
+import { OrderDetail, OrderEditor, OrderFinishEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
+  setBillDetailsAllFinished,
+  onGetList,
+} = useBillTable(OrderEntity, OrderService, {
+  editView: OrderEditor,
+  detailView: OrderDetail,
+})
+
+async function onAddDetail(order: OrderEntity) {
+  const detail = await AirDialog.show<OrderDetailEntity>(OrderFinishEditor, order.quantity)
+  detail.billId = order.id
+  await OrderService.create(isLoading).addOrderDetail(detail)
+  onGetList()
+}
+
+function startOrPauseLabel(order: OrderEntity) {
+  switch (order.status) {
+    case OrderStatusEnum.PRODUCING.key:
+      return '暂停'
+    default:
+      return '开始'
+  }
+}
+
+async function onStartOrPause(order: OrderEntity) {
+  await AirConfirm.warning(`是否确认${startOrPauseLabel(order)}订单？`, '操作提醒')
+  const http = OrderService.create(isLoading)
+  switch (order.status) {
+    case OrderStatusEnum.PRODUCING.key:
+      await http.pause(order)
+      break
+    default:
+      await http.start(order)
+  }
+  onGetList()
+}
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -11,7 +74,7 @@
       v-loading="isLoading"
       :ctrl-width="260"
       :data-list="response.list"
-      :disable-edit="row => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => OrderStatusEnum.REJECTED.notEqualsKey(row.status)"
       :entity="OrderEntity"
       :select-list="selectList"
       hide-delete
@@ -53,11 +116,11 @@
           />
         </template>
         <template
-          v-if="[
-            OrderStatusEnum.PREPARE.key,
-            OrderStatusEnum.PRODUCING.key,
-            OrderStatusEnum.PAUSED.key,
-          ].includes(data.status)"
+          v-if="
+            [OrderStatusEnum.PREPARE.key, OrderStatusEnum.PRODUCING.key, OrderStatusEnum.PAUSED.key].includes(
+              data.status,
+            )
+          "
         >
           <AButton
             :disabled="OrderStatusEnum.PRODUCING.notEqualsKey(data.status)"
@@ -91,70 +154,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  AButton, APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { OrderDetail, OrderEditor, OrderFinishEditor } from './component'
-import { OrderEntity } from '@/model/mes/order/OrderEntity'
-import { OrderService } from '@/model/mes/order/OrderService'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { CustomerDetail } from '../../channel/customer/component'
-import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
-import { BillAuditOrReject } from '@/component'
-import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-  setBillDetailsAllFinished,
-  onGetList,
-} = useBillTable(OrderEntity, OrderService, {
-  editView: OrderEditor,
-  detailView: OrderDetail,
-})
-
-async function onAddDetail(order: OrderEntity) {
-  const detail = await AirDialog.show<OrderDetailEntity>(OrderFinishEditor, order.quantity)
-  detail.billId = order.id
-  await OrderService.create(isLoading)
-    .addOrderDetail(detail)
-  onGetList()
-}
-
-function startOrPauseLabel(order: OrderEntity) {
-  switch (order.status) {
-    case OrderStatusEnum.PRODUCING.key:
-      return '暂停'
-    default:
-      return '开始'
-  }
-}
-
-async function onStartOrPause(order: OrderEntity) {
-  await AirConfirm.warning(`是否确认${startOrPauseLabel(order)}订单？`, '操作提醒')
-  const http = OrderService.create(isLoading)
-  switch (order.status) {
-    case OrderStatusEnum.PRODUCING.key:
-      await http.pause(order)
-      break
-    default:
-      await http.start(order)
-  }
-  onGetList()
-}
-
-</script>
 <style lang="scss" scoped></style>

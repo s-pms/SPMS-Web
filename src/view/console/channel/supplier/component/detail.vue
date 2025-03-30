@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
+import { SupplierService } from '@/model/channel/supplier/SupplierService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
+
+const props = defineProps(airPropsParam(new SupplierEntity()))
+
+const { title, formData, isLoading } = useAirDetail(props, SupplierEntity, SupplierService)
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -25,18 +37,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
-import { SupplierService } from '@/model/channel/supplier/SupplierService'
-
-const props = defineProps(airPropsParam(new SupplierEntity()))
-
-const {
-  title, formData, isLoading,
-} = useAirDetail(props, SupplierEntity, SupplierService)
-
-</script>

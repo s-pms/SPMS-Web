@@ -1,11 +1,9 @@
-import {
-  Field, Form, Model, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
-import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceReportingEnum } from '@/model/asset/device/DeviceReportingEnum'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
+import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
+import { Field, Form, Model, Table } from '@airpower/decorator'
 
 @Model({
   label: '设备',
@@ -23,7 +21,7 @@ export class DeviceEntity extends BaseEntity {
   @Field({
     label: '设备名称',
   })
-    name!: string
+  name!: string
 
   /**
    * ### 设备编码
@@ -38,7 +36,7 @@ export class DeviceEntity extends BaseEntity {
   @Field({
     label: '设备编码',
   })
-    code!: string
+  code!: string
 
   /**
    * ### 设备UUID
@@ -53,7 +51,7 @@ export class DeviceEntity extends BaseEntity {
   @Field({
     label: 'UUID',
   })
-    uuid!: string
+  uuid!: string
 
   @Table({
     copyField: true,
@@ -69,7 +67,7 @@ export class DeviceEntity extends BaseEntity {
     label: '开启采集',
     dictionary: DeviceReportingEnum,
   })
-    isReporting!: boolean
+  isReporting!: boolean
 
   @Table({
     copyField: true,
@@ -78,7 +76,7 @@ export class DeviceEntity extends BaseEntity {
   @Field({
     label: '实时产量',
   })
-    partCount!: string
+  partCount!: string
 
   @Table({
     showColor: true,
@@ -89,7 +87,7 @@ export class DeviceEntity extends BaseEntity {
     label: '运行状态',
     dictionary: DeviceStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Table({
     showColor: true,
@@ -100,7 +98,7 @@ export class DeviceEntity extends BaseEntity {
     label: '报警状态',
     dictionary: AlarmStatusEnum,
   })
-    alarm!: number
+  alarm!: number
 
   @Form({
     placeholder: '采集间隔毫秒数,最小200ms',
@@ -113,12 +111,12 @@ export class DeviceEntity extends BaseEntity {
   @Field({
     label: '采集频率',
   })
-    rate!: number
+  rate!: number
 
   @Field({
     label: '参数',
     type: ParameterEntity,
     array: true,
   })
-    parameters: ParameterEntity[] = []
+  parameters: ParameterEntity[] = []
 }

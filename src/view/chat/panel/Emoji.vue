@@ -1,18 +1,31 @@
+<script lang="ts" setup>
+import type { Ref } from 'vue'
+import { useEmoji } from '@/model/chat/hook/useEmoji'
+import { ref } from 'vue'
+
+const emits = defineEmits(['click'])
+
+const imageList: Ref<string[]> = ref([])
+
+const { getEmojiUrl } = useEmoji()
+
+for (let i = 1; i <= 100; i += 1) {
+  imageList.value.push(getEmojiUrl(i.toString()))
+}
+</script>
+
 <template>
-  <div
-    class="emoji slide"
-  >
+  <div class="emoji slide">
     <div
-      ref="list"
       class="list"
     >
       <template
-        v-for="(url,index) in imageList"
+        v-for="(url, index) in imageList"
         :key="url"
       >
         <div
           class="item"
-          @click="emits('click',index + 1)"
+          @click="emits('click', index + 1)"
         >
           <el-image
             :src="url"
@@ -29,21 +42,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
-import { ref, Ref } from 'vue'
-import { useEmoji } from '@/model/chat/hook/useEmoji'
 
-const imageList: Ref<string[]> = ref([])
-
-const { getEmojiUrl } = useEmoji()
-
-for (let i = 1; i <= 100; i += 1) {
-  imageList.value.push(getEmojiUrl(i.toString()))
-}
-
-const emits = defineEmits(['click'])
-
-</script>
 <style lang="scss" scoped>
 .emoji {
   position: absolute;

@@ -11,7 +11,7 @@ export class McpToolModel extends AirEntity {
   @Table({
     copyField: true,
   })
-    name!: string
+  name!: string
 
   @Field({
     label: '工具描述',
@@ -19,5 +19,5 @@ export class McpToolModel extends AirEntity {
   @Table({
     nowrap: true,
   })
-    description!: string
+  description!: string
 }

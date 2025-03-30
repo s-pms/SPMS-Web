@@ -1,7 +1,7 @@
 <script generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity" lang="ts" setup>
+import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { ADateTime, AFormField, AGroup } from '@airpower/component'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 
 const { bill } = defineProps<{
   /**
@@ -9,7 +9,6 @@ const { bill } = defineProps<{
    */
   bill: B
 }>()
-
 </script>
 
 <template>

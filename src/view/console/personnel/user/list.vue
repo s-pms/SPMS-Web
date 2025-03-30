@@ -1,3 +1,47 @@
+<script lang="ts" setup>
+import type { Ref } from 'vue'
+import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import { DepartmentService } from '@/model/personnel/department/DepartmentService'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { APage, APanel, ATable, AToolBar, ATreeBox } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { ref } from 'vue'
+import { UserEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  request,
+  onPageChanged,
+  onDelete,
+  onEdit,
+  onAdd,
+  onSearch,
+  onEnable,
+  onDisable,
+  onGetList,
+} = useAirTable(UserEntity, UserService, {
+  editView: UserEditor,
+})
+
+const departmentList: Ref<DepartmentEntity[]> = ref([])
+
+const isLoadingTree = ref(false)
+
+function departmentChanged(department?: DepartmentEntity) {
+  request.value.filter.departmentId = department?.id || undefined
+  onGetList()
+}
+
+async function getDepartmentList() {
+  departmentList.value = await DepartmentService.create(isLoadingTree).getList(new AirRequest(DepartmentEntity))
+}
+
+getDepartmentList()
+</script>
+
 <template>
   <ATreeBox
     :tree-data="departmentList"
@@ -33,49 +77,4 @@
   </ATreeBox>
 </template>
 
-<script lang="ts" setup>
-import { Ref, ref } from 'vue'
-import {
-  APage, APanel, ATable, AToolBar, ATreeBox,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { AirRequest } from '@airpower/model/AirRequest'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-import { UserEditor } from './component'
-import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
-import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-
-const {
-  isLoading,
-  response,
-  request,
-  onPageChanged,
-  onDelete,
-  onEdit,
-  onAdd,
-  onSearch,
-  onEnable,
-  onDisable,
-  onGetList,
-} = useAirTable(UserEntity, UserService, {
-  editView: UserEditor,
-})
-
-const departmentList: Ref<DepartmentEntity[]> = ref([])
-
-const isLoadingTree = ref(false)
-
-function departmentChanged(department?: DepartmentEntity) {
-  request.value.filter.departmentId = department?.id || undefined
-  onGetList()
-}
-
-async function getDepartmentList() {
-  departmentList.value = await DepartmentService.create(isLoadingTree)
-    .getList(new AirRequest(DepartmentEntity))
-}
-
-getDepartmentList()
-</script>
 <style lang="scss" scoped></style>

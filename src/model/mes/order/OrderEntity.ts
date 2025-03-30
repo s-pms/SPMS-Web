@@ -1,18 +1,16 @@
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
+import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
+import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { PlanEntity } from '../plan/PlanEntity'
+import { OrderDetailEntity } from './OrderDetailEntity'
 import { OrderStatusEnum } from './OrderStatusEnum'
 import { OrderTypeEnum } from './OrderTypeEnum'
-import { OrderDetailEntity } from './OrderDetailEntity'
-import { PlanEntity } from '../plan/PlanEntity'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 
 @Model({
   label: '生产订单',
@@ -29,7 +27,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     type: MaterialEntity,
   })
-    material!: MaterialEntity
+  material!: MaterialEntity
 
   @Table({
     copyField: true,
@@ -38,7 +36,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     label: '物料编码',
   })
-    materialCode!: string
+  materialCode!: string
 
   @Table({
     orderNumber: 77,
@@ -47,7 +45,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     label: '物料名称',
   })
-    materialName!: string
+  materialName!: string
 
   @Form({
     requiredNumber: true,
@@ -62,7 +60,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '生产数量',
     type: Number,
   })
-    quantity!: number
+  quantity!: number
 
   @Form({
     requiredNumber: true,
@@ -77,7 +75,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '完成数量',
     type: Number,
   })
-    finishQuantity!: number
+  finishQuantity!: number
 
   @Form({
     requiredNumber: true,
@@ -93,7 +91,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '异常数量',
     type: Number,
   })
-    ngQuantity!: number
+  ngQuantity!: number
 
   @Table({
     copyField: true,
@@ -102,7 +100,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     label: '生产计划号',
   })
-    planBillCode!: string
+  planBillCode!: string
 
   @Table({
     width: 100,
@@ -112,7 +110,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '订单状态',
     dictionary: OrderStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Table({
     width: 100,
@@ -128,7 +126,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     dictionary: OrderTypeEnum,
   })
   @Search()
-    type!: number
+  type!: number
 
   @Table({
     width: 110,
@@ -145,7 +143,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     label: '开始时间',
   })
-    startTime!: number
+  startTime!: number
 
   @Table({
     width: 110,
@@ -160,7 +158,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     label: '交付时间',
   })
-    deliverTime!: number
+  deliverTime!: number
 
   @Table({
     width: 110,
@@ -171,14 +169,14 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Field({
     label: '完成时间',
   })
-    finishTime!: number
+  finishTime!: number
 
   @Field({
     label: '订单明细',
     type: OrderDetailEntity,
     array: true,
   })
-    details: OrderDetailEntity[] = []
+  details: OrderDetailEntity[] = []
 
   @Form({})
   @Table({
@@ -189,7 +187,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '客户信息',
     type: CustomerEntity,
   })
-    customer!: CustomerEntity
+  customer!: CustomerEntity
 
   @Form({
     requiredPayload: true,
@@ -198,7 +196,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '生产工艺',
     type: RoutingEntity,
   })
-    routing!: RoutingEntity
+  routing!: RoutingEntity
 
   @Form({
     requiredPayload: true,
@@ -207,7 +205,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '关联计划',
     type: PlanEntity,
   })
-    plan!: PlanEntity
+  plan!: PlanEntity
 
   getAuditingStatus(): AirEnum {
     return OrderStatusEnum.AUDITING

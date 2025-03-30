@@ -1,103 +1,13 @@
-<template>
-  <APanel>
-    <AGroup
-      :column="1"
-      disable-collapse
-      title="设备实时状态"
-    >
-      <div class="device-view">
-        <div
-          v-for="item in DeviceStatusEnum.toArray()"
-          :key="item.key"
-          :style="{ width: (deviceList.filter(i => i.status === item.key).length / deviceList.length * 100) + '%' }"
-          class="device-item"
-        >
-          <div
-            :style="{ background: item.color }"
-            class="device-card"
-          >
-            <div class="device-status">
-              <span :style="{ backgroundColor: item.color }" />{{ item.label }}
-            </div>
-            <div class="device-number">
-              {{ deviceList.filter(i => i.status === item.key).length }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        v-if="deviceList.length > 0"
-        class="device-list"
-      >
-        <div
-          v-for="device in deviceList"
-          :key="device.id"
-          class="device-item"
-        >
-          <div
-            class="device-card"
-            @click="showMonitor(device)"
-          >
-            <div
-              :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status), }"
-              class="bg"
-            />
-            <div class="device-header">
-              <div class="device-name">
-                {{ device.name }}
-              </div>
-              <div class="device-code">
-                {{ device.code }}
-              </div>
-            </div>
-            <div class="device-body">
-              <div
-                :style="{ color: DeviceStatusEnum.getColor(device.status) }"
-                class="device-partcnt"
-              >
-                {{ device.partCount }}
-
-                <span>产量</span>
-              </div>
-              <div class="device-info">
-                <div
-                  v-if="device.status === DeviceStatusEnum.ALARM.key && device.alarm !== AlarmStatusEnum.NONE.key"
-                  :style="{ borderColor: AlarmStatusEnum.getColor(device.alarm), color: AlarmStatusEnum.getColor(device.alarm) }"
-                  class="device-status"
-                >
-                  <span :style="{ backgroundColor: AlarmStatusEnum.getColor(device.alarm), }" />
-                  {{ AlarmStatusEnum.getLabel(device.alarm, "未知") }}
-                </div>
-
-                <div
-                  :style="{ borderColor: DeviceStatusEnum.getColor(device.status), color: DeviceStatusEnum.getColor(device.status) }"
-                  class="device-status"
-                >
-                  <span :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status), }" />
-                  {{ DeviceStatusEnum.getLabel(device.status, "未知") }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <AEmpty v-else>
-        设备加载中,请稍后...
-      </AEmpty>
-    </AGroup>
-  </APanel>
-</template>
-
 <script lang="ts" setup>
-import { onUnmounted, ref } from 'vue'
-import { AEmpty, AGroup, APanel } from '@airpower/component'
-import { AirRequest } from '@airpower/model/AirRequest'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
+import { AEmpty, AGroup, APanel } from '@airpower/component'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirRequest } from '@airpower/model/AirRequest'
+import { onUnmounted, ref } from 'vue'
 import { DeviceMonitor } from '../../asset/device/component'
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 
 const deviceList = ref<DeviceEntity[]>([])
 
@@ -121,6 +31,103 @@ function showMonitor(device: DeviceEntity) {
   AirDialog.show(DeviceMonitor, device)
 }
 </script>
+
+<template>
+  <APanel>
+    <AGroup
+      :column="1"
+      disable-collapse
+      title="设备实时状态"
+    >
+      <div class="device-view">
+        <div
+          v-for="item in DeviceStatusEnum.toArray()"
+          :key="item.key"
+          :style="{ width: `${(deviceList.filter((i) => i.status === item.key).length / deviceList.length) * 100}%` }"
+          class="device-item"
+        >
+          <div
+            :style="{ background: item.color }"
+            class="device-card"
+          >
+            <div class="device-status">
+              <span :style="{ backgroundColor: item.color }" />{{ item.label }}
+            </div>
+            <div class="device-number">
+              {{ deviceList.filter((i) => i.status === item.key).length }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="deviceList.length > 0"
+        class="device-list"
+      >
+        <div
+          v-for="device in deviceList"
+          :key="device.id"
+          class="device-item"
+        >
+          <div
+            class="device-card"
+            @click="showMonitor(device)"
+          >
+            <div
+              :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status) }"
+              class="bg"
+            />
+            <div class="device-header">
+              <div class="device-name">
+                {{ device.name }}
+              </div>
+              <div class="device-code">
+                {{ device.code }}
+              </div>
+            </div>
+            <div class="device-body">
+              <div
+                :style="{ color: DeviceStatusEnum.getColor(device.status) }"
+                class="device-partcnt"
+              >
+                {{ device.partCount }}
+
+                <span>产量</span>
+              </div>
+              <div class="device-info">
+                <div
+                  v-if="device.status === DeviceStatusEnum.ALARM.key && device.alarm !== AlarmStatusEnum.NONE.key"
+                  :style="{
+                    borderColor: AlarmStatusEnum.getColor(device.alarm),
+                    color: AlarmStatusEnum.getColor(device.alarm),
+                  }"
+                  class="device-status"
+                >
+                  <span :style="{ backgroundColor: AlarmStatusEnum.getColor(device.alarm) }" />
+                  {{ AlarmStatusEnum.getLabel(device.alarm, '未知') }}
+                </div>
+
+                <div
+                  :style="{
+                    borderColor: DeviceStatusEnum.getColor(device.status),
+                    color: DeviceStatusEnum.getColor(device.status),
+                  }"
+                  class="device-status"
+                >
+                  <span :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status) }" />
+                  {{ DeviceStatusEnum.getLabel(device.status, '未知') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <AEmpty v-else>
+        设备加载中,请稍后...
+      </AEmpty>
+    </AGroup>
+  </APanel>
+</template>
+
 <style lang="scss" scoped>
 .device-view {
   margin: 0 8px;
@@ -155,7 +162,6 @@ function showMonitor(device: DeviceEntity) {
 }
 
 .device-list {
-
   .device-item {
     width: 25%;
     display: inline-block;
@@ -168,7 +174,7 @@ function showMonitor(device: DeviceEntity) {
       padding: 20px;
       cursor: pointer;
       z-index: 0;
-      transition: all .3s;
+      transition: all 0.3s;
       position: relative;
       overflow: hidden;
       text-shadow: 0 1px 1px rgba($color: #fff, $alpha: 1);

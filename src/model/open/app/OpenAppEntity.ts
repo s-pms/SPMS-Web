@@ -1,9 +1,7 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
-import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'
 
 @Model({
   label: '应用',
@@ -19,7 +17,8 @@ export class OpenAppEntity extends BaseEntity {
   })
   @Field({
     label: '应用名称',
-  }) appName!: string
+  })
+  appName!: string
 
   @Table({
     showColor: true,
@@ -35,7 +34,7 @@ export class OpenAppEntity extends BaseEntity {
     type: Boolean,
     dictionary: BooleanYesNoDictionary,
   })
-    isInternal!: boolean
+  isInternal!: boolean
 
   @Table({
     forceShow: true,
@@ -47,11 +46,13 @@ export class OpenAppEntity extends BaseEntity {
   @Form({})
   @Field({
     label: 'AppKey',
-  }) appKey!: string
+  })
+  appKey!: string
 
   @Field({
     label: 'AppSecret',
-  }) appSecret!: string
+  })
+  appSecret!: string
 
   @Table({
     width: 80,
@@ -69,7 +70,8 @@ export class OpenAppEntity extends BaseEntity {
   @Field({
     label: '加密算法',
     dictionary: OpenAppArithmeticEnum,
-  }) arithmetic!: number
+  })
+  arithmetic!: number
 
   @Table({
     removed: false,
@@ -82,14 +84,16 @@ export class OpenAppEntity extends BaseEntity {
   })
   @Field({
     label: '公钥',
-  }) publicKey!: string
+  })
+  publicKey!: string
 
   @Form({
     textarea: true,
   })
   @Field({
     label: '私钥',
-  }) privateKey!: string
+  })
+  privateKey!: string
 
   /**
    * ### 应用URL
@@ -101,7 +105,8 @@ export class OpenAppEntity extends BaseEntity {
   })
   @Field({
     label: '应用地址',
-  }) url!: string
+  })
+  url!: string
 
   @Field({
     label: 'IP白名单',
@@ -112,5 +117,5 @@ export class OpenAppEntity extends BaseEntity {
     defaultValue: '',
     placeholder: '请输入IP白名单，一行一个，不填写则不验证',
   })
-    ipWhiteList!: string
+  ipWhiteList!: string
 }

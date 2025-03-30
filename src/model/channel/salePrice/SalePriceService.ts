@@ -1,7 +1,7 @@
 import { AbstractBaseService } from '@/base/AbstractBaseService'
-import { SalePriceEntity } from './SalePriceEntity'
-import { CustomerEntity } from '../customer/CustomerEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { CustomerEntity } from '../customer/CustomerEntity'
+import { SalePriceEntity } from './SalePriceEntity'
 
 export class SalePriceService extends AbstractBaseService<SalePriceEntity> {
   entityClass = SalePriceEntity
@@ -13,10 +13,10 @@ export class SalePriceService extends AbstractBaseService<SalePriceEntity> {
     entity.material = new MaterialEntity(materialId)
     entity.customer = new CustomerEntity(customerId)
     try {
-      return this.api('getByMaterialAndCustomer')
-        .callbackError()
-        .request(entity, SalePriceEntity)
-    } catch (e) {
+      return this.api('getByMaterialAndCustomer').callbackError().request(entity, SalePriceEntity)
+    }
+    catch (e) {
+      console.error(e)
       return null
     }
   }

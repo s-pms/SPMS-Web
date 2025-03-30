@@ -1,9 +1,5 @@
-import RoutingSelector from './selector.vue'
 import RoutingEditor from './editor.vue'
 import RoutingProgress from './progress.vue'
+import RoutingSelector from './selector.vue'
 
-export {
-  RoutingSelector,
-  RoutingEditor,
-  RoutingProgress,
-}
+export { RoutingEditor, RoutingProgress, RoutingSelector }

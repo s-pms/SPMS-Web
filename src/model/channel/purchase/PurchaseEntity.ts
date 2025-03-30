@@ -1,10 +1,8 @@
-import {
-  Field, Form, Model, Search, Table,
-} from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
-import { PurchaseStatusEnum } from './PurchaseStatusEnum'
-import { PurchaseDetailEntity } from './PurchaseDetailEntity'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { PurchaseDetailEntity } from './PurchaseDetailEntity'
+import { PurchaseStatusEnum } from './PurchaseStatusEnum'
 
 @Model({
   label: '采购单',
@@ -26,7 +24,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @Field({
     label: '采购事由',
   })
-    reason!: string
+  reason!: string
 
   @Table({
     width: 150,
@@ -39,7 +37,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @Field({
     label: '总金额',
   })
-    totalPrice!: number
+  totalPrice!: number
 
   @Table({
     width: 150,
@@ -52,7 +50,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @Field({
     label: '实际金额',
   })
-    totalRealPrice!: number
+  totalRealPrice!: number
 
   @Table({
     width: 100,
@@ -65,14 +63,14 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
     label: '采购状态',
     dictionary: PurchaseStatusEnum,
   })
-    status!: number
+  status!: number
 
   @Field({
     label: '采购明细',
     type: PurchaseDetailEntity,
     array: true,
   })
-    details: PurchaseDetailEntity[] = []
+  details: PurchaseDetailEntity[] = []
 
   getAuditingStatus(): AirEnum {
     return PurchaseStatusEnum.AUDITING

@@ -1,3 +1,69 @@
+<script lang="ts" setup>
+import type { OauthScope } from '@/model/open/oauth/OauthScope'
+import Copyright from '@/component/login/Copyright.vue'
+import Logo from '@/component/login/Logo.vue'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirRouter } from '@airpower/helper/AirRouter'
+import { ref } from 'vue'
+
+const user = ref(new UserEntity())
+
+const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
+const scope = (AirRouter.router.currentRoute.value.query.scope || '').toString()
+const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
+
+const appInfo = ref(new OpenAppEntity())
+
+const scopeList = ref([] as OauthScope[])
+const scopeNeed = ref([] as string[])
+
+// 一些Loading状态
+const isLoading = ref(false)
+
+/**
+ * ### 获取当前应用信息
+ */
+async function getAppInfo() {
+  appInfo.value = await OpenAppService.create(isLoading).getAppByKey(appKey)
+}
+
+async function getScopeList() {
+  const list = await UserService.create(isLoading).getScopeList()
+  scopeList.value = list.filter(item => scopeNeed.value.includes(item.name) || item.isDefault)
+}
+
+async function onConfirm() {
+  const result = await UserService.create(isLoading).authorize(appKey, scope)
+  window.location.href = `${redirectUri}?code=${result}`
+}
+
+function onCancel() {
+  window.location.href = `${redirectUri}?error=cancel`
+}
+
+async function init() {
+  if (!appKey || !scope || !redirectUri) {
+    window.location.replace('/')
+    return
+  }
+  user.value = await UserService.create(isLoading).getMyInfo()
+  getAppInfo()
+  getScopeList()
+  scopeNeed.value = scope.split(',')
+}
+
+async function onSwitchAccount() {
+  await AirConfirm.warning('是否确认切换登录的账号', '切换账号')
+  window.location.replace(`/login${window.location.search}`)
+}
+
+init()
+</script>
+
 <template>
   <div class="authorize">
     <Logo />
@@ -42,75 +108,7 @@
     <Copyright />
   </div>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { AirRouter } from '@airpower/helper/AirRouter'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import Copyright from '@/component/login/Copyright.vue'
-import Logo from '@/component/login/Logo.vue'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-import { OauthScope } from '@/model/open/oauth/OauthScope'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
 
-const user = ref(new UserEntity())
-
-const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
-const scope = (AirRouter.router.currentRoute.value.query.scope || '').toString()
-const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
-
-const appInfo = ref(new OpenAppEntity())
-
-const scopeList = ref([] as OauthScope[])
-const scopeNeed = ref([] as string[])
-
-// 一些Loading状态
-const isLoading = ref(false)
-
-/**
- * ### 获取当前应用信息
- */
-async function getAppInfo() {
-  appInfo.value = await OpenAppService.create(isLoading)
-    .getAppByKey(appKey)
-}
-
-async function getScopeList() {
-  const list = await UserService.create(isLoading)
-    .getScopeList()
-  scopeList.value = list.filter((item) => scopeNeed.value.includes(item.name) || item.isDefault)
-}
-
-async function onConfirm() {
-  const result = await UserService.create(isLoading)
-    .authorize(appKey, scope)
-  window.location.href = `${redirectUri}?code=${result}`
-}
-
-function onCancel() {
-  window.location.href = `${redirectUri}?error=cancel`
-}
-
-async function init() {
-  if (!appKey || !scope || !redirectUri) {
-    window.location.replace('/')
-    return
-  }
-  user.value = await UserService.create(isLoading)
-    .getMyInfo()
-  getAppInfo()
-  getScopeList()
-  scopeNeed.value = scope.split(',')
-}
-
-async function onSwitchAccount() {
-  await AirConfirm.warning('是否确认切换登录的账号', '切换账号')
-  window.location.replace(`/login${window.location.search}`)
-}
-
-init()
-</script>
 <style lang="scss" scoped>
 .authorize {
   position: fixed;
@@ -205,7 +203,7 @@ init()
   }
 }
 
-@media screen and ((orientation:portrait) and (max-width: 600px)) {
+@media screen and ((orientation: portrait) and (max-width: 600px)) {
   .authorize {
     .logo {
       left: auto !important;

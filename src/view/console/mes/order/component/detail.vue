@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { OrderEntity } from '@/model/mes/order/OrderEntity'
+import { OrderService } from '@/model/mes/order/OrderService'
+import { ADateTime, ADialog, AFormField, AGroup } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
+
+const props = defineProps(airPropsParam(new OrderEntity()))
+
+const { title, formData, isLoading } = useAirDetail(props, OrderEntity, OrderService, {})
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -8,7 +21,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="formData"
       label-width="120px"
       @submit.prevent
@@ -63,23 +75,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  ADateTime, ADialog, AFormField, AGroup,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { OrderEntity } from '@/model/mes/order/OrderEntity'
-import { OrderService } from '@/model/mes/order/OrderService'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-
-const props = defineProps(airPropsParam(new OrderEntity()))
-
-const {
-  title,
-  formData,
-  isLoading,
-} = useAirDetail(props, OrderEntity, OrderService, {})
-
-</script>

@@ -1,3 +1,29 @@
+<script lang="ts" setup>
+import type { AirFormInstance } from '@airpower/type/AirType'
+import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
+import { BomDetailService } from '@/model/mes/bom/BomDetailService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new BomDetailEntity()))
+
+const formData = ref(props.param.copy())
+if (formData.value.material) {
+  formData.value.materialName = formData.value.material.name
+  formData.value.materialCode = formData.value.material.code
+}
+
+const isLoading = ref(false)
+
+const formRef = ref<AirFormInstance>()
+
+async function onSubmit() {
+  props.onConfirm(formData.value)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -43,29 +69,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFormInstance } from '@airpower/type/AirType'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
-import { BomDetailService } from '@/model/mes/bom/BomDetailService'
-
-const props = defineProps(airPropsParam(new BomDetailEntity()))
-
-const formData = ref(props.param.copy())
-if (formData.value.material) {
-  formData.value.materialName = formData.value.material.name
-  formData.value.materialCode = formData.value.material.code
-}
-
-const isLoading = ref(false)
-
-const formRef = ref<AirFormInstance>()
-
-async function onSubmit() {
-  props.onConfirm(formData.value)
-}
-</script>

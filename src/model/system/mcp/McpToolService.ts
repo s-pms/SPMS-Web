@@ -1,5 +1,5 @@
-import { AirAbstractService } from '@airpower/base/AirAbstractService'
 import { McpToolModel } from '@/model/system/mcp/McpToolModel'
+import { AirAbstractService } from '@airpower/base/AirAbstractService'
 
 export class McpToolService extends AirAbstractService {
   baseUrl = 'mcp'

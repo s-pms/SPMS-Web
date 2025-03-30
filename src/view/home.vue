@@ -1,8 +1,12 @@
+<script lang="ts" setup>
+import logo from '@/assets/img/logo.svg'
+</script>
+
 <template>
   <div class="home">
     <el-image
-      class="logo"
       :src="logo"
+      class="logo"
     />
     <div class="intro">
       <img src="https://svg.hamm.cn?key=Lang&value=TypeScript">
@@ -38,10 +42,8 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
-import logo from '@/assets/img/logo.svg'
-</script>
-<style scoped lang="scss">
+
+<style lang="scss" scoped>
 .home {
   position: fixed;
   left: 0;

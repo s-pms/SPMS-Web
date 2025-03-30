@@ -1,7 +1,7 @@
 import { AbstractBaseService } from '@/base/AbstractBaseService'
-import { PurchasePriceEntity } from './PurchasePriceEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'
+import { PurchasePriceEntity } from './PurchasePriceEntity'
 
 export class PurchasePriceService extends AbstractBaseService<PurchasePriceEntity> {
   entityClass = PurchasePriceEntity
@@ -13,10 +13,10 @@ export class PurchasePriceService extends AbstractBaseService<PurchasePriceEntit
     entity.material = new MaterialEntity(materialId)
     entity.supplier = new SupplierEntity(supplierId)
     try {
-      return this.api('getByMaterialAndSupplier')
-        .callbackError()
-        .request(entity, PurchasePriceEntity)
-    } catch (e) {
+      return this.api('getByMaterialAndSupplier').callbackError().request(entity, PurchasePriceEntity)
+    }
+    catch (e) {
+      console.error(e)
       return null
     }
   }

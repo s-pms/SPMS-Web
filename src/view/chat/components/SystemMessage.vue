@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
+import type { UserEntity } from '@/model/personnel/user/UserEntity'
 import { ChatEventType } from '@/model/chat/enum/ChatEventType'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { RoomMemberEvent } from '@/model/chat/room/model/RoomMemberEvent'
 
 defineProps({
   message: {
@@ -11,7 +11,7 @@ defineProps({
 })
 
 function openUser(user: UserEntity) {
-  console.log(user)
+  console.warn(user)
 }
 </script>
 
@@ -39,7 +39,6 @@ function openUser(user: UserEntity) {
 </template>
 
 <style lang="scss" scoped>
-
 .system {
   display: flex;
   flex-direction: row;

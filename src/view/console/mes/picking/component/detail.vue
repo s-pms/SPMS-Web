@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { PickingService } from '@/model/mes/picking/PickingService'
+import { StructureSelector } from '@/view/console/factory/structure/component'
+import { ADialog, AGroup, ASelect, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+
+const props = defineProps(airPropsParam(new PickingEntity()))
+
+const { title, formData, isLoading } = useBillDetail(props, PickingEntity, PickingService)
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -8,7 +23,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="formData"
       label-width="120px"
       @submit.prevent
@@ -48,25 +62,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  ADialog, AGroup, ASelect, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-import { PickingEntity } from '@/model/mes/picking/PickingEntity'
-import { PickingService } from '@/model/mes/picking/PickingService'
-import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
-import { StructureSelector } from '@/view/console/factory/structure/component'
-
-const props = defineProps(airPropsParam(new PickingEntity()))
-
-const {
-  title,
-  formData,
-  isLoading,
-} = useBillDetail(props, PickingEntity, PickingService)
-
-</script>

@@ -1,3 +1,22 @@
+<script lang="ts" setup>
+import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import { DepartmentService } from '@/model/personnel/department/DepartmentService'
+import { AButton, ADialog, ATable, AToolBar } from '@airpower/component'
+import { airPropsSelector } from '@airpower/config/AirProps'
+import { useAirSelector } from '@airpower/hook/useAirSelector'
+
+const props = defineProps(airPropsSelector<DepartmentEntity>())
+
+const { title, selectList, isLoading, list, onSearch, onSelected } = useAirSelector(
+  props,
+  DepartmentEntity,
+  DepartmentService,
+  {
+    unPaginate: true,
+  },
+)
+</script>
+
 <template>
   <ADialog
     :disable-confirm="isMultiple && selectList.length === 0"
@@ -25,7 +44,7 @@
       :select-list="selectList"
       :show-select="isMultiple"
       :tree-props="{
-        checkStrictly: true
+        checkStrictly: true,
       }"
       hide-delete
       hide-edit
@@ -41,34 +60,11 @@
           icon-button
           tooltip="选择"
           type="SELECT"
-          @click=" onConfirm(data)"
+          @click="onConfirm(data)"
         />
       </template>
     </ATable>
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import {
-  AButton, ADialog, ATable, AToolBar,
-} from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { useAirSelector } from '@airpower/hook/useAirSelector'
-import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
-import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-
-const props = defineProps(airPropsSelector<DepartmentEntity>())
-
-const {
-  title,
-  selectList,
-  isLoading,
-  list,
-  onSearch,
-  onSelected,
-} = useAirSelector(props, DepartmentEntity, DepartmentService, {
-  unPaginate: true,
-})
-
-</script>
 <style lang="scss" scoped></style>

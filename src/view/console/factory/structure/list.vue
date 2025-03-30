@@ -1,3 +1,23 @@
+<script lang="ts" setup>
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { StructureService } from '@/model/factory/structure/StructureService'
+import { APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTableTree } from '@airpower/hook/useAirTableTree'
+import { StructureEditor } from './component'
+
+const { isLoading, list, onSearch, onAdd, onDelete, onEdit, onSortChanged, onSelected, onAddRow } = useAirTableTree(
+  StructureEntity,
+  StructureService,
+  {
+    editView: StructureEditor,
+    beforeAddRow(param, row) {
+      param.parent = row
+      return param
+    },
+  },
+)
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -22,26 +42,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTableTree } from '@airpower/hook/useAirTableTree'
-import { StructureEditor } from './component'
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
-
-const {
-  isLoading,
-  list,
-  onSearch, onAdd, onDelete, onEdit, onSortChanged, onSelected, onAddRow,
-} = useAirTableTree(StructureEntity, StructureService, {
-  editView: StructureEditor,
-  beforeAddRow(param, row) {
-    param.parent = row
-    return param
-  },
-})
-
-</script>
 <style lang="scss" scoped></style>

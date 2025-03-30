@@ -1,7 +1,7 @@
-import { Field, Form, Model } from '@airpower/decorator'
 import { BaseEntity } from '@/base/BaseEntity'
-import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
+import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { Field, Form, Model } from '@airpower/decorator'
 
 /**
  * # 工序配置
@@ -17,7 +17,7 @@ export class RoutingOperationEntity extends BaseEntity {
   @Field({
     type: BomEntity,
   })
-    bom!: BomEntity
+  bom!: BomEntity
 
   @Form({
     requiredPayload: true,
@@ -25,7 +25,7 @@ export class RoutingOperationEntity extends BaseEntity {
   @Field({
     type: OperationEntity,
   })
-    operation!: OperationEntity
+  operation!: OperationEntity
 
   routingId!: number
 

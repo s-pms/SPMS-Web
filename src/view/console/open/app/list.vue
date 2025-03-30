@@ -1,3 +1,85 @@
+<script lang="ts" setup>
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirClipboard } from '@airpower/helper/AirClipboard'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
+
+const {
+  isLoading,
+  response,
+  onSearch,
+  onDelete,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onDisable,
+  onEnable,
+  onReloadData,
+} = useAirTable(OpenAppEntity, OpenAppService, {
+  editView: OpenAppEditor,
+})
+
+async function onResetSecret(app: OpenAppEntity) {
+  await AirConfirm.create()
+    .dangerButton()
+    .setConfirmText('重置AppSecret')
+    .setCancelText('关闭')
+    .show('重置密钥后，使用原密钥的应用将无法访问API服务，是否确认重置?', '确认重置AppSecret')
+  const newSecret = await OpenAppService.create(isLoading).resetSecret(app)
+  await AirAlert.create()
+    .setConfirmText('复制并关闭')
+    .hideClose()
+    .success('请注意，服务端将不再保存当前应用的 AppSecret，请务必将此密钥保存到安全的地方。', '重置AppSecret成功')
+  await AirClipboard.copy(newSecret)
+  AirNotification.success('复制AppSecret成功')
+  onReloadData()
+}
+
+async function onResetKeyPair(app: OpenAppEntity) {
+  await AirConfirm.create()
+    .dangerButton()
+    .setConfirmText('重置RSA密钥对')
+    .setCancelText('关闭')
+    .show('重置密钥后，使用原密钥的应用将无法访问API服务，是否确认重置?', '确认重置RSA密钥对')
+  const newSecret = await OpenAppService.create(isLoading).resetKeyPair(app)
+  await AirAlert.create()
+    .setConfirmText('复制并关闭')
+    .hideClose()
+    .success('请注意，服务端将不再保存当前应用的 公钥，请务必将此密钥保存到安全的地方。', '重置RSA密钥对成功')
+  await AirClipboard.copy(newSecret)
+  AirNotification.success('复制RSA公钥成功')
+  onReloadData()
+}
+
+async function onAdd() {
+  const appSecret: string = await AirDialog.show(OpenAppEditor)
+  onReloadData()
+  await AirAlert.create()
+    .setConfirmText('复制并关闭')
+    .hideClose()
+    .success('请注意，服务端将不再保存当前应用的 AppSecret/公钥，请务必保存到安全的地方。', '应用创建成功')
+  await AirClipboard.copy(appSecret)
+}
+
+async function onTest() {
+  AirDialog.show(OpenAppTest)
+}
+
+async function onAppLog(app: OpenAppEntity) {
+  AirDialog.show(OpenAppLog, app)
+}
+
+function openOAuth2(app: OpenAppEntity) {
+  window.open(app.url)
+}
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -21,7 +103,7 @@
       v-loading="isLoading"
       :ctrl-width="280"
       :data-list="response.list"
-      :disable-edit="row => row.isDisabled"
+      :disable-edit="(row) => row.isDisabled"
       :entity="OpenAppEntity"
       hide-delete
       show-enable-and-disable
@@ -71,89 +153,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  AButton, APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirClipboard } from '@airpower/helper/AirClipboard'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-
-const {
-  isLoading,
-  response,
-  onSearch,
-  onDelete,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onDisable,
-  onEnable,
-  onReloadData,
-} = useAirTable(OpenAppEntity, OpenAppService, {
-  editView: OpenAppEditor,
-})
-
-async function onResetSecret(app: OpenAppEntity) {
-  await AirConfirm.create()
-    .dangerButton()
-    .setConfirmText('重置AppSecret')
-    .setCancelText('关闭')
-    .show('重置密钥后，使用原密钥的应用将无法访问API服务，是否确认重置?', '确认重置AppSecret')
-  const newSecret = await OpenAppService.create(isLoading)
-    .resetSecret(app)
-  await AirAlert.create()
-    .setConfirmText('复制并关闭')
-    .hideClose()
-    .success('请注意，服务端将不再保存当前应用的 AppSecret，请务必将此密钥保存到安全的地方。', '重置AppSecret成功')
-  await AirClipboard.copy(newSecret)
-  AirNotification.success('复制AppSecret成功')
-  onReloadData()
-}
-
-async function onResetKeyPair(app: OpenAppEntity) {
-  await AirConfirm.create()
-    .dangerButton()
-    .setConfirmText('重置RSA密钥对')
-    .setCancelText('关闭')
-    .show('重置密钥后，使用原密钥的应用将无法访问API服务，是否确认重置?', '确认重置RSA密钥对')
-  const newSecret = await OpenAppService.create(isLoading)
-    .resetKeyPair(app)
-  await AirAlert.create()
-    .setConfirmText('复制并关闭')
-    .hideClose()
-    .success('请注意，服务端将不再保存当前应用的 公钥，请务必将此密钥保存到安全的地方。', '重置RSA密钥对成功')
-  await AirClipboard.copy(newSecret)
-  AirNotification.success('复制RSA公钥成功')
-  onReloadData()
-}
-
-async function onAdd() {
-  const appSecret: string = await AirDialog.show(OpenAppEditor)
-  onReloadData()
-  await AirAlert.create()
-    .setConfirmText('复制并关闭')
-    .hideClose()
-    .success('请注意，服务端将不再保存当前应用的 AppSecret/公钥，请务必保存到安全的地方。', '应用创建成功')
-  await AirClipboard.copy(appSecret)
-}
-
-async function onTest() {
-  AirDialog.show(OpenAppTest)
-}
-
-async function onAppLog(app: OpenAppEntity) {
-  AirDialog.show(OpenAppLog, app)
-}
-
-function openOAuth2(app: OpenAppEntity) {
-  window.open(app.url)
-}
-</script>
 <style lang="scss" scoped></style>

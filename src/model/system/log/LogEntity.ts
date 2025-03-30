@@ -1,6 +1,6 @@
+import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Model, Table } from '@airpower/decorator'
 import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { BaseEntity } from '@/base/BaseEntity'
 
 @Model({
   label: '日志',
@@ -14,7 +14,7 @@ export class LogEntity extends BaseEntity {
   @Field({
     label: '动作',
   })
-    action!: string
+  action!: string
 
   @Table({
     width: 100,
@@ -22,13 +22,13 @@ export class LogEntity extends BaseEntity {
   @Field({
     label: '版本号',
   })
-    version!: number
+  version!: number
 
   @Table()
   @Field({
     label: '平台',
   })
-    platform!: string
+  platform!: string
 
   @Table({
     orderNumber: 77,
@@ -37,17 +37,17 @@ export class LogEntity extends BaseEntity {
   @Field({
     label: 'IP',
   })
-    ip!: string
+  ip!: string
 
   @Field({
     label: '请求体',
   })
-    request!: string
+  request!: string
 
   @Field({
     label: '响应数据',
   })
-    response!: string
+  response!: string
 
   @Table({
     width: 60,
@@ -55,7 +55,7 @@ export class LogEntity extends BaseEntity {
   @Field({
     label: '用户ID',
   })
-    userId!: number
+  userId!: number
 
   @Table({
     hide: false,
@@ -84,5 +84,5 @@ export class LogEntity extends BaseEntity {
   @Field({
     label: '总耗时',
   })
-    pendingTime!: number
+  pendingTime!: number
 }

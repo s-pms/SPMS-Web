@@ -1,7 +1,88 @@
+<script lang="ts" setup>
+import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { ADialog, AFormField, AGroup } from '@airpower/component'
+import { AirApi } from '@airpower/config/AirApi'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirAlert } from '@airpower/feedback/AirAlert'
+import { AirCrypto } from '@airpower/helper/AirCrypto'
+
+import { AirHttp } from '@airpower/helper/AirHttp'
+import { AirRand } from '@airpower/helper/AirRand'
+import { computed, ref } from 'vue'
+
+const props = defineProps(airPropsParam())
+
+const app = ref(new OpenAppEntity())
+app.value.appKey = ''
+app.value.appSecret = ''
+
+const isLoading = ref(false)
+
+const json = ref('{"name":"Hamm","age":"18","len":"18cm"}')
+
+const version = 10000
+
+const APP_KEY = 'APP_KEY_TEST'
+const APP_SECRET = 'APP_SECRET_TEST'
+
+const timestamp = ref(new Date().valueOf())
+
+const url = ref('openApi/test/test')
+
+const nonce = ref(AirRand.getRandMixedCharString())
+
+if (OpenAppArithmeticEnum.RSA.equalsKey(app.value.arithmetic)) {
+  AirAlert.warning('前端暂未支持RSA加解密的测试，请自行测试')
+  props.onCancel()
+}
+
+app.value.appKey = AirApi.getStorage(APP_KEY) || ''
+app.value.appSecret = AirApi.getStorage(APP_SECRET) || ''
+
+const content = computed(() => {
+  AirApi.setStorage(APP_KEY, app.value.appKey)
+  AirApi.setStorage(APP_SECRET, app.value.appSecret)
+  switch (app.value.arithmetic) {
+    case OpenAppArithmeticEnum.AES.key:
+      if (!app.value.appSecret) {
+        return ''
+      }
+      return AirCrypto.aesEncrypt(json.value, app.value.appSecret)
+    default:
+      return json.value
+  }
+})
+const source = computed(
+  () => app.value.appSecret + app.value.appKey + version + timestamp.value + nonce.value + content.value,
+)
+const signature = computed(() => AirCrypto.sha1(source.value))
+
+async function onTest() {
+  const res = await new AirHttp(`${window.location.origin}/api/${url.value}`).send({
+    appKey: app.value.appKey,
+    content: content.value,
+    signature: signature.value,
+    version,
+    timestamp: timestamp.value,
+    nonce: nonce.value,
+  })
+
+  AirRand.getRandCharString()
+  const data = AirCrypto.aesDecrypt(res, app.value.appSecret)
+  AirAlert.success(data, '响应数据')
+}
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
-    :disable-confirm="!app.appKey || !app.appSecret || !app.arithmetic || (OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic) && !app.publicKey)"
+    :disable-confirm="
+      !app.appKey
+        || !app.appSecret
+        || !app.arithmetic
+        || (OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic) && !app.publicKey)
+    "
     :loading="isLoading"
     title="测试应用"
     with="1000px"
@@ -9,7 +90,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="app"
       label-width="120px"
       @submit.prevent
@@ -31,12 +111,14 @@
         <AFormField
           v-model="app"
           :entity="OpenAppEntity"
-          :list="OpenAppArithmeticEnum.toArray().map(item => {
-            if (OpenAppArithmeticEnum.RSA.equalsKey(item.key)) {
-              item.disabled = true
-            }
-            return item
-          })"
+          :list="
+            OpenAppArithmeticEnum.toArray().map((item) => {
+              if (OpenAppArithmeticEnum.RSA.equalsKey(item.key)) {
+                item.disabled = true
+              }
+              return item
+            })
+          "
           field="arithmetic"
         />
         <el-form-item label="版本号">
@@ -128,80 +210,6 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { ADialog, AFormField, AGroup } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirCrypto } from '@airpower/helper/AirCrypto'
-import { AirHttp } from '@airpower/helper/AirHttp'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirRand } from '@airpower/helper/AirRand'
-
-import { AirApi } from '@airpower/config/AirApi'
-import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-
-const props = defineProps(airPropsParam())
-
-const app = ref(new OpenAppEntity())
-app.value.appKey = ''
-app.value.appSecret = ''
-
-const isLoading = ref(false)
-
-const json = ref('{"name":"Hamm","age":"18","len":"18cm"}')
-
-const version = 10000
-
-const APP_KEY = 'APP_KEY_TEST'
-const APP_SECRET = 'APP_SECRET_TEST'
-
-const timestamp = ref(new Date().valueOf())
-
-const url = ref('openApi/test/test')
-
-const nonce = ref(AirRand.getRandMixedCharString())
-
-if (OpenAppArithmeticEnum.RSA.equalsKey(app.value.arithmetic)) {
-  AirAlert.warning('前端暂未支持RSA加解密的测试，请自行测试')
-  props.onCancel()
-}
-
-app.value.appKey = AirApi.getStorage(APP_KEY) || ''
-app.value.appSecret = AirApi.getStorage(APP_SECRET) || ''
-
-const content = computed(() => {
-  AirApi.setStorage(APP_KEY, app.value.appKey)
-  AirApi.setStorage(APP_SECRET, app.value.appSecret)
-  switch (app.value.arithmetic) {
-    case OpenAppArithmeticEnum.AES.key:
-      if (!app.value.appSecret) {
-        return ''
-      }
-      return AirCrypto.aesEncrypt(json.value, app.value.appSecret)
-    default:
-      return json.value
-  }
-})
-const source = computed(() => app.value.appSecret + app.value.appKey + version + timestamp.value + nonce.value + content.value)
-const signature = computed(() => AirCrypto.sha1(source.value))
-
-async function onTest() {
-  const res = await new AirHttp(`${window.location.origin}/api/${url.value}`).send({
-    appKey: app.value.appKey,
-    content: content.value,
-    signature: signature.value,
-    version,
-    timestamp: timestamp.value,
-    nonce: nonce.value,
-  })
-
-  AirRand.getRandCharString()
-  const data = AirCrypto.aesDecrypt(res, app.value.appSecret)
-  AirAlert.success(data, '响应数据')
-}
-</script>
 
 <style lang="scss" scoped>
 .source {

@@ -1,3 +1,26 @@
+<script lang="ts" setup>
+import type { IDictionary } from '@airpower/interface/IDictionary'
+import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
+import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
+import { NotifyService } from '@/model/open/notify/NotifyService'
+import { ADialog, AFormField } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { ref } from 'vue'
+
+const props = defineProps(airPropsParam(new NotifyEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, NotifyEntity, NotifyService)
+
+const sceneList = ref<IDictionary[]>([])
+
+async function init() {
+  sceneList.value = await NotifyService.create().getSceneList()
+}
+
+init()
+</script>
+
 <template>
   <ADialog
     :allow-fullscreen="false"
@@ -33,34 +56,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { IDictionary } from '@airpower/interface/IDictionary'
-import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
-import { NotifyService } from '@/model/open/notify/NotifyService'
-import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
-
-const props = defineProps(airPropsParam(new NotifyEntity()))
-
-const {
-  title,
-  formData,
-  rules,
-  formRef,
-  isLoading,
-  onSubmit,
-} = useAirEditor(props, NotifyEntity, NotifyService)
-
-const sceneList = ref<IDictionary[]>([])
-
-async function init() {
-  sceneList.value = await NotifyService.create()
-    .getSceneList()
-}
-
-init()
-</script>

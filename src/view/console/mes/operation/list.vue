@@ -1,3 +1,19 @@
+<script lang="ts" setup>
+import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { OperationService } from '@/model/mes/operation/OperationService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { OperationEditor } from './component'
+
+const { isLoading, response, onSearch, onAdd, onEdit, onDelete, onPageChanged } = useAirTable(
+  OperationEntity,
+  OperationService,
+  {
+    editView: OperationEditor,
+  },
+)
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -23,22 +39,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage,
-  APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { OperationEditor } from './component'
-import { OperationEntity } from '@/model/mes/operation/OperationEntity'
-import { OperationService } from '@/model/mes/operation/OperationService'
-
-const {
-  isLoading, response,
-  onSearch, onAdd, onEdit, onDelete, onPageChanged,
-} = useAirTable(OperationEntity, OperationService, {
-  editView: OperationEditor,
-})
-
-</script>
 <style lang="scss" scoped></style>

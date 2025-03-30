@@ -1,3 +1,35 @@
+<script lang="ts" setup>
+import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
+import { InputEntity } from '@/model/wms/input/InputEntity'
+import { InputService } from '@/model/wms/input/InputService'
+import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
+import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
+import { PurchaseDetail } from '@/view/console/channel/purchase/component'
+import { OrderDetail } from '@/view/console/mes/order/component'
+import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { InputAddFinishEditor } from '.'
+import { MoveDetail } from '../../move/component'
+
+const props = defineProps(airPropsParam(new InputEntity()))
+
+const { title, formData, isLoading, getDetail } = useBillDetail(props, InputEntity, InputService, {
+  afterGetDetail(detailData) {
+    return detailData
+  },
+})
+
+async function onAddFinish(detail: InputDetailEntity) {
+  await AirDialog.show(InputAddFinishEditor, detail)
+  AirNotification.success('明细入库成功')
+  getDetail()
+}
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -8,7 +40,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="formData"
       label-width="120px"
       @submit.prevent
@@ -76,42 +107,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AFormField, AGroup, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
-import { InputEntity } from '@/model/wms/input/InputEntity'
-import { InputService } from '@/model/wms/input/InputService'
-import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { InputAddFinishEditor } from '.'
-import { MoveDetail } from '../../move/component'
-import { PurchaseDetail } from '@/view/console/channel/purchase/component'
-import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
-import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-import { OrderDetail } from '@/view/console/mes/order/component'
-
-const props = defineProps(airPropsParam(new InputEntity()))
-
-const {
-  title,
-  formData,
-  isLoading,
-  getDetail,
-} = useBillDetail(props, InputEntity, InputService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-})
-
-async function onAddFinish(detail: InputDetailEntity) {
-  await AirDialog.show(InputAddFinishEditor, detail)
-  AirNotification.success('明细入库成功')
-  getDetail()
-}
-</script>

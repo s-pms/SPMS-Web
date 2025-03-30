@@ -1,7 +1,4 @@
-import MenuSelector from './selector.vue'
 import MenuEditor from './editor.vue'
+import MenuSelector from './selector.vue'
 
-export {
-  MenuSelector,
-  MenuEditor,
-}
+export { MenuEditor, MenuSelector }

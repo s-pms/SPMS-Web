@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
+import { SupplierService } from '@/model/channel/supplier/SupplierService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { SupplierEditor } from './component'
+
+const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
+  = useAirTable(SupplierEntity, SupplierService, {
+    editView: SupplierEditor,
+  })
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -26,22 +39,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, APage, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { SupplierEditor } from './component'
-import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
-import { SupplierService } from '@/model/channel/supplier/SupplierService'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(SupplierEntity, SupplierService, {
-  editView: SupplierEditor,
-})
-</script>
 <style lang="scss" scoped></style>

@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
+import { CustomerSelector } from '@/view/console/channel/customer/component'
+import { ADateTime, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { useAirDetail } from '@airpower/hook/useAirDetail'
+
+const props = defineProps(airPropsParam(new PlanEntity()))
+
+const { title, formData, isLoading } = useAirDetail(props, PlanEntity, PlanService, {})
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -8,7 +23,6 @@
     @on-cancel="onCancel"
   >
     <el-form
-      ref="formRef"
       :model="formData"
       label-width="120px"
       @submit.prevent
@@ -62,25 +76,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import {
-  ADateTime, ADialog, AFormField, AGroup, ASelect, ATable,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-import { CustomerSelector } from '@/view/console/channel/customer/component'
-
-const props = defineProps(airPropsParam(new PlanEntity()))
-
-const {
-  title,
-  formData,
-  isLoading,
-} = useAirDetail(props, PlanEntity, PlanService, {})
-
-</script>

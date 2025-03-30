@@ -1,13 +1,11 @@
-<script generic="D extends AbstractBaseBillDetailEntity,B extends AbstractBaseBillEntity<D>" lang="ts" setup>
-import {
-  inject, PropType, ref, Ref,
-} from 'vue'
+<script generic="D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>" lang="ts" setup>
+import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import type { PropType, Ref } from 'vue'
 import { ACopy, AFormField } from '@airpower/component'
-import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { inject, ref } from 'vue'
 
 const props = defineProps({
-
   /**
    * ### 手动绑定的表单对象
    */
@@ -25,11 +23,9 @@ const props = defineProps({
   },
 })
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const injectFormData = inject('formData') as Ref<B> | undefined
 
 // 手动绑定的 v-model 覆盖 自动注入的表单对象
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const formData = ref(props.modelValue) as Ref<B>
 if (injectFormData && injectFormData.value) {
   formData.value = injectFormData.value
@@ -37,7 +33,6 @@ if (injectFormData && injectFormData.value) {
 if (!formData.value) {
   throw new Error('请手动为 formData 绑定v-model或使用useAirEditor创建表单对象(推荐)！！！')
 }
-
 </script>
 
 <template>

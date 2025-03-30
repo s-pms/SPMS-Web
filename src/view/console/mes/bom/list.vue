@@ -1,3 +1,29 @@
+<script lang="ts" setup>
+import PublishButton from '@/component/PublishButton.vue'
+import { useTable } from '@/hook/useTable'
+import { BomEntity } from '@/model/mes/bom/BomEntity'
+import { BomService } from '@/model/mes/bom/BomService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { BomDetail, BomEditor } from './component'
+
+const {
+  isLoading,
+  response,
+  onSearch,
+  onAdd,
+  onEdit,
+  onSortChanged,
+  onSelected,
+  onPageChanged,
+  onDetail,
+  onDelete,
+  onPublish,
+} = useTable(BomEntity, BomService, {
+  editView: BomEditor,
+  detailView: BomDetail,
+})
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -11,8 +37,8 @@
       v-loading="isLoading"
       :ctrl-width="160"
       :data-list="response.list"
-      :disable-delete="row => row.isPublished"
-      :disable-edit="row => row.isPublished"
+      :disable-delete="(row) => row.isPublished"
+      :disable-edit="(row) => row.isPublished"
       :entity="BomEntity"
       show-detail
       @on-detail="onDetail"
@@ -37,31 +63,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APage, APanel, ATable, AToolBar,
-} from '@airpower/component'
-import { BomDetail, BomEditor } from './component'
-import { BomEntity } from '@/model/mes/bom/BomEntity'
-import { BomService } from '@/model/mes/bom/BomService'
-import { useTable } from '@/hook/useTable'
-import PublishButton from '@/component/PublishButton.vue'
-
-const {
-  isLoading,
-  response,
-  onSearch,
-  onAdd,
-  onEdit,
-  onSortChanged,
-  onSelected,
-  onPageChanged,
-  onDetail,
-  onDelete,
-  onPublish,
-} = useTable(BomEntity, BomService, {
-  editView: BomEditor,
-  detailView: BomDetail,
-})
-</script>
 <style lang="scss" scoped></style>

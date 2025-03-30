@@ -1,6 +1,6 @@
+import type { AbstractBaseBillEntity } from './AbstractBaseBillEntity'
+import type { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 import { AbstractBaseService } from '../AbstractBaseService'
-import { AbstractBaseBillEntity } from './AbstractBaseBillEntity'
-import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 
 /**
  * # 单据抽象服务基类
@@ -9,15 +9,14 @@ import { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEnt
  */
 export abstract class AbstractBaseBillService<
   D extends AbstractBaseBillDetailEntity,
-  B extends AbstractBaseBillEntity<D>
+  B extends AbstractBaseBillEntity<D>,
 > extends AbstractBaseService<B> {
   /**
    * ### 审核单据
    * @param bill 单据
    */
   async audit(bill: B): Promise<void> {
-    await this.api('audit')
-      .post(bill)
+    await this.api('audit').post(bill)
   }
 
   /**
@@ -25,8 +24,7 @@ export abstract class AbstractBaseBillService<
    * @param bill 单据
    */
   async reject(bill: B): Promise<void> {
-    await this.api('reject')
-      .post(bill)
+    await this.api('reject').post(bill)
   }
 
   /**
@@ -34,8 +32,7 @@ export abstract class AbstractBaseBillService<
    * @param bill 单据
    */
   async setBillFinished(bill: B): Promise<void> {
-    await this.api('setBillFinished')
-      .post(bill)
+    await this.api('setBillFinished').post(bill)
   }
 
   /**
@@ -43,8 +40,7 @@ export abstract class AbstractBaseBillService<
    * @param bill 单据
    */
   async setBillDetailsAllFinished(bill: B): Promise<void> {
-    await this.api('setBillDetailsAllFinished')
-      .post(bill)
+    await this.api('setBillDetailsAllFinished').post(bill)
   }
 
   /**
@@ -52,7 +48,6 @@ export abstract class AbstractBaseBillService<
    * @param bill 单据
    */
   async addDetailFinishQuantity(bill: D): Promise<void> {
-    await this.api('addFinish')
-      .post(bill)
+    await this.api('addFinish').post(bill)
   }
 }

@@ -1,13 +1,7 @@
-import PlanEditor from './editor.vue'
 import PlanDetail from './detail.vue'
 import PlanDetailEditor from './detailEditor.vue'
-import PlanSelector from './selector.vue'
 import PlanDetailSelector from './detailSelector.vue'
+import PlanEditor from './editor.vue'
+import PlanSelector from './selector.vue'
 
-export {
-  PlanEditor,
-  PlanDetail,
-  PlanDetailEditor,
-  PlanSelector,
-  PlanDetailSelector,
-}
+export { PlanDetail, PlanDetailEditor, PlanDetailSelector, PlanEditor, PlanSelector }

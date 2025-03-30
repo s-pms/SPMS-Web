@@ -1,3 +1,26 @@
+<script lang="ts" setup>
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { StructureService } from '@/model/factory/structure/StructureService'
+import { OperationSelector } from '@/view/console/mes/operation/component'
+import { DepartmentSelector } from '@/view/console/personnel/department/component'
+import { AButton, ADialog, AFormField, AGroup } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+const props = defineProps(airPropsParam(new StructureEntity()))
+
+const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, StructureEntity, StructureService)
+
+async function selectOperation() {
+  formData.value.operationList = await AirDialog.selectList(OperationSelector, formData.value.operationList)
+}
+
+async function selectDepartment() {
+  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -67,37 +90,6 @@
   </ADialog>
 </template>
 
-<script lang="ts" setup>
-import {
-  AButton, ADialog, AFormField, AGroup,
-} from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
-import { OperationSelector } from '@/view/console/mes/operation/component'
-import { DepartmentSelector } from '@/view/console/personnel/department/component'
-
-const props = defineProps(airPropsParam(new StructureEntity()))
-
-const {
-  title,
-  formData,
-  rules,
-  formRef,
-  isLoading,
-  onSubmit,
-} = useAirEditor(props, StructureEntity, StructureService)
-
-async function selectOperation() {
-  formData.value.operationList = await AirDialog.selectList(OperationSelector, formData.value.operationList)
-}
-
-async function selectDepartment() {
-  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
-}
-</script>
 <style lang="scss" scoped>
 .list {
   display: flex;

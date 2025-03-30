@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
+import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
+import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { useAirTable } from '@airpower/hook/useAirTable'
+import { SalePriceEditor } from './component'
+
+const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
+  = useAirTable(SalePriceEntity, SalePriceService, {
+    editView: SalePriceEditor,
+  })
+</script>
+
 <template>
   <APanel>
     <AToolBar
@@ -39,23 +52,4 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import {
-  APanel, APage, ATable, AToolBar,
-} from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { SalePriceEditor } from './component'
-import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
-import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected,
-} = useAirTable(SalePriceEntity, SalePriceService, {
-  editView: SalePriceEditor,
-})
-
-</script>
 <style lang="scss" scoped></style>
