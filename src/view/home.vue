@@ -22,13 +22,13 @@ import logo from '@/assets/img/logo.svg'
         Login
       </router-link>
       <el-link
-        href="https://github.com/HammCn"
+        href="https://github.com/s-pms"
         target="_blank"
       >
         Github
       </el-link>
       <el-link
-        href="https://gitee.com/air-power"
+        href="https://gitee.com/s-pms"
         target="_blank"
       >
         Gitee
