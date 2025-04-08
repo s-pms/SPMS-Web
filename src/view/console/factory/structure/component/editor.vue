@@ -10,7 +10,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new StructureEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, StructureEntity, StructureService)
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, StructureService)
 
 async function selectOperation() {
   formData.value.operationList = await AirDialog.selectList(OperationSelector, formData.value.operationList)

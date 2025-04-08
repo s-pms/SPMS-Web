@@ -9,13 +9,16 @@ import { AirDateTime } from '@airpower/helper/AirDateTime'
 import { useAirTable } from '@airpower/hook/useAirTable'
 import { ref } from 'vue'
 
-const { isLoading, response, onSearch, onEdit, onPageChanged, onSortChanged } = useAirTable(
-  CodeRuleEntity,
-  CodeRuleService,
-  {
-    editView: CodeRuleEditor,
-  },
-)
+const {
+  isLoading,
+  response,
+  onSearch,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+} = useAirTable(CodeRuleService, {
+  editView: CodeRuleEditor,
+})
 
 const fieldList = ref<CodeRuleField[]>([])
 

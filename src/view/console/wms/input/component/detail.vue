@@ -17,7 +17,12 @@ import { MoveDetail } from '../../move/component'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
-const { title, formData, isLoading, getDetail } = useBillDetail(props, InputEntity, InputService, {
+const {
+  title,
+  formData,
+  isLoading,
+  getDetail,
+} = useBillDetail(props, InputService, {
   afterGetDetail(detailData) {
     return detailData
   },

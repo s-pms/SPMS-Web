@@ -26,7 +26,7 @@ const {
   onReject,
   setBillDetailsAllFinished,
   onGetList,
-} = useBillTable(OrderEntity, OrderService, {
+} = useBillTable(OrderService, {
   editView: OrderEditor,
   detailView: OrderDetail,
 })

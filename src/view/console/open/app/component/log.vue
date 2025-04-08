@@ -12,9 +12,14 @@ import { OpenAppLogDetail } from './index'
 
 const props = defineProps(airPropsParam(new OpenAppEntity()))
 
-const { isLoading } = useAirDetail(props, OpenAppEntity, OpenAppService)
+const {
+  isLoading,
+} = useAirDetail(props, OpenAppService)
 
-const { onPageChanged, response } = useAirTable(OpenLogEntity, OpenLogService, {
+const {
+  onPageChanged,
+  response,
+} = useAirTable(OpenLogService, {
   beforeSearch(requestData) {
     requestData.filter.openApp = props.param.copyExposeId()
     return requestData

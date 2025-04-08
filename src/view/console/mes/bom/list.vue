@@ -18,7 +18,7 @@ const {
   onDetail,
   onDelete,
   onPublish,
-} = useTable(BomEntity, BomService, {
+} = useTable(BomService, {
   editView: BomEditor,
   detailView: BomDetail,
 })

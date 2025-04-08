@@ -20,7 +20,7 @@ const {
   onDetail,
   onAudit,
   onReject,
-} = useBillTable(MoveEntity, MoveService, {
+} = useBillTable(MoveService, {
   editView: MoveEditor,
   detailView: MoveDetail,
 })

@@ -4,7 +4,7 @@
   <div class="copyright">
     Copyright Hamm.cn &copy;{{ new Date().getFullYear() }}, All Rights Reserved. Powered By
     <el-link
-      href="https://github.com/HammCn/AirPower4T"
+      href="https://github.com/AirPowerTeam/AirPower4T"
       target="_blank"
     >
       AirPower4T

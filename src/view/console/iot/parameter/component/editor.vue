@@ -7,7 +7,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new ParameterEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, ParameterEntity, ParameterService)
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, ParameterService)
 </script>
 
 <template>

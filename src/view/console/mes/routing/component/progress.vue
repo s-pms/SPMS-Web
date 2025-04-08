@@ -22,7 +22,11 @@ const current = ref(-1)
 const currentModel = ref(new RoutingOperationEntity())
 const list = ref<RoutingOperationEntity[]>([])
 const bomDetails = ref<BomDetailEntity[]>([])
-const { formRef, isLoading, formData } = useAirEditor(props, RoutingEntity, RoutingService, {
+const {
+  formRef,
+  isLoading,
+  formData,
+} = useAirEditor(props, RoutingService, {
   afterGetDetail(detailData) {
     list.value = detailData.details
     return detailData

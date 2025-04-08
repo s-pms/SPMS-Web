@@ -6,7 +6,7 @@ import { useAirTable } from '@airpower/hook/useAirTable'
 import { SupplierEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(SupplierEntity, SupplierService, {
+  = useAirTable(SupplierService, {
     editView: SupplierEditor,
   })
 </script>

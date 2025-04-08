@@ -7,7 +7,7 @@ import { useAirTable } from '@airpower/hook/useAirTable'
 import { DeviceEditor, DeviceMonitor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(DeviceEntity, DeviceService, {
+  = useAirTable(DeviceService, {
     editView: DeviceEditor,
   })
 

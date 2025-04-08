@@ -14,7 +14,14 @@ import { InputDetailEditor } from '.'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, InputEntity, InputService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, InputService, {
   afterGetDetail(detailData) {
     return detailData
   },

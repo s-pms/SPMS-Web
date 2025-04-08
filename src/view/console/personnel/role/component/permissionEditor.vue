@@ -12,7 +12,11 @@ import { ref } from 'vue'
 
 const props = defineProps(airPropsParam(new RoleEntity()))
 
-const { isLoading, formRef, formData } = useAirEditor(props, RoleEntity, RoleService, {})
+const {
+  isLoading,
+  formRef,
+  formData,
+} = useAirEditor(props, RoleService, {})
 
 async function onSelect(selectList: PermissionEntity[]) {
   formData.value.permissionList = selectList

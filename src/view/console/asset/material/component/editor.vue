@@ -8,7 +8,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new MaterialEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, MaterialEntity, MaterialService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, MaterialService, {
   afterGetDetail(detailData) {
     return detailData
   },

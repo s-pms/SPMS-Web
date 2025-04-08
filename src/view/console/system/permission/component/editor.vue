@@ -6,7 +6,13 @@ import { airPropsParam } from '@airpower/config/AirProps'
 import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new PermissionEntity()))
-const { isLoading, formData, formRef, title, onSubmit } = useAirEditor(props, PermissionEntity, PermissionService)
+const {
+  isLoading,
+  formData,
+  formRef,
+  title,
+  onSubmit,
+} = useAirEditor(props, PermissionService)
 </script>
 
 <template>

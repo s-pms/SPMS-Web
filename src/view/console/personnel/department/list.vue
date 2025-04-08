@@ -5,17 +5,21 @@ import { APanel, ATable, AToolBar } from '@airpower/component'
 import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { DepartmentEditor } from './component'
 
-const { list, isLoading, onAddRow, onAdd, onDelete, onEdit, onSearch } = useAirTableTree(
-  DepartmentEntity,
-  DepartmentService,
-  {
-    editView: DepartmentEditor,
-    beforeAddRow(param, row) {
-      param.parent = row
-      return param
-    },
+const {
+  list,
+  isLoading,
+  onAddRow,
+  onAdd,
+  onDelete,
+  onEdit,
+  onSearch,
+} = useAirTableTree(DepartmentService, {
+  editView: DepartmentEditor,
+  beforeAddRow(param, row) {
+    param.parent = row
+    return param
   },
-)
+})
 </script>
 
 <template>

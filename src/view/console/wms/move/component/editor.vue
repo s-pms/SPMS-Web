@@ -16,7 +16,14 @@ import { InventorySelector } from '../../inventory/component'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, MoveEntity, MoveService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, MoveService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
     return detailData

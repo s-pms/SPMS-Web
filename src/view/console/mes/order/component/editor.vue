@@ -18,7 +18,14 @@ import { RoutingSelector } from '../../routing/component'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, OrderEntity, OrderService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, OrderService, {
   beforeSubmit(submitData) {
     if (submitData.deliverTime < submitData.startTime) {
       AirNotification.warning('交付日期不能早于开始日期')

@@ -7,13 +7,18 @@ import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
 import { AirDialog } from '@airpower/helper/AirDialog'
 import { RoutingEditor, RoutingProgress } from './component'
 
-const { isLoading, response, onSearch, onAdd, onEdit, onDelete, onPageChanged, onPublish } = useTable(
-  RoutingEntity,
-  RoutingService,
-  {
-    editView: RoutingEditor,
-  },
-)
+const {
+  isLoading,
+  response,
+  onSearch,
+  onAdd,
+  onEdit,
+  onDelete,
+  onPageChanged,
+  onPublish,
+} = useTable(RoutingService, {
+  editView: RoutingEditor,
+})
 
 async function onProgress(data: RoutingEntity) {
   await AirDialog.show(RoutingProgress, data)

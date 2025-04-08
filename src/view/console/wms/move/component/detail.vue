@@ -10,7 +10,11 @@ import { airPropsParam } from '@airpower/config/AirProps'
 
 const props = defineProps(airPropsParam(new MoveEntity()))
 
-const { formData, isLoading, addDetailFinishQuantity } = useBillDetail(props, MoveEntity, MoveService, {
+const {
+  formData,
+  isLoading,
+  addDetailFinishQuantity,
+} = useBillDetail(props, MoveService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
     return detailData
