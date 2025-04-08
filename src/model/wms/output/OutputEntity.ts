@@ -1,12 +1,12 @@
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
-import { AirEnum } from '@airpower/base/AirEnum'
+import type { AirEnum } from '@airpower/base/AirEnum'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
-import { OutputDetailEntity } from './OutputDetailEntity'
-import { OutputTypeEnum } from './OutputTypeEnum'
-import { OutputStatusEnum } from './OutputStatusEnum'
-import { MoveEntity } from '../move/MoveEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { MoveEntity } from '../move/MoveEntity'
+import { OutputDetailEntity } from './OutputDetailEntity'
+import { OutputStatusEnum } from './OutputStatusEnum'
+import { OutputTypeEnum } from './OutputTypeEnum'
 
 @Model({
   label: '出库单',
