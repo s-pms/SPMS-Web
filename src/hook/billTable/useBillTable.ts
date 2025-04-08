@@ -2,7 +2,7 @@ import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import type { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
-import type { ClassConstructor } from '@airpower/type/AirType'
+import type { ServiceConstructor } from '@airpower/type/AirType'
 import type { IUseBillTableResult } from './IUseBillTableResult'
 import { BillRejectDialog } from '@/component'
 import { AirConfirm } from '@airpower/feedback/AirConfirm'
@@ -20,7 +20,7 @@ export function useBillTable<
   B extends AbstractBaseBillEntity<D>,
   S extends AbstractBaseBillService<D, B>,
 >(
-  serviceClass: ClassConstructor<S>,
+  serviceClass: ServiceConstructor<B, S>,
   option: IUseTableOption<B> = {},
 ): IUseBillTableResult<D, B, S> {
   const result = useAirTable(serviceClass, option)

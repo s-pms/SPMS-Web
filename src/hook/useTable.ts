@@ -2,7 +2,7 @@ import type { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { BaseEntity } from '@/base/BaseEntity'
 import type { IBaseTableResult } from '@/hook/IBaseTableResult'
 import type { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
-import type { ClassConstructor } from '@airpower/type/AirType'
+import type { ServiceConstructor } from '@airpower/type/AirType'
 import { AirConfirm } from '@airpower/feedback/AirConfirm'
 import { useAirTable } from '@airpower/hook/useAirTable'
 
@@ -13,7 +13,7 @@ import { useAirTable } from '@airpower/hook/useAirTable'
  * @author Hamm.cn
  */
 export function useTable<E extends BaseEntity, S extends AbstractBaseService<E>>(
-  serviceClass: ClassConstructor<S>,
+  serviceClass: ServiceConstructor<E, S>,
   option: IUseTableOption<E> = {},
 ): IBaseTableResult<E, S> {
   const result = useAirTable(serviceClass, option)
