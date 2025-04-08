@@ -5,17 +5,21 @@ import { APanel, ATable, AToolBar } from '@airpower/component'
 import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { PermissionEditor } from './component'
 
-const { isLoading, list, onEdit, onAdd, onAddRow, onSearch, onDelete } = useAirTableTree(
-  PermissionEntity,
-  PermissionService,
-  {
-    editView: PermissionEditor,
-    beforeAddRow: (param: PermissionEntity, row: PermissionEntity) => {
-      param.parent = row
-      return param
-    },
+const {
+  isLoading,
+  list,
+  onEdit,
+  onAdd,
+  onAddRow,
+  onSearch,
+  onDelete,
+} = useAirTableTree(PermissionService, {
+  editView: PermissionEditor,
+  beforeAddRow: (param: PermissionEntity, row: PermissionEntity) => {
+    param.parent = row
+    return param
   },
-)
+})
 </script>
 
 <template>

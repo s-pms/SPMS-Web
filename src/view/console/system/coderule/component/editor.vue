@@ -13,7 +13,14 @@ import { computed, ref } from 'vue'
 
 const props = defineProps(airPropsParam(new CodeRuleEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, CodeRuleEntity, CodeRuleService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, CodeRuleService, {
   customRules: {
     prefix: [
       AirValidator.show('前缀只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),

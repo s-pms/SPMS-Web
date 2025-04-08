@@ -7,7 +7,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new OpenAppEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, OpenAppEntity, OpenAppService)
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, OpenAppService)
 
 // todo 这里需要删掉
 formData.value.url = formData.value.url || 'https://demo.hamm.cn/app'

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
-import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { ADialog, AFormField, AGroup, ATable } from '@airpower/component'
@@ -9,7 +8,11 @@ import { useAirDetail } from '@airpower/hook/useAirDetail'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
-const { title, formData, isLoading } = useAirDetail(props, BomEntity, BomService, {})
+const {
+  title,
+  formData,
+  isLoading,
+} = useAirDetail(props, BomService, {})
 </script>
 
 <template>

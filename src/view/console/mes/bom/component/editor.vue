@@ -14,7 +14,14 @@ import { BomDetailEditor } from '.'
 
 const props = defineProps(airPropsParam(new InputEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, BomEntity, BomService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, BomService, {
   afterGetDetail(detailData) {
     return detailData
   },

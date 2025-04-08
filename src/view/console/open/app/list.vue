@@ -21,7 +21,7 @@ const {
   onDisable,
   onEnable,
   onReloadData,
-} = useAirTable(OpenAppEntity, OpenAppService, {
+} = useAirTable(OpenAppService, {
   editView: OpenAppEditor,
 })
 

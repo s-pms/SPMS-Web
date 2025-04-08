@@ -7,7 +7,6 @@ import { airPropsParam } from '@airpower/config/AirProps'
 import { ref } from 'vue'
 
 const props = defineProps(airPropsParam(new MoveDetailEntity()))
-
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)

@@ -1,3 +1,30 @@
+<script lang="ts" setup>
+import {APage, APanel, ATable, AToolBar} from '@airpower/component'
+import {OutputDetail, OutputEditor} from './component'
+import {OutputEntity} from '@/model/wms/output/OutputEntity'
+import {OutputService} from '@/model/wms/output/OutputService'
+import {useBillTable} from '@/hook/billTable/useBillTable'
+import {OutputStatusEnum} from '@/model/wms/output/OutputStatusEnum'
+import {BillAuditOrReject} from '@/component'
+
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onAdd,
+  onEdit,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+  onAudit,
+  onReject,
+} = useBillTable(OutputService, {
+  editView: OutputEditor,
+  detailView: OutputDetail,
+})
+</script>
 <template>
   <APanel>
     <AToolBar
@@ -38,31 +65,5 @@
   </APanel>
 </template>
 
-<script lang="ts" setup>
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { OutputDetail, OutputEditor } from './component'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { useBillTable } from '@/hook/billTable/useBillTable'
-import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
-import { BillAuditOrReject } from '@/component'
-
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(OutputEntity, OutputService, {
-  editView: OutputEditor,
-  detailView: OutputDetail,
-})
-</script>
 <style lang="scss" scoped></style>
+

@@ -8,7 +8,11 @@ import { useAirDetail } from '@airpower/hook/useAirDetail'
 
 const props = defineProps(airPropsParam(new OrderEntity()))
 
-const { title, formData, isLoading } = useAirDetail(props, OrderEntity, OrderService, {})
+const {
+  title,
+  formData,
+  isLoading,
+} = useAirDetail(props, OrderService, {})
 </script>
 
 <template>

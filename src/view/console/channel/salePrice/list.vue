@@ -6,7 +6,7 @@ import { useAirTable } from '@airpower/hook/useAirTable'
 import { SalePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(SalePriceEntity, SalePriceService, {
+  = useAirTable(SalePriceService, {
     editView: SalePriceEditor,
   })
 </script>

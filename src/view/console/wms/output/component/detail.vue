@@ -1,3 +1,38 @@
+<script lang="ts" setup>
+import {AButton, ADialog, AFormField, AGroup, ATable} from '@airpower/component'
+import {airPropsParam} from '@airpower/config/AirProps'
+import {AirDialog} from '@airpower/helper/AirDialog'
+import {AirNotification} from '@airpower/feedback/AirNotification'
+import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
+import {OutputEntity} from '@/model/wms/output/OutputEntity'
+import {OutputService} from '@/model/wms/output/OutputService'
+import {useBillDetail} from '@/hook/billTable/useBillDetail'
+import {OutputAddFinishEditor} from '.'
+import {MoveDetail} from '../../move/component'
+import {SaleDetail} from '@/view/console/channel/sale/component'
+import {OutputTypeEnum} from '@/model/wms/output/OutputTypeEnum'
+import {OutputStatusEnum} from '@/model/wms/output/OutputStatusEnum'
+import {BillFormCode, BillFormMoreDetail} from '@/component'
+import {PickingDetail} from '@/view/console/mes/picking/component'
+
+const props = defineProps(airPropsParam(new OutputEntity()))
+
+const {
+  formData, isLoading, getDetail
+} = useBillDetail(props, OutputService, {
+  afterGetDetail(detailData) {
+    return detailData
+  },
+})
+
+async function onAddFinish(detail: OutputDetailEntity, billId: number) {
+  detail.billId = billId
+  await AirDialog.show(OutputAddFinishEditor, detail)
+  AirNotification.success('明细出库成功')
+  getDetail()
+}
+</script>
+
 <template>
   <ADialog
     :loading="isLoading"
@@ -15,7 +50,7 @@
         :column="3"
         title="出库单"
       >
-        <BillFormCode :bill="formData" />
+        <BillFormCode :bill="formData"/>
         <AFormField
           disabled
           field="type"
@@ -45,7 +80,7 @@
           </el-link>
         </el-form-item>
       </AGroup>
-      <BillFormMoreDetail :bill="formData" />
+      <BillFormMoreDetail :bill="formData"/>
       <AGroup title="出库明细">
         <ATable
           :data-list="formData.details"
@@ -76,36 +111,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { OutputAddFinishEditor } from '.'
-import { MoveDetail } from '../../move/component'
-import { SaleDetail } from '@/view/console/channel/sale/component'
-import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
-import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-import { PickingDetail } from '@/view/console/mes/picking/component'
-
-const props = defineProps(airPropsParam(new OutputEntity()))
-
-const { formData, isLoading, getDetail } = useBillDetail(props, OutputEntity, OutputService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-})
-
-async function onAddFinish(detail: OutputDetailEntity, billId: number) {
-  detail.billId = billId
-  await AirDialog.show(OutputAddFinishEditor, detail)
-  AirNotification.success('明细出库成功')
-  getDetail()
-}
-</script>

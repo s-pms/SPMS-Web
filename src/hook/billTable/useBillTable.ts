@@ -11,7 +11,6 @@ import { useAirTable } from '@airpower/hook/useAirTable'
 
 /**
  * # 单据的表格Hooks
- * @param entityClass 单据类
  * @param serviceClass 单据服务类
  * @param option (可选) 可选配置项
  * @author Hamm.cn
@@ -21,11 +20,10 @@ export function useBillTable<
   B extends AbstractBaseBillEntity<D>,
   S extends AbstractBaseBillService<D, B>,
 >(
-  entityClass: ClassConstructor<B>,
   serviceClass: ClassConstructor<S>,
   option: IUseTableOption<B> = {},
 ): IUseBillTableResult<D, B, S> {
-  const result = useAirTable(entityClass, serviceClass, option)
+  const result = useAirTable(serviceClass, option)
 
   /**
    * ### 单据审核

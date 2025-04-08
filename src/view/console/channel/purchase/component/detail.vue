@@ -10,7 +10,12 @@ import { airPropsParam } from '@airpower/config/AirProps'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
-const { title, formData, isLoading, addDetailFinishQuantity } = useBillDetail(props, PurchaseEntity, PurchaseService)
+const {
+  title,
+  formData,
+  isLoading,
+  addDetailFinishQuantity,
+} = useBillDetail(props, PurchaseService)
 </script>
 
 <template>

@@ -19,7 +19,7 @@
         :column="2"
         title="入库单"
       >
-        <AFormField field="billCode" />
+        <AFormField field="billCode"/>
       </AGroup>
       <AGroup title="出库明细">
         <ATable
@@ -65,22 +65,26 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { OutputDetailEditor } from '.'
-import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
+import {computed} from 'vue'
+import {AButton, ADialog, AFormField, AGroup, ATable} from '@airpower/component'
+import {airPropsParam} from '@airpower/config/AirProps'
+import {AirDialog} from '@airpower/helper/AirDialog'
+import {useAirEditor} from '@airpower/hook/useAirEditor'
+import {AirConfirm} from '@airpower/feedback/AirConfirm'
+import {AirNotification} from '@airpower/feedback/AirNotification'
+import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
+import {OutputEntity} from '@/model/wms/output/OutputEntity'
+import {OutputService} from '@/model/wms/output/OutputService'
+import {OutputDetailEditor} from '.'
+import {OutputTypeEnum} from '@/model/wms/output/OutputTypeEnum'
 
 const props = defineProps(airPropsParam(new OutputEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, OutputEntity, OutputService, {
+const {
+  title, formData, rules, formRef,
+  isLoading,
+  onSubmit
+} = useAirEditor(props, OutputService, {
   afterGetDetail(detailData) {
     return detailData
   },

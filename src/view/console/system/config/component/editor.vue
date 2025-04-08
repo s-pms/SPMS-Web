@@ -9,7 +9,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new ConfigEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, ConfigEntity, ConfigService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, ConfigService, {
   afterGetDetail: (data) => {
     switch (data.type) {
       case ConfigType.NUMBER.key:

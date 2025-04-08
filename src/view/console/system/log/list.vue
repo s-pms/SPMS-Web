@@ -6,13 +6,18 @@ import { AirColor } from '@airpower/enum/AirColor'
 import { useAirTable } from '@airpower/hook/useAirTable'
 import Detail from './detail.vue'
 
-const { isLoading, response, selectList, onSearch, onPageChanged, onSortChanged, onSelected, onDetail } = useAirTable(
-  LogEntity,
-  LogService,
-  {
-    detailView: Detail,
-  },
-)
+const {
+  isLoading,
+  response,
+  selectList,
+  onSearch,
+  onPageChanged,
+  onSortChanged,
+  onSelected,
+  onDetail,
+} = useAirTable(LogService, {
+  detailView: Detail,
+})
 
 function getColor(log: LogEntity) {
   const diff = log.updateTime - log.createTime

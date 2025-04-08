@@ -9,7 +9,12 @@ import { ref } from 'vue'
 
 const props = defineProps(airPropsParam(new UserEntity()))
 const confirmPassword = ref('')
-const { isLoading, formData, formRef, rules } = useAirEditor(props, UserEntity, UserService)
+const {
+  isLoading,
+  formData,
+  formRef,
+  rules,
+} = useAirEditor(props, UserService)
 
 async function onSubmit() {
   if (confirmPassword.value !== formData.value.password) {

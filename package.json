@@ -6,6 +6,7 @@
   "author": "Hamm",
   "scripts": {
     "s": "vite",
+    "lint": "eslint --fix",
     "dev": "vite build --mode dev",
     "test": "vite build --mode test",
     "production": "vite build --mode production",

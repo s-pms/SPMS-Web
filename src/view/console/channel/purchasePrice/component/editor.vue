@@ -9,12 +9,14 @@ import { SupplierSelector } from '../../supplier/component'
 
 const props = defineProps(airPropsParam(new PurchasePriceEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(
-  props,
-  PurchasePriceEntity,
-  PurchasePriceService,
-  {},
-)
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, PurchasePriceService, {})
 </script>
 
 <template>

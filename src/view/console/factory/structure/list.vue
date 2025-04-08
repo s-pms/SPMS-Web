@@ -5,17 +5,23 @@ import { APanel, ATable, AToolBar } from '@airpower/component'
 import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { StructureEditor } from './component'
 
-const { isLoading, list, onSearch, onAdd, onDelete, onEdit, onSortChanged, onSelected, onAddRow } = useAirTableTree(
-  StructureEntity,
-  StructureService,
-  {
-    editView: StructureEditor,
-    beforeAddRow(param, row) {
-      param.parent = row
-      return param
-    },
+const {
+  isLoading,
+  list,
+  onSearch,
+  onAdd,
+  onDelete,
+  onEdit,
+  onSortChanged,
+  onSelected,
+  onAddRow,
+} = useAirTableTree(StructureService, {
+  editView: StructureEditor,
+  beforeAddRow(param, row) {
+    param.parent = row
+    return param
   },
-)
+})
 </script>
 
 <template>

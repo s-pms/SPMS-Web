@@ -7,13 +7,18 @@ import { ConfigurationEditor } from '@/view/console/system/config/component'
 import { APage, APanel, ATable, AToolBar } from '@airpower/component'
 import { useAirTable } from '@airpower/hook/useAirTable'
 
-const { isLoading, response, onSearch, onEdit, onAdd, onPageChanged, onSortChanged, onDelete } = useAirTable(
-  ConfigEntity,
-  ConfigService,
-  {
-    editView: ConfigurationEditor,
-  },
-)
+const {
+  isLoading,
+  response,
+  onSearch,
+  onEdit,
+  onAdd,
+  onPageChanged,
+  onSortChanged,
+  onDelete,
+} = useAirTable(ConfigService, {
+  editView: ConfigurationEditor,
+})
 </script>
 
 <template>
