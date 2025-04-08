@@ -3,7 +3,7 @@ import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillServic
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import type { IUseDetailOption } from '@airpower/interface/hooks/IUseDetailOption'
 import type { IJson } from '@airpower/interface/IJson'
-import type { ClassConstructor } from '@airpower/type/AirType'
+import type { ServiceConstructor } from '@airpower/type/AirType'
 import type { IUseBillDetailResult } from './IUseBillDetailResult'
 import { BillAddFinishDialog } from '@/component'
 import { AirDialog } from '@airpower/helper/AirDialog'
@@ -12,7 +12,6 @@ import { useAirDetail } from '@airpower/hook/useAirDetail'
 /**
  * ### 单据明细
  * @param props Props
- * @param entityClass 实体类
  * @param serviceClass 服务类
  * @param option 配置项
  */
@@ -22,11 +21,10 @@ export function useBillDetail<
   S extends AbstractBaseBillService<D, B>,
 >(
   props: IJson,
-  entityClass: ClassConstructor<B>,
-  serviceClass: ClassConstructor<S>,
+  serviceClass: ServiceConstructor<B, S>,
   option: IUseDetailOption<B> = {},
 ): IUseBillDetailResult<D, B, S> {
-  const result = useAirDetail(props, entityClass, serviceClass, option)
+  const result = useAirDetail(props, serviceClass, option)
 
   /**
    * ### 添加完成数量

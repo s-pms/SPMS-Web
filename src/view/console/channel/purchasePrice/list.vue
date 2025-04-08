@@ -7,7 +7,7 @@ import { SupplierDetail } from '../supplier/component'
 import { PurchasePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(PurchasePriceEntity, PurchasePriceService, {
+  = useAirTable(PurchasePriceService, {
     editView: PurchasePriceEditor,
   })
 </script>

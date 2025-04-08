@@ -10,7 +10,14 @@ import { ref } from 'vue'
 
 const props = defineProps(airPropsParam(new NotifyEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, NotifyEntity, NotifyService)
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, NotifyService)
 
 const sceneList = ref<IDictionary[]>([])
 

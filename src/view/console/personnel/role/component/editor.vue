@@ -8,7 +8,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new RoleEntity()))
 
-const { formRef, isLoading, formData, rules, title, onSubmit } = useAirEditor(props, RoleEntity, RoleService, {
+const {
+  formRef,
+  isLoading,
+  formData,
+  rules,
+  title,
+  onSubmit,
+} = useAirEditor(props, RoleService, {
   customRules: {
     name: [AirValidator.show('不允许带管理员三个字').ifContain('管理员')],
   },

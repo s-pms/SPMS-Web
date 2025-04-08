@@ -7,14 +7,16 @@ import { useAirSelector } from '@airpower/hook/useAirSelector'
 
 const props = defineProps(airPropsSelector<DepartmentEntity>())
 
-const { title, selectList, isLoading, list, onSearch, onSelected } = useAirSelector(
-  props,
-  DepartmentEntity,
-  DepartmentService,
-  {
-    unPaginate: true,
-  },
-)
+const {
+  title,
+  selectList,
+  isLoading,
+  list,
+  onSearch,
+  onSelected,
+} = useAirSelector(props, DepartmentService, {
+  unPaginate: true,
+})
 </script>
 
 <template>

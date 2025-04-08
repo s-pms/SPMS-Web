@@ -22,7 +22,7 @@ const {
   onEnable,
   onDisable,
   onGetList,
-} = useAirTable(UserEntity, UserService, {
+} = useAirTable(UserService, {
   editView: UserEditor,
 })
 

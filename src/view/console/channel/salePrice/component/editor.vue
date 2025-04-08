@@ -9,23 +9,25 @@ import { CustomerSelector } from '../../customer/component'
 
 const props = defineProps(airPropsParam(new SalePriceEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(
-  props,
-  SalePriceEntity,
-  SalePriceService,
-  {
-    afterGetDetail(detailData) {
-      detailData.customerName = detailData.customer.name
-      detailData.materialId = detailData.material.id
-      detailData.materialName = detailData.material.name
-      return detailData
-    },
-    beforeSubmit(submitData) {
-      submitData.exclude('materialId', 'customerId')
-      return submitData
-    },
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, SalePriceService, {
+  afterGetDetail(detailData) {
+    detailData.customerName = detailData.customer.name
+    detailData.materialId = detailData.material.id
+    detailData.materialName = detailData.material.name
+    return detailData
   },
-)
+  beforeSubmit(submitData) {
+    submitData.exclude('materialId', 'customerId')
+    return submitData
+  },
+})
 </script>
 
 <template>

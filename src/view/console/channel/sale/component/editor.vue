@@ -13,7 +13,14 @@ import { CustomerSelector } from '../../customer/component'
 
 const props = defineProps(airPropsParam(new SaleEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, SaleEntity, SaleService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, SaleService, {
   afterGetDetail(detailData) {
     detailData.customerName = detailData.customer.name
     detailData.customerId = detailData.customer.id

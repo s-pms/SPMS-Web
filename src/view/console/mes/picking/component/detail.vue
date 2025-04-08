@@ -10,7 +10,11 @@ import { airPropsParam } from '@airpower/config/AirProps'
 
 const props = defineProps(airPropsParam(new PickingEntity()))
 
-const { title, formData, isLoading } = useBillDetail(props, PickingEntity, PickingService)
+const {
+  title,
+  formData,
+  isLoading,
+} = useBillDetail(props, PickingService)
 </script>
 
 <template>

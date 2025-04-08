@@ -5,7 +5,15 @@ import { APanel, ATable, AToolBar } from '@airpower/component'
 import { useAirTableTree } from '@airpower/hook/useAirTableTree'
 import { MenuEditor } from './component'
 
-const { list, isLoading, onAddRow, onAdd, onDelete, onEdit, onSearch } = useAirTableTree(MenuEntity, MenuService, {
+const {
+  list,
+  isLoading,
+  onAddRow,
+  onAdd,
+  onDelete,
+  onEdit,
+  onSearch,
+} = useAirTableTree(MenuService, {
   editView: MenuEditor,
   beforeAddRow(param, row) {
     param.parent = row

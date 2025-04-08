@@ -20,7 +20,7 @@ const {
   onDetail,
   onAudit,
   onReject,
-} = useBillTable(SaleEntity, SaleService, {
+} = useBillTable(SaleService, {
   editView: SaleEditor,
   detailView: SaleDetail,
 })

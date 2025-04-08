@@ -14,7 +14,14 @@ import { PlanDetailEditor } from '.'
 
 const props = defineProps(airPropsParam(new PlanEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, PlanEntity, PlanService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, PlanService, {
   afterGetDetail(detailData) {
     detailData.customerName = detailData.customer.name
     detailData.customerId = detailData.customer.id

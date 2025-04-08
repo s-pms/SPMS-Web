@@ -15,7 +15,11 @@ import { ref } from 'vue'
 
 const props = defineProps(airPropsParam(new RoleEntity()))
 
-const { isLoading, formRef, formData } = useAirEditor(props, RoleEntity, RoleService, {})
+const {
+  isLoading,
+  formRef,
+  formData,
+} = useAirEditor(props, RoleService, {})
 
 const treeRef = ref<AirTreeInstance>()
 

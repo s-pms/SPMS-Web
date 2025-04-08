@@ -10,7 +10,14 @@ import { RoleSelector } from '../../role/component'
 
 const props = defineProps(airPropsParam(new UserEntity()))
 
-const { isLoading, formData, formRef, title, rules, onSubmit } = useAirEditor(props, UserEntity, UserService)
+const {
+  isLoading,
+  formData,
+  formRef,
+  title,
+  rules,
+  onSubmit,
+} = useAirEditor(props, UserService)
 
 async function selectRole() {
   formData.value.roleList = await AirDialog.selectList(RoleSelector, formData.value.roleList)

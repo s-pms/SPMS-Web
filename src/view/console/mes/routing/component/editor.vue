@@ -14,7 +14,14 @@ import { ref } from 'vue'
 
 const props = defineProps(airPropsParam(new RoutingEntity()))
 
-const { formRef, isLoading, formData, rules, title, onSubmit } = useAirEditor(props, RoutingEntity, RoutingService, {})
+const {
+  formRef,
+  isLoading,
+  formData,
+  rules,
+  title,
+  onSubmit,
+} = useAirEditor(props, RoutingService, {})
 
 const bom = new BomEntity()
 bom.type = BomTypeEnum.NORMAL.key

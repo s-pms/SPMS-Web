@@ -6,7 +6,7 @@ import { useAirTable } from '@airpower/hook/useAirTable'
 import { ParameterEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(ParameterEntity, ParameterService, {
+  = useAirTable(ParameterService, {
     editView: ParameterEditor,
   })
 </script>

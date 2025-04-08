@@ -13,7 +13,14 @@ import { PickingDetailEditor } from '.'
 
 const props = defineProps(airPropsParam(new PickingEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, PickingEntity, PickingService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, PickingService, {
   afterGetDetail(detailData) {
     return detailData
   },

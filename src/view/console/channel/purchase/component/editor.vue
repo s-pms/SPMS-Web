@@ -12,7 +12,14 @@ import { PurchaseDetailEditor } from '.'
 
 const props = defineProps(airPropsParam(new PurchaseEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, PurchaseEntity, PurchaseService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, PurchaseService, {
   afterGetDetail(detailData) {
     return detailData
   },

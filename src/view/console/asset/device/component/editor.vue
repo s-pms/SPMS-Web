@@ -10,7 +10,14 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new DeviceEntity()))
 
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, DeviceEntity, DeviceService, {
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, DeviceService, {
   afterGetDetail(detailData) {
     const systemList = detailData.parameters.filter(item => item.isSystem)
     const customList = detailData.parameters.filter(item => !item.isSystem)

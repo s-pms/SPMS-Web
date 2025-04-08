@@ -7,7 +7,12 @@ import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new RoomEntity()))
 
-const { isLoading, formData, formRef, rules } = useAirEditor(props, RoomEntity, RoomService)
+const {
+  isLoading,
+  formData,
+  formRef,
+  rules,
+} = useAirEditor(props, RoomService)
 
 formData.value.name = '测试房间'
 

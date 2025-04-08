@@ -14,7 +14,15 @@ async function onPermissionEditor(role: RoleEntity) {
   AirDialog.show(RolePermissionEditor, role)
 }
 
-const { isLoading, response, onSearch, onAdd, onEdit, onDelete, onPageChanged } = useAirTable(RoleEntity, RoleService, {
+const {
+  isLoading,
+  response,
+  onSearch,
+  onAdd,
+  onEdit,
+  onDelete,
+  onPageChanged,
+} = useAirTable(RoleService, {
   editView: RoleEditor,
 })
 </script>

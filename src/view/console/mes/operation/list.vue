@@ -5,13 +5,17 @@ import { APage, APanel, ATable, AToolBar } from '@airpower/component'
 import { useAirTable } from '@airpower/hook/useAirTable'
 import { OperationEditor } from './component'
 
-const { isLoading, response, onSearch, onAdd, onEdit, onDelete, onPageChanged } = useAirTable(
-  OperationEntity,
-  OperationService,
-  {
-    editView: OperationEditor,
-  },
-)
+const {
+  isLoading,
+  response,
+  onSearch,
+  onAdd,
+  onEdit,
+  onDelete,
+  onPageChanged,
+} = useAirTable(OperationService, {
+  editView: OperationEditor,
+})
 </script>
 
 <template>

@@ -1,3 +1,54 @@
+<script lang="ts" setup>
+import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
+import { OutputEntity } from '@/model/wms/output/OutputEntity'
+import { OutputService } from '@/model/wms/output/OutputService'
+import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
+import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
+import { airPropsParam } from '@airpower/config/AirProps'
+import { AirConfirm } from '@airpower/feedback/AirConfirm'
+import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AirDialog } from '@airpower/helper/AirDialog'
+import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { computed } from 'vue'
+import { OutputDetailEditor } from '.'
+
+const props = defineProps(airPropsParam(new OutputEntity()))
+
+const {
+  title,
+  formData,
+  rules,
+  formRef,
+  isLoading,
+  onSubmit,
+} = useAirEditor(props, OutputService, {
+  afterGetDetail(detailData) {
+    return detailData
+  },
+  beforeSubmit(submitData) {
+    if (submitData.details.length === 0) {
+      AirNotification.warning('请添加明细后再提交')
+      return null
+    }
+    return submitData
+  },
+})
+
+formData.value.type = formData.value.type ?? OutputTypeEnum.NORMAL.key
+
+const isDetailEditable = computed(() => OutputTypeEnum.NORMAL.equalsKey(formData.value.type))
+
+async function addDetail() {
+  const detail: OutputDetailEntity = await AirDialog.show(OutputDetailEditor)
+  formData.value.details.push(detail)
+}
+
+async function deleteDetail(index: number) {
+  await AirConfirm.warning('是否删除选中行的计划明细？')
+  formData.value.details.splice(index, 1)
+}
+</script>
+
 <template>
   <ADialog
     :form-ref="formRef"
@@ -63,47 +114,3 @@
     </el-form>
   </ADialog>
 </template>
-
-<script lang="ts" setup>
-import { computed } from 'vue'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { OutputDetailEditor } from '.'
-import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
-
-const props = defineProps(airPropsParam(new OutputEntity()))
-
-const { title, formData, rules, formRef, isLoading, onSubmit } = useAirEditor(props, OutputEntity, OutputService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
-      return null
-    }
-    return submitData
-  },
-})
-
-formData.value.type = formData.value.type ?? OutputTypeEnum.NORMAL.key
-
-const isDetailEditable = computed(() => OutputTypeEnum.NORMAL.equalsKey(formData.value.type))
-
-async function addDetail() {
-  const detail: OutputDetailEntity = await AirDialog.show(OutputDetailEditor)
-  formData.value.details.push(detail)
-}
-
-async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的计划明细？')
-  formData.value.details.splice(index, 1)
-}
-</script>

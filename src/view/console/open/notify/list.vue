@@ -9,7 +9,7 @@ import { AirDictionaryArray } from '@airpower/model/extend/AirDictionaryArray'
 import { computed, ref } from 'vue'
 
 const { isLoading, response, onSearch, onDelete, onEdit, onPageChanged, onSortChanged, onDisable, onEnable, onAdd }
-  = useAirTable(NotifyEntity, NotifyService, {
+  = useAirTable(NotifyService, {
     editView: NotifyEditor,
   })
 
