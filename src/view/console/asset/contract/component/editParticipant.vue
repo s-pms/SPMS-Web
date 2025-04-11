@@ -77,6 +77,7 @@ function onTypeChanged() {
       label-width="120px"
       @submit.prevent
     >
+      <AFormField v-model.role="formData" :entity="ParticipantEntity" field="role" />
       <AFormField v-model.name="formData" :entity="ParticipantEntity" field="name" />
       <AFormField v-model.type="formData" :entity="ParticipantEntity" field="type" @change="onTypeChanged" />
       <AFormField

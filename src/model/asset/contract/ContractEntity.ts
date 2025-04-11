@@ -1,6 +1,7 @@
 import type { IPayload } from '@airpower/interface/IPayload'
 import { BaseEntity } from '@/base/BaseEntity'
 import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
+import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 import { AirConstant } from '@airpower/config/AirConstant'
@@ -136,6 +137,13 @@ export class ContractEntity extends BaseEntity implements IPayload {
     array: true,
   })
   participantList: ParticipantEntity[] = []
+
+  @Field({
+    label: '附件',
+    type: ContractDocumentEntity,
+    array: true,
+  })
+  documentList: ContractDocumentEntity[] = []
 
   getPayloadLabel(): string {
     return `${this.name}(${this.code})`

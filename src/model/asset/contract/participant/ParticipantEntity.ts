@@ -1,5 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
+import { ParticipantRoleEnum } from '@/model/asset/contract/participant/ParticipantRoleEnum'
 import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
 import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 
@@ -7,6 +8,23 @@ import { Field, Form, Model, Search, Table } from '@airpower/decorator'
   label: '参与方',
 })
 export class ParticipantEntity extends BaseEntity {
+  @Search()
+  @Table({
+    showColor: true,
+    orderNumber: 100,
+    width: 80,
+    forceShow: true,
+  })
+  @Field({
+    label: '身份',
+    dictionary: ParticipantRoleEnum,
+  })
+  @Form({
+    defaultValue: ParticipantRoleEnum.A.key,
+    clearable: false,
+  })
+  role!: number
+
   @Table({
     forceShow: true,
   })
