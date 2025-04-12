@@ -5,6 +5,7 @@ import { ContractDocumentEntity } from '@/model/asset/contract/document/Contract
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
 import { ADialog, AFormField, AGroup, ATab, ATable, ATabs } from '@airpower/component'
 import { airPropsParam } from '@airpower/config/AirProps'
+import { AirFile } from '@airpower/helper/AirFile'
 import { useAirDetail } from '@airpower/hook/useAirDetail'
 
 const props = defineProps(airPropsParam(new ContractEntity()))
@@ -63,7 +64,13 @@ const {
           :entity="ContractDocumentEntity"
           hide-ctrl
           hide-field-selector
-        />
+        >
+          <template #url="row">
+            <el-link :href="AirFile.getStaticFileUrl(row.data.url)" target="_blank">
+              {{ row.data.url }}
+            </el-link>
+          </template>
+        </ATable>
       </ATab>
     </ATabs>
   </ADialog>

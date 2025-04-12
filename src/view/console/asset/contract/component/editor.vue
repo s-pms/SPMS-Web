@@ -10,6 +10,7 @@ import { AButton, ADialog, AFormField, AGroup, ATab, ATable, ATabs } from '@airp
 import { airPropsParam } from '@airpower/config/AirProps'
 import { AirConfirm } from '@airpower/feedback/AirConfirm'
 import { AirDialog } from '@airpower/helper/AirDialog'
+import { AirFile } from '@airpower/helper/AirFile'
 import { useAirEditor } from '@airpower/hook/useAirEditor'
 
 const props = defineProps(airPropsParam(new ContractEntity()))
@@ -42,6 +43,11 @@ async function onEdit(item: ParticipantEntity, index: number) {
 async function onDelete(index: number) {
   await AirConfirm.warning('是否删除选中行的参与方？', '删除确认')
   formData.value.participantList.splice(index, 1)
+}
+
+async function onDeleteDocument(index: number) {
+  await AirConfirm.warning('是否删除选中行的合同附件？', '删除确认')
+  formData.value.documentList.splice(index, 1)
 }
 
 async function onUpload() {
@@ -126,6 +132,11 @@ async function onUpload() {
           hide-edit
           hide-field-selector
         >
+          <template #url="row">
+            <el-link :href="AirFile.getStaticFileUrl(row.data.url)" target="_blank">
+              {{ row.data.url }}
+            </el-link>
+          </template>
           <template #addButton>
             <AButton primary type="ADD" @click="onUpload">
               上传附件
