@@ -3,7 +3,6 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 import { AirConstant } from '@airpower/config/AirConstant'
 import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
@@ -112,24 +111,6 @@ export class ContractEntity extends BaseEntity implements IPayload {
     dictionary: ContractStatusEnum,
   })
   status!: number
-
-  @Table({
-    showColor: true,
-    width: 50,
-  })
-  @Field({
-    label: '模板',
-    type: Boolean,
-    dictionary: BooleanYesNoDictionary,
-  })
-  @Search({
-    orderNumber: -1,
-    hide: true,
-  })
-  @Form({
-    defaultValue: false,
-  })
-  isTemplate!: boolean
 
   @Field({
     label: '参与方',

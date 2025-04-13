@@ -36,7 +36,6 @@ const {
             <AFormField disabled field="code" />
             <AFormField disabled field="name" />
             <AFormField disabled field="type" />
-            <AFormField disabled field="isTemplate" />
           </AGroup>
           <AGroup :column="2" title="有效期">
             <AFormField disabled field="startTime" />

@@ -88,7 +88,6 @@ async function onUpload() {
             <AFormField field="code" />
             <AFormField field="name" />
             <AFormField field="type" />
-            <AFormField field="isTemplate" />
           </AGroup>
           <AGroup :column="2" title="有效期">
             <AFormField field="startTime" />
