@@ -2,7 +2,8 @@
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 
-import { ASelector } from '@airpower/web'
+import { PickingStatusEnum } from '@/model/mes/picking/PickingStatusEnum'
+import { ASelector, DialogProps } from '@airpower/web'
 import { PickingEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<PickingEntity>(new PickingEntity()))

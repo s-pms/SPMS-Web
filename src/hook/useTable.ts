@@ -14,7 +14,7 @@ export function useTable<E extends BaseEntity, S extends AbstractBaseService<E>>
   serviceClass: CurdServiceConstructor<E, S>,
   option: ITableOption<E> = {},
 ): IBaseTableResult<E, S> {
-  const result = useTable(serviceClass, option)
+  const result = useAirTable(serviceClass, option)
 
   /**
    * ### 实体发布

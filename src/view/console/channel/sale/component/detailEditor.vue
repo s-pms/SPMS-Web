@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
 
-import { ADialog, AInput, ASelect } from '@airpower/web'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new SaleDetailEntity()))
@@ -24,7 +25,7 @@ async function getSalePrice() {
       formData.value.price = salePrice.price
       return
     }
-    AirNotification.create().setDuration(5000).info('未配置该物料对该客户的特别销售价，将自动填写该物料的参考销售价')
+    FeedbackUtil.toastWarning('未配置该物料对该客户的特别销售价，将自动填写该物料的参考销售价')
     formData.value.price = formData.value.material.salePrice
   }
 }
@@ -46,7 +47,7 @@ async function onSubmit() {
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="SaleDetailService.createValidator(formData)"
+      :rules="SaleDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -61,7 +62,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="SaleDetailEntity.getFieldName('price')"
+        :label="getFieldLabel(SaleDetailEntity, 'price')"
         prop="price"
       >
         <AInput
@@ -77,7 +78,7 @@ async function onSubmit() {
         </AInput>
       </el-form-item>
       <el-form-item
-        :label="SaleDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(SaleDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

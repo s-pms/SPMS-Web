@@ -5,7 +5,7 @@ import { PlanService } from '@/model/mes/plan/PlanService'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
 import { PlanDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PlanEntity()))
@@ -87,7 +87,7 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :field-list="PlanDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(PlanDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -102,7 +102,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ PlanEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(PlanEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

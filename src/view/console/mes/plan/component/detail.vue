@@ -5,7 +5,7 @@ import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 
-import { ADateTime, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/web'
+import { ADateTime, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PlanEntity()))
 
@@ -65,7 +65,7 @@ const {
           ctrl-width="60"
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :field-list="PlanDetailEntity.getTableFieldConfigList()"
+          :field-list="getTableConfigList(PlanDetailEntity)"
           hide-ctrl
         >
           <template #materialCode="{ data }">

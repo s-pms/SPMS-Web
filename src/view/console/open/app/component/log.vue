@@ -4,7 +4,7 @@ import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 import { OpenLogService } from '@/model/open/log/OpenLogService'
 
-import { ADialog, APage, ATable, DialogUtil } from '@airpower/web'
+import { ADialog, APage, ATable, DialogProps, DialogUtil, useDetail, useTable } from '@airpower/web'
 import { OpenAppLogDetail } from './index'
 
 const props = defineProps(DialogProps.withParam(new OpenAppEntity()))
@@ -18,7 +18,7 @@ const {
   response,
 } = useTable(OpenLogService, {
   beforeSearch(requestData) {
-    requestData.filter.openApp = props.param.copyExposeId()
+    requestData.filter.openApp = props.param.copy().expose('id')
     return requestData
   },
 })

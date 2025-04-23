@@ -2,7 +2,7 @@
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
 
-import { ADialog, AFormField } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new SupplierEntity()))
 

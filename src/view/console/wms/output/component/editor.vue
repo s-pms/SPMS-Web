@@ -4,7 +4,7 @@ import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
 import { computed } from 'vue'
 import { OutputDetailEditor } from '.'
 
@@ -73,7 +73,7 @@ async function deleteDetail(index: number) {
           :data-list="formData.details"
           :entity="OutputDetailEntity"
           :field-list="
-            OutputDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))
+            getTableConfigList(OutputDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
           hide-delete
           hide-edit
@@ -93,7 +93,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ OutputEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(OutputEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

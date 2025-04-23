@@ -4,7 +4,7 @@ import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 
-import { ADialog, AFormField, AGroup, ATable } from '@airpower/web'
+import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new SaleEntity()))
 
@@ -50,7 +50,7 @@ const {
           ctrl-width="60"
           :data-list="formData.details"
           :entity="SaleDetailEntity"
-          :field-list="SaleDetailEntity.getTableFieldConfigList()"
+          :field-list="getTableConfigList(SaleDetailEntity)"
           hide-ctrl
         >
           <template #materialCode="{ data }">

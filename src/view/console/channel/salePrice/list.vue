@@ -2,7 +2,7 @@
 import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 
-import { APage, APanel, ATable } from '@airpower/web'
+import { APage, APanel, ATable, useTable } from '@airpower/web'
 import { SalePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }

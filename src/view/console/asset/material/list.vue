@@ -2,7 +2,7 @@
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
 
-import { APage, APanel, ATable } from '@airpower/web'
+import { APage, APanel, ATable, useTable } from '@airpower/web'
 import { MaterialEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }

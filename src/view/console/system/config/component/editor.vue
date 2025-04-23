@@ -4,7 +4,7 @@ import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, getFieldLabel, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new ConfigEntity()))
 
@@ -69,22 +69,22 @@ const {
         field="type"
       />
       <template v-if="ConfigType.NUMBER.equalsKey(formData.type)">
-        <el-form-item :label="ConfigEntity.getFieldName('config')">
+        <el-form-item :label="getFieldLabel(ConfigEntity, 'config')">
           <el-input-number v-model="formData.config" />
         </el-form-item>
       </template>
       <template v-else-if="ConfigType.BOOLEAN.equalsKey(formData.type)">
-        <el-form-item :label="ConfigEntity.getFieldName('config')">
+        <el-form-item :label="getFieldLabel(ConfigEntity, 'config')">
           <el-switch v-model="formData.config" />
         </el-form-item>
       </template>
 
       <template v-else>
-        <el-form-item :label="ConfigEntity.getFieldName('config')">
+        <el-form-item :label="getFieldLabel(ConfigEntity, 'config')">
           <el-input v-model="formData.config" />
         </el-form-item>
       </template>
-      <el-form-item :label="ConfigEntity.getFieldName('description')">
+      <el-form-item :label="getFieldLabel(ConfigEntity, 'description')">
         <el-input
           v-model="formData.description"
           disabled

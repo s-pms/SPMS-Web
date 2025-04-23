@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomDetailService } from '@/model/mes/bom/BomDetailService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
 
-import { ADialog, AInput, ASelect } from '@airpower/web'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new BomDetailEntity()))
@@ -35,7 +36,7 @@ async function onSubmit() {
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="BomDetailService.createValidator(formData)"
+      :rules="BomDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -49,7 +50,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="BomDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(BomDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

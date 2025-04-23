@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
 
-import { ADialog, AInput } from '@airpower/web'
+import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
+import { ADialog, AInput, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new MoveDetailEntity()))
@@ -32,7 +33,7 @@ async function onSubmit() {
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="MoveDetailService.createValidator(formData)"
+      :rules="MoveDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -46,7 +47,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="MoveDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(MoveDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

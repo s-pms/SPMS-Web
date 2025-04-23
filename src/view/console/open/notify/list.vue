@@ -1,33 +1,24 @@
 <script lang="ts" setup>
+import type { IWebEnum } from '@airpower/web'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 import { NotifyService } from '@/model/open/notify/NotifyService'
-import { NotifyEditor } from '@/view/console/open/notify/component'
 
-import { AirDictionaryArray } from '@airpower/model/extend/AirDictionaryArray'
-import { APage, APanel, ATable } from '@airpower/web'
-import { computed, ref } from 'vue'
+import { NotifyEditor } from '@/view/console/open/notify/component'
+import { APage, APanel, ATable, useTable } from '@airpower/web'
+import { ref } from 'vue'
 
 const { isLoading, response, onSearch, onDelete, onEdit, onPageChanged, onSortChanged, onDisable, onEnable, onAdd }
   = useTable(NotifyService, {
     editView: NotifyEditor,
   })
 
-const sceneList = ref<IDictionary[]>([])
+const sceneList = ref<IWebEnum[]>([])
 
 async function init() {
   sceneList.value = await NotifyService.create().getSceneList()
 }
 
 init()
-
-const fieldList = computed(() =>
-  NotifyEntity.getTableFieldConfigList().map((item) => {
-    if (item.key === 'scene') {
-      item.dictionary = AirDictionaryArray.create(sceneList.value)
-    }
-    return item
-  }),
-)
 </script>
 
 <template>
@@ -43,7 +34,6 @@ const fieldList = computed(() =>
       v-loading="isLoading"
       :data-list="response.list"
       :entity="NotifyEntity"
-      :field-list="fieldList"
       ctrl-width="130"
       show-enable-and-disable
       @edit="onEdit"
@@ -51,7 +41,11 @@ const fieldList = computed(() =>
       @sort-changed="onSortChanged"
       @on-disable="onDisable"
       @on-enable="onEnable"
-    />
+    >
+      <template #scene="row">
+        {{ sceneList.find(item => item.key === row.data.scene)?.label || '-' }}
+      </template>
+    </ATable>
     <template #footerLeft>
       <APage
         :response="response"

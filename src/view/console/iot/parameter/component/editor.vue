@@ -2,7 +2,7 @@
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new ParameterEntity()))
 
@@ -32,7 +32,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in ParameterEntity.getFormFieldConfigList()"
+        v-for="item in getFormConfigList(ParameterEntity)"
         :key="item.key"
         :field="item.key"
       />

@@ -2,7 +2,7 @@
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { PlanEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<PlanEntity>())

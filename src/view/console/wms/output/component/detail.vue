@@ -9,7 +9,7 @@ import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 import { SaleDetail } from '@/view/console/channel/sale/component'
 import { PickingDetail } from '@/view/console/mes/picking/component'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getTableConfigList } from '@airpower/web'
 import { OutputAddFinishEditor } from '.'
 import { MoveDetail } from '../../move/component'
 
@@ -85,7 +85,7 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
         <ATable
           :data-list="formData.details"
           :entity="OutputDetailEntity"
-          :field-list="OutputDetailEntity.getTableFieldConfigList().filter(
+          :field-list="getTableConfigList(OutputDetailEntity).filter(
             (item) => !['createTime'].includes(item.key),
           )
           "

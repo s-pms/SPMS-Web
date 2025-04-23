@@ -5,7 +5,7 @@ import { BomService } from '@/model/mes/bom/BomService'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
 import { BomDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
@@ -73,7 +73,7 @@ async function deleteDetail(index: number) {
           ctrl-width="80"
           :data-list="formData.details"
           :entity="BomDetailEntity"
-          :field-list="BomDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -88,7 +88,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ BomEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(BomEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

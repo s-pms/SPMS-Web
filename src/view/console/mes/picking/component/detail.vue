@@ -6,7 +6,7 @@ import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
 
-import { ADialog, AGroup, ASelect, ATable } from '@airpower/web'
+import { ADialog, AGroup, ASelect, ATable, DialogProps, getFieldLabel, getTableConfigList } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PickingEntity()))
 
@@ -37,7 +37,7 @@ const {
       >
         <BillFormCode :bill="formData" />
         <el-form-item
-          :label="PickingEntity.getFieldName('structure')"
+          :label="getFieldLabel(PickingEntity, 'structure')"
           prop="structure"
         >
           <ASelect
@@ -52,7 +52,7 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="PickingDetailEntity"
-          :field-list="PickingDetailEntity.getTableFieldConfigList()"
+          :field-list="getTableConfigList(PickingDetailEntity)"
           hide-ctrl
         >
           <template #materialCode="{ data }">

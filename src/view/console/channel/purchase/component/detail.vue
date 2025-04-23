@@ -6,7 +6,7 @@ import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
 
@@ -52,7 +52,7 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="PurchaseDetailEntity"
-          :field-list="PurchaseDetailEntity.getTableFieldConfigList()"
+          :field-list="getTableConfigList(PurchaseDetailEntity)"
           hide-ctrl
         >
           <template #materialCode="{ data }">
@@ -73,7 +73,7 @@ const {
               icon-button
               tooltip="添加完成"
               type="CHECKIN"
-              @click="addDetailFinishQuantity(data)"
+              @click="addDetailFinishQuantity(data, param.id)"
             />
           </template>
         </ATable>

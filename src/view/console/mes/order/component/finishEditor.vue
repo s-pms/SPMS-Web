@@ -2,7 +2,7 @@
 import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { OrderDetailService } from '@/model/mes/order/OrderDetailService'
 
-import { ADialog, AInput } from '@airpower/web'
+import { ADialog, AInput, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(
@@ -21,7 +21,7 @@ const orderDetail = ref(new OrderDetailEntity())
 orderDetail.value.finishQuantity = props.param
 orderDetail.value.ngQuantity = 0
 
-const rules = OrderDetailService.createValidator(orderDetail.value)
+const rules = OrderDetailService.createValidator()
 </script>
 
 <template>
@@ -41,7 +41,7 @@ const rules = OrderDetailService.createValidator(orderDetail.value)
       @submit.prevent
     >
       <el-form-item
-        :label="OrderDetailEntity.getFieldName('finishQuantity')"
+        :label="getFieldLabel(OrderDetailEntity, 'finishQuantity')"
         prop="finishQuantity"
       >
         <AInput
@@ -51,7 +51,7 @@ const rules = OrderDetailService.createValidator(orderDetail.value)
         />
       </el-form-item>
       <el-form-item
-        :label="OrderDetailEntity.getFieldName('ngQuantity')"
+        :label="getFieldLabel(OrderDetailEntity, 'ngQuantity')"
         prop="ngQuantity"
       >
         <AInput

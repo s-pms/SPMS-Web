@@ -8,7 +8,7 @@ import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { BomSelector } from '@/view/console/mes/bom/component'
 
-import { ADialog, AFormField, ASelect, useEditor } from '@airpower/web'
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new RoutingEntity()))

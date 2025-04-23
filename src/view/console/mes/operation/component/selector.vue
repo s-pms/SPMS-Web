@@ -2,7 +2,7 @@
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { OperationEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<OperationEntity>())

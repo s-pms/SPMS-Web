@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
 
-import { ADialog, AInput, ASelect } from '@airpower/web'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new PlanDetailEntity()))
@@ -31,7 +32,7 @@ async function onSubmit() {
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="PlanDetailService.createValidator(formData)"
+      :rules="PlanDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -45,7 +46,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="PlanDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(PlanDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

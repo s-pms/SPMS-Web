@@ -2,8 +2,8 @@
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
 
-import { APage, APanel, ATable, ATablePayload } from '@airpower/web'
-import { SupplierDetail } from '../supplier/component'
+import { APage, APanel, ATable, useTable } from '@airpower/web'
+// todo import { SupplierDetail } from '../supplier/component'
 import { PurchasePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
@@ -31,12 +31,6 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >
-      <template #supplier="{ data }">
-        <ATablePayload
-          :payload="data.supplier"
-          :view="SupplierDetail"
-        />
-      </template>
       <template #materialCode="{ data }">
         {{ data.material.code }}
       </template>

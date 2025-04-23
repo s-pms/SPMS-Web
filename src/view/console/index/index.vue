@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { IJson } from '@airpower/web'
 import { APanel } from '@airpower/web'
 import { ref } from 'vue'
 

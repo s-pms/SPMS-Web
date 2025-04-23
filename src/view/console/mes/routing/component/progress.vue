@@ -7,9 +7,7 @@ import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { BomSelector } from '@/view/console/mes/bom/component'
 import { OperationSelector } from '@/view/console/mes/operation/component'
-
-import { AirRequest } from '@airpower/model/AirRequest'
-import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, QueryRequest, useEditor } from '@airpower/web'
 import { nextTick, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
@@ -30,7 +28,7 @@ const {
   },
 })
 
-const request = ref(new AirRequest(RoutingOperationEntity))
+const request = ref(new QueryRequest(RoutingOperationEntity))
 request.value.filter.routingId = formData.value.id
 
 function onStart() {
@@ -234,9 +232,6 @@ function onDeleteRoutingOperation(index: number) {
       padding: 10px;
       display: flex;
       flex-direction: column;
-
-      .button {
-      }
 
       .list {
         flex: 1;

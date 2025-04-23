@@ -2,7 +2,7 @@
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
 
-import { ADialog, AFormField } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, getFormConfigList, getModelName, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new CustomerEntity()))
 
@@ -16,7 +16,7 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="CustomerEntity.getModelName() + title"
+    :title="getModelName(formData) + title"
     @on-confirm="onConfirm"
     @on-cancel="onCancel"
   >
@@ -26,7 +26,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in CustomerEntity.getFormFieldConfigList()"
+        v-for="item in getFormConfigList(formData)"
         :key="item.key"
         :field="item.key"
         disabled

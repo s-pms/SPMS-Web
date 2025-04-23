@@ -2,7 +2,7 @@
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { CustomerEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<CustomerEntity>())

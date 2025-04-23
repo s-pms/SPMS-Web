@@ -3,7 +3,7 @@ import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
 import { UnitSelector } from '@/view/console/system/unit/component'
 
-import { ADialog, AFormField, ASelect, useEditor } from '@airpower/web'
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new MaterialEntity()))
 

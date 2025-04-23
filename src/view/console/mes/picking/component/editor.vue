@@ -4,7 +4,7 @@ import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getModelName, getTableConfigList, useEditor } from '@airpower/web'
 import { PickingDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PickingEntity()))
@@ -44,7 +44,7 @@ async function deleteDetail(index: number) {
   <ADialog
     :form-ref="formRef"
     :loading="isLoading"
-    :title="title + PickingEntity.getModelName()"
+    :title="title + getModelName(PickingEntity)"
     height="80%"
     width="80%"
     @on-confirm="onSubmit"
@@ -63,7 +63,7 @@ async function deleteDetail(index: number) {
       >
         <AFormField field="billCode" />
         <el-form-item
-          :label="PickingEntity.getFieldName('structure')"
+          :label="getFieldLabel(PickingEntity, 'structure')"
           prop="structure"
         >
           <ASelect
@@ -77,7 +77,7 @@ async function deleteDetail(index: number) {
           :data-list="formData.details"
           :entity="PickingDetailEntity"
           :field-list="
-            PickingDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))
+            getTableConfigList(PickingDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
           hide-delete
           hide-edit
@@ -93,7 +93,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ PickingEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(PickingEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

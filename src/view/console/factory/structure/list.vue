@@ -2,7 +2,7 @@
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 
-import { APanel, ATable } from '@airpower/web'
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { StructureEditor } from './component'
 
 const {

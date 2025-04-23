@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { useTable } from '@/hook/useTable'
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
-import { SupplierService } from '@/model/channel/supplier/SupplierService'
 
+import { SupplierService } from '@/model/channel/supplier/SupplierService'
 import { APage, APanel, ATable } from '@airpower/web'
 import { SupplierEditor } from './component'
 

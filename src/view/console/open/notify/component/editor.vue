@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import type { IEnum } from '@airpower/web'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
-import { NotifyService } from '@/model/open/notify/NotifyService'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { NotifyService } from '@/model/open/notify/NotifyService'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new NotifyEntity()))
@@ -17,7 +18,7 @@ const {
   onSubmit,
 } = useEditor(props, NotifyService)
 
-const sceneList = ref<IDictionary[]>([])
+const sceneList = ref<IEnum[]>([])
 
 async function init() {
   sceneList.value = await NotifyService.create().getSceneList()
@@ -54,7 +55,7 @@ init()
         field="token"
       />
       <AFormField
-        v-if="NotifyChannelEnum.WEB_HOOK.equalsKey(formData.type)"
+        v-if="NotifyChannelEnum.WEB_HOOK.equalsKey(formData.channel)"
         field="token"
       />
       <AFormField field="remark" />

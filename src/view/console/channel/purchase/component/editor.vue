@@ -3,7 +3,7 @@ import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEnt
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getModelName, getTableConfigList, useEditor } from '@airpower/web'
 import { PurchaseDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
@@ -43,7 +43,7 @@ async function deleteDetail(index: number) {
   <ADialog
     :form-ref="formRef"
     :loading="isLoading"
-    :title="title + PurchaseEntity.getModelName()"
+    :title="title + getModelName(PurchaseEntity)"
     height="80%"
     width="80%"
     @on-confirm="onSubmit"
@@ -71,7 +71,7 @@ async function deleteDetail(index: number) {
           :data-list="formData.details"
           :entity="PurchaseDetailEntity"
           :field-list="
-            PurchaseDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))
+            getTableConfigList(PurchaseDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
           hide-delete
           hide-edit
@@ -93,7 +93,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ PurchaseEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(PurchaseEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

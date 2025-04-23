@@ -2,7 +2,7 @@
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 
 const props = defineProps(DialogProps.withSelector<StructureEntity>())
 </script>

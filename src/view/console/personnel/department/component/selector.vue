@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-
-import { useAirSelector } from '@airpower/hook/useAirSelector'
-import { AButton, ADialog, ATable } from '@airpower/web'
+import { AButton, ADialog, ATable, DialogProps, useSelector } from '@airpower/web'
 
 const props = defineProps(DialogProps.withSelector<DepartmentEntity>())
 
@@ -14,7 +12,7 @@ const {
   list,
   onSearch,
   onSelected,
-} = useAirSelector(props, DepartmentService, {
+} = useSelector(props, DepartmentService, {
   unPaginate: true,
 })
 </script>

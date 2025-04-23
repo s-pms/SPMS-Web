@@ -3,7 +3,7 @@ import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 
-import { AButton, ADialog, ATable } from '@airpower/web'
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<PlanDetailEntity, PlanEntity>())

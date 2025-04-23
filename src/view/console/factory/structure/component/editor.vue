@@ -4,7 +4,7 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { OperationSelector } from '@/view/console/mes/operation/component'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
 
-import { AButton, ADialog, AFormField, AGroup, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, DialogProps, DialogUtil, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new StructureEntity()))
 

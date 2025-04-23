@@ -3,7 +3,7 @@ import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
 import { SaleDetailEditor } from '.'
 import { CustomerSelector } from '../../customer/component'
 
@@ -81,11 +81,11 @@ async function deleteDetail(index: number) {
           style="width: 100%"
         />
       </AGroup>
-      <AGroup title="采购明细">
+      <AGroup title="销售明细">
         <ATable
           :data-list="formData.details"
           :entity="SaleDetailEntity"
-          :field-list="SaleDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(SaleDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -100,7 +100,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ SaleEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(SaleEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

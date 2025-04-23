@@ -3,7 +3,7 @@ import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEnt
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 
-import { AButton, ADialog, ATable } from '@airpower/web'
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<PurchaseDetailEntity, PurchaseEntity>())

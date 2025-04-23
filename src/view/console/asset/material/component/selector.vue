@@ -2,7 +2,7 @@
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { MaterialEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<MaterialEntity>())

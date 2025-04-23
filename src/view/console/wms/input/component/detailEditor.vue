@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputDetailService } from '@/model/wms/input/InputDetailService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
 
-import { ADialog, AInput, ASelect } from '@airpower/web'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new InputDetailEntity()))
@@ -35,7 +36,7 @@ async function onSubmit() {
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="InputDetailService.createValidator(formData)"
+      :rules="InputDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -49,7 +50,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="InputDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(InputDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

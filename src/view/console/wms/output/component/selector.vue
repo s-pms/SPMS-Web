@@ -2,7 +2,7 @@
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { OutputEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<OutputEntity>())

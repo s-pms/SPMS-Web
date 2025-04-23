@@ -2,7 +2,7 @@
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 
-import { APanel, ATable } from '@airpower/web'
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { DepartmentEditor } from './component'
 
 const {

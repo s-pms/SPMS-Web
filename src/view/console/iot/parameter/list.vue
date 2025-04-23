@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { useTable } from '@/hook/useTable'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { ParameterService } from '@/model/iot/parameter/ParameterService'
 
+import { ParameterService } from '@/model/iot/parameter/ParameterService'
 import { APage, APanel, ATable } from '@airpower/web'
 import { ParameterEditor } from './component'
 

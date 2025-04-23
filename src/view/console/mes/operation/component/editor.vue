@@ -2,7 +2,7 @@
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new OperationEntity()))
 

@@ -2,7 +2,7 @@
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { ParameterEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<ParameterEntity>())

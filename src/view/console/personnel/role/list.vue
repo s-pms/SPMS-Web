@@ -2,7 +2,7 @@
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 
-import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
+import { AButton, APage, APanel, ATable, DialogUtil, useTable } from '@airpower/web'
 import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
 
 async function onMenuEditor(role: RoleEntity) {

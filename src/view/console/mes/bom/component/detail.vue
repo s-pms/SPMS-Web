@@ -3,7 +3,7 @@ import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 
-import { ADialog, AFormField, AGroup, ATable } from '@airpower/web'
+import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
 
@@ -50,7 +50,7 @@ const {
           ctrl-width="80"
           :data-list="formData.details"
           :entity="BomDetailEntity"
-          :field-list="BomDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >

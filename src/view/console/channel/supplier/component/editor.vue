@@ -2,7 +2,7 @@
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new SupplierEntity()))
 
@@ -32,7 +32,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in SupplierEntity.getFormFieldConfigList()"
+        v-for="item in getFormConfigList(SupplierEntity)"
         :key="item.key"
         :field="item.key"
       />

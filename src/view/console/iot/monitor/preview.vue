@@ -3,14 +3,13 @@ import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { AirRequest } from '@airpower/model/AirRequest'
-import { AEmpty, AGroup, APanel, DialogUtil } from '@airpower/web'
+import { AEmpty, AGroup, APanel, DialogUtil, QueryRequest, WebColor } from '@airpower/web'
 import { onUnmounted, ref } from 'vue'
 import { DeviceMonitor } from '../../asset/device/component'
 
 const deviceList = ref<DeviceEntity[]>([])
 
-const request = ref(new AirRequest(DeviceEntity))
+const request = ref(new QueryRequest(DeviceEntity))
 request.value.filter = new DeviceEntity()
 request.value.filter.isReporting = true
 
@@ -72,7 +71,7 @@ function showMonitor(device: DeviceEntity) {
             @click="showMonitor(device)"
           >
             <div
-              :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status) }"
+              :style="{ backgroundColor: DeviceStatusEnum.get(device.status)?.color || WebColor.WARNING }"
               class="bg"
             />
             <div class="device-header">
@@ -85,7 +84,7 @@ function showMonitor(device: DeviceEntity) {
             </div>
             <div class="device-body">
               <div
-                :style="{ color: DeviceStatusEnum.getColor(device.status) }"
+                :style="{ color: DeviceStatusEnum.get(device.status)?.color || WebColor.NORMAL }"
                 class="device-partcnt"
               >
                 {{ device.partCount }}
@@ -96,23 +95,23 @@ function showMonitor(device: DeviceEntity) {
                 <div
                   v-if="device.status === DeviceStatusEnum.ALARM.key && device.alarm !== AlarmStatusEnum.NONE.key"
                   :style="{
-                    borderColor: AlarmStatusEnum.getColor(device.alarm),
-                    color: AlarmStatusEnum.getColor(device.alarm),
+                    borderColor: AlarmStatusEnum.get(device.alarm)?.color || WebColor.WARNING,
+                    color: AlarmStatusEnum.get(device.alarm)?.color || WebColor.WARNING,
                   }"
                   class="device-status"
                 >
-                  <span :style="{ backgroundColor: AlarmStatusEnum.getColor(device.alarm) }" />
+                  <span :style="{ backgroundColor: AlarmStatusEnum.get(device.alarm)?.color || WebColor.WARNING }" />
                   {{ AlarmStatusEnum.getLabel(device.alarm, '未知') }}
                 </div>
 
                 <div
                   :style="{
-                    borderColor: DeviceStatusEnum.getColor(device.status),
-                    color: DeviceStatusEnum.getColor(device.status),
+                    borderColor: DeviceStatusEnum.get(device.status)?.color || WebColor.WARNING,
+                    color: DeviceStatusEnum.get(device.status)?.color || WebColor.WARNING,
                   }"
                   class="device-status"
                 >
-                  <span :style="{ backgroundColor: DeviceStatusEnum.getColor(device.status) }" />
+                  <span :style="{ backgroundColor: DeviceStatusEnum.get(device.status)?.color || WebColor.WARNING }" />
                   {{ DeviceStatusEnum.getLabel(device.status, '未知') }}
                 </div>
               </div>

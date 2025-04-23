@@ -2,7 +2,7 @@
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
 
-import { APage, APanel, ATable } from '@airpower/web'
+import { APage, APanel, ATable, useTable } from '@airpower/web'
 import { OperationEditor } from './component'
 
 const {

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { useTable } from '@/hook/useTable'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { CustomerService } from '@/model/channel/customer/CustomerService'
 
+import { CustomerService } from '@/model/channel/customer/CustomerService'
 import { APage, APanel, ATable } from '@airpower/web'
 import { CustomerEditor } from './component'
 
