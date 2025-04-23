@@ -5,10 +5,10 @@ import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsParam(new MoveEntity()))
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new MoveEntity()))
 
 const {
   formData,
@@ -65,7 +65,7 @@ const {
           </template>
           <template #endRow="{ data }">
             <AButton
-              :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
+              :disabled="!MoveStatusEnum.MOVING.equalsKey(formData.status)"
               icon-button
               tooltip="添加完成"
               type="CHECKIN"

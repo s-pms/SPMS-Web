@@ -4,7 +4,7 @@ import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APage, APanel, ATable } from '@airpower/web'
 import { PlanDetail, PlanEditor } from './component'
 
 const {
@@ -27,7 +27,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="PlanEntity"
       :loading="isLoading"
@@ -37,17 +37,17 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="(row) => PlanStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => !PlanStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="PlanEntity"
       :select-list="selectList"
+      ctrl-width="160"
       hide-delete
       show-detail
       @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #customerCode="{ data }">
         {{ data.customer?.code || '-' }}

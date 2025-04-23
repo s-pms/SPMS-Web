@@ -2,11 +2,11 @@
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { AButton, ADialog, ATable } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsSelector<PickingDetailEntity, PickingEntity>())
+const props = defineProps(DialogProps.withSelector<PickingDetailEntity, PickingEntity>())
 
 const isLoading = ref(false)
 const list = ref<PickingDetailEntity[]>([])
@@ -39,7 +39,7 @@ getDetail()
     @on-cancel="onCancel"
   >
     <ATable
-      :ctrl-width="80"
+      ctrl-width="80"
       :data-list="list"
       :entity="PickingDetailEntity"
       :hide-ctrl="isMultiple"
@@ -48,7 +48,7 @@ getDetail()
       hide-delete
       hide-edit
       hide-field-selector
-      @on-select="onSelected"
+      @select-changed="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

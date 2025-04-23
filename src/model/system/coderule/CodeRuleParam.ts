@@ -1,5 +1,5 @@
 import { AirModel } from '@airpower/base/AirModel'
-import { Field } from '@airpower/decorator'
+import { Field } from '@airpower/web'
 
 /**
  * # 编码规则参数

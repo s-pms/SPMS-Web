@@ -3,9 +3,8 @@ import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { AEmpty, AGroup, APanel } from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
 import { AirRequest } from '@airpower/model/AirRequest'
+import { AEmpty, AGroup, APanel, DialogUtil } from '@airpower/web'
 import { onUnmounted, ref } from 'vue'
 import { DeviceMonitor } from '../../asset/device/component'
 
@@ -28,12 +27,12 @@ onUnmounted(() => {
 })
 
 function showMonitor(device: DeviceEntity) {
-  AirDialog.show(DeviceMonitor, device)
+  DialogUtil.show(DeviceMonitor, device)
 }
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AGroup
       :column="1"
       disable-collapse

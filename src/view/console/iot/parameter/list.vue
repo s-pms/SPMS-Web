@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable } from '@airpower/web'
 import { ParameterEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(ParameterService, {
+  = useTable(ParameterService, {
     editView: ParameterEditor,
   })
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="ParameterEntity"
       :loading="isLoading"
@@ -27,10 +27,10 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       :disable-edit="(row) => row.isSystem"
       :entity="ParameterEntity"
       :select-list="selectList"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     />
     <template #footerLeft>
       <APage

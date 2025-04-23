@@ -1,6 +1,6 @@
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '配方明细',
@@ -9,19 +9,17 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: MaterialEntity,
-  })
+  @Type(MaterialEntity)
   material!: MaterialEntity
 
-  @Table({ forceShow: true })
+  @Table({ force: true })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Field({
     label: '物料名称',

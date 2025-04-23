@@ -1,13 +1,10 @@
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import type { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
-import type { ServiceConstructor } from '@airpower/type/AirType'
+import type { CurdServiceConstructor, ITableOption } from '@airpower/web'
 import type { IUseBillTableResult } from './IUseBillTableResult'
 import { BillRejectDialog } from '@/component'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import { DialogUtil, FeedbackUtil, getModelName, useTable } from '@airpower/web'
 
 /**
  * # 单据的表格Hooks
@@ -20,17 +17,17 @@ export function useBillTable<
   B extends AbstractBaseBillEntity<D>,
   S extends AbstractBaseBillService<D, B>,
 >(
-  serviceClass: ServiceConstructor<B, S>,
-  option: IUseTableOption<B> = {},
+  serviceClass: CurdServiceConstructor<B, S>,
+  option: ITableOption<B> = {},
 ): IUseBillTableResult<D, B, S> {
-  const result = useAirTable(serviceClass, option)
+  const result = useTable(serviceClass, option)
 
   /**
    * ### 单据审核
    * @param bill 单据
    */
   async function onAudit(bill: B) {
-    await AirConfirm.warning(`是否确认审核选择的${result.entity.getModelName()}？`)
+    await FeedbackUtil.confirmWarning(`是否确认审核选择的${getModelName(result.entity)}？`)
     await result.service.audit(bill)
     result.onReloadData()
   }
@@ -40,7 +37,7 @@ export function useBillTable<
    * @param bill 单据
    */
   async function setBillDetailsAllFinished(bill: B) {
-    await AirConfirm.warning(`是否确认设置${result.entity.getModelName()}已完成？`)
+    await FeedbackUtil.confirmWarning(`是否确认设置${getModelName(result.entity)}已完成？`)
     await result.service.setBillDetailsAllFinished(bill)
     result.onReloadData()
   }
@@ -50,7 +47,7 @@ export function useBillTable<
    * @param bill 单据
    */
   async function setBillFinished(bill: B) {
-    await AirConfirm.warning(`是否确认设置所有${result.entity.getModelName()}明细都已完成？`)
+    await FeedbackUtil.confirmWarning(`是否确认设置所有${getModelName(result.entity)}明细都已完成？`)
     await result.service.setBillFinished(bill)
     result.onReloadData()
   }
@@ -60,8 +57,8 @@ export function useBillTable<
    * @param bill 单据
    */
   async function onReject(bill: B) {
-    const rejectReason: string = await AirDialog.show(BillRejectDialog, `驳回${result.entity.getModelName()}的原因`)
-    await AirConfirm.warning(`是否确认驳回选择的${result.entity.getModelName()}？`)
+    const rejectReason: string = await DialogUtil.show(BillRejectDialog, `驳回${getModelName(result.entity)}的原因`)
+    await FeedbackUtil.confirmWarning(`是否确认驳回选择的${getModelName(result.entity)}？`)
     bill.rejectReason = rejectReason
     await result.service.reject(bill)
     result.onReloadData()

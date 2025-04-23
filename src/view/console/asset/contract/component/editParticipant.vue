@@ -1,17 +1,16 @@
 <script lang="ts" setup>
-import type { IValidateRule } from '@airpower/interface/IValidateRule'
-import type { AirFormInstance } from '@airpower/type/AirType'
+import type { WebValidateRule } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
+
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
 import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirValidator } from '@airpower/helper/AirValidator'
+import { ADialog, AFormField, DialogProps, WebValidator } from '@airpower/web'
 import { computed, ref } from 'vue'
 
-const props = defineProps(airPropsParam(new ParticipantEntity()))
+const props = defineProps(DialogProps.withParam(new ParticipantEntity()))
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 const formData = ref(props.param.copy())
 formData.value.name = '凌小云'
@@ -24,18 +23,18 @@ async function onSubmit() {
   props.onConfirm(formData.value.copy())
 }
 
-const rules = AirValidator.create({
+const rules = WebValidator.create({
   name: [
-    AirValidator.show('').ifEmpty(),
+    WebValidator.show('').ifEmpty(),
   ],
   phone: [
-    AirValidator.show('').ifEmpty(),
-    AirValidator.show().ifNotPhone(),
+    WebValidator.show('').ifEmpty(),
+    WebValidator.show().ifNotPhone(),
   ],
   email: [
-    AirValidator.show().ifNotEmail(),
+    WebValidator.show().ifNotEmail(),
   ],
-} as IValidateRule<ParticipantEntity>)
+} as WebValidateRule<ParticipantEntity>)
 
 const certificateTypeList = computed(() => {
   const list = CertificateTypeEnum.toArray()

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector } from '@airpower/web'
 import { InputEditor } from '.'
 
-const props = defineProps(airPropsSelector<InputEntity>())
+const props = defineProps(DialogProps.withSelector<InputEntity>())
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector } from '@airpower/web'
 import { UserEditor } from '.'
 
-const props = defineProps(airPropsSelector<UserEntity>())
+const props = defineProps(DialogProps.withSelector<UserEntity>())
 </script>
 
 <template>

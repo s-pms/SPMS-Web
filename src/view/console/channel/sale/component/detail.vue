@@ -3,17 +3,16 @@ import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
-import { ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new SaleEntity()))
+import { ADialog, AFormField, AGroup, ATable } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new SaleEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, SaleService, {})
+} = useDetail(props, SaleService, {})
 </script>
 
 <template>
@@ -48,7 +47,7 @@ const {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="销售明细">
         <ATable
-          :ctrl-width="60"
+          ctrl-width="60"
           :data-list="formData.details"
           :entity="SaleDetailEntity"
           :field-list="SaleDetailEntity.getTableFieldConfigList()"

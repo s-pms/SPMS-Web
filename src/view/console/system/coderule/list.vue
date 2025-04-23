@@ -4,9 +4,8 @@ import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from '@/view/console/system/coderule/component'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable } from '@airpower/web'
 import { ref } from 'vue'
 
 const {
@@ -16,7 +15,7 @@ const {
   onEdit,
   onPageChanged,
   onSortChanged,
-} = useAirTable(CodeRuleService, {
+} = useTable(CodeRuleService, {
   editView: CodeRuleEditor,
 })
 
@@ -44,10 +43,10 @@ function nextCode(codeRule: CodeRuleEntity) {
   let code = codeRule.template
   for (const item of paramList.value) {
     if (['yyyy', 'mm', 'dd', 'hh'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), item.label.toUpperCase()))
+      code = code.replaceAll(item.label, DateTimeUtil.formatFromDate(new Date(), item.label.toUpperCase()))
     }
     if (['yy'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY').substring(2))
+      code = code.replaceAll(item.label, DateTimeUtil.formatFromDate(new Date(), 'YYYY').substring(2))
     }
   }
   return code
@@ -55,7 +54,7 @@ function nextCode(codeRule: CodeRuleEntity) {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="CodeRuleEntity"
       :loading="isLoading"
@@ -65,12 +64,12 @@ function nextCode(codeRule: CodeRuleEntity) {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="105"
       :data-list="response.list"
       :entity="CodeRuleEntity"
+      ctrl-width="105"
       hide-delete
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
+      @edit="onEdit"
+      @sort-changed="onSortChanged"
     >
       <template #ruleField="{ data }">
         {{ getFieldName(data) }}

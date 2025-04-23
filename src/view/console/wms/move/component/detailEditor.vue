@@ -1,17 +1,16 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
-import { ADialog, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+
+import { ADialog, AInput } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new MoveDetailEntity()))
+const props = defineProps(DialogProps.withParam(new MoveDetailEntity()))
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 formData.value.quantity = props.param.inventory.quantity
 formData.value.billId = props.param.billId

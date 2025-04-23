@@ -2,13 +2,11 @@
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
-import { AButton, ADialog, AGroup, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { AButton, ADialog, AGroup, AInput, DialogUtil, useEditor } from '@airpower/web'
 import { RoleSelector } from '../../role/component'
 
-const props = defineProps(airPropsParam(new UserEntity()))
+const props = defineProps(DialogProps.withParam(new UserEntity()))
 
 const {
   isLoading,
@@ -17,14 +15,14 @@ const {
   title,
   rules,
   onSubmit,
-} = useAirEditor(props, UserService)
+} = useEditor(props, UserService)
 
 async function selectRole() {
-  formData.value.roleList = await AirDialog.selectList(RoleSelector, formData.value.roleList)
+  formData.value.roleList = await DialogUtil.selectList(RoleSelector, formData.value.roleList)
 }
 
 async function selectDepartment() {
-  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
+  formData.value.departmentList = await DialogUtil.selectList(DepartmentSelector, formData.value.departmentList)
 }
 </script>
 

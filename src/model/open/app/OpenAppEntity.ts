@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'
 
 @Model({
@@ -8,8 +8,8 @@ import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'
 })
 export class OpenAppEntity extends BaseEntity {
   @Table({
-    forceShow: true,
-    orderNumber: 99,
+    force: true,
+    order: 99,
   })
   @Search()
   @Form({
@@ -21,9 +21,9 @@ export class OpenAppEntity extends BaseEntity {
   appName!: string
 
   @Table({
-    showColor: true,
+    color: true,
     width: 80,
-    orderNumber: 98,
+    order: 98,
   })
   @Form({
     defaultValue: BooleanYesNoDictionary.NO.key,
@@ -31,16 +31,15 @@ export class OpenAppEntity extends BaseEntity {
   })
   @Field({
     label: '内部应用',
-    type: Boolean,
     dictionary: BooleanYesNoDictionary,
   })
   isInternal!: boolean
 
   @Table({
-    forceShow: true,
-    orderNumber: 98,
+    force: true,
+    order: 98,
     width: 400,
-    copyField: true,
+    copy: true,
   })
   @Search()
   @Form({})
@@ -56,15 +55,15 @@ export class OpenAppEntity extends BaseEntity {
 
   @Table({
     width: 80,
-    copyField: true,
-    forceShow: true,
-    showColor: true,
+    copy: true,
+    force: true,
+    color: true,
   })
   @Form({
     requiredNumber: true,
     defaultValue: OpenAppArithmeticEnum.NO.key,
     clearable: false,
-    showColor: true,
+    color: true,
   })
   @Search()
   @Field({
@@ -110,7 +109,6 @@ export class OpenAppEntity extends BaseEntity {
 
   @Field({
     label: 'IP白名单',
-    type: String,
   })
   @Form({
     textarea: true,

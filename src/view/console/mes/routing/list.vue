@@ -3,8 +3,7 @@ import PublishButton from '@/component/PublishButton.vue'
 import { useTable } from '@/hook/useTable'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
 import { RoutingEditor, RoutingProgress } from './component'
 
 const {
@@ -21,12 +20,12 @@ const {
 })
 
 async function onProgress(data: RoutingEntity) {
-  await AirDialog.show(RoutingProgress, data)
+  await DialogUtil.show(RoutingProgress, data)
 }
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="RoutingEntity"
       :loading="isLoading"
@@ -36,13 +35,13 @@ async function onProgress(data: RoutingEntity) {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
       :data-list="response.list"
       :disable-delete="(row) => row.isPublished"
       :disable-edit="(row) => row.isPublished"
       :entity="RoutingEntity"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
+      ctrl-width="160"
+      @edit="onEdit"
+      @delete="onDelete"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

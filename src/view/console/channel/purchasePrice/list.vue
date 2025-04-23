@@ -1,19 +1,19 @@
 <script lang="ts" setup>
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
-import { APage, APanel, ATable, ATablePayload, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable, ATablePayload } from '@airpower/web'
 import { SupplierDetail } from '../supplier/component'
 import { PurchasePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(PurchasePriceService, {
+  = useTable(PurchasePriceService, {
     editView: PurchasePriceEditor,
   })
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="PurchasePriceEntity"
       :loading="isLoading"
@@ -26,10 +26,10 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       :data-list="response.list"
       :entity="PurchasePriceEntity"
       :select-list="selectList"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #supplier="{ data }">
         <ATablePayload

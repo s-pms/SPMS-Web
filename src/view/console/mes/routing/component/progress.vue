@@ -7,16 +7,13 @@ import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { BomSelector } from '@/view/console/mes/bom/component'
 import { OperationSelector } from '@/view/console/mes/operation/component'
-import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
 import { AirRequest } from '@airpower/model/AirRequest'
+import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
 import { nextTick, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
-const props = defineProps(airPropsParam(new RoutingEntity()))
+const props = defineProps(DialogProps.withParam(new RoutingEntity()))
 const drag = ref(false)
 const current = ref(-1)
 const currentModel = ref(new RoutingOperationEntity())
@@ -26,7 +23,7 @@ const {
   formRef,
   isLoading,
   formData,
-} = useAirEditor(props, RoutingService, {
+} = useEditor(props, RoutingService, {
   afterGetDetail(detailData) {
     list.value = detailData.details
     return detailData
@@ -52,7 +49,7 @@ async function onSubmit() {
     item.sortNo = index
   })
   await RoutingService.create().update(formData.value)
-  AirNotification.success('编辑工艺流程成功')
+  FeedbackUtil.toastSuccess('编辑工艺流程成功')
   props.onConfirm()
 }
 
@@ -84,7 +81,7 @@ async function currentChanged(index: number, item: RoutingOperationEntity) {
 }
 
 async function onAddOperation() {
-  const operation = await AirDialog.select<OperationEntity>(OperationSelector)
+  const operation = await DialogUtil.select<OperationEntity>(OperationSelector)
   const item = new RoutingOperationEntity()
   item.operation = operation
   item.id = Math.random()

@@ -1,6 +1,6 @@
 import type { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { BaseEntity } from '@/base/BaseEntity'
-import type { IUseTableResult } from '@airpower/interface/hooks/IUseTableResult'
+import type { ITableResult } from '@airpower/web'
 
 /**
  * # 单据表格Hook
@@ -8,7 +8,7 @@ import type { IUseTableResult } from '@airpower/interface/hooks/IUseTableResult'
  * @author Hamm.cn
  */
 export interface IBaseTableResult<E extends BaseEntity, S extends AbstractBaseService<E>>
-  extends IUseTableResult<E, S> {
+  extends ITableResult<E, S> {
   /**
    * ### 发布
    * @param entity 实体

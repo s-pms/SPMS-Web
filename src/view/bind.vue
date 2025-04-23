@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import type { AirAny } from '@airpower/type/AirType'
+
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirAlert } from '@airpower/feedback/AirAlert'
 import { AirRouter } from '@airpower/helper/AirRouter'
+import { FeedbackUtil } from '@airpower/web'
 import { ref } from 'vue'
 
 const isLoading = ref(true)
@@ -18,7 +19,7 @@ async function init() {
       .hideClose()
       .error((e as AirAny).message, '登录失败')
   }
-  await AirAlert.success('绑定第三方账号成功', '绑定成功')
+  await FeedbackUtil.toastSuccess('绑定第三方账号成功')
   window.close()
 }
 

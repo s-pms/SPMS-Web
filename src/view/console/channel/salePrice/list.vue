@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable } from '@airpower/web'
 import { SalePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(SalePriceService, {
+  = useTable(SalePriceService, {
     editView: SalePriceEditor,
   })
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="SalePriceEntity"
       :loading="isLoading"
@@ -25,10 +25,10 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       :data-list="response.list"
       :entity="SalePriceEntity"
       :select-list="selectList"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

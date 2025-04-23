@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new CustomerEntity()))
+import { ADialog, AFormField } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new CustomerEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, CustomerService)
+} = useDetail(props, CustomerService)
 </script>
 
 <template>

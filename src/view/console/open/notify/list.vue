@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import type { IDictionary } from '@airpower/interface/IDictionary'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 import { NotifyService } from '@/model/open/notify/NotifyService'
 import { NotifyEditor } from '@/view/console/open/notify/component'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
 import { AirDictionaryArray } from '@airpower/model/extend/AirDictionaryArray'
+import { APage, APanel, ATable } from '@airpower/web'
 import { computed, ref } from 'vue'
 
 const { isLoading, response, onSearch, onDelete, onEdit, onPageChanged, onSortChanged, onDisable, onEnable, onAdd }
-  = useAirTable(NotifyService, {
+  = useTable(NotifyService, {
     editView: NotifyEditor,
   })
 
@@ -32,7 +31,7 @@ const fieldList = computed(() =>
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="NotifyEntity"
       :loading="isLoading"
@@ -42,14 +41,14 @@ const fieldList = computed(() =>
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="130"
       :data-list="response.list"
       :entity="NotifyEntity"
       :field-list="fieldList"
+      ctrl-width="130"
       show-enable-and-disable
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
       @on-disable="onDisable"
       @on-enable="onEnable"
     />

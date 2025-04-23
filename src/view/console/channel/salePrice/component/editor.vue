@@ -2,12 +2,11 @@
 import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { ADialog, AFormField, ASelect, useEditor } from '@airpower/web'
 import { CustomerSelector } from '../../customer/component'
 
-const props = defineProps(airPropsParam(new SalePriceEntity()))
+const props = defineProps(DialogProps.withParam(new SalePriceEntity()))
 
 const {
   title,
@@ -16,7 +15,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, SalePriceService, {
+} = useEditor(props, SalePriceService, {
   afterGetDetail(detailData) {
     detailData.customerName = detailData.customer.name
     detailData.materialId = detailData.material.id

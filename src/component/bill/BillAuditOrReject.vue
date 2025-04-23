@@ -1,7 +1,7 @@
 <script generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity" lang="ts" setup>
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { AButton } from '@airpower/component'
+import { AButton } from '@airpower/web'
 
 const { bill } = defineProps<{
   /**

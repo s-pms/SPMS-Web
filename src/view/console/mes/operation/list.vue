@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable } from '@airpower/web'
 import { OperationEditor } from './component'
 
 const {
@@ -13,13 +13,13 @@ const {
   onEdit,
   onDelete,
   onPageChanged,
-} = useAirTable(OperationService, {
+} = useTable(OperationService, {
   editView: OperationEditor,
 })
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="OperationEntity"
       :loading="isLoading"
@@ -31,8 +31,8 @@ const {
       v-loading="isLoading"
       :data-list="response.list"
       :entity="OperationEntity"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
+      @edit="onEdit"
+      @delete="onDelete"
     />
     <template #footerLeft>
       <APage

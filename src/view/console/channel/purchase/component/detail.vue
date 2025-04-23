@@ -5,10 +5,10 @@ import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEnt
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsParam(new PurchaseEntity()))
+import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
 
 const {
   title,

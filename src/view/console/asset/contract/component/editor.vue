@@ -6,14 +6,23 @@ import { ParticipantEntity } from '@/model/asset/contract/participant/Participan
 import { FileCategory } from '@/model/system/file/FileCategory'
 import { FileEntity } from '@/model/system/file/FileEntity'
 import { ContractParticipantEditor } from '@/view/console/asset/contract/component/index'
-import { AButton, ADialog, AFormField, AGroup, ATab, ATable, ATabs } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { AirFile } from '@airpower/helper/AirFile'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new ContractEntity()))
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATab,
+  ATable,
+  ATabs,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  useEditor,
+  WebFileUtil,
+} from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new ContractEntity()))
 
 const {
   title,
@@ -22,7 +31,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, ContractService, {
+} = useEditor(props, ContractService, {
   afterGetDetail(detailData) {
     return detailData
   },
@@ -32,26 +41,26 @@ const {
 })
 
 async function onAddParticipant() {
-  const item: ParticipantEntity = await AirDialog.show(ContractParticipantEditor)
+  const item: ParticipantEntity = await DialogUtil.show(ContractParticipantEditor)
   formData.value.participantList.push(item)
 }
 
 async function onEdit(item: ParticipantEntity, index: number) {
-  formData.value.participantList[index] = await AirDialog.show(ContractParticipantEditor, item)
+  formData.value.participantList[index] = await DialogUtil.show(ContractParticipantEditor, item)
 }
 
 async function onDelete(index: number) {
-  await AirConfirm.warning('是否删除选中行的参与方？', '删除确认')
+  await FeedbackUtil.confirmWarning('是否删除选中行的参与方？', '删除确认')
   formData.value.participantList.splice(index, 1)
 }
 
 async function onDeleteDocument(index: number) {
-  await AirConfirm.warning('是否删除选中行的合同附件？', '删除确认')
+  await FeedbackUtil.confirmWarning('是否删除选中行的合同附件？', '删除确认')
   formData.value.documentList.splice(index, 1)
 }
 
 async function onUpload() {
-  const file: FileEntity = await AirDialog.showUpload({
+  const file: FileEntity = await DialogUtil.showUpload({
     data: {
       category: FileCategory.CONTRACT_ATTACHMENT.key,
     },
@@ -100,9 +109,9 @@ async function onUpload() {
       </ATab>
       <ATab label="合同参与方">
         <ATable
-          :ctrl-width="90"
           :data-list="formData.participantList"
           :entity="ParticipantEntity"
+          ctrl-width="90"
           hide-delete
           hide-edit
           hide-field-selector
@@ -124,15 +133,15 @@ async function onUpload() {
       </ATab>
       <ATab label="合同附件">
         <ATable
-          :ctrl-width="90"
           :data-list="formData.documentList"
           :entity="ContractDocumentEntity"
+          ctrl-width="90"
           hide-delete
           hide-edit
           hide-field-selector
         >
           <template #url="row">
-            <el-link :href="AirFile.getStaticFileUrl(row.data.url)" target="_blank">
+            <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">
               {{ row.data.url }}
             </el-link>
           </template>

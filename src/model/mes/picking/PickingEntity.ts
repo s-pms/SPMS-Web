@@ -1,7 +1,7 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { PickingDetailEntity } from './PickingDetailEntity'
 import { PickingStatusEnum } from './PickingStatusEnum'
 
@@ -16,9 +16,9 @@ export class PickingEntity extends AbstractBaseBillEntity<PickingDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
-    orderNumber: -80,
-    forceShow: true,
+    color: true,
+    order: -80,
+    force: true,
   })
   @Search()
   @Field({
@@ -29,9 +29,8 @@ export class PickingEntity extends AbstractBaseBillEntity<PickingDetailEntity> {
 
   @Field({
     label: '申领明细',
-    type: PickingDetailEntity,
-    array: true,
   })
+  @Type(PickingDetailEntity, true)
   details: PickingDetailEntity[] = []
 
   @Form({
@@ -39,24 +38,25 @@ export class PickingEntity extends AbstractBaseBillEntity<PickingDetailEntity> {
   })
   @Field({
     label: '生产单元',
-    type: StructureEntity,
   })
+  @Type(StructureEntity)
   @Table({
     width: 200,
-    orderNumber: -70,
-    payloadField: 'name',
+    order: -70,
+    // todo
+    // payloadField: 'name',
   })
   structure!: StructureEntity
 
-  getAuditingStatus(): AirEnum {
+  getAuditingStatus(): WebEnum {
     return PickingStatusEnum.AUDITING
   }
 
-  getAuditedStatus(): AirEnum {
+  getAuditedStatus(): WebEnum {
     return PickingStatusEnum.OUTPUTTING
   }
 
-  getRejectedStatus(): AirEnum {
+  getRejectedStatus(): WebEnum {
     return PickingStatusEnum.REJECTED
   }
 }

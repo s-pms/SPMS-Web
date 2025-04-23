@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new MenuEntity()))
+import { ADialog, AFormField, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new MenuEntity()))
 
 const {
   title,
@@ -14,7 +13,7 @@ const {
   isLoading,
   rules,
   onSubmit,
-} = useAirEditor(props, MenuService)
+} = useEditor(props, MenuService)
 </script>
 
 <template>

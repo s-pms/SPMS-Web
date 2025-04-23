@@ -4,7 +4,7 @@ import { useBillTable } from '@/hook/billTable/useBillTable'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APage, APanel, ATable } from '@airpower/web'
 import { InputDetail, InputEditor } from './component'
 
 const {
@@ -27,7 +27,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="InputEntity"
       :loading="isLoading"
@@ -38,17 +38,17 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="200"
       :data-list="response.list"
-      :disable-edit="(row) => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => !InputStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="InputEntity"
       :select-list="selectList"
+      ctrl-width="200"
       hide-delete
       show-detail
       @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #storageName="{ data }">
         {{ data.storage?.name || '-' }}({{ data.storage?.code || '-' }})

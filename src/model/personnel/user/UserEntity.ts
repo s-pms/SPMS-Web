@@ -1,10 +1,8 @@
-import type { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
-import type { IPayload } from '@airpower/interface/IPayload'
-import type { IUser } from '@airpower/interface/IUser'
+import type { IPayload, IUser } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
+import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
-import { Field, Form, Search, Table } from '@airpower/decorator'
-import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
+import { DesensitizeType, Field, Form, Search, Table, Type } from '@airpower/web'
 import { RoleEntity } from '../role/RoleEntity'
 
 /**
@@ -18,7 +16,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     requiredString: true,
   })
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Field({
@@ -35,10 +33,11 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     defaultValue: '13888888888',
   })
   @Table({
-    forceShow: true,
-    phone: true,
-    copyField: true,
-    desensitize: AirDesensitizeType.MOBILE,
+    force: true,
+    // todo
+    // phone: true,
+    copy: true,
+    desensitize: DesensitizeType.MOBILE,
   })
   @Search()
   @Field({
@@ -54,9 +53,9 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     requiredString: true,
   })
   @Table({
-    forceShow: true,
-    copyField: true,
-    desensitize: AirDesensitizeType.EMAIL,
+    force: true,
+    copy: true,
+    desensitize: DesensitizeType.EMAIL,
   })
   @Search()
   @Field({
@@ -70,8 +69,8 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     defaultValue: '13888888888',
   })
   @Table({
-    forceShow: true,
-    copyField: true,
+    force: true,
+    copy: true,
     width: 100,
     hide: true,
   })
@@ -84,7 +83,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Form({})
   @Table({
     hide: true,
-    copyField: true,
+    copy: true,
     width: 200,
   })
   @Search()
@@ -116,25 +115,25 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
    * ### 角色列表
    */
   @Table({
-    payloadArray: true,
-    payloadField: 'name',
+    // todo
+    // payloadArray: true,
+    // payloadField: 'name',
   })
   @Field({
-    type: RoleEntity,
-    array: true,
     label: '角色',
   })
+  @Type(RoleEntity, true)
   roleList!: RoleEntity[]
 
   @Field({
-    type: RoleEntity,
-    array: true,
     label: '部门',
   })
   @Table({
-    payloadArray: true,
-    payloadField: 'name',
+    // todo
+    // payloadArray: true,
+    // payloadField: 'name',
   })
+  @Type(DepartmentEntity, true)
   departmentList!: DepartmentEntity[]
 
   @Field({

@@ -1,6 +1,5 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Model, Table } from '@airpower/decorator'
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
+import { DateTimeFormatter, Field, Model, Table } from '@airpower/web'
 
 @Model({
   label: '日志',
@@ -8,8 +7,8 @@ import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
 export class LogEntity extends BaseEntity {
   @Table()
   @Table({
-    orderNumber: 66,
-    forceShow: true,
+    order: 66,
+    force: true,
   })
   @Field({
     label: '动作',
@@ -31,7 +30,7 @@ export class LogEntity extends BaseEntity {
   platform!: string
 
   @Table({
-    orderNumber: 77,
+    order: 77,
     width: 160,
   })
   @Field({
@@ -57,28 +56,32 @@ export class LogEntity extends BaseEntity {
   })
   userId!: number
 
+  @Field({
+    label: '发起时间',
+  })
   @Table({
     hide: false,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
-    label: '发起时间',
+    datetime: DateTimeFormatter.FULL_DATE_TIME,
     width: 150,
-    orderNumber: 99,
-    forceShow: true,
+    order: 99,
+    force: true,
   })
   declare createTime: number
 
+  @Field({
+    label: '响应时间',
+  })
   @Table({
     hide: false,
-    label: '响应时间',
-    orderNumber: 88,
+    order: 88,
     width: 150,
-    forceShow: true,
+    force: true,
   })
   declare updateTime: number
 
   @Table({
     width: 120,
-    orderNumber: -1,
+    order: -1,
     align: 'right',
   })
   @Field({

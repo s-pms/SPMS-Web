@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { McpToolModel } from '@/model/system/mcp/McpToolModel'
 import { McpToolService } from '@/model/system/mcp/McpToolService'
-import { AButton, APanel, ATable } from '@airpower/component'
-import { AirNotification } from '@airpower/feedback/AirNotification'
 import { AirClipboard } from '@airpower/helper/AirClipboard'
+import { AButton, APanel, ATable } from '@airpower/web'
 import { computed, ref } from 'vue'
 
 const isLoading = ref(false)
@@ -17,14 +16,14 @@ const mcpServer = computed(() => `${window.location.origin}/api/mcp/sse?token=�
 
 async function copy() {
   await AirClipboard.copy(mcpServer.value)
-  AirNotification.success('已经成功复制到你的剪切板')
+  FeedbackUtil.toastSuccess('已经成功复制到你的剪切板')
 }
 
 getList()
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <template #footerLeft>
       <AButton
         link-button

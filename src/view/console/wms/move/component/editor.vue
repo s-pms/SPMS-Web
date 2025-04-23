@@ -5,16 +5,12 @@ import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { StorageSelector } from '@/view/console/factory/storage/component'
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
 import { MoveDetailEditor } from '.'
 import { InventorySelector } from '../../inventory/component'
 
-const props = defineProps(airPropsParam(new MoveEntity()))
+const props = defineProps(DialogProps.withParam(new MoveEntity()))
 
 const {
   title,
@@ -23,14 +19,14 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, MoveService, {
+} = useEditor(props, MoveService, {
   afterGetDetail(detailData) {
     detailData.storageName = detailData.storage.name
     return detailData
   },
   beforeSubmit(submitData) {
     if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
+      FeedbackUtil.toastWarning('请添加明细后再提交')
       return null
     }
     return submitData
@@ -40,15 +36,15 @@ const {
 async function addDetail() {
   let inventory = new InventoryEntity()
   inventory.type = InventoryTypeEnum.STORAGE.key
-  inventory = await AirDialog.select(InventorySelector, inventory)
+  inventory = await DialogUtil.select(InventorySelector, inventory)
   let detail = new MoveDetailEntity()
   detail.inventory = inventory
-  detail = await AirDialog.show(MoveDetailEditor, detail)
+  detail = await DialogUtil.show(MoveDetailEditor, detail)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的计划明细？')
+  await FeedbackUtil.confirmWarning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
 }
 </script>

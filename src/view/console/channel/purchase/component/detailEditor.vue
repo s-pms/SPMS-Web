@@ -1,22 +1,20 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
+
+import { ADialog, AInput, ASelect } from '@airpower/web'
 import { ref } from 'vue'
 import { SupplierSelector } from '../../supplier/component'
 
-const props = defineProps(airPropsParam(new PurchaseDetailEntity()))
+const props = defineProps(DialogProps.withParam(new PurchaseDetailEntity()))
 
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function getPurchasePrice() {
   if (formData.value.material && formData.value.supplier) {

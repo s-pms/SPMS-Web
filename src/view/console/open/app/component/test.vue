@@ -1,17 +1,15 @@
 <script lang="ts" setup>
 import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { ADialog, AFormField, AGroup } from '@airpower/component'
 import { AirApi } from '@airpower/config/AirApi'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirCrypto } from '@airpower/helper/AirCrypto'
 
+import { AirCrypto } from '@airpower/helper/AirCrypto'
 import { AirHttp } from '@airpower/helper/AirHttp'
-import { AirRand } from '@airpower/helper/AirRand'
+
+import { ADialog, AFormField, AGroup } from '@airpower/web'
 import { computed, ref } from 'vue'
 
-const props = defineProps(airPropsParam())
+const props = defineProps(DialogProps.withParam())
 
 const app = ref(new OpenAppEntity())
 app.value.appKey = ''

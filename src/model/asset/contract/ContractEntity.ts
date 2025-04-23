@@ -1,13 +1,11 @@
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import { AirConstant } from '@airpower/config/AirConstant'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { DateTimeFormatter, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
+import { DateTimeType } from '@airpower/web/dist/components'
+
 import { ContractTypeEnum } from './ContractTypeEnum'
 
 @Model({
@@ -15,9 +13,9 @@ import { ContractTypeEnum } from './ContractTypeEnum'
 })
 export class ContractEntity extends BaseEntity implements IPayload {
   @Table({
-    copyField: true,
-    forceShow: true,
-    orderNumber: 200,
+    copy: true,
+    force: true,
+    order: 200,
     width: 200,
   })
   @Search()
@@ -30,9 +28,9 @@ export class ContractEntity extends BaseEntity implements IPayload {
   code!: string
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
-    orderNumber: 160,
+    order: 160,
   })
   @Form({
     clearable: false,
@@ -47,8 +45,8 @@ export class ContractEntity extends BaseEntity implements IPayload {
   type!: number
 
   @Table({
-    forceShow: true,
-    orderNumber: 150,
+    force: true,
+    order: 150,
   })
   @Form({
     requiredString: true,
@@ -71,14 +69,14 @@ export class ContractEntity extends BaseEntity implements IPayload {
 
   @Table({
     width: 110,
-    showColor: true,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    color: true,
+    datetime: DateTimeFormatter.FULL_DATE,
   })
   @Form({
-    defaultValue: AirDateTime.getMilliTimeStamps(),
+    defaultValue: DateTimeUtil.getMilliTimeStamps(),
     requiredNumber: true,
-    dateType: AirDateTimeType.DATE,
-    dateShowFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    dateType: DateTimeType.DATE,
+    dateShowFormatter: DateTimeFormatter.FULL_DATE,
   })
   @Field({
     label: '开始时间',
@@ -87,14 +85,14 @@ export class ContractEntity extends BaseEntity implements IPayload {
 
   @Table({
     width: 110,
-    showColor: true,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    color: true,
+    datetime: DateTimeFormatter.FULL_DATE,
   })
   @Form({
-    defaultValue: AirDateTime.getMilliTimeStamps() + AirConstant.SECOND_PER_DAY * AirConstant.DAY_PER_YEAR * AirConstant.MILLISECONDS_PER_SECOND,
+    defaultValue: DateTimeUtil.getMilliTimeStamps() + DateTimeUtil.SECOND_PER_DAY * DateTimeUtil.DAY_PER_YEAR * DateTimeUtil.MILLISECONDS_PER_SECOND,
     requiredNumber: true,
-    dateType: AirDateTimeType.DATE,
-    dateShowFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    dateType: DateTimeType.DATE,
+    dateShowFormatter: DateTimeFormatter.FULL_DATE,
   })
   @Field({
     label: '终止时间',
@@ -103,7 +101,7 @@ export class ContractEntity extends BaseEntity implements IPayload {
 
   @Search()
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
   })
   @Field({
@@ -114,16 +112,14 @@ export class ContractEntity extends BaseEntity implements IPayload {
 
   @Field({
     label: '参与方',
-    type: ParticipantEntity,
-    array: true,
   })
+  @Type(ParticipantEntity, true)
   participantList: ParticipantEntity[] = []
 
   @Field({
     label: '附件',
-    type: ContractDocumentEntity,
-    array: true,
   })
+  @Type(ContractDocumentEntity, true)
   documentList: ContractDocumentEntity[] = []
 
   getPayloadLabel(): string {

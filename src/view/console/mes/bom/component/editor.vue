@@ -4,15 +4,11 @@ import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 import { InputEntity } from '@/model/wms/input/InputEntity'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogUtil, useEditor } from '@airpower/web'
 import { BomDetailEditor } from '.'
 
-const props = defineProps(airPropsParam(new InputEntity()))
+const props = defineProps(DialogProps.withParam(new InputEntity()))
 
 const {
   title,
@@ -21,13 +17,13 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, BomService, {
+} = useEditor(props, BomService, {
   afterGetDetail(detailData) {
     return detailData
   },
   beforeSubmit(submitData) {
     if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
+      FeedbackUtil.toastWarning('请添加明细后再提交')
       return null
     }
     return submitData
@@ -37,12 +33,12 @@ const {
 formData.value.type = formData.value.type ?? BomTypeEnum.NORMAL.key
 
 async function addDetail() {
-  const detail: BomDetailEntity = await AirDialog.show(BomDetailEditor)
+  const detail: BomDetailEntity = await DialogUtil.show(BomDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的配方明细？')
+  await FeedbackUtil.confirmWarning('是否删除选中行的配方明细？')
   formData.value.details.splice(index, 1)
 }
 </script>
@@ -74,7 +70,7 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="配方物料清单">
         <ATable
-          :ctrl-width="80"
+          ctrl-width="80"
           :data-list="formData.details"
           :entity="BomDetailEntity"
           :field-list="BomDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"

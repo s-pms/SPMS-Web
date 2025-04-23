@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
-import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
 import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
 
 async function onMenuEditor(role: RoleEntity) {
-  AirDialog.show(RoleMenuEditor, role)
+  DialogUtil.show(RoleMenuEditor, role)
 }
 
 async function onPermissionEditor(role: RoleEntity) {
-  AirDialog.show(RolePermissionEditor, role)
+  DialogUtil.show(RolePermissionEditor, role)
 }
 
 const {
@@ -22,13 +21,13 @@ const {
   onEdit,
   onDelete,
   onPageChanged,
-} = useAirTable(RoleService, {
+} = useTable(RoleService, {
   editView: RoleEditor,
 })
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="RoleEntity"
       :loading="isLoading"
@@ -38,11 +37,11 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
       :data-list="response.list"
       :entity="RoleEntity"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
+      ctrl-width="160"
+      @edit="onEdit"
+      @delete="onDelete"
     >
       <template #customRow="{ data }">
         <AButton

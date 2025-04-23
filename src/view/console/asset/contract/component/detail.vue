@@ -3,18 +3,16 @@ import { ContractEntity } from '@/model/asset/contract/ContractEntity'
 import { ContractService } from '@/model/asset/contract/ContractService'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import { ADialog, AFormField, AGroup, ATab, ATable, ATabs } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirFile } from '@airpower/helper/AirFile'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new ContractEntity()))
+import { ADialog, AFormField, AGroup, ATab, ATable, ATabs, DialogProps, useDetail, WebFileUtil } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new ContractEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, ContractService, {})
+} = useDetail(props, ContractService, {})
 </script>
 
 <template>
@@ -48,9 +46,9 @@ const {
       </ATab>
       <ATab label="合同参与方">
         <ATable
-          :ctrl-width="40"
           :data-list="formData.participantList"
           :entity="ParticipantEntity"
+          ctrl-width="40"
           hide-delete
           hide-edit
           hide-field-selector
@@ -58,14 +56,14 @@ const {
       </ATab>
       <ATab label="合同附件">
         <ATable
-          :ctrl-width="40"
           :data-list="formData.documentList"
           :entity="ContractDocumentEntity"
+          ctrl-width="40"
           hide-ctrl
           hide-field-selector
         >
           <template #url="row">
-            <el-link :href="AirFile.getStaticFileUrl(row.data.url)" target="_blank">
+            <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">
               {{ row.data.url }}
             </el-link>
           </template>

@@ -1,7 +1,6 @@
-import type { IMenu } from '@airpower/interface/IMenu'
+import type { IMenu } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**
  * # 菜单
@@ -15,7 +14,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
    * ### 菜单名称
    */
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -30,8 +29,8 @@ export class MenuEntity extends BaseEntity implements IMenu {
    * ### 菜单路径
    */
   @Table({
-    copyField: true,
-    forceShow: true,
+    copy: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -54,7 +53,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
    * ### 组件地址
    */
   @Table({
-    copyField: true,
+    copy: true,
   })
   @Form()
   @Field({
@@ -66,7 +65,9 @@ export class MenuEntity extends BaseEntity implements IMenu {
    * ### 排序编号
    */
   @Form({
-    dictionary: OrderNumberDictionary,
+    max: 1000,
+    min: 0,
+    number: true,
     filterable: true,
     requiredNumber: true,
     defaultValue: 1,
@@ -76,7 +77,6 @@ export class MenuEntity extends BaseEntity implements IMenu {
   })
   @Field({
     label: '排序编号',
-    type: Number,
   })
   orderNo!: number
 
@@ -91,20 +91,14 @@ export class MenuEntity extends BaseEntity implements IMenu {
   /**
    * ### 子菜单列表
    */
-  @Field({
-
-    type: MenuEntity,
-    array: true,
-  })
+  @Field({})
+  @Type(MenuEntity, true)
   children!: this[]
 
   /**
    * ### 父菜单
    */
-  @Field({
-
-    type: MenuEntity,
-  })
+  @Type(MenuEntity)
   parent!: this
 
   @Table({

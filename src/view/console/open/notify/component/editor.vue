@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-import type { IDictionary } from '@airpower/interface/IDictionary'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 import { NotifyService } from '@/model/open/notify/NotifyService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { ADialog, AFormField, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new NotifyEntity()))
+const props = defineProps(DialogProps.withParam(new NotifyEntity()))
 
 const {
   title,
@@ -17,7 +15,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, NotifyService)
+} = useEditor(props, NotifyService)
 
 const sceneList = ref<IDictionary[]>([])
 

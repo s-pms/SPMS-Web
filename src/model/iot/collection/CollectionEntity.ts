@@ -1,5 +1,5 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table } from '@airpower/web'
 import { CollectionGranularityEnum } from './CollectionGranularityEnum'
 
 @Model({
@@ -7,7 +7,7 @@ import { CollectionGranularityEnum } from './CollectionGranularityEnum'
 })
 export class CollectionEntity extends BaseEntity {
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -18,7 +18,7 @@ export class CollectionEntity extends BaseEntity {
   code!: string
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -29,7 +29,7 @@ export class CollectionEntity extends BaseEntity {
   label!: string
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,

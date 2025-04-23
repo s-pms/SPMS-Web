@@ -4,7 +4,7 @@ import { useBillTable } from '@/hook/billTable/useBillTable'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APage, APanel, ATable } from '@airpower/web'
 import { MoveDetail, MoveEditor } from './component'
 
 const {
@@ -27,7 +27,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="MoveEntity"
       :loading="isLoading"
@@ -37,17 +37,17 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="(row) => MoveStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row) => !MoveStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="MoveEntity"
       :select-list="selectList"
+      ctrl-width="160"
       hide-delete
       show-detail
       @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #storageName="{ data }">
         {{ data.storage.name }}({{ data.storage.code }})

@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new StorageEntity()))
+import { ADialog, AFormField, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new StorageEntity()))
 
 const {
   title,
@@ -14,7 +13,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, StorageService)
+} = useEditor(props, StorageService)
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 import { ConfigType } from '@/model/system/config/ConfigType'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 /**
  * # 参数配置实体
@@ -15,8 +15,8 @@ export class ConfigEntity extends BaseEntity {
   @Search()
   @Table({
     nowrap: true,
-    copyField: true,
-    orderNumber: 88,
+    copy: true,
+    order: 88,
   })
   @Form({
     requiredString: true,
@@ -34,9 +34,9 @@ export class ConfigEntity extends BaseEntity {
   @Search()
   @Table({
     nowrap: true,
-    copyField: true,
+    copy: true,
     width: 300,
-    orderNumber: 99,
+    order: 99,
   })
   @Form({
     requiredString: true,
@@ -48,9 +48,9 @@ export class ConfigEntity extends BaseEntity {
 
   @Search()
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
-    orderNumber: 77,
+    order: 77,
   })
   @Form({
     requiredNumber: true,
@@ -64,13 +64,12 @@ export class ConfigEntity extends BaseEntity {
   type!: number
 
   @Table({
-    showColor: true,
+    color: true,
     width: 80,
-    orderNumber: 66,
+    order: 66,
   })
   @Field({
     label: '系统配置',
-    type: Boolean,
     dictionary: BooleanYesNoDictionary,
   })
   isSystem!: boolean

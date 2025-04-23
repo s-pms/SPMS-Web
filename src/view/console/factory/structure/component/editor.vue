@@ -3,12 +3,10 @@ import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { OperationSelector } from '@/view/console/mes/operation/component'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
-import { AButton, ADialog, AFormField, AGroup } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new StructureEntity()))
+import { AButton, ADialog, AFormField, AGroup, DialogUtil, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new StructureEntity()))
 
 const {
   title,
@@ -17,14 +15,14 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, StructureService)
+} = useEditor(props, StructureService)
 
 async function selectOperation() {
-  formData.value.operationList = await AirDialog.selectList(OperationSelector, formData.value.operationList)
+  formData.value.operationList = await DialogUtil.selectList(OperationSelector, formData.value.operationList)
 }
 
 async function selectDepartment() {
-  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
+  formData.value.departmentList = await DialogUtil.selectList(DepartmentSelector, formData.value.departmentList)
 }
 </script>
 

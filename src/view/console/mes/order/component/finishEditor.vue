@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { OrderDetailService } from '@/model/mes/order/OrderDetailService'
-import { ADialog, AInput } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+
+import { ADialog, AInput } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(
-  Object.assign(airProps(), {
+  Object.assign(DialogProps.create(), {
     /**
      * ### 添加完成数量
      */

@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new UnitEntity()))
+import { ADialog, AFormField, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new UnitEntity()))
 
 const {
   title,
@@ -14,7 +13,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, UnitService)
+} = useEditor(props, UnitService)
 </script>
 
 <template>

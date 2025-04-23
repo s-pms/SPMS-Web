@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import type { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserSelector } from '@/view/console/personnel/user/component'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import { DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -21,10 +20,10 @@ function emitList() {
 }
 
 async function selectUser() {
-  const user: UserEntity = await AirDialog.select(UserSelector)
+  const user: UserEntity = await DialogUtil.select(UserSelector)
   const isExist = auditUserList.value.find(item => item.id === user.id)
   if (isExist) {
-    AirNotification.warning(`${user.nickname} 已在当前审批流程中`)
+    FeedbackUtil.toastWarning(`${user.nickname} 已在当前审批流程中`)
     return
   }
   auditUserList.value.push(user)

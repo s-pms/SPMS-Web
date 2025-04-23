@@ -1,10 +1,8 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { AirDateTimeType } from '@airpower/enum/AirDateTimeType'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
+import { DateTimeFormatter, DateTimeUtil, Field, Form, Model, Table, Type } from '@airpower/web'
+import { DateTimeType } from '@airpower/web/dist/components'
 import { PlanDetailEntity } from './PlanDetailEntity'
 import { PlanStatusEnum } from './PlanStatusEnum'
 import { PlanTypeEnum } from './PlanTypeEnum'
@@ -40,7 +38,7 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
+    color: true,
   })
   @Field({
     label: '计划状态',
@@ -50,13 +48,13 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
+    color: true,
   })
   @Form({
     defaultValue: PlanTypeEnum.SALE.key,
     clearable: false,
     requiredNumber: true,
-    showColor: true,
+    color: true,
   })
   @Field({
     label: '计划类型',
@@ -66,14 +64,14 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Table({
     width: 110,
-    showColor: true,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    color: true,
+    datetime: DateTimeFormatter.FULL_DATE,
   })
   @Form({
-    defaultValue: AirDateTime.getMilliTimeStamps(),
+    defaultValue: DateTimeUtil.getMilliTimeStamps(),
     requiredNumber: true,
-    dateType: AirDateTimeType.DATE,
-    dateShowFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    dateType: DateTimeType.DATE,
+    dateShowFormatter: DateTimeFormatter.FULL_DATE,
   })
   @Field({
     label: '开始时间',
@@ -82,13 +80,13 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Table({
     width: 110,
-    showColor: true,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    color: true,
+    datetime: DateTimeFormatter.FULL_DATE,
   })
   @Form({
     requiredNumber: true,
-    dateType: AirDateTimeType.DATE,
-    dateShowFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    dateType: DateTimeType.DATE,
+    dateShowFormatter: DateTimeFormatter.FULL_DATE,
   })
   @Field({
     label: '交付时间',
@@ -97,8 +95,8 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Table({
     width: 110,
-    showColor: true,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD,
+    color: true,
+    datetime: DateTimeFormatter.FULL_DATE,
   })
   @Field({
     label: '完成时间',
@@ -107,29 +105,28 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
 
   @Field({
     label: '计划明细',
-    type: PlanDetailEntity,
-    array: true,
   })
+  @Type(PlanDetailEntity, true)
   details: PlanDetailEntity[] = []
 
   @Field({
     label: '客户信息',
-    type: CustomerEntity,
   })
+  @Type(CustomerEntity)
   @Form({
     requiredPayload: true,
   })
   customer!: CustomerEntity
 
-  getAuditingStatus(): AirEnum {
+  getAuditingStatus(): WebEnum {
     return PlanStatusEnum.AUDITING
   }
 
-  getAuditedStatus(): AirEnum {
+  getAuditedStatus(): WebEnum {
     return PlanStatusEnum.PRODUCING
   }
 
-  getRejectedStatus(): AirEnum {
+  getRejectedStatus(): WebEnum {
     return PlanStatusEnum.REJECTED
   }
 }

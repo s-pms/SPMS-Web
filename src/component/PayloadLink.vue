@@ -1,7 +1,7 @@
 <script generic="P extends IPayload" lang="ts" setup>
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/web'
 import type { Component } from 'vue'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import { DialogUtil } from '@airpower/web'
 
 const { payload, view } = defineProps<{
   /**
@@ -16,7 +16,7 @@ const { payload, view } = defineProps<{
 }>()
 
 function showDetail() {
-  AirDialog.show(view, payload)
+  DialogUtil.show(view, payload)
 }
 </script>
 

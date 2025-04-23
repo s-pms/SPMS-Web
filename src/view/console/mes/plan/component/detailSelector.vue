@@ -2,11 +2,11 @@
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { AButton, ADialog, ATable } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsSelector<PlanDetailEntity, PlanEntity>())
+const props = defineProps(DialogProps.withSelector<PlanDetailEntity, PlanEntity>())
 
 const isLoading = ref(false)
 const list = ref<PlanDetailEntity[]>([])
@@ -39,7 +39,7 @@ getPlan()
     @on-cancel="onCancel"
   >
     <ATable
-      :ctrl-width="80"
+      ctrl-width="80"
       :data-list="list"
       :entity="PlanDetailEntity"
       :hide-ctrl="isMultiple"
@@ -48,7 +48,7 @@ getPlan()
       hide-delete
       hide-edit
       hide-field-selector
-      @on-select="onSelected"
+      @select-changed="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

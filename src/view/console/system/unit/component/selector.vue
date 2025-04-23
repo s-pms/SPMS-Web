@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector } from '@airpower/web'
 import { UnitEditor } from '.'
 
-const props = defineProps(airPropsSelector<UnitEntity>())
+const props = defineProps(DialogProps.withSelector<UnitEntity>())
 </script>
 
 <template>

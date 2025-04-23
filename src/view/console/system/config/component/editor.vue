@@ -3,11 +3,10 @@ import { Constant } from '@/config/Constant'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new ConfigEntity()))
+import { ADialog, AFormField, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new ConfigEntity()))
 
 const {
   title,
@@ -16,7 +15,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, ConfigService, {
+} = useEditor(props, ConfigService, {
   afterGetDetail: (data) => {
     switch (data.type) {
       case ConfigType.NUMBER.key:

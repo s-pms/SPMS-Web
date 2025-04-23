@@ -4,7 +4,7 @@ import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APage, APanel, ATable } from '@airpower/web'
 import { PurchaseDetail, PurchaseEditor } from './component'
 
 const {
@@ -27,7 +27,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="PurchaseEntity"
       :loading="isLoading"
@@ -38,17 +38,17 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
       :data-list="response.list"
       :disable-edit="(row) => row.status !== PurchaseStatusEnum.REJECTED.key"
       :entity="PurchaseEntity"
       :select-list="selectList"
+      ctrl-width="160"
       hide-delete
       show-detail
       @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #customRow="{ data }">
         <BillAuditOrReject

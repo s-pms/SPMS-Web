@@ -1,7 +1,6 @@
-import type { ITree } from '@airpower/interface/ITree'
+import type { ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { OrderNumberDictionary } from '@/model/common/OrderNumberDictionary'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**
  * # 部门
@@ -13,8 +12,8 @@ import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 })
 export class DepartmentEntity extends BaseEntity implements ITree {
   @Table({
-    forceShow: true,
-    orderNumber: 99,
+    force: true,
+    order: 99,
   })
   @Search()
   @Form({
@@ -26,10 +25,10 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   name!: string
 
   @Table({
-    forceShow: true,
-    orderNumber: 88,
+    force: true,
+    order: 88,
     width: 300,
-    copyField: true,
+    copy: true,
   })
   @Search()
   @Form({
@@ -41,7 +40,9 @@ export class DepartmentEntity extends BaseEntity implements ITree {
   code!: string
 
   @Form({
-    dictionary: OrderNumberDictionary,
+    max: 200,
+    min: 0,
+    number: true,
     filterable: true,
     requiredNumber: true,
     defaultValue: 1,
@@ -56,21 +57,14 @@ export class DepartmentEntity extends BaseEntity implements ITree {
 
   @Field({
     label: '父级ID',
-    type: Number,
   })
   parentId!: number
 
-  @Field({
-
-    type: DepartmentEntity,
-    array: true,
-  })
+  @Field({})
+  @Type(DepartmentEntity, true)
   children!: this[]
 
-  @Field({
-
-    type: DepartmentEntity,
-  })
+  @Type(DepartmentEntity)
   parent!: this
 
   @Table({

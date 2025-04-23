@@ -3,20 +3,18 @@ import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
-import { ADialog, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
 import { AirRequest } from '@airpower/model/AirRequest'
+import { ADialog, ATable, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new RoleEntity()))
+const props = defineProps(DialogProps.withParam(new RoleEntity()))
 
 const {
   isLoading,
   formRef,
   formData,
-} = useAirEditor(props, RoleService, {})
+} = useEditor(props, RoleService, {})
 
 async function onSelect(selectList: PermissionEntity[]) {
   formData.value.permissionList = selectList
@@ -30,7 +28,7 @@ async function getPermissionList() {
 
 async function onSubmit() {
   await RoleService.create(isLoading).authorizePermission(formData.value.id, formData.value.permissionList)
-  AirNotification.success('角色权限授权成功')
+  FeedbackUtil.toastSuccess('角色权限授权成功')
   props.onConfirm()
 }
 

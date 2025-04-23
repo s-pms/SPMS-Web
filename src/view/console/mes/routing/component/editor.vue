@@ -7,12 +7,11 @@ import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { BomSelector } from '@/view/console/mes/bom/component'
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { ADialog, AFormField, ASelect, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new RoutingEntity()))
+const props = defineProps(DialogProps.withParam(new RoutingEntity()))
 
 const {
   formRef,
@@ -21,7 +20,7 @@ const {
   rules,
   title,
   onSubmit,
-} = useAirEditor(props, RoutingService, {})
+} = useEditor(props, RoutingService, {})
 
 const bom = new BomEntity()
 bom.type = BomTypeEnum.NORMAL.key

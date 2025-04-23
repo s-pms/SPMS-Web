@@ -1,25 +1,22 @@
 <script lang="ts" setup>
-import type { IJson } from '@airpower/interface/IJson'
 import type { AirTreeInstance } from '@airpower/type/AirType'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
-import { ADialog } from '@airpower/component'
 import { AirConfig } from '@airpower/config/AirConfig'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
 import { AirRequest } from '@airpower/model/AirRequest'
+import { ADialog, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new RoleEntity()))
+const props = defineProps(DialogProps.withParam(new RoleEntity()))
 
 const {
   isLoading,
   formRef,
   formData,
-} = useAirEditor(props, RoleService, {})
+} = useEditor(props, RoleService, {})
 
 const treeRef = ref<AirTreeInstance>()
 
@@ -35,7 +32,7 @@ async function getMenuTreeList() {
 
 async function onSubmit() {
   await RoleService.create(isLoading).authorizeMenu(formData.value.id, formData.value.menuList)
-  AirNotification.success('授权菜单成功')
+  FeedbackUtil.toastSuccess('授权菜单成功')
   props.onConfirm()
 }
 

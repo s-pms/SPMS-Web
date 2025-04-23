@@ -1,10 +1,8 @@
 import type { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { BaseEntity } from '@/base/BaseEntity'
 import type { IBaseTableResult } from '@/hook/IBaseTableResult'
-import type { IUseTableOption } from '@airpower/interface/hooks/IUseTableOption'
-import type { ServiceConstructor } from '@airpower/type/AirType'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import type { CurdServiceConstructor, ITableOption } from '@airpower/web'
+import { FeedbackUtil, useTable as useAirTable } from '@airpower/web'
 
 /**
  * # 单据的表格Hooks
@@ -13,17 +11,17 @@ import { useAirTable } from '@airpower/hook/useAirTable'
  * @author Hamm.cn
  */
 export function useTable<E extends BaseEntity, S extends AbstractBaseService<E>>(
-  serviceClass: ServiceConstructor<E, S>,
-  option: IUseTableOption<E> = {},
+  serviceClass: CurdServiceConstructor<E, S>,
+  option: ITableOption<E> = {},
 ): IBaseTableResult<E, S> {
-  const result = useAirTable(serviceClass, option)
+  const result = useTable(serviceClass, option)
 
   /**
    * ### 实体发布
    * @param entity 实体
    */
   async function onPublish(entity: E) {
-    await AirConfirm.warning('发布后将无法再次修改，是否确认？', '确认发布')
+    await FeedbackUtil.confirmWarning('发布后将无法再次修改，是否确认？', '确认发布')
     await result.service.publish(entity)
     result.onReloadData()
   }

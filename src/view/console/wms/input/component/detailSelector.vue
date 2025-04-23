@@ -2,11 +2,11 @@
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { AButton, ADialog, ATable } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsSelector<InputDetailEntity, InputEntity>())
+const props = defineProps(DialogProps.withSelector<InputDetailEntity, InputEntity>())
 
 const isLoading = ref(false)
 const list = ref<InputDetailEntity[]>([])
@@ -39,7 +39,7 @@ getInput()
     @on-cancel="onCancel"
   >
     <ATable
-      :ctrl-width="80"
+      ctrl-width="80"
       :data-list="list"
       :entity="InputDetailEntity"
       :hide-ctrl="isMultiple"
@@ -48,7 +48,7 @@ getInput()
       hide-delete
       hide-edit
       hide-field-selector
-      @on-select="onSelected"
+      @select-changed="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

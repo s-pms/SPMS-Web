@@ -1,9 +1,9 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { MoveEntity } from '../move/MoveEntity'
 import { InputDetailEntity } from './InputDetailEntity'
 import { InputStatusEnum } from './InputStatusEnum'
@@ -20,8 +20,8 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
-    forceShow: true,
+    color: true,
+    force: true,
   })
   @Form({
     defaultValue: InputTypeEnum.NORMAL.key,
@@ -37,9 +37,9 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
-    orderNumber: -80,
-    forceShow: true,
+    color: true,
+    order: -80,
+    force: true,
   })
   @Search()
   @Field({
@@ -50,44 +50,43 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
 
   @Field({
     label: '仓库',
-    type: StorageEntity,
   })
+  @Type(StorageEntity)
   storage!: StorageEntity
 
   @Field({
     label: '入库明细',
-    type: InputDetailEntity,
-    array: true,
   })
+  @Type(InputDetailEntity, true)
   details: InputDetailEntity[] = []
 
   @Field({
     label: '采购单',
-    type: PurchaseEntity,
   })
+  @Type(PurchaseEntity)
   purchase!: PurchaseEntity
 
   @Field({
     label: '移库单',
-    type: MoveEntity,
   })
+  @Type(MoveEntity)
   move!: MoveEntity
 
   @Field({
     label: '生产订单',
-    type: OrderEntity,
   })
+  @Type(OrderEntity)
   order!: OrderEntity
 
-  getAuditingStatus(): AirEnum {
+  getAuditingStatus(): WebEnum {
     return InputStatusEnum.AUDITING
   }
 
-  getAuditedStatus(): AirEnum {
+  getAuditedStatus(): WebEnum {
     return InputStatusEnum.INPUTTING
   }
 
-  getRejectedStatus(): AirEnum {
+  getRejectedStatus(): WebEnum {
     return InputStatusEnum.REJECTED
   }
 }

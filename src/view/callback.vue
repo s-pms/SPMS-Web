@@ -2,7 +2,7 @@
 import type { AirAny } from '@airpower/type/AirType'
 import { UserService } from '@/model/personnel/user/UserService'
 import { AirConfig } from '@airpower/config/AirConfig'
-import { AirAlert } from '@airpower/feedback/AirAlert'
+
 import { AirRouter } from '@airpower/helper/AirRouter'
 import { ref } from 'vue'
 

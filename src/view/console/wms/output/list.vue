@@ -5,7 +5,7 @@ import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { OutputDetail, OutputEditor } from '@/view/console/wms/output/component'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APage, APanel, ATable } from '@airpower/web'
 
 const {
   isLoading,
@@ -27,7 +27,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="OutputEntity"
       :loading="isLoading"
@@ -37,17 +37,17 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="160"
       :data-list="response.list"
-      :disable-edit="(row: OutputEntity) => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
+      :disable-edit="(row: OutputEntity) => !OutputStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="OutputEntity"
       :select-list="selectList"
+      ctrl-width="160"
       hide-delete
       show-detail
       @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     >
       <template #customRow="{ data }">
         <BillAuditOrReject

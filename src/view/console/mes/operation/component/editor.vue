@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new OperationEntity()))
+import { ADialog, AFormField, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new OperationEntity()))
 
 const {
   formRef,
@@ -14,7 +13,7 @@ const {
   rules,
   title,
   onSubmit,
-} = useAirEditor(props, OperationService)
+} = useEditor(props, OperationService)
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 /**
  * # 工序
@@ -13,7 +13,7 @@ export class OperationEntity extends BaseEntity {
    * ### 工序名称
    */
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -21,7 +21,6 @@ export class OperationEntity extends BaseEntity {
   })
   @Field({
     label: '工序名称',
-    type: String,
   })
   name!: string
 
@@ -29,7 +28,7 @@ export class OperationEntity extends BaseEntity {
    * ### 工序编码
    */
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -37,7 +36,6 @@ export class OperationEntity extends BaseEntity {
   })
   @Field({
     label: '工序编码',
-    type: String,
   })
   code!: string
 }

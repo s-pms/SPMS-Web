@@ -1,13 +1,10 @@
 <script lang="ts" setup>
-import type { AirFileEntity } from '@airpower/model/entity/AirFileEntity'
+import type { FileEntity } from '@/model/system/file/FileEntity'
 import { AppConfig } from '@/config/AppConfig'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { FileCategory } from '@/model/system/file/FileCategory'
-import { AImage, AUser } from '@airpower/component'
-import { AirDesensitizeType } from '@airpower/enum/AirDesensitizeType'
-import { AirDesensitize } from '@airpower/helper/AirDesensitize'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import { AImage, AUser, DesensitizeType, DialogUtil } from '@airpower/web'
 import { ref } from 'vue'
 import UserAccount from './user/UserAccount.vue'
 
@@ -19,12 +16,12 @@ defineProps({
 })
 
 function onUserAccount() {
-  AirDialog.show(UserAccount)
+  DialogUtil.show(UserAccount)
 }
 
 const isLoading = ref(false)
 
-async function onUploadAvatar(file: AirFileEntity) {
+async function onUploadAvatar(file: FileEntity) {
   AppConfig.currentUser.value = await UserService.create(isLoading).getMyInfo()
   AppConfig.currentUser.value.avatar = file.url
   await UserService.create(isLoading).updateMyInfo(AppConfig.currentUser.value)
@@ -47,7 +44,7 @@ async function onUploadAvatar(file: AirFileEntity) {
           :height="80"
           :width="80"
           upload
-          @on-upload="onUploadAvatar"
+          @upload="onUploadAvatar"
         />
         <div
           :class="user.gender === 1 ? 'male' : 'female'"
@@ -64,7 +61,7 @@ async function onUploadAvatar(file: AirFileEntity) {
             </div>
             <div class="value">
               <template v-if="user.idCard">
-                {{ AirDesensitize.desensitize(user.realName, AirDesensitizeType.CHINESE_NAME) }}
+                {{ DesensitizeType.CHINESE_NAME.desensitize(user.realName) }}
               </template>
               <el-link v-else>
                 去实名
@@ -77,7 +74,7 @@ async function onUploadAvatar(file: AirFileEntity) {
             </div>
             <div class="value">
               <template v-if="user.email">
-                {{ AirDesensitize.desensitize(user.email, AirDesensitizeType.EMAIL) }}
+                {{ DesensitizeType.EMAIL.desensitize(user.email) }}
                 <a>更换</a>
               </template>
               <a v-else> 绑定邮箱 </a>
@@ -89,7 +86,7 @@ async function onUploadAvatar(file: AirFileEntity) {
             </div>
             <div class="value">
               <template v-if="user.phone">
-                {{ AirDesensitize.desensitize(user.phone, AirDesensitizeType.MOBILE) }}
+                {{ DesensitizeType.MOBILE.desensitize(user.phone) }}
                 <a>更换</a>
               </template>
               <a v-else> 绑定手机 </a>

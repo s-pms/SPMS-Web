@@ -1,23 +1,21 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
 import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
 import { OutputService } from '@/model/wms/output/OutputService'
-import { ADialog, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
+
+import { ADialog, AInput, DialogUtil } from '@airpower/web'
 import { ref } from 'vue'
 import { InventorySelector } from '../../inventory/component'
 
-const props = defineProps(airPropsParam(new OutputDetailEntity()))
+const props = defineProps(DialogProps.withParam(new OutputDetailEntity()))
 
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
   await OutputService.create(isLoading).addDetailFinishQuantity(
@@ -34,7 +32,7 @@ async function selectInventory() {
   let inventory = new InventoryEntity()
   inventory.type = InventoryTypeEnum.STORAGE.key
   inventory.material = material.value.copy()
-  inventory = await AirDialog.show(InventorySelector, inventory)
+  inventory = await DialogUtil.show(InventorySelector, inventory)
   formData.value.inventory = inventory.copy()
   formData.value.inventoryId = formData.value.inventory.id
   formData.value.storageName = formData.value.inventory.storage.name

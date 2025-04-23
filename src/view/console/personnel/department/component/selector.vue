@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { AButton, ADialog, ATable, AToolBar } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { useAirSelector } from '@airpower/hook/useAirSelector'
 
-const props = defineProps(airPropsSelector<DepartmentEntity>())
+import { useAirSelector } from '@airpower/hook/useAirSelector'
+import { AButton, ADialog, ATable } from '@airpower/web'
+
+const props = defineProps(DialogProps.withSelector<DepartmentEntity>())
 
 const {
   title,
@@ -39,7 +39,7 @@ const {
       @on-search="onSearch"
     />
     <ATable
-      :ctrl-width="80"
+      ctrl-width="80"
       :data-list="list"
       :entity="DepartmentEntity"
       :hide-ctrl="isMultiple"
@@ -51,7 +51,7 @@ const {
       hide-delete
       hide-edit
       hide-field-selector
-      @on-select="onSelected"
+      @select-changed="onSelected"
     >
       <template
         v-if="!isMultiple"

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { IJson } from '@airpower/interface/IJson'
-import { APanel } from '@airpower/component'
+import { APanel } from '@airpower/web'
 import { ref } from 'vue'
 
 const modules = ref<IJson[]>([
@@ -104,7 +103,7 @@ const modules = ref<IJson[]>([
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <div class="index">
       <div
         v-for="(module, index) in modules"

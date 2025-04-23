@@ -6,13 +6,12 @@ import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
-import { ADialog, AEmpty } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
+
+import { ADialog, AEmpty, DialogProps, DialogUtil, WebColor } from '@airpower/web'
 import { onUnmounted, ref } from 'vue'
 import { DeviceCollectHistory } from '.'
 
-const props = defineProps(airPropsParam(new DeviceEntity()))
+const props = defineProps(DialogProps.withParam(new DeviceEntity()))
 
 const formData = ref(props.param.copy())
 
@@ -50,23 +49,23 @@ function getValue(item: CollectionEntity) {
 function getColor(item: CollectionEntity) {
   switch (item.code) {
     case CollectionDefault.STATUS:
-      return DeviceStatusEnum.getColor(Number.parseInt(item.value, 10))
+      return DeviceStatusEnum.get(Number.parseInt(item.value, 10))?.color || WebColor.NORMAL
     case CollectionDefault.ALARM:
-      return AlarmStatusEnum.getColor(Number.parseInt(item.value, 10))
+      return AlarmStatusEnum.get(Number.parseInt(item.value, 10))?.color || WebColor.NORMAL
     default:
       return item.value
   }
 }
 
 function addParameter() {
-  AirDialog.show(ParameterEditor)
+  DialogUtil.show(ParameterEditor)
 }
 
 async function showHistory(item: CollectionEntity) {
   item.uuid = props.param.uuid
   clearInterval(timer)
   try {
-    await AirDialog.show(DeviceCollectHistory, item)
+    await DialogUtil.show(DeviceCollectHistory, item)
   }
   finally {
     timer = setInterval(() => {

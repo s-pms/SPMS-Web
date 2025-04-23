@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
-import { AirNotification } from '@airpower/feedback/AirNotification'
+import { FeedbackUtil } from '@airpower/web'
 
 function getIcon(item: ThirdLoginPlatform) {
   return `/img/thirdlogin/${item.flag}.png`
@@ -8,7 +8,7 @@ function getIcon(item: ThirdLoginPlatform) {
 
 function onLogin(item: ThirdLoginPlatform) {
   if (item.disabled) {
-    AirNotification.error(`暂不支持${item.label}`)
+    FeedbackUtil.toastError(`暂不支持${item.label}`)
     return
   }
   const redirectUri = `${window.location.origin}/callback/${item.flag}`

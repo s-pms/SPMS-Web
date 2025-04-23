@@ -1,6 +1,6 @@
-import { AirEnum } from '@airpower/base/AirEnum'
+import { WebEnum } from '@airpower/web'
 
-export class ParameterTypeEnum extends AirEnum {
+export class ParameterTypeEnum extends WebEnum {
   static NUMBER = new ParameterTypeEnum(1, '数字')
 
   static STATUS = new ParameterTypeEnum(2, '状态')

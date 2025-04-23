@@ -3,15 +3,13 @@ import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
-import { ADialog, AFormField, AGroup, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+
 import { AirInputType } from '@airpower/enum/AirInputType'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { AirValidator } from '@airpower/helper/AirValidator'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { ADialog, AFormField, AGroup, AInput, useEditor } from '@airpower/web'
 import { computed, ref } from 'vue'
 
-const props = defineProps(airPropsParam(new CodeRuleEntity()))
+const props = defineProps(DialogProps.withParam(new CodeRuleEntity()))
 
 const {
   title,
@@ -20,13 +18,13 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, CodeRuleService, {
+} = useEditor(props, CodeRuleService, {
   customRules: {
     prefix: [
-      AirValidator.show('前缀只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
+      WebValidator.show('前缀只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
     ],
     template: [
-      AirValidator.show('模板只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
+      WebValidator.show('模板只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
     ],
   },
 })
@@ -59,10 +57,10 @@ const demoCode = computed(() => {
   let code = formData.value.template
   for (const item of paramList.value) {
     if (['yyyy', 'mm', 'dd', 'hh'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), item.label.toUpperCase()))
+      code = code.replaceAll(item.label, DateTimeUtil.formatFromDate(new Date(), item.label.toUpperCase()))
     }
     if (['yy'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY').substring(2))
+      code = code.replaceAll(item.label, DateTimeUtil.formatFromDate(new Date(), 'YYYY').substring(2))
     }
   }
   return code

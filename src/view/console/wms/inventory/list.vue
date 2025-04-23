@@ -8,10 +8,10 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { APage, APanel, ATable, AToolBar, ATreeBox } from '@airpower/component'
 import { AirRequest } from '@airpower/model/AirRequest'
 import { AirRequestPage } from '@airpower/model/AirRequestPage'
 import { AirResponsePage } from '@airpower/model/AirResponsePage'
+import { APage, APanel, ATable, ATreeBox } from '@airpower/web'
 import { computed, ref } from 'vue'
 
 const request = ref(new AirRequestPage(InventoryEntity))
@@ -105,7 +105,7 @@ inventoryTypeChanged()
     searchable
     @on-change="treeChanged"
   >
-    <APanel>
+    <APanel title="">
       <AToolBar
         :entity="InventoryEntity"
         :service="InventoryService"
@@ -129,10 +129,10 @@ inventoryTypeChanged()
       </AToolBar>
       <ATable
         v-loading="isLoading"
-        :ctrl-width="40"
         :data-list="response.list"
         :entity="InventoryEntity"
         :field-list="tableField"
+        ctrl-width="40"
         hide-delete
         hide-edit
       >

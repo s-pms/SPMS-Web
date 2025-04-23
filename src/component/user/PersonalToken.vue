@@ -1,16 +1,13 @@
 <script lang="ts" setup>
 import type { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AButton, AEmpty } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirClipboard } from '@airpower/helper/AirClipboard'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { ref } from 'vue'
 
-defineProps(airProps())
+import { AButton, AEmpty, DateTimeFormatter, DialogProps, FeedbackUtil } from '@airpower/web'
+import { ElMessageBox } from 'element-plus'
+import { ref } from 'vue'
+import useClipboard from 'vue-clipboard3'
+
+defineProps(DialogProps.create())
 
 const list = ref([] as PersonalTokenEntity[])
 
@@ -23,24 +20,23 @@ async function init() {
 }
 
 async function createMyPersonalToken() {
-  await AirConfirm.warning('是否确认创建新的私人令牌？', '创建确认')
+  await FeedbackUtil.confirmWarning('是否确认创建新的私人令牌？', '创建确认')
   const token = await UserService.create(isLoading).createMyPersonalToken(name.value)
 
-  await AirAlert.create()
-    .setConfirmText('点击复制')
-    .hideClose()
-    .success('创建私人令牌成功，请点击复制，后续将不再显示令牌！', '创建成功')
-  await AirClipboard.copy(token)
-  AirNotification.success('已经成功复制到你的剪切板')
+  await ElMessageBox.alert('创建私人令牌成功，请点击复制，后续将不再显示令牌！', '创建成功', {
+    confirmButtonText: '点击复制',
+    showCancelButton: true,
+    closeOnPressEscape: false,
+    showClose: false,
+  })
+  await useClipboard().toClipboard(token)
+  FeedbackUtil.toastSuccess('已经成功复制到你的剪切板')
   name.value = ''
   init()
 }
 
 async function onDisableOrEnable(item: PersonalTokenEntity) {
-  await AirConfirm.warning(
-    `是否确认${item.isDisabled ? '启用' : '禁用'}这个私人令牌？`,
-    item.isDisabled ? '启用' : '禁用',
-  )
+  await FeedbackUtil.confirmWarning(`是否确认${item.isDisabled ? '启用' : '禁用'}这个私人令牌？`, `${item.isDisabled ? '启用' : '禁用'}`)
   const service = UserService.create(isLoading)
   await (item.isDisabled ? service.enableMyPersonalToken(item) : service.disableMyPersonalToken(item))
   init()
@@ -90,7 +86,7 @@ init()
             />
           </div>
           <div class="create-time">
-            创建于: {{ AirDateTime.formatFromMilliSecond(item.createTime) }}
+            创建于: {{ DateTimeFormatter.FULL_DATE_TIME.formatMilliSecond(item.createTime) }}
           </div>
         </div>
       </div>

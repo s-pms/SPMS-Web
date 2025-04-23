@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
-import { APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTableTree } from '@airpower/hook/useAirTableTree'
+
+import { APanel, ATable } from '@airpower/web'
 import { PermissionEditor } from './component'
 
 const {
@@ -13,7 +13,7 @@ const {
   onAddRow,
   onSearch,
   onDelete,
-} = useAirTableTree(PermissionService, {
+} = useTableTree(PermissionService, {
   editView: PermissionEditor,
   beforeAddRow: (param: PermissionEntity, row: PermissionEntity) => {
     param.parent = row
@@ -23,7 +23,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="PermissionEntity"
       :loading="isLoading"
@@ -33,17 +33,17 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="130"
       :data-list="list"
       :default-expand-all="false"
       :disable-add="(row) => row.isSystem"
       :disable-delete="(row) => row.isSystem"
       :disable-edit="(row) => row.isSystem"
       :entity="PermissionEntity"
+      ctrl-width="130"
       show-add
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-add="onAddRow"
+      @edit="onEdit"
+      @delete="onDelete"
+      @add-row="onAddRow"
     />
   </APanel>
 </template>

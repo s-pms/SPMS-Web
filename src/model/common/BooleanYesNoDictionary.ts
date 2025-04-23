@@ -1,8 +1,9 @@
-import { AirEnum } from '@airpower/base/AirEnum'
-import { AirColor } from '@airpower/enum/AirColor'
+import { WebColor, WebEnum } from '@airpower/web'
 
-export class BooleanYesNoDictionary extends AirEnum<boolean> {
-  static readonly YES = new BooleanYesNoDictionary(true, '是', AirColor.SUCCESS)
+export class BooleanYesNoDictionary extends WebEnum<boolean> {
+  static readonly YES = new BooleanYesNoDictionary(true, '是')
+    .setColor(WebColor.SUCCESS)
 
-  static readonly NO = new BooleanYesNoDictionary(false, '否', AirColor.NORMAL)
+  static readonly NO = new BooleanYesNoDictionary(false, '否')
+    .setColor(WebColor.NORMAL)
 }

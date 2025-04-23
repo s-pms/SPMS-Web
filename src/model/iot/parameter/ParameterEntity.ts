@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { ParameterSystemEnum } from '@/model/iot/parameter/ParameterSystemEnum'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table } from '@airpower/web'
 import { ParameterTypeEnum } from './ParameterTypeEnum'
 
 @Model({
@@ -8,7 +8,7 @@ import { ParameterTypeEnum } from './ParameterTypeEnum'
 })
 export class ParameterEntity extends BaseEntity {
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -19,7 +19,7 @@ export class ParameterEntity extends BaseEntity {
   code!: string
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -30,7 +30,7 @@ export class ParameterEntity extends BaseEntity {
   label!: string
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
   })
   @Form({
@@ -45,9 +45,9 @@ export class ParameterEntity extends BaseEntity {
   dataType!: number
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
-    orderNumber: -100,
+    order: -100,
   })
   @Field({
     label: '参数类别',

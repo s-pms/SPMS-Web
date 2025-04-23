@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import PersonalToken from '@/component/user/PersonalToken.vue'
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+
+import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 import ModifyPassword from './ModifyPassword.vue'
 import ThirdAccountList from './ThirdAccountList.vue'
 
-defineProps(airProps())
+defineProps(DialogProps.create())
 
 enum TABS {
 

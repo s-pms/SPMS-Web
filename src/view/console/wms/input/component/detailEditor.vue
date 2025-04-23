@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputDetailService } from '@/model/wms/input/InputDetailService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+
+import { ADialog, AInput, ASelect } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new InputDetailEntity()))
+const props = defineProps(DialogProps.withParam(new InputDetailEntity()))
 
 const formData = ref(props.param.copy())
 if (formData.value.material) {
@@ -17,7 +16,7 @@ if (formData.value.material) {
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
   props.onConfirm(formData.value)

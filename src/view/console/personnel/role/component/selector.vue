@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector } from '@airpower/web'
 import { RoleEditor } from '.'
 
-const props = defineProps(airPropsSelector<RoleEntity>())
+const props = defineProps(DialogProps.withSelector<RoleEntity>())
 </script>
 
 <template>

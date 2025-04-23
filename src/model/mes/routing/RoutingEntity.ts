@@ -1,10 +1,10 @@
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**
  * # 生产工艺
@@ -15,8 +15,8 @@ import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 })
 export class RoutingEntity extends BaseEntity implements IPayload {
   @Table({
-    forceShow: true,
-    orderNumber: 88,
+    force: true,
+    order: 88,
   })
   @Search()
   @Form({
@@ -24,13 +24,12 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   })
   @Field({
     label: '工艺名称',
-    type: String,
   })
   name!: string
 
   @Table({
-    forceShow: true,
-    orderNumber: 99,
+    force: true,
+    order: 99,
   })
   @Search()
   @Form({
@@ -38,21 +37,18 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   })
   @Field({
     label: '工艺编码',
-    type: String,
   })
   code!: string
 
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: MaterialEntity,
-  })
+  @Type(MaterialEntity)
   material!: MaterialEntity
 
   @Table({
-    copyField: true,
-    orderNumber: 77,
+    copy: true,
+    order: 77,
   })
   @Field({
     label: '物料编码',
@@ -60,7 +56,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   materialCode!: string
 
   @Table({
-    orderNumber: 66,
+    order: 66,
     nowrap: true,
   })
   @Field({
@@ -71,14 +67,12 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: BomEntity,
-  })
+  @Type(BomEntity)
   bom!: BomEntity
 
   @Table({
-    copyField: true,
-    orderNumber: 55,
+    copy: true,
+    order: 55,
   })
   @Field({
     label: '配方编码',
@@ -86,7 +80,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   bomCode!: string
 
   @Table({
-    orderNumber: 44,
+    order: 44,
     nowrap: true,
   })
   @Field({
@@ -105,15 +99,12 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: RoutingOperationEntity,
-    array: true,
-  })
+  @Field({})
+  @Type(RoutingOperationEntity, true)
   details: RoutingOperationEntity[] = []
 
   @Field({
     label: '工艺配方',
-    type: Boolean,
     dictionary: BooleanYesNoDictionary,
   })
   @Form({
@@ -121,8 +112,8 @@ export class RoutingEntity extends BaseEntity implements IPayload {
     clearable: false,
   })
   @Table({
-    showColor: true,
-    orderNumber: 22,
+    color: true,
+    order: 22,
     width: 100,
   })
   isRoutingBom!: boolean

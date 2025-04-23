@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
 defineProps(
-  Object.assign(airProps(), {
+  Object.assign(DialogProps.create(), {
     /**
      * ### 弹出标题
      */

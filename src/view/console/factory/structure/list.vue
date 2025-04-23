@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
-import { APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTableTree } from '@airpower/hook/useAirTableTree'
+
+import { APanel, ATable } from '@airpower/web'
 import { StructureEditor } from './component'
 
 const {
@@ -15,7 +15,7 @@ const {
   onSortChanged,
   onSelected,
   onAddRow,
-} = useAirTableTree(StructureService, {
+} = useTableTree(StructureService, {
   editView: StructureEditor,
   beforeAddRow(param, row) {
     param.parent = row
@@ -25,7 +25,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="StructureEntity"
       :loading="isLoading"
@@ -35,15 +35,15 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="130"
       :data-list="list"
       :entity="StructureEntity"
+      ctrl-width="130"
       show-add
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
-      @on-add="onAddRow"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
+      @add-row="onAddRow"
     />
   </APanel>
 </template>

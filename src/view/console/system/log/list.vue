@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { LogEntity } from '@/model/system/log/LogEntity'
 import { LogService } from '@/model/system/log/LogService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { AirColor } from '@airpower/enum/AirColor'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable } from '@airpower/web'
 import Detail from './detail.vue'
 
 const {
@@ -15,27 +14,27 @@ const {
   onSortChanged,
   onSelected,
   onDetail,
-} = useAirTable(LogService, {
+} = useTable(LogService, {
   detailView: Detail,
 })
 
 function getColor(log: LogEntity) {
   const diff = log.updateTime - log.createTime
   if (diff < 500) {
-    return AirColor.SUCCESS
+    return WebColor.SUCCESS
   }
   if (diff < 2000) {
-    return AirColor.WARNING
+    return WebColor.WARNING
   }
   if (diff < 5000) {
-    return AirColor.DANGER
+    return WebColor.DANGER
   }
-  return AirColor.NORMAL
+  return WebColor.NORMAL
 }
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="LogEntity"
       :loading="isLoading"
@@ -45,15 +44,15 @@ function getColor(log: LogEntity) {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="60"
       :data-list="response.list"
       :entity="LogEntity"
       :select-list="selectList"
+      ctrl-width="60"
       hide-delete
       hide-edit
       show-detail
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
       @on-detail="onDetail"
     >
       <template #pendingTime="{ data }">

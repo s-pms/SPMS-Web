@@ -1,6 +1,6 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { PurchaseStatusEnum } from './PurchaseStatusEnum'
 
@@ -29,7 +29,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @Table({
     width: 150,
     money: true,
-    forceShow: true,
+    force: true,
   })
   @Form({
     suffixText: '元',
@@ -42,7 +42,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   @Table({
     width: 150,
     money: true,
-    forceShow: true,
+    force: true,
   })
   @Form({
     suffixText: '元',
@@ -54,9 +54,9 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
 
   @Table({
     width: 100,
-    showColor: true,
-    orderNumber: -80,
-    forceShow: true,
+    color: true,
+    order: -80,
+    force: true,
   })
   @Search()
   @Field({
@@ -67,20 +67,19 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
 
   @Field({
     label: '采购明细',
-    type: PurchaseDetailEntity,
-    array: true,
   })
+  @Type(PurchaseDetailEntity, true)
   details: PurchaseDetailEntity[] = []
 
-  getAuditingStatus(): AirEnum {
+  getAuditingStatus(): WebEnum {
     return PurchaseStatusEnum.AUDITING
   }
 
-  getAuditedStatus(): AirEnum {
+  getAuditedStatus(): WebEnum {
     return PurchaseStatusEnum.PURCHASING
   }
 
-  getRejectedStatus(): AirEnum {
+  getRejectedStatus(): WebEnum {
     return PurchaseStatusEnum.REJECTED
   }
 }

@@ -1,18 +1,17 @@
 <script lang="ts" setup>
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new PermissionEntity()))
+import { ADialog, AFormField, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new PermissionEntity()))
 const {
   isLoading,
   formData,
   formRef,
   title,
   onSubmit,
-} = useAirEditor(props, PermissionService)
+} = useEditor(props, PermissionService)
 </script>
 
 <template>

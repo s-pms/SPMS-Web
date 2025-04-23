@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
-import { APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTableTree } from '@airpower/hook/useAirTableTree'
+
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { StorageEditor } from './component'
 
 const {
@@ -15,7 +15,7 @@ const {
   onSortChanged,
   onSelected,
   onAddRow,
-} = useAirTableTree(StorageService, {
+} = useTableTree(StorageService, {
   editView: StorageEditor,
   beforeAddRow(param, row) {
     param.parent = row
@@ -25,7 +25,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="StorageEntity"
       :loading="isLoading"
@@ -35,15 +35,15 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="130"
       :data-list="list"
       :entity="StorageEntity"
+      ctrl-width="130"
       show-add
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
-      @on-add="onAddRow"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
+      @add-row="onAddRow"
     />
   </APanel>
 </template>

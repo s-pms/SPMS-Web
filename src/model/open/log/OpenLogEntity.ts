@@ -1,12 +1,9 @@
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Table } from '@airpower/decorator'
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
+import { DateTimeFormatter, Field, Table, Type } from '@airpower/web'
 import { OpenAppEntity } from '../app/OpenAppEntity'
 
 export class OpenLogEntity extends BaseEntity {
-  @Field({
-    type: OpenAppEntity,
-  })
+  @Type(OpenAppEntity)
   openApp!: OpenAppEntity
 
   @Table({
@@ -52,12 +49,12 @@ export class OpenLogEntity extends BaseEntity {
   declare createTime: number
 
   @Table({
-    orderNumber: -100,
-    dateTimeFormatter: AirDateTimeFormatter.YYYY_MM_DD_HH_mm_ss,
+    order: -100,
+    datetime: DateTimeFormatter.FULL_DATE_TIME,
     width: 180,
   })
   @Field({
     label: '响应时间',
   })
-  updateTime!: number
+  declare updateTime!: number
 }

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsSelector<StructureEntity>())
+import { ASelector } from '@airpower/web'
+
+const props = defineProps(DialogProps.withSelector<StructureEntity>())
 </script>
 
 <template>

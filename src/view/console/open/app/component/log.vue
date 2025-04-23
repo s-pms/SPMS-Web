@@ -3,23 +3,20 @@ import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 import { OpenLogService } from '@/model/open/log/OpenLogService'
-import { ADialog, APage, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { ADialog, APage, ATable, DialogUtil } from '@airpower/web'
 import { OpenAppLogDetail } from './index'
 
-const props = defineProps(airPropsParam(new OpenAppEntity()))
+const props = defineProps(DialogProps.withParam(new OpenAppEntity()))
 
 const {
   isLoading,
-} = useAirDetail(props, OpenAppService)
+} = useDetail(props, OpenAppService)
 
 const {
   onPageChanged,
   response,
-} = useAirTable(OpenLogService, {
+} = useTable(OpenLogService, {
   beforeSearch(requestData) {
     requestData.filter.openApp = props.param.copyExposeId()
     return requestData
@@ -27,7 +24,7 @@ const {
 })
 
 function onDetail(log: OpenLogEntity) {
-  AirDialog.show(OpenAppLogDetail, log)
+  DialogUtil.show(OpenAppLogDetail, log)
 }
 </script>
 
@@ -41,7 +38,7 @@ function onDetail(log: OpenLogEntity) {
   >
     <ATable
       v-loading="isLoading"
-      :ctrl-width="100"
+      ctrl-width="100"
       :data-list="response.list"
       :entity="OpenLogEntity"
       hide-delete

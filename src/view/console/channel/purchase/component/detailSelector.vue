@@ -2,11 +2,11 @@
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { AButton, ADialog, ATable } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsSelector<PurchaseDetailEntity, PurchaseEntity>())
+const props = defineProps(DialogProps.withSelector<PurchaseDetailEntity, PurchaseEntity>())
 
 const isLoading = ref(false)
 const list = ref<PurchaseDetailEntity[]>([])
@@ -39,7 +39,7 @@ getDetail()
     @on-cancel="onCancel"
   >
     <ATable
-      :ctrl-width="80"
+      ctrl-width="80"
       :data-list="list"
       :entity="PurchaseDetailEntity"
       :hide-ctrl="isMultiple"
@@ -48,7 +48,7 @@ getDetail()
       hide-delete
       hide-edit
       hide-field-selector
-      @on-select="onSelected"
+      @select-changed="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

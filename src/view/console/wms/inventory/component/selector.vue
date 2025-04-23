@@ -7,12 +7,12 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { AButton, ADialog, ATable, ATreeBox } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
 import { AirRequest } from '@airpower/model/AirRequest'
+import { AButton, ADialog, ATable, ATreeBox } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsSelector<InventoryEntity>())
+const props = defineProps(DialogProps.withSelector<InventoryEntity>())
 
 const request = ref(new AirRequest(InventoryEntity))
 const list = ref<InventoryEntity[]>([])
@@ -100,7 +100,7 @@ inventoryTypeChanged()
       @on-change="treeChanged"
     >
       <ATable
-        :ctrl-width="80"
+        ctrl-width="80"
         :data-list="list"
         :entity="InventoryEntity"
         :hide-ctrl="isMultiple"

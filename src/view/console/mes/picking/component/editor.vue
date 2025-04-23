@@ -3,15 +3,11 @@ import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
 import { PickingDetailEditor } from '.'
 
-const props = defineProps(airPropsParam(new PickingEntity()))
+const props = defineProps(DialogProps.withParam(new PickingEntity()))
 
 const {
   title,
@@ -20,13 +16,13 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, PickingService, {
+} = useEditor(props, PickingService, {
   afterGetDetail(detailData) {
     return detailData
   },
   beforeSubmit(submitData) {
     if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
+      FeedbackUtil.toastWarning('请添加明细后再提交')
       return null
     }
     return submitData
@@ -34,12 +30,12 @@ const {
 })
 
 async function addDetail() {
-  const detail: PickingDetailEntity = await AirDialog.show(PickingDetailEditor)
+  const detail: PickingDetailEntity = await DialogUtil.show(PickingDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的申领明细？')
+  await FeedbackUtil.confirmWarning('是否删除选中行的申领明细？')
   formData.value.details.splice(index, 1)
 }
 </script>

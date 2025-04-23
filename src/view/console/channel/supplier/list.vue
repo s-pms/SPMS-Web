@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { APage, APanel, ATable } from '@airpower/web'
 import { SupplierEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(SupplierService, {
+  = useTable(SupplierService, {
     editView: SupplierEditor,
   })
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="SupplierEntity"
       :loading="isLoading"
@@ -25,10 +25,10 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       :data-list="response.list"
       :entity="SupplierEntity"
       :select-list="selectList"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
+      @select-changed="onSelected"
     />
     <template #footerLeft>
       <APage

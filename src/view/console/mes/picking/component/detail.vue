@@ -5,10 +5,10 @@ import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
-import { ADialog, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsParam(new PickingEntity()))
+import { ADialog, AGroup, ASelect, ATable } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new PickingEntity()))
 
 const {
   title,

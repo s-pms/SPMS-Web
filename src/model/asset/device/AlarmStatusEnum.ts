@@ -1,10 +1,12 @@
-import { AirEnum } from '@airpower/base/AirEnum'
-import { AirColor } from '@airpower/enum/AirColor'
+import { WebColor, WebEnum } from '@airpower/web'
 
-export class AlarmStatusEnum extends AirEnum {
-  static readonly NONE = new AlarmStatusEnum(0, '正常运行', AirColor.SUCCESS)
+export class AlarmStatusEnum extends WebEnum {
+  static readonly NONE = new AlarmStatusEnum(0, '正常运行')
+    .setColor(WebColor.SUCCESS)
 
-  static readonly SYSTEM = new AlarmStatusEnum(1, '系统报警', AirColor.DANGER)
+  static readonly SYSTEM = new AlarmStatusEnum(1, '系统报警')
+    .setColor(WebColor.DANGER)
 
-  static readonly MANUAL = new AlarmStatusEnum(2, '手动报警', AirColor.WARNING)
+  static readonly MANUAL = new AlarmStatusEnum(2, '手动报警')
+    .setColor(WebColor.WARNING)
 }

@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomDetailService } from '@/model/mes/bom/BomDetailService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+
+import { ADialog, AInput, ASelect } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new BomDetailEntity()))
+const props = defineProps(DialogProps.withParam(new BomDetailEntity()))
 
 const formData = ref(props.param.copy())
 if (formData.value.material) {
@@ -17,7 +16,7 @@ if (formData.value.material) {
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
   props.onConfirm(formData.value)

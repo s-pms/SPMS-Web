@@ -1,6 +1,6 @@
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '计划明细',
@@ -9,9 +9,7 @@ export class PlanDetailEntity extends AbstractBaseBillDetailEntity {
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: MaterialEntity,
-  })
+  @Type(MaterialEntity)
   material!: MaterialEntity
 
   @Table()
@@ -31,7 +29,6 @@ export class PlanDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Field({
     label: '物料',
-    type: Number,
   })
   materialId!: number
 
@@ -43,22 +40,20 @@ export class PlanDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -2,
+    order: -2,
   })
   @Field({
     label: '计划数量',
-    type: Number,
   })
   quantity!: number
 
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -3,
+    order: -3,
   })
   @Field({
     label: '已完成数量',
-    type: Number,
   })
   finishQuantity!: number
 }

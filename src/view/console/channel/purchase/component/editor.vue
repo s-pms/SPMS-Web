@@ -2,15 +2,11 @@
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogUtil, useEditor } from '@airpower/web'
 import { PurchaseDetailEditor } from '.'
 
-const props = defineProps(airPropsParam(new PurchaseEntity()))
+const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
 
 const {
   title,
@@ -19,13 +15,13 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, PurchaseService, {
+} = useEditor(props, PurchaseService, {
   afterGetDetail(detailData) {
     return detailData
   },
   beforeSubmit(submitData) {
     if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
+      FeedbackUtil.toastWarning('请添加明细后再提交')
       return null
     }
     return submitData
@@ -33,12 +29,12 @@ const {
 })
 
 async function addDetail() {
-  const detail: PurchaseDetailEntity = await AirDialog.show(PurchaseDetailEditor)
+  const detail: PurchaseDetailEntity = await DialogUtil.show(PurchaseDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的采购明细？')
+  await FeedbackUtil.confirmWarning('是否删除选中行的采购明细？')
   formData.value.details.splice(index, 1)
 }
 </script>

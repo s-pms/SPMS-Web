@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTableTree } from '@airpower/hook/useAirTableTree'
+
+import { APanel, ATable } from '@airpower/web'
 import { DepartmentEditor } from './component'
 
 const {
@@ -13,7 +13,7 @@ const {
   onDelete,
   onEdit,
   onSearch,
-} = useAirTableTree(DepartmentService, {
+} = useTableTree(DepartmentService, {
   editView: DepartmentEditor,
   beforeAddRow(param, row) {
     param.parent = row
@@ -23,7 +23,7 @@ const {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="DepartmentEntity"
       :loading="isLoading"
@@ -33,14 +33,14 @@ const {
     />
     <ATable
       v-loading="isLoading"
-      :ctrl-width="130"
       :data-list="list"
       :disable-delete="(row) => row.children.length > 0"
       :entity="DepartmentEntity"
+      ctrl-width="130"
       show-add
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-add="onAddRow"
+      @edit="onEdit"
+      @delete="onDelete"
+      @add-row="onAddRow"
     />
   </APanel>
 </template>

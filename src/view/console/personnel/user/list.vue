@@ -4,9 +4,9 @@ import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { APage, APanel, ATable, AToolBar, ATreeBox } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
 import { AirRequest } from '@airpower/model/AirRequest'
+import { APage, APanel, ATable, ATreeBox } from '@airpower/web'
 import { ref } from 'vue'
 import { UserEditor } from './component'
 
@@ -22,7 +22,7 @@ const {
   onEnable,
   onDisable,
   onGetList,
-} = useAirTable(UserService, {
+} = useTable(UserService, {
   editView: UserEditor,
 })
 
@@ -48,7 +48,7 @@ getDepartmentList()
     searchable
     @change="departmentChanged"
   >
-    <APanel>
+    <APanel title="">
       <AToolBar
         :entity="UserEntity"
         :loading="isLoading"
@@ -58,12 +58,12 @@ getDepartmentList()
       />
       <ATable
         v-loading="isLoading"
-        :ctrl-width="150"
         :data-list="response.list"
         :entity="UserEntity"
+        ctrl-width="150"
         show-enable-and-disable
-        @on-edit="onEdit"
-        @on-delete="onDelete"
+        @edit="onEdit"
+        @delete="onDelete"
         @on-enable="onEnable"
         @on-disable="onDisable"
       />

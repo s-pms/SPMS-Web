@@ -1,13 +1,10 @@
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import type { IUseDetailOption } from '@airpower/interface/hooks/IUseDetailOption'
-import type { IJson } from '@airpower/interface/IJson'
-import type { ServiceConstructor } from '@airpower/type/AirType'
+import type { CurdServiceConstructor, IDetailOption, IJson } from '@airpower/web'
 import type { IUseBillDetailResult } from './IUseBillDetailResult'
 import { BillAddFinishDialog } from '@/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
+import { DialogUtil, useDetail } from '@airpower/web'
 
 /**
  * ### 单据明细
@@ -21,10 +18,10 @@ export function useBillDetail<
   S extends AbstractBaseBillService<D, B>,
 >(
   props: IJson,
-  serviceClass: ServiceConstructor<B, S>,
-  option: IUseDetailOption<B> = {},
+  serviceClass: CurdServiceConstructor<B, S>,
+  option: IDetailOption<B> = {},
 ): IUseBillDetailResult<D, B, S> {
-  const result = useAirDetail(props, serviceClass, option)
+  const result = useDetail(props, serviceClass, option)
 
   /**
    * ### 添加完成数量
@@ -35,7 +32,7 @@ export function useBillDetail<
     detail.billId = billId
     const postData = detail.copy()
     const dec = 100000
-    const number: number = await AirDialog.show(
+    const number: number = await DialogUtil.show(
       BillAddFinishDialog,
       Number.parseFloat((Math.ceil((detail.quantity - detail.finishQuantity) * dec) / dec).toString()),
     )

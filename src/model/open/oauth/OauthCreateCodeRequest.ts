@@ -1,10 +1,10 @@
-import { AirModel } from '@airpower/base/AirModel'
+import { Transformer } from '@airpower/web'
 
 /**
  * # Oauth 创建授权码 请求
  * @author Hamm.cn
  */
-export class OauthCreateCodeRequest extends AirModel {
+export class OauthCreateCodeRequest extends Transformer {
   /**
    * ### AppKey
    */

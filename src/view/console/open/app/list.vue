@@ -1,13 +1,10 @@
 <script lang="ts" setup>
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
+
 import { AirClipboard } from '@airpower/helper/AirClipboard'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirTable } from '@airpower/hook/useAirTable'
+
+import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 
 const {
@@ -21,7 +18,7 @@ const {
   onDisable,
   onEnable,
   onReloadData,
-} = useAirTable(OpenAppService, {
+} = useTable(OpenAppService, {
   editView: OpenAppEditor,
 })
 
@@ -37,7 +34,7 @@ async function onResetSecret(app: OpenAppEntity) {
     .hideClose()
     .success('请注意，服务端将不再保存当前应用的 AppSecret，请务必将此密钥保存到安全的地方。', '重置AppSecret成功')
   await AirClipboard.copy(newSecret)
-  AirNotification.success('复制AppSecret成功')
+  FeedbackUtil.toastSuccess('复制AppSecret成功')
   onReloadData()
 }
 
@@ -53,12 +50,12 @@ async function onResetKeyPair(app: OpenAppEntity) {
     .hideClose()
     .success('请注意，服务端将不再保存当前应用的 公钥，请务必将此密钥保存到安全的地方。', '重置RSA密钥对成功')
   await AirClipboard.copy(newSecret)
-  AirNotification.success('复制RSA公钥成功')
+  FeedbackUtil.toastSuccess('复制RSA公钥成功')
   onReloadData()
 }
 
 async function onAdd() {
-  const appSecret: string = await AirDialog.show(OpenAppEditor)
+  const appSecret: string = await DialogUtil.show(OpenAppEditor)
   onReloadData()
   await AirAlert.create()
     .setConfirmText('复制并关闭')
@@ -68,11 +65,11 @@ async function onAdd() {
 }
 
 async function onTest() {
-  AirDialog.show(OpenAppTest)
+  DialogUtil.show(OpenAppTest)
 }
 
 async function onAppLog(app: OpenAppEntity) {
-  AirDialog.show(OpenAppLog, app)
+  DialogUtil.show(OpenAppLog, app)
 }
 
 function openOAuth2(app: OpenAppEntity) {
@@ -81,7 +78,7 @@ function openOAuth2(app: OpenAppEntity) {
 </script>
 
 <template>
-  <APanel>
+  <APanel title="">
     <AToolBar
       :entity="OpenAppEntity"
       :loading="isLoading"
@@ -101,15 +98,15 @@ function openOAuth2(app: OpenAppEntity) {
     </AToolBar>
     <ATable
       v-loading="isLoading"
-      :ctrl-width="280"
       :data-list="response.list"
       :disable-edit="(row) => row.isDisabled"
       :entity="OpenAppEntity"
+      ctrl-width="280"
       hide-delete
       show-enable-and-disable
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
+      @edit="onEdit"
+      @delete="onDelete"
+      @sort-changed="onSortChanged"
       @on-disable="onDisable"
       @on-enable="onEnable"
     >

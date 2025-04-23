@@ -2,17 +2,16 @@
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
-import { ADateTime, ADialog, AFormField, AGroup } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new OrderEntity()))
+import { ADateTime, ADialog, AFormField, AGroup } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new OrderEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, OrderService, {})
+} = useDetail(props, OrderService, {})
 </script>
 
 <template>

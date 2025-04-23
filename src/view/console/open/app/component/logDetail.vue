@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import type { IJson } from '@airpower/interface/IJson'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
-import { ACopy, ADialog } from '@airpower/component'
 import { AirConfig } from '@airpower/config/AirConfig'
-import { airPropsParam } from '@airpower/config/AirProps'
+
+import { ACopy, ADialog } from '@airpower/web'
 import { computed } from 'vue'
 
-const props = defineProps(airPropsParam(new OpenLogEntity()))
+const props = defineProps(DialogProps.withParam(new OpenLogEntity()))
 
 function getTreeData(obj: IJson): IJson[] {
   const treeData = []

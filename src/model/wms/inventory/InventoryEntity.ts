@@ -3,21 +3,21 @@ import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { Field, Model, Table } from '@airpower/decorator'
+import { Field, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '库存',
 })
 export class InventoryEntity extends BaseEntity {
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
-  @Table({ forceShow: true })
+  @Table({ force: true })
   @Field({
     label: '物料名称',
   })
@@ -26,8 +26,8 @@ export class InventoryEntity extends BaseEntity {
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -2,
-    forceShow: true,
+    order: -2,
+    force: true,
   })
   @Field({
     label: '库存数量',
@@ -36,7 +36,7 @@ export class InventoryEntity extends BaseEntity {
 
   @Table({
     width: 100,
-    orderNumber: -3,
+    order: -3,
   })
   @Field({
     label: '计量单位',
@@ -45,8 +45,8 @@ export class InventoryEntity extends BaseEntity {
 
   @Field({
     label: '仓库',
-    type: StorageEntity,
   })
+  @Type(StorageEntity)
   storage!: StorageEntity
 
   @Table()
@@ -69,13 +69,13 @@ export class InventoryEntity extends BaseEntity {
 
   @Field({
     label: '物料信息',
-    type: MaterialEntity,
   })
+  @Type(MaterialEntity)
   material!: MaterialEntity
 
   @Field({
     label: '生产单元',
-    type: StructureEntity,
   })
+  @Type(StructureEntity)
   structure!: StructureEntity
 }

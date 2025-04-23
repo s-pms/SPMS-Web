@@ -8,14 +8,12 @@ import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 import { SaleDetail } from '@/view/console/channel/sale/component'
 import { PickingDetail } from '@/view/console/mes/picking/component'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
+
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { OutputAddFinishEditor } from '.'
 import { MoveDetail } from '../../move/component'
 
-const props = defineProps(airPropsParam(new OutputEntity()))
+const props = defineProps(DialogProps.withParam(new OutputEntity()))
 
 const {
   formData,
@@ -29,8 +27,8 @@ const {
 
 async function onAddFinish(detail: OutputDetailEntity, billId: number) {
   detail.billId = billId
-  await AirDialog.show(OutputAddFinishEditor, detail)
-  AirNotification.success('明细出库成功')
+  await DialogUtil.show(OutputAddFinishEditor, detail)
+  FeedbackUtil.toastSuccess('明细出库成功')
   getDetail()
 }
 </script>
@@ -61,7 +59,7 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
           v-if="OutputTypeEnum.SALE.equalsKey(formData.type)"
           label="销售单号"
         >
-          <el-link @click="AirDialog.show(SaleDetail, formData.sale)">
+          <el-link @click="DialogUtil.show(SaleDetail, formData.sale)">
             {{ formData.sale.billCode }}
           </el-link>
         </el-form-item>
@@ -69,7 +67,7 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
           v-if="OutputTypeEnum.MOVE.equalsKey(formData.type)"
           label="移库单号"
         >
-          <el-link @click="AirDialog.show(MoveDetail, formData.move)">
+          <el-link @click="DialogUtil.show(MoveDetail, formData.move)">
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
@@ -77,7 +75,7 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
           v-if="OutputTypeEnum.PICKING.equalsKey(formData.type)"
           label="领料单号"
         >
-          <el-link @click="AirDialog.show(PickingDetail, formData.picking)">
+          <el-link @click="DialogUtil.show(PickingDetail, formData.picking)">
             {{ formData.picking.billCode }}
           </el-link>
         </el-form-item>
@@ -102,7 +100,7 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
           </template>
           <template #endRow="{ data }">
             <AButton
-              :disabled="OutputStatusEnum.OUTPUTTING.notEqualsKey(formData.status)
+              :disabled="!OutputStatusEnum.OUTPUTTING.equalsKey(formData.status)
               "
               icon-button
               tooltip="添加完成"

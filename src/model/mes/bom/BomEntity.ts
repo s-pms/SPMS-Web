@@ -1,8 +1,8 @@
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**
  * # 生产配方
@@ -14,7 +14,7 @@ import { Field, Form, Model, Search, Table } from '@airpower/decorator'
 })
 export class BomEntity extends BaseEntity implements IPayload {
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -26,7 +26,7 @@ export class BomEntity extends BaseEntity implements IPayload {
   code!: string
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -39,7 +39,7 @@ export class BomEntity extends BaseEntity implements IPayload {
 
   @Table({
     width: 100,
-    showColor: true,
+    color: true,
   })
   @Form({
     defaultValue: BomTypeEnum.NORMAL.key,
@@ -55,9 +55,8 @@ export class BomEntity extends BaseEntity implements IPayload {
 
   @Field({
     label: '配方明细',
-    type: BomDetailEntity,
-    array: true,
   })
+  @Type(BomDetailEntity, true)
   details: BomDetailEntity[] = []
 
   @Table({

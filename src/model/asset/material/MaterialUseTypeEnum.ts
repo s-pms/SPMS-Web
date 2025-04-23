@@ -1,8 +1,9 @@
-import { AirEnum } from '@airpower/base/AirEnum'
-import { AirColor } from '@airpower/enum/AirColor'
+import { WebColor, WebEnum } from '@airpower/web'
 
-export class MaterialUseTypeEnum extends AirEnum {
-  static readonly TOOL = new MaterialUseTypeEnum(1, '工具类', AirColor.SUCCESS)
+export class MaterialUseTypeEnum extends WebEnum {
+  static readonly TOOL = new MaterialUseTypeEnum(1, '工具类')
+    .setColor(WebColor.SUCCESS)
 
-  static readonly CONSUMABLE = new MaterialUseTypeEnum(2, '消耗品', AirColor.WARNING)
+  static readonly CONSUMABLE = new MaterialUseTypeEnum(2, '消耗品')
+    .setColor(WebColor.WARNING)
 }
