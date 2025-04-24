@@ -26,14 +26,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="StructureEntity"
-      :loading="isLoading"
-      :service="StructureService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="StructureService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :entity="StructureEntity"

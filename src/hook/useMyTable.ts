@@ -2,7 +2,7 @@ import type { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { BaseEntity } from '@/base/BaseEntity'
 import type { IBaseTableResult } from '@/hook/IBaseTableResult'
 import type { CurdServiceConstructor, ITableOption } from '@airpower/web'
-import { FeedbackUtil, useTable as useAirTable } from '@airpower/web'
+import { FeedbackUtil, useTable } from '@airpower/web'
 
 /**
  * # 单据的表格Hooks
@@ -10,11 +10,11 @@ import { FeedbackUtil, useTable as useAirTable } from '@airpower/web'
  * @param option (可选) 可选配置项
  * @author Hamm.cn
  */
-export function useTable<E extends BaseEntity, S extends AbstractBaseService<E>>(
+export function useMyTable<E extends BaseEntity, S extends AbstractBaseService<E>>(
   serviceClass: CurdServiceConstructor<E, S>,
   option: ITableOption<E> = {},
 ): IBaseTableResult<E, S> {
-  const result = useAirTable(serviceClass, option)
+  const result = useTable(serviceClass, option)
 
   /**
    * ### 实体发布

@@ -39,8 +39,8 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
     height="80%"
     title="出库单详情"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-form
       label-width="120px"

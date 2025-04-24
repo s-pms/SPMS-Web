@@ -34,8 +34,8 @@ init()
     :loading="isLoading"
     :title="title"
     min-height="100px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

@@ -5,8 +5,9 @@ import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 
-import { APage, APanel, ATable } from '@airpower/web'
+import { APage, APanel, ATable, DateTimeUtil } from '@airpower/web'
 import { ref } from 'vue'
+import { useMyTable } from '@/hook/useMyTable'
 
 const {
   isLoading,
@@ -15,7 +16,7 @@ const {
   onEdit,
   onPageChanged,
   onSortChanged,
-} = useTable(CodeRuleService, {
+} = useMyTable(CodeRuleService, {
   editView: CodeRuleEditor,
 })
 
@@ -55,14 +56,10 @@ function nextCode(codeRule: CodeRuleEntity) {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="CodeRuleEntity"
-      :loading="isLoading"
+    <ATable
       :service="CodeRuleService"
       hide-add
-      @on-search="onSearch"
-    />
-    <ATable
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="CodeRuleEntity"

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useTable } from '@/hook/useTable'
+import { useMyTable,  } from '@/hook/useMyTable'
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
@@ -7,21 +7,17 @@ import { APage, APanel, ATable } from '@airpower/web'
 import { SupplierEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(SupplierService, {
+  = useMyTable(SupplierService, {
     editView: SupplierEditor,
   })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="SupplierEntity"
-      :loading="isLoading"
-      :service="SupplierService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="SupplierService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="SupplierEntity"

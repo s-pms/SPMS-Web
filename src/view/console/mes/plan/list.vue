@@ -28,14 +28,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="PlanEntity"
-      :loading="isLoading"
-      :service="PlanService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="PlanService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row) => !PlanStatusEnum.REJECTED.equalsKey(row.status)"

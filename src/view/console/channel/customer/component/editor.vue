@@ -21,8 +21,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"
@@ -32,7 +32,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in getFormConfigList(formData)"
+        v-for="item in getFormConfigList(CustomerEntity)"
         :key="item.key"
         :field="item.key"
       />

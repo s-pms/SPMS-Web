@@ -81,7 +81,7 @@ async function showHistory(item: CollectionEntity) {
     height="70%"
     hide-confirm
     width="70%"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
   >
     <div
       v-if="monitorList.length > 0"

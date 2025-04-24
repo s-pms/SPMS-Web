@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useTable } from '@/hook/useTable'
+import { useMyTable } from '@/hook/useMyTable'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
@@ -7,21 +7,17 @@ import { APage, APanel, ATable } from '@airpower/web'
 import { ParameterEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(ParameterService, {
+  = useMyTable(ParameterService, {
     editView: ParameterEditor,
   })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="ParameterEntity"
-      :loading="isLoading"
-      :service="ParameterService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="ParameterService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isSystem"

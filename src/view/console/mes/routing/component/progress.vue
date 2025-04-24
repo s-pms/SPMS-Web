@@ -101,8 +101,8 @@ function onDeleteRoutingOperation(index: number) {
     height="80%"
     title="工艺流程"
     width="75%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <div class="progress">
       <div class="top" />

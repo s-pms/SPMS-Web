@@ -35,8 +35,8 @@ getPlan()
     is-selector
     title="选择计划明细"
     width="70%"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel"
+    @confirm="onConfirm(selectList)"
+    @cancel="onCancel"
   >
     <ATable
       ctrl-width="80"

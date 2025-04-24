@@ -5,10 +5,10 @@ import { DepartmentService } from '@/model/personnel/department/DepartmentServic
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 
-import { AirRequest } from '@airpower/model/AirRequest'
-import { APage, APanel, ATable, ATreeBox } from '@airpower/web'
+import { APage, APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
 import { ref } from 'vue'
 import { UserEditor } from './component'
+import { useMyTable } from '@/hook/useMyTable'
 
 const {
   isLoading,
@@ -22,7 +22,7 @@ const {
   onEnable,
   onDisable,
   onGetList,
-} = useTable(UserService, {
+} = useMyTable(UserService, {
   editView: UserEditor,
 })
 
@@ -36,7 +36,7 @@ function departmentChanged(department?: DepartmentEntity) {
 }
 
 async function getDepartmentList() {
-  departmentList.value = await DepartmentService.create(isLoadingTree).getList(new AirRequest(DepartmentEntity))
+  departmentList.value = await DepartmentService.create(isLoadingTree).getList(new QueryRequest(DepartmentEntity))
 }
 
 getDepartmentList()
@@ -49,14 +49,10 @@ getDepartmentList()
     @change="departmentChanged"
   >
     <APanel title="">
-      <AToolBar
-        :entity="UserEntity"
-        :loading="isLoading"
-        :service="UserService"
-        @on-add="onAdd"
-        @on-search="onSearch"
-      />
       <ATable
+        :service="UserService"
+        @add="onAdd"
+        @search="onSearch"
         v-loading="isLoading"
         :data-list="response.list"
         :entity="UserEntity"

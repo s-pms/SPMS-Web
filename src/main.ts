@@ -11,8 +11,6 @@ WebConfig.elementPlusLocale = zhCn
 WebConfig.appKey = 'spms'
 WebConfig.uploadUrl = '/api/file/upload'
 
-console.log(routes)
-
 createApp(App)
   .use(RouterUtil.createRouter(routes))
   .use(ElementPlus, {

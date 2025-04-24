@@ -6,7 +6,7 @@ import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { StorageSelector } from '@/view/console/factory/storage/component'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
 import { MoveDetailEditor } from '.'
 import { InventorySelector } from '../../inventory/component'
 
@@ -56,8 +56,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"
@@ -85,7 +85,7 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="MoveDetailEntity"
-          :field-list="MoveDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(MoveDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -100,7 +100,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ MoveEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(MoveEntity,"details") }}
             </AButton>
           </template>
           <template #customRow="{ index }">

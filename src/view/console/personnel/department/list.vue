@@ -24,14 +24,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="DepartmentEntity"
-      :loading="isLoading"
-      :service="DepartmentService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="DepartmentService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :disable-delete="(row) => row.children.length > 0"

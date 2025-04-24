@@ -393,7 +393,7 @@ function setCurrent(item?: IJson) {
     hide-confirm
     hide-footer
     width="65%"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
     @on-full="onFull"
   >
     <div class="filter">

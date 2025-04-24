@@ -45,8 +45,8 @@ getMenuTreeList()
     :title="`${getModelName(RoleEntity)}菜单授权`"
     confirm-text="保存"
     height="70%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-tree
       ref="treeRef"

@@ -3,8 +3,7 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import { DateTimeFormatter, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
-import { DateTimeType } from '@airpower/web/dist/components'
+import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 import { ContractTypeEnum } from './ContractTypeEnum'
 

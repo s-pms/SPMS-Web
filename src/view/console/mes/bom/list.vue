@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import PublishButton from '@/component/PublishButton.vue'
-import { useTable } from '@/hook/useTable'
+import { useMyTable } from '@/hook/useMyTable'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { APage, APanel, ATable } from '@airpower/web'
@@ -18,7 +18,7 @@ const {
   onDetail,
   onDelete,
   onPublish,
-} = useTable(BomService, {
+} = useMyTable(BomService, {
   editView: BomEditor,
   detailView: BomDetail,
 })
@@ -26,14 +26,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="BomEntity"
-      :loading="isLoading"
-      :service="BomService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="BomService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isPublished"

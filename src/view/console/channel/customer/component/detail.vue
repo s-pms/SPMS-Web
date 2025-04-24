@@ -16,9 +16,9 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="getModelName(formData) + title"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    :title="getModelName(CustomerEntity) + title"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-form
       :model="formData"
@@ -26,7 +26,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in getFormConfigList(formData)"
+        v-for="item in getFormConfigList(CustomerEntity)"
         :key="item.key"
         :field="item.key"
         disabled

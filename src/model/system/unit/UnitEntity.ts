@@ -1,5 +1,6 @@
-import type { Field, Form, IPayload, Model, Table } from '@airpower/web'
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
+import { Field, Form, Model, Table } from '@airpower/web'
 
 @Model({
   label: '计量单位',

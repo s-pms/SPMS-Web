@@ -47,8 +47,8 @@ const json = computed(() => {
     height="70%"
     title="请求和响应数据"
     width="600px"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-tabs type="border-card">
       <el-tab-pane label="请求">

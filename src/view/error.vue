@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { WebConfig } from '@airpower/web'
+import { RouterUtil, WebConfig } from '@airpower/web'
 import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
 
 const isLoading = ref(true)
 const isError = ref(false)
@@ -11,8 +10,6 @@ const errorCode = ref(WebConfig.successCode)
 const errorTitle = ref('')
 
 const errorDesc = ref('')
-
-const route = useRoute()
 
 const FORBIDDEN = 403
 const NOT_FOUND = 404
@@ -54,8 +51,7 @@ watch(errorCode, () => {
 })
 
 function checkErrorCode() {
-  console.log('errorCode', route)
-  const code = route.path.replace('/', '')
+  const code = RouterUtil.router.currentRoute.value.path.replace('/', '')
   switch (code) {
     case FORBIDDEN.toString():
       clearTimeout(timer)
@@ -71,16 +67,6 @@ function checkErrorCode() {
 }
 
 checkErrorCode()
-
-watch(
-  () => route,
-  () => {
-    checkErrorCode()
-  },
-  {
-    deep: true,
-  },
-)
 </script>
 
 <template>

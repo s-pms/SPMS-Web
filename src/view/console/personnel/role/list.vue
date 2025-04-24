@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
-import { RoleService } from '@/model/personnel/role/RoleService'
 
-import { AButton, APage, APanel, ATable, DialogUtil, useTable } from '@airpower/web'
+import { RoleService } from '@/model/personnel/role/RoleService'
+import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
 import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
 
 async function onMenuEditor(role: RoleEntity) {
@@ -21,26 +22,22 @@ const {
   onEdit,
   onDelete,
   onPageChanged,
-} = useTable(RoleService, {
+} = useMyTable(RoleService, {
   editView: RoleEditor,
 })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="RoleEntity"
-      :loading="isLoading"
-      :service="RoleService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
       :entity="RoleEntity"
       ctrl-width="160"
       @edit="onEdit"
+      :service="RoleService"
+      @add="onAdd"
+      @search="onSearch"
       @delete="onDelete"
     >
       <template #customRow="{ data }">

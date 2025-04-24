@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { ITree } from '@airpower/interface/ITree'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
@@ -8,13 +7,12 @@ import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
-import { AirRequest } from '@airpower/model/AirRequest'
-import { AButton, ADialog, ATable, ATreeBox } from '@airpower/web'
+import { AButton, ADialog, ATable, ATreeBox, DialogProps, ITree, QueryRequest, RootEntity } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<InventoryEntity>())
 
-const request = ref(new AirRequest(InventoryEntity))
+const request = ref(new QueryRequest(InventoryEntity))
 const list = ref<InventoryEntity[]>([])
 
 const isLoading = ref(false)
@@ -22,14 +20,14 @@ const isLoadingTree = ref(false)
 
 const inventoryType = ref(props.param.type)
 
-const treeData = ref<ITree[]>([])
+const treeData = ref<Array<ITree & RootEntity>>([])
 
 async function getStorage() {
-  treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
+  treeData.value = await StorageService.create(isLoadingTree).getList(new QueryRequest(StorageEntity))
 }
 
 async function getStructure() {
-  treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
+  treeData.value = await StructureService.create(isLoadingTree).getList(new QueryRequest(StructureEntity))
 }
 
 const treePlaceHolder = ref('搜索...')
@@ -89,8 +87,8 @@ inventoryTypeChanged()
     is-selector
     title="选择库存"
     width="70%"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel"
+    @confirm="onConfirm(selectList)"
+    @cancel="onCancel"
   >
     <ATreeBox
       v-loading="isLoadingTree"

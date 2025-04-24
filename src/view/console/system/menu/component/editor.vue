@@ -2,7 +2,7 @@
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new MenuEntity()))
 
@@ -23,8 +23,8 @@ const {
     :loading="isLoading"
     :title="title"
     confirm-text="保存"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

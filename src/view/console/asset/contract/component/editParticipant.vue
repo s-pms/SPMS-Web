@@ -66,8 +66,8 @@ function onTypeChanged() {
   <ADialog
     :form-ref="formRef"
     :title="`${formData.isPublished ? '修改' : '添加'}参与方`"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

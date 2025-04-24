@@ -2,7 +2,7 @@
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
 
-import { APanel, ATable } from '@airpower/web'
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { PermissionEditor } from './component'
 
 const {
@@ -24,18 +24,14 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="PermissionEntity"
-      :loading="isLoading"
-      :service="PermissionService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="PermissionService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :default-expand-all="false"
-      :disable-add="(row) => row.isSystem"
+      :disable-add-row="(row) => row.isSystem"
       :disable-delete="(row) => row.isSystem"
       :disable-edit="(row) => row.isSystem"
       :entity="PermissionEntity"

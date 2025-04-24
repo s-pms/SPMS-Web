@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
-import { OperationService } from '@/model/mes/operation/OperationService'
 
-import { APage, APanel, ATable, useTable } from '@airpower/web'
+import { OperationService } from '@/model/mes/operation/OperationService'
+import { APage, APanel, ATable } from '@airpower/web'
 import { OperationEditor } from './component'
 
 const {
@@ -13,21 +14,17 @@ const {
   onEdit,
   onDelete,
   onPageChanged,
-} = useTable(OperationService, {
+} = useMyTable(OperationService, {
   editView: OperationEditor,
 })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="OperationEntity"
-      :loading="isLoading"
-      :service="OperationService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="OperationService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="OperationEntity"

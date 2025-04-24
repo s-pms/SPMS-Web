@@ -2,7 +2,7 @@
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 
 const props = defineProps(DialogProps.withSelector<PermissionEntity>())
 </script>

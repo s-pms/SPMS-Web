@@ -2,7 +2,7 @@
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { UserEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<UserEntity>())

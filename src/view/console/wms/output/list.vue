@@ -28,14 +28,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="OutputEntity"
-      :loading="isLoading"
-      :service="OutputService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="OutputService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row: OutputEntity) => !OutputStatusEnum.REJECTED.equalsKey(row.status)"

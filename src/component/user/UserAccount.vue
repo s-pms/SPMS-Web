@@ -25,8 +25,8 @@ const active = ref(TABS.modifyPassword)
     hide-confirm
     min-height="100px"
     title="账号安全中心"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-tabs
       v-model="active"

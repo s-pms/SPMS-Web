@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import PublishButton from '@/component/PublishButton.vue'
-import { useTable } from '@/hook/useTable'
+import { useMyTable } from '@/hook/useMyTable'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
@@ -15,7 +15,7 @@ const {
   onDelete,
   onPageChanged,
   onPublish,
-} = useTable(RoutingService, {
+} = useMyTable(RoutingService, {
   editView: RoutingEditor,
 })
 
@@ -26,14 +26,10 @@ async function onProgress(data: RoutingEntity) {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="RoutingEntity"
-      :loading="isLoading"
-      :service="RoutingService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="RoutingService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isPublished"

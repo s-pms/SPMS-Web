@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Constant } from '@/config/Constant'
+import { useMyTable } from '@/hook/useMyTable'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
@@ -16,21 +17,17 @@ const {
   onPageChanged,
   onSortChanged,
   onDelete,
-} = useTable(ConfigService, {
+} = useMyTable(ConfigService, {
   editView: ConfigurationEditor,
 })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="ConfigEntity"
-      :loading="isLoading"
-      :service="ConfigService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="ConfigService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isSystem"

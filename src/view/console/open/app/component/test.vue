@@ -80,8 +80,8 @@ async function onTest() {
     :loading="isLoading"
     title="测试应用"
     with="1000px"
-    @on-confirm="onTest"
-    @on-cancel="onCancel"
+    @confirm="onTest"
+    @cancel="onCancel"
   >
     <el-form
       :model="app"

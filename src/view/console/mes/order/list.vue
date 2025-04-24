@@ -62,14 +62,10 @@ async function onStartOrPause(order: OrderEntity) {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="OrderEntity"
-      :loading="isLoading"
-      :service="OrderService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="OrderService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row) => !OrderStatusEnum.REJECTED.equalsKey(row.status)"

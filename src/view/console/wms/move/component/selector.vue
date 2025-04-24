@@ -3,7 +3,7 @@ import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { MoveEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<MoveEntity>())

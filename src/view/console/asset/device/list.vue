@@ -1,12 +1,13 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
 
-import { AButton, APage, APanel, ATable, DialogUtil, useTable } from '@airpower/web'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
 import { DeviceEditor, DeviceMonitor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(DeviceService, {
+  = useMyTable(DeviceService, {
     editView: DeviceEditor,
   })
 
@@ -17,14 +18,10 @@ async function showMonitor(device: DeviceEntity) {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="DeviceEntity"
-      :loading="isLoading"
-      :service="DeviceService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="DeviceService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="DeviceEntity"

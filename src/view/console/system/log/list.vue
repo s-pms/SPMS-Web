@@ -2,8 +2,9 @@
 import { LogEntity } from '@/model/system/log/LogEntity'
 import { LogService } from '@/model/system/log/LogService'
 
-import { APage, APanel, ATable } from '@airpower/web'
+import { APage, APanel, ATable, WebColor } from '@airpower/web'
 import Detail from './detail.vue'
+import { useMyTable } from '@/hook/useMyTable'
 
 const {
   isLoading,
@@ -14,7 +15,7 @@ const {
   onSortChanged,
   onSelected,
   onDetail,
-} = useTable(LogService, {
+} = useMyTable(LogService, {
   detailView: Detail,
 })
 
@@ -35,14 +36,10 @@ function getColor(log: LogEntity) {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="LogEntity"
-      :loading="isLoading"
+    <ATable
       :service="LogService"
       hide-add
-      @on-search="onSearch"
-    />
-    <ATable
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="LogEntity"

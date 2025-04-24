@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useTable } from '@/hook/useTable'
+import { useMyTable } from '@/hook/useMyTable'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 
 import { CustomerService } from '@/model/channel/customer/CustomerService'
@@ -7,34 +7,30 @@ import { APage, APanel, ATable } from '@airpower/web'
 import { CustomerEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(CustomerService, {
+  = useMyTable(CustomerService, {
     editView: CustomerEditor,
   })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="CustomerEntity"
-      :loading="isLoading"
-      :service="CustomerService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
       :entity="CustomerEntity"
       :select-list="selectList"
+      :service="CustomerService"
       @edit="onEdit"
       @delete="onDelete"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
+      @search="onSearch"
+      @add="onAdd"
     />
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

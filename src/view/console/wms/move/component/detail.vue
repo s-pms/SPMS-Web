@@ -6,7 +6,7 @@ import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new MoveEntity()))
 
@@ -28,8 +28,8 @@ const {
     height="80%"
     title="移库单明细"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-form
       label-width="120px"
@@ -50,7 +50,7 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="MoveDetailEntity"
-          :field-list="MoveDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(MoveDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >

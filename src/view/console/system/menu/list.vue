@@ -2,7 +2,7 @@
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
 
-import { APanel, ATable } from '@airpower/web'
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { MenuEditor } from './component'
 
 const {
@@ -24,14 +24,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="MenuEntity"
-      :loading="isLoading"
-      :service="MenuService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="MenuService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :disable-delete="(row) => row.children.length > 0"

@@ -39,8 +39,8 @@ async function onSave() {
     :loading="isLoading"
     :title="title"
     min-height="100px"
-    @on-confirm="onSave"
-    @on-cancel="onCancel"
+    @confirm="onSave"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

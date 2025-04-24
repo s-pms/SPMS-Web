@@ -26,17 +26,13 @@ const {
     height="70%"
     is-selector
     width="70%"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel"
+    @confirm="onConfirm(selectList)"
+    @cancel="onCancel"
   >
-    <AToolBar
-      :entity="DepartmentEntity"
-      :loading="isLoading"
+    <ATable
       :service="DepartmentService"
       hide-add
-      @on-search="onSearch"
-    />
-    <ATable
+      @search="onSearch"
       ctrl-width="80"
       :data-list="list"
       :entity="DepartmentEntity"

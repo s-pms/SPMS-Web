@@ -1,31 +1,28 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { MaterialService } from '@/model/asset/material/MaterialService'
 
-import { APage, APanel, ATable, useTable } from '@airpower/web'
+import { MaterialService } from '@/model/asset/material/MaterialService'
+import { APage, APanel, ATable } from '@airpower/web'
 import { MaterialEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(MaterialService, {
+  = useMyTable(MaterialService, {
     editView: MaterialEditor,
   })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="MaterialEntity"
-      :loading="isLoading"
-      :service="MaterialService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="MaterialEntity"
       :select-list="selectList"
       @edit="onEdit"
+      :service="MaterialService"
       @delete="onDelete"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"

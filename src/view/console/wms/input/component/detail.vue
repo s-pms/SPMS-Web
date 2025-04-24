@@ -39,8 +39,8 @@ async function onAddFinish(detail: InputDetailEntity) {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-form
       :model="formData"
@@ -86,7 +86,6 @@ async function onAddFinish(detail: InputDetailEntity) {
         <ATable
           :data-list="formData.details"
           :entity="InputDetailEntity"
-          :field-list="InputDetailEntity.getTableFieldConfigList()"
           hide-delete
           hide-edit
         >

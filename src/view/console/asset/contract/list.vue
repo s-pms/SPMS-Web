@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { ContractEntity } from '@/model/asset/contract/ContractEntity'
 import { ContractService } from '@/model/asset/contract/ContractService'
-import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
 
-import { AButton, APage, APanel, ATable, DialogUtil, FeedbackUtil, useTable } from '@airpower/web'
+import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
+import { AButton, APage, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ContractDetail, ContractEditor } from './component'
 
 const {
@@ -19,7 +20,7 @@ const {
   onSelected,
   onReloadData,
 }
-  = useTable(ContractService, {
+  = useMyTable(ContractService, {
     editView: ContractEditor,
   })
 
@@ -57,16 +58,12 @@ async function onDetail(contract: ContractEntity) {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="ContractEntity"
-      :loading="isLoading"
-      :service="ContractService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
+      :service="ContractService"
+      @add="onAdd"
+      @search="onSearch"
       :disable-delete="row => !ContractStatusEnum.INVALID.equalsKey(row.status)"
       :disable-edit="row => !ContractStatusEnum.INVALID.equalsKey(row.status)"
       :entity="ContractEntity"

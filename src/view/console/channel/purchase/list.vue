@@ -28,15 +28,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="PurchaseEntity"
-      :loading="isLoading"
-      :service="PurchaseService"
-      show-filter
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="PurchaseService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row) => row.status !== PurchaseStatusEnum.REJECTED.key"

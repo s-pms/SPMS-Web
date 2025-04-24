@@ -3,7 +3,7 @@ import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
 
-import { AButton, ADialog, AGroup, AInput, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor } from '@airpower/web'
 import { RoleSelector } from '../../role/component'
 
 const props = defineProps(DialogProps.withParam(new UserEntity()))
@@ -27,91 +27,36 @@ async function selectDepartment() {
 </script>
 
 <template>
-  <ADialog
-    :allow-fullscreen="false"
-    :form-ref="formRef"
-    :loading="isLoading"
-    :title="title"
-    confirm-text="保存"
-    height="60%"
-    width="60%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
-  >
-    <el-form
-      ref="formRef"
-      :model="formData"
-      :rules="rules"
-      label-width="120px"
-      @submit.prevent
-    >
-      <AGroup
-        :column="2"
-        title="基础信息"
-      >
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('nickname')"
-          prop="nickname"
-        >
-          <AInput
-            v-model.nickname="formData.nickname"
-            :entity="UserEntity"
-          />
+  <ADialog :allow-fullscreen="false" :form-ref="formRef" :loading="isLoading" :title="title" confirm-text="保存"
+    height="60%" width="60%" @confirm="onSubmit" @cancel="onCancel">
+    <el-form ref="formRef" :model="formData" :rules="rules" label-width="120px" @submit.prevent>
+      <AGroup :column="2" title="基础信息">
+        <el-form-item :label="getFieldLabel(UserEntity, 'nickname')" prop="nickname">
+          <AInput v-model.nickname="formData.nickname" :entity="UserEntity" />
         </el-form-item>
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('email')"
-          prop="email"
-        >
-          <AInput
-            v-model.email="formData.email"
-            :entity="UserEntity"
-          />
+        <el-form-item :label="getFieldLabel(UserEntity, 'email')" prop="email">
+          <AInput v-model.email="formData.email" :entity="UserEntity" />
         </el-form-item>
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('phone')"
-          prop="phone"
-        >
-          <AInput
-            v-model.phone="formData.phone"
-            :entity="UserEntity"
-          />
+        <el-form-item :label="getFieldLabel(UserEntity, 'phone')" prop="phone">
+          <AInput v-model.phone="formData.phone" :entity="UserEntity" />
         </el-form-item>
       </AGroup>
-      <AGroup
-        :column="2"
-        title="角色和部门"
-      >
+      <AGroup :column="2" title="角色和部门">
         <div class="role-list">
-          <AButton
-            type="ADD"
-            @click="selectRole()"
-          >
+          <AButton type="ADD" @click="selectRole()">
             添加角色
           </AButton>
-          <el-tag
-            v-for="(role, index) in formData.roleList"
-            :key="role.id"
-            closable
-            size="large"
-            @close="formData.roleList.splice(index, 1)"
-          >
+          <el-tag v-for="(role, index) in formData.roleList" :key="role.id" closable size="large"
+            @close="formData.roleList.splice(index, 1)">
             {{ role.name }}
           </el-tag>
         </div>
         <div class="department-list">
-          <AButton
-            type="ADD"
-            @click="selectDepartment()"
-          >
+          <AButton type="ADD" @click="selectDepartment()">
             添加部门
           </AButton>
-          <el-tag
-            v-for="(department, index) in formData.departmentList"
-            :key="department.id"
-            closable
-            size="large"
-            @close="formData.departmentList.splice(index, 1)"
-          >
+          <el-tag v-for="(department, index) in formData.departmentList" :key="department.id" closable size="large"
+            @close="formData.departmentList.splice(index, 1)">
             {{ department.name }}
           </el-tag>
         </div>
@@ -121,8 +66,8 @@ async function selectDepartment() {
 </template>
 
 <style lang="scss" scoped>
-.role-list > *,
-.department-list > * {
+.role-list>*,
+.department-list>* {
   margin-right: 5px;
 }
 </style>

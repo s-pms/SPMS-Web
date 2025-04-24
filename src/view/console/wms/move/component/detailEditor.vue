@@ -27,8 +27,8 @@ async function onSubmit() {
     :loading="isLoading"
     title="移库明细"
     width="600px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

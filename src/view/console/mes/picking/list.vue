@@ -28,15 +28,10 @@ const {
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="PickingEntity"
-      :loading="isLoading"
-      :service="PickingService"
-      show-filter
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="PickingService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row) => row.status !== PickingStatusEnum.REJECTED.key"

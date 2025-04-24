@@ -50,8 +50,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="70%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

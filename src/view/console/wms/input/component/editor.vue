@@ -4,7 +4,7 @@ import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 
-import { AButton, ADialog, AFormField, AGroup, AInput, ATable, DialogUtil, useEditor } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, AInput, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
 import { computed } from 'vue'
 import { InputDetailEditor } from '.'
 
@@ -52,8 +52,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"
@@ -82,7 +82,7 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="InputDetailEntity"
-          :field-list="InputDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :field-list="getTableConfigList(InputDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
@@ -98,7 +98,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ InputEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(InputEntity,'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

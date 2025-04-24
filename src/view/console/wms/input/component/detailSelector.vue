@@ -3,7 +3,7 @@ import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 
-import { AButton, ADialog, ATable } from '@airpower/web'
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<InputDetailEntity, InputEntity>())
@@ -35,8 +35,8 @@ getInput()
     is-selector
     title="选择入库明细"
     width="70%"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel"
+    @confirm="onConfirm(selectList)"
+    @cancel="onCancel"
   >
     <ATable
       ctrl-width="80"

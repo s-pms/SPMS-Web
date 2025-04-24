@@ -42,8 +42,8 @@ async function selectStorage() {
     :loading="isLoading"
     title="确认入库"
     width="600px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

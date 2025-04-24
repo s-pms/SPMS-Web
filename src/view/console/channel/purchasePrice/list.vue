@@ -1,28 +1,25 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
-import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
 
-import { APage, APanel, ATable, useTable } from '@airpower/web'
+import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+import { APage, APanel, ATable } from '@airpower/web'
 // todo import { SupplierDetail } from '../supplier/component'
 import { PurchasePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(PurchasePriceService, {
+  = useMyTable(PurchasePriceService, {
     editView: PurchasePriceEditor,
   })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="PurchasePriceEntity"
-      :loading="isLoading"
-      :service="PurchasePriceService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
       v-loading="isLoading"
+      :service="PurchasePriceService"
+      @add="onAdd"
+      @search="onSearch"
       :data-list="response.list"
       :entity="PurchasePriceEntity"
       :select-list="selectList"

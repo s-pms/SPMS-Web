@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
-import { OpenLogService } from '@/model/open/log/OpenLogService'
 
-import { ADialog, APage, ATable, DialogProps, DialogUtil, useDetail, useTable } from '@airpower/web'
+import { OpenLogService } from '@/model/open/log/OpenLogService'
+import { ADialog, APage, ATable, DialogProps, DialogUtil, useDetail } from '@airpower/web'
 import { OpenAppLogDetail } from './index'
 
 const props = defineProps(DialogProps.withParam(new OpenAppEntity()))
@@ -16,7 +17,7 @@ const {
 const {
   onPageChanged,
   response,
-} = useTable(OpenLogService, {
+} = useMyTable(OpenLogService, {
   beforeSearch(requestData) {
     requestData.filter.openApp = props.param.copy().expose('id')
     return requestData
@@ -33,8 +34,8 @@ function onDetail(log: OpenLogEntity) {
     height="80%"
     title="请求日志"
     width="80%"
-    @on-cancel="onCancel"
-    @on-confirm="onConfirm"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <ATable
       v-loading="isLoading"

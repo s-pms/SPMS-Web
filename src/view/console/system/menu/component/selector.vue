@@ -2,7 +2,7 @@
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
 
-import { ASelector } from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 
 const props = defineProps(DialogProps.withSelector<MenuEntity>())
 </script>

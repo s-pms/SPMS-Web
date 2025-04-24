@@ -4,23 +4,20 @@ import { UnitService } from '@/model/system/unit/UnitService'
 
 import { APage, APanel, ATable } from '@airpower/web'
 import { UnitEditor } from './component'
+import { useMyTable } from '@/hook/useMyTable'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useTable(UnitService, {
+  = useMyTable(UnitService, {
     editView: UnitEditor,
   })
 </script>
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="UnitEntity"
-      :loading="isLoading"
-      :service="UnitService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="UnitService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="UnitEntity"

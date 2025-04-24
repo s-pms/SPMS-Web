@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import type { IWebEnum } from '@airpower/web'
+import { useMyTable } from '@/hook/useMyTable'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
-import { NotifyService } from '@/model/open/notify/NotifyService'
 
+import { NotifyService } from '@/model/open/notify/NotifyService'
 import { NotifyEditor } from '@/view/console/open/notify/component'
-import { APage, APanel, ATable, useTable } from '@airpower/web'
+import { APage, APanel, ATable } from '@airpower/web'
 import { ref } from 'vue'
 
 const { isLoading, response, onSearch, onDelete, onEdit, onPageChanged, onSortChanged, onDisable, onEnable, onAdd }
-  = useTable(NotifyService, {
+  = useMyTable(NotifyService, {
     editView: NotifyEditor,
   })
 
@@ -23,14 +24,10 @@ init()
 
 <template>
   <APanel title="">
-    <AToolBar
-      :entity="NotifyEntity"
-      :loading="isLoading"
-      :service="NotifyService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
+      :service="NotifyService"
+      @add="onAdd"
+      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="NotifyEntity"

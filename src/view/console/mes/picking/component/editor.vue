@@ -47,8 +47,8 @@ async function deleteDetail(index: number) {
     :title="title + getModelName(PickingEntity)"
     height="80%"
     width="80%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"

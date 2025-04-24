@@ -23,8 +23,8 @@ const rejectReason = ref('')
     :disable-confirm="rejectReason === ''"
     :title="param"
     min-height="200px"
-    @on-confirm="onConfirm(rejectReason)"
-    @on-cancel="onCancel"
+    @confirm="onConfirm(rejectReason)"
+    @cancel="onCancel"
   >
     <el-input
       v-model="rejectReason"

@@ -4,7 +4,8 @@ import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBa
 import type { CurdServiceConstructor, ITableOption } from '@airpower/web'
 import type { IUseBillTableResult } from './IUseBillTableResult'
 import { BillRejectDialog } from '@/component'
-import { DialogUtil, FeedbackUtil, getModelName, useTable } from '@airpower/web'
+import { DialogUtil, FeedbackUtil, getModelName } from '@airpower/web'
+import { useMyTable } from '../useMyTable'
 
 /**
  * # 单据的表格Hooks
@@ -20,14 +21,14 @@ export function useBillTable<
   serviceClass: CurdServiceConstructor<B, S>,
   option: ITableOption<B> = {},
 ): IUseBillTableResult<D, B, S> {
-  const result = useTable(serviceClass, option)
+  const result = useMyTable(serviceClass, option)
 
   /**
    * ### 单据审核
    * @param bill 单据
    */
   async function onAudit(bill: B) {
-    await FeedbackUtil.confirmWarning(`是否确认审核选择的${getModelName(result.entity)}？`)
+    await FeedbackUtil.confirmWarning(`是否确认审核选择的${getModelName(result.service.entityClass)}？`)
     await result.service.audit(bill)
     result.onReloadData()
   }
@@ -37,7 +38,7 @@ export function useBillTable<
    * @param bill 单据
    */
   async function setBillDetailsAllFinished(bill: B) {
-    await FeedbackUtil.confirmWarning(`是否确认设置${getModelName(result.entity)}已完成？`)
+    await FeedbackUtil.confirmWarning(`是否确认设置${getModelName(result.service.entityClass)}已完成？`)
     await result.service.setBillDetailsAllFinished(bill)
     result.onReloadData()
   }
@@ -47,7 +48,7 @@ export function useBillTable<
    * @param bill 单据
    */
   async function setBillFinished(bill: B) {
-    await FeedbackUtil.confirmWarning(`是否确认设置所有${getModelName(result.entity)}明细都已完成？`)
+    await FeedbackUtil.confirmWarning(`是否确认设置所有${getModelName(result.service.entityClass)}明细都已完成？`)
     await result.service.setBillFinished(bill)
     result.onReloadData()
   }
@@ -57,8 +58,8 @@ export function useBillTable<
    * @param bill 单据
    */
   async function onReject(bill: B) {
-    const rejectReason: string = await DialogUtil.show(BillRejectDialog, `驳回${getModelName(result.entity)}的原因`)
-    await FeedbackUtil.confirmWarning(`是否确认驳回选择的${getModelName(result.entity)}？`)
+    const rejectReason: string = await DialogUtil.show(BillRejectDialog, `驳回${getModelName(result.service.entityClass)}的原因`)
+    await FeedbackUtil.confirmWarning(`是否确认驳回选择的${getModelName(result.service.entityClass)}？`)
     bill.rejectReason = rejectReason
     await result.service.reject(bill)
     result.onReloadData()

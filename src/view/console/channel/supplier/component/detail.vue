@@ -17,8 +17,8 @@ const {
   <ADialog
     :loading="isLoading"
     :title="title"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-form
       :model="formData"

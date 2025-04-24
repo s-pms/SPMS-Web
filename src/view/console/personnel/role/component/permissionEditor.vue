@@ -42,8 +42,8 @@ getPermissionList()
     confirm-text="保存"
     height="70%"
     width="70%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <ATable
       :data-list="treeList"

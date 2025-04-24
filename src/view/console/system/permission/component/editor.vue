@@ -2,7 +2,7 @@
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 import { PermissionService } from '@/model/system/permission/PermissionService'
 
-import { ADialog, AFormField, useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PermissionEntity()))
 const {
@@ -21,13 +21,13 @@ const {
     :loading="isLoading"
     :title="title"
     confirm-text="保存"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @confirm="onSubmit"
+    @cancel="onCancel"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="PermissionService.createValidator(param)"
+      :rules="PermissionService.createValidator()"
       label-width="120px"
       @submit.prevent
     >

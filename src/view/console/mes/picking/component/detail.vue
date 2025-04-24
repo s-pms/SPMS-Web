@@ -23,8 +23,8 @@ const {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @confirm="onConfirm"
+    @cancel="onCancel"
   >
     <el-form
       :model="formData"
