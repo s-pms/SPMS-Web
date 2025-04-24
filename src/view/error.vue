@@ -54,6 +54,7 @@ watch(errorCode, () => {
 })
 
 function checkErrorCode() {
+  console.log('errorCode', route)
   const code = route.path.replace('/', '')
   switch (code) {
     case FORBIDDEN.toString():

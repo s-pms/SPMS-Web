@@ -2,6 +2,7 @@
 import type { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
 import { UserService } from '@/model/personnel/user/UserService'
+import { DialogProps } from '@airpower/web'
 
 import { ref } from 'vue'
 

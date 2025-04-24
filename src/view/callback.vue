@@ -1,25 +1,25 @@
 <script lang="ts" setup>
 import type { AirAny } from '@airpower/type/AirType'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirConfig } from '@airpower/config/AirConfig'
-
-import { AirRouter } from '@airpower/helper/AirRouter'
+import { DateTimeUtil, FeedbackUtil, RouterUtil, WebConfig } from '@airpower/web'
 import { ref } from 'vue'
 
 const isLoading = ref(true)
 
 async function init() {
-  const platform = AirRouter.router.currentRoute.value.params.platform.toString()
-  const code = AirRouter.router.currentRoute.value.query.code?.toString() || ''
+  const platform = RouterUtil.router.currentRoute.value.params.platform.toString()
+  const code = RouterUtil.router.currentRoute.value.query.code?.toString() || ''
   try {
     const accessToken = await UserService.create(isLoading).callbackCode(platform, code)
-    AirConfig.saveAccessToken(accessToken)
+    WebConfig.saveAccessToken(accessToken)
   }
   catch (e) {
-    await AirAlert.create()
-      .hideClose()
-      .error((e as AirAny).message, '登录失败')
+    await FeedbackUtil.alertError((e as AirAny).message)
+    return
   }
+
+  await DateTimeUtil.sleep(3000)
+
   // 判断当前窗口是否由 window.open 打开
   if (window.opener) {
     window.close()

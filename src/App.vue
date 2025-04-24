@@ -13,7 +13,7 @@ onMounted(() => {
     v-loading="isLoading"
     class="app"
   >
-    <router-view />
+    <RouterView />
   </div>
 </template>
 

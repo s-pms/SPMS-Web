@@ -15,7 +15,7 @@
     "v": "vite preview"
   },
   "dependencies": {
-    "@airpower/web": "^0.2.17",
+    "@airpower/web": "^0.2.22",
     "@element-plus/icons-vue": "^2.3.1",
     "@types/crypto-js": "^4.2.2",
     "axios": "^1.7.2",
@@ -30,7 +30,7 @@
     "vue": "^3.4.27",
     "vue-clipboard3": "^2.0.0",
     "vue-draggable-plus": "^0.6.0",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.11.0",
