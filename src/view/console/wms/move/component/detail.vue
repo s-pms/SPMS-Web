@@ -28,8 +28,8 @@ const {
     height="80%"
     title="移库单明细"
     width="80%"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       label-width="120px"

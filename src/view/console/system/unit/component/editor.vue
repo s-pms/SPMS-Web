@@ -2,7 +2,7 @@
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
 
-import { ADialog, AFormField, DialogProps, getFormConfigList,  useEditor } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new UnitEntity()))
 
@@ -21,8 +21,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

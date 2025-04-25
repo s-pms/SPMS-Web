@@ -31,8 +31,8 @@ const rules = OrderDetailService.createValidator()
     confirm-text="添加完成"
     min-height="200px"
     title="订单报工"
-    @confirm="onConfirm(orderDetail)"
     @cancel="onCancel"
+    @confirm="onConfirm(orderDetail)"
   >
     <el-form
       :model="orderDetail"

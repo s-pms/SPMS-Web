@@ -5,7 +5,19 @@ import { BomService } from '@/model/mes/bom/BomService'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { BomDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
@@ -50,8 +62,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="70%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -70,10 +82,10 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="配方物料清单">
         <ATable
-          ctrl-width="80"
           :data-list="formData.details"
           :entity="BomDetailEntity"
           :field-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
+          ctrl-width="80"
           hide-delete
           hide-edit
         >

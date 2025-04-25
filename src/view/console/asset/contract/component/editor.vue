@@ -81,8 +81,8 @@ async function onUpload() {
     :title="title"
     height="70%"
     width="70%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <ATabs>
       <ATab label="合同基本信息">

@@ -21,8 +21,8 @@ const {
   onReloadData,
 }
   = useMyTable(ContractService, {
-    editView: ContractEditor,
-  })
+  editView: ContractEditor,
+})
 
 async function onEnforce(contract: ContractEntity) {
   const roles: number[] = []
@@ -37,8 +37,7 @@ async function onEnforce(contract: ContractEntity) {
   }
   if (contract.documentList.length === 0) {
     await FeedbackUtil.confirmWarning('没有上传任何附件，是否继续生效合同？', '生效合同')
-  }
-  else {
+  } else {
     await FeedbackUtil.confirmWarning('是否确认生效这个合同？', '生效合同')
   }
   await ContractService.create(isLoading).enforce(contract)
@@ -61,16 +60,16 @@ async function onDetail(contract: ContractEntity) {
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
-      :service="ContractService"
-      @add="onAdd"
-      @search="onSearch"
       :disable-delete="row => !ContractStatusEnum.INVALID.equalsKey(row.status)"
       :disable-edit="row => !ContractStatusEnum.INVALID.equalsKey(row.status)"
       :entity="ContractEntity"
       :select-list="selectList"
+      :service="ContractService"
       ctrl-width="200"
-      @edit="onEdit"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >

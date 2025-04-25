@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import type { Ref } from 'vue'
+import { useMyTable } from '@/hook/useMyTable'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 
 import { APage, APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
+import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { UserEditor } from './component'
-import { useMyTable } from '@/hook/useMyTable'
 
 const {
   isLoading,
@@ -50,16 +50,16 @@ getDepartmentList()
   >
     <APanel title="">
       <ATable
-        :service="UserService"
-        @add="onAdd"
-        @search="onSearch"
         v-loading="isLoading"
         :data-list="response.list"
         :entity="UserEntity"
+        :service="UserService"
         ctrl-width="150"
         show-enable-and-disable
-        @edit="onEdit"
+        @add="onAdd"
         @delete="onDelete"
+        @edit="onEdit"
+        @search="onSearch"
         @on-enable="onEnable"
         @on-disable="onDisable"
       />

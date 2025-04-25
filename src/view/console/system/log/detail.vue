@@ -17,8 +17,7 @@ function getTreeData(obj: IJson): IJson[] {
         children: getTreeData(obj[keys[i]]),
         value: '',
       })
-    }
-    else {
+    } else {
       treeData.push({
         key: i,
         name: `${keys[i]}`,
@@ -34,8 +33,8 @@ function getTreeData(obj: IJson): IJson[] {
 <template>
   <ADialog
     :title="param.action"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-tabs type="border-card">
       <el-tab-pane label="请求">

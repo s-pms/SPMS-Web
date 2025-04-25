@@ -6,7 +6,20 @@ import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { StorageSelector } from '@/view/console/factory/storage/component'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { MoveDetailEditor } from '.'
 import { InventorySelector } from '../../inventory/component'
 
@@ -56,8 +69,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="80%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -100,7 +113,7 @@ async function deleteDetail(index: number) {
               type="ADD"
               @click="addDetail()"
             >
-              添加{{ getFieldLabel(MoveEntity,"details") }}
+              添加{{ getFieldLabel(MoveEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">

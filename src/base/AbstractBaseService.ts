@@ -1,5 +1,5 @@
-import type { BaseEntity } from './BaseEntity'
 import { AbstractCurdService, FeedbackUtil } from '@airpower/web'
+import type { BaseEntity } from './BaseEntity'
 
 /**
  * # 抽象服务基类

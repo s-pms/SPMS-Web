@@ -22,14 +22,14 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="OperationService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="OperationEntity"
-      @edit="onEdit"
+      :service="OperationService"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
     />
     <template #footerLeft>
       <APage

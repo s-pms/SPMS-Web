@@ -26,25 +26,25 @@ const {
     height="70%"
     is-selector
     width="70%"
-    @confirm="onConfirm(selectList)"
     @cancel="onCancel"
+    @confirm="onConfirm(selectList)"
   >
     <ATable
-      :service="DepartmentService"
-      hide-add
-      @search="onSearch"
-      ctrl-width="80"
       :data-list="list"
       :entity="DepartmentEntity"
       :hide-ctrl="isMultiple"
       :select-list="selectList"
+      :service="DepartmentService"
       :show-select="isMultiple"
       :tree-props="{
         checkStrictly: true,
       }"
+      ctrl-width="80"
+      hide-add
       hide-delete
       hide-edit
       hide-field-selector
+      @search="onSearch"
       @select-changed="onSelected"
     >
       <template

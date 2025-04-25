@@ -46,8 +46,8 @@ async function selectParameter() {
     :title="title"
     height="70%"
     width="70%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import type { WebValidateRule } from '@airpower/web'
-import type { FormInstance } from 'element-plus'
-
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
 import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
+import type { WebValidateRule } from '@airpower/web'
 import { ADialog, AFormField, DialogProps, WebValidator } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
 import { computed, ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new ParticipantEntity()))
@@ -66,8 +65,8 @@ function onTypeChanged() {
   <ADialog
     :form-ref="formRef"
     :title="`${formData.isPublished ? '修改' : '添加'}参与方`"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

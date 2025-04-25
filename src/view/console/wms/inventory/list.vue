@@ -6,7 +6,19 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { APage, APanel, ATable, ATreeBox, getTableConfigList, ITree, QueryPage, QueryRequest, QueryRequestPage, QueryResponsePage, RootEntity } from '@airpower/web'
+import {
+  APage,
+  APanel,
+  ATable,
+  ATreeBox,
+  getTableConfigList,
+  ITree,
+  QueryPage,
+  QueryRequest,
+  QueryRequestPage,
+  QueryResponsePage,
+  RootEntity,
+} from '@airpower/web'
 import { computed, ref } from 'vue'
 
 const request = ref(new QueryRequestPage(InventoryEntity))
@@ -62,16 +74,15 @@ async function treeChanged(current: ITree | undefined) {
     switch (inventoryType.value) {
       case InventoryTypeEnum.STORAGE.key:
         request.value.filter.storage = (current as StorageEntity).copy()
-        request.value.filter.storage.expose("id")
+        request.value.filter.storage.expose('id')
         break
       case InventoryTypeEnum.STRUCTURE.key:
         request.value.filter.structure = (current as StructureEntity).copy()
-        request.value.filter.structure.expose("id")
+        request.value.filter.structure.expose('id')
         break
       default:
     }
-  }
-  else {
+  } else {
     request.value.filter.exclude('storage', 'structure')
   }
   getList()
@@ -94,17 +105,18 @@ inventoryTypeChanged()
 
 <template>
   <ATreeBox v-loading="isLoadingTree" :placeholder="treePlaceHolder" :tree-data="treeData" searchable
-    @on-change="treeChanged">
+            @on-change="treeChanged">
     <APanel title="">
-      <ATable :service="InventoryService" hide-add v-loading="isLoading" :data-list="response.list"
-        :entity="InventoryEntity" :field-list="tableField" ctrl-width="40" hide-delete hide-edit>
+      <ATable v-loading="isLoading" :data-list="response.list" :entity="InventoryEntity" :field-list="tableField"
+              :service="InventoryService" ctrl-width="40" hide-add hide-delete hide-edit>
         <template #afterButton>
           <el-radio-group v-model="inventoryType" @change="inventoryTypeChanged">
             <el-radio-button v-for="view in InventoryTypeEnum.toArray()" :key="view.key" :label="view.key"
-              :value="view.key">
+                             :value="view.key">
               {{ view.label }}
             </el-radio-button>
-          </el-radio-group></template>
+          </el-radio-group>
+        </template>
         <template #materialCode="{ data }">
           {{ data.material.code }}
         </template>

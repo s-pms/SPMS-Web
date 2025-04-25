@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useMyTable,  } from '@/hook/useMyTable'
+import { useMyTable } from '@/hook/useMyTable'
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
@@ -8,22 +8,22 @@ import { SupplierEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(SupplierService, {
-    editView: SupplierEditor,
-  })
+  editView: SupplierEditor,
+})
 </script>
 
 <template>
   <APanel title="">
     <ATable
-      :service="SupplierService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="SupplierEntity"
       :select-list="selectList"
-      @edit="onEdit"
+      :service="SupplierService"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     />

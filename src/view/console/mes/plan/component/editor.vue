@@ -5,7 +5,20 @@ import { PlanService } from '@/model/mes/plan/PlanService'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { PlanDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PlanEntity()))
@@ -54,8 +67,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="80%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

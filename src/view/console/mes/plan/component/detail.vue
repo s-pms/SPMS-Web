@@ -5,7 +5,17 @@ import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 
-import { ADateTime, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
+import {
+  ADateTime,
+  ADialog,
+  AFormField,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  getTableConfigList,
+  useDetail,
+} from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PlanEntity()))
 
@@ -22,8 +32,8 @@ const {
     :title="title"
     height="80%"
     width="80%"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -62,10 +72,10 @@ const {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="计划明细">
         <ATable
-          ctrl-width="60"
           :data-list="formData.details"
           :entity="PlanDetailEntity"
           :field-list="getTableConfigList(PlanDetailEntity)"
+          ctrl-width="60"
           hide-ctrl
         >
           <template #materialCode="{ data }">

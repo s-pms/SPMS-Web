@@ -21,8 +21,8 @@ const {
     :title="title"
     height="80%"
     width="80%"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -47,10 +47,10 @@ const {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="销售明细">
         <ATable
-          ctrl-width="60"
           :data-list="formData.details"
           :entity="SaleDetailEntity"
           :field-list="getTableConfigList(SaleDetailEntity)"
+          ctrl-width="60"
           hide-ctrl
         >
           <template #materialCode="{ data }">

@@ -10,20 +10,21 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
   = useMyTable(MaterialService, {
     editView: MaterialEditor,
   })
+console.log(new (MaterialEntity)())
 </script>
 
 <template>
   <APanel title="">
     <ATable
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="MaterialEntity"
       :select-list="selectList"
-      @edit="onEdit"
       :service="MaterialService"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     />

@@ -3,7 +3,20 @@ import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEnt
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getModelName, getTableConfigList, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getModelName,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { PurchaseDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
@@ -46,8 +59,8 @@ async function deleteDetail(index: number) {
     :title="title + getModelName(PurchaseEntity)"
     height="80%"
     width="80%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

@@ -29,19 +29,19 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="PlanService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row) => !PlanStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="PlanEntity"
       :select-list="selectList"
+      :service="PlanService"
       ctrl-width="160"
       hide-delete
       show-detail
-      @on-detail="onDetail"
+      @add="onAdd"
       @edit="onEdit"
+      @search="onSearch"
+      @on-detail="onDetail"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >

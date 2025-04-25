@@ -4,7 +4,21 @@ import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
 
-import { AButton, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getModelName, getTableConfigList, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getModelName,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { PickingDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PickingEntity()))
@@ -47,8 +61,8 @@ async function deleteDetail(index: number) {
     :title="title + getModelName(PickingEntity)"
     height="80%"
     width="80%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

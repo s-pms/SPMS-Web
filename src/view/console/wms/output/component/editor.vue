@@ -4,7 +4,19 @@ import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getFieldLabel, getTableConfigList, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { computed } from 'vue'
 import { OutputDetailEditor } from '.'
 
@@ -52,8 +64,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="80%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

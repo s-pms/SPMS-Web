@@ -8,8 +8,8 @@ import { DeviceEditor, DeviceMonitor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(DeviceService, {
-    editView: DeviceEditor,
-  })
+  editView: DeviceEditor,
+})
 
 async function showMonitor(device: DeviceEntity) {
   DialogUtil.show(DeviceMonitor, device)
@@ -19,17 +19,17 @@ async function showMonitor(device: DeviceEntity) {
 <template>
   <APanel title="">
     <ATable
-      :service="DeviceService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="DeviceEntity"
       :select-list="selectList"
+      :service="DeviceService"
       ctrl-width="130"
+      @add="onAdd"
       @delete="onDelete"
       @edit="onEdit"
       @s="onSortChanged"
+      @search="onSearch"
       @select-changed="onSelected"
     >
       <template #customRow="{ data }">

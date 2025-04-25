@@ -8,22 +8,22 @@ import { SalePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(SalePriceService, {
-    editView: SalePriceEditor,
-  })
+  editView: SalePriceEditor,
+})
 </script>
 
 <template>
   <APanel title="">
     <ATable
-      :service="SalePriceService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="SalePriceEntity"
       :select-list="selectList"
-      @edit="onEdit"
+      :service="SalePriceService"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >

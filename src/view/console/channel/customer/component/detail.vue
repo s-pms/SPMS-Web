@@ -17,8 +17,8 @@ const {
   <ADialog
     :loading="isLoading"
     :title="getModelName(CustomerEntity) + title"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"

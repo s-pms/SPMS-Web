@@ -1,29 +1,29 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
 import { UnitService } from '@/model/system/unit/UnitService'
 
 import { APage, APanel, ATable } from '@airpower/web'
 import { UnitEditor } from './component'
-import { useMyTable } from '@/hook/useMyTable'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(UnitService, {
-    editView: UnitEditor,
-  })
+  editView: UnitEditor,
+})
 </script>
 
 <template>
   <APanel title="">
     <ATable
-      :service="UnitService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="UnitEntity"
       :select-list="selectList"
-      @edit="onEdit"
+      :service="UnitService"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     />

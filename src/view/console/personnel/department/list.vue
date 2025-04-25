@@ -25,17 +25,17 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="DepartmentService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :disable-delete="(row) => row.children.length > 0"
       :entity="DepartmentEntity"
+      :service="DepartmentService"
       ctrl-width="130"
       show-add
-      @edit="onEdit"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @add-row="onAddRow"
     />
   </APanel>

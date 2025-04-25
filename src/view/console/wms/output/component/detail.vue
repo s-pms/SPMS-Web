@@ -9,7 +9,17 @@ import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
 import { SaleDetail } from '@/view/console/channel/sale/component'
 import { PickingDetail } from '@/view/console/mes/picking/component'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, DialogUtil, FeedbackUtil, getTableConfigList } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getTableConfigList,
+} from '@airpower/web'
 import { OutputAddFinishEditor } from '.'
 import { MoveDetail } from '../../move/component'
 
@@ -39,8 +49,8 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
     height="80%"
     title="出库单详情"
     width="80%"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       label-width="120px"

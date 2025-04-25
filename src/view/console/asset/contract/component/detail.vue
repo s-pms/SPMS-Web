@@ -21,8 +21,8 @@ const {
     :title="title"
     height="70%"
     width="70%"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <ATabs>
       <ATab label="合同基本信息">

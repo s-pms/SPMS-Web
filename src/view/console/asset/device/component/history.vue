@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { IJson, IWebEnum } from '@airpower/web'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
 import { DeviceService } from '@/model/asset/device/DeviceService'
@@ -7,6 +6,7 @@ import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
 import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
+import type { IJson, IWebEnum } from '@airpower/web'
 import {
   ADialog,
   AEmpty,
@@ -145,8 +145,7 @@ function validDateTimeRange() {
         break
       default:
     }
-  }
-  else {
+  } else {
     dateTimeRange.value = [
       new Date(DateTimeUtil.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.getMillisecond()),
       new Date(),
@@ -362,8 +361,7 @@ async function getDevicePayloadHistory() {
   const list = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
   if (ParameterTypeEnum.STRING.equalsKey(props.param.dataType)) {
     collectionList.value = list.reverse()
-  }
-  else {
+  } else {
     collectionList.value = list
   }
   loadData()

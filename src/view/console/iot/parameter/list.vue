@@ -15,17 +15,17 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
 <template>
   <APanel title="">
     <ATable
-      :service="ParameterService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isSystem"
       :disable-edit="(row) => row.isSystem"
       :entity="ParameterEntity"
       :select-list="selectList"
-      @edit="onEdit"
+      :service="ParameterService"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     />

@@ -28,7 +28,7 @@ async function selectDepartment() {
 
 <template>
   <ADialog :allow-fullscreen="false" :form-ref="formRef" :loading="isLoading" :title="title" confirm-text="保存"
-    height="60%" width="60%" @confirm="onSubmit" @cancel="onCancel">
+           height="60%" width="60%" @cancel="onCancel" @confirm="onSubmit">
     <el-form ref="formRef" :model="formData" :rules="rules" label-width="120px" @submit.prevent>
       <AGroup :column="2" title="基础信息">
         <el-form-item :label="getFieldLabel(UserEntity, 'nickname')" prop="nickname">
@@ -47,7 +47,7 @@ async function selectDepartment() {
             添加角色
           </AButton>
           <el-tag v-for="(role, index) in formData.roleList" :key="role.id" closable size="large"
-            @close="formData.roleList.splice(index, 1)">
+                  @close="formData.roleList.splice(index, 1)">
             {{ role.name }}
           </el-tag>
         </div>
@@ -56,7 +56,7 @@ async function selectDepartment() {
             添加部门
           </AButton>
           <el-tag v-for="(department, index) in formData.departmentList" :key="department.id" closable size="large"
-            @close="formData.departmentList.splice(index, 1)">
+                  @close="formData.departmentList.splice(index, 1)">
             {{ department.name }}
           </el-tag>
         </div>
@@ -66,8 +66,8 @@ async function selectDepartment() {
 </template>
 
 <style lang="scss" scoped>
-.role-list>*,
-.department-list>* {
+.role-list > *,
+.department-list > * {
   margin-right: 5px;
 }
 </style>

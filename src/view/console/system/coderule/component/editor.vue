@@ -1,10 +1,21 @@
 <script lang="ts" setup>
+import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
-import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 
-import { ADialog, AFormField, AGroup, AInput, DateTimeUtil, DialogProps, getFieldLabel, getModelName, useEditor, WebValidator } from '@airpower/web'
+import {
+  ADialog,
+  AFormField,
+  AGroup,
+  AInput,
+  DateTimeUtil,
+  DialogProps,
+  getFieldLabel,
+  getModelName,
+  useEditor,
+  WebValidator,
+} from '@airpower/web'
 import { computed, ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new CodeRuleEntity()))
@@ -67,7 +78,7 @@ const demoCode = computed(() => {
 
 <template>
   <ADialog :form-ref="formRef" :loading="isLoading" :title="title + getModelName(CodeRuleEntity)" height="550px"
-    width="800px" @confirm="onSubmit" @cancel="onCancel">
+           width="800px" @cancel="onCancel" @confirm="onSubmit">
     <el-form ref="formRef" :model="formData" :rules="rules" label-width="140px" @submit.prevent>
       <AGroup :column="2" title="基础配置">
         <el-form-item :label="getFieldLabel(CodeRuleEntity,'ruleField')" prop="ruleField">
@@ -94,7 +105,7 @@ const demoCode = computed(() => {
           <span style="margin: 0 2px; color: red; font-weight: bold">{{ formData.prefix }}</span>
           <span style="margin: 0 2px; color: darkgreen; font-weight: bold">{{ demoCode }}</span>
           <span style="margin: 0 2px; color: blue; font-weight: bold">{{
-            '1'.padStart(Math.min(formData.snLength, 10), '0')
+              '1'.padStart(Math.min(formData.snLength, 10), '0')
             }}</span>
         </el-form-item>
       </AGroup>

@@ -1,13 +1,13 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
+import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
-import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 
 import { APage, APanel, ATable, DateTimeUtil } from '@airpower/web'
 import { ref } from 'vue'
-import { useMyTable } from '@/hook/useMyTable'
 
 const {
   isLoading,
@@ -57,15 +57,15 @@ function nextCode(codeRule: CodeRuleEntity) {
 <template>
   <APanel title="">
     <ATable
-      :service="CodeRuleService"
-      hide-add
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="CodeRuleEntity"
+      :service="CodeRuleService"
       ctrl-width="105"
+      hide-add
       hide-delete
       @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
     >
       <template #ruleField="{ data }">

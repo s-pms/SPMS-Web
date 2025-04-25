@@ -25,17 +25,17 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="ConfigService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isSystem"
       :entity="ConfigEntity"
+      :service="ConfigService"
       ctrl-width="90"
-      @edit="onEdit"
-      @sort-changed="onSortChanged"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
+      @sort-changed="onSortChanged"
     >
       <template #name="{ data }">
         <el-link v-tip="data.description">

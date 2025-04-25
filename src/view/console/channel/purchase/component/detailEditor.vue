@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
 
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 import { SupplierSelector } from '../../supplier/component'
 
@@ -43,8 +43,8 @@ async function onSubmit() {
     :loading="isLoading"
     title="采购明细"
     width="600px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

@@ -32,8 +32,8 @@ async function selectDepartment() {
     :loading="isLoading"
     :title="title"
     width="1000px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

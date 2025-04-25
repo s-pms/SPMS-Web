@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
 
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new PlanDetailEntity()))
@@ -26,8 +26,8 @@ async function onSubmit() {
     :loading="isLoading"
     title="计划明细"
     width="600px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

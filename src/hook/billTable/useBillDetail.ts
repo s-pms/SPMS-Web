@@ -1,10 +1,10 @@
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import type { CurdServiceConstructor, IDetailOption, IJson } from '@airpower/web'
-import type { IUseBillDetailResult } from './IUseBillDetailResult'
 import { BillAddFinishDialog } from '@/component'
+import type { CurdServiceConstructor, IDetailOption, IJson } from '@airpower/web'
 import { DialogUtil, useDetail } from '@airpower/web'
+import type { IUseBillDetailResult } from './IUseBillDetailResult'
 
 /**
  * ### 单据明细

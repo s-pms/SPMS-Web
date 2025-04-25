@@ -35,16 +35,16 @@ getDetail()
     is-selector
     title="选择申领明细"
     width="70%"
-    @confirm="onConfirm(selectList)"
     @cancel="onCancel"
+    @confirm="onConfirm(selectList)"
   >
     <ATable
-      ctrl-width="80"
       :data-list="list"
       :entity="PickingDetailEntity"
       :hide-ctrl="isMultiple"
       :select-list="selectList"
       :show-select="isMultiple"
+      ctrl-width="80"
       hide-delete
       hide-edit
       hide-field-selector

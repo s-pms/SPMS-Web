@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
@@ -63,19 +63,19 @@ async function onStartOrPause(order: OrderEntity) {
 <template>
   <APanel title="">
     <ATable
-      :service="OrderService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-edit="(row) => !OrderStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="OrderEntity"
       :select-list="selectList"
+      :service="OrderService"
       ctrl-width="260"
       hide-delete
       show-detail
-      @on-detail="onDetail"
+      @add="onAdd"
       @edit="onEdit"
+      @search="onSearch"
+      @on-detail="onDetail"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >

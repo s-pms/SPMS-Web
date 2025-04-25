@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
+import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { MaterialSelector } from '@/view/console/asset/material/component'
@@ -41,8 +41,7 @@ async function selectPlan() {
     formData.value.customer = formData.value.plan.customer
     formData.value.startTime = formData.value.plan.startTime
     formData.value.deliverTime = formData.value.plan.deliverTime
-  }
-  else {
+  } else {
     formData.value.exclude('customer', 'material')
   }
 }
@@ -91,8 +90,8 @@ const isCustomerDisabled = computed(() => {
     :title="title"
     height="80%"
     width="80%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

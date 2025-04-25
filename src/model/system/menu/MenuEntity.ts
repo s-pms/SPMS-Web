@@ -1,5 +1,5 @@
-import type { IMenu } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
+import type { IMenu } from '@airpower/web'
 import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**

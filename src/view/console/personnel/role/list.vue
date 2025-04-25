@@ -33,12 +33,12 @@ const {
       v-loading="isLoading"
       :data-list="response.list"
       :entity="RoleEntity"
-      ctrl-width="160"
-      @edit="onEdit"
       :service="RoleService"
+      ctrl-width="160"
       @add="onAdd"
-      @search="onSearch"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
     >
       <template #customRow="{ data }">
         <AButton

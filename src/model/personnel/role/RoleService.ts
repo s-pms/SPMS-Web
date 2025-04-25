@@ -1,6 +1,6 @@
+import { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { MenuEntity } from '@/model/system/menu/MenuEntity'
 import type { PermissionEntity } from '@/model/system/permission/PermissionEntity'
-import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { RoleEntity } from './RoleEntity'
 
 /**

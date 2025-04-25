@@ -39,8 +39,8 @@ const materialFilter = ref(material)
     :loading="isLoading"
     :title="title"
     confirm-text="保存"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

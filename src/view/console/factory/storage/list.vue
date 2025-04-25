@@ -27,16 +27,16 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="StorageService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :entity="StorageEntity"
+      :service="StorageService"
       ctrl-width="130"
       show-add
-      @edit="onEdit"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
       @add-row="onAddRow"

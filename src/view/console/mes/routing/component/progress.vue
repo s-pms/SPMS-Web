@@ -1,13 +1,25 @@
 <script lang="ts" setup>
-import type { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
+import type { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { BomSelector } from '@/view/console/mes/bom/component'
 import { OperationSelector } from '@/view/console/mes/operation/component'
-import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable, DialogProps, DialogUtil, FeedbackUtil, QueryRequest, useEditor } from '@airpower/web'
+import {
+  AButton,
+  ADialog,
+  AEmpty,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  QueryRequest,
+  useEditor,
+} from '@airpower/web'
 import { nextTick, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
@@ -101,8 +113,8 @@ function onDeleteRoutingOperation(index: number) {
     height="80%"
     title="工艺流程"
     width="75%"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <div class="progress">
       <div class="top" />

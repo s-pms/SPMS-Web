@@ -27,19 +27,19 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="BomService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isPublished"
       :disable-edit="(row) => row.isPublished"
       :entity="BomEntity"
+      :service="BomService"
       ctrl-width="160"
       show-detail
-      @on-detail="onDetail"
+      @add="onAdd"
       @delete="onDelete"
       @edit="onEdit"
+      @search="onSearch"
+      @on-detail="onDetail"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >

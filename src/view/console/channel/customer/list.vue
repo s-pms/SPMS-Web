@@ -8,8 +8,8 @@ import { CustomerEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(CustomerService, {
-    editView: CustomerEditor,
-  })
+  editView: CustomerEditor,
+})
 </script>
 
 <template>
@@ -20,12 +20,12 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       :entity="CustomerEntity"
       :select-list="selectList"
       :service="CustomerService"
-      @edit="onEdit"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
-      @search="onSearch"
-      @add="onAdd"
     />
     <template #footerLeft>
       <APage

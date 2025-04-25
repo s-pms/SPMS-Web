@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { useMyTable } from '@/hook/useMyTable'
 import { LogEntity } from '@/model/system/log/LogEntity'
 import { LogService } from '@/model/system/log/LogService'
 
 import { APage, APanel, ATable, WebColor } from '@airpower/web'
 import Detail from './detail.vue'
-import { useMyTable } from '@/hook/useMyTable'
 
 const {
   isLoading,
@@ -37,17 +37,17 @@ function getColor(log: LogEntity) {
 <template>
   <APanel title="">
     <ATable
-      :service="LogService"
-      hide-add
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :entity="LogEntity"
       :select-list="selectList"
+      :service="LogService"
       ctrl-width="60"
+      hide-add
       hide-delete
       hide-edit
       show-detail
+      @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
       @on-detail="onDetail"

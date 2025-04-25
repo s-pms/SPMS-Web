@@ -27,17 +27,17 @@ async function onProgress(data: RoutingEntity) {
 <template>
   <APanel title="">
     <ATable
-      :service="RoutingService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="response.list"
       :disable-delete="(row) => row.isPublished"
       :disable-edit="(row) => row.isPublished"
       :entity="RoutingEntity"
+      :service="RoutingService"
       ctrl-width="160"
-      @edit="onEdit"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

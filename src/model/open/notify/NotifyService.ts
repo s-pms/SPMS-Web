@@ -1,6 +1,6 @@
-import type { IWebEnum } from '@airpower/web'
 import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
+import type { IWebEnum } from '@airpower/web'
 
 export class NotifyService extends AbstractBaseService<NotifyEntity> {
   baseUrl = 'notify'

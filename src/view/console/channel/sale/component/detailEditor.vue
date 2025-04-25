@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
 
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new SaleDetailEntity()))
@@ -41,8 +41,8 @@ async function onSubmit() {
     :loading="isLoading"
     title="销售明细"
     width="600px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

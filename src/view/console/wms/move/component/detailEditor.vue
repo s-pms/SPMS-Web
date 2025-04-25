@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 
 import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
 import { ADialog, AInput, DialogProps, getFieldLabel } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new MoveDetailEntity()))
@@ -27,8 +27,8 @@ async function onSubmit() {
     :loading="isLoading"
     title="移库明细"
     width="600px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

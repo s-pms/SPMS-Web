@@ -1,5 +1,5 @@
-import type { IPayload, ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
+import type { IPayload, ITree } from '@airpower/web'
 import { Field, Form, Model, Table, Type } from '@airpower/web'
 
 @Model({

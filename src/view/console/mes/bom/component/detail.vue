@@ -20,8 +20,8 @@ const {
     :title="title"
     height="80%"
     width="70%"
-    @confirm="onConfirm"
     @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -47,10 +47,10 @@ const {
       </AGroup>
       <AGroup title="配方物料清单">
         <ATable
-          ctrl-width="80"
           :data-list="formData.details"
           :entity="BomDetailEntity"
           :field-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
+          ctrl-width="80"
           hide-delete
           hide-edit
         >

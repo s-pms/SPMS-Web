@@ -1,5 +1,5 @@
-import type { Ref } from 'vue'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
+import type { Ref } from 'vue'
 import { ref } from 'vue'
 
 /**

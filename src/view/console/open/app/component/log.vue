@@ -39,9 +39,9 @@ function onDetail(log: OpenLogEntity) {
   >
     <ATable
       v-loading="isLoading"
-      ctrl-width="100"
       :data-list="response.list"
       :entity="OpenLogEntity"
+      ctrl-width="100"
       hide-delete
       hide-edit
       show-detail

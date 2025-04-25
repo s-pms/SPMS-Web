@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
@@ -7,6 +6,7 @@ import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
 
 import { OutputService } from '@/model/wms/output/OutputService'
 import { ADialog, AInput, DialogProps, DialogUtil } from '@airpower/web'
+import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 import { InventorySelector } from '../../inventory/component'
 
@@ -51,8 +51,8 @@ async function selectInventory() {
     :loading="isLoading"
     title="确认出库"
     width="600px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

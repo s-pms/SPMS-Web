@@ -1,6 +1,6 @@
-import type { IFile } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { FileCategory } from '@/model/system/file/FileCategory'
+import type { IFile } from '@airpower/web'
 import { Field } from '@airpower/web'
 
 export class FileEntity extends BaseEntity implements IFile {

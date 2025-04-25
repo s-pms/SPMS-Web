@@ -25,9 +25,6 @@ const {
 <template>
   <APanel title="">
     <ATable
-      :service="PermissionService"
-      @add="onAdd"
-      @search="onSearch"
       v-loading="isLoading"
       :data-list="list"
       :default-expand-all="false"
@@ -35,10 +32,13 @@ const {
       :disable-delete="(row) => row.isSystem"
       :disable-edit="(row) => row.isSystem"
       :entity="PermissionEntity"
+      :service="PermissionService"
       ctrl-width="130"
       show-add
-      @edit="onEdit"
+      @add="onAdd"
       @delete="onDelete"
+      @edit="onEdit"
+      @search="onSearch"
       @add-row="onAddRow"
     />
   </APanel>

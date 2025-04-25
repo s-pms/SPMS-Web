@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { IEnum } from '@airpower/web'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 
 import { NotifyService } from '@/model/open/notify/NotifyService'
+import type { IEnum } from '@airpower/web'
 import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
@@ -34,8 +34,8 @@ init()
     :loading="isLoading"
     :title="title"
     min-height="100px"
-    @confirm="onSubmit"
     @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
