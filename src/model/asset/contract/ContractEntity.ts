@@ -1,8 +1,8 @@
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import type { IPayload } from '@airpower/web'
 import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 import { ContractTypeEnum } from './ContractTypeEnum'
@@ -76,6 +76,7 @@ export class ContractEntity extends BaseEntity implements IPayload {
     requiredNumber: true,
     dateType: DateTimeType.DATE,
     dateShowFormatter: DateTimeFormatter.FULL_DATE,
+    dateFormatter: DateTimeFormatter.TIMESTAMP,
   })
   @Field({
     label: '开始时间',
@@ -92,6 +93,7 @@ export class ContractEntity extends BaseEntity implements IPayload {
     requiredNumber: true,
     dateType: DateTimeType.DATE,
     dateShowFormatter: DateTimeFormatter.FULL_DATE,
+    dateFormatter: DateTimeFormatter.TIMESTAMP,
   })
   @Field({
     label: '终止时间',

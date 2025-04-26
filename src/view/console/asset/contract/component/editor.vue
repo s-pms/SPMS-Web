@@ -84,6 +84,7 @@ async function onUpload() {
     @cancel="onCancel"
     @confirm="onSubmit"
   >
+    {{ formData }}
     <ATabs>
       <ATab label="合同基本信息">
         <el-form
