@@ -16,7 +16,6 @@ export class McpToolModel extends RootEntity {
     label: '工具描述',
   })
   @Table({
-    nowrap: true,
   })
   description!: string
 }

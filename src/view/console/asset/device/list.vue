@@ -35,7 +35,7 @@ async function showMonitor(device: DeviceEntity) {
       <template #customRow="{ data }">
         <AButton
           :disabled="!data.isReporting"
-          link-button
+          link
           tooltip="实时监控"
           type="MONITOR"
           @click="showMonitor(data)"

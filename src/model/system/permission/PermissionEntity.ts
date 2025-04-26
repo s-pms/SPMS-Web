@@ -94,5 +94,10 @@ export class PermissionEntity extends BaseEntity implements ITree {
   @Table({
     removed: true,
   })
+  declare updateTime: number
+
+  @Table({
+    removed: true,
+  })
   declare isDisabled: boolean
 }

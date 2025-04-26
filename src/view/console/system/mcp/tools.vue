@@ -28,7 +28,7 @@ getList()
   <APanel title="">
     <template #footerLeft>
       <AButton
-        link-button
+        link
         type="SETTING"
         @click="copy()"
       >
@@ -37,6 +37,8 @@ getList()
     </template>
     <ATable
       v-loading="isLoading"
+      hide-column-selector
+      hide-add
       :data-list="list"
       :default-expand-all="false"
       :entity="McpToolModel"

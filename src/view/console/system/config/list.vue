@@ -26,6 +26,7 @@ const {
   <APanel title="">
     <ATable
       v-loading="isLoading"
+      hide-add
       :data-list="response.list"
       :disable-delete="(row) => row.isSystem"
       :entity="ConfigEntity"

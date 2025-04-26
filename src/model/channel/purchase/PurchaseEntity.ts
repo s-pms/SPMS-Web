@@ -1,5 +1,5 @@
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { WebEnum } from '@airpower/web'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { PurchaseDetailEntity } from './PurchaseDetailEntity'
 import { PurchaseStatusEnum } from './PurchaseStatusEnum'
@@ -14,7 +14,6 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   declare billCode: string
 
   @Table({
-    nowrap: true,
   })
   @Form({
     textarea: true,

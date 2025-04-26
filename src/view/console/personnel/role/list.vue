@@ -42,7 +42,7 @@ const {
     >
       <template #customRow="{ data }">
         <AButton
-          link-button
+          link
           tooltip="授权菜单"
           type="CONFIRM"
           @click="onMenuEditor(data)"
@@ -50,7 +50,7 @@ const {
           菜单
         </AButton>
         <AButton
-          link-button
+          link
           tooltip="授权权限"
           type="LOCK"
           @click="onPermissionEditor(data)"

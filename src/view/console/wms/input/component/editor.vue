@@ -119,10 +119,11 @@ async function deleteDetail(index: number) {
             <AButton
               v-if="isDetailEditable"
               danger
-              icon-button
-              type="DELETE"
+              link
               @click="deleteDetail(index)"
-            />
+            >
+              删除
+            </AButton>
           </template>
         </ATable>
       </AGroup>

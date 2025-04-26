@@ -107,7 +107,7 @@ inventoryTypeChanged()
         ctrl-width="80"
         hide-delete
         hide-edit
-        hide-field-selector
+        hide-column-selector
         @select-changed="onConfirm"
       >
         <template #materialCode="{ data }">

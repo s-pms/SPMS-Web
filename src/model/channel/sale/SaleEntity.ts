@@ -1,5 +1,5 @@
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { WebEnum } from '@airpower/web'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { SaleDetailEntity } from './SaleDetailEntity'
@@ -36,7 +36,6 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   customerId!: number
 
   @Table({
-    nowrap: true,
   })
   @Form({
     textarea: true,

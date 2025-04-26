@@ -43,7 +43,7 @@ const {
       hide-add
       hide-delete
       hide-edit
-      hide-field-selector
+      hide-column-selector
       @search="onSearch"
       @select-changed="onSelected"
     >

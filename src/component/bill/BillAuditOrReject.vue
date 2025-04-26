@@ -27,7 +27,7 @@ function onAudit() {
 <template>
   <AButton
     :disabled="!bill.canAudit()"
-    link-button
+    link
     tooltip="审核"
     type="CONFIRM"
     @click="onAudit"
@@ -36,7 +36,7 @@ function onAudit() {
   </AButton>
   <AButton
     :disabled="!bill.canReject()"
-    link-button
+    link
     tooltip="驳回"
     type="LOCK"
     @click="onReject"

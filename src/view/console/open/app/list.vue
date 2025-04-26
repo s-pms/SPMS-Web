@@ -110,13 +110,13 @@ function openOAuth2(app: OpenAppEntity) {
         </el-link>
       </template>
       <template #customRow="{ data }">
-        <AButton :disabled="data.isDisabled" link-button tooltip="重置AppSecret" @click="onResetSecret(data)">
+        <AButton :disabled="data.isDisabled" link tooltip="重置AppSecret" @click="onResetSecret(data)">
           重置Secret
         </AButton>
-        <AButton :disabled="data.isDisabled" link-button tooltip="重置RSA密钥对" @click="onResetKeyPair(data)">
+        <AButton :disabled="data.isDisabled" link tooltip="重置RSA密钥对" @click="onResetKeyPair(data)">
           重置密钥对
         </AButton>
-        <AButton link-button tooltip="请求日志" @click="onAppLog(data)">
+        <AButton link tooltip="请求日志" @click="onAppLog(data)">
           日志
         </AButton>
       </template>

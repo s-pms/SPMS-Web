@@ -119,20 +119,20 @@ async function onStartOrPause(order: OrderEntity) {
         >
           <AButton
             :disabled="!OrderStatusEnum.PRODUCING.equalsKey(data.status)"
-            link-button
+            link
             @click="onAddDetail(data)"
           >
             报工
           </AButton>
           <AButton
-            link-button
+            link
             @click="onStartOrPause(data)"
           >
             {{ startOrPauseLabel(data) }}
           </AButton>
           <AButton
             :disabled="!OrderStatusEnum.PRODUCING.equalsKey(data.status)"
-            link-button
+            link
             @click="setBillDetailsAllFinished(data)"
           >
             完成

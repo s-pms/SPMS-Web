@@ -51,7 +51,7 @@ getPermissionList()
       :entity="PermissionEntity"
       :select-list="formData.permissionList"
       hide-ctrl
-      hide-field-selector
+      hide-column-selector
       hide-index
       show-select
       @select-changed="onSelect"

@@ -410,6 +410,7 @@ function setCurrent(item?: IJson) {
         />
 
         <el-dropdown
+
           v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
           trigger="click"
           @command="handleCommand"

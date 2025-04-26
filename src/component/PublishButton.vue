@@ -15,7 +15,7 @@ const emits = defineEmits(['click'])
 <template>
   <AButton
     :disabled="data.isPublished"
-    link-button
+    link
     @click="emits('click', data)"
   >
     发布

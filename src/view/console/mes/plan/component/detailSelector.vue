@@ -47,7 +47,7 @@ getPlan()
       ctrl-width="80"
       hide-delete
       hide-edit
-      hide-field-selector
+      hide-column-selector
       @select-changed="onSelected"
     >
       <template #materialCode="{ data }">

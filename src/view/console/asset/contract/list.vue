@@ -76,19 +76,21 @@ async function onDetail(contract: ContractEntity) {
     >
       <template #customRow="row">
         <AButton
-          :disabled="!ContractStatusEnum.INVALID.equalsKey(row.data.status)" link-button
+          link
+          :disabled="!ContractStatusEnum.INVALID.equalsKey(row.data.status)"
           @click="onEnforce(row.data)"
         >
           生效
         </AButton>
         <AButton
-          :disabled="!ContractStatusEnum.EFFECTIVE.equalsKey(row.data.status)" link-button
+          link
+          :disabled="!ContractStatusEnum.EFFECTIVE.equalsKey(row.data.status)"
           @click="onStop(row.data)"
         >
           终止
         </AButton>
         <AButton
-          link-button
+          link
           @click="onDetail(row.data)"
         >
           查看

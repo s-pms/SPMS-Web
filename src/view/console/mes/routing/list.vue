@@ -57,7 +57,7 @@ async function onProgress(data: RoutingEntity) {
           @click="onPublish"
         />
         <AButton
-          link-button
+          link
           @click="onProgress(data)"
         >
           流程

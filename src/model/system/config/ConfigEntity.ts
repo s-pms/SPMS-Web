@@ -14,7 +14,6 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
 export class ConfigEntity extends BaseEntity {
   @Search()
   @Table({
-    nowrap: true,
     copy: true,
     order: 88,
   })
@@ -33,7 +32,6 @@ export class ConfigEntity extends BaseEntity {
 
   @Search()
   @Table({
-    nowrap: true,
     copy: true,
     width: 300,
     order: 99,
@@ -74,7 +72,9 @@ export class ConfigEntity extends BaseEntity {
   })
   isSystem!: boolean
 
-  @Table()
+  @Table({
+    width: 200,
+  })
   @Form({
     requiredString: true,
   })
@@ -82,4 +82,9 @@ export class ConfigEntity extends BaseEntity {
     label: '配置参数',
   })
   config!: string
+
+  @Table({
+    removed: true,
+  })
+  declare updateTime: number
 }

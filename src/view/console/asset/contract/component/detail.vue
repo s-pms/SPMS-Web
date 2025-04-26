@@ -51,7 +51,8 @@ const {
           ctrl-width="40"
           hide-delete
           hide-edit
-          hide-field-selector
+          hide-add
+          hide-column-selector
         />
       </ATab>
       <ATab label="合同附件">
@@ -60,7 +61,7 @@ const {
           :entity="ContractDocumentEntity"
           ctrl-width="40"
           hide-ctrl
-          hide-field-selector
+          hide-column-selector
         >
           <template #url="row">
             <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">

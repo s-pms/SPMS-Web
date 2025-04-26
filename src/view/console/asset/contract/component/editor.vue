@@ -84,7 +84,6 @@ async function onUpload() {
     @cancel="onCancel"
     @confirm="onSubmit"
   >
-    {{ formData }}
     <ATabs>
       <ATab label="合同基本信息">
         <el-form
@@ -115,18 +114,19 @@ async function onUpload() {
           ctrl-width="90"
           hide-delete
           hide-edit
-          hide-field-selector
+          hide-add
+          hide-column-selector
         >
           <template #addButton>
-            <AButton primary type="ADD" @click="onAddParticipant">
+            <AButton primary icon="ADD" @click="onAddParticipant">
               添加参与方
             </AButton>
           </template>
           <template #customRow="row">
-            <AButton link-button @click="onEdit(row.data, row.index)">
+            <AButton link @click="onEdit(row.data, row.index)">
               编辑
             </AButton>
-            <AButton danger link-button @click="onDelete(row.index)">
+            <AButton danger link @click="onDelete(row.index)">
               编辑
             </AButton>
           </template>
@@ -139,7 +139,7 @@ async function onUpload() {
           ctrl-width="90"
           hide-delete
           hide-edit
-          hide-field-selector
+          hide-column-selector
         >
           <template #url="row">
             <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">
@@ -152,7 +152,7 @@ async function onUpload() {
             </AButton>
           </template>
           <template #customRow="row">
-            <AButton danger link-button @click="onDeleteDocument(row.index)">
+            <AButton danger link @click="onDeleteDocument(row.index)">
               删除
             </AButton>
           </template>

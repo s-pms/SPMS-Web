@@ -113,10 +113,11 @@ async function deleteDetail(index: number) {
           <template #customRow="{ index }">
             <AButton
               danger
-              icon-button
-              type="DELETE"
+              link
               @click="deleteDetail(index)"
-            />
+            >
+              删除
+            </AButton>
           </template>
         </ATable>
       </AGroup>
