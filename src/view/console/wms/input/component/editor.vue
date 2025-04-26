@@ -96,6 +96,7 @@ async function deleteDetail(index: number) {
           :data-list="formData.details"
           :entity="InputDetailEntity"
           :field-list="getTableConfigList(InputDetailEntity).filter((item) => !['createTime'].includes(item.key))"
+          hide-add
           hide-delete
           hide-edit
         >

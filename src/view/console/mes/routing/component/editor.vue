@@ -34,11 +34,11 @@ const materialFilter = ref(material)
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
     confirm-text="保存"
+    hide-fullscreen
     @cancel="onCancel"
     @confirm="onSubmit"
   >

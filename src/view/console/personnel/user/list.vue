@@ -1,12 +1,12 @@
 <script lang="ts" setup>
+import type { Ref } from 'vue'
 import { useMyTable } from '@/hook/useMyTable'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
 
+import { UserService } from '@/model/personnel/user/UserService'
 import { APage, APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
-import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { UserEditor } from './component'
 
@@ -46,7 +46,7 @@ getDepartmentList()
   <ATreeBox
     :tree-data="departmentList"
     searchable
-    @change="departmentChanged"
+    @changed="departmentChanged"
   >
     <APanel title="">
       <ATable
@@ -60,13 +60,13 @@ getDepartmentList()
         @delete="onDelete"
         @edit="onEdit"
         @search="onSearch"
-        @on-enable="onEnable"
-        @on-disable="onDisable"
+        @enable="onEnable"
+        @disable="onDisable"
       />
       <template #footerLeft>
         <APage
           :response="response"
-          @on-change="onPageChanged"
+          @changed="onPageChanged"
         />
       </template>
     </APanel>

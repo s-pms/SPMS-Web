@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import type {
+  ITree,
+  QueryPage,
+  RootEntity,
+} from '@airpower/web'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
@@ -12,12 +17,9 @@ import {
   ATable,
   ATreeBox,
   getTableConfigList,
-  ITree,
-  QueryPage,
   QueryRequest,
   QueryRequestPage,
   QueryResponsePage,
-  RootEntity,
 } from '@airpower/web'
 import { computed, ref } from 'vue'
 
@@ -82,7 +84,8 @@ async function treeChanged(current: ITree | undefined) {
         break
       default:
     }
-  } else {
+  }
+  else {
     request.value.filter.exclude('storage', 'structure')
   }
   getList()
@@ -104,15 +107,21 @@ inventoryTypeChanged()
 </script>
 
 <template>
-  <ATreeBox v-loading="isLoadingTree" :placeholder="treePlaceHolder" :tree-data="treeData" searchable
-            @on-change="treeChanged">
+  <ATreeBox
+    v-loading="isLoadingTree" :placeholder="treePlaceHolder" :tree-data="treeData" searchable
+    @changed="treeChanged"
+  >
     <APanel title="">
-      <ATable v-loading="isLoading" :data-list="response.list" :entity="InventoryEntity" :field-list="tableField"
-              :service="InventoryService" ctrl-width="40" hide-add hide-delete hide-edit>
+      <ATable
+        v-loading="isLoading" :data-list="response.list" :entity="InventoryEntity" :field-list="tableField"
+        :service="InventoryService" ctrl-width="40" hide-add hide-delete hide-edit
+      >
         <template #afterButton>
           <el-radio-group v-model="inventoryType" @change="inventoryTypeChanged">
-            <el-radio-button v-for="view in InventoryTypeEnum.toArray()" :key="view.key" :label="view.key"
-                             :value="view.key">
+            <el-radio-button
+              v-for="view in InventoryTypeEnum.toArray()" :key="view.key" :label="view.key"
+              :value="view.key"
+            >
               {{ view.label }}
             </el-radio-button>
           </el-radio-group>
@@ -134,7 +143,7 @@ inventoryTypeChanged()
         </template>
       </ATable>
       <template #footerLeft>
-        <APage :response="response" @on-change="onPageChanged" />
+        <APage :response="response" @changed="onPageChanged" />
       </template>
     </APanel>
   </ATreeBox>

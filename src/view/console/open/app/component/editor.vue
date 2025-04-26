@@ -34,10 +34,10 @@ async function onSave() {
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
+    hide-fullscreen
     min-height="100px"
     @cancel="onCancel"
     @confirm="onSave"

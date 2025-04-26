@@ -41,7 +41,7 @@ const {
       @add="onAdd"
       @edit="onEdit"
       @search="onSearch"
-      @on-detail="onDetail"
+      @detail="onDetail"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >
@@ -56,7 +56,7 @@ const {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

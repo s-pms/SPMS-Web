@@ -10,7 +10,7 @@ import { MaterialTypeEnum } from './MaterialTypeEnum'
 })
 export class MaterialEntity extends BaseEntity implements IPayload {
   @Table({
-    force: true,
+    hide: true,
   })
   @Form({
     requiredString: true,
@@ -76,8 +76,8 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   spc!: string
 
   @Table({
-    // todo
     // payloadField: 'name',
+    payload: true,
     width: 100,
   })
   @Form({

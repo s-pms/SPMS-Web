@@ -45,7 +45,7 @@ function onDetail(log: OpenLogEntity) {
       hide-delete
       hide-edit
       show-detail
-      @on-detail="onDetail"
+      @detail="onDetail"
     >
       <template #mSecond="{ data }">
         {{ data.updateTime - data.createTime }}ms
@@ -54,7 +54,7 @@ function onDetail(log: OpenLogEntity) {
     <template #status>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </ADialog>

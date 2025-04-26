@@ -67,7 +67,7 @@ async function onProgress(data: RoutingEntity) {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

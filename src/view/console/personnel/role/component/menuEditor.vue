@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+import type { IJson } from '@airpower/web'
+import type { TreeInstance } from 'element-plus'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
-import type { IJson } from '@airpower/web'
 import { ADialog, DialogProps, FeedbackUtil, getModelName, QueryRequest, useEditor, WebConfig } from '@airpower/web'
-import type { TreeInstance } from 'element-plus'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new RoleEntity()))
@@ -39,12 +39,12 @@ getMenuTreeList()
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="`${getModelName(RoleEntity)}菜单授权`"
     confirm-text="保存"
     height="70%"
+    hide-fullscreen
     @cancel="onCancel"
     @confirm="onSubmit"
   >

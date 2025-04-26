@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
-import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
-
-import { NotifyService } from '@/model/open/notify/NotifyService'
 import type { IEnum } from '@airpower/web'
+import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
+
+import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
+import { NotifyService } from '@/model/open/notify/NotifyService'
 import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
@@ -29,10 +29,10 @@ init()
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
+    hide-fullscreen
     min-height="100px"
     @cancel="onCancel"
     @confirm="onSubmit"

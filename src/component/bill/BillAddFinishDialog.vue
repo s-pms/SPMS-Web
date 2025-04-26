@@ -19,9 +19,9 @@ const num = ref(props.param)
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="num <= 0"
     confirm-text="添加完成"
+    hide-fullscreen
     min-height="200px"
     title="添加完成数量"
     @cancel="onCancel"

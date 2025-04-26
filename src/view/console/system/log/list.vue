@@ -50,7 +50,7 @@ function getColor(log: LogEntity) {
       @search="onSearch"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
-      @on-detail="onDetail"
+      @detail="onDetail"
     >
       <template #pendingTime="{ data }">
         <el-tag
@@ -65,7 +65,7 @@ function getColor(log: LogEntity) {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

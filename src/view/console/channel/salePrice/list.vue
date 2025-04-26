@@ -8,8 +8,8 @@ import { SalePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(SalePriceService, {
-  editView: SalePriceEditor,
-})
+    editView: SalePriceEditor,
+  })
 </script>
 
 <template>
@@ -43,7 +43,7 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

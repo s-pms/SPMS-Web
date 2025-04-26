@@ -8,8 +8,8 @@ import { DeviceEditor, DeviceMonitor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(DeviceService, {
-  editView: DeviceEditor,
-})
+    editView: DeviceEditor,
+  })
 
 async function showMonitor(device: DeviceEntity) {
   DialogUtil.show(DeviceMonitor, device)
@@ -47,7 +47,7 @@ async function showMonitor(device: DeviceEntity) {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

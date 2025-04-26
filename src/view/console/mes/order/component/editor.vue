@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
-import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { MaterialSelector } from '@/view/console/asset/material/component'
@@ -41,7 +41,8 @@ async function selectPlan() {
     formData.value.customer = formData.value.plan.customer
     formData.value.startTime = formData.value.plan.startTime
     formData.value.deliverTime = formData.value.plan.deliverTime
-  } else {
+  }
+  else {
     formData.value.exclude('customer', 'material')
   }
 }
@@ -107,7 +108,7 @@ const isCustomerDisabled = computed(() => {
         <AFormField field="billCode" />
         <AFormField
           field="type"
-          @on-change="orderTypeChanged"
+          @changed="orderTypeChanged"
         />
         <template v-if="OrderTypeEnum.PLAN.equalsKey(formData.type)">
           <el-form-item
@@ -118,7 +119,7 @@ const isCustomerDisabled = computed(() => {
               v-model="formData.plan"
               :selector="PlanSelector"
               placeholder="请选择订单关联计划"
-              @change="selectPlan()"
+              @changed="selectPlan()"
             />
           </el-form-item>
           <el-form-item />

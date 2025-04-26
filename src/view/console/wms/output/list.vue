@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { OutputDetail, OutputEditor } from '@/view/console/wms/output/component'
@@ -41,7 +41,7 @@ const {
       @add="onAdd"
       @edit="onEdit"
       @search="onSearch"
-      @on-detail="onDetail"
+      @detail="onDetail"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >
@@ -56,7 +56,7 @@ const {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

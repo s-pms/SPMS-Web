@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
@@ -75,7 +75,7 @@ async function onStartOrPause(order: OrderEntity) {
       @add="onAdd"
       @edit="onEdit"
       @search="onSearch"
-      @on-detail="onDetail"
+      @detail="onDetail"
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >
@@ -143,7 +143,7 @@ async function onStartOrPause(order: OrderEntity) {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

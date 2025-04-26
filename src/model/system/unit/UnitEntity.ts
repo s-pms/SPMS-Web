@@ -1,5 +1,5 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import type { IPayload } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Form, Model, Table } from '@airpower/web'
 
 @Model({
@@ -36,6 +36,6 @@ export class UnitEntity extends BaseEntity implements IPayload {
   code!: string
 
   getPayloadLabel(): string {
-    return `${this.name}(${this.code})`
+    return `${this.name} (${this.code})`
   }
 }

@@ -70,7 +70,6 @@ async function onTest() {
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="
       !app.appKey
         || !app.appSecret
@@ -78,6 +77,7 @@ async function onTest() {
         || (OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic) && !app.publicKey)
     "
     :loading="isLoading"
+    hide-fullscreen
     title="测试应用"
     with="1000px"
     @cancel="onCancel"

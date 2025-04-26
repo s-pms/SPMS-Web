@@ -1,12 +1,11 @@
-import { AirModel } from '@airpower/base/AirModel'
-import { Field } from '@airpower/web'
+import { Field, RootModel } from '@airpower/web'
 
 /**
  * # 编码规则参数
  *
  * @author Hamm.cn
  */
-export class CodeRuleParam extends AirModel {
+export class CodeRuleParam extends RootModel {
   @Field({
     label: '占位符',
   })
@@ -14,7 +13,6 @@ export class CodeRuleParam extends AirModel {
 
   @Field({
     label: '参数值',
-    type: Number,
   })
   value!: number
 

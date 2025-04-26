@@ -8,8 +8,8 @@ import { CustomerEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(CustomerService, {
-  editView: CustomerEditor,
-})
+    editView: CustomerEditor,
+  })
 </script>
 
 <template>

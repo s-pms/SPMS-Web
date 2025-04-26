@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
-import type { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
@@ -106,11 +106,11 @@ function onDeleteRoutingOperation(index: number) {
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     confirm-text="保存"
     height="80%"
+    hide-fullscreen
     title="工艺流程"
     width="75%"
     @cancel="onCancel"
@@ -193,7 +193,7 @@ function onDeleteRoutingOperation(index: number) {
                   v-model="currentModel.bom"
                   :disabled="formData.isPublished"
                   :selector="BomSelector"
-                  @change="bomChanged"
+                  @changed="bomChanged"
                 />
               </el-form-item>
             </el-form>

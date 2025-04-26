@@ -26,9 +26,9 @@ const rules = OrderDetailService.createValidator()
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="orderDetail.finishQuantity <= 0 && orderDetail.ngQuantity <= 0"
     confirm-text="添加完成"
+    hide-fullscreen
     min-height="200px"
     title="订单报工"
     @cancel="onCancel"

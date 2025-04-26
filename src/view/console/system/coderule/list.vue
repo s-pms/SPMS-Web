@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { useMyTable } from '@/hook/useMyTable'
-import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
+import { useMyTable } from '@/hook/useMyTable'
+import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 
@@ -78,7 +78,7 @@ function nextCode(codeRule: CodeRuleEntity) {
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

@@ -3,14 +3,14 @@ import { useMyTable } from '@/hook/useMyTable'
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
 
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
-import { APage, APanel, ATable } from '@airpower/web'
-// todo import { SupplierDetail } from '../supplier/component'
+import { APage, APanel, APayload, ATable } from '@airpower/web'
+import { SupplierDetail } from '../supplier/component'
 import { PurchasePriceEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(PurchasePriceService, {
-  editView: PurchasePriceEditor,
-})
+    editView: PurchasePriceEditor,
+  })
 </script>
 
 <template>
@@ -28,6 +28,9 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
       @sort-changed="onSortChanged"
       @select-changed="onSelected"
     >
+      <template #supplier="row">
+        <APayload :payload="row.data.supplier" :view="SupplierDetail" />
+      </template>
       <template #materialCode="{ data }">
         {{ data.material.code }}
       </template>
@@ -44,7 +47,7 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

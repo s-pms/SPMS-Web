@@ -3,7 +3,6 @@ import { useMyTable } from '@/hook/useMyTable'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 
-
 import { AButton, APage, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ElMessageBox } from 'element-plus'
 import useClipboard from 'vue-clipboard3'
@@ -34,7 +33,9 @@ async function onResetSecret(app: OpenAppEntity) {
   })
   const newSecret = await OpenAppService.create(isLoading).resetSecret(app)
   await ElMessageBox.alert('请注意，服务端将不再保存当前应用的 AppSecret，请务必将此密钥保存到安全的地方。', '重置AppSecret成功', {
-    showClose: false, closeOnPressEscape: false, closeOnClickModal: false,
+    showClose: false,
+    closeOnPressEscape: false,
+    closeOnClickModal: false,
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
@@ -52,7 +53,9 @@ async function onResetKeyPair(app: OpenAppEntity) {
   })
   const newSecret = await OpenAppService.create(isLoading).resetKeyPair(app)
   await ElMessageBox.alert('请注意，服务端将不再保存当前应用的 公钥，请务必将此密钥保存到安全的地方。', '重置RSA密钥对成功', {
-    showClose: false, closeOnPressEscape: false, closeOnClickModal: false,
+    showClose: false,
+    closeOnPressEscape: false,
+    closeOnClickModal: false,
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
@@ -65,7 +68,9 @@ async function onAdd() {
   const appSecret: string = await DialogUtil.show(OpenAppEditor)
   onReloadData()
   await ElMessageBox.alert('请注意，服务端将不再保存当前应用的 AppSecret/公钥，请务必保存到安全的地方。', '应用创建成功', {
-    showClose: false, closeOnPressEscape: false, closeOnClickModal: false,
+    showClose: false,
+    closeOnPressEscape: false,
+    closeOnClickModal: false,
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
@@ -87,11 +92,13 @@ function openOAuth2(app: OpenAppEntity) {
 
 <template>
   <APanel title="">
-    <ATable v-loading="isLoading" :data-list="response.list" :disable-edit="(row) => row.isDisabled" :entity="OpenAppEntity" :service="OpenAppService"
-            ctrl-width="280"
-            hide-delete show-enable-and-disable @add="onAdd" @delete="onDelete" @edit="onEdit"
-            @search="onSearch"
-            @sort-changed="onSortChanged" @on-disable="onDisable" @on-enable="onEnable">
+    <ATable
+      v-loading="isLoading" :data-list="response.list" :disable-edit="(row) => row.isDisabled" :entity="OpenAppEntity" :service="OpenAppService"
+      ctrl-width="280"
+      hide-delete show-enable-and-disable @add="onAdd" @delete="onDelete" @edit="onEdit"
+      @search="onSearch"
+      @sort-changed="onSortChanged" @disable="onDisable" @enable="onEnable"
+    >
       <template #afterButton>
         <AButton icon="CHECK" tooltip="测试API" @click="onTest()">
           测试API
@@ -115,7 +122,7 @@ function openOAuth2(app: OpenAppEntity) {
       </template>
     </ATable>
     <template #footerLeft>
-      <APage :response="response" @on-change="onPageChanged" />
+      <APage :response="response" @changed="onPageChanged" />
     </template>
   </APanel>
 </template>

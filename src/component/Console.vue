@@ -7,7 +7,6 @@ import { AFrame, PermissionUtil, RouterUtil } from '@airpower/web'
 import { ref } from 'vue'
 
 const components = import.meta.glob('/src/view/**/*.vue')
-console.warn(components)
 
 const currentUserInfo = ref(new UserEntity())
 const menuList = ref<MenuEntity[]>([])
@@ -15,7 +14,6 @@ const isLoading = ref(false)
 
 async function getMenuList() {
   menuList.value = await UserService.create(isLoading).getMyMenuList()
-  console.log(menuList.value)
   RouterUtil.initVueRouter(menuList.value, components, '/src/view', 'console')
 }
 

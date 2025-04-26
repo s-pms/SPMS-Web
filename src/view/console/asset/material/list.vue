@@ -3,14 +3,16 @@ import { useMyTable } from '@/hook/useMyTable'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 
 import { MaterialService } from '@/model/asset/material/MaterialService'
-import { APage, APanel, ATable } from '@airpower/web'
+import { APage, APanel, ATable, getTableConfigList } from '@airpower/web'
 import { MaterialEditor } from './component'
 
 const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
   = useMyTable(MaterialService, {
     editView: MaterialEditor,
   })
-console.log(new (MaterialEntity)())
+
+console.log((new MaterialEntity()))
+console.log(getTableConfigList(MaterialEntity))
 </script>
 
 <template>
@@ -31,7 +33,7 @@ console.log(new (MaterialEntity)())
     <template #footerLeft>
       <APage
         :response="response"
-        @on-change="onPageChanged"
+        @changed="onPageChanged"
       />
     </template>
   </APanel>

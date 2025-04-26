@@ -27,8 +27,10 @@ async function selectDepartment() {
 </script>
 
 <template>
-  <ADialog :allow-fullscreen="false" :form-ref="formRef" :loading="isLoading" :title="title" confirm-text="保存"
-           height="60%" width="60%" @cancel="onCancel" @confirm="onSubmit">
+  <ADialog
+    :form-ref="formRef" :loading="isLoading" :title="title" confirm-text="保存" height="60%"
+    hide-fullscreen width="60%" @cancel="onCancel" @confirm="onSubmit"
+  >
     <el-form ref="formRef" :model="formData" :rules="rules" label-width="120px" @submit.prevent>
       <AGroup :column="2" title="基础信息">
         <el-form-item :label="getFieldLabel(UserEntity, 'nickname')" prop="nickname">
@@ -46,8 +48,10 @@ async function selectDepartment() {
           <AButton type="ADD" @click="selectRole()">
             添加角色
           </AButton>
-          <el-tag v-for="(role, index) in formData.roleList" :key="role.id" closable size="large"
-                  @close="formData.roleList.splice(index, 1)">
+          <el-tag
+            v-for="(role, index) in formData.roleList" :key="role.id" closable size="large"
+            @close="formData.roleList.splice(index, 1)"
+          >
             {{ role.name }}
           </el-tag>
         </div>
@@ -55,8 +59,10 @@ async function selectDepartment() {
           <AButton type="ADD" @click="selectDepartment()">
             添加部门
           </AButton>
-          <el-tag v-for="(department, index) in formData.departmentList" :key="department.id" closable size="large"
-                  @close="formData.departmentList.splice(index, 1)">
+          <el-tag
+            v-for="(department, index) in formData.departmentList" :key="department.id" closable size="large"
+            @close="formData.departmentList.splice(index, 1)"
+          >
             {{ department.name }}
           </el-tag>
         </div>

@@ -20,9 +20,9 @@ const active = ref(TABS.modifyPassword)
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     hide-cancel
     hide-confirm
+    hide-fullscreen
     min-height="100px"
     title="账号安全中心"
     @cancel="onCancel"

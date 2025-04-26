@@ -19,9 +19,9 @@ const rejectReason = ref('')
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="rejectReason === ''"
     :title="param"
+    hide-fullscreen
     min-height="200px"
     @cancel="onCancel"
     @confirm="onConfirm(rejectReason)"

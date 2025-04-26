@@ -1,13 +1,14 @@
 <script lang="ts" setup>
+import type { ITree, RootEntity } from '@airpower/web'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
-import { AButton, ADialog, ATable, ATreeBox, DialogProps, ITree, QueryRequest, RootEntity } from '@airpower/web'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<InventoryEntity>())
@@ -68,7 +69,8 @@ async function treeChanged(current: ITree | undefined) {
         break
       default:
     }
-  } else {
+  }
+  else {
     request.value.filter.exclude('storage', 'structure')
   }
   getList()
@@ -94,7 +96,7 @@ inventoryTypeChanged()
       :placeholder="treePlaceHolder"
       :tree-data="treeData"
       searchable
-      @on-change="treeChanged"
+      @changed="treeChanged"
     >
       <ATable
         :data-list="list"
@@ -106,7 +108,7 @@ inventoryTypeChanged()
         hide-delete
         hide-edit
         hide-field-selector
-        @on-select="onConfirm"
+        @select-changed="onConfirm"
       >
         <template #materialCode="{ data }">
           {{ data.material.code }}

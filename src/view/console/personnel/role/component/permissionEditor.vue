@@ -35,12 +35,12 @@ getPermissionList()
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="`${getModelName(RoleEntity)}权限授权`"
     confirm-text="保存"
     height="70%"
+    hide-fullscreen
     width="70%"
     @cancel="onCancel"
     @confirm="onSubmit"
@@ -54,7 +54,7 @@ getPermissionList()
       hide-field-selector
       hide-index
       show-select
-      @on-select="onSelect"
+      @select-changed="onSelect"
     />
   </ADialog>
 </template>
