@@ -114,7 +114,7 @@ inventoryTypeChanged()
     <APanel title="">
       <ATable
         v-loading="isLoading" :data-list="response.list" :entity="InventoryEntity" :field-list="tableField"
-        :service="InventoryService" ctrl-width="40" hide-add hide-delete hide-edit
+        :service="InventoryService" ctrl-width="60" hide-add hide-delete hide-edit
       >
         <template #afterButton>
           <el-radio-group v-model="inventoryType" @change="inventoryTypeChanged">

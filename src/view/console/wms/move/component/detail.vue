@@ -53,6 +53,7 @@ const {
           :field-list="getTableConfigList(MoveDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
+          hide-add
         >
           <template #storageName="{ data }">
             {{ data.inventory.storage.name }}({{ data.inventory.storage.code }})

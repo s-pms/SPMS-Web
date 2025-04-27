@@ -28,7 +28,6 @@ function onAudit() {
   <AButton
     :disabled="!bill.canAudit()"
     link
-    tooltip="审核"
     @click="onAudit"
   >
     审核
@@ -36,7 +35,6 @@ function onAudit() {
   <AButton
     :disabled="!bill.canReject()"
     link
-    tooltip="驳回"
     @click="onReject"
   >
     驳回

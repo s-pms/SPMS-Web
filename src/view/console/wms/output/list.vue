@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
+import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { OutputDetail, OutputEditor } from '@/view/console/wms/output/component'
@@ -31,7 +31,7 @@ const {
     <ATable
       v-loading="isLoading"
       :data-list="response.list"
-      :disable-edit="(row: OutputEntity) => !OutputStatusEnum.REJECTED.equalsKey(row.status)"
+      :disable-edit="(row) => !OutputStatusEnum.REJECTED.equalsKey(row.status)"
       :entity="OutputEntity"
       :select-list="selectList"
       :service="OutputService"

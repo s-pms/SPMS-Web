@@ -56,7 +56,7 @@ async function selectDepartment() {
       <AGroup title="可执行工序">
         <div class="list">
           <AButton
-            type="ADD"
+            icon="ADD"
             @click="selectOperation()"
           >
             添加工序
@@ -75,7 +75,7 @@ async function selectDepartment() {
       <AGroup title="所属部门">
         <div class="list">
           <AButton
-            type="ADD"
+            icon="ADD"
             @click="selectDepartment()"
           >
             添加部门

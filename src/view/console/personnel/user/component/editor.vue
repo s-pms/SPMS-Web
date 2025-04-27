@@ -45,7 +45,7 @@ async function selectDepartment() {
       </AGroup>
       <AGroup :column="2" title="角色和部门">
         <div class="role-list">
-          <AButton type="ADD" @click="selectRole()">
+          <AButton icon="ADD" @click="selectRole()">
             添加角色
           </AButton>
           <el-tag
@@ -56,7 +56,7 @@ async function selectDepartment() {
           </el-tag>
         </div>
         <div class="department-list">
-          <AButton type="ADD" @click="selectDepartment()">
+          <AButton icon="ADD" @click="selectDepartment()">
             添加部门
           </AButton>
           <el-tag

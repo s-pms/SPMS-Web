@@ -147,7 +147,7 @@ async function onUpload() {
             </el-link>
           </template>
           <template #addButton>
-            <AButton primary type="ADD" @click="onUpload">
+            <AButton primary icon="UPLOAD" @click="onUpload">
               上传附件
             </AButton>
           </template>

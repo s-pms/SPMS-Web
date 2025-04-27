@@ -88,6 +88,7 @@ async function onAddFinish(detail: InputDetailEntity) {
           :entity="InputDetailEntity"
           hide-delete
           hide-edit
+          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

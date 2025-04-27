@@ -101,6 +101,7 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
           "
           hide-delete
           hide-edit
+          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

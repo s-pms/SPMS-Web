@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { LogEntity } from '@/model/system/log/LogEntity'
+import type { IJson } from '@airpower/web'
 
-import { ACopy, ADialog, DialogProps, IJson, WebConfig } from '@airpower/web'
+import { LogEntity } from '@/model/system/log/LogEntity'
+import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
 
 defineProps(DialogProps.withParam(new LogEntity()))
 
@@ -17,7 +18,8 @@ function getTreeData(obj: IJson): IJson[] {
         children: getTreeData(obj[keys[i]]),
         value: '',
       })
-    } else {
+    }
+    else {
       treeData.push({
         key: i,
         name: `${keys[i]}`,

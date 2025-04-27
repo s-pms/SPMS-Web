@@ -6,6 +6,7 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '参与方',
+  hideFieldSelector: true,
 })
 export class ParticipantEntity extends BaseEntity {
   @Search()
@@ -53,7 +54,6 @@ export class ParticipantEntity extends BaseEntity {
   @Form({
     requiredString: true,
   })
-  @Search()
   @Field({
     label: '邮箱',
   })

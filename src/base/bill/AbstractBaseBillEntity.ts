@@ -1,7 +1,7 @@
 import type { IPayload, WebEnum } from '@airpower/web'
+import type { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 import { Field, Form, Search, Table } from '@airpower/web'
 import { BaseEntity } from '../BaseEntity'
-import type { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
 
 /**
  * # 单据基类

@@ -102,7 +102,7 @@ async function deleteDetail(index: number) {
           <template #addButton>
             <AButton
               v-if="isDetailEditable"
-              type="ADD"
+              icon="ADD"
               @click="addDetail()"
             >
               添加{{ getFieldLabel(OutputEntity, 'details') }}

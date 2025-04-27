@@ -49,10 +49,10 @@ const {
           :data-list="formData.participantList"
           :entity="ParticipantEntity"
           ctrl-width="40"
-          hide-delete
-          hide-edit
           hide-add
           hide-column-selector
+          hide-delete
+          hide-edit
         />
       </ATab>
       <ATab label="合同附件">
@@ -60,8 +60,9 @@ const {
           :data-list="formData.documentList"
           :entity="ContractDocumentEntity"
           ctrl-width="40"
-          hide-ctrl
+          hide-add
           hide-column-selector
+          hide-ctrl
         >
           <template #url="row">
             <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">

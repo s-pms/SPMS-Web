@@ -53,6 +53,7 @@ const {
           ctrl-width="80"
           hide-delete
           hide-edit
+          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

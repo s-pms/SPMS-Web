@@ -123,7 +123,7 @@ function onDeleteRoutingOperation(index: number) {
           <div class="button">
             <AButton
               v-if="!formData.isPublished"
-              type="ADD"
+              icon="ADD"
               @click="onAddOperation"
             >
               添加工序

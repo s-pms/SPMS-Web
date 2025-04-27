@@ -110,7 +110,7 @@ async function deleteDetail(index: number) {
           </template>
           <template #addButton>
             <AButton
-              type="ADD"
+              icon="ADD"
               @click="addDetail()"
             >
               添加{{ getFieldLabel(SaleEntity, 'details') }}

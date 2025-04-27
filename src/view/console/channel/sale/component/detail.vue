@@ -52,6 +52,7 @@ const {
           :field-list="getTableConfigList(SaleDetailEntity)"
           ctrl-width="60"
           hide-ctrl
+          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

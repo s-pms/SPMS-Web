@@ -83,7 +83,7 @@ async function selectParameter() {
       >
         <div class="parameter-list">
           <AButton
-            type="ADD"
+            type="CHECK"
             @click="selectParameter()"
           >
             选择

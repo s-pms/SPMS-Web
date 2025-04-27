@@ -42,4 +42,9 @@ export class BaseEntity extends RootEntity {
     label: '更新时间',
   })
   updateTime!: number
+
+  @Table({
+    removed: true,
+  })
+  declare isDisabled: boolean
 }
