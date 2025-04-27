@@ -60,7 +60,6 @@ export class ContractEntity extends BaseEntity implements IPayload {
     textarea: true,
     maxLength: 20000,
   })
-  @Search()
   @Field({
     label: '合同内容',
   })
@@ -100,6 +99,9 @@ export class ContractEntity extends BaseEntity implements IPayload {
   })
   endTime!: number
 
+  /**
+   * # 合同状态
+   */
   @Search()
   @Table({
     color: true,

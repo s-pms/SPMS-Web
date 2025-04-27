@@ -25,8 +25,8 @@ async function createMyPersonalToken() {
 
   await ElMessageBox.alert('创建私人令牌成功，请点击复制，后续将不再显示令牌！', '创建成功', {
     confirmButtonText: '点击复制',
-    showCancelButton: true,
     closeOnPressEscape: false,
+    type: 'success',
     showClose: false,
   })
   await useClipboard().toClipboard(token)
@@ -48,28 +48,13 @@ init()
 <template>
   <div class="personal-token">
     <div class="new">
-      <el-input
-        v-model="name"
-        placeholder="请输入令牌名称..."
-      />
-      <AButton
-        :disabled="!name"
-        primary
-        type="ADD"
-        @click="createMyPersonalToken()"
-      >
+      <el-input v-model="name" placeholder="请输入令牌名称..." />
+      <AButton :disabled="!name" primary type="ADD" @click="createMyPersonalToken()">
         创建令牌
       </AButton>
     </div>
-    <div
-      v-loading="isLoading"
-      class="main"
-    >
-      <div
-        v-for="item in list"
-        :key="item.id"
-        class="list"
-      >
+    <div v-loading="isLoading" class="main">
+      <div v-for="item in list" :key="item.id" class="list">
         <div class="item">
           <div class="title">
             {{ item.name }}
@@ -79,9 +64,7 @@ init()
           </div>
           <div class="status">
             <el-switch
-              :active-value="false"
-              :inactive-value="true"
-              :model-value="item.isDisabled"
+              :active-value="false" :inactive-value="true" :model-value="item.isDisabled"
               @click="onDisableOrEnable(item)"
             />
           </div>
