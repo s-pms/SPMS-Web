@@ -1,6 +1,6 @@
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import type { WebEnum } from '@airpower/web'
 import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { PickingDetailEntity } from './PickingDetailEntity'
 import { PickingStatusEnum } from './PickingStatusEnum'
@@ -43,8 +43,7 @@ export class PickingEntity extends AbstractBaseBillEntity<PickingDetailEntity> {
   @Table({
     width: 200,
     order: -70,
-    // todo
-    // payloadField: 'name',
+    payload: true,
   })
   structure!: StructureEntity
 

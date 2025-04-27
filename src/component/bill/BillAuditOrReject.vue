@@ -29,7 +29,6 @@ function onAudit() {
     :disabled="!bill.canAudit()"
     link
     tooltip="审核"
-    type="CONFIRM"
     @click="onAudit"
   >
     审核
@@ -38,7 +37,6 @@ function onAudit() {
     :disabled="!bill.canReject()"
     link
     tooltip="驳回"
-    type="LOCK"
     @click="onReject"
   >
     驳回

@@ -1,3 +1,4 @@
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
@@ -11,7 +12,11 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 @Model({
   label: '角色',
 })
-export class RoleEntity extends BaseEntity {
+export class RoleEntity extends BaseEntity implements IPayload {
+  getPayloadLabel() {
+    return this.name
+  }
+
   /**
    * ### 角色名称
    */

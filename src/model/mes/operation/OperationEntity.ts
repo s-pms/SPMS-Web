@@ -1,3 +1,4 @@
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Form, Model, Search, Table } from '@airpower/web'
 
@@ -8,7 +9,7 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
 @Model({
   label: '工序',
 })
-export class OperationEntity extends BaseEntity {
+export class OperationEntity extends BaseEntity implements IPayload {
   /**
    * ### 工序名称
    */
@@ -38,4 +39,8 @@ export class OperationEntity extends BaseEntity {
     label: '工序编码',
   })
   code!: string
+
+  getPayloadLabel(): string {
+    return `${this.name} (${this.code})`
+  }
 }

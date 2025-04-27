@@ -74,7 +74,6 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   spc!: string
 
   @Table({
-    // payloadField: 'name',
     payload: true,
     width: 100,
   })

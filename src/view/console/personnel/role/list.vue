@@ -44,7 +44,6 @@ const {
         <AButton
           link
           tooltip="授权菜单"
-          type="CONFIRM"
           @click="onMenuEditor(data)"
         >
           菜单
@@ -52,7 +51,6 @@ const {
         <AButton
           link
           tooltip="授权权限"
-          type="LOCK"
           @click="onPermissionEditor(data)"
         >
           权限

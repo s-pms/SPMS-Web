@@ -1,5 +1,5 @@
+import type { IPayload, ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import type { ITree } from '@airpower/web'
 import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**
@@ -10,7 +10,7 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
   label: '菜单',
   addChildPermission: 'add',
 })
-export class DepartmentEntity extends BaseEntity implements ITree {
+export class DepartmentEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     force: true,
     order: 99,
@@ -76,4 +76,8 @@ export class DepartmentEntity extends BaseEntity implements ITree {
     removed: true,
   })
   declare isDisabled: boolean
+
+  getPayloadLabel(): string {
+    return this.name
+  }
 }

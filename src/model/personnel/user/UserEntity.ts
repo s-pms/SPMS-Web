@@ -1,7 +1,7 @@
+import type { IPayload, IUser } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
-import type { IPayload, IUser } from '@airpower/web'
 import { DesensitizeType, Field, Form, Search, Table, Type } from '@airpower/web'
 import { RoleEntity } from '../role/RoleEntity'
 
@@ -34,8 +34,7 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   })
   @Table({
     force: true,
-    // todo
-    // phone: true,
+    phone: true,
     copy: true,
     desensitize: DesensitizeType.MOBILE,
   })
@@ -115,9 +114,8 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
    * ### 角色列表
    */
   @Table({
-    // todo
-    // payloadArray: true,
-    // payloadField: 'name',
+    array: true,
+    payload: true,
   })
   @Field({
     label: '角色',
@@ -129,9 +127,8 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     label: '部门',
   })
   @Table({
-    // todo
-    // payloadArray: true,
-    // payloadField: 'name',
+    payload: true,
+    array: true,
   })
   @Type(DepartmentEntity, true)
   departmentList!: DepartmentEntity[]
