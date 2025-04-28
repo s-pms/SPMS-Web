@@ -14,14 +14,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useEditor(props, MaterialService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    return submitData
-  },
-})
+} = useEditor(props, MaterialService)
 </script>
 
 <template>

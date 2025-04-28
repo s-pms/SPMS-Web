@@ -31,14 +31,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useEditor(props, ContractService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    return submitData
-  },
-})
+} = useEditor(props, ContractService)
 
 async function onAddParticipant() {
   const item: ParticipantEntity = await DialogUtil.show(ContractParticipantEditor)
