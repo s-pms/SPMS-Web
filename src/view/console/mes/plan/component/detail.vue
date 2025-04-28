@@ -74,7 +74,6 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :field-list="getTableConfigList(PlanDetailEntity)"
           ctrl-width="60"
           hide-add
           hide-ctrl

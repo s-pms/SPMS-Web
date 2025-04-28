@@ -52,7 +52,6 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="PickingDetailEntity"
-          :field-list="getTableConfigList(PickingDetailEntity)"
           hide-add
           hide-ctrl
         >

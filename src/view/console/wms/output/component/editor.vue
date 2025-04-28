@@ -84,7 +84,7 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="OutputDetailEntity"
-          :field-list="
+          :column-list="
             getTableConfigList(OutputDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
           hide-delete

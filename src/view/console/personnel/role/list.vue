@@ -26,10 +26,16 @@ const hook = useMyTable(RoleService, {
       ctrl-width="160"
     >
       <template #customRow="{ data }">
-        <AButton link tooltip="授权菜单" @click="onMenuEditor(data)">
+        <AButton
+          link
+          @click="onMenuEditor(data)"
+        >
           菜单
         </AButton>
-        <AButton link tooltip="授权权限" @click="onPermissionEditor(data)">
+        <AButton
+          link
+          @click="onPermissionEditor(data)"
+        >
           权限
         </AButton>
       </template>

@@ -100,7 +100,7 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :field-list="getTableConfigList(PlanDetailEntity).filter((item) => !['createTime'].includes(item.key))"
+          :column-list="getTableConfigList(PlanDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >

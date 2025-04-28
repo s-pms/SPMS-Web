@@ -29,17 +29,14 @@ getList()
     <ATable
       v-loading="isLoading"
       :data-list="list"
-      :default-expand-all="false"
       :entity="McpToolModel"
       hide-add
       hide-column-selector
-      hide-delete
-      hide-edit
+      hide-ctrl
     >
       <template #beforePage>
         <AButton
           link
-          type="SETTING"
           @click="copy()"
         >
           MCP服务地址: {{ mcpServer }}

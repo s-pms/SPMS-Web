@@ -18,4 +18,9 @@ export class McpToolModel extends RootEntity {
   @Table({
   })
   description!: string
+
+  @Table({
+    removed: true
+  })
+  declare isDisabled: boolean
 }

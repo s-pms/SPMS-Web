@@ -3,8 +3,8 @@ import type { ITree, RootEntity } from '@airpower/web'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
 
+import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
@@ -128,11 +128,11 @@ inventoryTypeChanged()
         >
           <AButton
             :disabled="data.isDisabled"
-            icon-button
-            tooltip="选择"
-            type="SELECT"
+            link
             @click="onConfirm(data)"
-          />
+          >
+            选择
+          </AButton>
         </template>
       </ATable>
     </ATreeBox>

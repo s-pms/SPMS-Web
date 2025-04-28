@@ -48,9 +48,9 @@ const {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="移库明细">
         <ATable
+          :column-list="getTableConfigList(MoveDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           :data-list="formData.details"
           :entity="MoveDetailEntity"
-          :field-list="getTableConfigList(MoveDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-add
           hide-delete
           hide-edit
@@ -67,11 +67,11 @@ const {
           <template #endRow="{ data }">
             <AButton
               :disabled="!MoveStatusEnum.MOVING.equalsKey(formData.status)"
-              icon-button
-              tooltip="添加完成"
-              type="CHECKIN"
+              link
               @click="addDetailFinishQuantity(data, formData.id)"
-            />
+            >
+              作业
+            </AButton>
           </template>
         </ATable>
       </AGroup>

@@ -62,11 +62,11 @@ getInput()
       >
         <AButton
           :disabled="data.isDisabled"
-          icon-button
-          tooltip="选择"
-          type="SELECT"
+          link
           @click="onConfirm(data)"
-        />
+        >
+          选择
+        </AButton>
       </template>
     </ATable>
   </ADialog>

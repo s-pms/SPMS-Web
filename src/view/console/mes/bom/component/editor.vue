@@ -84,7 +84,7 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="BomDetailEntity"
-          :field-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
+          :column-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           ctrl-width="80"
           hide-delete
           hide-edit

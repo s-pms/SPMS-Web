@@ -93,12 +93,12 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="出库明细">
         <ATable
-          :data-list="formData.details"
-          :entity="OutputDetailEntity"
-          :field-list="getTableConfigList(OutputDetailEntity).filter(
+          :column-list="getTableConfigList(OutputDetailEntity).filter(
             (item) => !['createTime'].includes(item.key),
           )
           "
+          :data-list="formData.details"
+          :entity="OutputDetailEntity"
           hide-add
           hide-delete
           hide-edit
@@ -113,11 +113,11 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
             <AButton
               :disabled="!OutputStatusEnum.OUTPUTTING.equalsKey(formData.status)
               "
-              icon-button
-              tooltip="添加完成"
-              type="CHECKIN"
+              link
               @click="onAddFinish(data, formData.id)"
-            />
+            >
+              作业
+            </AButton>
           </template>
         </ATable>
       </AGroup>

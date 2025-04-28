@@ -99,11 +99,11 @@ async function onAddFinish(detail: InputDetailEntity) {
           <template #endRow="{ data }">
             <AButton
               :disabled="!InputStatusEnum.INPUTTING.equalsKey(formData.status)"
-              icon-button
-              tooltip="添加完成"
-              type="CHECKIN"
+              link
               @click="onAddFinish(data)"
-            />
+            >
+              作业
+            </AButton>
           </template>
         </ATable>
       </AGroup>

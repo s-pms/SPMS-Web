@@ -104,13 +104,23 @@ inventoryTypeChanged()
 
 <template>
   <ATreeBox
-    v-loading="isLoadingTree" :placeholder="treePlaceHolder" :tree-data="treeData" searchable
+    v-loading="isLoadingTree"
+    :placeholder="treePlaceHolder"
+    :tree-data="treeData"
+    searchable
     @changed="treeChanged"
   >
     <APanel>
       <ATable
-        v-loading="isLoading" :data-list="response.list" :entity="InventoryEntity" :field-list="tableField"
-        :service="InventoryService" ctrl-width="60" hide-add hide-delete hide-edit
+        v-loading="isLoading"
+        :column-list="tableField"
+        :data-list="response.list"
+        :entity="InventoryEntity"
+        :service="InventoryService"
+        ctrl-width="60"
+        hide-add
+        hide-delete
+        hide-edit
       >
         <template #afterButton>
           <el-radio-group v-model="inventoryType" @change="inventoryTypeChanged">

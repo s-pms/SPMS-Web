@@ -53,11 +53,11 @@ const {
       >
         <AButton
           :disabled="data.isDisabled"
-          icon-button
-          tooltip="选择"
-          type="SELECT"
+          link
           @click="onConfirm(data)"
-        />
+        >
+          作业
+        </AButton>
       </template>
     </ATable>
   </ADialog>
