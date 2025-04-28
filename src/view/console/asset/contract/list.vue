@@ -1,28 +1,15 @@
 <script lang="ts" setup>
+import type { ContractEntity } from '@/model/asset/contract/ContractEntity'
 import { useMyTable } from '@/hook/useMyTable'
-import { ContractEntity } from '@/model/asset/contract/ContractEntity'
 import { ContractService } from '@/model/asset/contract/ContractService'
 
 import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
-import { AButton, APage, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
+import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ContractDetail, ContractEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onDelete,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onReloadData,
-}
-  = useMyTable(ContractService, {
-    editView: ContractEditor,
-  })
+const hook = useMyTable(ContractService, {
+  editView: ContractEditor,
+})
 
 async function onEnforce(contract: ContractEntity) {
   const roles: number[] = []
@@ -41,14 +28,14 @@ async function onEnforce(contract: ContractEntity) {
   else {
     await FeedbackUtil.confirmWarning('是否确认生效这个合同？', '生效合同')
   }
-  await ContractService.create(isLoading).enforce(contract)
-  onReloadData()
+  await ContractService.create(hook.isLoading).enforce(contract)
+  hook.onReloadData()
 }
 
 async function onStop(contract: ContractEntity) {
   await FeedbackUtil.confirmWarning('是否确认终止这个合同？', '终止合同')
-  await ContractService.create(isLoading).stop(contract)
-  onReloadData()
+  await ContractService.create(hook.isLoading).stop(contract)
+  hook.onReloadData()
 }
 
 async function onDetail(contract: ContractEntity) {
@@ -57,52 +44,25 @@ async function onDetail(contract: ContractEntity) {
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
       :disable-delete="row => !ContractStatusEnum.INVALID.equalsKey(row.status)"
       :disable-edit="row => !ContractStatusEnum.INVALID.equalsKey(row.status)"
-      :entity="ContractEntity"
-      :select-list="selectList"
-      :service="ContractService"
+      :use-hook="hook"
       ctrl-width="200"
-      @add="onAdd"
-      @delete="onDelete"
-      @edit="onEdit"
-      @search="onSearch"
-      @sort-changed="onSortChanged"
-      @select-changed="onSelected"
     >
       <template #customRow="row">
-        <AButton
-          link
-          :disabled="!ContractStatusEnum.INVALID.equalsKey(row.data.status)"
-          @click="onEnforce(row.data)"
-        >
+        <AButton :disabled="!ContractStatusEnum.INVALID.equalsKey(row.data.status)" link @click="onEnforce(row.data)">
           生效
         </AButton>
-        <AButton
-          link
-          :disabled="!ContractStatusEnum.EFFECTIVE.equalsKey(row.data.status)"
-          @click="onStop(row.data)"
-        >
+        <AButton :disabled="!ContractStatusEnum.EFFECTIVE.equalsKey(row.data.status)" link @click="onStop(row.data)">
           终止
         </AButton>
-        <AButton
-          link
-          @click="onDetail(row.data)"
-        >
+        <AButton link @click="onDetail(row.data)">
           查看
         </AButton>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

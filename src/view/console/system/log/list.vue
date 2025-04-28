@@ -1,21 +1,12 @@
 <script lang="ts" setup>
+import type { LogEntity } from '@/model/system/log/LogEntity'
 import { useMyTable } from '@/hook/useMyTable'
-import { LogEntity } from '@/model/system/log/LogEntity'
 import { LogService } from '@/model/system/log/LogService'
 
-import { APage, APanel, ATable, WebColor } from '@airpower/web'
+import { APanel, ATable, WebColor } from '@airpower/web'
 import Detail from './detail.vue'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-} = useMyTable(LogService, {
+const hook = useMyTable(LogService, {
   detailView: Detail,
 })
 
@@ -35,39 +26,14 @@ function getColor(log: LogEntity) {
 </script>
 
 <template>
-  <APanel title="">
-    <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
-      :entity="LogEntity"
-      :select-list="selectList"
-      :service="LogService"
-      ctrl-width="60"
-      hide-add
-      hide-delete
-      hide-edit
-      show-detail
-      @search="onSearch"
-      @sort-changed="onSortChanged"
-      @select-changed="onSelected"
-      @detail="onDetail"
-    >
+  <APanel>
+    <ATable :use-hook="hook" ctrl-width="60" hide-add hide-delete hide-edit show-detail>
       <template #pendingTime="{ data }">
-        <el-tag
-          :color="getColor(data)"
-          disable-transitions
-          effect="dark"
-        >
+        <el-tag :color="getColor(data)" disable-transitions effect="dark">
           {{ data.updateTime - data.createTime }}ms
         </el-tag>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

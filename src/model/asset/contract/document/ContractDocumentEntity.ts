@@ -1,5 +1,5 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import type { IFile } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Model, Table } from '@airpower/web'
 
 @Model({

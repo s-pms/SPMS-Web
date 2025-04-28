@@ -1,47 +1,32 @@
 <script lang="ts" setup>
 import { Constant } from '@/config/Constant'
 import { useMyTable } from '@/hook/useMyTable'
-import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
 import { ConfigurationEditor } from '@/view/console/system/config/component'
 
-import { APage, APanel, ATable } from '@airpower/web'
+import { AButton, APanel, ATable, FeedbackUtil } from '@airpower/web'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onEdit,
-  onAdd,
-  onPageChanged,
-  onSortChanged,
-  onDelete,
-} = useMyTable(ConfigService, {
+const hook = useMyTable(ConfigService, {
   editView: ConfigurationEditor,
 })
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      hide-add
-      :data-list="response.list"
       :disable-delete="(row) => row.isSystem"
-      :entity="ConfigEntity"
-      :service="ConfigService"
+      :use-hook="hook"
       ctrl-width="90"
-      @add="onAdd"
-      @delete="onDelete"
-      @edit="onEdit"
-      @search="onSearch"
-      @sort-changed="onSortChanged"
+      hide-add
     >
       <template #name="{ data }">
-        <el-link v-tip="data.description">
+        <AButton
+          link
+          @click="FeedbackUtil.toastInfo(data.description)"
+        >
           {{ data.name }}
-        </el-link>
+        </AButton>
       </template>
       <template #config="{ data }">
         <template v-if="ConfigType.BOOLEAN.equalsKey(data.type)">
@@ -55,12 +40,6 @@ const {
         </template>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

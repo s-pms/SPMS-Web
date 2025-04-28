@@ -1,49 +1,25 @@
 <script lang="ts" setup>
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
-import { APage, APanel, ATable } from '@airpower/web'
+import { APanel, ATable } from '@airpower/web'
 import { MoveDetail, MoveEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(MoveService, {
+const hook = useBillTable(MoveService, {
   editView: MoveEditor,
   detailView: MoveDetail,
 })
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
       :disable-edit="(row) => !MoveStatusEnum.REJECTED.equalsKey(row.status)"
-      :entity="MoveEntity"
-      :select-list="selectList"
-      :service="MoveService"
+      :use-hook="hook"
       ctrl-width="160"
       hide-delete
       show-detail
-      @add="onAdd"
-      @edit="onEdit"
-      @search="onSearch"
-      @detail="onDetail"
-      @sort-changed="onSortChanged"
-      @select-changed="onSelected"
     >
       <template #storageName="{ data }">
         {{ data.storage.name }}({{ data.storage.code }})
@@ -51,17 +27,11 @@ const {
       <template #customRow="{ data }">
         <BillAuditOrReject
           :bill="data"
-          @on-audit="onAudit"
-          @on-reject="onReject"
+          @on-audit="hook.onAudit"
+          @on-reject="hook.onReject"
         />
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

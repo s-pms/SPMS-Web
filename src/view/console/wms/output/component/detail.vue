@@ -99,9 +99,9 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
             (item) => !['createTime'].includes(item.key),
           )
           "
+          hide-add
           hide-delete
           hide-edit
-          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

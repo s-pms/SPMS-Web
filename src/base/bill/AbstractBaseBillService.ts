@@ -1,6 +1,6 @@
-import { AbstractBaseService } from '../AbstractBaseService'
 import type { AbstractBaseBillEntity } from './AbstractBaseBillEntity'
 import type { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
+import { AbstractBaseService } from '../AbstractBaseService'
 
 /**
  * # 单据抽象服务基类

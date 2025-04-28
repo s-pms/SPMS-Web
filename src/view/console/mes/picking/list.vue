@@ -1,64 +1,30 @@
 <script lang="ts" setup>
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { PickingStatusEnum } from '@/model/mes/picking/PickingStatusEnum'
-import { APage, APanel, ATable } from '@airpower/web'
+import { APanel, ATable } from '@airpower/web'
 import { PickingDetail, PickingEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onReject,
-  onAudit,
-} = useBillTable(PickingService, {
+const hook = useBillTable(PickingService, {
   editView: PickingEditor,
   detailView: PickingDetail,
 })
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
       :disable-edit="(row) => row.status !== PickingStatusEnum.REJECTED.key"
-      :entity="PickingEntity"
-      :select-list="selectList"
-      :service="PickingService"
+      :use-hook="hook"
       ctrl-width="160"
       hide-delete
       show-detail
-      @add="onAdd"
-      @edit="onEdit"
-      @search="onSearch"
-      @detail="onDetail"
-      @sort-changed="onSortChanged"
-      @select-changed="onSelected"
     >
       <template #customRow="{ data }">
-        <BillAuditOrReject
-          :bill="data"
-          @on-audit="onAudit"
-          @on-reject="onReject"
-        />
+        <BillAuditOrReject :bill="data" @on-audit="hook.onAudit" @on-reject="hook.onReject" />
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

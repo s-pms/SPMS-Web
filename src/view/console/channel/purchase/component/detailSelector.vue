@@ -45,9 +45,9 @@ getDetail()
       :select-list="selectList"
       :show-select="isMultiple"
       ctrl-width="80"
+      hide-column-selector
       hide-delete
       hide-edit
-      hide-column-selector
       @select-changed="onSelected"
     >
       <template #materialCode="{ data }">

@@ -14,7 +14,8 @@ export class PurchasePriceService extends AbstractBaseService<PurchasePriceEntit
     entity.supplier = new SupplierEntity(supplierId)
     try {
       return this.api('getByMaterialAndSupplier').callbackError().request(entity, PurchasePriceEntity)
-    } catch (e) {
+    }
+    catch (e) {
       console.error(e)
       return null
     }

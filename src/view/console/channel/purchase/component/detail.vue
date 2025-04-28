@@ -53,8 +53,8 @@ const {
           :data-list="formData.details"
           :entity="PurchaseDetailEntity"
           :field-list="getTableConfigList(PurchaseDetailEntity)"
-          hide-ctrl
           hide-add
+          hide-ctrl
         >
           <template #materialCode="{ data }">
             {{ data.material?.code }}

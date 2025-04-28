@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 import type { IJson } from '@airpower/web'
+import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
 import { computed } from 'vue'
 
@@ -18,7 +18,8 @@ function getTreeData(obj: IJson): IJson[] {
         children: getTreeData(obj[keys[i]]),
         value: '',
       })
-    } else {
+    }
+    else {
       treeData.push({
         key: i,
         name: `${keys[i]}`,
@@ -33,7 +34,8 @@ function getTreeData(obj: IJson): IJson[] {
 const json = computed(() => {
   try {
     return JSON.parse(props.param.request)
-  } catch (e) {
+  }
+  catch (e) {
     console.error(e)
     return {}
   }

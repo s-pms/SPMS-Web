@@ -104,7 +104,7 @@ const modules = ref<IJson[]>([
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <div class="index">
       <div
         v-for="(module, index) in modules"

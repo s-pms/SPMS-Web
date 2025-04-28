@@ -1,15 +1,14 @@
 <script lang="ts" setup>
+import type { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { useMyTable } from '@/hook/useMyTable'
-import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 
 import { DeviceService } from '@/model/asset/device/DeviceService'
-import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
+import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import { DeviceEditor, DeviceMonitor } from './component'
 
-const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useMyTable(DeviceService, {
-    editView: DeviceEditor,
-  })
+const hook = useMyTable(DeviceService, {
+  editView: DeviceEditor,
+})
 
 async function showMonitor(device: DeviceEntity) {
   DialogUtil.show(DeviceMonitor, device)
@@ -17,39 +16,17 @@ async function showMonitor(device: DeviceEntity) {
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
-      :entity="DeviceEntity"
-      :select-list="selectList"
-      :service="DeviceService"
+      :use-hook="hook"
       ctrl-width="130"
-      @add="onAdd"
-      @delete="onDelete"
-      @edit="onEdit"
-      @s="onSortChanged"
-      @search="onSearch"
-      @select-changed="onSelected"
     >
       <template #customRow="{ data }">
-        <AButton
-          :disabled="!data.isReporting"
-          link
-          tooltip="实时监控"
-          type="MONITOR"
-          @click="showMonitor(data)"
-        >
+        <AButton :disabled="!data.isReporting" link @click="showMonitor(data)">
           监控
         </AButton>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

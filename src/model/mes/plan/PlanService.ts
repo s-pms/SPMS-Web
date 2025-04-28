@@ -1,5 +1,5 @@
-import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { PlanDetailEntity } from './PlanDetailEntity'
+import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { PlanEntity } from './PlanEntity'
 
 export class PlanService extends AbstractBaseBillService<PlanDetailEntity, PlanEntity> {

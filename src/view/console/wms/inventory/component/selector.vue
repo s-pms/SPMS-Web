@@ -4,9 +4,9 @@ import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
+
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
-
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 import { AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest } from '@airpower/web'
 import { ref } from 'vue'
@@ -105,9 +105,9 @@ inventoryTypeChanged()
         :select-list="selectList"
         :show-select="isMultiple"
         ctrl-width="80"
+        hide-column-selector
         hide-delete
         hide-edit
-        hide-column-selector
         @select-changed="onConfirm"
       >
         <template #materialCode="{ data }">

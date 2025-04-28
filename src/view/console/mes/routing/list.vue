@@ -1,21 +1,12 @@
 <script lang="ts" setup>
+import type { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import PublishButton from '@/component/PublishButton.vue'
 import { useMyTable } from '@/hook/useMyTable'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { AButton, APage, APanel, ATable, DialogUtil } from '@airpower/web'
+import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import { RoutingEditor, RoutingProgress } from './component'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onAdd,
-  onEdit,
-  onDelete,
-  onPageChanged,
-  onPublish,
-} = useMyTable(RoutingService, {
+const hook = useMyTable(RoutingService, {
   editView: RoutingEditor,
 })
 
@@ -25,19 +16,12 @@ async function onProgress(data: RoutingEntity) {
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
       :disable-delete="(row) => row.isPublished"
       :disable-edit="(row) => row.isPublished"
-      :entity="RoutingEntity"
-      :service="RoutingService"
+      :use-hook="hook"
       ctrl-width="160"
-      @add="onAdd"
-      @delete="onDelete"
-      @edit="onEdit"
-      @search="onSearch"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}
@@ -52,24 +36,12 @@ async function onProgress(data: RoutingEntity) {
         {{ data.bom?.name || '-' }}
       </template>
       <template #customRow="{ data }">
-        <PublishButton
-          :data
-          @click="onPublish"
-        />
-        <AButton
-          link
-          @click="onProgress(data)"
-        >
+        <PublishButton :data @click="hook.onPublish" />
+        <AButton link @click="onProgress(data)">
           流程
         </AButton>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

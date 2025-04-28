@@ -41,9 +41,9 @@ const {
       }"
       ctrl-width="80"
       hide-add
+      hide-column-selector
       hide-delete
       hide-edit
-      hide-column-selector
       @search="onSearch"
       @select-changed="onSelected"
     >

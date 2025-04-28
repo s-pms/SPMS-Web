@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import type { IJson } from '@airpower/web'
 import { UserService } from '@/model/personnel/user/UserService'
-import type { AirAny } from '@airpower/type/AirType'
 import { DateTimeUtil, FeedbackUtil, RouterUtil, WebConfig } from '@airpower/web'
 import { ref } from 'vue'
 
@@ -12,8 +12,9 @@ async function init() {
   try {
     const accessToken = await UserService.create(isLoading).callbackCode(platform, code)
     WebConfig.saveAccessToken(accessToken)
-  } catch (e) {
-    await FeedbackUtil.alertError((e as AirAny).message)
+  }
+  catch (e) {
+    await FeedbackUtil.alertError((e as IJson).message)
     return
   }
 
@@ -22,7 +23,8 @@ async function init() {
   // 判断当前窗口是否由 window.open 打开
   if (window.opener) {
     window.close()
-  } else {
+  }
+  else {
     window.location.replace('/console')
   }
 }

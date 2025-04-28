@@ -51,9 +51,9 @@ const {
           :entity="BomDetailEntity"
           :field-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           ctrl-width="80"
+          hide-add
           hide-delete
           hide-edit
-          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

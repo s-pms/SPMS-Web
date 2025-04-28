@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import type { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
-import type { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { ParameterEditor } from '@/view/console/iot/parameter/component'
 
 import { ADialog, AEmpty, DialogProps, DialogUtil, WebColor } from '@airpower/web'
@@ -66,7 +66,8 @@ async function showHistory(item: CollectionEntity) {
   clearInterval(timer)
   try {
     await DialogUtil.show(DeviceCollectHistory, item)
-  } finally {
+  }
+  finally {
     timer = setInterval(() => {
       getCurrentReport()
     }, 1000)

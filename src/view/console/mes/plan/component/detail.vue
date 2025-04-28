@@ -76,8 +76,8 @@ const {
           :entity="PlanDetailEntity"
           :field-list="getTableConfigList(PlanDetailEntity)"
           ctrl-width="60"
-          hide-ctrl
           hide-add
+          hide-ctrl
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

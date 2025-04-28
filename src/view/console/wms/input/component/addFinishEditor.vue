@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+import type { FormInstance } from 'element-plus'
+
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputDetailService } from '@/model/wms/input/InputDetailService'
 import { InputService } from '@/model/wms/input/InputService'
-
 import { StorageSelector } from '@/view/console/factory/storage/component'
 import { ADialog, AInput, DialogProps, DialogUtil } from '@airpower/web'
-import type { FormInstance } from 'element-plus'
 import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new InputDetailEntity()))

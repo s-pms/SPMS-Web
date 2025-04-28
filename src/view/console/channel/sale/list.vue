@@ -1,49 +1,25 @@
 <script lang="ts" setup>
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
-import { APage, APanel, ATable } from '@airpower/web'
+import { APanel, ATable } from '@airpower/web'
 import { SaleDetail, SaleEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(SaleService, {
+const hook = useBillTable(SaleService, {
   editView: SaleEditor,
   detailView: SaleDetail,
 })
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
       :disable-edit="(row) => !SaleStatusEnum.REJECTED.equalsKey(row.status)"
-      :entity="SaleEntity"
-      :select-list="selectList"
-      :service="SaleService"
+      :use-hook="hook"
       ctrl-width="160"
       hide-delete
       show-detail
-      @add="onAdd"
-      @edit="onEdit"
-      @search="onSearch"
-      @detail="onDetail"
-      @sort-changed="onSortChanged"
-      @select-changed="onSelected"
     >
       <template #customerCode="{ data }">
         {{ data.customer?.code || '-' }}
@@ -52,19 +28,9 @@ const {
         {{ data.customer?.name || '-' }}
       </template>
       <template #customRow="{ data }">
-        <BillAuditOrReject
-          :bill="data"
-          @on-audit="onAudit"
-          @on-reject="onReject"
-        />
+        <BillAuditOrReject :bill="data" @on-audit="hook.onAudit" @on-reject="hook.onReject" />
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

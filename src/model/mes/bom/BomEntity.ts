@@ -1,7 +1,7 @@
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
-import type { IPayload } from '@airpower/web'
 import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 /**

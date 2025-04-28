@@ -112,13 +112,13 @@ async function onUpload() {
           :data-list="formData.participantList"
           :entity="ParticipantEntity"
           ctrl-width="90"
-          hide-delete
-          hide-edit
           hide-add
           hide-column-selector
+          hide-delete
+          hide-edit
         >
           <template #addButton>
-            <AButton primary icon="ADD" @click="onAddParticipant">
+            <AButton icon="ADD" primary @click="onAddParticipant">
               添加参与方
             </AButton>
           </template>
@@ -137,9 +137,9 @@ async function onUpload() {
           :data-list="formData.documentList"
           :entity="ContractDocumentEntity"
           ctrl-width="90"
+          hide-column-selector
           hide-delete
           hide-edit
-          hide-column-selector
         >
           <template #url="row">
             <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">
@@ -147,7 +147,7 @@ async function onUpload() {
             </el-link>
           </template>
           <template #addButton>
-            <AButton primary icon="UPLOAD" @click="onUpload">
+            <AButton icon="UPLOAD" primary @click="onUpload">
               上传附件
             </AButton>
           </template>

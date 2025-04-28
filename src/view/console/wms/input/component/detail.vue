@@ -86,9 +86,9 @@ async function onAddFinish(detail: InputDetailEntity) {
         <ATable
           :data-list="formData.details"
           :entity="InputDetailEntity"
+          hide-add
           hide-delete
           hide-edit
-          hide-add
         >
           <template #materialCode="{ data }">
             {{ data.material.code }}

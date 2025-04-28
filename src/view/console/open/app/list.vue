@@ -1,25 +1,14 @@
 <script lang="ts" setup>
+import type { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { useMyTable } from '@/hook/useMyTable'
-import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 
-import { AButton, APage, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
+import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ElMessageBox } from 'element-plus'
 import useClipboard from 'vue-clipboard3'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onDelete,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onDisable,
-  onEnable,
-  onReloadData,
-} = useMyTable(OpenAppService, {
+const hook = useMyTable(OpenAppService, {
   editView: OpenAppEditor,
 })
 const { toClipboard } = useClipboard()
@@ -31,7 +20,7 @@ async function onResetSecret(app: OpenAppEntity) {
     cancelButtonText: '取消',
     type: 'warning',
   })
-  const newSecret = await OpenAppService.create(isLoading).resetSecret(app)
+  const newSecret = await OpenAppService.create(hook.isLoading).resetSecret(app)
   await ElMessageBox.alert('请注意，服务端将不再保存当前应用的 AppSecret，请务必将此密钥保存到安全的地方。', '重置AppSecret成功', {
     showClose: false,
     closeOnPressEscape: false,
@@ -41,7 +30,7 @@ async function onResetSecret(app: OpenAppEntity) {
   })
   await toClipboard(newSecret)
   FeedbackUtil.toastSuccess('复制AppSecret成功')
-  onReloadData()
+  hook.onReloadData()
 }
 
 async function onResetKeyPair(app: OpenAppEntity) {
@@ -51,7 +40,7 @@ async function onResetKeyPair(app: OpenAppEntity) {
     cancelButtonText: '取消',
     type: 'warning',
   })
-  const newSecret = await OpenAppService.create(isLoading).resetKeyPair(app)
+  const newSecret = await OpenAppService.create(hook.isLoading).resetKeyPair(app)
   await ElMessageBox.alert('请注意，服务端将不再保存当前应用的 公钥，请务必将此密钥保存到安全的地方。', '重置RSA密钥对成功', {
     showClose: false,
     closeOnPressEscape: false,
@@ -61,12 +50,12 @@ async function onResetKeyPair(app: OpenAppEntity) {
   })
   await toClipboard(newSecret)
   FeedbackUtil.toastSuccess('复制RSA公钥成功')
-  onReloadData()
+  hook.onReloadData()
 }
 
 async function onAdd() {
   const appSecret: string = await DialogUtil.show(OpenAppEditor)
-  onReloadData()
+  hook.onReloadData()
   await ElMessageBox.alert('请注意，服务端将不再保存当前应用的 AppSecret/公钥，请务必保存到安全的地方。', '应用创建成功', {
     showClose: false,
     closeOnPressEscape: false,
@@ -91,13 +80,14 @@ function openOAuth2(app: OpenAppEntity) {
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading" :data-list="response.list" :disable-edit="(row) => row.isDisabled" :entity="OpenAppEntity" :service="OpenAppService"
+      :disable-edit="(row) => row.isDisabled"
+      :on-add="onAdd"
+      :use-hook="hook"
       ctrl-width="280"
-      hide-delete show-enable-and-disable @add="onAdd" @delete="onDelete" @edit="onEdit"
-      @search="onSearch"
-      @sort-changed="onSortChanged" @disable="onDisable" @enable="onEnable"
+      hide-delete
+      show-enable-and-disable
     >
       <template #afterButton>
         <AButton icon="CHECK" tooltip="测试API" @click="onTest()">
@@ -121,9 +111,6 @@ function openOAuth2(app: OpenAppEntity) {
         </AButton>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage :response="response" @changed="onPageChanged" />
-    </template>
   </APanel>
 </template>
 

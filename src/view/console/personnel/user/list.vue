@@ -1,28 +1,15 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
+
 import { useMyTable } from '@/hook/useMyTable'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-
 import { UserService } from '@/model/personnel/user/UserService'
-import { APage, APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
+import { APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
 import { ref } from 'vue'
 import { UserEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  request,
-  onPageChanged,
-  onDelete,
-  onEdit,
-  onAdd,
-  onSearch,
-  onEnable,
-  onDisable,
-  onGetList,
-} = useMyTable(UserService, {
+const hook = useMyTable(UserService, {
   editView: UserEditor,
 })
 
@@ -31,8 +18,8 @@ const departmentList: Ref<DepartmentEntity[]> = ref([])
 const isLoadingTree = ref(false)
 
 function departmentChanged(department?: DepartmentEntity) {
-  request.value.filter.departmentId = department?.id || undefined
-  onGetList()
+  hook.request.value.filter.departmentId = department?.id || undefined
+  hook.onGetList()
 }
 
 async function getDepartmentList() {
@@ -48,27 +35,12 @@ getDepartmentList()
     searchable
     @changed="departmentChanged"
   >
-    <APanel title="">
+    <APanel>
       <ATable
-        v-loading="isLoading"
-        :data-list="response.list"
-        :entity="UserEntity"
-        :service="UserService"
+        :use-hook="hook"
         ctrl-width="150"
         show-enable-and-disable
-        @add="onAdd"
-        @delete="onDelete"
-        @edit="onEdit"
-        @search="onSearch"
-        @enable="onEnable"
-        @disable="onDisable"
       />
-      <template #footerLeft>
-        <APage
-          :response="response"
-          @changed="onPageChanged"
-        />
-      </template>
     </APanel>
   </ATreeBox>
 </template>

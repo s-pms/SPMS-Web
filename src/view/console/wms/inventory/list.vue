@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import type {
-  ITree,
-  QueryPage,
-  RootEntity,
-} from '@airpower/web'
+import type { ITree, QueryPage, RootEntity } from '@airpower/web'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
@@ -111,7 +107,7 @@ inventoryTypeChanged()
     v-loading="isLoadingTree" :placeholder="treePlaceHolder" :tree-data="treeData" searchable
     @changed="treeChanged"
   >
-    <APanel title="">
+    <APanel>
       <ATable
         v-loading="isLoading" :data-list="response.list" :entity="InventoryEntity" :field-list="tableField"
         :service="InventoryService" ctrl-width="60" hide-add hide-delete hide-edit
@@ -141,10 +137,10 @@ inventoryTypeChanged()
         <template #unitName="{ data }">
           {{ data.material.unit.name }}
         </template>
+        <template #beforePage>
+          <APage :response="response" @changed="onPageChanged" />
+        </template>
       </ATable>
-      <template #footerLeft>
-        <APage :response="response" @changed="onPageChanged" />
-      </template>
     </APanel>
   </ATreeBox>
 </template>

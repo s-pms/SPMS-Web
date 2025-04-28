@@ -25,26 +25,27 @@ getList()
 </script>
 
 <template>
-  <APanel title="">
-    <template #footerLeft>
-      <AButton
-        link
-        type="SETTING"
-        @click="copy()"
-      >
-        MCP服务地址: {{ mcpServer }}
-      </AButton>
-    </template>
+  <APanel>
     <ATable
       v-loading="isLoading"
-      hide-column-selector
-      hide-add
       :data-list="list"
       :default-expand-all="false"
       :entity="McpToolModel"
+      hide-add
+      hide-column-selector
       hide-delete
       hide-edit
-    />
+    >
+      <template #beforePage>
+        <AButton
+          link
+          type="SETTING"
+          @click="copy()"
+        >
+          MCP服务地址: {{ mcpServer }}
+        </AButton>
+      </template>
+    </ATable>
   </APanel>
 </template>
 

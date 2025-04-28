@@ -1,29 +1,22 @@
 <script lang="ts" setup>
+import type { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 import { useMyTable } from '@/hook/useMyTable'
-import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 
-import { APage, APanel, ATable, DateTimeUtil } from '@airpower/web'
+import { APanel, ATable, DateTimeUtil } from '@airpower/web'
 import { ref } from 'vue'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-} = useMyTable(CodeRuleService, {
+const hook = useMyTable(CodeRuleService, {
   editView: CodeRuleEditor,
 })
 
 const fieldList = ref<CodeRuleField[]>([])
 
 async function getFieldList() {
-  fieldList.value = await CodeRuleService.create(isLoading).getFieldList()
+  fieldList.value = await CodeRuleService.create(hook.isLoading).getFieldList()
 }
 
 getFieldList()
@@ -35,7 +28,7 @@ function getFieldName(codeRule: CodeRuleEntity) {
 const paramList = ref<CodeRuleParam[]>([])
 
 async function getParamList() {
-  paramList.value = await CodeRuleService.create(isLoading).getParamList()
+  paramList.value = await CodeRuleService.create(hook.isLoading).getParamList()
 }
 
 getParamList()
@@ -55,18 +48,12 @@ function nextCode(codeRule: CodeRuleEntity) {
 </script>
 
 <template>
-  <APanel title="">
+  <APanel>
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
-      :entity="CodeRuleEntity"
-      :service="CodeRuleService"
+      :use-hook="hook"
       ctrl-width="105"
       hide-add
       hide-delete
-      @edit="onEdit"
-      @search="onSearch"
-      @sort-changed="onSortChanged"
     >
       <template #ruleField="{ data }">
         {{ getFieldName(data) }}
@@ -75,12 +62,6 @@ function nextCode(codeRule: CodeRuleEntity) {
         {{ data.prefix }}{{ nextCode(data) }}{{ (data.currentSn + 1).toString().padStart(data.snLength, '0') }}
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @changed="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 
