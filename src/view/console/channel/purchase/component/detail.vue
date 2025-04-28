@@ -6,7 +6,7 @@ import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
 
@@ -53,7 +53,8 @@ const {
           :data-list="formData.details"
           :entity="PurchaseDetailEntity"
           hide-add
-          hide-ctrl
+          hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material?.code }}
