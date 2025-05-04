@@ -1,10 +1,10 @@
-import { AirModel } from '@airpower/base/AirModel'
+import { Transformer } from '@airpower/web'
 
 /**
  * # 授权范围
  * @author Hamm.cn
  */
-export class OauthScope extends AirModel {
+export class OauthScope extends Transformer {
   /**
    * ### 是否默认
    */

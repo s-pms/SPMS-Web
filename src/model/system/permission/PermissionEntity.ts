@@ -1,6 +1,6 @@
-import type { ITree } from '@airpower/interface/ITree'
+import type { ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { PermissionSystemEnum } from './PermissionSystemEnum'
 import { PermissionTypeEnum } from './PermissionTypeEnum'
 
@@ -16,7 +16,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
    * ### 权限名称
    */
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -31,8 +31,8 @@ export class PermissionEntity extends BaseEntity implements ITree {
    * ### 权限唯一标识
    */
   @Table({
-    forceShow: true,
-    copyField: true,
+    force: true,
+    copy: true,
   })
   @Form({
     requiredString: '请输入权限标识...',
@@ -44,7 +44,7 @@ export class PermissionEntity extends BaseEntity implements ITree {
   identity!: string
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
   })
   @Search()
@@ -55,9 +55,9 @@ export class PermissionEntity extends BaseEntity implements ITree {
   type!: number
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
-    orderNumber: -100,
+    order: -100,
   })
   @Field({
     label: '系统权限',
@@ -76,26 +76,25 @@ export class PermissionEntity extends BaseEntity implements ITree {
   /**
    * ### 子权限列表
    */
-  @Field({
-
-    type: PermissionEntity,
-    array: true,
-  })
+  @Field({})
+  @Type(PermissionEntity, true)
   children!: this[]
 
   /**
    * ### 父权限
    */
-  @Field({
-
-    type: PermissionEntity,
-  })
+  @Type(PermissionEntity)
   parent!: this
 
   @Table({
     removed: true,
   })
   declare createTime: number
+
+  @Table({
+    removed: true,
+  })
+  declare updateTime: number
 
   @Table({
     removed: true,

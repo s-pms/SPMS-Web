@@ -1,6 +1,6 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { SaleDetailEntity } from './SaleDetailEntity'
 import { SaleStatusEnum } from './SaleStatusEnum'
@@ -36,7 +36,6 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   customerId!: number
 
   @Table({
-    nowrap: true,
   })
   @Form({
     textarea: true,
@@ -50,7 +49,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   @Table({
     width: 150,
     money: true,
-    forceShow: true,
+    force: true,
   })
   @Form({
     suffixText: '元',
@@ -62,9 +61,9 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
 
   @Table({
     width: 150,
-    showColor: true,
-    orderNumber: -80,
-    forceShow: true,
+    color: true,
+    order: -80,
+    force: true,
   })
   @Field({
     label: '销售状态',
@@ -74,9 +73,8 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
 
   @Field({
     label: '销售明细',
-    type: SaleDetailEntity,
-    array: true,
   })
+  @Type(SaleDetailEntity, true)
   details: SaleDetailEntity[] = []
 
   @Form({
@@ -84,19 +82,19 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   })
   @Field({
     label: '客户',
-    type: CustomerEntity,
   })
+  @Type(CustomerEntity)
   customer!: CustomerEntity
 
-  getAuditingStatus(): AirEnum {
+  getAuditingStatus(): WebEnum {
     return SaleStatusEnum.AUDITING
   }
 
-  getAuditedStatus(): AirEnum {
+  getAuditedStatus(): WebEnum {
     return SaleStatusEnum.OUTPUTTING
   }
 
-  getRejectedStatus(): AirEnum {
+  getRejectedStatus(): WebEnum {
     return SaleStatusEnum.REJECTED
   }
 }

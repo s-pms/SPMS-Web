@@ -1,19 +1,18 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
+import type { FormInstance } from 'element-plus'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new PlanDetailEntity()))
+const props = defineProps(DialogProps.withParam(new PlanDetailEntity()))
 
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
   props.onConfirm(formData.value)
@@ -26,13 +25,13 @@ async function onSubmit() {
     :loading="isLoading"
     title="计划明细"
     width="600px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="PlanDetailService.createValidator(formData)"
+      :rules="PlanDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -46,7 +45,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="PlanDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(PlanDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

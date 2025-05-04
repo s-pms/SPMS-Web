@@ -2,7 +2,7 @@
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import type { PropType, Ref } from 'vue'
-import { ACopy, AFormField } from '@airpower/component'
+import { ACopy, AFormField } from '@airpower/web'
 import { inject, ref } from 'vue'
 
 const props = defineProps({
@@ -31,7 +31,7 @@ if (injectFormData && injectFormData.value) {
   formData.value = injectFormData.value
 }
 if (!formData.value) {
-  throw new Error('请手动为 formData 绑定v-model或使用useAirEditor创建表单对象(推荐)！！！')
+  throw new Error('请手动为 formData 绑定v-model或使用useEditor创建表单对象(推荐)！！！')
 }
 </script>
 

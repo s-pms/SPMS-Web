@@ -1,12 +1,11 @@
-import { AirModel } from '@airpower/base/AirModel'
-import { Field } from '@airpower/decorator'
+import { Field, Transformer } from '@airpower/web'
 
 /**
  * # 编码规则表格
  *
  * @author Hamm.cn
  */
-export class CodeRuleField extends AirModel {
+export class CodeRuleField extends Transformer {
   @Field({
     label: '默认前缀',
   })
@@ -19,7 +18,6 @@ export class CodeRuleField extends AirModel {
 
   @Field({
     label: '表格ID',
-    type: Number,
   })
   key!: number
 }

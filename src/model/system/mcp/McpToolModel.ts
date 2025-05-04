@@ -1,15 +1,14 @@
-import { AirEntity } from '@airpower/base/AirEntity'
-import { Field, Model, Table } from '@airpower/decorator'
+import { Field, Model, RootEntity, Table } from '@airpower/web'
 
 @Model({
   hideFieldSelector: true,
 })
-export class McpToolModel extends AirEntity {
+export class McpToolModel extends RootEntity {
   @Field({
     label: '工具名称',
   })
   @Table({
-    copyField: true,
+    copy: true,
   })
   name!: string
 
@@ -17,7 +16,11 @@ export class McpToolModel extends AirEntity {
     label: '工具描述',
   })
   @Table({
-    nowrap: true,
   })
   description!: string
+
+  @Table({
+    removed: true
+  })
+  declare isDisabled: boolean
 }

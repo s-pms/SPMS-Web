@@ -1,17 +1,10 @@
 <script lang="ts" setup>
 import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { ADialog, AFormField, AGroup } from '@airpower/component'
-import { AirApi } from '@airpower/config/AirApi'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirCrypto } from '@airpower/helper/AirCrypto'
-
-import { AirHttp } from '@airpower/helper/AirHttp'
-import { AirRand } from '@airpower/helper/AirRand'
+import { ADialog, AFormField, AGroup, CryptoUtil, DialogProps, FeedbackUtil, RandomUtil } from '@airpower/web'
 import { computed, ref } from 'vue'
 
-const props = defineProps(airPropsParam())
+const props = defineProps(DialogProps.withParam())
 
 const app = ref(new OpenAppEntity())
 app.value.appKey = ''
@@ -30,25 +23,25 @@ const timestamp = ref(new Date().valueOf())
 
 const url = ref('openApi/test/test')
 
-const nonce = ref(AirRand.getRandMixedCharString())
+const nonce = ref(RandomUtil.getRandMixedCharString())
 
 if (OpenAppArithmeticEnum.RSA.equalsKey(app.value.arithmetic)) {
-  AirAlert.warning('前端暂未支持RSA加解密的测试，请自行测试')
+  FeedbackUtil.toastWarning('前端暂未支持RSA加解密的测试，请自行测试')
   props.onCancel()
 }
 
-app.value.appKey = AirApi.getStorage(APP_KEY) || ''
-app.value.appSecret = AirApi.getStorage(APP_SECRET) || ''
+app.value.appKey = localStorage.getItem(APP_KEY) || ''
+app.value.appSecret = localStorage.getItem(APP_SECRET) || ''
 
 const content = computed(() => {
-  AirApi.setStorage(APP_KEY, app.value.appKey)
-  AirApi.setStorage(APP_SECRET, app.value.appSecret)
+  localStorage.setItem(APP_KEY, app.value.appKey)
+  localStorage.setItem(APP_SECRET, app.value.appSecret)
   switch (app.value.arithmetic) {
     case OpenAppArithmeticEnum.AES.key:
       if (!app.value.appSecret) {
         return ''
       }
-      return AirCrypto.aesEncrypt(json.value, app.value.appSecret)
+      return CryptoUtil.aesEncrypt(json.value, app.value.appSecret)
     default:
       return json.value
   }
@@ -56,27 +49,27 @@ const content = computed(() => {
 const source = computed(
   () => app.value.appSecret + app.value.appKey + version + timestamp.value + nonce.value + content.value,
 )
-const signature = computed(() => AirCrypto.sha1(source.value))
+const signature = computed(() => CryptoUtil.sha1(source.value))
 
 async function onTest() {
-  const res = await new AirHttp(`${window.location.origin}/api/${url.value}`).send({
-    appKey: app.value.appKey,
-    content: content.value,
-    signature: signature.value,
-    version,
-    timestamp: timestamp.value,
-    nonce: nonce.value,
-  })
+  // const res = await new Http(`${window.location.origin}/api/${url.value}`).send({
+  //   appKey: app.value.appKey,
+  //   content: content.value,
+  //   signature: signature.value,
+  //   version,
+  //   timestamp: timestamp.value,
+  //   nonce: nonce.value,
+  // })
+  const res = ''
 
-  AirRand.getRandCharString()
-  const data = AirCrypto.aesDecrypt(res, app.value.appSecret)
-  AirAlert.success(data, '响应数据')
+  RandomUtil.getRandCharString()
+  const data = CryptoUtil.aesDecrypt(res, app.value.appSecret)
+  FeedbackUtil.alertSuccess(data, '响应数据')
 }
 </script>
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="
       !app.appKey
         || !app.appSecret
@@ -84,10 +77,11 @@ async function onTest() {
         || (OpenAppArithmeticEnum.RSA.equalsKey(app.arithmetic) && !app.publicKey)
     "
     :loading="isLoading"
+    hide-fullscreen
     title="测试应用"
     with="1000px"
-    @on-confirm="onTest"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onTest"
   >
     <el-form
       :model="app"
@@ -139,7 +133,7 @@ async function onTest() {
         <el-form-item label="随机串">
           <el-input v-model="nonce">
             <template #append>
-              <el-button @click="nonce = AirRand.getRandMixedCharString()">
+              <el-button @click="nonce = RandomUtil.getRandMixedCharString()">
                 重置
               </el-button>
             </template>

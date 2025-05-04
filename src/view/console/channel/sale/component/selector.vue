@@ -2,11 +2,11 @@
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { SaleEditor } from '.'
 
-const props = defineProps(airPropsSelector<SaleEntity>())
+const props = defineProps(DialogProps.withSelector<SaleEntity>())
 </script>
 
 <template>

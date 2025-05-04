@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import PersonalToken from '@/component/user/PersonalToken.vue'
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+
+import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 import ModifyPassword from './ModifyPassword.vue'
 import ThirdAccountList from './ThirdAccountList.vue'
 
-defineProps(airProps())
+defineProps(DialogProps.create())
 
 enum TABS {
 
@@ -20,13 +20,13 @@ const active = ref(TABS.modifyPassword)
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     hide-cancel
     hide-confirm
+    hide-fullscreen
     min-height="100px"
     title="账号安全中心"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-tabs
       v-model="active"

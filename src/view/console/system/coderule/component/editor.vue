@@ -3,15 +3,22 @@ import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
 import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
 import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
 import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
-import { ADialog, AFormField, AGroup, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirInputType } from '@airpower/enum/AirInputType'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { AirValidator } from '@airpower/helper/AirValidator'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import {
+  ADialog,
+  AFormField,
+  AGroup,
+  AInput,
+  DateTimeUtil,
+  DialogProps,
+  getFieldLabel,
+  getModelName,
+  useEditor,
+  WebValidator,
+} from '@airpower/web'
 import { computed, ref } from 'vue'
 
-const props = defineProps(airPropsParam(new CodeRuleEntity()))
+const props = defineProps(DialogProps.withParam(new CodeRuleEntity()))
 
 const {
   title,
@@ -20,13 +27,13 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, CodeRuleService, {
+} = useEditor(props, CodeRuleService, {
   customRules: {
     prefix: [
-      AirValidator.show('前缀只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
+      WebValidator.show('前缀只允许字母/数字').ifNotOnlyNumberAndLetter(),
     ],
     template: [
-      AirValidator.show('模板只允许字母/数字/横线/下划线').ifNot(AirInputType.LETTER, AirInputType.NUMBER, '\\-', '_'),
+      WebValidator.show('前缀只允许字母/数字').ifNotOnlyNumberAndLetter(),
     ],
   },
 })
@@ -59,10 +66,10 @@ const demoCode = computed(() => {
   let code = formData.value.template
   for (const item of paramList.value) {
     if (['yyyy', 'mm', 'dd', 'hh'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), item.label.toUpperCase()))
+      code = code.replaceAll(item.label, DateTimeUtil.formatFromDate(new Date(), item.label.toUpperCase()))
     }
     if (['yy'].includes(item.label)) {
-      code = code.replaceAll(item.label, AirDateTime.formatFromDate(new Date(), 'YYYY').substring(2))
+      code = code.replaceAll(item.label, DateTimeUtil.formatFromDate(new Date(), 'YYYY').substring(2))
     }
   }
   return code
@@ -71,42 +78,20 @@ const demoCode = computed(() => {
 
 <template>
   <ADialog
-    :form-ref="formRef"
-    :loading="isLoading"
-    :title="title + CodeRuleEntity.getModelName()"
-    height="550px"
-    width="800px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    :form-ref="formRef" :loading="isLoading" :title="title + getModelName(CodeRuleEntity)" height="550px"
+    width="800px" @cancel="onCancel" @confirm="onSubmit"
   >
-    <el-form
-      ref="formRef"
-      :model="formData"
-      :rules="rules"
-      label-width="140px"
-      @submit.prevent
-    >
-      <AGroup
-        :column="2"
-        title="基础配置"
-      >
-        <el-form-item
-          :label="CodeRuleEntity.getFormFieldLabel('ruleField')"
-          prop="ruleField"
-        >
+    <el-form ref="formRef" :model="formData" :rules="rules" label-width="140px" @submit.prevent>
+      <AGroup :column="2" title="基础配置">
+        <el-form-item :label="getFieldLabel(CodeRuleEntity, 'ruleField')" prop="ruleField">
           <AInput
-            v-model.ruleField="formData.ruleField"
-            :disabled="!!formData.id"
-            :entity="CodeRuleEntity"
-            :list="
-              fieldList.map((item) => {
-                return {
-                  key: item.key,
-                  label: item.label,
-                }
-              })
-            "
-            @on-change="fieldChanged"
+            v-model.ruleField="formData.ruleField" :disabled="!!formData.id" :entity="CodeRuleEntity" :list="fieldList.map((item) => {
+              return {
+                key: item.key,
+                label: item.label,
+              }
+            })
+            " @changed="fieldChanged"
           />
         </el-form-item>
         <AFormField field="snType" />
@@ -115,20 +100,12 @@ const demoCode = computed(() => {
       </AGroup>
       <AGroup title="模板配置">
         <el-form-item label="可选参数">
-          <el-tag
-            v-for="param in paramList"
-            :key="param.value"
-            class="param-item"
-            @click="paramClicked(param)"
-          >
+          <el-tag v-for="param in paramList" :key="param.value" class="param-item" @click="paramClicked(param)">
             {{ param.desc }}
           </el-tag>
         </el-form-item>
         <AFormField field="template" />
-        <el-form-item
-          v-if="formData.prefix || demoCode"
-          label="示例编码"
-        >
+        <el-form-item v-if="formData.prefix || demoCode" label="示例编码">
           <span style="margin: 0 2px; color: red; font-weight: bold">{{ formData.prefix }}</span>
           <span style="margin: 0 2px; color: darkgreen; font-weight: bold">{{ demoCode }}</span>
           <span style="margin: 0 2px; color: blue; font-weight: bold">{{

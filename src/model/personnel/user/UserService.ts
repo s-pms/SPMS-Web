@@ -16,7 +16,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
   entityClass = UserEntity
 
   async logout() {
-    await this.api('logout').post()
+    await this.api('logout').request()
   }
 
   /**
@@ -24,7 +24,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * @param user 用户
    */
   async login(user: UserEntity): Promise<string> {
-    const result = await this.api('login').post(user)
+    const result = await this.api('login').request(user)
     return result as unknown as string
   }
 
@@ -33,7 +33,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * @param user 用户
    */
   async sendEmail(user: UserEntity): Promise<void> {
-    await this.api('sendEmail').setTimeout(10000).post(user)
+    await this.api('sendEmail').setTimeout(10000).request(user)
   }
 
   /**
@@ -41,7 +41,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * @param user 用户
    */
   async loginViaEmail(user: UserEntity): Promise<string> {
-    const result = await this.api('loginViaEmail').post(user)
+    const result = await this.api('loginViaEmail').request(user)
     return result as unknown as string
   }
 
@@ -50,7 +50,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * @param user 用户
    */
   async resetMyPassword(user: UserEntity): Promise<void> {
-    await this.api('resetMyPassword').post(user)
+    await this.api('resetMyPassword').request(user)
   }
 
   /**
@@ -58,21 +58,21 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * @param user 用户
    */
   async updateMyPassword(user: UserEntity): Promise<void> {
-    await this.api('updateMyPassword').post(user)
+    await this.api('updateMyPassword').request(user)
   }
 
   /**
    * ### 获取我有权限的菜单列表
    */
   async getMyMenuList(): Promise<MenuEntity[]> {
-    return this.api('getMyMenuList').requestArray(undefined, MenuEntity)
+    return this.api('getMyMenuList').postArray(undefined, MenuEntity)
   }
 
   /**
    * ### 获取我的权限列表
    */
   async getMyPermissionList(): Promise<string[]> {
-    const arr = await this.api('getMyPermissionList').post()
+    const arr = await this.api('getMyPermissionList').request()
     return arr as string[]
   }
 
@@ -80,37 +80,37 @@ export class UserService extends AbstractBaseService<UserEntity> {
    * ### 获取我的三方账号
    */
   async getMyThirdList(): Promise<UserThirdLoginEntity[]> {
-    return this.api('getMyThirdList').requestArray(undefined, UserThirdLoginEntity)
+    return this.api('getMyThirdList').postArray(undefined, UserThirdLoginEntity)
   }
 
   /**
    * ### 获取我的个人信息
    */
   async getMyInfo(): Promise<UserEntity> {
-    return this.api('getMyInfo').request(undefined, UserEntity)
+    return this.api('getMyInfo').post(undefined, UserEntity)
   }
 
   async getScopeList(): Promise<OauthScope[]> {
-    return this.api('getScopeList', 'oauth2').requestArray(undefined, OauthScope)
+    return this.api('getScopeList', 'oauth2').postArray(undefined, OauthScope)
   }
 
   async authorize(appKey: string, scope: string): Promise<string> {
     const postData = new OauthCreateCodeRequest()
     postData.appKey = appKey
     postData.scope = scope
-    const code = await this.api('createCode', 'oauth2').post(postData)
+    const code = await this.api('createCode', 'oauth2').request(postData)
     return code as unknown as string
   }
 
   async getMyPersonalTokenList(): Promise<PersonalTokenEntity[]> {
-    const json = await this.api('getMyPersonalTokenList').post()
+    const json = await this.api('getMyPersonalTokenList').request()
     return PersonalTokenEntity.fromJsonArray(json)
   }
 
   async createMyPersonalToken(name: string): Promise<string> {
     const personalToken = new PersonalTokenEntity()
     personalToken.name = name
-    const result = await this.api('createMyPersonalToken').post(personalToken)
+    const result = await this.api('createMyPersonalToken').request(personalToken)
     return result.toString()
   }
 
@@ -118,7 +118,7 @@ export class UserService extends AbstractBaseService<UserEntity> {
     const postData = new ThirdLoginRequest()
     postData.platform = platform
     postData.code = code
-    const result = await this.api('callback', 'oauth2').callbackError().post(postData)
+    const result = await this.api('callback', 'oauth2').throwError().request(postData)
     return result as unknown as string
   }
 
@@ -126,22 +126,22 @@ export class UserService extends AbstractBaseService<UserEntity> {
     const postData = new ThirdLoginRequest()
     postData.platform = platform
     postData.code = code
-    await this.api('thirdBind', 'oauth2').callbackError().post(postData)
+    await this.api('thirdBind', 'oauth2').throwError().request(postData)
   }
 
   async unBindThird(data: UserThirdLoginEntity): Promise<void> {
-    await this.api('unBindThird', 'oauth2').callbackError().post(data)
+    await this.api('unBindThird', 'oauth2').throwError().request(data)
   }
 
   async updateMyInfo(user: UserEntity) {
-    await this.api('updateMyInfo').post(user)
+    await this.api('updateMyInfo').request(user)
   }
 
   async enableMyPersonalToken(item: PersonalTokenEntity) {
-    await this.api('enableMyPersonalToken').post(item.copyExposeId())
+    await this.api('enableMyPersonalToken').request(item.copy().expose('id'))
   }
 
   async disableMyPersonalToken(item: PersonalTokenEntity) {
-    await this.api('disableMyPersonalToken').post(item.copyExposeId())
+    await this.api('disableMyPersonalToken').request(item.copy().expose('id'))
   }
 }

@@ -1,6 +1,6 @@
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { SupplierEntity } from '../supplier/SupplierEntity'
 
 @Model({
@@ -10,17 +10,14 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: MaterialEntity,
-  })
+  @Type(MaterialEntity)
   material!: MaterialEntity
 
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: SupplierEntity,
-  })
+  @Field({})
+  @Type(SupplierEntity)
   supplier!: SupplierEntity
 
   @Table()
@@ -54,11 +51,10 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     width: 150,
     money: true,
-    orderNumber: -1,
+    order: -1,
   })
   @Field({
     label: '采购单价',
-    type: Number,
   })
   price!: number
 
@@ -69,22 +65,20 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -2,
+    order: -2,
   })
   @Field({
     label: '采购数量',
-    type: Number,
   })
   quantity!: number
 
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -3,
+    order: -3,
   })
   @Field({
     label: '已采购数量',
-    type: Number,
   })
   finishQuantity!: number
 }

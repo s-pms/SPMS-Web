@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import type { IJson } from '@airpower/interface/IJson'
-import { LogEntity } from '@/model/system/log/LogEntity'
-import { ACopy, ADialog } from '@airpower/component'
-import { AirConfig } from '@airpower/config/AirConfig'
-import { airPropsParam } from '@airpower/config/AirProps'
+import type { IJson } from '@airpower/web'
 
-defineProps(airPropsParam(new LogEntity()))
+import { LogEntity } from '@/model/system/log/LogEntity'
+import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
+
+defineProps(DialogProps.withParam(new LogEntity()))
 
 function getTreeData(obj: IJson): IJson[] {
   const treeData = []
@@ -36,14 +35,14 @@ function getTreeData(obj: IJson): IJson[] {
 <template>
   <ADialog
     :title="param.action"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-tabs type="border-card">
       <el-tab-pane label="请求">
         <el-tree
           :data="getTreeData(JSON.parse(param.request))"
-          :props="AirConfig.treeProps"
+          :props="WebConfig.treeProps"
         >
           <template #default="{ node, data }">
             <span class="custom-tree-node">
@@ -56,7 +55,7 @@ function getTreeData(obj: IJson): IJson[] {
       <el-tab-pane label="响应">
         <el-tree
           :data="getTreeData(JSON.parse(param.response))"
-          :props="AirConfig.treeProps"
+          :props="WebConfig.treeProps"
         >
           <template #default="{ node, data }">
             <ACopy :content="data.value">

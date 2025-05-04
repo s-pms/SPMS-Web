@@ -2,11 +2,11 @@
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
-import { AButton, ADialog, ATable } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsSelector<PickingDetailEntity, PickingEntity>())
+const props = defineProps(DialogProps.withSelector<PickingDetailEntity, PickingEntity>())
 
 const isLoading = ref(false)
 const list = ref<PickingDetailEntity[]>([])
@@ -35,20 +35,20 @@ getDetail()
     is-selector
     title="选择申领明细"
     width="70%"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm(selectList)"
   >
     <ATable
-      :ctrl-width="80"
       :data-list="list"
       :entity="PickingDetailEntity"
       :hide-ctrl="isMultiple"
       :select-list="selectList"
       :show-select="isMultiple"
+      ctrl-width="80"
+      hide-column-selector
       hide-delete
       hide-edit
-      hide-field-selector
-      @on-select="onSelected"
+      @select-changed="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}
@@ -62,11 +62,11 @@ getDetail()
       >
         <AButton
           :disabled="data.isDisabled"
-          icon-button
-          tooltip="选择"
-          type="SELECT"
+          link
           @click="onConfirm(data)"
-        />
+        >
+          选择
+        </AButton>
       </template>
     </ATable>
   </ADialog>

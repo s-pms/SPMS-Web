@@ -1,3 +1,4 @@
 import { BaseEntity } from '@/base/BaseEntity'
 
-export class DevicePayloadEntity extends BaseEntity {}
+export class DevicePayloadEntity extends BaseEntity {
+}

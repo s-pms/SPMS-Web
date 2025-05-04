@@ -5,10 +5,10 @@ import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsParam(new MoveEntity()))
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new MoveEntity()))
 
 const {
   formData,
@@ -28,8 +28,8 @@ const {
     height="80%"
     title="移库单明细"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       label-width="120px"
@@ -48,9 +48,10 @@ const {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="移库明细">
         <ATable
+          :column-list="getTableConfigList(MoveDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           :data-list="formData.details"
           :entity="MoveDetailEntity"
-          :field-list="MoveDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          hide-add
           hide-delete
           hide-edit
         >
@@ -65,12 +66,12 @@ const {
           </template>
           <template #endRow="{ data }">
             <AButton
-              :disabled="MoveStatusEnum.MOVING.notEqualsKey(formData.status)"
-              icon-button
-              tooltip="添加完成"
-              type="CHECKIN"
+              :disabled="!MoveStatusEnum.MOVING.equalsKey(formData.status)"
+              link
               @click="addDetailFinishQuantity(data, formData.id)"
-            />
+            >
+              作业
+            </AButton>
           </template>
         </ATable>
       </AGroup>

@@ -1,49 +1,32 @@
 <script lang="ts" setup>
 import { Constant } from '@/config/Constant'
-import { ConfigEntity } from '@/model/system/config/ConfigEntity'
+import { useMyTable } from '@/hook/useMyTable'
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
 import { ConfigurationEditor } from '@/view/console/system/config/component'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onEdit,
-  onAdd,
-  onPageChanged,
-  onSortChanged,
-  onDelete,
-} = useAirTable(ConfigService, {
+import { AButton, APanel, ATable, FeedbackUtil } from '@airpower/web'
+
+const hook = useMyTable(ConfigService, {
   editView: ConfigurationEditor,
 })
 </script>
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="ConfigEntity"
-      :loading="isLoading"
-      :service="ConfigService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
-      v-loading="isLoading"
-      :ctrl-width="90"
-      :data-list="response.list"
       :disable-delete="(row) => row.isSystem"
-      :entity="ConfigEntity"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-delete="onDelete"
+      :use-hook="hook"
+      ctrl-width="90"
+      hide-add
     >
       <template #name="{ data }">
-        <el-link v-tip="data.description">
+        <AButton
+          link
+          @click="FeedbackUtil.toastInfo(data.description)"
+        >
           {{ data.name }}
-        </el-link>
+        </AButton>
       </template>
       <template #config="{ data }">
         <template v-if="ConfigType.BOOLEAN.equalsKey(data.type)">
@@ -57,12 +40,6 @@ const {
         </template>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

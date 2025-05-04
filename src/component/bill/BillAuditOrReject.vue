@@ -1,7 +1,7 @@
 <script generic="B extends AbstractBaseBillEntity<D>, D extends AbstractBaseBillDetailEntity" lang="ts" setup>
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import { AButton } from '@airpower/component'
+import { AButton } from '@airpower/web'
 
 const { bill } = defineProps<{
   /**
@@ -27,18 +27,14 @@ function onAudit() {
 <template>
   <AButton
     :disabled="!bill.canAudit()"
-    link-button
-    tooltip="审核"
-    type="CONFIRM"
+    link
     @click="onAudit"
   >
     审核
   </AButton>
   <AButton
     :disabled="!bill.canReject()"
-    link-button
-    tooltip="驳回"
-    type="LOCK"
+    link
     @click="onReject"
   >
     驳回

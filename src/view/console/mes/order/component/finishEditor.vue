@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 import { OrderDetailService } from '@/model/mes/order/OrderDetailService'
-import { ADialog, AInput } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+
+import { ADialog, AInput, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(
-  Object.assign(airProps(), {
+  Object.assign(DialogProps.create(), {
     /**
      * ### 添加完成数量
      */
@@ -21,18 +21,18 @@ const orderDetail = ref(new OrderDetailEntity())
 orderDetail.value.finishQuantity = props.param
 orderDetail.value.ngQuantity = 0
 
-const rules = OrderDetailService.createValidator(orderDetail.value)
+const rules = OrderDetailService.createValidator()
 </script>
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="orderDetail.finishQuantity <= 0 && orderDetail.ngQuantity <= 0"
     confirm-text="添加完成"
+    hide-fullscreen
     min-height="200px"
     title="订单报工"
-    @on-confirm="onConfirm(orderDetail)"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm(orderDetail)"
   >
     <el-form
       :model="orderDetail"
@@ -41,7 +41,7 @@ const rules = OrderDetailService.createValidator(orderDetail.value)
       @submit.prevent
     >
       <el-form-item
-        :label="OrderDetailEntity.getFieldName('finishQuantity')"
+        :label="getFieldLabel(OrderDetailEntity, 'finishQuantity')"
         prop="finishQuantity"
       >
         <AInput
@@ -51,7 +51,7 @@ const rules = OrderDetailService.createValidator(orderDetail.value)
         />
       </el-form-item>
       <el-form-item
-        :label="OrderDetailEntity.getFieldName('ngQuantity')"
+        :label="getFieldLabel(OrderDetailEntity, 'ngQuantity')"
         prop="ngQuantity"
       >
         <AInput

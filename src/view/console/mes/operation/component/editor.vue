@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { OperationService } from '@/model/mes/operation/OperationService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new OperationEntity()))
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new OperationEntity()))
 
 const {
   formRef,
@@ -14,18 +13,18 @@ const {
   rules,
   title,
   onSubmit,
-} = useAirEditor(props, OperationService)
+} = useEditor(props, OperationService)
 </script>
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
     confirm-text="保存"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    hide-fullscreen
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

@@ -1,26 +1,12 @@
 <script lang="ts" setup>
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { OutputDetail, OutputEditor } from '@/view/console/wms/output/component'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APanel, ATable } from '@airpower/web'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(OutputService, {
+const hook = useBillTable(OutputService, {
   editView: OutputEditor,
   detailView: OutputDetail,
 })
@@ -28,41 +14,17 @@ const {
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="OutputEntity"
-      :loading="isLoading"
-      :service="OutputService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
-      v-loading="isLoading"
-      :ctrl-width="160"
-      :data-list="response.list"
-      :disable-edit="(row: OutputEntity) => OutputStatusEnum.REJECTED.notEqualsKey(row.status)"
-      :entity="OutputEntity"
-      :select-list="selectList"
+      :disable-edit="(row) => !OutputStatusEnum.REJECTED.equalsKey(row.status)"
+      :use-hook="hook"
+      ctrl-width="160"
       hide-delete
       show-detail
-      @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
     >
       <template #customRow="{ data }">
-        <BillAuditOrReject
-          :bill="data"
-          @on-audit="onAudit"
-          @on-reject="onReject"
-        />
+        <BillAuditOrReject :bill="data" @on-audit="hook.onAudit" @on-reject="hook.onReject" />
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

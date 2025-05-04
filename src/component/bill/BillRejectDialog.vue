@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
 defineProps(
-  Object.assign(airProps(), {
+  Object.assign(DialogProps.create(), {
     /**
      * ### 弹出标题
      */
@@ -20,12 +19,12 @@ const rejectReason = ref('')
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="rejectReason === ''"
     :title="param"
+    hide-fullscreen
     min-height="200px"
-    @on-confirm="onConfirm(rejectReason)"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm(rejectReason)"
   >
     <el-input
       v-model="rejectReason"

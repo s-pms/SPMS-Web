@@ -3,12 +3,10 @@ import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterSelector } from '@/view/console/iot/parameter/component'
-import { AButton, ADialog, AFormField, AGroup } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new DeviceEntity()))
+import { AButton, ADialog, AFormField, AGroup, DialogProps, DialogUtil, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new DeviceEntity()))
 
 const {
   title,
@@ -17,7 +15,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, DeviceService, {
+} = useEditor(props, DeviceService, {
   afterGetDetail(detailData) {
     const systemList = detailData.parameters.filter(item => item.isSystem)
     const customList = detailData.parameters.filter(item => !item.isSystem)
@@ -34,7 +32,7 @@ async function selectParameter() {
   const filter = new ParameterEntity()
   filter.isSystem = false
   const systemList = formData.value.parameters.filter(item => item.isSystem)
-  const customList = (await AirDialog.selectList(ParameterSelector, formData.value.parameters, filter)).filter(
+  const customList = (await DialogUtil.selectList(ParameterSelector, formData.value.parameters, filter)).filter(
     item => !item.isSystem,
   )
   formData.value.parameters = systemList.concat(customList)
@@ -48,8 +46,8 @@ async function selectParameter() {
     :title="title"
     height="70%"
     width="70%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -85,7 +83,7 @@ async function selectParameter() {
       >
         <div class="parameter-list">
           <AButton
-            type="ADD"
+            type="CHECK"
             @click="selectParameter()"
           >
             选择

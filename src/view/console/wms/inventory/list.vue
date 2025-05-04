@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { ITree } from '@airpower/interface/ITree'
-import type { AirPage } from '@airpower/model/AirPage'
+import type { ITree, QueryPage, RootEntity } from '@airpower/web'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
@@ -8,28 +7,34 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { APage, APanel, ATable, AToolBar, ATreeBox } from '@airpower/component'
-import { AirRequest } from '@airpower/model/AirRequest'
-import { AirRequestPage } from '@airpower/model/AirRequestPage'
-import { AirResponsePage } from '@airpower/model/AirResponsePage'
+import {
+  APage,
+  APanel,
+  ATable,
+  ATreeBox,
+  getTableConfigList,
+  QueryRequest,
+  QueryRequestPage,
+  QueryResponsePage,
+} from '@airpower/web'
 import { computed, ref } from 'vue'
 
-const request = ref(new AirRequestPage(InventoryEntity))
-const response = ref<AirResponsePage<InventoryEntity>>(new AirResponsePage())
+const request = ref(new QueryRequestPage(InventoryEntity))
+const response = ref<QueryResponsePage<InventoryEntity>>(new QueryResponsePage())
 
 const isLoading = ref(false)
 const isLoadingTree = ref(false)
 
 const inventoryType = ref(InventoryTypeEnum.STORAGE.key)
 
-const treeData = ref<ITree[]>([])
+const treeData = ref<Array<ITree & RootEntity>>([])
 
 async function getStorage() {
-  treeData.value = await StorageService.create(isLoadingTree).getList(new AirRequest(StorageEntity))
+  treeData.value = await StorageService.create(isLoadingTree).getList(new QueryRequest(StorageEntity))
 }
 
 async function getStructure() {
-  treeData.value = await StructureService.create(isLoadingTree).getList(new AirRequest(StructureEntity))
+  treeData.value = await StructureService.create(isLoadingTree).getList(new QueryRequest(StructureEntity))
 }
 
 async function getList() {
@@ -38,7 +43,7 @@ async function getList() {
   response.value = await InventoryService.create(isLoading).getPage(request.value)
 }
 
-async function onPageChanged(page: AirPage) {
+async function onPageChanged(page: QueryPage) {
   request.value.page = page
   getList()
 }
@@ -62,16 +67,16 @@ async function inventoryTypeChanged() {
 }
 
 async function treeChanged(current: ITree | undefined) {
-  response.value = new AirResponsePage()
+  response.value = new QueryResponsePage()
   if (current) {
     switch (inventoryType.value) {
       case InventoryTypeEnum.STORAGE.key:
         request.value.filter.storage = (current as StorageEntity).copy()
-        request.value.filter.storage.exposeId()
+        request.value.filter.storage.expose('id')
         break
       case InventoryTypeEnum.STRUCTURE.key:
         request.value.filter.structure = (current as StructureEntity).copy()
-        request.value.filter.structure.exposeId()
+        request.value.filter.structure.expose('id')
         break
       default:
     }
@@ -83,7 +88,7 @@ async function treeChanged(current: ITree | undefined) {
 }
 
 const tableField = computed(() => {
-  const list = InventoryEntity.getTableFieldConfigList()
+  const list = getTableConfigList(InventoryEntity)
   switch (inventoryType.value) {
     case InventoryTypeEnum.STORAGE.key:
       return list.filter(item => item.key !== 'structureName')
@@ -103,39 +108,30 @@ inventoryTypeChanged()
     :placeholder="treePlaceHolder"
     :tree-data="treeData"
     searchable
-    @on-change="treeChanged"
+    @changed="treeChanged"
   >
     <APanel>
-      <AToolBar
+      <ATable
+        v-loading="isLoading"
+        :column-list="tableField"
+        :data-list="response.list"
         :entity="InventoryEntity"
         :service="InventoryService"
+        ctrl-width="60"
         hide-add
+        hide-delete
+        hide-edit
       >
         <template #afterButton>
-          <el-radio-group
-            v-model="inventoryType"
-            @change="inventoryTypeChanged"
-          >
+          <el-radio-group v-model="inventoryType" @change="inventoryTypeChanged">
             <el-radio-button
-              v-for="view in InventoryTypeEnum.toDictionary()"
-              :key="view.key"
-              :label="view.key"
+              v-for="view in InventoryTypeEnum.toArray()" :key="view.key" :label="view.key"
               :value="view.key"
             >
               {{ view.label }}
             </el-radio-button>
           </el-radio-group>
         </template>
-      </AToolBar>
-      <ATable
-        v-loading="isLoading"
-        :ctrl-width="40"
-        :data-list="response.list"
-        :entity="InventoryEntity"
-        :field-list="tableField"
-        hide-delete
-        hide-edit
-      >
         <template #materialCode="{ data }">
           {{ data.material.code }}
         </template>
@@ -151,13 +147,10 @@ inventoryTypeChanged()
         <template #unitName="{ data }">
           {{ data.material.unit.name }}
         </template>
+        <template #beforePage>
+          <APage :response="response" @changed="onPageChanged" />
+        </template>
       </ATable>
-      <template #footerLeft>
-        <APage
-          :response="response"
-          @on-change="onPageChanged"
-        />
-      </template>
     </APanel>
   </ATreeBox>
 </template>

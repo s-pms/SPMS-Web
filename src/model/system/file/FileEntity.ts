@@ -1,7 +1,7 @@
-import type { IFile } from '@airpower/interface/IFile'
+import type { IFile } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { FileCategory } from '@/model/system/file/FileCategory'
-import { Field } from '@airpower/decorator'
+import { Field } from '@airpower/web'
 
 export class FileEntity extends BaseEntity implements IFile {
   name!: string
@@ -11,7 +11,7 @@ export class FileEntity extends BaseEntity implements IFile {
   url!: string
 
   @Field({
-    type: FileCategory,
+    dictionary: FileCategory,
   })
   category!: number
 

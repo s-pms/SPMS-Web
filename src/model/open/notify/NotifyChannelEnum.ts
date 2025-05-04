@@ -1,10 +1,10 @@
-import { AirEnum } from '@airpower/base/AirEnum'
+import { WebEnum } from '@airpower/web'
 
 /**
  * # 通知渠道
  * @author Hamm.cn
  */
-export class NotifyChannelEnum extends AirEnum {
+export class NotifyChannelEnum extends WebEnum {
   static readonly WORK_WECHAT = new NotifyChannelEnum(1, '企业微信')
 
   static readonly FEI_SHU = new NotifyChannelEnum(2, '飞书')

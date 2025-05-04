@@ -1,6 +1,6 @@
 <script generic="E extends BaseEntity" lang="ts" setup>
 import type { BaseEntity } from '@/base/BaseEntity'
-import { AButton } from '@airpower/component'
+import { AButton } from '@airpower/web'
 
 const { data } = defineProps<{
   /**
@@ -15,7 +15,7 @@ const emits = defineEmits(['click'])
 <template>
   <AButton
     :disabled="data.isPublished"
-    link-button
+    link
     @click="emits('click', data)"
   >
     发布

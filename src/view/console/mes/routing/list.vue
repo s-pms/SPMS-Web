@@ -1,48 +1,27 @@
 <script lang="ts" setup>
+import type { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import PublishButton from '@/component/PublishButton.vue'
-import { useTable } from '@/hook/useTable'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
+import { useMyTable } from '@/hook/useMyTable'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { AButton, APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { AirDialog } from '@airpower/helper/AirDialog'
+import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import { RoutingEditor, RoutingProgress } from './component'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onAdd,
-  onEdit,
-  onDelete,
-  onPageChanged,
-  onPublish,
-} = useTable(RoutingService, {
+const hook = useMyTable(RoutingService, {
   editView: RoutingEditor,
 })
 
 async function onProgress(data: RoutingEntity) {
-  await AirDialog.show(RoutingProgress, data)
+  await DialogUtil.show(RoutingProgress, data)
 }
 </script>
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="RoutingEntity"
-      :loading="isLoading"
-      :service="RoutingService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
-      v-loading="isLoading"
-      :ctrl-width="160"
-      :data-list="response.list"
       :disable-delete="(row) => row.isPublished"
       :disable-edit="(row) => row.isPublished"
-      :entity="RoutingEntity"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
+      :use-hook="hook"
+      ctrl-width="160"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}
@@ -57,24 +36,12 @@ async function onProgress(data: RoutingEntity) {
         {{ data.bom?.name || '-' }}
       </template>
       <template #customRow="{ data }">
-        <PublishButton
-          :data
-          @click="onPublish"
-        />
-        <AButton
-          link-button
-          @click="onProgress(data)"
-        >
+        <PublishButton :data @click="hook.onPublish" />
+        <AButton link @click="onProgress(data)">
           流程
         </AButton>
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

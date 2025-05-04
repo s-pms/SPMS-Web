@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import type { IJson } from '@airpower/interface/IJson'
+import type { IJson } from '@airpower/web'
 import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
-import { ACopy, ADialog } from '@airpower/component'
-import { AirConfig } from '@airpower/config/AirConfig'
-import { airPropsParam } from '@airpower/config/AirProps'
+import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
 import { computed } from 'vue'
 
-const props = defineProps(airPropsParam(new OpenLogEntity()))
+const props = defineProps(DialogProps.withParam(new OpenLogEntity()))
 
 function getTreeData(obj: IJson): IJson[] {
   const treeData = []
@@ -49,14 +47,14 @@ const json = computed(() => {
     height="70%"
     title="请求和响应数据"
     width="600px"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-tabs type="border-card">
       <el-tab-pane label="请求">
         <el-tree
           :data="getTreeData(json)"
-          :props="AirConfig.treeProps"
+          :props="WebConfig.treeProps"
         >
           <template #default="{ node, data }">
             <span class="custom-tree-node">
@@ -69,7 +67,7 @@ const json = computed(() => {
       <el-tab-pane label="响应">
         <el-tree
           :data="getTreeData(JSON.parse(param.response))"
-          :props="AirConfig.treeProps"
+          :props="WebConfig.treeProps"
         >
           <template #default="{ node, data }">
             <ACopy :content="data.value">

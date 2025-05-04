@@ -1,7 +1,7 @@
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import type { IUseTableResult } from '@airpower/interface/hooks/IUseTableResult'
+import type { ITableResult } from '@airpower/web'
 
 /**
  * # 单据表格Hook
@@ -12,7 +12,7 @@ export interface IUseBillTableResult<
   D extends AbstractBaseBillDetailEntity,
   B extends AbstractBaseBillEntity<D>,
   S extends AbstractBaseBillService<D, B>,
-> extends IUseTableResult<B, S> {
+> extends ITableResult<B, S> {
   /**
    * ### 审核
    * @param bill 单据

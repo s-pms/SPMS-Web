@@ -3,16 +3,24 @@ import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import {
+  AButton,
+  ADialog,
+  AFormField,
+  AGroup,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  getFieldLabel,
+  getTableConfigList,
+  useEditor,
+} from '@airpower/web'
 import { computed } from 'vue'
 import { OutputDetailEditor } from '.'
 
-const props = defineProps(airPropsParam(new OutputEntity()))
+const props = defineProps(DialogProps.withParam(new OutputEntity()))
 
 const {
   title,
@@ -21,13 +29,13 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, OutputService, {
+} = useEditor(props, OutputService, {
   afterGetDetail(detailData) {
     return detailData
   },
   beforeSubmit(submitData) {
     if (submitData.details.length === 0) {
-      AirNotification.warning('请添加明细后再提交')
+      FeedbackUtil.toastWarning('请添加明细后再提交')
       return null
     }
     return submitData
@@ -39,12 +47,12 @@ formData.value.type = formData.value.type ?? OutputTypeEnum.NORMAL.key
 const isDetailEditable = computed(() => OutputTypeEnum.NORMAL.equalsKey(formData.value.type))
 
 async function addDetail() {
-  const detail: OutputDetailEntity = await AirDialog.show(OutputDetailEditor)
+  const detail: OutputDetailEntity = await DialogUtil.show(OutputDetailEditor)
   formData.value.details.push(detail)
 }
 
 async function deleteDetail(index: number) {
-  await AirConfirm.warning('是否删除选中行的计划明细？')
+  await FeedbackUtil.confirmWarning('是否删除选中行的计划明细？')
   formData.value.details.splice(index, 1)
 }
 </script>
@@ -56,8 +64,8 @@ async function deleteDetail(index: number) {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -76,8 +84,8 @@ async function deleteDetail(index: number) {
         <ATable
           :data-list="formData.details"
           :entity="OutputDetailEntity"
-          :field-list="
-            OutputDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))
+          :column-list="
+            getTableConfigList(OutputDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
           hide-delete
           hide-edit
@@ -94,20 +102,21 @@ async function deleteDetail(index: number) {
           <template #addButton>
             <AButton
               v-if="isDetailEditable"
-              type="ADD"
+              icon="ADD"
               @click="addDetail()"
             >
-              添加{{ OutputEntity.getFieldName('details') }}
+              添加{{ getFieldLabel(OutputEntity, 'details') }}
             </AButton>
           </template>
           <template #customRow="{ index }">
             <AButton
               v-if="isDetailEditable"
               danger
-              icon-button
-              type="DELETE"
+              link
               @click="deleteDetail(index)"
-            />
+            >
+              删除
+            </AButton>
           </template>
         </ATable>
       </AGroup>

@@ -1,21 +1,10 @@
 <script lang="ts" setup>
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
-import { APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTableTree } from '@airpower/hook/useAirTableTree'
+
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { StructureEditor } from './component'
 
-const {
-  isLoading,
-  list,
-  onSearch,
-  onAdd,
-  onDelete,
-  onEdit,
-  onSortChanged,
-  onSelected,
-  onAddRow,
-} = useAirTableTree(StructureService, {
+const hook = useTableTree(StructureService, {
   editView: StructureEditor,
   beforeAddRow(param, row) {
     param.parent = row
@@ -26,24 +15,12 @@ const {
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="StructureEntity"
-      :loading="isLoading"
-      :service="StructureService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
-      v-loading="isLoading"
-      :ctrl-width="130"
-      :data-list="list"
-      :entity="StructureEntity"
-      show-add
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
-      @on-add="onAddRow"
+      :disable-delete="(row) => row.children.length > 0"
+      :use-hook="hook"
+      ctrl-width="130"
+      is-tree
+      show-add-row
     />
   </APanel>
 </template>

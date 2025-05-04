@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ADialog } from '@airpower/component'
-import { airProps } from '@airpower/config/AirProps'
+import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
 const props = defineProps(
-  Object.assign(airProps(), {
+  Object.assign(DialogProps.create(), {
     /**
      * ### 添加完成数量
      */
@@ -20,13 +19,13 @@ const num = ref(props.param)
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :disable-confirm="num <= 0"
     confirm-text="添加完成"
+    hide-fullscreen
     min-height="200px"
     title="添加完成数量"
-    @on-confirm="onConfirm(num)"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm(num)"
   >
     <el-input
       v-model="num"

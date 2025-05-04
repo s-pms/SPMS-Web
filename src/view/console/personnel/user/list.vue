@@ -1,28 +1,15 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
+
+import { useMyTable } from '@/hook/useMyTable'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { APage, APanel, ATable, AToolBar, ATreeBox } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
-import { AirRequest } from '@airpower/model/AirRequest'
+import { APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
 import { ref } from 'vue'
 import { UserEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  request,
-  onPageChanged,
-  onDelete,
-  onEdit,
-  onAdd,
-  onSearch,
-  onEnable,
-  onDisable,
-  onGetList,
-} = useAirTable(UserService, {
+const hook = useMyTable(UserService, {
   editView: UserEditor,
 })
 
@@ -31,12 +18,12 @@ const departmentList: Ref<DepartmentEntity[]> = ref([])
 const isLoadingTree = ref(false)
 
 function departmentChanged(department?: DepartmentEntity) {
-  request.value.filter.departmentId = department?.id || undefined
-  onGetList()
+  hook.request.value.filter.departmentId = department?.id || undefined
+  hook.onGetList()
 }
 
 async function getDepartmentList() {
-  departmentList.value = await DepartmentService.create(isLoadingTree).getList(new AirRequest(DepartmentEntity))
+  departmentList.value = await DepartmentService.create(isLoadingTree).getList(new QueryRequest(DepartmentEntity))
 }
 
 getDepartmentList()
@@ -46,33 +33,14 @@ getDepartmentList()
   <ATreeBox
     :tree-data="departmentList"
     searchable
-    @change="departmentChanged"
+    @changed="departmentChanged"
   >
     <APanel>
-      <AToolBar
-        :entity="UserEntity"
-        :loading="isLoading"
-        :service="UserService"
-        @on-add="onAdd"
-        @on-search="onSearch"
-      />
       <ATable
-        v-loading="isLoading"
-        :ctrl-width="150"
-        :data-list="response.list"
-        :entity="UserEntity"
+        :use-hook="hook"
+        ctrl-width="150"
         show-enable-and-disable
-        @on-edit="onEdit"
-        @on-delete="onDelete"
-        @on-enable="onEnable"
-        @on-disable="onDisable"
       />
-      <template #footerLeft>
-        <APage
-          :response="response"
-          @on-change="onPageChanged"
-        />
-      </template>
     </APanel>
   </ATreeBox>
 </template>

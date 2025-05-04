@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { RoutingEditor } from '.'
 
-const props = defineProps(airPropsSelector<RoutingEntity>())
+const props = defineProps(DialogProps.withSelector<RoutingEntity>())
 </script>
 
 <template>

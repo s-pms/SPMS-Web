@@ -7,16 +7,23 @@ import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
 import { BomSelector } from '@/view/console/mes/bom/component'
 import { OperationSelector } from '@/view/console/mes/operation/component'
-import { AButton, ADialog, AEmpty, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
-import { AirRequest } from '@airpower/model/AirRequest'
+import {
+  AButton,
+  ADialog,
+  AEmpty,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  DialogUtil,
+  FeedbackUtil,
+  QueryRequest,
+  useEditor,
+} from '@airpower/web'
 import { nextTick, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
-const props = defineProps(airPropsParam(new RoutingEntity()))
+const props = defineProps(DialogProps.withParam(new RoutingEntity()))
 const drag = ref(false)
 const current = ref(-1)
 const currentModel = ref(new RoutingOperationEntity())
@@ -26,14 +33,14 @@ const {
   formRef,
   isLoading,
   formData,
-} = useAirEditor(props, RoutingService, {
+} = useEditor(props, RoutingService, {
   afterGetDetail(detailData) {
     list.value = detailData.details
     return detailData
   },
 })
 
-const request = ref(new AirRequest(RoutingOperationEntity))
+const request = ref(new QueryRequest(RoutingOperationEntity))
 request.value.filter.routingId = formData.value.id
 
 function onStart() {
@@ -52,7 +59,7 @@ async function onSubmit() {
     item.sortNo = index
   })
   await RoutingService.create().update(formData.value)
-  AirNotification.success('编辑工艺流程成功')
+  FeedbackUtil.toastSuccess('编辑工艺流程成功')
   props.onConfirm()
 }
 
@@ -84,7 +91,7 @@ async function currentChanged(index: number, item: RoutingOperationEntity) {
 }
 
 async function onAddOperation() {
-  const operation = await AirDialog.select<OperationEntity>(OperationSelector)
+  const operation = await DialogUtil.select<OperationEntity>(OperationSelector)
   const item = new RoutingOperationEntity()
   item.operation = operation
   item.id = Math.random()
@@ -99,15 +106,15 @@ function onDeleteRoutingOperation(index: number) {
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     confirm-text="保存"
     height="80%"
+    hide-fullscreen
     title="工艺流程"
     width="75%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <div class="progress">
       <div class="top" />
@@ -116,7 +123,7 @@ function onDeleteRoutingOperation(index: number) {
           <div class="button">
             <AButton
               v-if="!formData.isPublished"
-              type="ADD"
+              icon="ADD"
               @click="onAddOperation"
             >
               添加工序
@@ -186,7 +193,7 @@ function onDeleteRoutingOperation(index: number) {
                   v-model="currentModel.bom"
                   :disabled="formData.isPublished"
                   :selector="BomSelector"
-                  @change="bomChanged"
+                  @changed="bomChanged"
                 />
               </el-form-item>
             </el-form>
@@ -237,9 +244,6 @@ function onDeleteRoutingOperation(index: number) {
       padding: 10px;
       display: flex;
       flex-direction: column;
-
-      .button {
-      }
 
       .list {
         flex: 1;

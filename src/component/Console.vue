@@ -3,10 +3,10 @@ import type { MenuEntity } from '@/model/system/menu/MenuEntity'
 import UserCard from '@/component/UserCard.vue'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AFrame } from '@airpower/component'
-import { AirPermission } from '@airpower/helper/AirPermission'
-import { AirRouter } from '@airpower/helper/AirRouter'
+import { AFrame, PermissionUtil, RouterUtil } from '@airpower/web'
 import { ref } from 'vue'
+
+const components = import.meta.glob('/src/view/**/*.vue')
 
 const currentUserInfo = ref(new UserEntity())
 const menuList = ref<MenuEntity[]>([])
@@ -14,16 +14,16 @@ const isLoading = ref(false)
 
 async function getMenuList() {
   menuList.value = await UserService.create(isLoading).getMyMenuList()
-  AirRouter.initVueRouter(menuList.value, 'console')
+  RouterUtil.initVueRouter(menuList.value, components, '/src/view', 'console')
 }
 
 async function init() {
   currentUserInfo.value = await UserService.create().getMyInfo()
-  let permissions = AirPermission.getList()
+  let permissions = PermissionUtil.getList()
   if (permissions.length === 0) {
     permissions = await UserService.create(isLoading).getMyPermissionList()
   }
-  AirPermission.saveList(permissions)
+  PermissionUtil.saveList(permissions)
   await getMenuList()
 }
 

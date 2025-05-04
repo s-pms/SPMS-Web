@@ -1,7 +1,6 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload, WebEnum } from '@airpower/web'
 import type { AbstractBaseBillDetailEntity } from './detail/AbstractBaseBillDetailEntity'
-import { Field, Form, Search, Table } from '@airpower/decorator'
+import { Field, Form, Search, Table } from '@airpower/web'
 import { BaseEntity } from '../BaseEntity'
 
 /**
@@ -16,9 +15,9 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
    * ### 单据编号
    */
   @Table({
-    orderNumber: 99,
-    forceShow: true,
-    copyField: true,
+    order: 99,
+    force: true,
+    copy: true,
   })
   @Search()
   @Form({
@@ -33,7 +32,7 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
    * ### 单据状态码
    */
   @Form({
-    showColor: true,
+    color: true,
   })
   @Search()
   abstract status: number
@@ -54,17 +53,17 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   /**
    * ### 审核中的状态
    */
-  abstract getAuditingStatus(): AirEnum
+  abstract getAuditingStatus(): WebEnum
 
   /**
    * ### 已审核的状态
    */
-  abstract getAuditedStatus(): AirEnum
+  abstract getAuditedStatus(): WebEnum
 
   /**
    * ### 已拒绝的状态
    */
-  abstract getRejectedStatus(): AirEnum
+  abstract getRejectedStatus(): WebEnum
 
   getPayloadLabel(): string {
     return this.billCode

@@ -1,25 +1,24 @@
 <script lang="ts" setup>
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new CustomerEntity()))
+import { ADialog, AFormField, DialogProps, getFormConfigList, getModelName, useDetail } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new CustomerEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, CustomerService)
+} = useDetail(props, CustomerService)
 </script>
 
 <template>
   <ADialog
     :loading="isLoading"
-    :title="CustomerEntity.getModelName() + title"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    :title="getModelName(CustomerEntity) + title"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -27,7 +26,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in CustomerEntity.getFormFieldConfigList()"
+        v-for="item in getFormConfigList(CustomerEntity)"
         :key="item.key"
         :field="item.key"
         disabled

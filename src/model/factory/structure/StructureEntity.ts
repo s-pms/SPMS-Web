@@ -1,17 +1,16 @@
-import type { IPayload } from '@airpower/interface/IPayload'
-import type { ITree } from '@airpower/interface/ITree'
+import type { IPayload, ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { StructureTypeEnum } from '@/model/factory/structure/StructureTypeEnum'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '生产单元',
 })
 export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table({
-    orderNumber: 99,
+    order: 99,
   })
   @Form({
     requiredString: true,
@@ -23,8 +22,8 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
 
   @Table({
     width: 300,
-    copyField: true,
-    orderNumber: 88,
+    copy: true,
+    order: 88,
   })
   @Form({
     placeholder: '不输入按编码规则自动生成',
@@ -35,9 +34,9 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   code!: string
 
   @Table({
-    showColor: true,
+    color: true,
     width: 120,
-    orderNumber: 77,
+    order: 77,
   })
   @Form({
     clearable: false,
@@ -51,43 +50,37 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   })
   type!: number
 
-  @Field({
-
-    type: StructureEntity,
-    array: true,
-  })
+  @Field({})
+  @Type(StructureEntity, true)
   children!: this[]
 
   parentId!: number
 
   @Field({
     label: '所属上级',
-
-    type: StructureEntity,
   })
+  @Type(StructureEntity)
   parent!: this
 
   @Field({
-    type: OperationEntity,
-    array: true,
     label: '可执行工序',
   })
+  @Type(OperationEntity, true)
   @Table({
-    payloadArray: true,
-    payloadField: 'name',
-    orderNumber: 11,
+    payload: true,
+    array: true,
+    order: 11,
   })
   operationList!: OperationEntity[]
 
   @Field({
-    type: DepartmentEntity,
-    array: true,
     label: '所属部门',
   })
+  @Type(DepartmentEntity, true)
   @Table({
-    payloadArray: true,
-    payloadField: 'name',
-    orderNumber: 1,
+    payload: true,
+    array: true,
+    order: 1,
   })
   departmentList!: DepartmentEntity[]
 

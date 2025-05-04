@@ -1,7 +1,6 @@
-import type { IPayload } from '@airpower/interface/IPayload'
-import type { ITree } from '@airpower/interface/ITree'
+import type { IPayload, ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '仓库',
@@ -18,7 +17,7 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
 
   @Table({
     width: 300,
-    copyField: true,
+    copy: true,
   })
   @Form({
     placeholder: '不输入按编码规则自动生成',
@@ -28,20 +27,16 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
   })
   code!: string
 
-  @Field({
-
-    type: StorageEntity,
-    array: true,
-  })
+  @Field({})
+  @Type(StorageEntity, true)
   children!: this[]
 
   parentId!: number
 
   @Field({
     label: '所属上级',
-
-    type: StorageEntity,
   })
+  @Type(StorageEntity)
   parent!: this
 
   getPayloadLabel(): string {

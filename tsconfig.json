@@ -15,12 +15,6 @@
     "paths": {
       "@/*": [
         "src/*"
-      ],
-      "@airpower": [
-        "airpower/index"
-      ],
-      "@airpower/*": [
-        "airpower/*"
       ]
     },
     "resolveJsonModule": true,
@@ -32,10 +26,6 @@
     "esModuleInterop": true
   },
   "include": [
-    "vite.config.mts",
-    "airpower",
-    "airpower/**/*.ts",
-    "airpower/**/*.vue",
     "src/**/*.ts",
     "src/**/*.vue"
   ]

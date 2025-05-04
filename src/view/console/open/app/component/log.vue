@@ -1,33 +1,23 @@
 <script lang="ts" setup>
+import type { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
+import { useMyTable } from '@/hook/useMyTable'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
+
 import { OpenLogService } from '@/model/open/log/OpenLogService'
-import { ADialog, APage, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import { ADialog, ATable, DialogProps, DialogUtil } from '@airpower/web'
 import { OpenAppLogDetail } from './index'
 
-const props = defineProps(airPropsParam(new OpenAppEntity()))
+const props = defineProps(DialogProps.withParam(new OpenAppEntity()))
 
-const {
-  isLoading,
-} = useAirDetail(props, OpenAppService)
-
-const {
-  onPageChanged,
-  response,
-} = useAirTable(OpenLogService, {
+const hook = useMyTable(OpenLogService, {
   beforeSearch(requestData) {
-    requestData.filter.openApp = props.param.copyExposeId()
+    requestData.filter.openApp = props.param.copy().expose('id')
     return requestData
   },
 })
 
 function onDetail(log: OpenLogEntity) {
-  AirDialog.show(OpenAppLogDetail, log)
+  DialogUtil.show(OpenAppLogDetail, log)
 }
 </script>
 
@@ -36,29 +26,21 @@ function onDetail(log: OpenLogEntity) {
     height="80%"
     title="请求日志"
     width="80%"
-    @on-cancel="onCancel"
-    @on-confirm="onConfirm"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <ATable
-      v-loading="isLoading"
-      :ctrl-width="100"
-      :data-list="response.list"
-      :entity="OpenLogEntity"
+      :on-detail="onDetail"
+      :use-hook="hook"
+      ctrl-width="100"
       hide-delete
       hide-edit
       show-detail
-      @on-detail="onDetail"
     >
       <template #mSecond="{ data }">
         {{ data.updateTime - data.createTime }}ms
       </template>
     </ATable>
-    <template #status>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
   </ADialog>
 </template>
 

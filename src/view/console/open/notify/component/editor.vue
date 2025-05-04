@@ -1,14 +1,13 @@
 <script lang="ts" setup>
-import type { IDictionary } from '@airpower/interface/IDictionary'
+import type { IEnum } from '@airpower/web'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
+
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
 import { NotifyService } from '@/model/open/notify/NotifyService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new NotifyEntity()))
+const props = defineProps(DialogProps.withParam(new NotifyEntity()))
 
 const {
   title,
@@ -17,9 +16,9 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, NotifyService)
+} = useEditor(props, NotifyService)
 
-const sceneList = ref<IDictionary[]>([])
+const sceneList = ref<IEnum[]>([])
 
 async function init() {
   sceneList.value = await NotifyService.create().getSceneList()
@@ -30,13 +29,13 @@ init()
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
+    hide-fullscreen
     min-height="100px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -56,7 +55,7 @@ init()
         field="token"
       />
       <AFormField
-        v-if="NotifyChannelEnum.WEB_HOOK.equalsKey(formData.type)"
+        v-if="NotifyChannelEnum.WEB_HOOK.equalsKey(formData.channel)"
         field="token"
       />
       <AFormField field="remark" />

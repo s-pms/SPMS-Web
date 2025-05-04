@@ -1,17 +1,16 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
+import type { FormInstance } from 'element-plus'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
-import { ADialog, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+import { ADialog, AInput, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new MoveDetailEntity()))
+const props = defineProps(DialogProps.withParam(new MoveDetailEntity()))
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 formData.value.quantity = props.param.inventory.quantity
 formData.value.billId = props.param.billId
@@ -27,13 +26,13 @@ async function onSubmit() {
     :loading="isLoading"
     title="移库明细"
     width="600px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="MoveDetailService.createValidator(formData)"
+      :rules="MoveDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -47,7 +46,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="MoveDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(MoveDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { MenuService } from '@/model/system/menu/MenuService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsSelector<MenuEntity>())
+import { ASelector, DialogProps } from '@airpower/web'
+
+const props = defineProps(DialogProps.withSelector<MenuEntity>())
 </script>
 
 <template>

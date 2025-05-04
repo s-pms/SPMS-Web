@@ -2,12 +2,11 @@
 import type { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
 import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
 import { UserService } from '@/model/personnel/user/UserService'
-import { airProps } from '@airpower/config/AirProps'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
+import { DialogProps, FeedbackUtil } from '@airpower/web'
+
 import { ref } from 'vue'
 
-defineProps(airProps())
+defineProps(DialogProps.create())
 
 const isLoading = ref(false)
 
@@ -35,7 +34,7 @@ function getAvatar(item: ThirdLoginPlatform) {
 
 function onBind(item: ThirdLoginPlatform) {
   if (item.disabled) {
-    AirNotification.error(`暂不支持${item.label}`)
+    FeedbackUtil.toastError(`暂不支持${item.label}`)
     return
   }
   const redirectUri = `${window.location.origin}/bind/${item.flag}`
@@ -57,7 +56,7 @@ async function onUnBind(item: ThirdLoginPlatform) {
   if (!data) {
     return
   }
-  await AirConfirm.warning(`是否确认解绑 ${item.label} 账号？`, '解绑提醒')
+  await FeedbackUtil.confirmWarning(`是否确认解绑 ${item.label} 账号？`, '解绑提醒')
   await UserService.create(isLoading).unBindThird(data)
   init()
 }

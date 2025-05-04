@@ -1,45 +1,18 @@
 <script lang="ts" setup>
-import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { useMyTable } from '@/hook/useMyTable'
+
 import { OperationService } from '@/model/mes/operation/OperationService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import { APanel, ATable } from '@airpower/web'
 import { OperationEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  onSearch,
-  onAdd,
-  onEdit,
-  onDelete,
-  onPageChanged,
-} = useAirTable(OperationService, {
+const hook = useMyTable(OperationService, {
   editView: OperationEditor,
 })
 </script>
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="OperationEntity"
-      :loading="isLoading"
-      :service="OperationService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
-    <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
-      :entity="OperationEntity"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-    />
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
+    <ATable :use-hook="hook" />
   </APanel>
 </template>
 

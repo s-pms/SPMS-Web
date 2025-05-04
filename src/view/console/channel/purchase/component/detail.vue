@@ -5,10 +5,10 @@ import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEnt
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
-import { AButton, ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsParam(new PurchaseEntity()))
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
 
 const {
   title,
@@ -24,8 +24,8 @@ const {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -52,8 +52,9 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="PurchaseDetailEntity"
-          :field-list="PurchaseDetailEntity.getTableFieldConfigList()"
-          hide-ctrl
+          hide-add
+          hide-delete
+          hide-edit
         >
           <template #materialCode="{ data }">
             {{ data.material?.code }}
@@ -70,11 +71,11 @@ const {
           <template #endRow="{ data }">
             <AButton
               :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"
-              icon-button
-              tooltip="添加完成"
-              type="CHECKIN"
-              @click="addDetailFinishQuantity(data)"
-            />
+              link
+              @click="addDetailFinishQuantity(data, param.id)"
+            >
+              作业
+            </AButton>
           </template>
         </ATable>
       </AGroup>

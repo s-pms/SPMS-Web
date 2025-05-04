@@ -2,11 +2,11 @@
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { PurchaseEditor } from '.'
 
-const props = defineProps(airPropsSelector<PurchaseEntity>(new PurchaseEntity()))
+const props = defineProps(DialogProps.withSelector<PurchaseEntity>(new PurchaseEntity()))
 </script>
 
 <template>

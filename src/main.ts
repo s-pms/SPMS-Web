@@ -1,17 +1,20 @@
+import App from '@/App.vue'
 import { routes } from '@/config/routes'
-import { app } from '@airpower'
-
-import { AirConfig } from '@airpower/config/AirConfig'
-import { AirRouter } from '@airpower/helper/AirRouter'
+import { RouterUtil, WebConfig } from '@airpower/web'
+import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import { createApp } from 'vue'
+import '@airpower/web/dist/web.css'
 import '@/assets/css/main.scss'
 
-AirConfig.appKey = 'spms'
-AirConfig.uploadUrl = '/api/file/upload'
+WebConfig.elementPlusLocale = zhCn
+WebConfig.appKey = 'spms'
+WebConfig.uploadUrl = '/api/file/upload'
 
-// 开启所有表格斑马纹
-// AirConfig.tableStripe = true
-
-// 开启所有表格边框线
-// AirConfig.tableBorder = true
-
-app.use(AirRouter.createRouter(routes)).mount('#app')
+createApp(App)
+  .use(RouterUtil.createRouter(routes))
+  .use(ElementPlus, {
+    zIndex: 3000,
+    locale: zhCn,
+  })
+  .mount('#app')

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 import { ParameterService } from '@/model/iot/parameter/ParameterService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { ParameterEditor } from '.'
 
-const props = defineProps(airPropsSelector<ParameterEntity>())
+const props = defineProps(DialogProps.withSelector<ParameterEntity>())
 </script>
 
 <template>

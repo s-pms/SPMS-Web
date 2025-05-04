@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { IDictionary } from '@airpower/interface/IDictionary'
-import type { IJson } from '@airpower/interface/IJson'
+import type { IJson, IWebEnum } from '@airpower/web'
 import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
 import { DeviceService } from '@/model/asset/device/DeviceService'
@@ -8,20 +7,22 @@ import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
 import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
 import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
-import { ADialog, AEmpty } from '@airpower/component'
-import { AirConstant } from '@airpower/config/AirConstant'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirColor } from '@airpower/enum/AirColor'
-import { AirDateTimeFormatter } from '@airpower/enum/AirDateTimeFormatter'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDateTime } from '@airpower/helper/AirDateTime'
-import { AirRand } from '@airpower/helper/AirRand'
+import {
+  ADialog,
+  AEmpty,
+  DateTimeFormatter,
+  DateTimeUtil,
+  DialogProps,
+  FeedbackUtil,
+  RandomUtil,
+  WebColor,
+} from '@airpower/web'
 import { ArrowDown, Clock } from '@element-plus/icons-vue'
 
 import * as echarts from 'echarts'
 import { computed, onMounted, ref } from 'vue'
 
-const props = defineProps(airPropsParam(new CollectionEntity()))
+const props = defineProps(DialogProps.withParam(new CollectionEntity()))
 const currentLabel = ref('')
 const currentColor = ref('')
 const collectionList = ref<CollectionEntity[]>([])
@@ -31,14 +32,14 @@ const isLoading = ref(false)
 const maxLength = 500
 
 const currentGranularity = ref(CollectionGranularityEnum.ONE_MINUTE)
-const dateTimeRange = ref([new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.key), new Date()])
+const dateTimeRange = ref([new Date(DateTimeUtil.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.key), new Date()])
 
 const shortcuts = computed(() =>
-  DeviceReportDuration.toDictionary().forEach(item => ({
+  DeviceReportDuration.toArray().forEach(item => ({
     text: item.label,
     value: () => {
       const start = new Date()
-      start.setTime(start.getTime() - item.key * AirConstant.MILLISECONDS_PER_SECOND)
+      start.setTime(start.getTime() - item.key * DateTimeUtil.MILLISECONDS_PER_SECOND)
       return [start, new Date()]
     },
   })),
@@ -47,9 +48,9 @@ const shortcuts = computed(() =>
 const dictionary = computed(() => {
   switch (props.param.code) {
     case 'Status':
-      return DeviceStatusEnum.toDictionary().filter(item => item.key !== DeviceStatusEnum.UNKNOWN.key)
+      return DeviceStatusEnum.toArray().filter(item => item.key !== DeviceStatusEnum.UNKNOWN.key)
     case 'Alarm':
-      return AlarmStatusEnum.toDictionary()
+      return AlarmStatusEnum.toArray()
     default:
   }
   return []
@@ -66,75 +67,75 @@ function validDateTimeRange() {
           case CollectionGranularityEnum.ONE_MINUTE:
             // 每分钟 最多允许查看最近6小时
             if (
-              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
+              - DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
               > DeviceReportDuration.SIX_HOUR.getMillisecond()
             ) {
-              AirNotification.warning('该时间粒度下最多允许查看6小时内的数据')
+              FeedbackUtil.toastWarning('该时间粒度下最多允许查看6小时内的数据')
               dateTimeRange.value[0] = new Date(
-                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.SIX_HOUR.getMillisecond(),
+                DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.SIX_HOUR.getMillisecond(),
               )
             }
             break
           case CollectionGranularityEnum.FIVE_MINUTES:
             if (
-              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
+              - DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
               > DeviceReportDuration.ONE_DAY.getMillisecond()
             ) {
-              AirNotification.warning('该时间粒度下最多允许查看24小时内的数据')
+              FeedbackUtil.toastWarning('该时间粒度下最多允许查看24小时内的数据')
               dateTimeRange.value[0] = new Date(
-                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_DAY.getMillisecond(),
+                DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_DAY.getMillisecond(),
               )
             }
             break
           case CollectionGranularityEnum.THIRTY_MINUTES:
             if (
-              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
+              - DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
               > DeviceReportDuration.THREE_DAY.getMillisecond()
             ) {
-              AirNotification.warning('该时间粒度下最多允许查看72小时内的数据')
+              FeedbackUtil.toastWarning('该时间粒度下最多允许查看72小时内的数据')
               dateTimeRange.value[0] = new Date(
-                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+                DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
                 - DeviceReportDuration.THREE_DAY.getMillisecond(),
               )
             }
             break
           case CollectionGranularityEnum.ONE_HOUR:
             if (
-              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
+              - DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
               > DeviceReportDuration.ONE_WEEK.getMillisecond()
             ) {
-              AirNotification.warning('该时间粒度下最多允许查看7天内的数据')
+              FeedbackUtil.toastWarning('该时间粒度下最多允许查看7天内的数据')
               dateTimeRange.value[0] = new Date(
-                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_WEEK.getMillisecond(),
+                DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_WEEK.getMillisecond(),
               )
             }
             break
           case CollectionGranularityEnum.ONE_DAY:
             if (
-              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
+              - DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
               > DeviceReportDuration.ONE_YEAR.getMillisecond()
             ) {
-              AirNotification.warning('该时间粒度下最多允许查看一年内的数据')
+              FeedbackUtil.toastWarning('该时间粒度下最多允许查看一年内的数据')
               dateTimeRange.value[0] = new Date(
-                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_YEAR.getMillisecond(),
+                DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1]) - DeviceReportDuration.ONE_YEAR.getMillisecond(),
               )
             }
             break
           case CollectionGranularityEnum.ONE_WEEK:
           case CollectionGranularityEnum.ONE_MONTH:
             if (
-              AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
-              - AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
+              DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
+              - DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
               > DeviceReportDuration.THREE_YEAR.getMillisecond()
             ) {
-              AirNotification.warning('该时间粒度下最多允许查看三年内的数据')
+              FeedbackUtil.toastWarning('该时间粒度下最多允许查看三年内的数据')
               dateTimeRange.value[0] = new Date(
-                AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+                DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
                 - DeviceReportDuration.THREE_YEAR.getMillisecond(),
               )
             }
@@ -147,7 +148,7 @@ function validDateTimeRange() {
   }
   else {
     dateTimeRange.value = [
-      new Date(AirDateTime.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.getMillisecond()),
+      new Date(DateTimeUtil.getMilliTimeStamps() - DeviceReportDuration.SIX_HOUR.getMillisecond()),
       new Date(),
     ]
     currentGranularity.value = CollectionGranularityEnum.ONE_MINUTE
@@ -163,12 +164,12 @@ function validDateTimeRange() {
 function getStatusColor(item: CollectionEntity) {
   switch (props.param.code) {
     case 'Status':
-      return DeviceStatusEnum.getColor(item.intValue, AirColor.NORMAL)
+      return DeviceStatusEnum.get(item.intValue)?.color || WebColor.NORMAL
     case 'Alarm':
-      return AlarmStatusEnum.getColor(item.intValue, AirColor.NORMAL)
+      return AlarmStatusEnum.get(item.intValue)?.color || WebColor.NORMAL
     default:
   }
-  return AirColor.NORMAL
+  return WebColor.NORMAL
 }
 
 /**
@@ -184,23 +185,19 @@ function getStatusLabel(item: CollectionEntity, index: number) {
   switch (props.param.code) {
     case 'Status':
       label = DeviceStatusEnum.getLabel(item.intValue)
-      label += ' [ '
-      label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp)
-      label += ' ~ '
-      label += AirDateTime.formatFromMilliSecond(item.timestamp)
-      label += ' ]'
-      return label
+      break
     case 'Alarm':
       label = AlarmStatusEnum.getLabel(item.intValue)
-      label += ' [ '
-      label += AirDateTime.formatFromMilliSecond(collectionList.value[index - 1].timestamp)
-      label += ' ~ '
-      label += AirDateTime.formatFromMilliSecond(item.timestamp)
-      label += ' ]'
-      return label
+      break
     default:
+      return item.intValue
   }
-  return item.intValue
+  label += ' [ '
+  label += DateTimeFormatter.FULL_DATE_TIME.formatMilliSecond(collectionList.value[index - 1].timestamp)
+  label += ' ~ '
+  label += DateTimeFormatter.FULL_DATE_TIME.formatMilliSecond(item.timestamp)
+  label += ' ]'
+  return label
 }
 
 /**
@@ -244,18 +241,18 @@ const statusList = computed(() => {
   return arr
 })
 
-function getLabel(item: IDictionary) {
+function getLabel(item: IWebEnum) {
   return dictionary.value.find(i => i.key === item.key)?.label || '未知'
 }
 
-function getColor(item: IDictionary) {
+function getColor(item: IWebEnum) {
   return (
     dictionary.value.find(i => i.key === item.key)?.color
-    || `#${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}${AirRand.getRandNumber(10, 99)}`
+    || `#${RandomUtil.getRandNumber(10, 99)}${RandomUtil.getRandNumber(10, 99)}${RandomUtil.getRandNumber(10, 99)}`
   )
 }
 
-function getPercent(dictionary: IDictionary) {
+function getPercent(dictionary: IWebEnum) {
   let percent = 0
   statusList.value.forEach((item) => {
     if (dictionary.key === item.key) {
@@ -307,7 +304,7 @@ function initLine() {
           show: true,
         },
         data: collectionList.value.map(item =>
-          AirDateTime.formatFromMilliSecond(item.timestamp, AirDateTimeFormatter.MM_DD_HH_mm),
+          DateTimeFormatter.SHORT_DATE_TIME.formatMilliSecond(item.timestamp),
         ),
       },
     ],
@@ -355,13 +352,13 @@ function loadData() {
 
 async function getDevicePayloadHistory() {
   if (dateTimeRange.value.length !== 2) {
-    AirNotification.warning('请选择查看的历史周期')
+    FeedbackUtil.toastWarning('请选择查看的历史周期')
     return
   }
   const postData = props.param.copy()
   postData.reportGranularity = currentGranularity.value.key
-  postData.startTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[0])
-  postData.endTime = AirDateTime.getMilliTimeStamps(dateTimeRange.value[1])
+  postData.startTime = DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[0])
+  postData.endTime = DateTimeUtil.getMilliTimeStamps(dateTimeRange.value[1])
   const list = await DeviceService.create(isLoading).getDevicePayloadHistory(postData)
   if (ParameterTypeEnum.STRING.equalsKey(props.param.dataType)) {
     collectionList.value = list.reverse()
@@ -396,8 +393,8 @@ function setCurrent(item?: IJson) {
     hide-confirm
     hide-footer
     width="65%"
-    @on-cancel="onCancel"
-    @on-full="onFull"
+    @cancel="onCancel"
+    @fullscreen-change="onFull"
   >
     <div class="filter">
       <div class="left" />
@@ -413,6 +410,7 @@ function setCurrent(item?: IJson) {
         />
 
         <el-dropdown
+
           v-if="ParameterTypeEnum.NUMBER.equalsKey(param.dataType)"
           trigger="click"
           @command="handleCommand"
@@ -426,7 +424,7 @@ function setCurrent(item?: IJson) {
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
-                v-for="item in CollectionGranularityEnum.toDictionary()"
+                v-for="item in CollectionGranularityEnum.toArray()"
                 :key="item.key"
                 :command="item.key"
               >
@@ -502,13 +500,14 @@ function setCurrent(item?: IJson) {
         </div>
         <div class="time">
           <div class="left">
-            {{ AirDateTime.formatFromMilliSecond(collectionList[0].timestamp) }}
+            {{ DateTimeFormatter.FULL_DATE_TIME.formatMilliSecond(collectionList[0].timestamp) }}
           </div>
           <div
             v-if="collectionList.length < maxLength"
             class="right"
           >
-            {{ AirDateTime.formatFromMilliSecond(collectionList[collectionList.length - 1].timestamp) }}
+            {{ DateTimeFormatter.FULL_DATE_TIME.formatMilliSecond(collectionList[collectionList.length - 1].timestamp)
+            }}
           </div>
           <div
             v-else
@@ -532,7 +531,7 @@ function setCurrent(item?: IJson) {
               <el-icon>
                 <Clock />
               </el-icon>
-              {{ AirDateTime.formatFromMilliSecond(item.timestamp) }}
+              {{ DateTimeFormatter.FULL_DATE_TIME.formatMilliSecond(item.timestamp) }}
             </div>
           </el-timeline-item>
         </el-timeline>

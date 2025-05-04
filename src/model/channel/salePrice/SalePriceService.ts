@@ -13,7 +13,7 @@ export class SalePriceService extends AbstractBaseService<SalePriceEntity> {
     entity.material = new MaterialEntity(materialId)
     entity.customer = new CustomerEntity(customerId)
     try {
-      return this.api('getByMaterialAndCustomer').callbackError().request(entity, SalePriceEntity)
+      return this.api('getByMaterialAndCustomer').throwError().post(entity, SalePriceEntity)
     }
     catch (e) {
       console.error(e)

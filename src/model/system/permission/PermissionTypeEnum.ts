@@ -1,8 +1,9 @@
-import { AirEnum } from '@airpower/base/AirEnum'
-import { AirColor } from '@airpower/enum/AirColor'
+import { WebColor, WebEnum } from '@airpower/web'
 
-export class PermissionTypeEnum extends AirEnum {
-  static API = new PermissionTypeEnum(0, 'API权限', AirColor.WARNING)
+export class PermissionTypeEnum extends WebEnum {
+  static API = new PermissionTypeEnum(0, 'API权限')
+    .setColor(WebColor.WARNING)
 
-  static MCP = new PermissionTypeEnum(1, 'MCP权限', AirColor.SUCCESS)
+  static MCP = new PermissionTypeEnum(1, 'MCP权限')
+    .setColor(WebColor.SUCCESS)
 }

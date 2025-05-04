@@ -2,13 +2,11 @@
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
-import { AButton, ADialog, AGroup, AInput } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor } from '@airpower/web'
 import { RoleSelector } from '../../role/component'
 
-const props = defineProps(airPropsParam(new UserEntity()))
+const props = defineProps(DialogProps.withParam(new UserEntity()))
 
 const {
   isLoading,
@@ -17,101 +15,52 @@ const {
   title,
   rules,
   onSubmit,
-} = useAirEditor(props, UserService)
+} = useEditor(props, UserService)
 
 async function selectRole() {
-  formData.value.roleList = await AirDialog.selectList(RoleSelector, formData.value.roleList)
+  formData.value.roleList = await DialogUtil.selectList(RoleSelector, formData.value.roleList)
 }
 
 async function selectDepartment() {
-  formData.value.departmentList = await AirDialog.selectList(DepartmentSelector, formData.value.departmentList)
+  formData.value.departmentList = await DialogUtil.selectList(DepartmentSelector, formData.value.departmentList)
 }
 </script>
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
-    :form-ref="formRef"
-    :loading="isLoading"
-    :title="title"
-    confirm-text="保存"
-    height="60%"
-    width="60%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    :form-ref="formRef" :loading="isLoading" :title="title" confirm-text="保存" height="60%"
+    hide-fullscreen width="60%" @cancel="onCancel" @confirm="onSubmit"
   >
-    <el-form
-      ref="formRef"
-      :model="formData"
-      :rules="rules"
-      label-width="120px"
-      @submit.prevent
-    >
-      <AGroup
-        :column="2"
-        title="基础信息"
-      >
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('nickname')"
-          prop="nickname"
-        >
-          <AInput
-            v-model.nickname="formData.nickname"
-            :entity="UserEntity"
-          />
+    <el-form ref="formRef" :model="formData" :rules="rules" label-width="120px" @submit.prevent>
+      <AGroup :column="2" title="基础信息">
+        <el-form-item :label="getFieldLabel(UserEntity, 'nickname')" prop="nickname">
+          <AInput v-model.nickname="formData.nickname" :entity="UserEntity" />
         </el-form-item>
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('email')"
-          prop="email"
-        >
-          <AInput
-            v-model.email="formData.email"
-            :entity="UserEntity"
-          />
+        <el-form-item :label="getFieldLabel(UserEntity, 'email')" prop="email">
+          <AInput v-model.email="formData.email" :entity="UserEntity" />
         </el-form-item>
-        <el-form-item
-          :label="UserEntity.getFormFieldLabel('phone')"
-          prop="phone"
-        >
-          <AInput
-            v-model.phone="formData.phone"
-            :entity="UserEntity"
-          />
+        <el-form-item :label="getFieldLabel(UserEntity, 'phone')" prop="phone">
+          <AInput v-model.phone="formData.phone" :entity="UserEntity" />
         </el-form-item>
       </AGroup>
-      <AGroup
-        :column="2"
-        title="角色和部门"
-      >
+      <AGroup :column="2" title="角色和部门">
         <div class="role-list">
-          <AButton
-            type="ADD"
-            @click="selectRole()"
-          >
+          <AButton icon="ADD" @click="selectRole()">
             添加角色
           </AButton>
           <el-tag
-            v-for="(role, index) in formData.roleList"
-            :key="role.id"
-            closable
-            size="large"
+            v-for="(role, index) in formData.roleList" :key="role.id" closable size="large"
             @close="formData.roleList.splice(index, 1)"
           >
             {{ role.name }}
           </el-tag>
         </div>
         <div class="department-list">
-          <AButton
-            type="ADD"
-            @click="selectDepartment()"
-          >
+          <AButton icon="ADD" @click="selectDepartment()">
             添加部门
           </AButton>
           <el-tag
-            v-for="(department, index) in formData.departmentList"
-            :key="department.id"
-            closable
-            size="large"
+            v-for="(department, index) in formData.departmentList" :key="department.id" closable size="large"
             @close="formData.departmentList.splice(index, 1)"
           >
             {{ department.name }}

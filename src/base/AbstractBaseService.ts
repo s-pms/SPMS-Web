@@ -1,23 +1,17 @@
-import type { AirHttp } from '@airpower/helper/AirHttp'
 import type { BaseEntity } from './BaseEntity'
-import { AirAbstractEntityService } from '@airpower/base/AirAbstractEntityService'
-import { AirNotification } from '@airpower/feedback/AirNotification'
+import { AbstractCurdService, FeedbackUtil } from '@airpower/web'
 
 /**
  * # 抽象服务基类
  * @author Hamm.cn
  */
-export abstract class AbstractBaseService<E extends BaseEntity> extends AirAbstractEntityService<E> {
-  api(url: string, baseUrl?: string | undefined): AirHttp {
-    return super.api(url, baseUrl).addHttpHeader('hello', 'world')
-  }
-
+export abstract class AbstractBaseService<E extends BaseEntity> extends AbstractCurdService<E> {
   /**
    * ### 发布实体
    * @param entity 实体
    */
   async publish(entity: E): Promise<void> {
-    await this.api('publish').post(entity)
-    AirNotification.success('发布成功')
+    await this.api('publish').request(entity)
+    FeedbackUtil.toastSuccess('发布成功')
   }
 }

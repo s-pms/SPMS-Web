@@ -1,33 +1,29 @@
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '入库明细',
 })
 export class InputDetailEntity extends AbstractBaseBillDetailEntity {
-  @Field({
-    type: StorageEntity,
-  })
+  @Type(StorageEntity)
   storage!: StorageEntity
 
   @Form({
     requiredPayload: true,
   })
-  @Field({
-    type: MaterialEntity,
-  })
+  @Type(MaterialEntity)
   material!: MaterialEntity
 
-  @Table({ forceShow: true })
+  @Table({ force: true })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Field({
     label: '物料名称',
@@ -44,7 +40,6 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Field({
     label: '物料',
-    type: Number,
   })
   materialId!: number
 
@@ -55,23 +50,24 @@ export class InputDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -2,
-    forceShow: true,
+    order: -2,
+    force: true,
   })
   @Field({
     label: '入库数量',
-    type: Number,
   })
   quantity!: number
 
   @Table({
     align: 'right',
     width: 150,
-    orderNumber: -3,
+    order: -3,
   })
   @Field({
     label: '已入库数量',
-    type: Number,
+  })
+  @Form({
+    number: true,
   })
   finishQuantity!: number
 

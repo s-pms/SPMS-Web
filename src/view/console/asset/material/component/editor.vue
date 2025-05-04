@@ -2,11 +2,10 @@
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
 import { UnitSelector } from '@/view/console/system/unit/component'
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new MaterialEntity()))
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new MaterialEntity()))
 
 const {
   title,
@@ -15,14 +14,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, MaterialService, {
-  afterGetDetail(detailData) {
-    return detailData
-  },
-  beforeSubmit(submitData) {
-    return submitData
-  },
-})
+} = useEditor(props, MaterialService)
 </script>
 
 <template>
@@ -30,8 +22,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

@@ -1,6 +1,6 @@
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Table } from '@airpower/decorator'
+import { Field, Form, Model, Table } from '@airpower/web'
 
 @Model({
   label: '供应商',
@@ -10,7 +10,7 @@ export class SupplierEntity extends BaseEntity implements IPayload {
    * ### 供应商名称
    */
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -24,8 +24,8 @@ export class SupplierEntity extends BaseEntity implements IPayload {
    * ### 供应商编码
    */
   @Table({
-    copyField: true,
-    forceShow: true,
+    copy: true,
+    force: true,
   })
   @Form({
     placeholder: '不输入按编码规则自动生成',

@@ -1,17 +1,15 @@
-import type { IPayload } from '@airpower/interface/IPayload'
+import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialUseTypeEnum } from '@/model/asset/material/MaterialUseTypeEnum'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { MaterialTypeEnum } from './MaterialTypeEnum'
 
 @Model({
   label: '物料',
 })
 export class MaterialEntity extends BaseEntity implements IPayload {
-  @Table({
-    forceShow: true,
-  })
+  @Table({})
   @Form({
     requiredString: true,
   })
@@ -22,8 +20,8 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   name!: string
 
   @Table({
-    copyField: true,
-    forceShow: true,
+    copy: true,
+    force: true,
   })
   @Search()
   @Form({
@@ -35,7 +33,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   code!: string
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
   })
   @Form({
@@ -51,7 +49,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   materialType!: number
 
   @Table({
-    showColor: true,
+    color: true,
     width: 100,
   })
   @Form({
@@ -67,7 +65,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   useType!: number
 
   @Table({
-    copyField: true,
+    copy: true,
   })
   @Form()
   @Field({
@@ -76,7 +74,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   spc!: string
 
   @Table({
-    payloadField: 'name',
+    payload: true,
     width: 100,
   })
   @Form({
@@ -84,9 +82,8 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   })
   @Field({
     label: '计量单位',
-    type: UnitEntity,
-    alias: 'unitInfo',
   })
+  @Type(UnitEntity)
   unit!: UnitEntity
 
   @Table({
@@ -101,7 +98,6 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   })
   @Field({
     label: '采购单价',
-    type: Number,
   })
   purchasePrice!: number
 
@@ -117,7 +113,6 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   })
   @Field({
     label: '销售单价',
-    type: Number,
   })
   salePrice!: number
 

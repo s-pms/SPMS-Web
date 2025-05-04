@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { PlanEditor } from '.'
 
-const props = defineProps(airPropsSelector<PlanEntity>())
+const props = defineProps(DialogProps.withSelector<PlanEntity>())
 </script>
 
 <template>

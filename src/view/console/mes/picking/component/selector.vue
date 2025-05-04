@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { PickingStatusEnum } from '@/model/mes/picking/PickingStatusEnum'
+import { ASelector, DialogProps } from '@airpower/web'
 import { PickingEditor } from '.'
 
-const props = defineProps(airPropsSelector<PickingEntity>(new PickingEntity()))
+const props = defineProps(DialogProps.withSelector<PickingEntity>(new PickingEntity()))
 </script>
 
 <template>

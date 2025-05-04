@@ -5,10 +5,10 @@ import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
-import { ADialog, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
 
-const props = defineProps(airPropsParam(new PickingEntity()))
+import { ADialog, AGroup, ASelect, ATable, DialogProps, getFieldLabel, getTableConfigList } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new PickingEntity()))
 
 const {
   title,
@@ -23,8 +23,8 @@ const {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -37,7 +37,7 @@ const {
       >
         <BillFormCode :bill="formData" />
         <el-form-item
-          :label="PickingEntity.getFieldName('structure')"
+          :label="getFieldLabel(PickingEntity, 'structure')"
           prop="structure"
         >
           <ASelect
@@ -52,7 +52,7 @@ const {
         <ATable
           :data-list="formData.details"
           :entity="PickingDetailEntity"
-          :field-list="PickingDetailEntity.getTableFieldConfigList()"
+          hide-add
           hide-ctrl
         >
           <template #materialCode="{ data }">

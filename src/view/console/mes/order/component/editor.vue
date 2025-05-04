@@ -7,16 +7,13 @@ import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
-import { ADialog, AFormField, AGroup, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirDialog } from '@airpower/helper/AirDialog'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { ADialog, AFormField, AGroup, ASelect, DialogProps, DialogUtil, FeedbackUtil, useEditor } from '@airpower/web'
 import { computed, ref } from 'vue'
 import { PlanDetailSelector, PlanSelector } from '../../plan/component'
 import { RoutingSelector } from '../../routing/component'
 
-const props = defineProps(airPropsParam(new OrderEntity()))
+const props = defineProps(DialogProps.withParam(new OrderEntity()))
 
 const {
   title,
@@ -25,10 +22,10 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, OrderService, {
+} = useEditor(props, OrderService, {
   beforeSubmit(submitData) {
     if (submitData.deliverTime < submitData.startTime) {
-      AirNotification.warning('交付日期不能早于开始日期')
+      FeedbackUtil.toastWarning('交付日期不能早于开始日期')
       return null
     }
     return submitData
@@ -52,11 +49,11 @@ async function selectPlan() {
 
 async function selectMaterial() {
   if (OrderTypeEnum.OTHER.equalsKey(formData.value.type)) {
-    formData.value.material = await AirDialog.select(MaterialSelector)
+    formData.value.material = await DialogUtil.select(MaterialSelector)
     routingFilter.value.material = formData.value.material
     return
   }
-  const planDetail: PlanDetailEntity = await AirDialog.show(PlanDetailSelector, formData.value.plan)
+  const planDetail: PlanDetailEntity = await DialogUtil.show(PlanDetailSelector, formData.value.plan)
   formData.value.material = planDetail.material
   routingFilter.value.material = formData.value.material
   formData.value.quantity = planDetail.quantity
@@ -94,8 +91,8 @@ const isCustomerDisabled = computed(() => {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -111,7 +108,7 @@ const isCustomerDisabled = computed(() => {
         <AFormField field="billCode" />
         <AFormField
           field="type"
-          @on-change="orderTypeChanged"
+          @changed="orderTypeChanged"
         />
         <template v-if="OrderTypeEnum.PLAN.equalsKey(formData.type)">
           <el-form-item
@@ -122,7 +119,7 @@ const isCustomerDisabled = computed(() => {
               v-model="formData.plan"
               :selector="PlanSelector"
               placeholder="请选择订单关联计划"
-              @change="selectPlan()"
+              @changed="selectPlan()"
             />
           </el-form-item>
           <el-form-item />

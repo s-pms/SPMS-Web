@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
+import type { FormInstance } from 'element-plus'
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputDetailService } from '@/model/wms/input/InputDetailService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new InputDetailEntity()))
+const props = defineProps(DialogProps.withParam(new InputDetailEntity()))
 
 const formData = ref(props.param.copy())
 if (formData.value.material) {
@@ -17,7 +16,7 @@ if (formData.value.material) {
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
   props.onConfirm(formData.value)
@@ -30,13 +29,13 @@ async function onSubmit() {
     :loading="isLoading"
     title="入库明细"
     width="600px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="InputDetailService.createValidator(formData)"
+      :rules="InputDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -50,7 +49,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="InputDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(InputDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

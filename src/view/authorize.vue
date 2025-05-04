@@ -6,15 +6,14 @@ import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirRouter } from '@airpower/helper/AirRouter'
+import { FeedbackUtil, RouterUtil } from '@airpower/web'
 import { ref } from 'vue'
 
 const user = ref(new UserEntity())
 
-const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
-const scope = (AirRouter.router.currentRoute.value.query.scope || '').toString()
-const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
+const appKey = (RouterUtil.router.currentRoute.value.query.appKey || '').toString()
+const scope = (RouterUtil.router.currentRoute.value.query.scope || '').toString()
+const redirectUri = (RouterUtil.router.currentRoute.value.query.redirectUri || '/console').toString()
 
 const appInfo = ref(new OpenAppEntity())
 
@@ -57,7 +56,7 @@ async function init() {
 }
 
 async function onSwitchAccount() {
-  await AirConfirm.warning('是否确认切换登录的账号', '切换账号')
+  await FeedbackUtil.confirmWarning('是否确认切换登录的账号', '切换账号')
   window.location.replace(`/login${window.location.search}`)
 }
 

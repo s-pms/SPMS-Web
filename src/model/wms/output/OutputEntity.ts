@@ -1,8 +1,8 @@
-import type { AirEnum } from '@airpower/base/AirEnum'
+import type { WebEnum } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { MoveEntity } from '../move/MoveEntity'
 import { OutputDetailEntity } from './OutputDetailEntity'
 import { OutputStatusEnum } from './OutputStatusEnum'
@@ -19,8 +19,8 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
-    forceShow: true,
+    color: true,
+    force: true,
   })
   @Form({
     defaultValue: OutputTypeEnum.NORMAL.key,
@@ -36,9 +36,9 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
 
   @Table({
     width: 100,
-    showColor: true,
-    orderNumber: -80,
-    forceShow: true,
+    color: true,
+    order: -80,
+    force: true,
   })
   @Search()
   @Field({
@@ -49,38 +49,37 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
 
   @Field({
     label: '出库明细',
-    type: OutputDetailEntity,
-    array: true,
   })
+  @Type(OutputDetailEntity, true)
   details: OutputDetailEntity[] = []
 
   @Field({
     label: '采购单',
-    type: SaleEntity,
   })
+  @Type(SaleEntity)
   sale!: SaleEntity
 
   @Field({
     label: '移库单',
-    type: MoveEntity,
   })
+  @Type(MoveEntity)
   move!: MoveEntity
 
   @Field({
     label: '领料单',
-    type: PickingEntity,
   })
+  @Type(PickingEntity)
   picking!: PickingEntity
 
-  getAuditingStatus(): AirEnum {
+  getAuditingStatus(): WebEnum {
     return OutputStatusEnum.AUDITING
   }
 
-  getAuditedStatus(): AirEnum {
+  getAuditedStatus(): WebEnum {
     return OutputStatusEnum.OUTPUTTING
   }
 
-  getRejectedStatus(): AirEnum {
+  getRejectedStatus(): WebEnum {
     return OutputStatusEnum.REJECTED
   }
 }

@@ -3,11 +3,10 @@ import { Constant } from '@/config/Constant'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new ConfigEntity()))
+import { ADialog, AFormField, DialogProps, getFieldLabel, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new ConfigEntity()))
 
 const {
   title,
@@ -16,7 +15,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, ConfigService, {
+} = useEditor(props, ConfigService, {
   afterGetDetail: (data) => {
     switch (data.type) {
       case ConfigType.NUMBER.key:
@@ -50,8 +49,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -70,22 +69,22 @@ const {
         field="type"
       />
       <template v-if="ConfigType.NUMBER.equalsKey(formData.type)">
-        <el-form-item :label="ConfigEntity.getFieldName('config')">
+        <el-form-item :label="getFieldLabel(ConfigEntity, 'config')">
           <el-input-number v-model="formData.config" />
         </el-form-item>
       </template>
       <template v-else-if="ConfigType.BOOLEAN.equalsKey(formData.type)">
-        <el-form-item :label="ConfigEntity.getFieldName('config')">
+        <el-form-item :label="getFieldLabel(ConfigEntity, 'config')">
           <el-switch v-model="formData.config" />
         </el-form-item>
       </template>
 
       <template v-else>
-        <el-form-item :label="ConfigEntity.getFieldName('config')">
+        <el-form-item :label="getFieldLabel(ConfigEntity, 'config')">
           <el-input v-model="formData.config" />
         </el-form-item>
       </template>
-      <el-form-item :label="ConfigEntity.getFieldName('description')">
+      <el-form-item :label="getFieldLabel(ConfigEntity, 'description')">
         <el-input
           v-model="formData.description"
           disabled

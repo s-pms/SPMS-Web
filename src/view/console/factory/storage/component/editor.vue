@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new StorageEntity()))
+import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new StorageEntity()))
 
 const {
   title,
@@ -14,7 +13,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, StorageService)
+} = useEditor(props, StorageService)
 </script>
 
 <template>
@@ -22,8 +21,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -39,7 +38,7 @@ const {
         {{ formData.parent.name }}({{ formData.parent.code }})
       </el-form-item>
       <AFormField
-        v-for="item in StorageEntity.getFormFieldConfigList()"
+        v-for="item in getFormConfigList(StorageEntity)"
         :key="item.key"
         :field="item.key"
       />

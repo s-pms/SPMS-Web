@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { MaterialEditor } from '.'
 
-const props = defineProps(airPropsSelector<MaterialEntity>())
+const props = defineProps(DialogProps.withSelector<MaterialEntity>())
 </script>
 
 <template>

@@ -8,4 +8,5 @@ import { AbstractBaseService } from '../AbstractBaseService'
  */
 export abstract class AbstractBaseBillDetailService<
   D extends AbstractBaseBillDetailEntity,
-> extends AbstractBaseService<D> {}
+> extends AbstractBaseService<D> {
+}

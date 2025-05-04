@@ -2,12 +2,11 @@
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AFormField, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
+
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
 import { SupplierSelector } from '../../supplier/component'
 
-const props = defineProps(airPropsParam(new PurchasePriceEntity()))
+const props = defineProps(DialogProps.withParam(new PurchasePriceEntity()))
 
 const {
   title,
@@ -16,7 +15,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, PurchasePriceService, {})
+} = useEditor(props, PurchasePriceService, {})
 </script>
 
 <template>
@@ -24,8 +23,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

@@ -1,17 +1,20 @@
-import { AirEnum } from '@airpower/base/AirEnum'
-import { AirColor } from '@airpower/enum/AirColor'
+import { WebColor, WebEnum } from '@airpower/web'
 
 /**
  * # 移库状态枚举字典
  *
  * @author Hamm.cn
  */
-export class MoveStatusEnum extends AirEnum {
-  static readonly AUDITING = new MoveStatusEnum(1, '审核中', AirColor.WARNING)
+export class MoveStatusEnum extends WebEnum {
+  static readonly AUDITING = new MoveStatusEnum(1, '审核中')
+    .setColor(WebColor.WARNING)
 
-  static readonly REJECTED = new MoveStatusEnum(2, '已驳回', AirColor.DANGER)
+  static readonly REJECTED = new MoveStatusEnum(2, '已驳回')
+    .setColor(WebColor.DANGER)
 
-  static readonly MOVING = new MoveStatusEnum(3, '移动中', AirColor.NORMAL)
+  static readonly MOVING = new MoveStatusEnum(3, '移动中')
+    .setColor(WebColor.NORMAL)
 
-  static readonly DONE = new MoveStatusEnum(4, '已完成', AirColor.SUCCESS)
+  static readonly DONE = new MoveStatusEnum(4, '已完成')
+    .setColor(WebColor.SUCCESS)
 }

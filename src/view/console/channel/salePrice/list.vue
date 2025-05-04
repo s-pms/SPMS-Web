@@ -1,34 +1,19 @@
 <script lang="ts" setup>
-import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
+import { useMyTable } from '@/hook/useMyTable'
+
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
-import { useAirTable } from '@airpower/hook/useAirTable'
+import { APanel, ATable } from '@airpower/web'
 import { SalePriceEditor } from './component'
 
-const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPageChanged, onSortChanged, onSelected }
-  = useAirTable(SalePriceService, {
-    editView: SalePriceEditor,
-  })
+const hook = useMyTable(SalePriceService, {
+  editView: SalePriceEditor,
+})
 </script>
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="SalePriceEntity"
-      :loading="isLoading"
-      :service="SalePriceService"
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
-      v-loading="isLoading"
-      :data-list="response.list"
-      :entity="SalePriceEntity"
-      :select-list="selectList"
-      @on-edit="onEdit"
-      @on-delete="onDelete"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
+      :use-hook="hook"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}
@@ -43,12 +28,6 @@ const { isLoading, response, selectList, onSearch, onAdd, onDelete, onEdit, onPa
         {{ data.customer.name }}
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

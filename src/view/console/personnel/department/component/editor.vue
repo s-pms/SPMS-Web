@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new DepartmentEntity()))
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new DepartmentEntity()))
 
 const {
   title,
@@ -14,18 +13,18 @@ const {
   isLoading,
   rules,
   onSubmit,
-} = useAirEditor(props, DepartmentService, {})
+} = useEditor(props, DepartmentService, {})
 </script>
 
 <template>
   <ADialog
-    :allow-fullscreen="false"
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
     confirm-text="保存"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    hide-fullscreen
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"

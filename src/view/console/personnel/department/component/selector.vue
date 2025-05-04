@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { AButton, ADialog, ATable, AToolBar } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
-import { useAirSelector } from '@airpower/hook/useAirSelector'
+import { AButton, ADialog, ATable, DialogProps, useSelector } from '@airpower/web'
 
-const props = defineProps(airPropsSelector<DepartmentEntity>())
+const props = defineProps(DialogProps.withSelector<DepartmentEntity>())
 
 const {
   title,
@@ -14,7 +12,7 @@ const {
   list,
   onSearch,
   onSelected,
-} = useAirSelector(props, DepartmentService, {
+} = useSelector(props, DepartmentService, {
   unPaginate: true,
 })
 </script>
@@ -28,30 +26,26 @@ const {
     height="70%"
     is-selector
     width="70%"
-    @on-confirm="onConfirm(selectList)"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm(selectList)"
   >
-    <AToolBar
-      :entity="DepartmentEntity"
-      :loading="isLoading"
-      :service="DepartmentService"
-      hide-add
-      @on-search="onSearch"
-    />
     <ATable
-      :ctrl-width="80"
       :data-list="list"
       :entity="DepartmentEntity"
       :hide-ctrl="isMultiple"
       :select-list="selectList"
+      :service="DepartmentService"
       :show-select="isMultiple"
       :tree-props="{
         checkStrictly: true,
       }"
+      ctrl-width="80"
+      hide-add
+      hide-column-selector
       hide-delete
       hide-edit
-      hide-field-selector
-      @on-select="onSelected"
+      @search="onSearch"
+      @select-changed="onSelected"
     >
       <template
         v-if="!isMultiple"
@@ -59,11 +53,11 @@ const {
       >
         <AButton
           :disabled="data.isDisabled"
-          icon-button
-          tooltip="选择"
-          type="SELECT"
+          link
           @click="onConfirm(data)"
-        />
+        >
+          作业
+        </AButton>
       </template>
     </ATable>
   </ADialog>

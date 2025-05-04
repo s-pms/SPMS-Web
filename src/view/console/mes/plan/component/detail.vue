@@ -4,17 +4,26 @@ import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
-import { ADateTime, ADialog, AFormField, AGroup, ASelect, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new PlanEntity()))
+import {
+  ADateTime,
+  ADialog,
+  AFormField,
+  AGroup,
+  ASelect,
+  ATable,
+  DialogProps,
+  getTableConfigList,
+  useDetail,
+} from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new PlanEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, PlanService, {})
+} = useDetail(props, PlanService, {})
 </script>
 
 <template>
@@ -23,8 +32,8 @@ const {
     :title="title"
     height="80%"
     width="80%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -63,10 +72,10 @@ const {
       <BillFormMoreDetail :bill="formData" />
       <AGroup title="计划明细">
         <ATable
-          :ctrl-width="60"
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :field-list="PlanDetailEntity.getTableFieldConfigList()"
+          ctrl-width="60"
+          hide-add
           hide-ctrl
         >
           <template #materialCode="{ data }">

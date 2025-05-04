@@ -1,25 +1,24 @@
 <script lang="ts" setup>
 import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
 import { SupplierService } from '@/model/channel/supplier/SupplierService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new SupplierEntity()))
+import { ADialog, AFormField, DialogProps, useDetail } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new SupplierEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, SupplierService)
+} = useDetail(props, SupplierService)
 </script>
 
 <template>
   <ADialog
     :loading="isLoading"
     :title="title"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"

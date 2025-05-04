@@ -15,13 +15,14 @@
     "v": "vite preview"
   },
   "dependencies": {
+    "@airpower/web": "^0.3.11",
     "@element-plus/icons-vue": "^2.3.1",
     "@types/crypto-js": "^4.2.2",
     "axios": "^1.7.2",
     "core-js": "^3.37.1",
     "crypto-js": "^4.2.0",
     "echarts": "^5.5.0",
-    "element-plus": "^2.8.0",
+    "element-plus": "^2.9.9",
     "js-base64": "^3.7.7",
     "pinia": "^2.1.7",
     "qrcode.vue": "3.4.1",
@@ -29,7 +30,7 @@
     "vue": "^3.4.27",
     "vue-clipboard3": "^2.0.0",
     "vue-draggable-plus": "^0.6.0",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.11.0",

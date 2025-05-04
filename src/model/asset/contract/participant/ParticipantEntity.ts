@@ -2,18 +2,19 @@ import { BaseEntity } from '@/base/BaseEntity'
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantRoleEnum } from '@/model/asset/contract/participant/ParticipantRoleEnum'
 import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '参与方',
+  hideFieldSelector: true,
 })
 export class ParticipantEntity extends BaseEntity {
   @Search()
   @Table({
-    showColor: true,
-    orderNumber: 100,
+    color: true,
+    order: 100,
     width: 80,
-    forceShow: true,
+    force: true,
   })
   @Field({
     label: '身份',
@@ -26,7 +27,7 @@ export class ParticipantEntity extends BaseEntity {
   role!: number
 
   @Table({
-    forceShow: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -53,14 +54,13 @@ export class ParticipantEntity extends BaseEntity {
   @Form({
     requiredString: true,
   })
-  @Search()
   @Field({
     label: '邮箱',
   })
   email!: string
 
   @Table({
-    copyField: true,
+    copy: true,
   })
   @Form({
     requiredString: true,
@@ -73,9 +73,9 @@ export class ParticipantEntity extends BaseEntity {
 
   @Search()
   @Table({
-    showColor: true,
+    color: true,
     width: 80,
-    forceShow: true,
+    force: true,
   })
   @Field({
     label: '身份类型',
@@ -89,9 +89,9 @@ export class ParticipantEntity extends BaseEntity {
 
   @Search()
   @Table({
-    showColor: true,
+    color: true,
     width: 120,
-    forceShow: true,
+    force: true,
   })
   @Form({
     clearable: false,

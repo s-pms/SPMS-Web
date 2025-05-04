@@ -7,11 +7,8 @@ import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirConfig } from '@airpower/config/AirConfig'
-import { AirConfirm } from '@airpower/feedback/AirConfirm'
-import { AirNotification } from '@airpower/feedback/AirNotification'
-import { AirRouter } from '@airpower/helper/AirRouter'
-import { AirValidator } from '@airpower/helper/AirValidator'
+import { FeedbackUtil, RouterUtil, ValidateUtil, WebConfig } from '@airpower/web'
+import { ElMessageBox } from 'element-plus'
 import { computed, ref } from 'vue'
 
 /**
@@ -28,9 +25,9 @@ const isRead = ref(true)
 
 const user = ref(new UserEntity())
 
-const appKey = (AirRouter.router.currentRoute.value.query.appKey || '').toString()
-const scope = (AirRouter.router.currentRoute.value.query.scope || '').toString()
-const redirectUri = (AirRouter.router.currentRoute.value.query.redirectUri || '/console').toString()
+const appKey = (RouterUtil.router.currentRoute.value.query.appKey || '').toString()
+const scope = (RouterUtil.router.currentRoute.value.query.scope || '').toString()
+const redirectUri = (RouterUtil.router.currentRoute.value.query.redirectUri || '/console').toString()
 
 const appInfo = ref(new OpenAppEntity())
 
@@ -44,10 +41,10 @@ const isEmailCodeLoading = ref(false)
 
 // ! 判断是否输入有效格式的值
 const isValidCode = computed(() => user.value.code && user.value.code.length === 6)
-const isValidEmail = computed(() => user.value.email && AirValidator.isEmail(user.value.email))
-const isValidPhone = computed(() => user.value.phone && AirValidator.isMobilePhone(user.value.phone))
+const isValidEmail = computed(() => user.value.email && ValidateUtil.isEmail(user.value.email))
+const isValidPhone = computed(() => user.value.phone && ValidateUtil.isMobilePhone(user.value.phone))
 const isValidAccount = computed(
-  () => user.value.email && (AirValidator.isEmail(user.value.email) || AirValidator.isNaturalNumber(user.value.email)),
+  () => user.value.email && (ValidateUtil.isEmail(user.value.email) || ValidateUtil.isNaturalNumber(user.value.email)),
 )
 
 /**
@@ -80,7 +77,7 @@ async function getAppInfo() {
  * ### 处理登录重定向
  */
 async function loginRedirect(result: string) {
-  AirConfig.saveAccessToken(result)
+  WebConfig.saveAccessToken(result)
   if (appKey) {
     if (appInfo.value.isInternal) {
       const result = await UserService.create(isLoadingLogin).authorize(appKey, scope)
@@ -100,7 +97,7 @@ async function loginRedirect(result: string) {
  */
 async function onLogin() {
   const request = user.value.copy()
-  if (AirValidator.isNumber(request.email)) {
+  if (ValidateUtil.isNumber(request.email)) {
     request.id = Number.parseInt(request.email, 10)
     request.exclude('email')
   }
@@ -121,9 +118,10 @@ async function onEmailLogin() {
  */
 async function onSubmit() {
   if (!isRead.value) {
-    await AirConfirm.create()
-      .setConfirmText('我已阅读并同意')
-      .show('请阅读并同意隐私政策以及服务条款相关内容。', '确认提示')
+    await ElMessageBox.confirm('请阅读并同意隐私政策以及服务条款相关内容。', '确认提示', {
+      type: 'warning',
+      confirmButtonText: '我已阅读并同意',
+    })
     isRead.value = true
   }
   switch (currentAction.value) {
@@ -144,11 +142,11 @@ async function onSendEmailCode() {
   const request = new UserEntity()
   request.email = user.value.email
   await UserService.create(isEmailCodeLoading).sendEmail(request)
-  AirNotification.success('邮箱验证码发送成功, 请注意查看是否被拦截')
+  FeedbackUtil.toastSuccess('邮箱验证码发送成功, 请注意查看是否被拦截')
 }
 
 async function logout() {
-  AirConfig.removeAccessToken()
+  WebConfig.removeAccessToken()
   await UserService.create(isLoadingLogin).logout()
 }
 
@@ -234,7 +232,7 @@ getAppInfo()
           >
             <div class="item">
               <div
-                :class="!AirValidator.isEmail(user.email) ? 'error' : ''"
+                :class="!ValidateUtil.isEmail(user.email) ? 'error' : ''"
                 class="label"
               >
                 邮箱
@@ -245,7 +243,7 @@ getAppInfo()
               >
                 <template #suffix>
                   <el-button
-                    :disabled="!AirValidator.isEmail(user.email)"
+                    :disabled="!ValidateUtil.isEmail(user.email)"
                     :loading="isEmailCodeLoading"
                     text
                     type="primary"
@@ -276,7 +274,7 @@ getAppInfo()
           >
             <div class="item">
               <div
-                :class="!AirValidator.isMobilePhone(user.phone) ? 'error' : ''"
+                :class="!ValidateUtil.isMobilePhone(user.phone) ? 'error' : ''"
                 class="label"
               >
                 手机号
@@ -287,7 +285,7 @@ getAppInfo()
               >
                 <template #suffix>
                   <el-button
-                    :disabled="!AirValidator.isMobilePhone(user.phone)"
+                    :disabled="!ValidateUtil.isMobilePhone(user.phone)"
                     text
                     type="primary"
                   >

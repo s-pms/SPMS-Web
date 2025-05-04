@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
-import { ADialog, AFormField } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirEditor } from '@airpower/hook/useAirEditor'
 
-const props = defineProps(airPropsParam(new CustomerEntity()))
+import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new CustomerEntity()))
 
 const {
   title,
@@ -14,7 +13,7 @@ const {
   formRef,
   isLoading,
   onSubmit,
-} = useAirEditor(props, CustomerService)
+} = useEditor(props, CustomerService)
 </script>
 
 <template>
@@ -22,8 +21,8 @@ const {
     :form-ref="formRef"
     :loading="isLoading"
     :title="title"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
@@ -33,7 +32,7 @@ const {
       @submit.prevent
     >
       <AFormField
-        v-for="item in CustomerEntity.getFormFieldConfigList()"
+        v-for="item in getFormConfigList(CustomerEntity)"
         :key="item.key"
         :field="item.key"
       />

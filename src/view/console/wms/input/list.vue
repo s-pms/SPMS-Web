@@ -1,26 +1,12 @@
 <script lang="ts" setup>
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
-import { APage, APanel, ATable, AToolBar } from '@airpower/component'
+import { APanel, ATable } from '@airpower/web'
 import { InputDetail, InputEditor } from './component'
 
-const {
-  isLoading,
-  response,
-  selectList,
-  onSearch,
-  onAdd,
-  onEdit,
-  onPageChanged,
-  onSortChanged,
-  onSelected,
-  onDetail,
-  onAudit,
-  onReject,
-} = useBillTable(InputService, {
+const hook = useBillTable(InputService, {
   editView: InputEditor,
   detailView: InputDetail,
 })
@@ -28,45 +14,20 @@ const {
 
 <template>
   <APanel>
-    <AToolBar
-      :entity="InputEntity"
-      :loading="isLoading"
-      :service="InputService"
-      show-filter
-      @on-add="onAdd"
-      @on-search="onSearch"
-    />
     <ATable
-      v-loading="isLoading"
-      :ctrl-width="200"
-      :data-list="response.list"
-      :disable-edit="(row) => InputStatusEnum.REJECTED.notEqualsKey(row.status)"
-      :entity="InputEntity"
-      :select-list="selectList"
+      :disable-edit="(row) => !InputStatusEnum.REJECTED.equalsKey(row.status)"
+      :use-hook="hook"
+      ctrl-width="200"
       hide-delete
       show-detail
-      @on-detail="onDetail"
-      @on-edit="onEdit"
-      @on-sort="onSortChanged"
-      @on-select="onSelected"
     >
       <template #storageName="{ data }">
         {{ data.storage?.name || '-' }}({{ data.storage?.code || '-' }})
       </template>
       <template #customRow="{ data }">
-        <BillAuditOrReject
-          :bill="data"
-          @on-audit="onAudit"
-          @on-reject="onReject"
-        />
+        <BillAuditOrReject :bill="data" @on-audit="hook.onAudit" @on-reject="hook.onReject" />
       </template>
     </ATable>
-    <template #footerLeft>
-      <APage
-        :response="response"
-        @on-change="onPageChanged"
-      />
-    </template>
   </APanel>
 </template>
 

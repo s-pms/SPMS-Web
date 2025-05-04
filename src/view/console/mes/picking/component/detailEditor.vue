@@ -1,19 +1,18 @@
 <script lang="ts" setup>
-import type { AirFormInstance } from '@airpower/type/AirType'
+import type { FormInstance } from 'element-plus'
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingDetailService } from '@/model/mes/picking/PickingDetailService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(airPropsParam(new PickingDetailEntity()))
+const props = defineProps(DialogProps.withParam(new PickingDetailEntity()))
 
 const formData = ref(props.param.copy())
 
 const isLoading = ref(false)
 
-const formRef = ref<AirFormInstance>()
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
   props.onConfirm(formData.value)
@@ -26,13 +25,13 @@ async function onSubmit() {
     :loading="isLoading"
     title="申领明细"
     width="600px"
-    @on-confirm="onSubmit"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
     <el-form
       ref="formRef"
       :model="formData"
-      :rules="PickingDetailService.createValidator(formData)"
+      :rules="PickingDetailService.createValidator()"
       label-width="120px"
       @submit.prevent
     >
@@ -46,7 +45,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
-        :label="PickingDetailEntity.getFieldName('quantity')"
+        :label="getFieldLabel(PickingDetailEntity, 'quantity')"
         prop="quantity"
       >
         <AInput

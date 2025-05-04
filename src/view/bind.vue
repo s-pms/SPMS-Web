@@ -1,24 +1,23 @@
 <script lang="ts" setup>
-import type { AirAny } from '@airpower/type/AirType'
+import type { IJson } from '@airpower/web'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AirAlert } from '@airpower/feedback/AirAlert'
-import { AirRouter } from '@airpower/helper/AirRouter'
+import { DateTimeUtil, FeedbackUtil, RouterUtil } from '@airpower/web'
 import { ref } from 'vue'
 
 const isLoading = ref(true)
 
 async function init() {
-  const platform = AirRouter.router.currentRoute.value.params.platform.toString()
-  const code = AirRouter.router.currentRoute.value.query.code?.toString() || ''
+  const platform = RouterUtil.router.currentRoute.value.params.platform.toString()
+  const code = RouterUtil.router.currentRoute.value.query.code?.toString() || ''
   try {
     await UserService.create(isLoading).thirdBind(platform, code)
   }
   catch (e) {
-    await AirAlert.create()
-      .hideClose()
-      .error((e as AirAny).message, '登录失败')
+    await FeedbackUtil.alertError((e as IJson).message)
+    return
   }
-  await AirAlert.success('绑定第三方账号成功', '绑定成功')
+  FeedbackUtil.toastSuccess('绑定第三方账号成功')
+  await DateTimeUtil.sleep(3000)
   window.close()
 }
 

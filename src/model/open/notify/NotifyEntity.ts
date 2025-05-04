@@ -1,7 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
-import { Field, Form, Model, Search, Table } from '@airpower/decorator'
-import { AirSearchDataType } from '@airpower/enum/AirSearchDataType'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '通知',
@@ -11,8 +10,8 @@ export class NotifyEntity extends BaseEntity {
     requiredNumber: true,
   })
   @Table({
-    orderNumber: 99,
-    forceShow: true,
+    order: 99,
+    force: true,
   })
   @Field({
     label: '通知场景',
@@ -20,16 +19,16 @@ export class NotifyEntity extends BaseEntity {
   scene!: number
 
   @Search({
-    orderNumber: -1,
+    order: -1,
   })
   @Form({
     requiredNumber: true,
-    showColor: true,
+    color: true,
   })
   @Table({
-    forceShow: true,
+    force: true,
     width: 100,
-    showColor: true,
+    color: true,
   })
   @Field({
     label: '通知渠道',
@@ -58,14 +57,9 @@ export class NotifyEntity extends BaseEntity {
   })
   token!: string
 
-  @Search({
-    orderNumber: -100,
-    dataType: AirSearchDataType.TEXTAREA,
-    hide: true,
-  })
   @Form({
     textarea: true,
-    orderNumber: -100,
+    order: -100,
     hide: true,
   })
   @Field({

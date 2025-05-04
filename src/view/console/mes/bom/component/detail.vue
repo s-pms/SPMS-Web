@@ -2,17 +2,16 @@
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { InputEntity } from '@/model/wms/input/InputEntity'
-import { ADialog, AFormField, AGroup, ATable } from '@airpower/component'
-import { airPropsParam } from '@airpower/config/AirProps'
-import { useAirDetail } from '@airpower/hook/useAirDetail'
 
-const props = defineProps(airPropsParam(new InputEntity()))
+import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
+
+const props = defineProps(DialogProps.withParam(new InputEntity()))
 
 const {
   title,
   formData,
   isLoading,
-} = useAirDetail(props, BomService, {})
+} = useDetail(props, BomService, {})
 </script>
 
 <template>
@@ -21,8 +20,8 @@ const {
     :title="title"
     height="80%"
     width="70%"
-    @on-confirm="onConfirm"
-    @on-cancel="onCancel"
+    @cancel="onCancel"
+    @confirm="onConfirm"
   >
     <el-form
       :model="formData"
@@ -48,10 +47,11 @@ const {
       </AGroup>
       <AGroup title="配方物料清单">
         <ATable
-          :ctrl-width="80"
           :data-list="formData.details"
           :entity="BomDetailEntity"
-          :field-list="BomDetailEntity.getTableFieldConfigList().filter((item) => !['createTime'].includes(item.key))"
+          :column-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
+          ctrl-width="80"
+          hide-add
           hide-delete
           hide-edit
         >

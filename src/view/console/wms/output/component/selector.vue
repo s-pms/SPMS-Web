@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 import { OutputService } from '@/model/wms/output/OutputService'
-import { ASelector } from '@airpower/component'
-import { airPropsSelector } from '@airpower/config/AirProps'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { OutputEditor } from '.'
 
-const props = defineProps(airPropsSelector<OutputEntity>())
+const props = defineProps(DialogProps.withSelector<OutputEntity>())
 </script>
 
 <template>
