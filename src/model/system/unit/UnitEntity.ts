@@ -1,9 +1,10 @@
 import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Table } from '@airpower/web'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '计量单位',
+  hideFieldSelector: true,
 })
 export class UnitEntity extends BaseEntity implements IPayload {
   /**
@@ -11,6 +12,7 @@ export class UnitEntity extends BaseEntity implements IPayload {
    */
   @Table({
     force: true,
+    copy: true,
   })
   @Form({
     requiredString: true,
@@ -18,6 +20,7 @@ export class UnitEntity extends BaseEntity implements IPayload {
   @Field({
     label: '单位名称',
   })
+  @Search()
   name!: string
 
   /**
@@ -33,6 +36,7 @@ export class UnitEntity extends BaseEntity implements IPayload {
   @Field({
     label: '单位编码',
   })
+  @Search()
   code!: string
 
   getPayloadLabel(): string {

@@ -1,18 +1,22 @@
 import type { IPayload, ITree } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Table, Type } from '@airpower/web'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '仓库',
+  hideFieldSelector: true,
 })
 export class StorageEntity extends BaseEntity implements ITree, IPayload {
-  @Table()
+  @Table({
+    copy: true,
+  })
   @Form({
     requiredString: true,
   })
   @Field({
     label: '仓库名称',
   })
+  @Search()
   name!: string
 
   @Table({
@@ -25,6 +29,7 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '仓库编码',
   })
+  @Search()
   code!: string
 
   @Field({})

@@ -8,6 +8,7 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
  */
 @Model({
   label: '工序',
+  hideFieldSelector: true,
 })
 export class OperationEntity extends BaseEntity implements IPayload {
   /**
@@ -15,6 +16,7 @@ export class OperationEntity extends BaseEntity implements IPayload {
    */
   @Table({
     force: true,
+    copy: true,
   })
   @Search()
   @Form({
@@ -30,6 +32,7 @@ export class OperationEntity extends BaseEntity implements IPayload {
    */
   @Table({
     force: true,
+    copy: true,
   })
   @Search()
   @Form({

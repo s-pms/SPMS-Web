@@ -17,6 +17,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Table({
     force: true,
     order: 88,
+    copy: true,
   })
   @Search()
   @Form({
@@ -30,6 +31,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Table({
     force: true,
     order: 99,
+    copy: true,
   })
   @Search()
   @Form({
@@ -101,6 +103,9 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Type(RoutingOperationEntity, true)
   details: RoutingOperationEntity[] = []
 
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '工艺配方',
     dictionary: BooleanYesNoDictionary,

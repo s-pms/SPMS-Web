@@ -1,6 +1,6 @@
 import type { IPayload } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
-import { DesensitizeType, Field, Form, Model, Table } from '@airpower/web'
+import { DesensitizeType, Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '客户',
@@ -9,8 +9,10 @@ export class CustomerEntity extends BaseEntity implements IPayload {
   /**
    * ### 客户名称
    */
+  @Search()
   @Table({
     force: true,
+    copy: true,
   })
   @Form({
     requiredString: true,
@@ -23,6 +25,7 @@ export class CustomerEntity extends BaseEntity implements IPayload {
   /**
    * ### 客户编码
    */
+  @Search()
   @Table({
     copy: true,
     force: true,
@@ -38,6 +41,7 @@ export class CustomerEntity extends BaseEntity implements IPayload {
   /**
    * ### 联系电话
    */
+  @Search()
   @Table({
     phone: true,
     desensitize: DesensitizeType.MOBILE,

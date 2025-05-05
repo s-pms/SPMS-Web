@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { ParameterSystemEnum } from '@/model/iot/parameter/ParameterSystemEnum'
-import { Field, Form, Model, Table } from '@airpower/web'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { ParameterTypeEnum } from './ParameterTypeEnum'
 
 @Model({
@@ -9,6 +9,7 @@ import { ParameterTypeEnum } from './ParameterTypeEnum'
 export class ParameterEntity extends BaseEntity {
   @Table({
     force: true,
+    copy: true,
   })
   @Form({
     requiredString: true,
@@ -16,10 +17,12 @@ export class ParameterEntity extends BaseEntity {
   @Field({
     label: '参数名称',
   })
+  @Search()
   code!: string
 
   @Table({
     force: true,
+    copy: true,
   })
   @Form({
     requiredString: true,
@@ -27,6 +30,7 @@ export class ParameterEntity extends BaseEntity {
   @Field({
     label: '参数标题',
   })
+  @Search()
   label!: string
 
   @Table({
@@ -41,6 +45,9 @@ export class ParameterEntity extends BaseEntity {
   @Field({
     label: '数据类型',
     dictionary: ParameterTypeEnum,
+  })
+  @Search({
+    width: 120,
   })
   dataType!: number
 

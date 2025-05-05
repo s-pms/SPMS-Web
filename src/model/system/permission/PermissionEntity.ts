@@ -47,7 +47,9 @@ export class PermissionEntity extends BaseEntity implements ITree {
     color: true,
     width: 100,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '权限类型',
     dictionary: PermissionTypeEnum,

@@ -50,7 +50,9 @@ export class BomEntity extends BaseEntity implements IPayload {
     label: '配方类型',
     dictionary: BomTypeEnum,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   type!: number
 
   @Field({

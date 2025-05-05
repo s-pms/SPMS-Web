@@ -9,7 +9,9 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
   hideFieldSelector: true,
 })
 export class ParticipantEntity extends BaseEntity {
-  @Search()
+  @Search({
+    width: 90,
+  })
   @Table({
     color: true,
     order: 100,
@@ -71,7 +73,9 @@ export class ParticipantEntity extends BaseEntity {
   })
   identification!: string
 
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Table({
     color: true,
     width: 80,
@@ -87,7 +91,9 @@ export class ParticipantEntity extends BaseEntity {
   })
   type!: number
 
-  @Search()
+  @Search({
+    width: 130,
+  })
   @Table({
     color: true,
     width: 120,

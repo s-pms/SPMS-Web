@@ -36,7 +36,9 @@ export class ContractEntity extends BaseEntity implements IPayload {
     defaultValue: ContractTypeEnum.OTHER.key,
     requiredNumber: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '合同类型',
     dictionary: ContractTypeEnum,
@@ -102,7 +104,9 @@ export class ContractEntity extends BaseEntity implements IPayload {
   /**
    * # 合同状态
    */
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Table({
     color: true,
     width: 100,

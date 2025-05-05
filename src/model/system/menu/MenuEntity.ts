@@ -38,6 +38,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '菜单路径',
   })
+  @Search()
   path!: string
 
   /**
@@ -59,6 +60,7 @@ export class MenuEntity extends BaseEntity implements IMenu {
   @Field({
     label: '组件地址',
   })
+  @Search()
   component!: string
 
   /**

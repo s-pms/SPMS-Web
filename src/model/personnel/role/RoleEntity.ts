@@ -11,12 +11,9 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '角色',
+  hideFieldSelector: true,
 })
 export class RoleEntity extends BaseEntity implements IPayload {
-  getPayloadLabel() {
-    return this.name
-  }
-
   /**
    * ### 角色名称
    */
@@ -60,4 +57,8 @@ export class RoleEntity extends BaseEntity implements IPayload {
   @Field({})
   @Type(PermissionEntity, true)
   permissionList!: PermissionEntity[]
+
+  getPayloadLabel() {
+    return this.name
+  }
 }

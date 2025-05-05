@@ -9,11 +9,13 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 @Model({
   label: '菜单',
   addChildPermission: 'add',
+  hideFieldSelector: true,
 })
 export class DepartmentEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     force: true,
     order: 99,
+    copy: true,
   })
   @Search()
   @Form({

@@ -28,7 +28,9 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     clearable: false,
     requiredNumber: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '入库类型',
     dictionary: InputTypeEnum,
@@ -41,7 +43,6 @@ export class InputEntity extends AbstractBaseBillEntity<InputDetailEntity> {
     order: -80,
     force: true,
   })
-  @Search()
   @Field({
     label: '入库状态',
     dictionary: InputStatusEnum,
