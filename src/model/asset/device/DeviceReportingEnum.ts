@@ -9,12 +9,12 @@ export class DeviceReportingEnum extends WebEnum<boolean> {
   /**
    * ### 开启
    */
-  static readonly ENABLE = new DeviceReportingEnum(true, '开启')
+  static readonly ENABLE = new DeviceReportingEnum(true, '开启采集')
     .setColor(WebColor.SUCCESS)
 
   /**
    * ### 关闭
    */
-  static readonly DISABLE = new DeviceReportingEnum(false, '关闭')
+  static readonly DISABLE = new DeviceReportingEnum(false, '关闭采集')
     .setColor(WebColor.NORMAL)
 }

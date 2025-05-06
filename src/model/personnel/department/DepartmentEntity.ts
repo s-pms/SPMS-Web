@@ -14,13 +14,14 @@ export class DepartmentEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     force: true,
     order: 99,
+    copy: true,
   })
   @Search()
   @Form({
     requiredString: true,
   })
   @Field({
-    label: '部门名称',
+    label: '菜单名称',
   })
   name!: string
 

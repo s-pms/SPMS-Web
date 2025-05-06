@@ -116,7 +116,9 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
     label: '订单类型',
     dictionary: OrderTypeEnum,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   type!: number
 
   @Table({

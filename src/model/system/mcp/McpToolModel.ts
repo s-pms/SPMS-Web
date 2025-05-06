@@ -1,8 +1,5 @@
-import { Field, Model, RootEntity, Table } from '@airpower/web'
+import { Field, RootEntity, Table } from '@airpower/web'
 
-@Model({
-  hideFieldSelector: true,
-})
 export class McpToolModel extends RootEntity {
   @Field({
     label: '工具名称',
@@ -15,12 +12,11 @@ export class McpToolModel extends RootEntity {
   @Field({
     label: '工具描述',
   })
-  @Table({
-  })
+  @Table({})
   description!: string
 
   @Table({
-    removed: true
+    removed: true,
   })
   declare isDisabled: boolean
 }

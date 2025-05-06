@@ -34,7 +34,9 @@ export abstract class AbstractBaseBillEntity<D extends AbstractBaseBillDetailEnt
   @Form({
     color: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   abstract status: number
 
   /**

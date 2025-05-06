@@ -24,6 +24,7 @@ export class BaseEntity extends RootEntity {
   @Search({
     order: -1,
     hide: true,
+    width: 120,
   })
   isPublished!: boolean
 

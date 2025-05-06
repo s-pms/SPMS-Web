@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/base/BaseEntity'
 import { SerialNumberUpdateEnum } from '@/model/system/coderule/SerialNumberUpdateEnum'
-import { Field, Form, Model, Table } from '@airpower/web'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 /**
  * # 编码规则实体
@@ -64,6 +64,7 @@ export class CodeRuleEntity extends BaseEntity {
   @Field({
     label: '规则模板',
   })
+  @Search()
   template!: string
 
   @Form({
@@ -79,6 +80,9 @@ export class CodeRuleEntity extends BaseEntity {
   @Field({
     label: '序列号更新',
     dictionary: SerialNumberUpdateEnum,
+  })
+  @Search({
+    width: 130,
   })
   snType!: number
 

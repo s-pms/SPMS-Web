@@ -15,6 +15,7 @@ export class OperationEntity extends BaseEntity implements IPayload {
    */
   @Table({
     force: true,
+    copy: true,
   })
   @Search()
   @Form({
@@ -30,6 +31,7 @@ export class OperationEntity extends BaseEntity implements IPayload {
    */
   @Table({
     force: true,
+    copy: true,
   })
   @Search()
   @Form({

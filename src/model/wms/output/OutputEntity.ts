@@ -40,7 +40,6 @@ export class OutputEntity extends AbstractBaseBillEntity<OutputDetailEntity> {
     order: -80,
     force: true,
   })
-  @Search()
   @Field({
     label: '出库状态',
     dictionary: OutputStatusEnum,

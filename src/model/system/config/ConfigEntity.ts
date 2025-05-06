@@ -12,7 +12,6 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
   label: '配置',
 })
 export class ConfigEntity extends BaseEntity {
-  @Search()
   @Table({
     copy: true,
     order: 88,
@@ -23,6 +22,7 @@ export class ConfigEntity extends BaseEntity {
   @Field({
     label: '配置名称',
   })
+  @Search()
   name!: string
 
   @Field({
@@ -30,12 +30,12 @@ export class ConfigEntity extends BaseEntity {
   })
   description!: string
 
-  @Search()
   @Table({
     copy: true,
     width: 300,
     order: 99,
   })
+  @Search()
   @Form({
     requiredString: true,
   })
@@ -44,7 +44,9 @@ export class ConfigEntity extends BaseEntity {
   })
   flag!: string
 
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Table({
     color: true,
     width: 100,

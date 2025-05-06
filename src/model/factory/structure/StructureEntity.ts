@@ -11,6 +11,7 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     order: 99,
+    copy: true,
   })
   @Form({
     requiredString: true,
@@ -18,6 +19,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '生产单元名称',
   })
+  @Search()
   name!: string
 
   @Table({
@@ -31,6 +33,7 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Field({
     label: '生产单元编码',
   })
+  @Search()
   code!: string
 
   @Table({

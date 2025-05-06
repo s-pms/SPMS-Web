@@ -13,8 +13,7 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
   })
   declare billCode: string
 
-  @Table({
-  })
+  @Table({})
   @Form({
     textarea: true,
     maxLength: 80,
@@ -57,7 +56,9 @@ export class PurchaseEntity extends AbstractBaseBillEntity<PurchaseDetailEntity>
     order: -80,
     force: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '采购状态',
     dictionary: PurchaseStatusEnum,

@@ -3,7 +3,7 @@ import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
 import { DeviceReportingEnum } from '@/model/asset/device/DeviceReportingEnum'
 import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { Field, Form, Model, Table, Type } from '@airpower/web'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '设备',
@@ -12,6 +12,7 @@ export class DeviceEntity extends BaseEntity {
   /**
    * ### 设备名称
    */
+  @Search()
   @Table({
     force: true,
   })
@@ -26,6 +27,7 @@ export class DeviceEntity extends BaseEntity {
   /**
    * ### 设备编码
    */
+  @Search()
   @Table({
     copy: true,
     force: true,
@@ -41,6 +43,7 @@ export class DeviceEntity extends BaseEntity {
   /**
    * ### 设备UUID
    */
+  @Search()
   @Table({
     copy: true,
     force: true,
@@ -53,10 +56,13 @@ export class DeviceEntity extends BaseEntity {
   })
   uuid!: string
 
+  @Search({
+    width: 120,
+  })
   @Table({
     copy: true,
     order: -79,
-    width: 80,
+    width: 100,
     color: true,
   })
   @Form({
@@ -64,7 +70,7 @@ export class DeviceEntity extends BaseEntity {
     clearable: false,
   })
   @Field({
-    label: '开启采集',
+    label: '采集状态',
     dictionary: DeviceReportingEnum,
   })
   isReporting!: boolean
@@ -78,6 +84,9 @@ export class DeviceEntity extends BaseEntity {
   })
   partCount!: string
 
+  @Search({
+    width: 120,
+  })
   @Table({
     color: true,
     width: 80,

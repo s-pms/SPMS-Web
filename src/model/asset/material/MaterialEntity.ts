@@ -9,7 +9,10 @@ import { MaterialTypeEnum } from './MaterialTypeEnum'
   label: '物料',
 })
 export class MaterialEntity extends BaseEntity implements IPayload {
-  @Table({})
+  @Table({
+    copy: true,
+    force: true,
+  })
   @Form({
     requiredString: true,
   })
@@ -41,7 +44,9 @@ export class MaterialEntity extends BaseEntity implements IPayload {
     defaultValue: MaterialTypeEnum.PRODUCT.key,
     requiredNumber: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '物料类型',
     dictionary: MaterialTypeEnum,
@@ -57,7 +62,9 @@ export class MaterialEntity extends BaseEntity implements IPayload {
     defaultValue: MaterialUseTypeEnum.CONSUMABLE.key,
     requiredNumber: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '使用类型',
     dictionary: MaterialUseTypeEnum,

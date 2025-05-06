@@ -65,7 +65,9 @@ export class OpenAppEntity extends BaseEntity {
     clearable: false,
     color: true,
   })
-  @Search()
+  @Search({
+    width: 120,
+  })
   @Field({
     label: '加密算法',
     dictionary: OpenAppArithmeticEnum,
