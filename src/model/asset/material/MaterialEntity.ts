@@ -9,7 +9,10 @@ import { MaterialTypeEnum } from './MaterialTypeEnum'
   label: '物料',
 })
 export class MaterialEntity extends BaseEntity implements IPayload {
-  @Table({})
+  @Table({
+    copy: true,
+    force: true,
+  })
   @Form({
     requiredString: true,
   })

@@ -11,7 +11,6 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '角色',
-  hideFieldSelector: true,
 })
 export class RoleEntity extends BaseEntity implements IPayload {
   /**

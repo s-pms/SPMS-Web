@@ -7,7 +7,6 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '生产单元',
-  hideFieldSelector: true,
 })
 export class StructureEntity extends BaseEntity implements ITree, IPayload {
   @Table({

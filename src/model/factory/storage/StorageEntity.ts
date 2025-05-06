@@ -4,11 +4,11 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '仓库',
-  hideFieldSelector: true,
 })
 export class StorageEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     copy: true,
+    force: true,
   })
   @Form({
     requiredString: true,
@@ -22,6 +22,7 @@ export class StorageEntity extends BaseEntity implements ITree, IPayload {
   @Table({
     width: 300,
     copy: true,
+    force: true,
   })
   @Form({
     placeholder: '不输入按编码规则自动生成',

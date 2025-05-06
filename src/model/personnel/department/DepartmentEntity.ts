@@ -9,7 +9,6 @@ import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 @Model({
   label: '菜单',
   addChildPermission: 'add',
-  hideFieldSelector: true,
 })
 export class DepartmentEntity extends BaseEntity implements ITree, IPayload {
   @Table({
@@ -22,7 +21,7 @@ export class DepartmentEntity extends BaseEntity implements ITree, IPayload {
     requiredString: true,
   })
   @Field({
-    label: '部门名称',
+    label: '菜单名称',
   })
   name!: string
 

@@ -4,7 +4,6 @@ import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '计量单位',
-  hideFieldSelector: true,
 })
 export class UnitEntity extends BaseEntity implements IPayload {
   /**
