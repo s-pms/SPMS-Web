@@ -15,7 +15,7 @@
     "v": "vite preview"
   },
   "dependencies": {
-    "@airpower/web": "^0.3.13",
+    "@airpower/web": "^0.4.2",
     "@element-plus/icons-vue": "^2.3.1",
     "@types/crypto-js": "^4.2.2",
     "axios": "^1.7.2",
