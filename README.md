@@ -93,7 +93,6 @@ Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.
   ```shell
   git clone https://github.com/s-pms/SPMS-Web.git &&
   cd SPMS-Web &&
-  git clone https://github.com/AirPowerTeam/AirPower4T.git airpower &&
   yarn && cp .env.dev .env && yarn s
   ```
 
@@ -102,7 +101,6 @@ Web前端项目仓库，你可以查看 [开发者指南@Github](https://github.
   ```shell
   git clone https://gitee.com/s-pms/SPMS-Web.git &&
   cd SPMS-Web &&
-  git clone https://gitee.com/air-power/AirPower4T.git airpower &&
   yarn && cp .env.dev .env && yarn s
   ```
 
@@ -128,19 +126,6 @@ yarn s              #缩写指令
 yarn dev            #开发环境 使用.env.dev
 yarn test           #测试环境 使用.env.test
 yarn production     #生产环境 使用.env.production
-```
-
-### 其他命令
-
-```shell
-#使用标准commit模板
-yarn c
-
-#更新项目和AirPower
-yarn u
-
-#查看Git格式化日志
-yarn l
 ```
 
 ### 推荐的VSCODE插件扩展
