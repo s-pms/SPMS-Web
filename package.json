@@ -10,8 +10,6 @@
     "dev": "vite build --mode dev",
     "test": "vite build --mode test",
     "production": "vite build --mode production",
-    "sync": "git checkout dev && git pull && git add -A && git commit -S -m 'sync(Codes): 自动同步了代码到远端仓库' && git push && git push gitee && git checkout main && git pull && git merge dev && git push && git push gitee && git checkout dev",
-    "u": "sh update.sh",
     "v": "vite preview"
   },
   "dependencies": {

@@ -128,19 +128,6 @@ yarn test           #测试环境 使用.env.test
 yarn production     #生产环境 使用.env.production
 ```
 
-### 其他命令
-
-```shell
-#使用标准commit模板
-yarn c
-
-#更新项目和AirPower
-yarn u
-
-#查看Git格式化日志
-yarn l
-```
-
 ### 推荐的VSCODE插件扩展
 
 - Vue - Official
