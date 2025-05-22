@@ -9,6 +9,7 @@ import '@/assets/css/main.scss'
 
 WebConfig.elementPlusLocale = zhCn
 WebConfig.appKey = 'spms'
+WebConfig.product = 'SPMS'
 WebConfig.uploadUrl = '/api/file/upload'
 
 createApp(App)
