@@ -44,16 +44,6 @@ export function useBillTable<
   }
 
   /**
-   * ### 设置单据已完成
-   * @param bill 单据
-   */
-  async function setBillFinished(bill: B) {
-    await FeedbackUtil.confirmWarning(`是否确认设置所有${getModelName(result.service.entityClass)}明细都已完成？`)
-    await result.service.setBillFinished(bill)
-    result.onReloadData()
-  }
-
-  /**
    * ### 单据驳回
    * @param bill 单据
    */
@@ -66,7 +56,6 @@ export function useBillTable<
   }
 
   return {
-    setBillFinished,
     setBillDetailsAllFinished,
     onAudit,
     onReject,
