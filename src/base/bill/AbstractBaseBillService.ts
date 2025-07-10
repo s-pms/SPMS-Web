@@ -28,14 +28,6 @@ export abstract class AbstractBaseBillService<
   }
 
   /**
-   * ### 完成单据
-   * @param bill 单据
-   */
-  async setBillFinished(bill: B): Promise<void> {
-    await this.api('setBillFinished').request(bill)
-  }
-
-  /**
    * ### 完成单据所有明细
    * @param bill 单据
    */
