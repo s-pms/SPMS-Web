@@ -2,8 +2,8 @@
 import { AButton, APanel, ATable, FeedbackUtil } from '@airpower/web'
 import { computed, ref } from 'vue'
 import useClipboard from 'vue-clipboard3'
-import {McpToolModel} from '@/model/system/mcp/McpToolModel'
-import {McpToolService} from '@/model/system/mcp/McpToolService'
+import { McpToolModel } from '@/model/system/mcp/McpToolModel'
+import { McpToolService } from '@/model/system/mcp/McpToolService'
 
 const { toClipboard } = useClipboard()
 

@@ -1,4 +1,4 @@
-import {Field, Form, Model, Search, Table} from '@airpower/web'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantRoleEnum } from '@/model/asset/contract/participant/ParticipantRoleEnum'

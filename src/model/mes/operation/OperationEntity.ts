@@ -1,6 +1,6 @@
 import type { IPayload } from '@airpower/web'
 import { Field, Form, Model, Search, Table } from '@airpower/web'
-import {BaseEntity} from '@/base/BaseEntity'
+import { BaseEntity } from '@/base/BaseEntity'
 
 /**
  * # 工序

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {BomDetailEntity} from '@/model/mes/bom/BomDetailEntity'
-import {BomDetailService} from '@/model/mes/bom/BomDetailService'
-import {MaterialSelector} from '@/view/console/asset/material/component'
+import type { FormInstance } from 'element-plus'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
+import { ref } from 'vue'
 
-import {ADialog, AInput, ASelect, DialogProps, getFieldLabel} from '@airpower/web'
-import type {FormInstance} from 'element-plus'
-import {ref} from 'vue'
+import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
+import { BomDetailService } from '@/model/mes/bom/BomDetailService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
 
 const props = defineProps(DialogProps.withParam(new BomDetailEntity()))
 

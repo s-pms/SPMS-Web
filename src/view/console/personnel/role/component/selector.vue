@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 
 import { RoleService } from '@/model/personnel/role/RoleService'

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ITree, RootEntity } from '@airpower/web'
-import {AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest} from '@airpower/web'
-import {ref} from 'vue'
+import { AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest } from '@airpower/web'
+import { ref } from 'vue'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 
 import { StorageService } from '@/model/factory/storage/StorageService'

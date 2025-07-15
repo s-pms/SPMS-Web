@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {BillAuditOrReject} from '@/component'
-import {useBillTable} from '@/hook/billTable/useBillTable'
-import {PickingService} from '@/model/mes/picking/PickingService'
-import {PickingStatusEnum} from '@/model/mes/picking/PickingStatusEnum'
-import {APanel, ATable} from '@airpower/web'
-import {PickingDetail, PickingEditor} from './component'
+import { APanel, ATable } from '@airpower/web'
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { PickingService } from '@/model/mes/picking/PickingService'
+import { PickingStatusEnum } from '@/model/mes/picking/PickingStatusEnum'
+import { PickingDetail, PickingEditor } from './component'
 
 const hook = useBillTable(PickingService, {
   editView: PickingEditor,

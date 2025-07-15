@@ -1,4 +1,4 @@
-import {Field, Form, Model, Table, Type} from '@airpower/web'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { SupplierEntity } from '../supplier/SupplierEntity'

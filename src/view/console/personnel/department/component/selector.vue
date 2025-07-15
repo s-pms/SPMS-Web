@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {AButton, ADialog, ATable, DialogProps, useSelector} from '@airpower/web'
+import { AButton, ADialog, ATable, DialogProps, useSelector } from '@airpower/web'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 

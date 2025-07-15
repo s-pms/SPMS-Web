@@ -1,4 +1,4 @@
-import {Field, Form, Model, Search, Table} from '@airpower/web'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
 

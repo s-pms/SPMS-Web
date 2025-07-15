@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
-import {OutputDetailService} from '@/model/wms/output/OutputDetailService'
-import {MaterialSelector} from '@/view/console/asset/material/component'
-import {ADialog, AInput, ASelect, DialogProps, getFieldLabel} from '@airpower/web'
-import type {FormInstance} from 'element-plus'
+import type { FormInstance } from 'element-plus'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
+import { ref } from 'vue'
+import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
+import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
 
-import {ref} from 'vue'
+import { MaterialSelector } from '@/view/console/asset/material/component'
 
 const props = defineProps(DialogProps.withParam(new OutputDetailEntity()))
 

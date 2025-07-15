@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import {ADialog, ATable, DialogProps, FeedbackUtil, getModelName, QueryRequest, useEditor} from '@airpower/web'
-import {ref} from 'vue'
+import { ADialog, ATable, DialogProps, FeedbackUtil, getModelName, QueryRequest, useEditor } from '@airpower/web'
+import { ref } from 'vue'
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'

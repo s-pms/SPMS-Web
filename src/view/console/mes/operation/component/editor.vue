@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import {OperationEntity} from '@/model/mes/operation/OperationEntity'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 
-import {OperationService} from '@/model/mes/operation/OperationService'
-import {ADialog, AFormField, DialogProps, useEditor} from '@airpower/web'
+import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { OperationService } from '@/model/mes/operation/OperationService'
 
 const props = defineProps(DialogProps.withParam(new OperationEntity()))
 

@@ -1,4 +1,4 @@
-import type {CurdServiceConstructor, ITableOption} from '@airpower/web'
+import type { CurdServiceConstructor, ITableOption } from '@airpower/web'
 import type { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { BaseEntity } from '@/base/BaseEntity'
 import type { IBaseTableResult } from '@/hook/IBaseTableResult'

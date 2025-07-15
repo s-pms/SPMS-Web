@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
 
 import { ParameterService } from '@/model/iot/parameter/ParameterService'

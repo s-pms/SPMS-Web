@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {BillAuditOrReject} from '@/component'
-import {useBillTable} from '@/hook/billTable/useBillTable'
-import {PurchaseService} from '@/model/channel/purchase/PurchaseService'
-import {PurchaseStatusEnum} from '@/model/channel/purchase/PurchaseStatusEnum'
-import {APanel, ATable} from '@airpower/web'
-import {PurchaseDetail, PurchaseEditor} from './component'
+import { APanel, ATable } from '@airpower/web'
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
+import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
+import { PurchaseDetail, PurchaseEditor } from './component'
 
 const hook = useBillTable(PurchaseService, {
   editView: PurchaseEditor,

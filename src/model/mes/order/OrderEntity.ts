@@ -1,5 +1,5 @@
 import type { WebEnum } from '@airpower/web'
-import {DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { OutputEntity } from '@/model/wms/output/OutputEntity'
 
 import { OutputService } from '@/model/wms/output/OutputService'

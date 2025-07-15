@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { FeedbackUtil } from '@airpower/web'
-import {ThirdLoginPlatform} from '@/model/open/thirdlogin/ThirdLoginPlatform'
+import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
 
 function getIcon(item: ThirdLoginPlatform) {
   return `/img/thirdlogin/${item.flag}.png`

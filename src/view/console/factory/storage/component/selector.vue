@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 
 import { StorageService } from '@/model/factory/storage/StorageService'

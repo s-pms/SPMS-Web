@@ -2,9 +2,9 @@
 import type { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
 import { DialogProps, FeedbackUtil } from '@airpower/web'
 import { ref } from 'vue'
-import {ThirdLoginPlatform} from '@/model/open/thirdlogin/ThirdLoginPlatform'
+import { ThirdLoginPlatform } from '@/model/open/thirdlogin/ThirdLoginPlatform'
 
-import {UserService} from '@/model/personnel/user/UserService'
+import { UserService } from '@/model/personnel/user/UserService'
 
 defineProps(DialogProps.create())
 

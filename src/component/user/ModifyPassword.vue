@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import {UserEntity} from '@/model/personnel/user/UserEntity'
-import {UserService} from '@/model/personnel/user/UserService'
-import {DialogProps, FeedbackUtil, useEditor} from '@airpower/web'
-import {ref} from 'vue'
+import { DialogProps, FeedbackUtil, useEditor } from '@airpower/web'
+import { ref } from 'vue'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
 
 const props = defineProps(DialogProps.withParam(new UserEntity()))
 const confirmPassword = ref('')

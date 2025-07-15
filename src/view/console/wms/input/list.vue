@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {BillAuditOrReject} from '@/component'
-import {useBillTable} from '@/hook/billTable/useBillTable'
-import {InputService} from '@/model/wms/input/InputService'
-import {InputStatusEnum} from '@/model/wms/input/InputStatusEnum'
-import {APanel, ATable} from '@airpower/web'
-import {InputDetail, InputEditor} from './component'
+import { APanel, ATable } from '@airpower/web'
+import { BillAuditOrReject } from '@/component'
+import { useBillTable } from '@/hook/billTable/useBillTable'
+import { InputService } from '@/model/wms/input/InputService'
+import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
+import { InputDetail, InputEditor } from './component'
 
 const hook = useBillTable(InputService, {
   editView: InputEditor,

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 
 import { BomService } from '@/model/mes/bom/BomService'

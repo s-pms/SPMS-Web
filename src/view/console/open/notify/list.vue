@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {useMyTable} from '@/hook/useMyTable'
-import {NotifyService} from '@/model/open/notify/NotifyService'
-import {NotifyEditor} from '@/view/console/open/notify/component'
-import type {IWebEnum} from '@airpower/web'
-import {APanel, ATable} from '@airpower/web'
-import {ref} from 'vue'
+import type { IWebEnum } from '@airpower/web'
+import { APanel, ATable } from '@airpower/web'
+import { ref } from 'vue'
+import { useMyTable } from '@/hook/useMyTable'
+import { NotifyService } from '@/model/open/notify/NotifyService'
+import { NotifyEditor } from '@/view/console/open/notify/component'
 
 const hook = useMyTable(NotifyService, {
   editView: NotifyEditor,

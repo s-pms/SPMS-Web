@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {SalePriceEntity} from '@/model/channel/salePrice/SalePriceEntity'
-import {SalePriceService} from '@/model/channel/salePrice/SalePriceService'
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
+import { SalePriceEntity } from '@/model/channel/salePrice/SalePriceEntity'
 
-import {MaterialSelector} from '@/view/console/asset/material/component'
-import {ADialog, AFormField, ASelect, DialogProps, useEditor} from '@airpower/web'
-import {CustomerSelector} from '../../customer/component'
+import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
+import { CustomerSelector } from '../../customer/component'
 
 const props = defineProps(DialogProps.withParam(new SalePriceEntity()))
 

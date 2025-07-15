@@ -1,4 +1,4 @@
-import {Field, Form, Model, Search, Table} from '@airpower/web'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'

@@ -1,5 +1,5 @@
 import { Field } from '@airpower/web'
-import {BaseEntity} from '@/base/BaseEntity'
+import { BaseEntity } from '@/base/BaseEntity'
 
 export class PersonalTokenEntity extends BaseEntity {
   @Field({

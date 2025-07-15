@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
-import {OutputEntity} from '@/model/wms/output/OutputEntity'
-
-import {OutputService} from '@/model/wms/output/OutputService'
-import {OutputTypeEnum} from '@/model/wms/output/OutputTypeEnum'
 import {
   AButton,
   ADialog,
@@ -17,8 +12,13 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import {computed} from 'vue'
-import {OutputDetailEditor} from '.'
+import { computed } from 'vue'
+
+import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
+import { OutputEntity } from '@/model/wms/output/OutputEntity'
+import { OutputService } from '@/model/wms/output/OutputService'
+import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
+import { OutputDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new OutputEntity()))
 

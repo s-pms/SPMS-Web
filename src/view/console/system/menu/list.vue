@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import {MenuService} from '@/model/system/menu/MenuService'
-import {APanel, ATable, useTableTree} from '@airpower/web'
-import {MenuEditor} from './component'
+import { APanel, ATable, useTableTree } from '@airpower/web'
+import { MenuService } from '@/model/system/menu/MenuService'
+import { MenuEditor } from './component'
 
 const hook = useTableTree(MenuService, {
   editView: MenuEditor,

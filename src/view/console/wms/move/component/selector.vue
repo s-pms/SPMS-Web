@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList} from '@airpower/web'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'

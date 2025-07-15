@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {InputDetailEntity} from '@/model/wms/input/InputDetailEntity'
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 
-import {InputEntity} from '@/model/wms/input/InputEntity'
-import {InputService} from '@/model/wms/input/InputService'
-import {AButton, ADialog, ATable, DialogProps} from '@airpower/web'
-import {ref} from 'vue'
+import { ref } from 'vue'
+import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
+import { InputEntity } from '@/model/wms/input/InputEntity'
+import { InputService } from '@/model/wms/input/InputService'
 
 const props = defineProps(DialogProps.withSelector<InputDetailEntity, InputEntity>())
 

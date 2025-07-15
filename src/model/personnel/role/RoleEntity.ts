@@ -1,5 +1,5 @@
 import type { IPayload } from '@airpower/web'
-import {Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 import { PermissionEntity } from '@/model/system/permission/PermissionEntity'

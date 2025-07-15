@@ -5,7 +5,7 @@ import { AButton, AEmpty, DateTimeFormatter, DialogProps, FeedbackUtil } from '@
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 import useClipboard from 'vue-clipboard3'
-import {UserService} from '@/model/personnel/user/UserService'
+import { UserService } from '@/model/personnel/user/UserService'
 
 defineProps(DialogProps.create())
 
