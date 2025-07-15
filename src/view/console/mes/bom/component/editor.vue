@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
-import { BomEntity } from '@/model/mes/bom/BomEntity'
-import { BomService } from '@/model/mes/bom/BomService'
-import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
-import { InputEntity } from '@/model/wms/input/InputEntity'
+import {BomDetailEntity} from '@/model/mes/bom/BomDetailEntity'
+import {BomEntity} from '@/model/mes/bom/BomEntity'
+import {BomService} from '@/model/mes/bom/BomService'
+import {BomTypeEnum} from '@/model/mes/bom/BomTypeEnum'
 
+import {InputEntity} from '@/model/wms/input/InputEntity'
 import {
   AButton,
   ADialog,
@@ -18,7 +18,7 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { BomDetailEditor } from '.'
+import {BomDetailEditor} from '.'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
 

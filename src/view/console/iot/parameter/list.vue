@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { useMyTable } from '@/hook/useMyTable'
-
-import { ParameterService } from '@/model/iot/parameter/ParameterService'
-import { APanel, ATable } from '@airpower/web'
-import { ParameterEditor } from './component'
+import {useMyTable} from '@/hook/useMyTable'
+import {ParameterService} from '@/model/iot/parameter/ParameterService'
+import {APanel, ATable} from '@airpower/web'
+import {ParameterEditor} from './component'
 
 const hook = useMyTable(ParameterService, {
   editView: ParameterEditor,

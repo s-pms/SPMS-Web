@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-import { PurchaseDetailService } from '@/model/channel/purchase/PurchaseDetailService'
-
-import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel } from '@airpower/web'
-import { ref } from 'vue'
-import { SupplierSelector } from '../../supplier/component'
+import {PurchaseDetailEntity} from '@/model/channel/purchase/PurchaseDetailEntity'
+import {PurchaseDetailService} from '@/model/channel/purchase/PurchaseDetailService'
+import {PurchasePriceService} from '@/model/channel/purchasePrice/PurchasePriceService'
+import {MaterialSelector} from '@/view/console/asset/material/component'
+import {ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel} from '@airpower/web'
+import type {FormInstance} from 'element-plus'
+import {ref} from 'vue'
+import {SupplierSelector} from '../../supplier/component'
 
 const props = defineProps(DialogProps.withParam(new PurchaseDetailEntity()))
 

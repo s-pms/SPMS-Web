@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { StructureService } from '@/model/factory/structure/StructureService'
-
-import { APanel, ATable, useTableTree } from '@airpower/web'
-import { StructureEditor } from './component'
+import {StructureService} from '@/model/factory/structure/StructureService'
+import {APanel, ATable, useTableTree} from '@airpower/web'
+import {StructureEditor} from './component'
 
 const hook = useTableTree(StructureService, {
   editView: StructureEditor,

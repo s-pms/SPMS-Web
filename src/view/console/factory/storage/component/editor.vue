@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { StorageService } from '@/model/factory/storage/StorageService'
+import {StorageEntity} from '@/model/factory/storage/StorageEntity'
 
-import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
+import {StorageService} from '@/model/factory/storage/StorageService'
+import {ADialog, AFormField, DialogProps, getFormConfigList, useEditor} from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new StorageEntity()))
 

@@ -1,12 +1,5 @@
 <script lang="ts" setup>
 import type { OperationEntity } from '@/model/mes/operation/OperationEntity'
-import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
-import { BomService } from '@/model/mes/bom/BomService'
-import { RoutingOperationEntity } from '@/model/mes/routing/operation/RoutingOperationEntity'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
-import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { BomSelector } from '@/view/console/mes/bom/component'
-import { OperationSelector } from '@/view/console/mes/operation/component'
 import {
   AButton,
   ADialog,
@@ -22,6 +15,13 @@ import {
 } from '@airpower/web'
 import { nextTick, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
+import {BomDetailEntity} from '@/model/mes/bom/BomDetailEntity'
+import {BomService} from '@/model/mes/bom/BomService'
+import {RoutingOperationEntity} from '@/model/mes/routing/operation/RoutingOperationEntity'
+import {RoutingEntity} from '@/model/mes/routing/RoutingEntity'
+import {RoutingService} from '@/model/mes/routing/RoutingService'
+import {BomSelector} from '@/view/console/mes/bom/component'
+import {OperationSelector} from '@/view/console/mes/operation/component'
 
 const props = defineProps(DialogProps.withParam(new RoutingEntity()))
 const drag = ref(false)

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { StorageService } from '@/model/factory/storage/StorageService'
-
-import { APanel, ATable, useTableTree } from '@airpower/web'
-import { StorageEditor } from './component'
+import {StorageService} from '@/model/factory/storage/StorageService'
+import {APanel, ATable, useTableTree} from '@airpower/web'
+import {StorageEditor} from './component'
 
 const hook = useTableTree(StorageService, {
   editView: StorageEditor,

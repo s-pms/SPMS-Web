@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { ADateTime, ADialog, AFormField, AGroup, DialogProps, useDetail } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
+
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { OrderService } from '@/model/mes/order/OrderService'
-
-import { ADateTime, ADialog, AFormField, AGroup, DialogProps, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new OrderEntity()))
 

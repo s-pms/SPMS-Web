@@ -1,9 +1,9 @@
-import { BaseEntity } from '@/base/BaseEntity'
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
-import { DeviceReportingEnum } from '@/model/asset/device/DeviceReportingEnum'
-import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
+import {BaseEntity} from '@/base/BaseEntity'
+import {AlarmStatusEnum} from '@/model/asset/device/AlarmStatusEnum'
+import {DeviceReportingEnum} from '@/model/asset/device/DeviceReportingEnum'
+import {DeviceStatusEnum} from '@/model/asset/device/DeviceStatusEnum'
+import {ParameterEntity} from '@/model/iot/parameter/ParameterEntity'
+import {Field, Form, Model, Search, Table, Type} from '@airpower/web'
 
 @Model({
   label: '设备',

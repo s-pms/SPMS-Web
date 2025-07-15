@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { useMyTable } from '@/hook/useMyTable'
-
-import { SupplierService } from '@/model/channel/supplier/SupplierService'
-import { APanel, ATable } from '@airpower/web'
-import { SupplierEditor } from './component'
+import {useMyTable} from '@/hook/useMyTable'
+import {SupplierService} from '@/model/channel/supplier/SupplierService'
+import {APanel, ATable} from '@airpower/web'
+import {SupplierEditor} from './component'
 
 const hook = useMyTable(SupplierService, {
   editView: SupplierEditor,

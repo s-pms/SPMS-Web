@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserService } from '@/model/personnel/user/UserService'
-import { DepartmentSelector } from '@/view/console/personnel/department/component'
+import {UserEntity} from '@/model/personnel/user/UserEntity'
+import {UserService} from '@/model/personnel/user/UserService'
 
-import { AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor } from '@airpower/web'
-import { RoleSelector } from '../../role/component'
+import {DepartmentSelector} from '@/view/console/personnel/department/component'
+import {AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor} from '@airpower/web'
+import {RoleSelector} from '../../role/component'
 
 const props = defineProps(DialogProps.withParam(new UserEntity()))
 

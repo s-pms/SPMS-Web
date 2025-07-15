@@ -1,13 +1,13 @@
-import type { WebEnum } from '@airpower/web'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { OrderEntity } from '@/model/mes/order/OrderEntity'
-import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
-import { MoveEntity } from '../move/MoveEntity'
-import { InputDetailEntity } from './InputDetailEntity'
-import { InputStatusEnum } from './InputStatusEnum'
-import { InputTypeEnum } from './InputTypeEnum'
+import {AbstractBaseBillEntity} from '@/base/bill/AbstractBaseBillEntity'
+import {PurchaseEntity} from '@/model/channel/purchase/PurchaseEntity'
+import {StorageEntity} from '@/model/factory/storage/StorageEntity'
+import {OrderEntity} from '@/model/mes/order/OrderEntity'
+import type {WebEnum} from '@airpower/web'
+import {Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import {MoveEntity} from '../move/MoveEntity'
+import {InputDetailEntity} from './InputDetailEntity'
+import {InputStatusEnum} from './InputStatusEnum'
+import {InputTypeEnum} from './InputTypeEnum'
 
 @Model({
   label: '入库单',

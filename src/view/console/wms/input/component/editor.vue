@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
-import { InputEntity } from '@/model/wms/input/InputEntity'
-import { InputService } from '@/model/wms/input/InputService'
-import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
+import {InputDetailEntity} from '@/model/wms/input/InputDetailEntity'
+import {InputEntity} from '@/model/wms/input/InputEntity'
 
+import {InputService} from '@/model/wms/input/InputService'
+import {InputTypeEnum} from '@/model/wms/input/InputTypeEnum'
 import {
   AButton,
   ADialog,
@@ -18,8 +18,8 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { computed } from 'vue'
-import { InputDetailEditor } from '.'
+import {computed} from 'vue'
+import {InputDetailEditor} from '.'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
 

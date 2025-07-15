@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
-import { ParameterEntity } from '@/model/iot/parameter/ParameterEntity'
-import { ParameterSelector } from '@/view/console/iot/parameter/component'
+import {DeviceEntity} from '@/model/asset/device/DeviceEntity'
+import {DeviceService} from '@/model/asset/device/DeviceService'
+import {ParameterEntity} from '@/model/iot/parameter/ParameterEntity'
 
-import { AButton, ADialog, AFormField, AGroup, DialogProps, DialogUtil, useEditor } from '@airpower/web'
+import {ParameterSelector} from '@/view/console/iot/parameter/component'
+import {AButton, ADialog, AFormField, AGroup, DialogProps, DialogUtil, useEditor} from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new DeviceEntity()))
 

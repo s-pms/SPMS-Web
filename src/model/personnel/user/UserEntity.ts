@@ -1,8 +1,8 @@
 import type { IPayload, IUser } from '@airpower/web'
+import {DesensitizeType, Field, Form, Search, Table, Type} from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
-import { DesensitizeType, Field, Form, Search, Table, Type } from '@airpower/web'
 import { RoleEntity } from '../role/RoleEntity'
 
 /**

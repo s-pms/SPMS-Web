@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
-import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
-import { InputDetailService } from '@/model/wms/input/InputDetailService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
-import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
-import { ref } from 'vue'
+import {InputDetailEntity} from '@/model/wms/input/InputDetailEntity'
+import {InputDetailService} from '@/model/wms/input/InputDetailService'
+import {MaterialSelector} from '@/view/console/asset/material/component'
+import {ADialog, AInput, ASelect, DialogProps, getFieldLabel} from '@airpower/web'
+import type {FormInstance} from 'element-plus'
+import {ref} from 'vue'
 
 const props = defineProps(DialogProps.withParam(new InputDetailEntity()))
 

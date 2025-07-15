@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { MaterialService } from '@/model/asset/material/MaterialService'
-import { UnitSelector } from '@/view/console/system/unit/component'
+import {MaterialEntity} from '@/model/asset/material/MaterialEntity'
+import {MaterialService} from '@/model/asset/material/MaterialService'
 
-import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
+import {UnitSelector} from '@/view/console/system/unit/component'
+import {ADialog, AFormField, ASelect, DialogProps, useEditor} from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new MaterialEntity()))
 

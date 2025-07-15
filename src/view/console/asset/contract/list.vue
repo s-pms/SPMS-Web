@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { ContractEntity } from '@/model/asset/contract/ContractEntity'
-import { useMyTable } from '@/hook/useMyTable'
-import { ContractService } from '@/model/asset/contract/ContractService'
+import {useMyTable} from '@/hook/useMyTable'
+import type {ContractEntity} from '@/model/asset/contract/ContractEntity'
 
-import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
-import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
-import { ContractDetail, ContractEditor } from './component'
+import {ContractService} from '@/model/asset/contract/ContractService'
+import {ContractStatusEnum} from '@/model/asset/contract/ContractStatusEnum'
+import {AButton, APanel, ATable, DialogUtil, FeedbackUtil} from '@airpower/web'
+import {ContractDetail, ContractEditor} from './component'
 
 const hook = useMyTable(ContractService, {
   editView: ContractEditor,

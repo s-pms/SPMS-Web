@@ -1,6 +1,6 @@
+import {Field, Form, Model, Search, Table} from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { ParameterSystemEnum } from '@/model/iot/parameter/ParameterSystemEnum'
-import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { ParameterTypeEnum } from './ParameterTypeEnum'
 
 @Model({

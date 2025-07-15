@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
-import { OperationSelector } from '@/view/console/mes/operation/component'
-import { DepartmentSelector } from '@/view/console/personnel/department/component'
+import {StructureEntity} from '@/model/factory/structure/StructureEntity'
+import {StructureService} from '@/model/factory/structure/StructureService'
+import {OperationSelector} from '@/view/console/mes/operation/component'
 
-import { AButton, ADialog, AFormField, AGroup, DialogProps, DialogUtil, useEditor } from '@airpower/web'
+import {DepartmentSelector} from '@/view/console/personnel/department/component'
+import {AButton, ADialog, AFormField, AGroup, DialogProps, DialogUtil, useEditor} from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new StructureEntity()))
 

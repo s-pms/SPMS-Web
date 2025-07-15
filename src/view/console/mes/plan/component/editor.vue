@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
-import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
-import { CustomerSelector } from '@/view/console/channel/customer/component'
+import {PlanDetailEntity} from '@/model/mes/plan/PlanDetailEntity'
+import {PlanEntity} from '@/model/mes/plan/PlanEntity'
+import {PlanService} from '@/model/mes/plan/PlanService'
+import {PlanTypeEnum} from '@/model/mes/plan/PlanTypeEnum'
 
+import {CustomerSelector} from '@/view/console/channel/customer/component'
 import {
   AButton,
   ADialog,
@@ -19,7 +19,7 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { PlanDetailEditor } from '.'
+import {PlanDetailEditor} from '.'
 
 const props = defineProps(DialogProps.withParam(new PlanEntity()))
 

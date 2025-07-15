@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { LogEntity } from '@/model/system/log/LogEntity'
-import { useMyTable } from '@/hook/useMyTable'
-import { LogService } from '@/model/system/log/LogService'
+import {useMyTable} from '@/hook/useMyTable'
+import type {LogEntity} from '@/model/system/log/LogEntity'
 
-import { APanel, ATable, WebColor } from '@airpower/web'
+import {LogService} from '@/model/system/log/LogService'
+import {APanel, ATable, WebColor} from '@airpower/web'
 import Detail from './detail.vue'
 
 const hook = useMyTable(LogService, {

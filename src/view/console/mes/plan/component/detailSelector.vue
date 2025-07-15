@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
+import {PlanDetailEntity} from '@/model/mes/plan/PlanDetailEntity'
 
-import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
-import { ref } from 'vue'
+import {PlanEntity} from '@/model/mes/plan/PlanEntity'
+import {PlanService} from '@/model/mes/plan/PlanService'
+import {AButton, ADialog, ATable, DialogProps} from '@airpower/web'
+import {ref} from 'vue'
 
 const props = defineProps(DialogProps.withSelector<PlanDetailEntity, PlanEntity>())
 

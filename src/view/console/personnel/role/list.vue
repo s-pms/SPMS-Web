@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import type { RoleEntity } from '@/model/personnel/role/RoleEntity'
-import { useMyTable } from '@/hook/useMyTable'
-
-import { RoleService } from '@/model/personnel/role/RoleService'
-import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
-import { RoleEditor, RoleMenuEditor, RolePermissionEditor } from './component'
+import {useMyTable} from '@/hook/useMyTable'
+import type {RoleEntity} from '@/model/personnel/role/RoleEntity'
+import {RoleService} from '@/model/personnel/role/RoleService'
+import {AButton, APanel, ATable, DialogUtil} from '@airpower/web'
+import {RoleEditor, RoleMenuEditor, RolePermissionEditor} from './component'
 
 async function onMenuEditor(role: RoleEntity) {
   DialogUtil.show(RoleMenuEditor, role)
