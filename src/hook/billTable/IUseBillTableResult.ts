@@ -30,10 +30,4 @@ export interface IUseBillTableResult<
    * @param bill
    */
   setBillDetailsAllFinished: (bill: B) => void
-
-  /**
-   * ### 完成单据
-   * @param bill
-   */
-  setBillFinished: (bill: B) => void
 }
