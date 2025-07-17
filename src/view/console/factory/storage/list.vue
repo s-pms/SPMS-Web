@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { StorageService } from '@/model/factory/storage/StorageService'
-
 import { APanel, ATable, useTableTree } from '@airpower/web'
+import { StorageService } from '@/model/factory/storage/StorageService'
 import { StorageEditor } from './component'
 
 const hook = useTableTree(StorageService, {

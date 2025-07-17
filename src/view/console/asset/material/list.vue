@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { APanel, ATable } from '@airpower/web'
 import { useMyTable } from '@/hook/useMyTable'
 import { MaterialService } from '@/model/asset/material/MaterialService'
-import { APanel, ATable } from '@airpower/web'
 import { MaterialEditor } from './component'
 </script>
 

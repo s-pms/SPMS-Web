@@ -1,7 +1,7 @@
 <script generic="D extends AbstractBaseBillDetailEntity, B extends AbstractBaseBillEntity<D>" lang="ts" setup>
+import type { PropType, Ref } from 'vue'
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import type { PropType, Ref } from 'vue'
 import { ACopy, AFormField } from '@airpower/web'
 import { inject, ref } from 'vue'
 

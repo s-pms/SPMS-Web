@@ -1,14 +1,4 @@
 <script lang="ts" setup>
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
-import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
-import { SaleDetail } from '@/view/console/channel/sale/component'
-import { PickingDetail } from '@/view/console/mes/picking/component'
-
 import {
   AButton,
   ADialog,
@@ -20,6 +10,16 @@ import {
   FeedbackUtil,
   getTableConfigList,
 } from '@airpower/web'
+import { BillFormCode, BillFormMoreDetail } from '@/component'
+import { useBillDetail } from '@/hook/billTable/useBillDetail'
+import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
+import { OutputEntity } from '@/model/wms/output/OutputEntity'
+import { OutputService } from '@/model/wms/output/OutputService'
+import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
+import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
+
+import { SaleDetail } from '@/view/console/channel/sale/component'
+import { PickingDetail } from '@/view/console/mes/picking/component'
 import { OutputAddFinishEditor } from '.'
 import { MoveDetail } from '../../move/component'
 

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { useMyTable } from '@/hook/useMyTable'
-
-import { CustomerService } from '@/model/channel/customer/CustomerService'
 import { APanel, ATable } from '@airpower/web'
+import { useMyTable } from '@/hook/useMyTable'
+import { CustomerService } from '@/model/channel/customer/CustomerService'
 import { CustomerEditor } from './component'
 
 const hook = useMyTable(CustomerService, {

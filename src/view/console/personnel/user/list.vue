@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
-
+import { APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
+import { ref } from 'vue'
 import { useMyTable } from '@/hook/useMyTable'
+
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
 import { UserService } from '@/model/personnel/user/UserService'
-import { APanel, ATable, ATreeBox, QueryRequest } from '@airpower/web'
-import { ref } from 'vue'
 import { UserEditor } from './component'
 
 const hook = useMyTable(UserService, {

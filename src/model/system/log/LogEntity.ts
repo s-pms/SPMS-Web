@@ -1,5 +1,5 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import { DateTimeFormatter, Field, Model, Table } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
 
 @Model({
   label: '日志',

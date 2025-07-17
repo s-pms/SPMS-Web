@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
+
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
 import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-
-import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new DepartmentEntity()))
 

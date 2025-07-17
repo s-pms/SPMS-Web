@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, DialogProps, getFieldLabel, useEditor } from '@airpower/web'
 import { Constant } from '@/config/Constant'
 import { ConfigEntity } from '@/model/system/config/ConfigEntity'
+
 import { ConfigService } from '@/model/system/config/ConfigService'
 import { ConfigType } from '@/model/system/config/ConfigType'
-
-import { ADialog, AFormField, DialogProps, getFieldLabel, useEditor } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new ConfigEntity()))
 

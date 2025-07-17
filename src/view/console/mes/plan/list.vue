@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { APanel, ATable } from '@airpower/web'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { PlanStatusEnum } from '@/model/mes/plan/PlanStatusEnum'
-import { APanel, ATable } from '@airpower/web'
 import { PlanDetail, PlanEditor } from './component'
 
 const hook = useBillTable(PlanService, {

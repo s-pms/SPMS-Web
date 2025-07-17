@@ -1,6 +1,6 @@
 import type { WebEnum } from '@airpower/web'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Field, Form, Model, Table, Type } from '@airpower/web'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { SaleDetailEntity } from './SaleDetailEntity'
 import { SaleStatusEnum } from './SaleStatusEnum'

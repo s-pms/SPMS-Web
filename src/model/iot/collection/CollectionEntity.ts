@@ -1,5 +1,5 @@
-import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Form, Model, Table } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
 import { CollectionGranularityEnum } from './CollectionGranularityEnum'
 
 @Model({

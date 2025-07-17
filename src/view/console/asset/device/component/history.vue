@@ -1,12 +1,5 @@
 <script lang="ts" setup>
 import type { IJson, IWebEnum } from '@airpower/web'
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
-import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
-import { DeviceService } from '@/model/asset/device/DeviceService'
-import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
-import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
-import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
 import {
   ADialog,
   AEmpty,
@@ -18,9 +11,16 @@ import {
   WebColor,
 } from '@airpower/web'
 import { ArrowDown, Clock } from '@element-plus/icons-vue'
-
 import * as echarts from 'echarts'
 import { computed, onMounted, ref } from 'vue'
+
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
+import { DeviceReportDuration } from '@/model/asset/device/DeviceReportDuration'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
+import { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
+import { CollectionGranularityEnum } from '@/model/iot/collection/CollectionGranularityEnum'
+import { ParameterTypeEnum } from '@/model/iot/parameter/ParameterTypeEnum'
 
 const props = defineProps(DialogProps.withParam(new CollectionEntity()))
 const currentLabel = ref('')

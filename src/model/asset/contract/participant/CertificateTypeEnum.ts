@@ -1,5 +1,5 @@
-import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
 import { WebColor, WebEnum } from '@airpower/web'
+import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
 
 export class CertificateTypeEnum extends WebEnum {
   static readonly OTHER = new CertificateTypeEnum(0, '其他')

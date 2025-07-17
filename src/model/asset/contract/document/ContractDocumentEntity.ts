@@ -1,6 +1,6 @@
 import type { IFile } from '@airpower/web'
-import { BaseEntity } from '@/base/BaseEntity'
 import { Field, Model, Table } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
 
 @Model({
   label: '合同附件',

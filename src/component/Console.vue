@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { MenuEntity } from '@/model/system/menu/MenuEntity'
+import { AFrame, PermissionUtil, RouterUtil } from '@airpower/web'
+import { ref } from 'vue'
 import UserCard from '@/component/UserCard.vue'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
-import { AFrame, PermissionUtil, RouterUtil } from '@airpower/web'
-import { ref } from 'vue'
 
 const components = import.meta.glob('/src/view/**/*.vue')
 

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { APanel, ATable } from '@airpower/web'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { OutputService } from '@/model/wms/output/OutputService'
 import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
 import { OutputDetail, OutputEditor } from '@/view/console/wms/output/component'
-import { APanel, ATable } from '@airpower/web'
 
 const hook = useBillTable(OutputService, {
   editView: OutputEditor,

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
-import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
+import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 
 const props = defineProps(DialogProps.withParam(new MoveEntity()))
 

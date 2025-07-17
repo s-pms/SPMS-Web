@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
-import { SupplierService } from '@/model/channel/supplier/SupplierService'
-
 import { ASelector, DialogProps } from '@airpower/web'
+import { SupplierEntity } from '@/model/channel/supplier/SupplierEntity'
+
+import { SupplierService } from '@/model/channel/supplier/SupplierService'
 import { SupplierEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<SupplierEntity>())

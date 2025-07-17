@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import type { FormInstance } from 'element-plus'
-import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
-
-import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
-import { MaterialSelector } from '@/view/console/asset/material/component'
 import { ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
+import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
+import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
+import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
+import { MaterialSelector } from '@/view/console/asset/material/component'
 
 const props = defineProps(DialogProps.withParam(new SaleDetailEntity()))
 

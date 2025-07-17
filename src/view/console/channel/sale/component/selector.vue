@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { ASelector, DialogProps } from '@airpower/web'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
-import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 
-import { ASelector, DialogProps } from '@airpower/web'
+import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 import { SaleEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<SaleEntity>())

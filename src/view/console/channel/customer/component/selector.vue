@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { CustomerService } from '@/model/channel/customer/CustomerService'
-
 import { ASelector, DialogProps } from '@airpower/web'
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+
+import { CustomerService } from '@/model/channel/customer/CustomerService'
 import { CustomerEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<CustomerEntity>())

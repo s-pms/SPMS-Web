@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
+
 import { BomService } from '@/model/mes/bom/BomService'
 import { InputEntity } from '@/model/wms/input/InputEntity'
-
-import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
 
@@ -47,9 +47,9 @@ const {
       </AGroup>
       <AGroup title="配方物料清单">
         <ATable
+          :column-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           :data-list="formData.details"
           :entity="BomDetailEntity"
-          :column-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           ctrl-width="80"
           hide-add
           hide-delete

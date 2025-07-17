@@ -1,6 +1,6 @@
 import type { OrderDetailEntity } from './OrderDetailEntity'
-import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { FeedbackUtil } from '@airpower/web'
+import { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import { OrderEntity } from './OrderEntity'
 
 export class OrderService extends AbstractBaseBillService<OrderDetailEntity, OrderEntity> {

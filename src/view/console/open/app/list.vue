@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { useMyTable } from '@/hook/useMyTable'
-import { OpenAppService } from '@/model/open/app/OpenAppService'
-
 import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ElMessageBox } from 'element-plus'
 import useClipboard from 'vue-clipboard3'
+import { useMyTable } from '@/hook/useMyTable'
+
+import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 
 const hook = useMyTable(OpenAppService, {
