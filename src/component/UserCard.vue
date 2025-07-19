@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { FileEntity } from '@/model/system/file/FileEntity'
 import { AImage, AUser, DesensitizeType, DialogUtil } from '@airpower/web'
 import { ref } from 'vue'
 import { AppConfig } from '@/config/AppConfig'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { FileCategory } from '@/model/system/file/FileCategory'
+import { FileEntity } from '@/model/system/file/FileEntity'
 import UserAccount from './user/UserAccount.vue'
 
 defineProps({
@@ -22,6 +22,8 @@ function onUserAccount() {
 const isLoading = ref(false)
 
 async function onUploadAvatar(file: FileEntity) {
+  console.log(file);
+  
   AppConfig.currentUser.value = await UserService.create(isLoading).getMyInfo()
   AppConfig.currentUser.value.avatar = file.url
   await UserService.create(isLoading).updateMyInfo(AppConfig.currentUser.value)
@@ -30,26 +32,15 @@ async function onUploadAvatar(file: FileEntity) {
 </script>
 
 <template>
-  <AUser
-    :height="200"
-    :user="user"
-  >
+  <AUser :height="200" :user="user">
     <div class="user">
       <div class="user-left">
         <AImage
-          v-loading="isLoading"
-          :data="{
+          v-loading="isLoading" :data="{
             category: FileCategory.AVATAR.key,
-          }"
-          :height="80"
-          :width="80"
-          upload
-          @upload="onUploadAvatar"
+          }" :height="80" :width="80" :entity="FileEntity" upload @uploaded="onUploadAvatar"
         />
-        <div
-          :class="user.gender === 1 ? 'male' : 'female'"
-          class="gender"
-        >
+        <div :class="user.gender === 1 ? 'male' : 'female'" class="gender">
           {{ user.gender === 1 ? '男' : '女' }}
         </div>
       </div>
@@ -96,10 +87,7 @@ async function onUploadAvatar(file: FileEntity) {
       </div>
     </div>
     <div class="setting">
-      <div
-        class="item"
-        @click="onUserAccount()"
-      >
+      <div class="item" @click="onUserAccount()">
         账号安全
       </div>
       <div class="item">
