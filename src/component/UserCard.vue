@@ -22,8 +22,6 @@ function onUserAccount() {
 const isLoading = ref(false)
 
 async function onUploadAvatar(file: FileEntity) {
-  console.log(file);
-  
   AppConfig.currentUser.value = await UserService.create(isLoading).getMyInfo()
   AppConfig.currentUser.value.avatar = file.url
   await UserService.create(isLoading).updateMyInfo(AppConfig.currentUser.value)
@@ -38,7 +36,12 @@ async function onUploadAvatar(file: FileEntity) {
         <AImage
           v-loading="isLoading" :data="{
             category: FileCategory.AVATAR.key,
-          }" :height="80" :width="80" :entity="FileEntity" upload @uploaded="onUploadAvatar"
+          }"
+          :entity="FileEntity"
+          :height="80"
+          :width="80"
+          upload
+          @uploaded="onUploadAvatar"
         />
         <div :class="user.gender === 1 ? 'male' : 'female'" class="gender">
           {{ user.gender === 1 ? '男' : '女' }}
