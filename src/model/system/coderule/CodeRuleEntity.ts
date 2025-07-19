@@ -8,7 +8,7 @@ import { SerialNumberUpdateEnum } from '@/model/system/coderule/SerialNumberUpda
  * @author Hamm.cn
  */
 @Model({
-  permissionPrefix: 'coderule',
+  permissionPrefix: 'CodeRule',
   label: '编码规则',
 })
 export class CodeRuleEntity extends BaseEntity {
