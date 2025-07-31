@@ -86,12 +86,18 @@ async function onUpload() {
           label-width="120px"
           @submit.prevent
         >
-          <AGroup :column="2" title="基本信息">
+          <AGroup
+            :column="2"
+            title="基本信息"
+          >
             <AFormField field="code" />
             <AFormField field="name" />
             <AFormField field="type" />
           </AGroup>
-          <AGroup :column="2" title="有效期">
+          <AGroup
+            :column="2"
+            title="有效期"
+          >
             <AFormField field="startTime" />
             <AFormField field="endTime" />
           </AGroup>
@@ -111,15 +117,26 @@ async function onUpload() {
           hide-edit
         >
           <template #addButton>
-            <AButton icon="ADD" primary @click="onAddParticipant">
+            <AButton
+              icon="ADD"
+              primary
+              @click="onAddParticipant"
+            >
               添加参与方
             </AButton>
           </template>
           <template #customRow="row">
-            <AButton link @click="onEdit(row.data, row.index)">
+            <AButton
+              link
+              @click="onEdit(row.data, row.index)"
+            >
               编辑
             </AButton>
-            <AButton danger link @click="onDelete(row.index)">
+            <AButton
+              danger
+              link
+              @click="onDelete(row.index)"
+            >
               编辑
             </AButton>
           </template>
@@ -135,17 +152,28 @@ async function onUpload() {
           hide-edit
         >
           <template #url="row">
-            <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">
+            <el-link
+              :href="WebFileUtil.getStaticFileUrl(row.data.url)"
+              target="_blank"
+            >
               {{ row.data.url }}
             </el-link>
           </template>
           <template #addButton>
-            <AButton icon="UPLOAD" primary @click="onUpload">
+            <AButton
+              icon="UPLOAD"
+              primary
+              @click="onUpload"
+            >
               上传附件
             </AButton>
           </template>
           <template #customRow="row">
-            <AButton danger link @click="onDeleteDocument(row.index)">
+            <AButton
+              danger
+              link
+              @click="onDeleteDocument(row.index)"
+            >
               删除
             </AButton>
           </template>

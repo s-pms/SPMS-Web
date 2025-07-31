@@ -14,7 +14,10 @@ const hook = useMyTable(PurchasePriceService, {
   <APanel>
     <ATable :use-hook="hook">
       <template #supplier="row">
-        <APayload :payload="row.data.supplier" :view="SupplierDetail" />
+        <APayload
+          :payload="row.data.supplier"
+          :view="SupplierDetail"
+        />
       </template>
       <template #materialCode="{ data }">
         {{ data.material.code }}

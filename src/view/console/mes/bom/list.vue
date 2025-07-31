@@ -21,7 +21,10 @@ const hook = useMyTable(BomService, {
       show-detail
     >
       <template #customRow="{ data }">
-        <PublishButton :data @click="hook.onPublish" />
+        <PublishButton
+          :data
+          @click="hook.onPublish"
+        />
       </template>
     </ATable>
   </APanel>

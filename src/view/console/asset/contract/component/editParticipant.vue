@@ -75,16 +75,43 @@ function onTypeChanged() {
       label-width="120px"
       @submit.prevent
     >
-      <AFormField v-model.role="formData" :entity="ParticipantEntity" field="role" />
-      <AFormField v-model.name="formData" :entity="ParticipantEntity" field="name" />
-      <AFormField v-model.type="formData" :entity="ParticipantEntity" field="type" @change="onTypeChanged" />
       <AFormField
-        v-model.certificateType="formData" :entity="ParticipantEntity" :list="certificateTypeList"
+        v-model.role="formData"
+        :entity="ParticipantEntity"
+        field="role"
+      />
+      <AFormField
+        v-model.name="formData"
+        :entity="ParticipantEntity"
+        field="name"
+      />
+      <AFormField
+        v-model.type="formData"
+        :entity="ParticipantEntity"
+        field="type"
+        @change="onTypeChanged"
+      />
+      <AFormField
+        v-model.certificateType="formData"
+        :entity="ParticipantEntity"
+        :list="certificateTypeList"
         field="certificateType"
       />
-      <AFormField v-model.identification="formData" :entity="ParticipantEntity" field="identification" />
-      <AFormField v-model.phone="formData" :entity="ParticipantEntity" field="phone" />
-      <AFormField v-model.email="formData" :entity="ParticipantEntity" field="email" />
+      <AFormField
+        v-model.identification="formData"
+        :entity="ParticipantEntity"
+        field="identification"
+      />
+      <AFormField
+        v-model.phone="formData"
+        :entity="ParticipantEntity"
+        field="phone"
+      />
+      <AFormField
+        v-model.email="formData"
+        :entity="ParticipantEntity"
+        field="email"
+      />
     </el-form>
   </ADialog>
 </template>

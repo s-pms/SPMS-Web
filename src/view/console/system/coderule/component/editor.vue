@@ -77,20 +77,41 @@ const demoCode = computed(() => {
 
 <template>
   <ADialog
-    :form-ref="formRef" :loading="isLoading" :title="title + getModelName(CodeRuleEntity)" height="550px"
-    width="800px" @cancel="onCancel" @confirm="onSubmit"
+    :form-ref="formRef"
+    :loading="isLoading"
+    :title="title + getModelName(CodeRuleEntity)"
+    height="550px"
+    width="800px"
+    @cancel="onCancel"
+    @confirm="onSubmit"
   >
-    <el-form ref="formRef" :model="formData" :rules="rules" label-width="140px" @submit.prevent>
-      <AGroup :column="2" title="基础配置">
-        <el-form-item :label="getFieldLabel(CodeRuleEntity, 'ruleField')" prop="ruleField">
+    <el-form
+      ref="formRef"
+      :model="formData"
+      :rules="rules"
+      label-width="140px"
+      @submit.prevent
+    >
+      <AGroup
+        :column="2"
+        title="基础配置"
+      >
+        <el-form-item
+          :label="getFieldLabel(CodeRuleEntity, 'ruleField')"
+          prop="ruleField"
+        >
           <AInput
-            v-model.ruleField="formData.ruleField" :disabled="!!formData.id" :entity="CodeRuleEntity" :list="fieldList.map((item) => {
+            v-model.ruleField="formData.ruleField"
+            :disabled="!!formData.id"
+            :entity="CodeRuleEntity"
+            :list="fieldList.map((item) => {
               return {
                 key: item.key,
                 label: item.label,
               }
             })
-            " @changed="fieldChanged"
+            "
+            @changed="fieldChanged"
           />
         </el-form-item>
         <AFormField field="snType" />
@@ -99,12 +120,20 @@ const demoCode = computed(() => {
       </AGroup>
       <AGroup title="模板配置">
         <el-form-item label="可选参数">
-          <el-tag v-for="param in paramList" :key="param.value" class="param-item" @click="paramClicked(param)">
+          <el-tag
+            v-for="param in paramList"
+            :key="param.value"
+            class="param-item"
+            @click="paramClicked(param)"
+          >
             {{ param.desc }}
           </el-tag>
         </el-form-item>
         <AFormField field="template" />
-        <el-form-item v-if="formData.prefix || demoCode" label="示例编码">
+        <el-form-item
+          v-if="formData.prefix || demoCode"
+          label="示例编码"
+        >
           <span style="margin: 0 2px; color: red; font-weight: bold">{{ formData.prefix }}</span>
           <span style="margin: 0 2px; color: darkgreen; font-weight: bold">{{ demoCode }}</span>
           <span style="margin: 0 2px; color: blue; font-weight: bold">{{

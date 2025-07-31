@@ -22,7 +22,11 @@ const hook = useBillTable(PickingService, {
       show-detail
     >
       <template #customRow="{ data }">
-        <BillAuditOrReject :bill="data" @on-audit="hook.onAudit" @on-reject="hook.onReject" />
+        <BillAuditOrReject
+          :bill="data"
+          @on-audit="hook.onAudit"
+          @on-reject="hook.onReject"
+        />
       </template>
     </ATable>
   </APanel>

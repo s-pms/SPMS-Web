@@ -30,17 +30,41 @@ const {
           label-width="120px"
           @submit.prevent
         >
-          <AGroup :column="2" title="基本信息">
-            <AFormField disabled field="code" />
-            <AFormField disabled field="name" />
-            <AFormField disabled field="type" />
+          <AGroup
+            :column="2"
+            title="基本信息"
+          >
+            <AFormField
+              disabled
+              field="code"
+            />
+            <AFormField
+              disabled
+              field="name"
+            />
+            <AFormField
+              disabled
+              field="type"
+            />
           </AGroup>
-          <AGroup :column="2" title="有效期">
-            <AFormField disabled field="startTime" />
-            <AFormField disabled field="endTime" />
+          <AGroup
+            :column="2"
+            title="有效期"
+          >
+            <AFormField
+              disabled
+              field="startTime"
+            />
+            <AFormField
+              disabled
+              field="endTime"
+            />
           </AGroup>
           <AGroup title="合同内容">
-            <AFormField disabled field="content" />
+            <AFormField
+              disabled
+              field="content"
+            />
           </AGroup>
         </el-form>
       </ATab>
@@ -65,7 +89,10 @@ const {
           hide-ctrl
         >
           <template #url="row">
-            <el-link :href="WebFileUtil.getStaticFileUrl(row.data.url)" target="_blank">
+            <el-link
+              :href="WebFileUtil.getStaticFileUrl(row.data.url)"
+              target="_blank"
+            >
               {{ row.data.url }}
             </el-link>
           </template>

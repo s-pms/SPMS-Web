@@ -30,11 +30,15 @@ async function onUploadAvatar(file: FileEntity) {
 </script>
 
 <template>
-  <AUser :height="200" :user="user">
+  <AUser
+    :height="200"
+    :user="user"
+  >
     <div class="user">
       <div class="user-left">
         <AImage
-          v-loading="isLoading" :data="{
+          v-loading="isLoading"
+          :data="{
             category: FileCategory.AVATAR.key,
           }"
           :entity="FileEntity"
@@ -43,7 +47,10 @@ async function onUploadAvatar(file: FileEntity) {
           upload
           @uploaded="onUploadAvatar"
         />
-        <div :class="user.gender === 1 ? 'male' : 'female'" class="gender">
+        <div
+          :class="user.gender === 1 ? 'male' : 'female'"
+          class="gender"
+        >
           {{ user.gender === 1 ? '男' : '女' }}
         </div>
       </div>
@@ -90,7 +97,10 @@ async function onUploadAvatar(file: FileEntity) {
       </div>
     </div>
     <div class="setting">
-      <div class="item" @click="onUserAccount()">
+      <div
+        class="item"
+        @click="onUserAccount()"
+      >
         账号安全
       </div>
       <div class="item">
