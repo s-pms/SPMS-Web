@@ -29,7 +29,6 @@ const {
     @cancel="onCancel"
     @confirm="onConfirm(selectList)"
   >
-    {{ selectList }}
     <ATable
       :data-list="list"
       :entity="DepartmentEntity"
