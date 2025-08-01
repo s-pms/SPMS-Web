@@ -29,6 +29,7 @@ const {
     @cancel="onCancel"
     @confirm="onConfirm(selectList)"
   >
+    {{ selectList }}
     <ATable
       :data-list="list"
       :entity="DepartmentEntity"
@@ -45,7 +46,7 @@ const {
       hide-delete
       hide-edit
       @search="onSearch"
-      @select-changed="onSelected"
+      @selected="onSelected"
     >
       <template
         v-if="!isMultiple"

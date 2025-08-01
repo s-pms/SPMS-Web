@@ -3,7 +3,6 @@ import type { ITree, RootEntity } from '@airpower/web'
 import { AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest } from '@airpower/web'
 import { ref } from 'vue'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { StructureService } from '@/model/factory/structure/StructureService'
@@ -108,7 +107,7 @@ inventoryTypeChanged()
         hide-column-selector
         hide-delete
         hide-edit
-        @select-changed="onConfirm"
+        @selected="onConfirm"
       >
         <template #materialCode="{ data }">
           {{ data.material.code }}

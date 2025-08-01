@@ -54,7 +54,7 @@ getPermissionList()
       hide-ctrl
       hide-index
       show-select
-      @select-changed="onSelect"
+      @selected="onSelect"
     />
   </ADialog>
 </template>
