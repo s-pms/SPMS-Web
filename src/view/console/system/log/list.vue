@@ -27,9 +27,20 @@ function getColor(log: LogEntity) {
 
 <template>
   <APanel>
-    <ATable :use-hook="hook" ctrl-width="60" hide-add hide-delete hide-edit show-detail>
+    <ATable
+      :use-hook="hook"
+      ctrl-width="60"
+      hide-add
+      hide-delete
+      hide-edit
+      show-detail
+    >
       <template #pendingTime="{ data }">
-        <el-tag :color="getColor(data)" disable-transitions effect="dark">
+        <el-tag
+          :color="getColor(data)"
+          disable-transitions
+          effect="dark"
+        >
           {{ data.updateTime - data.createTime }}ms
         </el-tag>
       </template>

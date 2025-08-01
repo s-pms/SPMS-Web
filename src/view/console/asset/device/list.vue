@@ -21,7 +21,11 @@ async function showMonitor(device: DeviceEntity) {
       ctrl-width="130"
     >
       <template #customRow="{ data }">
-        <AButton :disabled="!data.isReporting" link @click="showMonitor(data)">
+        <AButton
+          :disabled="!data.isReporting"
+          link
+          @click="showMonitor(data)"
+        >
           监控
         </AButton>
       </template>

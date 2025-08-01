@@ -123,9 +123,14 @@ inventoryTypeChanged()
         hide-edit
       >
         <template #afterButton>
-          <el-radio-group v-model="inventoryType" @change="inventoryTypeChanged">
+          <el-radio-group
+            v-model="inventoryType"
+            @change="inventoryTypeChanged"
+          >
             <el-radio-button
-              v-for="view in InventoryTypeEnum.toArray()" :key="view.key" :label="view.key"
+              v-for="view in InventoryTypeEnum.toArray()"
+              :key="view.key"
+              :label="view.key"
               :value="view.key"
             >
               {{ view.label }}
@@ -148,7 +153,10 @@ inventoryTypeChanged()
           {{ data.material.unit.name }}
         </template>
         <template #beforePage>
-          <APage :response="response" @changed="onPageChanged" />
+          <APage
+            :response="response"
+            @changed="onPageChanged"
+          />
         </template>
       </ATable>
     </APanel>

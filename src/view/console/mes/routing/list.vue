@@ -36,8 +36,14 @@ async function onProgress(data: RoutingEntity) {
         {{ data.bom?.name || '-' }}
       </template>
       <template #customRow="{ data }">
-        <PublishButton :data @click="hook.onPublish" />
-        <AButton link @click="onProgress(data)">
+        <PublishButton
+          :data
+          @click="hook.onPublish"
+        />
+        <AButton
+          link
+          @click="onProgress(data)"
+        >
           流程
         </AButton>
       </template>

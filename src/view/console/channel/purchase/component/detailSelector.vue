@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
-
 import { ref } from 'vue'
+
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
@@ -48,7 +48,7 @@ getDetail()
       hide-column-selector
       hide-delete
       hide-edit
-      @select-changed="onSelected"
+      @selected="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

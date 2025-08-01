@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
-
 import { ref } from 'vue'
+
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
 import { PlanService } from '@/model/mes/plan/PlanService'
@@ -48,7 +48,7 @@ getPlan()
       hide-column-selector
       hide-delete
       hide-edit
-      @select-changed="onSelected"
+      @selected="onSelected"
     >
       <template #materialCode="{ data }">
         {{ data.material.code }}

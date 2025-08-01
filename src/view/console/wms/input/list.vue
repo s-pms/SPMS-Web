@@ -25,7 +25,11 @@ const hook = useBillTable(InputService, {
         {{ data.storage?.name || '-' }}({{ data.storage?.code || '-' }})
       </template>
       <template #customRow="{ data }">
-        <BillAuditOrReject :bill="data" @on-audit="hook.onAudit" @on-reject="hook.onReject" />
+        <BillAuditOrReject
+          :bill="data"
+          @on-audit="hook.onAudit"
+          @on-reject="hook.onReject"
+        />
       </template>
     </ATable>
   </APanel>
