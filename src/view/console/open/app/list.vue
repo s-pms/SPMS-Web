@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
+import { AButton, APanel, ATable, ClipboardUtil, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ElMessageBox } from 'element-plus'
 import useClipboard from 'vue-clipboard3'
-import { useMyTable } from '@/hook/useMyTable'
 
+import { useMyTable } from '@/hook/useMyTable'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 
@@ -28,7 +28,7 @@ async function onResetSecret(app: OpenAppEntity) {
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
-  await toClipboard(newSecret)
+  await ClipboardUtil.copy(newSecret)
   FeedbackUtil.toastSuccess('复制AppSecret成功')
   hook.onReloadData()
 }
@@ -48,7 +48,7 @@ async function onResetKeyPair(app: OpenAppEntity) {
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
-  await toClipboard(newSecret)
+  await ClipboardUtil.copy(newSecret)
   FeedbackUtil.toastSuccess('复制RSA公钥成功')
   hook.onReloadData()
 }
@@ -63,7 +63,7 @@ async function onAdd() {
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
-  await toClipboard(appSecret)
+  await ClipboardUtil.copy(appSecret)
 }
 
 async function onTest() {

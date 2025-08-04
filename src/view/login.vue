@@ -169,7 +169,10 @@ getAppInfo()
       <div class="app-name">
         {{ appInfo.appName || '请先登录 SPMS!' }}
       </div>
-      <div class="tabs">
+      <div
+        v-if="false"
+        class="tabs"
+      >
         <div
           v-for="(item, index) in [
             LoginAction.LOGIN_VIA_PASSWORD,
@@ -327,7 +330,7 @@ getAppInfo()
           </div>
         </template>
       </div>
-      <ThirdLogin />
+      <ThirdLogin v-if="false" />
     </div>
     <Copyright />
   </div>
@@ -429,6 +432,7 @@ getAppInfo()
       width: 100%;
       padding: 10px 60px;
       flex: 1;
+      margin-top: 50px;
       height: 0;
 
       .form {

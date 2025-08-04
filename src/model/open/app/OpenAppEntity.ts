@@ -5,6 +5,7 @@ import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'
 
 @Model({
   label: '应用',
+  permissionPrefix: 'OpenApp',
 })
 export class OpenAppEntity extends BaseEntity {
   @Table({
