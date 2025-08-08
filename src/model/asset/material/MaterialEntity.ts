@@ -82,7 +82,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
 
   @Table({
     payload: true,
-    width: 100,
+    width: 150,
   })
   @Form({
     requiredPayload: true,
@@ -92,6 +92,10 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   })
   @Type(UnitEntity)
   unit!: UnitEntity
+
+  @Field({ label: '计量单位' })
+  @Search()
+  unitName?: string
 
   @Table({
     width: 150,
