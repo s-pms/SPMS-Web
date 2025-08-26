@@ -2,8 +2,6 @@
 import type { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { AButton, APanel, ATable, ClipboardUtil, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { ElMessageBox } from 'element-plus'
-import useClipboard from 'vue-clipboard3'
-
 import { useMyTable } from '@/hook/useMyTable'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
@@ -11,7 +9,6 @@ import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 const hook = useMyTable(OpenAppService, {
   editView: OpenAppEditor,
 })
-const { toClipboard } = useClipboard()
 
 async function onResetSecret(app: OpenAppEntity) {
   await ElMessageBox.confirm('重置密钥后，使用原密钥的应用将无法访问API服务，是否确认重置?', '确认重置AppSecret', {
