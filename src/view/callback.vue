@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { IJson } from '@airpower/web'
+import { UserService } from '@/model/personnel/user/UserService'
 import { DateTimeUtil, FeedbackUtil, RouterUtil, WebConfig } from '@airpower/web'
 import { ref } from 'vue'
-import { UserService } from '@/model/personnel/user/UserService'
 
 const isLoading = ref(true)
 

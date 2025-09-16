@@ -1,9 +1,9 @@
-import { Field, Model, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { Field, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '库存',

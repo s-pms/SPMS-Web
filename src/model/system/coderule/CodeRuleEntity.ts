@@ -1,6 +1,6 @@
-import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { SerialNumberUpdateEnum } from '@/model/system/coderule/SerialNumberUpdateEnum'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 /**
  * # 编码规则实体

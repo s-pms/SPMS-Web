@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
 import { PurchasePriceEntity } from '@/model/channel/purchasePrice/PurchasePriceEntity'
-
 import { PurchasePriceService } from '@/model/channel/purchasePrice/PurchasePriceService'
+
 import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
 import { SupplierSelector } from '../../supplier/component'
 
 const props = defineProps(DialogProps.withParam(new PurchasePriceEntity()))

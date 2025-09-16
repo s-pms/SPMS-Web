@@ -1,7 +1,7 @@
-import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
 import { ConfigType } from '@/model/system/config/ConfigType'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 /**
  * # 参数配置实体

@@ -1,4 +1,11 @@
 <script lang="ts" setup>
+import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
+import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
+import { MoveEntity } from '@/model/wms/move/MoveEntity'
+import { MoveService } from '@/model/wms/move/MoveService'
+
+import { StorageSelector } from '@/view/console/factory/storage/component'
 import {
   AButton,
   ADialog,
@@ -13,13 +20,6 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { MoveEntity } from '@/model/wms/move/MoveEntity'
-
-import { MoveService } from '@/model/wms/move/MoveService'
-import { StorageSelector } from '@/view/console/factory/storage/component'
 import { MoveDetailEditor } from '.'
 import { InventorySelector } from '../../inventory/component'
 

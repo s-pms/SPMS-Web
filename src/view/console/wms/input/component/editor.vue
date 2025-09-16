@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
+import { InputEntity } from '@/model/wms/input/InputEntity'
+
+import { InputService } from '@/model/wms/input/InputService'
+import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 import {
   AButton,
   ADialog,
@@ -14,11 +19,6 @@ import {
   useEditor,
 } from '@airpower/web'
 import { computed } from 'vue'
-
-import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
-import { InputEntity } from '@/model/wms/input/InputEntity'
-import { InputService } from '@/model/wms/input/InputService'
-import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 import { InputDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))

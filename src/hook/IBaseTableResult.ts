@@ -1,6 +1,6 @@
-import type { ITableResult } from '@airpower/web'
 import type { AbstractBaseService } from '@/base/AbstractBaseService'
 import type { BaseEntity } from '@/base/BaseEntity'
+import type { ITableResult } from '@airpower/web'
 
 /**
  * # 单据表格Hook

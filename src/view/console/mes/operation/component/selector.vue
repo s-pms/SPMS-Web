@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ASelector, DialogProps } from '@airpower/web'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
-
 import { OperationService } from '@/model/mes/operation/OperationService'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { OperationEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<OperationEntity>())

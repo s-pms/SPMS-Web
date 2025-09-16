@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
+import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
+
+import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import {
   AButton,
   ADialog,
@@ -13,10 +17,6 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-
-import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PurchaseEntity()))

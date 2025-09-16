@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { IJson } from '@airpower/web'
 
-import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
 import { LogEntity } from '@/model/system/log/LogEntity'
+import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
 
 defineProps(DialogProps.withParam(new LogEntity()))
 

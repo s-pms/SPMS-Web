@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
+import { SaleEntity } from '@/model/channel/sale/SaleEntity'
+
+import { SaleService } from '@/model/channel/sale/SaleService'
 import {
   AButton,
   ADialog,
@@ -13,10 +17,6 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-
-import { SaleEntity } from '@/model/channel/sale/SaleEntity'
-import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleDetailEditor } from '.'
 import { CustomerSelector } from '../../customer/component'
 

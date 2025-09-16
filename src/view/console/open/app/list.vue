@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { AButton, APanel, ATable, ClipboardUtil, DialogUtil, FeedbackUtil } from '@airpower/web'
-import { ElMessageBox } from 'element-plus'
 import { useMyTable } from '@/hook/useMyTable'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { AButton, APanel, ATable, ClipboardUtil, DialogUtil, FeedbackUtil } from '@airpower/web'
+import { ElMessageBox } from 'element-plus'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 
 const hook = useMyTable(OpenAppService, {

@@ -1,7 +1,7 @@
-import { Form, Model, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
+import { Form, Model, Type } from '@airpower/web'
 
 /**
  * # 工序配置

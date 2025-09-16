@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { APanel, ATable, useTableTree } from '@airpower/web'
 import { StructureService } from '@/model/factory/structure/StructureService'
+import { APanel, ATable, useTableTree } from '@airpower/web'
 import { StructureEditor } from './component'
 
 const hook = useTableTree(StructureService, {

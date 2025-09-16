@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { ASelector, DialogProps } from '@airpower/web'
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
-
 import { MoveService } from '@/model/wms/move/MoveService'
+
+import { ASelector, DialogProps } from '@airpower/web'
 import { MoveEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<MoveEntity>())

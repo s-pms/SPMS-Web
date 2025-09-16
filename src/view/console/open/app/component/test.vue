@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ADialog, AFormField, AGroup, CryptoUtil, DialogProps, FeedbackUtil, RandomUtil } from '@airpower/web'
-import { computed, ref } from 'vue'
 import { OpenAppArithmeticEnum } from '@/model/open/app/OpenAppArithmeticEnum'
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { ADialog, AFormField, AGroup, CryptoUtil, DialogProps, FeedbackUtil, RandomUtil } from '@airpower/web'
+import { computed, ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam())
 
