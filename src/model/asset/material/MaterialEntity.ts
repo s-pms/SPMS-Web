@@ -1,8 +1,8 @@
 import type { IPayload } from '@airpower/web'
-import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { MaterialUseTypeEnum } from '@/model/asset/material/MaterialUseTypeEnum'
 import { UnitEntity } from '@/model/system/unit/UnitEntity'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { MaterialTypeEnum } from './MaterialTypeEnum'
 
 @Model({
@@ -82,7 +82,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
 
   @Table({
     payload: true,
-    width: 100,
+    width: 150,
   })
   @Form({
     requiredPayload: true,
@@ -92,6 +92,10 @@ export class MaterialEntity extends BaseEntity implements IPayload {
   })
   @Type(UnitEntity)
   unit!: UnitEntity
+
+  @Field({ label: '计量单位' })
+  @Search()
+  unitName?: string
 
   @Table({
     width: 150,

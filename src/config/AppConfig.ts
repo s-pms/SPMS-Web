@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
-import { ref } from 'vue'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { ref } from 'vue'
 
 /**
  * # 应用配置

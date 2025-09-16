@@ -1,5 +1,5 @@
-import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { InventoryEntity } from '../inventory/InventoryEntity'
 
 @Model({

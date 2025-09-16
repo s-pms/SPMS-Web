@@ -1,17 +1,14 @@
 <script lang="ts" setup>
 import type { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
-import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
-import { ElMessageBox } from 'element-plus'
-import useClipboard from 'vue-clipboard3'
 import { useMyTable } from '@/hook/useMyTable'
-
 import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { AButton, APanel, ATable, ClipboardUtil, DialogUtil, FeedbackUtil } from '@airpower/web'
+import { ElMessageBox } from 'element-plus'
 import { OpenAppEditor, OpenAppLog, OpenAppTest } from './component'
 
 const hook = useMyTable(OpenAppService, {
   editView: OpenAppEditor,
 })
-const { toClipboard } = useClipboard()
 
 async function onResetSecret(app: OpenAppEntity) {
   await ElMessageBox.confirm('重置密钥后，使用原密钥的应用将无法访问API服务，是否确认重置?', '确认重置AppSecret', {
@@ -28,7 +25,7 @@ async function onResetSecret(app: OpenAppEntity) {
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
-  await toClipboard(newSecret)
+  await ClipboardUtil.copy(newSecret)
   FeedbackUtil.toastSuccess('复制AppSecret成功')
   hook.onReloadData()
 }
@@ -48,7 +45,7 @@ async function onResetKeyPair(app: OpenAppEntity) {
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
-  await toClipboard(newSecret)
+  await ClipboardUtil.copy(newSecret)
   FeedbackUtil.toastSuccess('复制RSA公钥成功')
   hook.onReloadData()
 }
@@ -63,7 +60,7 @@ async function onAdd() {
     confirmButtonText: '复制并关闭',
     type: 'success',
   })
-  await toClipboard(appSecret)
+  await ClipboardUtil.copy(appSecret)
 }
 
 async function onTest() {

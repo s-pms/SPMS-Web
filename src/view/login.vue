@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { FeedbackUtil, RouterUtil, ValidateUtil, WebConfig } from '@airpower/web'
-import { ElMessageBox } from 'element-plus'
-import { computed, ref } from 'vue'
 import Copyright from '@/component/login/Copyright.vue'
 import Logo from '@/component/login/Logo.vue'
 import ThirdLogin from '@/component/login/ThirdLogin.vue'
@@ -10,6 +7,9 @@ import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenAppService } from '@/model/open/app/OpenAppService'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
+import { FeedbackUtil, RouterUtil, ValidateUtil, WebConfig } from '@airpower/web'
+import { ElMessageBox } from 'element-plus'
+import { computed, ref } from 'vue'
 
 /**
  * ### 是否二维码登录
@@ -169,7 +169,10 @@ getAppInfo()
       <div class="app-name">
         {{ appInfo.appName || '请先登录 SPMS!' }}
       </div>
-      <div class="tabs">
+      <div
+        v-if="false"
+        class="tabs"
+      >
         <div
           v-for="(item, index) in [
             LoginAction.LOGIN_VIA_PASSWORD,
@@ -327,7 +330,7 @@ getAppInfo()
           </div>
         </template>
       </div>
-      <ThirdLogin />
+      <ThirdLogin v-if="false" />
     </div>
     <Copyright />
   </div>
@@ -429,6 +432,7 @@ getAppInfo()
       width: 100%;
       padding: 10px 60px;
       flex: 1;
+      margin-top: 50px;
       height: 0;
 
       .form {

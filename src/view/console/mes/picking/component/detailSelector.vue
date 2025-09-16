@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
-import { ref } from 'vue'
-
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+
 import { PickingService } from '@/model/mes/picking/PickingService'
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
+import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<PickingDetailEntity, PickingEntity>())
 

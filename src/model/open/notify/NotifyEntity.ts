@@ -1,6 +1,6 @@
-import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '通知',

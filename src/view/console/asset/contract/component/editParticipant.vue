@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { WebValidateRule } from '@airpower/web'
 import type { FormInstance } from 'element-plus'
-import { ADialog, AFormField, DialogProps, WebValidator } from '@airpower/web'
-import { computed, ref } from 'vue'
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
 import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
+import { ADialog, AFormField, DialogProps, WebValidator } from '@airpower/web'
+import { computed, ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new ParticipantEntity()))
 
