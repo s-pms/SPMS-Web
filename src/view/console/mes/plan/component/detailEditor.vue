@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { FormInstance } from 'element-plus'
-import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
-import { ref } from 'vue'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanDetailService } from '@/model/mes/plan/PlanDetailService'
 import { MaterialSelector } from '@/view/console/asset/material/component'
+import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
+import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new PlanDetailEntity()))
 

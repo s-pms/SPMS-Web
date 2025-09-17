@@ -1,5 +1,12 @@
 <script lang="ts" setup>
 import type { ITree, QueryPage, RootEntity } from '@airpower/web'
+import { StorageEntity } from '@/model/factory/storage/StorageEntity'
+import { StorageService } from '@/model/factory/storage/StorageService'
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { StructureService } from '@/model/factory/structure/StructureService'
+import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
+import { InventoryService } from '@/model/wms/inventory/InventoryService'
+import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 import {
   APage,
   APanel,
@@ -11,13 +18,6 @@ import {
   QueryResponsePage,
 } from '@airpower/web'
 import { computed, ref } from 'vue'
-import { StorageEntity } from '@/model/factory/storage/StorageEntity'
-import { StorageService } from '@/model/factory/storage/StorageService'
-import { StructureEntity } from '@/model/factory/structure/StructureEntity'
-import { StructureService } from '@/model/factory/structure/StructureService'
-import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryService } from '@/model/wms/inventory/InventoryService'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 
 const request = ref(new QueryRequestPage(InventoryEntity))
 const response = ref<QueryResponsePage<InventoryEntity>>(new QueryResponsePage())

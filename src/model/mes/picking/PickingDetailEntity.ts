@@ -1,6 +1,6 @@
-import { Field, Form, Model, Table, Type } from '@airpower/web'
 import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
 
 @Model({
   label: '领料明细',

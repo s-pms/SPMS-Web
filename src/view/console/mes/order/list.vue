@@ -2,11 +2,12 @@
 import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
 
 import type { OrderEntity } from '@/model/mes/order/OrderEntity'
-import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { OrderService } from '@/model/mes/order/OrderService'
+
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
+import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { CustomerDetail } from '../../channel/customer/component'
 import { OrderDetail, OrderEditor, OrderFinishEditor } from './component'
 

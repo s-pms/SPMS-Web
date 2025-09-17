@@ -1,5 +1,5 @@
-import { Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
+import { Table } from '@airpower/web'
 
 /**
  * # 单据明细抽象基类

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ADialog, AFormField, AGroup, ATable, DialogProps, useDetail } from '@airpower/web'
-
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
+
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 

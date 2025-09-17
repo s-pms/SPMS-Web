@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
+
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
+import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PurchaseEntity()))
 
