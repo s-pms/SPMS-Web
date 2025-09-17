@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import {AlarmStatusEnum} from '@/model/asset/device/AlarmStatusEnum'
-import {DeviceEntity} from '@/model/asset/device/DeviceEntity'
-import {DeviceService} from '@/model/asset/device/DeviceService'
-import {DeviceStatusEnum} from '@/model/asset/device/DeviceStatusEnum'
-import {CollectionDefault} from '@/model/iot/collection/CollectionDefault'
-import type {CollectionEntity} from '@/model/iot/collection/CollectionEntity'
-import {ParameterEditor} from '@/view/console/iot/parameter/component'
+import type { CollectionEntity } from '@/model/iot/collection/CollectionEntity'
+import { ADialog, AEmpty, DialogProps, DialogUtil, WebColor } from '@airpower/web'
+import { onUnmounted, ref } from 'vue'
+import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
+import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
+import { DeviceService } from '@/model/asset/device/DeviceService'
+import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
 
-import {ADialog, AEmpty, DialogProps, DialogUtil, WebColor} from '@airpower/web'
-import {onUnmounted, ref} from 'vue'
-import {DeviceCollectHistory} from '.'
+import { CollectionDefault } from '@/model/iot/collection/CollectionDefault'
+import { ParameterEditor } from '@/view/console/iot/parameter/component'
+import { DeviceCollectHistory } from '.'
 
 const props = defineProps(DialogProps.withParam(new DeviceEntity()))
 

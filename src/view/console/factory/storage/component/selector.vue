@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import {StorageEntity} from '@/model/factory/storage/StorageEntity'
-import {StorageService} from '@/model/factory/storage/StorageService'
-import {ASelector, DialogProps} from '@airpower/web'
+import { ASelector, DialogProps } from '@airpower/web'
+import { StorageEntity } from '@/model/factory/storage/StorageEntity'
+import { StorageService } from '@/model/factory/storage/StorageService'
 
 const props = defineProps(DialogProps.withSelector(new StorageEntity()))
 </script>

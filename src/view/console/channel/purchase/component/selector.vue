@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import {PurchaseEntity} from '@/model/channel/purchase/PurchaseEntity'
-
-import {PurchaseService} from '@/model/channel/purchase/PurchaseService'
-import {PurchaseStatusEnum} from '@/model/channel/purchase/PurchaseStatusEnum'
-import {ASelector, DialogProps} from '@airpower/web'
-import {PurchaseEditor} from '.'
+import { ASelector, DialogProps } from '@airpower/web'
+import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
+import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
+import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
+import { PurchaseEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<PurchaseEntity>(new PurchaseEntity()))
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ADialog, AFormField, DialogProps, useEditor, WebValidator} from '@airpower/web'
+import { ADialog, AFormField, DialogProps, useEditor, WebValidator } from '@airpower/web'
 
 import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { RoleService } from '@/model/personnel/role/RoleService'

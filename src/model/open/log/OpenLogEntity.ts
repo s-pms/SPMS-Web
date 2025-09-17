@@ -1,6 +1,6 @@
-import {BaseEntity} from '@/base/BaseEntity'
-import {DateTimeFormatter, Field, Table, Type} from '@airpower/web'
-import {OpenAppEntity} from '../app/OpenAppEntity'
+import { DateTimeFormatter, Field, Table, Type } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
+import { OpenAppEntity } from '../app/OpenAppEntity'
 
 export class OpenLogEntity extends BaseEntity {
   @Type(OpenAppEntity)

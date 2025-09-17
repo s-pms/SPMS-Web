@@ -1,15 +1,15 @@
 <script lang="ts" setup>
+import { FeedbackUtil, RouterUtil, ValidateUtil, WebConfig } from '@airpower/web'
+import { ElMessageBox } from 'element-plus'
+import { computed, ref } from 'vue'
 import Copyright from '@/component/login/Copyright.vue'
 import Logo from '@/component/login/Logo.vue'
 import ThirdLogin from '@/component/login/ThirdLogin.vue'
-import {LoginAction} from '@/model/common/LoginAction'
-import {OpenAppEntity} from '@/model/open/app/OpenAppEntity'
-import {OpenAppService} from '@/model/open/app/OpenAppService'
-import {UserEntity} from '@/model/personnel/user/UserEntity'
-import {UserService} from '@/model/personnel/user/UserService'
-import {FeedbackUtil, RouterUtil, ValidateUtil, WebConfig} from '@airpower/web'
-import {ElMessageBox} from 'element-plus'
-import {computed, ref} from 'vue'
+import { LoginAction } from '@/model/common/LoginAction'
+import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
+import { OpenAppService } from '@/model/open/app/OpenAppService'
+import { UserEntity } from '@/model/personnel/user/UserEntity'
+import { UserService } from '@/model/personnel/user/UserService'
 
 /**
  * ### 是否二维码登录

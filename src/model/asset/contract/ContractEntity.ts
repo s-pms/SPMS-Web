@@ -1,11 +1,11 @@
-import {BaseEntity} from '@/base/BaseEntity'
-import {ContractStatusEnum} from '@/model/asset/contract/ContractStatusEnum'
-import {ContractDocumentEntity} from '@/model/asset/contract/document/ContractDocumentEntity'
-import {ParticipantEntity} from '@/model/asset/contract/participant/ParticipantEntity'
-import type {IPayload} from '@airpower/web'
-import {DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import type { IPayload } from '@airpower/web'
+import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
+import { ContractStatusEnum } from '@/model/asset/contract/ContractStatusEnum'
+import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
+import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
 
-import {ContractTypeEnum} from './ContractTypeEnum'
+import { ContractTypeEnum } from './ContractTypeEnum'
 
 @Model({
   label: '合同',

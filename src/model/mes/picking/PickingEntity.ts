@@ -1,9 +1,9 @@
-import {AbstractBaseBillEntity} from '@/base/bill/AbstractBaseBillEntity'
-import {StructureEntity} from '@/model/factory/structure/StructureEntity'
-import type {WebEnum} from '@airpower/web'
-import {Field, Form, Model, Table, Type} from '@airpower/web'
-import {PickingDetailEntity} from './PickingDetailEntity'
-import {PickingStatusEnum} from './PickingStatusEnum'
+import type { WebEnum } from '@airpower/web'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
+import { StructureEntity } from '@/model/factory/structure/StructureEntity'
+import { PickingDetailEntity } from './PickingDetailEntity'
+import { PickingStatusEnum } from './PickingStatusEnum'
 
 @Model({
   label: '领料单',

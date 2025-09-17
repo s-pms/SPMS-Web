@@ -1,5 +1,5 @@
-import {PublishStatusEnum} from '@/model/common/PublishStatusEnum'
-import {Field, Model, RootEntity, Search, Table} from '@airpower/web'
+import { Field, Model, RootEntity, Search, Table } from '@airpower/web'
+import { PublishStatusEnum } from '@/model/common/PublishStatusEnum'
 
 /**
  * # 数据库实体基类

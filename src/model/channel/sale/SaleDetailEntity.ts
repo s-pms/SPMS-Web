@@ -1,7 +1,7 @@
-import {AbstractBaseBillDetailEntity} from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import {MaterialEntity} from '@/model/asset/material/MaterialEntity'
-import {Field, Form, Model, Table, Type} from '@airpower/web'
-import {CustomerEntity} from '../customer/CustomerEntity'
+import { Field, Form, Model, Table, Type } from '@airpower/web'
+import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
+import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
+import { CustomerEntity } from '../customer/CustomerEntity'
 
 @Model({
   label: '销售明细',

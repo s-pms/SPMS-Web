@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor} from '@airpower/web'
+import { AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor } from '@airpower/web'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 
 import { UserService } from '@/model/personnel/user/UserService'

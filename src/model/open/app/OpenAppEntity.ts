@@ -1,7 +1,7 @@
-import {BaseEntity} from '@/base/BaseEntity'
-import {BooleanYesNoDictionary} from '@/model/common/BooleanYesNoDictionary'
-import {Field, Form, Model, Search, Table} from '@airpower/web'
-import {OpenAppArithmeticEnum} from './OpenAppArithmeticEnum'
+import { Field, Form, Model, Search, Table } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
+import { BooleanYesNoDictionary } from '@/model/common/BooleanYesNoDictionary'
+import { OpenAppArithmeticEnum } from './OpenAppArithmeticEnum'
 
 @Model({
   label: '应用',

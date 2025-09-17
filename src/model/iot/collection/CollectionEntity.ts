@@ -1,6 +1,6 @@
-import {BaseEntity} from '@/base/BaseEntity'
-import {Field, Form, Model, Table} from '@airpower/web'
-import {CollectionGranularityEnum} from './CollectionGranularityEnum'
+import { Field, Form, Model, Table } from '@airpower/web'
+import { BaseEntity } from '@/base/BaseEntity'
+import { CollectionGranularityEnum } from './CollectionGranularityEnum'
 
 @Model({
   label: '采集参数',

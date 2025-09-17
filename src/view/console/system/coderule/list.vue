@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import {useMyTable} from '@/hook/useMyTable'
-import type {CodeRuleEntity} from '@/model/system/coderule/CodeRuleEntity'
-import type {CodeRuleField} from '@/model/system/coderule/CodeRuleField'
-import type {CodeRuleParam} from '@/model/system/coderule/CodeRuleParam'
-import {CodeRuleService} from '@/model/system/coderule/CodeRuleService'
-import {CodeRuleEditor} from '@/view/console/system/coderule/component'
-import {APanel, ATable, DateTimeUtil} from '@airpower/web'
+import type { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
+import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
+import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
+import { APanel, ATable, DateTimeUtil } from '@airpower/web'
+import { ref } from 'vue'
+import { useMyTable } from '@/hook/useMyTable'
+import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
 
-import {ref} from 'vue'
+import { CodeRuleEditor } from '@/view/console/system/coderule/component'
 
 const hook = useMyTable(CodeRuleService, {
   editView: CodeRuleEditor,
