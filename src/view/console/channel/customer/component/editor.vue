@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-
-import { CustomerService } from '@/model/channel/customer/CustomerService'
 import { ADialog, AFormField, DialogProps, getFormConfigList, useEditor } from '@airpower/web'
+import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
+import { CustomerService } from '@/model/channel/customer/CustomerService'
 
 const props = defineProps(DialogProps.withParam(new CustomerEntity()))
 

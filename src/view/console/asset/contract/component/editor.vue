@@ -1,12 +1,4 @@
 <script lang="ts" setup>
-import { ContractEntity } from '@/model/asset/contract/ContractEntity'
-import { ContractService } from '@/model/asset/contract/ContractService'
-import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
-import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import { FileCategory } from '@/model/system/file/FileCategory'
-import { FileEntity } from '@/model/system/file/FileEntity'
-
-import { ContractParticipantEditor } from '@/view/console/asset/contract/component/index'
 import {
   AButton,
   ADialog,
@@ -21,6 +13,14 @@ import {
   useEditor,
   WebFileUtil,
 } from '@airpower/web'
+import { ContractEntity } from '@/model/asset/contract/ContractEntity'
+import { ContractService } from '@/model/asset/contract/ContractService'
+import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
+import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
+
+import { FileCategory } from '@/model/system/file/FileCategory'
+import { FileEntity } from '@/model/system/file/FileEntity'
+import { ContractParticipantEditor } from '@/view/console/asset/contract/component/index'
 
 const props = defineProps(DialogProps.withParam(new ContractEntity()))
 

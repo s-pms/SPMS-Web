@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
+
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
-
 import { InputEntity } from '@/model/wms/input/InputEntity'
-import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new InputEntity()))
 

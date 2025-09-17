@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, AGroup, ATab, ATable, ATabs, DialogProps, useDetail, WebFileUtil } from '@airpower/web'
 import { ContractEntity } from '@/model/asset/contract/ContractEntity'
+
 import { ContractService } from '@/model/asset/contract/ContractService'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
-
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-import { ADialog, AFormField, AGroup, ATab, ATable, ATabs, DialogProps, useDetail, WebFileUtil } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new ContractEntity()))
 

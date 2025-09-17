@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { CodeRuleField } from '@/model/system/coderule/CodeRuleField'
-import type { CodeRuleParam } from '@/model/system/coderule/CodeRuleParam'
-import { CodeRuleEntity } from '@/model/system/coderule/CodeRuleEntity'
-import { CodeRuleService } from '@/model/system/coderule/CodeRuleService'
+import {CodeRuleEntity} from '@/model/system/coderule/CodeRuleEntity'
+import type {CodeRuleField} from '@/model/system/coderule/CodeRuleField'
+import type {CodeRuleParam} from '@/model/system/coderule/CodeRuleParam'
+import {CodeRuleService} from '@/model/system/coderule/CodeRuleService'
 import {
   ADialog,
   AFormField,
@@ -15,7 +15,7 @@ import {
   useEditor,
   WebValidator,
 } from '@airpower/web'
-import { computed, ref } from 'vue'
+import {computed, ref} from 'vue'
 
 const props = defineProps(DialogProps.withParam(new CodeRuleEntity()))
 

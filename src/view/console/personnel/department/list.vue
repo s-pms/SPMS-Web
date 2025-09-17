@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { DepartmentService } from '@/model/personnel/department/DepartmentService'
-import { APanel, ATable, useTableTree } from '@airpower/web'
-import { DepartmentEditor } from './component'
+import {DepartmentService} from '@/model/personnel/department/DepartmentService'
+import {APanel, ATable, useTableTree} from '@airpower/web'
+import {DepartmentEditor} from './component'
 
 const hook = useTableTree(DepartmentService, {
   editView: DepartmentEditor,

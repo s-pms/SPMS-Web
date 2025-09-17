@@ -1,8 +1,8 @@
-import type { ITree } from '@airpower/web'
-import { BaseEntity } from '@/base/BaseEntity'
-import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
-import { PermissionSystemEnum } from './PermissionSystemEnum'
-import { PermissionTypeEnum } from './PermissionTypeEnum'
+import {BaseEntity} from '@/base/BaseEntity'
+import type {ITree} from '@airpower/web'
+import {Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import {PermissionSystemEnum} from './PermissionSystemEnum'
+import {PermissionTypeEnum} from './PermissionTypeEnum'
 
 /**
  * # 权限

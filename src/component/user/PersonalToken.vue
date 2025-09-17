@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
-import { UserService } from '@/model/personnel/user/UserService'
+import type {PersonalTokenEntity} from '@/model/personnel/user/token/PersonalTokenEntity'
+import {UserService} from '@/model/personnel/user/UserService'
+import {AButton, AEmpty, DateTimeFormatter, DialogProps, FeedbackUtil} from '@airpower/web'
+import {ElMessageBox} from 'element-plus'
 
-import { AButton, AEmpty, DateTimeFormatter, DialogProps, FeedbackUtil } from '@airpower/web'
-import { ElMessageBox } from 'element-plus'
-import { ref } from 'vue'
+import {ref} from 'vue'
 import useClipboard from 'vue-clipboard3'
 
 defineProps(DialogProps.create())

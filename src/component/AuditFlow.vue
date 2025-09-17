@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { UserEntity } from '@/model/personnel/user/UserEntity'
-import { UserSelector } from '@/view/console/personnel/user/component'
-import { DialogUtil, FeedbackUtil } from '@airpower/web'
-import { ref } from 'vue'
+import type {UserEntity} from '@/model/personnel/user/UserEntity'
+import {UserSelector} from '@/view/console/personnel/user/component'
+import {DialogUtil, FeedbackUtil} from '@airpower/web'
+import {ref} from 'vue'
 
 const props = defineProps({
   modelValue: {

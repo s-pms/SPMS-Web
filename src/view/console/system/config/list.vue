@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { Constant } from '@/config/Constant'
-import { useMyTable } from '@/hook/useMyTable'
-import { ConfigService } from '@/model/system/config/ConfigService'
-import { ConfigType } from '@/model/system/config/ConfigType'
+import {Constant} from '@/config/Constant'
+import {useMyTable} from '@/hook/useMyTable'
+import {ConfigService} from '@/model/system/config/ConfigService'
 
-import { ConfigurationEditor } from '@/view/console/system/config/component'
-import { AButton, APanel, ATable, FeedbackUtil } from '@airpower/web'
+import {ConfigType} from '@/model/system/config/ConfigType'
+import {ConfigurationEditor} from '@/view/console/system/config/component'
+import {AButton, APanel, ATable, FeedbackUtil} from '@airpower/web'
 
 const hook = useMyTable(ConfigService, {
   editView: ConfigurationEditor,

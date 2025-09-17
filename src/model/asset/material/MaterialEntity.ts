@@ -1,9 +1,9 @@
-import type { IPayload } from '@airpower/web'
-import { BaseEntity } from '@/base/BaseEntity'
-import { MaterialUseTypeEnum } from '@/model/asset/material/MaterialUseTypeEnum'
-import { UnitEntity } from '@/model/system/unit/UnitEntity'
-import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
-import { MaterialTypeEnum } from './MaterialTypeEnum'
+import {BaseEntity} from '@/base/BaseEntity'
+import {MaterialUseTypeEnum} from '@/model/asset/material/MaterialUseTypeEnum'
+import {UnitEntity} from '@/model/system/unit/UnitEntity'
+import type {IPayload} from '@airpower/web'
+import {Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import {MaterialTypeEnum} from './MaterialTypeEnum'
 
 @Model({
   label: '物料',

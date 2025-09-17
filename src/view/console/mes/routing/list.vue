@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import PublishButton from '@/component/PublishButton.vue'
-import { useMyTable } from '@/hook/useMyTable'
-import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
-import { RoutingEditor, RoutingProgress } from './component'
+import {useMyTable} from '@/hook/useMyTable'
+import type {RoutingEntity} from '@/model/mes/routing/RoutingEntity'
+import {RoutingService} from '@/model/mes/routing/RoutingService'
+import {AButton, APanel, ATable, DialogUtil} from '@airpower/web'
+import {RoutingEditor, RoutingProgress} from './component'
 
 const hook = useMyTable(RoutingService, {
   editView: RoutingEditor,

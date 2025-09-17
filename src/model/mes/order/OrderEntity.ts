@@ -1,13 +1,13 @@
-import type { WebEnum } from '@airpower/web'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
-import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
-import { PlanEntity } from '../plan/PlanEntity'
-import { OrderDetailEntity } from './OrderDetailEntity'
-import { OrderStatusEnum } from './OrderStatusEnum'
-import { OrderTypeEnum } from './OrderTypeEnum'
+import {AbstractBaseBillEntity} from '@/base/bill/AbstractBaseBillEntity'
+import {MaterialEntity} from '@/model/asset/material/MaterialEntity'
+import {CustomerEntity} from '@/model/channel/customer/CustomerEntity'
+import {RoutingEntity} from '@/model/mes/routing/RoutingEntity'
+import type {WebEnum} from '@airpower/web'
+import {DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type} from '@airpower/web'
+import {PlanEntity} from '../plan/PlanEntity'
+import {OrderDetailEntity} from './OrderDetailEntity'
+import {OrderStatusEnum} from './OrderStatusEnum'
+import {OrderTypeEnum} from './OrderTypeEnum'
 
 @Model({
   label: '生产订单',

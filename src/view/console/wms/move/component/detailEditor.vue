@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { FormInstance } from 'element-plus'
-import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
-import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
 import { ADialog, AInput, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
+import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
+import { MoveDetailService } from '@/model/wms/move/MoveDetailService'
 
 const props = defineProps(DialogProps.withParam(new MoveDetailEntity()))
 const formData = ref(props.param.copy())

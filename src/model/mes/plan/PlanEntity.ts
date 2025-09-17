@@ -1,10 +1,10 @@
-import type { WebEnum } from '@airpower/web'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
-import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Table, Type } from '@airpower/web'
-import { PlanDetailEntity } from './PlanDetailEntity'
-import { PlanStatusEnum } from './PlanStatusEnum'
-import { PlanTypeEnum } from './PlanTypeEnum'
+import {AbstractBaseBillEntity} from '@/base/bill/AbstractBaseBillEntity'
+import {CustomerEntity} from '@/model/channel/customer/CustomerEntity'
+import type {WebEnum} from '@airpower/web'
+import {DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Table, Type} from '@airpower/web'
+import {PlanDetailEntity} from './PlanDetailEntity'
+import {PlanStatusEnum} from './PlanStatusEnum'
+import {PlanTypeEnum} from './PlanTypeEnum'
 
 @Model({
   label: '生产计划',

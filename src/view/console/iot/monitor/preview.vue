@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { AlarmStatusEnum } from '@/model/asset/device/AlarmStatusEnum'
-import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
-import { DeviceService } from '@/model/asset/device/DeviceService'
-import { DeviceStatusEnum } from '@/model/asset/device/DeviceStatusEnum'
-import { AEmpty, AGroup, APanel, DialogUtil, QueryRequest, WebColor } from '@airpower/web'
-import { onUnmounted, ref } from 'vue'
-import { DeviceMonitor } from '../../asset/device/component'
+import {AlarmStatusEnum} from '@/model/asset/device/AlarmStatusEnum'
+import {DeviceEntity} from '@/model/asset/device/DeviceEntity'
+import {DeviceService} from '@/model/asset/device/DeviceService'
+import {DeviceStatusEnum} from '@/model/asset/device/DeviceStatusEnum'
+import {AEmpty, AGroup, APanel, DialogUtil, QueryRequest, WebColor} from '@airpower/web'
+import {onUnmounted, ref} from 'vue'
+import {DeviceMonitor} from '../../asset/device/component'
 
 const deviceList = ref<DeviceEntity[]>([])
 

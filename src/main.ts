@@ -1,10 +1,10 @@
 import App from '@/App.vue'
-import { routes } from '@/config/routes'
-import { RouterUtil, WebConfig } from '@airpower/web'
+import {routes} from '@/config/routes'
+import '@airpower/web/dist/web.css'
+import {RouterUtil, WebConfig} from '@airpower/web'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import { createApp } from 'vue'
-import '@airpower/web/dist/web.css'
+import {createApp} from 'vue'
 import '@/assets/css/main.scss'
 
 WebConfig.elementPlusLocale = zhCn
