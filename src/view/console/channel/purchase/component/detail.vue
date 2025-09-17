@@ -2,9 +2,9 @@
 import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
+
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
-
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
 
@@ -56,18 +56,6 @@ const {
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material?.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material?.name }}
-          </template>
-          <template #supplierCode="{ data }">
-            {{ data.supplier?.code }}
-          </template>
-          <template #supplierName="{ data }">
-            {{ data.supplier?.name }}
-          </template>
           <template #endRow="{ data }">
             <AButton
               :disabled="!PurchaseStatusEnum.PURCHASING.equalsKey(formData.status)"

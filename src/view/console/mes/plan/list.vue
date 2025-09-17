@@ -21,12 +21,6 @@ const hook = useBillTable(PlanService, {
       hide-delete
       show-detail
     >
-      <template #customerCode="{ data }">
-        {{ data.customer?.code || '-' }}
-      </template>
-      <template #customerName="{ data }">
-        {{ data.customer?.name || '-' }}
-      </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
           :bill="data"

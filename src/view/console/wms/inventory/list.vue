@@ -137,21 +137,6 @@ inventoryTypeChanged()
             </el-radio-button>
           </el-radio-group>
         </template>
-        <template #materialCode="{ data }">
-          {{ data.material.code }}
-        </template>
-        <template #materialName="{ data }">
-          {{ data.material.name }}
-        </template>
-        <template #storageName="{ data }">
-          {{ data.storage?.name }}({{ data.storage?.code }})
-        </template>
-        <template #structureName="{ data }">
-          {{ data.structure?.name }}({{ data.structure?.code }})
-        </template>
-        <template #unitName="{ data }">
-          {{ data.material.unit.name }}
-        </template>
         <template #beforePage>
           <APage
             :response="response"

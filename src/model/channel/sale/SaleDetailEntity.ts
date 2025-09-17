@@ -13,13 +13,17 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   @Type(MaterialEntity)
   material!: MaterialEntity
 
-  @Table()
+  @Table({
+    formatter: row => row.material.code,
+  })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.material.name,
+  })
   @Field({
     label: '物料名称',
   })
@@ -30,7 +34,6 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Field({
     label: '物料',
-    type: Number,
   })
   materialId!: number
 
@@ -45,7 +48,6 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Field({
     label: '销售单价',
-    type: Number,
   })
   price!: number
 
@@ -60,12 +62,12 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
   })
   @Field({
     label: '销售数量',
-    type: Number,
   })
   quantity!: number
 
-  @Field({
-    type: Number,
+  @Field()
+  @Form({
+    number: true,
   })
   finishQuantity!: number
 

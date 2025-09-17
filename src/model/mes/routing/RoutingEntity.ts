@@ -51,6 +51,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Table({
     copy: true,
     order: 77,
+    formatter: row => row.material.code,
   })
   @Field({
     label: '物料编码',
@@ -59,6 +60,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
 
   @Table({
     order: 66,
+    formatter: row => row.material.name,
   })
   @Field({
     label: '物料名称',
@@ -74,6 +76,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
   @Table({
     copy: true,
     order: 55,
+    formatter: row => row.bom?.code || '-',
   })
   @Field({
     label: '配方编码',
@@ -82,6 +85,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
 
   @Table({
     order: 44,
+    formatter: row => row.bom?.name || '-',
   })
   @Field({
     label: '配方名称',

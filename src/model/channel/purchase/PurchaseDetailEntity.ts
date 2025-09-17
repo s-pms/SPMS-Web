@@ -20,25 +20,33 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
   @Type(SupplierEntity)
   supplier!: SupplierEntity
 
-  @Table()
+  @Table({
+    formatter: row => row.material.code,
+  })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.material.name,
+  })
   @Field({
     label: '物料名称',
   })
   materialName!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.supplier?.name || '-',
+  })
   @Field({
     label: '供应商名称',
   })
   supplierName!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.supplier?.code || '-',
+  })
   @Field({
     label: '供应商编码',
   })

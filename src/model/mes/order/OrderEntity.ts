@@ -27,6 +27,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Table({
     copy: true,
     order: 88,
+    formatter: row => row.material.code,
   })
   @Field({
     label: '物料编码',
@@ -35,6 +36,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
 
   @Table({
     order: 77,
+    formatter: row => row.material.name,
   })
   @Field({
     label: '物料名称',
@@ -87,6 +89,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Table({
     copy: true,
     hide: true,
+    formatter: row => row.plan?.billCode || '-',
   })
   @Field({
     label: '生产计划号',

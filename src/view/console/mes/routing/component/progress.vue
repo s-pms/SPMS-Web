@@ -208,14 +208,7 @@ function onDeleteRoutingOperation(index: number) {
               :entity="BomDetailEntity"
               hide-delete
               hide-edit
-            >
-              <template #materialCode="{ data }">
-                {{ data.material.code }}
-              </template>
-              <template #materialName="{ data }">
-                {{ data.material.name }}
-              </template>
-            </ATable>
+            />
           </AGroup>
         </div>
       </div>

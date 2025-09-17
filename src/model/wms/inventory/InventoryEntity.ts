@@ -11,13 +11,17 @@ import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
 export class InventoryEntity extends BaseEntity {
   @Table({
     force: true,
+    formatter: row => row.material.code,
   })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
-  @Table({ force: true })
+  @Table({
+    force: true,
+    formatter: row => row.material.name,
+  })
   @Field({
     label: '物料名称',
   })
@@ -37,6 +41,7 @@ export class InventoryEntity extends BaseEntity {
   @Table({
     width: 100,
     order: -3,
+    formatter: row => row.material.unit.name,
   })
   @Field({
     label: '计量单位',
@@ -49,13 +54,17 @@ export class InventoryEntity extends BaseEntity {
   @Type(StorageEntity)
   storage!: StorageEntity
 
-  @Table()
+  @Table({
+    formatter: row => `${row.storage?.name || '-'}(${row.storage?.code || '-'})`,
+  })
   @Field({
     label: '仓库',
   })
   storageName!: string
 
-  @Table()
+  @Table({
+    formatter: row => `${row.structure?.name || '-'}(${row.structure?.code || '-'})`,
+  })
   @Field({
     label: '生产单元',
   })

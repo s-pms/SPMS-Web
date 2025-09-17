@@ -21,9 +21,6 @@ const hook = useBillTable(InputService, {
       hide-delete
       show-detail
     >
-      <template #storageName="{ data }">
-        {{ data.storage?.name || '-' }}({{ data.storage?.code || '-' }})
-      </template>
       <template #customRow="{ data }">
         <BillAuditOrReject
           :bill="data"

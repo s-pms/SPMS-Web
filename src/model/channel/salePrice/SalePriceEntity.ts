@@ -19,25 +19,33 @@ export class SalePriceEntity extends BaseEntity {
   @Type(CustomerEntity)
   customer!: CustomerEntity
 
-  @Table()
+  @Table({
+    formatter: row => row.material.code,
+  })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.material.name,
+  })
   @Field({
     label: '物料名称',
   })
   materialName!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer.code,
+  })
   @Field({
     label: '客户编码',
   })
   customerName!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer.name,
+  })
   @Field({
     label: '客户名称',
   })

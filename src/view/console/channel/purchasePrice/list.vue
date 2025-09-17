@@ -19,18 +19,6 @@ const hook = useMyTable(PurchasePriceService, {
           :view="SupplierDetail"
         />
       </template>
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
-      <template #supplierCode="{ data }">
-        {{ data.supplier.code }}
-      </template>
-      <template #supplierName="{ data }">
-        {{ data.supplier.name }}
-      </template>
     </ATable>
   </APanel>
 </template>

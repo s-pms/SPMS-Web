@@ -13,20 +13,7 @@ const hook = useMyTable(SalePriceService, {
   <APanel>
     <ATable
       :use-hook="hook"
-    >
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
-      <template #customerCode="{ data }">
-        {{ data.customer.code }}
-      </template>
-      <template #customerName="{ data }">
-        {{ data.customer.name }}
-      </template>
-    </ATable>
+    />
   </APanel>
 </template>
 

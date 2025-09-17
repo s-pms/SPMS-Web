@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+import {BillFormCode, BillFormMoreDetail} from '@/component'
+import {useBillDetail} from '@/hook/billTable/useBillDetail'
+import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
+import {OutputEntity} from '@/model/wms/output/OutputEntity'
+import {OutputService} from '@/model/wms/output/OutputService'
+import {OutputStatusEnum} from '@/model/wms/output/OutputStatusEnum'
+import {OutputTypeEnum} from '@/model/wms/output/OutputTypeEnum'
+
+import {SaleDetail} from '@/view/console/channel/sale/component'
+import {PickingDetail} from '@/view/console/mes/picking/component'
 import {
   AButton,
   ADialog,
@@ -10,18 +20,8 @@ import {
   FeedbackUtil,
   getTableConfigList,
 } from '@airpower/web'
-import { BillFormCode, BillFormMoreDetail } from '@/component'
-import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { OutputEntity } from '@/model/wms/output/OutputEntity'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { OutputStatusEnum } from '@/model/wms/output/OutputStatusEnum'
-import { OutputTypeEnum } from '@/model/wms/output/OutputTypeEnum'
-
-import { SaleDetail } from '@/view/console/channel/sale/component'
-import { PickingDetail } from '@/view/console/mes/picking/component'
-import { OutputAddFinishEditor } from '.'
-import { MoveDetail } from '../../move/component'
+import {OutputAddFinishEditor} from '.'
+import {MoveDetail} from '../../move/component'
 
 const props = defineProps(DialogProps.withParam(new OutputEntity()))
 
@@ -45,76 +45,70 @@ async function onAddFinish(detail: OutputDetailEntity, billId: number) {
 
 <template>
   <ADialog
-    :loading="isLoading"
-    height="80%"
-    title="出库单详情"
-    width="80%"
-    @cancel="onCancel"
-    @confirm="onConfirm"
+      :loading="isLoading"
+      height="80%"
+      title="出库单详情"
+      width="80%"
+      @cancel="onCancel"
+      @confirm="onConfirm"
   >
     <el-form
-      label-width="120px"
-      @submit.prevent
+        label-width="120px"
+        @submit.prevent
     >
       <AGroup
-        :column="3"
-        title="出库单"
+          :column="3"
+          title="出库单"
       >
-        <BillFormCode :bill="formData" />
+        <BillFormCode :bill="formData"/>
         <AFormField
-          disabled
-          field="type"
+            disabled
+            field="type"
         />
         <el-form-item
-          v-if="OutputTypeEnum.SALE.equalsKey(formData.type)"
-          label="销售单号"
+            v-if="OutputTypeEnum.SALE.equalsKey(formData.type)"
+            label="销售单号"
         >
           <el-link @click="DialogUtil.show(SaleDetail, formData.sale)">
             {{ formData.sale.billCode }}
           </el-link>
         </el-form-item>
         <el-form-item
-          v-if="OutputTypeEnum.MOVE.equalsKey(formData.type)"
-          label="移库单号"
+            v-if="OutputTypeEnum.MOVE.equalsKey(formData.type)"
+            label="移库单号"
         >
           <el-link @click="DialogUtil.show(MoveDetail, formData.move)">
             {{ formData.move.billCode }}
           </el-link>
         </el-form-item>
         <el-form-item
-          v-if="OutputTypeEnum.PICKING.equalsKey(formData.type)"
-          label="领料单号"
+            v-if="OutputTypeEnum.PICKING.equalsKey(formData.type)"
+            label="领料单号"
         >
           <el-link @click="DialogUtil.show(PickingDetail, formData.picking)">
             {{ formData.picking.billCode }}
           </el-link>
         </el-form-item>
       </AGroup>
-      <BillFormMoreDetail :bill="formData" />
+      <BillFormMoreDetail :bill="formData"/>
       <AGroup title="出库明细">
         <ATable
-          :column-list="getTableConfigList(OutputDetailEntity).filter(
+            :column-list="getTableConfigList(OutputDetailEntity).filter(
             (item) => !['createTime'].includes(item.key),
           )
           "
-          :data-list="formData.details"
-          :entity="OutputDetailEntity"
-          hide-add
-          hide-delete
-          hide-edit
+            :data-list="formData.details"
+            :entity="OutputDetailEntity"
+            hide-add
+            hide-delete
+            hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
           <template #endRow="{ data }">
             <AButton
-              :disabled="!OutputStatusEnum.OUTPUTTING.equalsKey(formData.status)
+                :disabled="!OutputStatusEnum.OUTPUTTING.equalsKey(formData.status)
               "
-              link
-              @click="onAddFinish(data, formData.id)"
+                link
+                @click="onAddFinish(data, formData.id)"
             >
               作业
             </AButton>

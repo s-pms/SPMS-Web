@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ADateTime, ADialog, AFormField, AGroup, ASelect, ATable, DialogProps, useDetail } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
+
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-
 import { PlanService } from '@/model/mes/plan/PlanService'
 import { CustomerSelector } from '@/view/console/channel/customer/component'
 
@@ -67,14 +67,7 @@ const {
           ctrl-width="60"
           hide-add
           hide-ctrl
-        >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
-        </ATable>
+        />
       </AGroup>
     </el-form>
   </ADialog>

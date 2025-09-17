@@ -12,7 +12,10 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
   @Type(MaterialEntity)
   material!: MaterialEntity
 
-  @Table({ force: true })
+  @Table({
+    force: true,
+    formatter: row => row.material.code,
+  })
   @Field({
     label: '物料编码',
   })
@@ -20,6 +23,7 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     force: true,
+    formatter: row => row.material.name,
   })
   @Field({
     label: '物料名称',

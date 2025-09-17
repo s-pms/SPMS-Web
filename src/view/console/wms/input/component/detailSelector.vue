@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
-
 import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
@@ -50,12 +49,6 @@ getInput()
       hide-edit
       @selected="onSelected"
     >
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
       <template
         v-if="!isMultiple"
         #customRow="{ data }"

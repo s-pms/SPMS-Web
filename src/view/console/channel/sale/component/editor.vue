@@ -13,8 +13,8 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
-import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 
+import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 import { SaleDetailEditor } from '.'
@@ -96,18 +96,12 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="销售明细">
         <ATable
+          :column-list="getTableConfigList(SaleDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           :data-list="formData.details"
           :entity="SaleDetailEntity"
-          :column-list="getTableConfigList(SaleDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
           <template #addButton>
             <AButton
               icon="ADD"

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ASelector, DialogProps } from '@airpower/web'
+
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
-
 import { SaleStatusEnum } from '@/model/channel/sale/SaleStatusEnum'
 import { SaleEditor } from '.'
 
@@ -21,14 +21,7 @@ const props = defineProps(DialogProps.withSelector<SaleEntity>())
     :entity="SaleEntity"
     :props="props"
     :service="SaleService"
-  >
-    <template #customerCode="{ data }">
-      {{ data.customer?.code || '-' }}
-    </template>
-    <template #customerName="{ data }">
-      {{ data.customer?.name || '-' }}
-    </template>
-  </ASelector>
+  />
 </template>
 
 <style lang="scss" scoped></style>

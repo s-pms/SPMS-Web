@@ -15,13 +15,17 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   })
   declare billCode: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer?.code || '-',
+  })
   @Field({
     label: '客户编码',
   })
   customerCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer?.name || '-',
+  })
   @Field({
     label: '客户名称',
   })

@@ -6,9 +6,9 @@ import { InputDetailEntity } from '@/model/wms/input/InputDetailEntity'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { InputService } from '@/model/wms/input/InputService'
 import { InputStatusEnum } from '@/model/wms/input/InputStatusEnum'
+
 import { InputTypeEnum } from '@/model/wms/input/InputTypeEnum'
 import { PurchaseDetail } from '@/view/console/channel/purchase/component'
-
 import { OrderDetail } from '@/view/console/mes/order/component'
 import { InputAddFinishEditor } from '.'
 import { MoveDetail } from '../../move/component'
@@ -90,12 +90,6 @@ async function onAddFinish(detail: InputDetailEntity) {
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
           <template #endRow="{ data }">
             <AButton
               :disabled="!InputStatusEnum.INPUTTING.equalsKey(formData.status)"

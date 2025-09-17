@@ -14,7 +14,9 @@ export class MoveEntity extends AbstractBaseBillEntity<MoveDetailEntity> {
   })
   declare billCode: string
 
-  @Table()
+  @Table({
+    formatter: row => `${row.storage.name}(${row.storage.code})`,
+  })
   @Field({
     label: '目标仓库',
   })

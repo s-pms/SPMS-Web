@@ -11,12 +11,9 @@ const hook = useMyTable(NotifyService, {
 })
 
 const sceneList = ref<IWebEnum[]>([])
-
-async function init() {
-  sceneList.value = await NotifyService.create().getSceneList()
-}
-
-init()
+NotifyService.create().getSceneList().then((list) => {
+  sceneList.value = list
+})
 </script>
 
 <template>

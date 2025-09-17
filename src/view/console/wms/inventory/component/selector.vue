@@ -109,18 +109,6 @@ inventoryTypeChanged()
         hide-edit
         @selected="onConfirm"
       >
-        <template #materialCode="{ data }">
-          {{ data.material.code }}
-        </template>
-        <template #materialName="{ data }">
-          {{ data.material.name }}
-        </template>
-        <template #storageName="{ data }">
-          {{ data.storage.name }}({{ data.storage.code }})
-        </template>
-        <template #unitName="{ data }">
-          {{ data.material.unit.name }}
-        </template>
         <template
           v-if="!isMultiple"
           #customRow="{ data }"

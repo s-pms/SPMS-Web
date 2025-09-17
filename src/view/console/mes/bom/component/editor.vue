@@ -12,10 +12,10 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
+
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomService } from '@/model/mes/bom/BomService'
-
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 import { InputEntity } from '@/model/wms/input/InputEntity'
 import { BomDetailEditor } from '.'
@@ -82,19 +82,13 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="配方物料清单">
         <ATable
+          :column-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           :data-list="formData.details"
           :entity="BomDetailEntity"
-          :column-list="getTableConfigList(BomDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           ctrl-width="80"
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
           <template #addButton>
             <AButton
               icon="ADD"

@@ -2,10 +2,10 @@
 import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
+
 import { MoveDetailEntity } from '@/model/wms/move/MoveDetailEntity'
 import { MoveEntity } from '@/model/wms/move/MoveEntity'
 import { MoveService } from '@/model/wms/move/MoveService'
-
 import { MoveStatusEnum } from '@/model/wms/move/MoveStatusEnum'
 
 const props = defineProps(DialogProps.withParam(new MoveEntity()))
@@ -55,15 +55,6 @@ const {
           hide-delete
           hide-edit
         >
-          <template #storageName="{ data }">
-            {{ data.inventory.storage.name }}({{ data.inventory.storage.code }})
-          </template>
-          <template #materialCode="{ data }">
-            {{ data.inventory.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.inventory.material.name }}
-          </template>
           <template #endRow="{ data }">
             <AButton
               :disabled="!MoveStatusEnum.MOVING.equalsKey(formData.status)"

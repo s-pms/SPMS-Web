@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
+
 import type { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
-
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderStatusEnum } from '@/model/mes/order/OrderStatusEnum'
 import { CustomerDetail } from '../../channel/customer/component'
@@ -64,18 +64,6 @@ async function onStartOrPause(order: OrderEntity) {
         <template v-else>
           -
         </template>
-      </template>
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
-      <template #planBillCode="{ data }">
-        {{ data.plan?.billCode || '-' }}
-      </template>
-      <template #moreButton>
-        123
       </template>
       <template #customRow="{ data }">
         <template v-if="OrderStatusEnum.AUDITING.equalsKey(data.status)">

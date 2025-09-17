@@ -14,7 +14,6 @@ import {
   useEditor,
 } from '@airpower/web'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
-
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseDetailEditor } from '.'
@@ -81,26 +80,14 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="采购明细">
         <ATable
-          :data-list="formData.details"
-          :entity="PurchaseDetailEntity"
           :column-list="
             getTableConfigList(PurchaseDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
+          :data-list="formData.details"
+          :entity="PurchaseDetailEntity"
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
-          <template #supplierCode="{ data }">
-            {{ data.supplier.code }}
-          </template>
-          <template #supplierName="{ data }">
-            {{ data.supplier.name }}
-          </template>
           <template #addButton>
             <AButton
               icon="ADD"

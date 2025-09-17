@@ -12,13 +12,17 @@ export class PickingDetailEntity extends AbstractBaseBillDetailEntity {
   @Type(MaterialEntity)
   material!: MaterialEntity
 
-  @Table()
+  @Table({
+    formatter: row => row.material?.code || '-',
+  })
   @Field({
     label: '物料编码',
   })
   materialCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.material?.name || '-',
+  })
   @Field({
     label: '物料名称',
   })
