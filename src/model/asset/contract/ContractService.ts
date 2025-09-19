@@ -7,10 +7,10 @@ export class ContractService extends AbstractBaseService<ContractEntity> {
   baseUrl = 'contract'
 
   async enforce(contract: ContractEntity) {
-    return this.api('enforce').request(contract)
+    await this.api('enforce').request(contract)
   }
 
   async stop(contract: ContractEntity) {
-    return this.api('stop').request(contract)
+    await this.api('stop').request(contract)
   }
 }

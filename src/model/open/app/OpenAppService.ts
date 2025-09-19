@@ -21,7 +21,7 @@ export class OpenAppService extends AbstractBaseService<OpenAppEntity> {
    * @param app 应用
    */
   async resetSecret(app: OpenAppEntity): Promise<string> {
-    const result = await this.api('resetSecret').request(app)
+    const result = await this.api('resetSecret').requestRaw(app)
     return result as unknown as string
   }
 
@@ -30,7 +30,7 @@ export class OpenAppService extends AbstractBaseService<OpenAppEntity> {
    * @param app 应用
    */
   async addAndGetSecret(app: OpenAppEntity): Promise<string> {
-    const result = await this.api('add').request(app)
+    const result = await this.api('add').requestRaw(app)
     return result as unknown as string
   }
 
@@ -39,7 +39,7 @@ export class OpenAppService extends AbstractBaseService<OpenAppEntity> {
    * @param app 应用
    */
   async resetKeyPair(app: OpenAppEntity) {
-    const result = await this.api('resetKeyPair').request(app)
+    const result = await this.api('resetKeyPair').requestRaw(app)
     return result as unknown as string
   }
 }
