@@ -5,7 +5,6 @@ export class McpToolService extends AbstractService {
   baseUrl = 'mcp'
 
   async getMcpTools(): Promise<McpToolModel[]> {
-    const json = await this.api('getMcpTools').requestRaw()
-    return McpToolModel.fromJsonArray(json)
+    return this.api('getMcpTools').requestModelList(undefined, McpToolModel)
   }
 }
