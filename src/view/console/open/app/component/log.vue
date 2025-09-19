@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
-
+import { ADialog, ATable, DialogProps, DialogUtil } from '@airpower/web'
 import { useMyTable } from '@/hook/useMyTable'
+
 import { OpenAppEntity } from '@/model/open/app/OpenAppEntity'
 import { OpenLogService } from '@/model/open/log/OpenLogService'
-import { ADialog, ATable, DialogProps, DialogUtil } from '@airpower/web'
 import { OpenAppLogDetail } from './index'
 
 const props = defineProps(DialogProps.withParam(new OpenAppEntity()))

@@ -1,9 +1,9 @@
 import type { WebEnum } from '@airpower/web'
+import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
-import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { PlanEntity } from '../plan/PlanEntity'
 import { OrderDetailEntity } from './OrderDetailEntity'
 import { OrderStatusEnum } from './OrderStatusEnum'
@@ -27,6 +27,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Table({
     copy: true,
     order: 88,
+    formatter: row => row.material.code,
   })
   @Field({
     label: '物料编码',
@@ -35,6 +36,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
 
   @Table({
     order: 77,
+    formatter: row => row.material.name,
   })
   @Field({
     label: '物料名称',
@@ -87,6 +89,7 @@ export class OrderEntity extends AbstractBaseBillEntity<OrderDetailEntity> {
   @Table({
     copy: true,
     hide: true,
+    formatter: row => row.plan?.billCode || '-',
   })
   @Field({
     label: '生产计划号',

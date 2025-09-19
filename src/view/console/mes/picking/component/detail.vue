@@ -1,12 +1,13 @@
 <script lang="ts" setup>
+import { ADialog, AGroup, ASelect, ATable, DialogProps, getFieldLabel } from '@airpower/web'
+
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
+
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
-
 import { StructureSelector } from '@/view/console/factory/structure/component'
-import { ADialog, AGroup, ASelect, ATable, DialogProps, getFieldLabel } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new PickingEntity()))
 
@@ -54,14 +55,7 @@ const {
           :entity="PickingDetailEntity"
           hide-add
           hide-ctrl
-        >
-          <template #materialCode="{ data }">
-            {{ data.material?.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material?.name }}
-          </template>
-        </ATable>
+        />
       </AGroup>
     </el-form>
   </ADialog>

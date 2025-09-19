@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
-import { PickingEntity } from '@/model/mes/picking/PickingEntity'
-
-import { PickingService } from '@/model/mes/picking/PickingService'
 import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
+
+import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { PickingService } from '@/model/mes/picking/PickingService'
 
 const props = defineProps(DialogProps.withSelector<PickingDetailEntity, PickingEntity>())
 
@@ -50,12 +50,6 @@ getDetail()
       hide-edit
       @selected="onSelected"
     >
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
       <template
         v-if="!isMultiple"
         #customRow="{ data }"

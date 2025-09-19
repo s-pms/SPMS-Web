@@ -1,7 +1,7 @@
 import type { WebEnum } from '@airpower/web'
+import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Table, Type } from '@airpower/web'
 import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
-import { DateTimeFormatter, DateTimeType, DateTimeUtil, Field, Form, Model, Table, Type } from '@airpower/web'
 import { PlanDetailEntity } from './PlanDetailEntity'
 import { PlanStatusEnum } from './PlanStatusEnum'
 import { PlanTypeEnum } from './PlanTypeEnum'
@@ -15,13 +15,17 @@ export class PlanEntity extends AbstractBaseBillEntity<PlanDetailEntity> {
   })
   declare billCode: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer?.code || '-',
+  })
   @Field({
     label: '客户编码',
   })
   customerCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer?.name || '-',
+  })
   @Field({
     label: '客户名称',
   })

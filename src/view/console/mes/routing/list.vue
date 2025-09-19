@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
+import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import PublishButton from '@/component/PublishButton.vue'
 import { useMyTable } from '@/hook/useMyTable'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
-import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import { RoutingEditor, RoutingProgress } from './component'
 
 const hook = useMyTable(RoutingService, {
@@ -23,18 +23,6 @@ async function onProgress(data: RoutingEntity) {
       :use-hook="hook"
       ctrl-width="160"
     >
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
-      <template #bomCode="{ data }">
-        {{ data.bom?.code || '-' }}
-      </template>
-      <template #bomName="{ data }">
-        {{ data.bom?.name || '-' }}
-      </template>
       <template #customRow="{ data }">
         <PublishButton
           :data

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
+import { ref } from 'vue'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialTypeEnum } from '@/model/asset/material/MaterialTypeEnum'
+
 import { BomEntity } from '@/model/mes/bom/BomEntity'
 import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { RoutingService } from '@/model/mes/routing/RoutingService'
-
 import { MaterialSelector } from '@/view/console/asset/material/component'
 import { BomSelector } from '@/view/console/mes/bom/component'
-import { ADialog, AFormField, ASelect, DialogProps, useEditor } from '@airpower/web'
-import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withParam(new RoutingEntity()))
 

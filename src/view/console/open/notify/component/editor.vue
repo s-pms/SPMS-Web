@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import type { IEnum } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
+import { ref } from 'vue'
 import { NotifyChannelEnum } from '@/model/open/notify/NotifyChannelEnum'
 import { NotifyEntity } from '@/model/open/notify/NotifyEntity'
-import { NotifyService } from '@/model/open/notify/NotifyService'
-import { ADialog, AFormField, DialogProps, useEditor } from '@airpower/web'
 
-import { ref } from 'vue'
+import { NotifyService } from '@/model/open/notify/NotifyService'
 
 const props = defineProps(DialogProps.withParam(new NotifyEntity()))
 

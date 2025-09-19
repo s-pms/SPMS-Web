@@ -1,8 +1,8 @@
+import { Field, Form, Model, Search, Table } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantRoleEnum } from '@/model/asset/contract/participant/ParticipantRoleEnum'
 import { ParticipantTypeEnum } from '@/model/asset/contract/participant/ParticipantTypeEnum'
-import { Field, Form, Model, Search, Table } from '@airpower/web'
 
 @Model({
   label: '参与方',

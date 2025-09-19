@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-
-import { PlanService } from '@/model/mes/plan/PlanService'
 import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
+
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
 
 const props = defineProps(DialogProps.withSelector<PlanDetailEntity, PlanEntity>())
 
@@ -50,12 +50,6 @@ getPlan()
       hide-edit
       @selected="onSelected"
     >
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
       <template
         v-if="!isMultiple"
         #customRow="{ data }"

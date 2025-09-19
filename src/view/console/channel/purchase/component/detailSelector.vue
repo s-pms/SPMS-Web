@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
+import { ref } from 'vue'
 import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
-import { AButton, ADialog, ATable, DialogProps } from '@airpower/web'
-import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<PurchaseDetailEntity, PurchaseEntity>())
 
@@ -50,12 +50,6 @@ getDetail()
       hide-edit
       @selected="onSelected"
     >
-      <template #materialCode="{ data }">
-        {{ data.material.code }}
-      </template>
-      <template #materialName="{ data }">
-        {{ data.material.name }}
-      </template>
       <template
         v-if="!isMultiple"
         #customRow="{ data }"

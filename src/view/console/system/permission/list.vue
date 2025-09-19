@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { PermissionEntity } from '@/model/system/permission/PermissionEntity'
 
-import { PermissionService } from '@/model/system/permission/PermissionService'
 import { APanel, ATable, useTableTree } from '@airpower/web'
+import { PermissionService } from '@/model/system/permission/PermissionService'
 import { PermissionEditor } from './component'
 
 const hook = useTableTree(PermissionService, {

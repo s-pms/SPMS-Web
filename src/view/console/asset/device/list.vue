@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { DeviceEntity } from '@/model/asset/device/DeviceEntity'
+import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import { useMyTable } from '@/hook/useMyTable'
 import { DeviceService } from '@/model/asset/device/DeviceService'
-import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
 import { DeviceEditor, DeviceMonitor } from './component'
 
 const hook = useMyTable(DeviceService, {

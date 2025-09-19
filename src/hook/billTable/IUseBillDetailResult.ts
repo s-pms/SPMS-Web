@@ -1,7 +1,7 @@
+import type { IDetailResult } from '@airpower/web'
 import type { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import type { AbstractBaseBillService } from '@/base/bill/AbstractBaseBillService'
 import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBillDetailEntity'
-import type { IDetailResult } from '@airpower/web'
 
 /**
  * # 单据详情Hook

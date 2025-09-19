@@ -11,7 +11,7 @@ export class NotifyService extends AbstractBaseService<NotifyEntity> {
    * ### 获取通知场景
    */
   async getSceneList(): Promise<IWebEnum[]> {
-    const result = await this.api('getSceneList').request()
+    const result = await this.api('getSceneList').requestRaw()
     return result as unknown as IWebEnum[]
   }
 }

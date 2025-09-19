@@ -1,8 +1,7 @@
 <script lang="ts" setup>
+import { ASelector, DialogProps } from '@airpower/web'
 import { MaterialEntity } from '@/model/asset/material/MaterialEntity'
 import { MaterialService } from '@/model/asset/material/MaterialService'
-
-import { ASelector, DialogProps } from '@airpower/web'
 import { ContractEditor } from '.'
 
 const props = defineProps(DialogProps.withSelector<MaterialEntity>())

@@ -1,6 +1,6 @@
 import type { WebEnum } from '@airpower/web'
-import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { Field, Form, Model, Table, Type } from '@airpower/web'
+import { AbstractBaseBillEntity } from '@/base/bill/AbstractBaseBillEntity'
 import { CustomerEntity } from '../customer/CustomerEntity'
 import { SaleDetailEntity } from './SaleDetailEntity'
 import { SaleStatusEnum } from './SaleStatusEnum'
@@ -14,13 +14,17 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   })
   declare billCode: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer.code,
+  })
   @Field({
     label: '客户编码',
   })
   customerCode!: string
 
-  @Table()
+  @Table({
+    formatter: row => row.customer.name,
+  })
   @Field({
     label: '客户名称',
   })
@@ -35,8 +39,7 @@ export class SaleEntity extends AbstractBaseBillEntity<SaleDetailEntity> {
   })
   customerId!: number
 
-  @Table({
-  })
+  @Table({})
   @Form({
     textarea: true,
     maxLength: 80,

@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
-import { PickingEntity } from '@/model/mes/picking/PickingEntity'
-import { PickingService } from '@/model/mes/picking/PickingService'
-
-import { StructureSelector } from '@/view/console/factory/structure/component'
 import {
   AButton,
   ADialog,
@@ -19,6 +14,11 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
+
+import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
+import { PickingEntity } from '@/model/mes/picking/PickingEntity'
+import { PickingService } from '@/model/mes/picking/PickingService'
+import { StructureSelector } from '@/view/console/factory/structure/component'
 import { PickingDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PickingEntity()))
@@ -88,20 +88,14 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="申领明细">
         <ATable
-          :data-list="formData.details"
-          :entity="PickingDetailEntity"
           :column-list="
             getTableConfigList(PickingDetailEntity).filter((item) => !['createTime'].includes(item.key))
           "
+          :data-list="formData.details"
+          :entity="PickingDetailEntity"
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
           <template #addButton>
             <AButton
               icon="ADD"

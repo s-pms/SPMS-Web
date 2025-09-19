@@ -1,10 +1,4 @@
 <script lang="ts" setup>
-import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
-import { PlanEntity } from '@/model/mes/plan/PlanEntity'
-import { PlanService } from '@/model/mes/plan/PlanService'
-import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
-
-import { CustomerSelector } from '@/view/console/channel/customer/component'
 import {
   AButton,
   ADialog,
@@ -19,6 +13,12 @@ import {
   getTableConfigList,
   useEditor,
 } from '@airpower/web'
+
+import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+import { PlanEntity } from '@/model/mes/plan/PlanEntity'
+import { PlanService } from '@/model/mes/plan/PlanService'
+import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
+import { CustomerSelector } from '@/view/console/channel/customer/component'
 import { PlanDetailEditor } from '.'
 
 const props = defineProps(DialogProps.withParam(new PlanEntity()))
@@ -98,18 +98,12 @@ async function deleteDetail(index: number) {
       </AGroup>
       <AGroup title="计划明细">
         <ATable
+          :column-list="getTableConfigList(PlanDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           :data-list="formData.details"
           :entity="PlanDetailEntity"
-          :column-list="getTableConfigList(PlanDetailEntity).filter((item) => !['createTime'].includes(item.key))"
           hide-delete
           hide-edit
         >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
           <template #addButton>
             <AButton
               icon="ADD"

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { ADialog, AFormField, AGroup, ATable, DialogProps, useDetail } from '@airpower/web'
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 
+import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
-import { ADialog, AFormField, AGroup, ATable, DialogProps, useDetail } from '@airpower/web'
 
 const props = defineProps(DialogProps.withParam(new SaleEntity()))
 
@@ -52,14 +52,7 @@ const {
           ctrl-width="60"
           hide-add
           hide-ctrl
-        >
-          <template #materialCode="{ data }">
-            {{ data.material.code }}
-          </template>
-          <template #materialName="{ data }">
-            {{ data.material.name }}
-          </template>
-        </ATable>
+        />
       </AGroup>
     </el-form>
   </ADialog>

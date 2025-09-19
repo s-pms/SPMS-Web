@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+import { AImage, AUser, DesensitizeType, DialogUtil } from '@airpower/web'
+import { ref } from 'vue'
 import { AppConfig } from '@/config/AppConfig'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { UserService } from '@/model/personnel/user/UserService'
 import { FileCategory } from '@/model/system/file/FileCategory'
 import { FileEntity } from '@/model/system/file/FileEntity'
-import { AImage, AUser, DesensitizeType, DialogUtil } from '@airpower/web'
-import { ref } from 'vue'
 import UserAccount from './user/UserAccount.vue'
 
 defineProps({

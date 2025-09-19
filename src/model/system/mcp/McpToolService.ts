@@ -1,11 +1,10 @@
-import { McpToolModel } from '@/model/system/mcp/McpToolModel'
 import { AbstractService } from '@airpower/web'
+import { McpToolModel } from '@/model/system/mcp/McpToolModel'
 
 export class McpToolService extends AbstractService {
   baseUrl = 'mcp'
 
   async getMcpTools(): Promise<McpToolModel[]> {
-    const json = await this.api('getMcpTools').request()
-    return McpToolModel.fromJsonArray(json)
+    return this.api('getMcpTools').requestModelList(undefined, McpToolModel)
   }
 }

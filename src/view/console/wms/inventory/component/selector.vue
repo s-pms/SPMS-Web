@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { ITree, RootEntity } from '@airpower/web'
+import { AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest } from '@airpower/web'
+import { ref } from 'vue'
 import { StorageEntity } from '@/model/factory/storage/StorageEntity'
 import { StorageService } from '@/model/factory/storage/StorageService'
 import { StructureEntity } from '@/model/factory/structure/StructureEntity'
@@ -7,8 +9,6 @@ import { StructureService } from '@/model/factory/structure/StructureService'
 import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
 import { InventoryService } from '@/model/wms/inventory/InventoryService'
 import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { AButton, ADialog, ATable, ATreeBox, DialogProps, QueryRequest } from '@airpower/web'
-import { ref } from 'vue'
 
 const props = defineProps(DialogProps.withSelector<InventoryEntity>())
 
@@ -109,18 +109,6 @@ inventoryTypeChanged()
         hide-edit
         @selected="onConfirm"
       >
-        <template #materialCode="{ data }">
-          {{ data.material.code }}
-        </template>
-        <template #materialName="{ data }">
-          {{ data.material.name }}
-        </template>
-        <template #storageName="{ data }">
-          {{ data.storage.name }}({{ data.storage.code }})
-        </template>
-        <template #unitName="{ data }">
-          {{ data.material.unit.name }}
-        </template>
         <template
           v-if="!isMultiple"
           #customRow="{ data }"

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { IJson } from '@airpower/web'
-import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 import { ACopy, ADialog, DialogProps, WebConfig } from '@airpower/web'
 import { computed } from 'vue'
+import { OpenLogEntity } from '@/model/open/log/OpenLogEntity'
 
 const props = defineProps(DialogProps.withParam(new OpenLogEntity()))
 

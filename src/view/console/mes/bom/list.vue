@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import { APanel, ATable } from '@airpower/web'
 import PublishButton from '@/component/PublishButton.vue'
 import { useMyTable } from '@/hook/useMyTable'
 import { BomService } from '@/model/mes/bom/BomService'
-import { APanel, ATable } from '@airpower/web'
 import { BomDetail, BomEditor } from './component'
 
 const hook = useMyTable(BomService, {

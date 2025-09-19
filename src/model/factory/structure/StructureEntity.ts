@@ -1,9 +1,9 @@
 import type { IPayload, ITree } from '@airpower/web'
+import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { StructureTypeEnum } from '@/model/factory/structure/StructureTypeEnum'
 import { OperationEntity } from '@/model/mes/operation/OperationEntity'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
-import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 
 @Model({
   label: '生产单元',
