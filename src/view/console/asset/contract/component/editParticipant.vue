@@ -76,39 +76,39 @@ function onTypeChanged() {
       @submit.prevent
     >
       <AFormField
-        v-model.role="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         field="role"
       />
       <AFormField
-        v-model.name="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         field="name"
       />
       <AFormField
-        v-model.type="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         field="type"
         @change="onTypeChanged"
       />
       <AFormField
-        v-model.certificateType="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         :list="certificateTypeList"
         field="certificateType"
       />
       <AFormField
-        v-model.identification="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         field="identification"
       />
       <AFormField
-        v-model.phone="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         field="phone"
       />
       <AFormField
-        v-model.email="formData"
+        v-model="formData"
         :entity="ParticipantEntity"
         field="email"
       />
