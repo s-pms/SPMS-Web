@@ -45,7 +45,7 @@ async function onUploadAvatar(file: FileEntity) {
           :height="80"
           :width="80"
           upload
-          @uploaded="onUploadAvatar"
+          @upload="onUploadAvatar"
         />
         <div
           :class="user.gender === 1 ? 'male' : 'female'"

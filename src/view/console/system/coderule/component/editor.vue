@@ -111,7 +111,8 @@ const demoCode = computed(() => {
               }
             })
             "
-            @changed="fieldChanged"
+            "fieldChanged"
+            @change
           />
         </el-form-item>
         <AFormField field="snType" />

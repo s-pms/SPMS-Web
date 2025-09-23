@@ -193,7 +193,8 @@ function onDeleteRoutingOperation(index: number) {
                   v-model="currentModel.bom"
                   :disabled="formData.isPublished"
                   :selector="BomSelector"
-                  @changed="bomChanged"
+                  "bomChanged"
+                  @change
                 />
               </el-form-item>
             </el-form>

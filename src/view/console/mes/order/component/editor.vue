@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
+
 import { ADialog, AFormField, AGroup, ASelect, DialogProps, DialogUtil, FeedbackUtil, useEditor } from '@airpower/web'
 import { computed, ref } from 'vue'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
-
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
@@ -108,7 +108,8 @@ const isCustomerDisabled = computed(() => {
         <AFormField field="billCode" />
         <AFormField
           field="type"
-          @changed="orderTypeChanged"
+          "orderTypeChanged"
+          @change
         />
         <template v-if="OrderTypeEnum.PLAN.equalsKey(formData.type)">
           <el-form-item
@@ -119,7 +120,8 @@ const isCustomerDisabled = computed(() => {
               v-model="formData.plan"
               :selector="PlanSelector"
               placeholder="请选择订单关联计划"
-              @changed="selectPlan()"
+              "selectPlan()"
+              @change
             />
           </el-form-item>
           <el-form-item />
