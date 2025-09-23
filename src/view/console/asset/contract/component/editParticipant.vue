@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { WebValidateRule } from '@airpower/web'
 import type { FormInstance } from 'element-plus'
-import { ADialog, AFormField, DialogProps, WebValidator } from '@airpower/web'
+import { ADialog, AFormField, AInput, DialogProps, WebValidator } from '@airpower/web'
 import { computed, ref } from 'vue'
 import { CertificateTypeEnum } from '@/model/asset/contract/participant/CertificateTypeEnum'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
@@ -90,13 +90,17 @@ function onTypeChanged() {
         :entity="ParticipantEntity"
         field="type"
         @change="onTypeChanged"
-      />
+      >
+      </AFormField>
       <AFormField
         v-model="formData"
         :entity="ParticipantEntity"
         :list="certificateTypeList"
         field="certificateType"
-      />
+      >
+      <AInput v-model:certificateType="formData.certificateType" :entity="ParticipantEntity" 
+        :list="certificateTypeList"></AInput>
+      </AFormField>
       <AFormField
         v-model="formData"
         :entity="ParticipantEntity"
