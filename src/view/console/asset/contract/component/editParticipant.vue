@@ -46,6 +46,7 @@ const certificateTypeList = computed(() => {
   return list.filter(item => [CertificateTypeEnum.OTHER.key].includes(item.key))
 })
 
+const placeholder = ref('')
 function onTypeChanged() {
   switch (formData.value.type) {
     case ParticipantTypeEnum.PERSONAL.key:
@@ -97,14 +98,12 @@ function onTypeChanged() {
         :entity="ParticipantEntity"
         :list="certificateTypeList"
         field="certificateType"
-      >
-      <AInput v-model:certificateType="formData.certificateType" :entity="ParticipantEntity" 
-        :list="certificateTypeList"></AInput>
-      </AFormField>
+      />
       <AFormField
         v-model="formData"
         :entity="ParticipantEntity"
         field="identification"
+        :placeholder="placeholder"
       />
       <AFormField
         v-model="formData"

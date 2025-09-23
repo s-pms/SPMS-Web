@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import type { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
-import { AButton, AEmpty, DateTimeFormatter, DialogProps, FeedbackUtil } from '@airpower/web'
+import { AButton, AEmpty, ClipboardUtil, DateTimeFormatter, DialogProps, FeedbackUtil } from '@airpower/web'
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 
-import useClipboard from 'vue-clipboard3'
 import { UserService } from '@/model/personnel/user/UserService'
 
 defineProps(DialogProps.create())
@@ -29,7 +28,8 @@ async function createMyPersonalToken() {
     type: 'success',
     showClose: false,
   })
-  await useClipboard().toClipboard(token)
+  
+  await ClipboardUtil.copy(token)
   FeedbackUtil.toastSuccess('已经成功复制到你的剪切板')
   name.value = ''
   init()
