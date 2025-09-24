@@ -44,7 +44,7 @@ async function onUploadAvatar(file: FileEntity) {
           :entity="FileEntity"
           :height="80"
           :width="80"
-          uploads
+          upload
           @upload="onUploadAvatar"
         />
         <div
