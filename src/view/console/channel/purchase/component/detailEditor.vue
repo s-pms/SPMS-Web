@@ -59,8 +59,7 @@ async function onSubmit() {
         <ASelect
           v-model="formData.material"
           :selector="MaterialSelector"
-          "getPurchasePrice()"
-          @change
+          @change="getPurchasePrice()"
         />
       </el-form-item>
       <el-form-item
@@ -70,8 +69,7 @@ async function onSubmit() {
         <ASelect
           v-model="formData.supplier"
           :selector="SupplierSelector"
-          "getPurchasePrice()"
-          @change
+          @change="getPurchasePrice()"
         />
       </el-form-item>
       <el-form-item

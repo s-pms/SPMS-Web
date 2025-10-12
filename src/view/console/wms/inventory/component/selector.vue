@@ -95,8 +95,7 @@ inventoryTypeChanged()
       :placeholder="treePlaceHolder"
       :tree-data="treeData"
       searchable
-      "treeChanged"
-      @change
+      @change="treeChanged"
     >
       <ATable
         :data-list="list"
