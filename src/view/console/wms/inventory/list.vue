@@ -108,8 +108,7 @@ inventoryTypeChanged()
     :placeholder="treePlaceHolder"
     :tree-data="treeData"
     searchable
-    "treeChanged"
-    @change
+    @change="treeChanged"
   >
     <APanel>
       <ATable
@@ -141,8 +140,7 @@ inventoryTypeChanged()
         <template #beforePage>
           <APage
             :response="response"
-            "onPageChanged"
-            @change
+            @change="onPageChanged"
           />
         </template>
       </ATable>
