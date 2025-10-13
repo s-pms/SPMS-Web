@@ -15,6 +15,7 @@ import { BomTypeEnum } from '@/model/mes/bom/BomTypeEnum'
 export class BomEntity extends BaseEntity implements IPayload {
   @Table({
     force: true,
+    copy: true,
   })
   @Search()
   @Form({
