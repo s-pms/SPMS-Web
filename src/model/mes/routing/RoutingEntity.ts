@@ -60,6 +60,7 @@ export class RoutingEntity extends BaseEntity implements IPayload {
 
   @Table({
     order: 66,
+    copy: true,
     formatter: row => row.material.name,
   })
   @Field({
