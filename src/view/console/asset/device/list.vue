@@ -1,12 +1,16 @@
 <script lang="ts" setup>
-import type { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { AButton, APanel, ATable, DialogUtil } from '@airpower/web'
+import { ref } from 'vue'
 import { useMyTable } from '@/hook/useMyTable'
+import { DeviceEntity } from '@/model/asset/device/DeviceEntity'
 import { DeviceService } from '@/model/asset/device/DeviceService'
 import { DeviceEditor, DeviceMonitor } from './component'
 
+const filter = ref(new DeviceEntity())
+filter.value.code = 'Simulator002'
 const hook = useMyTable(DeviceService, {
   editView: DeviceEditor,
+  // defaultFilter: filter.value,
 })
 
 async function showMonitor(device: DeviceEntity) {
@@ -17,6 +21,7 @@ async function showMonitor(device: DeviceEntity) {
 <template>
   <APanel>
     <ATable
+      :default-filter="filter"
       :use-hook="hook"
       ctrl-width="130"
     >
