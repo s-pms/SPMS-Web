@@ -13,9 +13,9 @@ const hook = useMyTable(PurchasePriceService, {
 <template>
   <APanel>
     <ATable :use-hook="hook">
-      <template #supplier="row">
+      <template #supplier="{ data }">
         <APayload
-          :payload="row.data.supplier"
+          :payload="data.supplier"
           :view="SupplierDetail"
         />
       </template>

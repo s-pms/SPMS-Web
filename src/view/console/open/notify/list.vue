@@ -23,8 +23,8 @@ NotifyService.create().getSceneList().then((list) => {
       ctrl-width="130"
       show-enable-and-disable
     >
-      <template #scene="row">
-        {{ sceneList.find(item => item.key === row.data.scene)?.label || '-' }}
+      <template #scene="{ data }">
+        {{ sceneList.find(item => item.key === data.scene)?.label || '-' }}
       </template>
     </ATable>
   </APanel>
