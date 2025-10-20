@@ -13,11 +13,11 @@ import {
   useEditor,
   WebFileUtil,
 } from '@airpower/web'
+
 import { ContractEntity } from '@/model/asset/contract/ContractEntity'
 import { ContractService } from '@/model/asset/contract/ContractService'
 import { ContractDocumentEntity } from '@/model/asset/contract/document/ContractDocumentEntity'
 import { ParticipantEntity } from '@/model/asset/contract/participant/ParticipantEntity'
-
 import { FileCategory } from '@/model/system/file/FileCategory'
 import { FileEntity } from '@/model/system/file/FileEntity'
 import { ContractParticipantEditor } from '@/view/console/asset/contract/component/index'
@@ -125,17 +125,17 @@ async function onUpload() {
               添加参与方
             </AButton>
           </template>
-          <template #customRow="row">
+          <template #customRow="{ data, index }">
             <AButton
               link
-              @click="onEdit(row.data, row.index)"
+              @click="onEdit(data, index)"
             >
               编辑
             </AButton>
             <AButton
               danger
               link
-              @click="onDelete(row.index)"
+              @click="onDelete(index)"
             >
               编辑
             </AButton>
@@ -151,12 +151,12 @@ async function onUpload() {
           hide-delete
           hide-edit
         >
-          <template #url="row">
+          <template #url="{ data }">
             <el-link
-              :href="WebFileUtil.getStaticFileUrl(row.data.url)"
+              :href="WebFileUtil.getStaticFileUrl(data.url)"
               target="_blank"
             >
-              {{ row.data.url }}
+              {{ data.url }}
             </el-link>
           </template>
           <template #addButton>
@@ -168,11 +168,11 @@ async function onUpload() {
               上传附件
             </AButton>
           </template>
-          <template #customRow="row">
+          <template #customRow="{ index }">
             <AButton
               danger
               link
-              @click="onDeleteDocument(row.index)"
+              @click="onDeleteDocument(index)"
             >
               删除
             </AButton>
