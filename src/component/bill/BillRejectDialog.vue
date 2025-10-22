@@ -2,7 +2,7 @@
 import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
-defineProps(
+const { param } = defineProps(
   Object.assign(DialogProps.create(), {
     /**
      * ### 弹出标题

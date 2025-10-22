@@ -14,28 +14,20 @@ const emits = defineEmits<{
   onReject: [bill: B]
   onAudit: [bill: B]
 }>()
-
-function onReject() {
-  emits('onReject', bill)
-}
-
-function onAudit() {
-  emits('onAudit', bill)
-}
 </script>
 
 <template>
   <AButton
     :disabled="!bill.canAudit()"
     link
-    @click="onAudit"
+    @click="emits('onAudit', bill)"
   >
     审核
   </AButton>
   <AButton
     :disabled="!bill.canReject()"
     link
-    @click="onReject"
+    @click="emits('onReject', bill)"
   >
     驳回
   </AButton>

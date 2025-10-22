@@ -2,7 +2,7 @@
 import { ADialog, DialogProps } from '@airpower/web'
 import { ref } from 'vue'
 
-const props = defineProps(
+const { param } = defineProps(
   Object.assign(DialogProps.create(), {
     /**
      * ### 添加完成数量
@@ -14,7 +14,7 @@ const props = defineProps(
   }),
 )
 
-const num = ref(props.param)
+const num = ref(param)
 </script>
 
 <template>
