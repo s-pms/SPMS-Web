@@ -13,7 +13,7 @@ const hook = useMyTable(DeviceService, {
   // defaultFilter: filter.value,
 })
 
-async function showMonitor(device: DeviceEntity) {
+function showMonitor(device: DeviceEntity) {
   DialogUtil.show(DeviceMonitor, device)
 }
 </script>

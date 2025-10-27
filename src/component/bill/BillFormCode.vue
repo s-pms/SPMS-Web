@@ -5,7 +5,7 @@ import type { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBa
 import { ACopy, AFormField } from '@airpower/web'
 import { inject, ref } from 'vue'
 
-const props = defineProps({
+const { modelValue } = defineProps({
   /**
    * ### 手动绑定的表单对象
    */
@@ -13,20 +13,12 @@ const props = defineProps({
     type: Object as PropType<B>,
     default: null,
   },
-
-  /**
-   * ### 是否禁用输入
-   */
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
 })
 
 const injectFormData = inject('formData') as Ref<B> | undefined
 
 // 手动绑定的 v-model 覆盖 自动注入的表单对象
-const formData = ref(props.modelValue) as Ref<B>
+const formData = ref(modelValue) as Ref<B>
 if (injectFormData && injectFormData.value) {
   formData.value = injectFormData.value
 }

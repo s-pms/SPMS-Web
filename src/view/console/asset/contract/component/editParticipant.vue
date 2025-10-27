@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { WebValidateRule } from '@airpower/web'
 import type { FormInstance } from 'element-plus'
 import { ADialog, AFormField, DialogProps, WebValidator } from '@airpower/web'
 import { computed, ref } from 'vue'
@@ -22,7 +21,7 @@ async function onSubmit() {
   props.onConfirm(formData.value.copy())
 }
 
-const rules = WebValidator.create({
+const rules = WebValidator.create<ParticipantEntity>({
   name: [
     WebValidator.show('').ifEmpty(),
   ],
@@ -33,7 +32,7 @@ const rules = WebValidator.create({
   email: [
     WebValidator.show().ifNotEmail(),
   ],
-} as WebValidateRule<ParticipantEntity>)
+})
 
 const certificateTypeList = computed(() => {
   const list = CertificateTypeEnum.toArray()
