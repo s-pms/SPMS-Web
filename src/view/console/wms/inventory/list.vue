@@ -71,12 +71,12 @@ async function treeChanged(current: ITree | undefined) {
   if (current) {
     switch (inventoryType.value) {
       case InventoryTypeEnum.STORAGE.key:
-        request.value.filter.storage = (current as StorageEntity).copy()
-        request.value.filter.storage.expose('id')
+        request.value.filter.exclude('structure')
+        request.value.filter.storage = (current as StorageEntity).copyOnlyId()
         break
       case InventoryTypeEnum.STRUCTURE.key:
-        request.value.filter.structure = (current as StructureEntity).copy()
-        request.value.filter.structure.expose('id')
+        request.value.filter.exclude('storage')
+        request.value.filter.structure = (current as StructureEntity).copyOnlyId()
         break
       default:
     }
