@@ -14,7 +14,7 @@ const isLoading = ref(false)
 
 const json = ref('{"name":"Hamm","age":"18","len":"18cm"}')
 
-const version = 10000
+const version = ref(10000)
 
 const APP_KEY = 'APP_KEY_TEST'
 const APP_SECRET = 'APP_SECRET_TEST'
@@ -47,7 +47,7 @@ const content = computed(() => {
   }
 })
 const source = computed(
-  () => app.value.appSecret + app.value.appKey + version + timestamp.value + nonce.value + content.value,
+  () => app.value.appSecret + app.value.appKey + version.value + timestamp.value + nonce.value + content.value,
 )
 const signature = computed(() => CryptoUtil.sha1(source.value))
 
