@@ -19,10 +19,7 @@ async function getMenuList() {
 
 async function init() {
   currentUserInfo.value = await UserService.create().getMyInfo()
-  let permissions = PermissionUtil.getList()
-  if (permissions.length === 0) {
-    permissions = await UserService.create(isLoading).getMyPermissionList()
-  }
+  const permissions = await UserService.create(isLoading).getMyPermissionList()
   PermissionUtil.saveList(permissions)
   await getMenuList()
 }
