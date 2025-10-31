@@ -56,7 +56,7 @@ const {
           link
           @click="onConfirm(data)"
         >
-          作业
+          选择
         </AButton>
       </template>
     </ATable>

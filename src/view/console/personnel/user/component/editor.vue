@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { AButton, ADialog, AGroup, AInput, DialogProps, DialogUtil, getFieldLabel, useEditor } from '@airpower/web'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
-
 import { UserService } from '@/model/personnel/user/UserService'
 import { DepartmentSelector } from '@/view/console/personnel/department/component'
 import { RoleSelector } from '../../role/component'
@@ -15,7 +14,13 @@ const {
   title,
   rules,
   onSubmit,
-} = useEditor(props, UserService)
+} = useEditor(props, UserService, {
+  beforeSubmit: (submitData) => {
+    submitData.departmentList = submitData.departmentList.map(item => item.copyOnlyId())
+    submitData.roleList = submitData.roleList.map(item => item.copyOnlyId())
+    return submitData
+  },
+})
 
 async function selectRole() {
   formData.value.roleList = await DialogUtil.selectList(RoleSelector, formData.value.roleList)
@@ -78,10 +83,10 @@ async function selectDepartment() {
         </el-form-item>
       </AGroup>
       <AGroup
-        :column="2"
-        title="角色和部门"
+        :column="1"
+        title="角色"
       >
-        <div class="role-list">
+        <div class="list">
           <AButton
             icon="ADD"
             @click="selectRole()"
@@ -98,7 +103,12 @@ async function selectDepartment() {
             {{ role.name }}
           </el-tag>
         </div>
-        <div class="department-list">
+      </AGroup>
+      <AGroup
+        :column="1"
+        title="部门"
+      >
+        <div class="list">
           <AButton
             icon="ADD"
             @click="selectDepartment()"
@@ -121,8 +131,7 @@ async function selectDepartment() {
 </template>
 
 <style lang="scss" scoped>
-.role-list > *,
-.department-list > * {
+.list > * {
   margin-right: 5px;
 }
 </style>

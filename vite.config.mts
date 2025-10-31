@@ -22,7 +22,8 @@ export default defineConfig({
     proxy: {
       '/api': {
         // target: 'https://spms.hamm.cn/api/',
-        target: 'http://10.0.0.8:8080/',
+        // target: 'http://10.0.0.8:8080/',
+        target: 'http://127.0.0.1:8080/',
         rewrite: path => path.replace(/^\/api/, ''),
         changeOrigin: true,
       },

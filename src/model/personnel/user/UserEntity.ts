@@ -2,16 +2,13 @@ import type { IPayload, IUser } from '@airpower/web'
 import { DesensitizeType, Field, Form, Search, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
 import { DepartmentEntity } from '@/model/personnel/department/DepartmentEntity'
+import { RoleEntity } from '@/model/personnel/role/RoleEntity'
 import { UserGenderEnum } from '@/model/personnel/user/UserGenderEnum'
-import { RoleEntity } from '../role/RoleEntity'
 
 /**
  * # 用户实体
  */
 export class UserEntity extends BaseEntity implements IUser, IPayload {
-  /**
-   * ### 昵称
-   */
   @Form({
     requiredString: true,
   })
@@ -24,9 +21,6 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   })
   nickname!: string
 
-  /**
-   * ### 手机
-   */
   @Form({
     mobilePhone: true,
     requiredString: true,
@@ -44,9 +38,6 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   })
   phone!: string
 
-  /**
-   * ### 邮箱
-   */
   @Form({
     email: true,
     requiredString: true,
@@ -68,7 +59,6 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     defaultValue: '13888888888',
   })
   @Table({
-    force: true,
     copy: true,
     width: 100,
     hide: true,
@@ -91,17 +81,11 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   })
   idCard!: string
 
-  /**
-   * ### 头像
-   */
   @Field({
     label: '头像',
   })
   avatar!: string
 
-  /**
-   * ### 密码
-   */
   @Form({
     password: true,
   })
@@ -109,29 +93,6 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
     label: '密码',
   })
   password!: string
-
-  /**
-   * ### 角色列表
-   */
-  @Table({
-    array: true,
-    payload: true,
-  })
-  @Field({
-    label: '角色',
-  })
-  @Type(RoleEntity, true)
-  roleList!: RoleEntity[]
-
-  @Field({
-    label: '部门',
-  })
-  @Table({
-    payload: true,
-    array: true,
-  })
-  @Type(DepartmentEntity, true)
-  departmentList!: DepartmentEntity[]
 
   @Field({
     label: '性别',
@@ -149,19 +110,10 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   })
   declare isDisabled: boolean
 
-  /**
-   * ### 验证码
-   */
   code!: string
 
-  /**
-   * ### 所属应用AppKey
-   */
   appKey!: string
 
-  /**
-   * ### 旧密码
-   */
   oldPassword!: string
 
   @Form({
@@ -175,14 +127,11 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
 
   departmentId?: number
 
-  /**
-   * ### 设置邮箱
-   * @param email 邮箱
-   */
-  setEmail(email: string): this {
-    this.email = email
-    return this
-  }
+  @Type(RoleEntity, true)
+  roleList!: RoleEntity[]
+
+  @Type(DepartmentEntity, true)
+  departmentList!: DepartmentEntity[]
 
   getPayloadLabel(): string {
     return this.nickname
