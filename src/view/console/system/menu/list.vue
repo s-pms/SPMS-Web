@@ -18,6 +18,7 @@ const hook = useTableTree(MenuService, {
       :disable-delete="(row) => row.children.length > 0"
       :use-hook="hook"
       ctrl-width="130"
+      is-tree
       show-add-row
     />
   </APanel>

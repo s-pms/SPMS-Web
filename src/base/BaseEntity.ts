@@ -47,5 +47,10 @@ export class BaseEntity extends RootEntity {
   @Table({
     removed: true,
   })
+  @Search({
+    order: -100,
+    width: 120,
+    hide: true,
+  })
   declare isDisabled: boolean
 }

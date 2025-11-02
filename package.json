@@ -13,14 +13,14 @@
     "v": "vite preview"
   },
   "dependencies": {
-    "@airpower/web": "^1.9.0",
+    "@airpower/web": "^1.9.2",
     "@element-plus/icons-vue": "^2.3.2",
     "@types/crypto-js": "^4.2.2",
-    "axios": "1.12.2",
+    "axios": "1.13.1",
     "core-js": "^3.46.0",
     "crypto-js": "^4.2.0",
     "echarts": "^6.0.0",
-    "element-plus": "^2.11.5",
+    "element-plus": "^2.11.7",
     "js-base64": "^3.7.8",
     "pinia": "^3.0.3",
     "qrcode.vue": "3.6.0",
@@ -30,14 +30,14 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.0.0",
+    "@antfu/eslint-config": "^6.2.0",
     "@vitejs/plugin-vue": "^6.0.1",
-    "eslint": "^9.38.0",
-    "globals": "^16.4.0",
-    "sass": "^1.93.2",
+    "eslint": "^9.39.0",
+    "globals": "^16.5.0",
+    "sass": "^1.93.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2",
-    "vite": "^7.1.11",
-    "vue-tsc": "^3.1.1"
+    "vite": "^7.1.12",
+    "vue-tsc": "^3.1.2"
   }
 }

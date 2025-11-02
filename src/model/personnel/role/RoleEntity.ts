@@ -13,9 +13,6 @@ import { PermissionEntity } from '@/model/system/permission/PermissionEntity'
   label: '角色',
 })
 export class RoleEntity extends BaseEntity implements IPayload {
-  /**
-   * ### 角色名称
-   */
   @Table({
     force: true,
   })
@@ -28,9 +25,6 @@ export class RoleEntity extends BaseEntity implements IPayload {
   })
   name!: string
 
-  /**
-   * ### 角色编码
-   */
   @Table({
     force: true,
   })
@@ -43,19 +37,21 @@ export class RoleEntity extends BaseEntity implements IPayload {
   })
   code!: string
 
-  /**
-   * ### 菜单列表
-   */
   @Field({})
   @Type(MenuEntity, true)
   menuList!: MenuEntity[]
 
-  /**
-   * ### 权限列表
-   */
   @Field({})
   @Type(PermissionEntity, true)
   permissionList!: PermissionEntity[]
+
+  @Table({
+    removed: false,
+  })
+  @Search({
+    hide: false,
+  })
+  declare isDisabled: boolean
 
   getPayloadLabel() {
     return this.name
