@@ -108,6 +108,9 @@ export class UserEntity extends BaseEntity implements IUser, IPayload {
   @Table({
     removed: false,
   })
+  @Search({
+    hide: false,
+  })
   declare isDisabled: boolean
 
   code!: string

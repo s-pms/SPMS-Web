@@ -22,7 +22,8 @@ const hook = useMyTable(RoleService, {
   <APanel>
     <ATable
       :use-hook="hook"
-      ctrl-width="160"
+      ctrl-width="200"
+      show-enable-and-disable
     >
       <template #customRow="{ data }">
         <AButton

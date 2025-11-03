@@ -12,9 +12,11 @@ import { PermissionTypeEnum } from './PermissionTypeEnum'
   label: '权限',
 })
 export class PermissionEntity extends BaseEntity implements ITree {
-  /**
-   * ### 权限名称
-   */
+  @Table({
+    width: 100,
+  })
+  declare id: number
+
   @Table({
     force: true,
   })
@@ -27,9 +29,6 @@ export class PermissionEntity extends BaseEntity implements ITree {
   })
   name!: string
 
-  /**
-   * ### 权限唯一标识
-   */
   @Table({
     force: true,
     copy: true,
@@ -67,24 +66,15 @@ export class PermissionEntity extends BaseEntity implements ITree {
   })
   isSystem!: boolean
 
-  /**
-   * ### 父权限ID
-   */
   @Field({
     label: '父级ID',
   })
   parentId!: number
 
-  /**
-   * ### 子权限列表
-   */
   @Field({})
   @Type(PermissionEntity, true)
   children!: this[]
 
-  /**
-   * ### 父权限
-   */
   @Type(PermissionEntity)
   parent!: this
 
