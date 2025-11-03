@@ -23,6 +23,7 @@ const hook = useMyTable(MaterialService, {
   <APanel>
     <ATable
       :use-hook="hook"
+      show-export
     />
   </APanel>
 </template>
