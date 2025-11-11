@@ -5,7 +5,7 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 # 复制yarn.lock和package.json文件
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # 安装依赖
 # 配置网络超时并安装依赖
