@@ -11,6 +11,7 @@ WebConfig.elementPlusLocale = zhCn
 WebConfig.appKey = 'spms'
 WebConfig.product = 'SPMS'
 WebConfig.uploadUrl = '/api/file/upload'
+WebConfig.staticUrl = '/static/'
 
 createApp(App)
   .use(RouterUtil.createRouter(routes))
