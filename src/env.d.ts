@@ -19,21 +19,6 @@ interface ImportMetaEnv extends Readonly<Record<string, string | boolean>> {
   VITE_APP_API_URL: string
 
   /**
-   * ### Websocket URL
-   */
-  VITE_APP_WEBSOCKET_URL: string
-
-  /**
-   * ### Oauth2的授权地址
-   */
-  VITE_APP_OAUTH_URL: string
-
-  /**
-   * ### 静态资源根路径
-   */
-  VITE_APP_STATIC_URL: string
-
-  /**
    * ### 是否开发模式
    */
   DEV: boolean
