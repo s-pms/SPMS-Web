@@ -4,8 +4,8 @@ FROM node:20-alpine AS build
 # 设置工作目录
 WORKDIR /app
 
-# 复制yarn.lock和package.json文件
-COPY package.json ./
+# package.json文件
+COPY package.json yarn.lock ./
 
 # 安装依赖
 # 配置网络超时并安装依赖
@@ -16,7 +16,7 @@ RUN yarn config set network-timeout 300000 -g && \
 COPY . .
 
 # 构建生产版本
-RUN yarn run production
+RUN yarn production
 
 # 生产阶段
 FROM nginx:alpine
