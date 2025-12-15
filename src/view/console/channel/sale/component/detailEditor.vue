@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { FormInstance } from 'element-plus'
 import { ADialog, AInput, ASelect, DialogProps, FeedbackUtil, getFieldLabel } from '@airpower/web'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
 import { SaleDetailService } from '@/model/channel/sale/SaleDetailService'
 import { SalePriceService } from '@/model/channel/salePrice/SalePriceService'
@@ -32,6 +32,13 @@ async function getSalePrice() {
 async function onSubmit() {
   props.onConfirm(formData.value)
 }
+
+watch(() => formData.value, () => {
+  formRef.value?.validate()
+}, {
+  deep: true,
+  immediate: true,
+})
 </script>
 
 <template>
