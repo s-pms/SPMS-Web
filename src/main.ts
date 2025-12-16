@@ -20,3 +20,5 @@ createApp(App)
     locale: zhCn,
   })
   .mount('#app')
+
+console.warn(`ElementPlus Version: ${ElementPlus.version}`)
