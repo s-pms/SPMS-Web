@@ -20,7 +20,13 @@ const hook = useTableTree(MenuService, {
       ctrl-width="130"
       is-tree
       show-add-row
-    />
+    >
+      <template #path="{ data }">
+        <el-link :href="data.path">
+          {{ data.path }}
+        </el-link>
+      </template>
+    </ATable>
   </APanel>
 </template>
 

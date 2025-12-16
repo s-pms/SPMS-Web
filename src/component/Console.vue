@@ -14,7 +14,7 @@ const isLoading = ref(false)
 
 async function getMenuList() {
   menuList.value = await UserService.create(isLoading).getMyMenuList()
-  RouterUtil.initVueRouter(menuList.value, components, '/src/view', 'console')
+  await RouterUtil.initVueRouter(menuList.value, components, '/src/view', 'console')
 }
 
 async function init() {
