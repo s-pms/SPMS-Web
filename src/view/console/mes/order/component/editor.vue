@@ -3,9 +3,9 @@ import type { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
 import { ADialog, AFormField, AGroup, ASelect, DialogProps, DialogUtil, FeedbackUtil, useEditor } from '@airpower/web'
 import { computed, ref } from 'vue'
 import { OrderEntity } from '@/model/mes/order/OrderEntity'
+
 import { OrderService } from '@/model/mes/order/OrderService'
 import { OrderTypeEnum } from '@/model/mes/order/OrderTypeEnum'
-
 import { PlanTypeEnum } from '@/model/mes/plan/PlanTypeEnum'
 import { RoutingEntity } from '@/model/mes/routing/RoutingEntity'
 import { MaterialSelector } from '@/view/console/asset/material/component'
@@ -34,7 +34,7 @@ const {
 
 const routingFilter = ref(new RoutingEntity())
 routingFilter.value.isPublished = true
-routingFilter.value.material = formData.value.material.copyOnlyId()
+routingFilter.value.material = formData.value.material?.copyOnlyId()
 
 async function selectPlan() {
   if (formData.value.plan) {
