@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import { RouterUtil, WebConfig } from '@airpower/web'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import { createApp } from 'vue'
+import { createApp, version } from 'vue'
 import App from '@/App.vue'
 import { routes } from '@/config/routes'
 import '@airpower/web/dist/web.css'
@@ -21,4 +22,6 @@ createApp(App)
   })
   .mount('#app')
 
+console.warn(`Vue Version: ${version}`)
 console.warn(`ElementPlus Version: ${ElementPlus.version}`)
+console.groupEnd()
