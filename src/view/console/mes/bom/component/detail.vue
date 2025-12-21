@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ADialog, AFormField, AGroup, ATable, DialogProps, getTableConfigList, useDetail } from '@airpower/web'
-
 import { BomDetailEntity } from '@/model/mes/bom/BomDetailEntity'
 import { BomService } from '@/model/mes/bom/BomService'
 import { InputEntity } from '@/model/wms/input/InputEntity'
@@ -8,7 +7,6 @@ import { InputEntity } from '@/model/wms/input/InputEntity'
 const props = defineProps(DialogProps.withParam(new InputEntity()))
 
 const {
-  title,
   formData,
   isLoading,
 } = useDetail(props, BomService, {})
@@ -17,8 +15,8 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="title"
     height="80%"
+    title="BOM详情"
     width="70%"
     @cancel="onCancel"
     @confirm="onConfirm"

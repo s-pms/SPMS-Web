@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import { AButton, ADialog, AFormField, AGroup, ATable, DialogProps } from '@airpower/web'
-
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
-import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 
+import { PurchaseDetailEntity } from '@/model/channel/purchase/PurchaseDetailEntity'
 import { PurchaseEntity } from '@/model/channel/purchase/PurchaseEntity'
 import { PurchaseService } from '@/model/channel/purchase/PurchaseService'
 import { PurchaseStatusEnum } from '@/model/channel/purchase/PurchaseStatusEnum'
@@ -22,8 +21,8 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="title"
     height="80%"
+    title="采购详情"
     width="80%"
     @cancel="onCancel"
     @confirm="onConfirm"
