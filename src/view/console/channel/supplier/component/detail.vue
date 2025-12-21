@@ -6,7 +6,6 @@ import { SupplierService } from '@/model/channel/supplier/SupplierService'
 const props = defineProps(DialogProps.withParam(new SupplierEntity()))
 
 const {
-  title,
   formData,
   isLoading,
 } = useDetail(props, SupplierService)
@@ -15,7 +14,7 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="title"
+    title="供应商详情"
     @cancel="onCancel"
     @confirm="onConfirm"
   >

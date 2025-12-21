@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import { ADialog, AGroup, ASelect, ATable, DialogProps, getFieldLabel } from '@airpower/web'
-
 import { BillFormCode, BillFormMoreDetail } from '@/component'
+
 import { useBillDetail } from '@/hook/billTable/useBillDetail'
 import { PickingDetailEntity } from '@/model/mes/picking/PickingDetailEntity'
-
 import { PickingEntity } from '@/model/mes/picking/PickingEntity'
 import { PickingService } from '@/model/mes/picking/PickingService'
 import { StructureSelector } from '@/view/console/factory/structure/component'
@@ -12,7 +11,6 @@ import { StructureSelector } from '@/view/console/factory/structure/component'
 const props = defineProps(DialogProps.withParam(new PickingEntity()))
 
 const {
-  title,
   formData,
   isLoading,
 } = useBillDetail(props, PickingService)
@@ -21,8 +19,8 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="title"
     height="80%"
+    title="领料单详情"
     width="80%"
     @cancel="onCancel"
     @confirm="onConfirm"

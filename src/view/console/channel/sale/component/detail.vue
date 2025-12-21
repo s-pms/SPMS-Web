@@ -1,15 +1,14 @@
 <script lang="ts" setup>
 import { ADialog, AFormField, AGroup, ATable, DialogProps, useDetail } from '@airpower/web'
+
 import { BillFormCode, BillFormMoreDetail } from '@/component'
 import { SaleDetailEntity } from '@/model/channel/sale/SaleDetailEntity'
-
 import { SaleEntity } from '@/model/channel/sale/SaleEntity'
 import { SaleService } from '@/model/channel/sale/SaleService'
 
 const props = defineProps(DialogProps.withParam(new SaleEntity()))
 
 const {
-  title,
   formData,
   isLoading,
 } = useDetail(props, SaleService, {})
@@ -18,8 +17,8 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="title"
     height="80%"
+    title="销售详情"
     width="80%"
     @cancel="onCancel"
     @confirm="onConfirm"

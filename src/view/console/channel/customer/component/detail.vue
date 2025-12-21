@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { ADialog, AFormField, DialogProps, getFormConfigList, getModelName, useDetail } from '@airpower/web'
+import { ADialog, AFormField, DialogProps, getFormConfigList, useDetail } from '@airpower/web'
 import { CustomerEntity } from '@/model/channel/customer/CustomerEntity'
 import { CustomerService } from '@/model/channel/customer/CustomerService'
 
 const props = defineProps(DialogProps.withParam(new CustomerEntity()))
 
 const {
-  title,
   formData,
   isLoading,
 } = useDetail(props, CustomerService)
@@ -15,7 +14,7 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="getModelName(CustomerEntity) + title"
+    title="客户详情"
     @cancel="onCancel"
     @confirm="onConfirm"
   >

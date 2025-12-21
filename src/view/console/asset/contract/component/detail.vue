@@ -8,7 +8,6 @@ import { ParticipantEntity } from '@/model/asset/contract/participant/Participan
 const props = defineProps(DialogProps.withParam(new ContractEntity()))
 
 const {
-  title,
   formData,
   isLoading,
 } = useDetail(props, ContractService)
@@ -17,8 +16,8 @@ const {
 <template>
   <ADialog
     :loading="isLoading"
-    :title="title"
     height="70%"
+    title="合同详情"
     width="70%"
     @cancel="onCancel"
     @confirm="onConfirm"
