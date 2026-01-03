@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { FormInstance } from 'element-plus'
+import type { Ref } from 'vue'
 import { ADialog, AInput, ASelect, DialogProps, getFieldLabel } from '@airpower/web'
 import { ref } from 'vue'
 import { PlanDetailEntity } from '@/model/mes/plan/PlanDetailEntity'
@@ -8,7 +9,7 @@ import { MaterialSelector } from '@/view/console/asset/material/component'
 
 const props = defineProps(DialogProps.withParam(new PlanDetailEntity()))
 
-const formData = ref(props.param.copy())
+const formData: Ref<PlanDetailEntity> = ref(props.param.copy())
 
 const isLoading = ref(false)
 
@@ -45,6 +46,7 @@ async function onSubmit() {
         />
       </el-form-item>
       <el-form-item
+        v-if="formData.material"
         :label="getFieldLabel(PlanDetailEntity, 'quantity')"
         prop="quantity"
       >

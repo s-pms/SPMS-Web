@@ -15,6 +15,7 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     force: true,
     formatter: row => row.material.code,
+    copy: true,
   })
   @Field({
     label: '物料编码',
@@ -24,6 +25,7 @@ export class BomDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     force: true,
     formatter: row => row.material.name,
+    copy: true,
   })
   @Field({
     label: '物料名称',

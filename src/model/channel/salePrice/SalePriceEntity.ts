@@ -21,6 +21,7 @@ export class SalePriceEntity extends BaseEntity {
 
   @Table({
     formatter: row => row.material.code,
+    copy: true,
   })
   @Field({
     label: '物料编码',
@@ -29,6 +30,7 @@ export class SalePriceEntity extends BaseEntity {
 
   @Table({
     formatter: row => row.material.name,
+    copy: true,
   })
   @Field({
     label: '物料名称',
@@ -37,6 +39,7 @@ export class SalePriceEntity extends BaseEntity {
 
   @Table({
     formatter: row => row.customer.code,
+    copy: true,
   })
   @Field({
     label: '客户编码',
@@ -45,6 +48,7 @@ export class SalePriceEntity extends BaseEntity {
 
   @Table({
     formatter: row => row.customer.name,
+    copy: true,
   })
   @Field({
     label: '客户名称',
