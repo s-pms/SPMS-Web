@@ -15,6 +15,7 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     formatter: row => row.material.code,
+    copy: true,
   })
   @Field({
     label: '物料编码',
@@ -23,6 +24,7 @@ export class SaleDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     formatter: row => row.material.name,
+    copy: true,
   })
   @Field({
     label: '物料名称',

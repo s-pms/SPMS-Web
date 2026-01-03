@@ -22,6 +22,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     formatter: row => row.material.code,
+    copy: true,
   })
   @Field({
     label: '物料编码',
@@ -30,6 +31,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     formatter: row => row.material.name,
+    copy: true,
   })
   @Field({
     label: '物料名称',
@@ -38,6 +40,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     formatter: row => row.supplier?.name || '-',
+    copy: true,
   })
   @Field({
     label: '供应商名称',
@@ -46,6 +49,7 @@ export class PurchaseDetailEntity extends AbstractBaseBillDetailEntity {
 
   @Table({
     formatter: row => row.supplier?.code || '-',
+    copy: true,
   })
   @Field({
     label: '供应商编码',

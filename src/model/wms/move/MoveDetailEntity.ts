@@ -12,6 +12,7 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     force: true,
     formatter: row => row.inventory.material.code,
+    copy: true,
   })
   @Field({
     label: '物料编码',
@@ -21,6 +22,7 @@ export class MoveDetailEntity extends AbstractBaseBillDetailEntity {
   @Table({
     force: true,
     formatter: row => row.inventory.material.name,
+    copy: true,
   })
   @Field({
     label: '物料名称',
