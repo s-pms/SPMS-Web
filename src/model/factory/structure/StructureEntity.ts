@@ -69,22 +69,12 @@ export class StructureEntity extends BaseEntity implements ITree, IPayload {
     label: '可执行工序',
   })
   @Type(OperationEntity, true)
-  @Table({
-    payload: true,
-    array: true,
-    order: 11,
-  })
   operationList!: OperationEntity[]
 
   @Field({
     label: '所属部门',
   })
   @Type(DepartmentEntity, true)
-  @Table({
-    payload: true,
-    array: true,
-    order: 1,
-  })
   departmentList!: DepartmentEntity[]
 
   getPayloadLabel(): string {

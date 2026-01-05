@@ -138,10 +138,10 @@ export class UserService extends AbstractBaseService<UserEntity> {
   }
 
   async enableMyPersonalToken(item: PersonalTokenEntity) {
-    await this.api('enableMyPersonalToken').request(item.copy().expose('id'))
+    await this.api('enableMyPersonalToken').request(item.copyOnlyId())
   }
 
   async disableMyPersonalToken(item: PersonalTokenEntity) {
-    await this.api('disableMyPersonalToken').request(item.copy().expose('id'))
+    await this.api('disableMyPersonalToken').request(item.copyOnlyId())
   }
 }

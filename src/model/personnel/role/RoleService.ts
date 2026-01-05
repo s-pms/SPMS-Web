@@ -19,7 +19,7 @@ export class RoleService extends AbstractBaseService<RoleEntity> {
    */
   async authorizeMenu(id: number, menuList: MenuEntity[]): Promise<void> {
     const role = new RoleEntity(id)
-    role.menuList = menuList.map(item => item.expose('id'))
+    role.menuList = menuList.map(item => item.copyOnlyId())
     await this.api('authorizeMenu').request(role)
   }
 
@@ -30,7 +30,7 @@ export class RoleService extends AbstractBaseService<RoleEntity> {
    */
   async authorizePermission(id: number, permissionList: PermissionEntity[]): Promise<void> {
     const role = new RoleEntity(id)
-    role.permissionList = permissionList.map(item => item.expose('id'))
+    role.permissionList = permissionList.map(item => item.copyOnlyId())
     await this.api('authorizePermission').request(role)
   }
 }

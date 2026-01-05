@@ -39,6 +39,8 @@ async function getStructure() {
 
 async function getList() {
   request.value.filter = request.value.filter || new InventoryEntity()
+  request.value.filter.storage = request.value.filter.storage?.exposeOnlyId()
+  request.value.filter.structure = request.value.filter.structure?.exposeOnlyId()
   request.value.filter.type = inventoryType.value
   response.value = await InventoryService.create(isLoading).getPage(request.value)
 }
@@ -67,22 +69,21 @@ async function inventoryTypeChanged() {
 }
 
 async function treeChanged(current: ITree | undefined) {
-  response.value = new QueryResponsePage()
-  if (current) {
-    switch (inventoryType.value) {
-      case InventoryTypeEnum.STORAGE.key:
-        request.value.filter.storage = (current as StorageEntity).copy()
-        request.value.filter.storage.expose('id')
-        break
-      case InventoryTypeEnum.STRUCTURE.key:
-        request.value.filter.structure = (current as StructureEntity).copy()
-        request.value.filter.structure.expose('id')
-        break
-      default:
-    }
-  }
-  else {
+  if (!current) {
     request.value.filter.exclude('storage', 'structure')
+    getList()
+    return
+  }
+  switch (inventoryType.value) {
+    case InventoryTypeEnum.STORAGE.key:
+      request.value.filter.storage = (current as StorageEntity).copy()
+      request.value.filter.storage.expose('id')
+      break
+    case InventoryTypeEnum.STRUCTURE.key:
+      request.value.filter.structure = (current as StructureEntity).copy()
+      request.value.filter.structure.expose('id')
+      break
+    default:
   }
   getList()
 }
