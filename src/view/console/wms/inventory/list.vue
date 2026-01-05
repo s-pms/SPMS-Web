@@ -39,8 +39,8 @@ async function getStructure() {
 
 async function getList() {
   request.value.filter = request.value.filter || new InventoryEntity()
-  request.value.filter.storage = request.value.filter.storage?.exposeOnlyId()
-  request.value.filter.structure = request.value.filter.structure?.exposeOnlyId()
+  request.value.filter.storage?.exposeOnlyId()
+  request.value.filter.structure?.exposeOnlyId()
   request.value.filter.type = inventoryType.value
   response.value = await InventoryService.create(isLoading).getPage(request.value)
 }
