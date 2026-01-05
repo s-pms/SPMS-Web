@@ -37,7 +37,8 @@ export function useBillDetail<
       Number.parseFloat((Math.ceil((detail.quantity - detail.finishQuantity) * dec) / dec).toString()),
     )
     postData.quantity = Math.max(number, 0)
-    await result.service.addDetailFinishQuantity(postData.expose('id', 'quantity', 'billId'))
+    postData.expose('id', 'quantity', 'billId')
+    await result.service.addDetailFinishQuantity(postData)
     result.getDetail()
   }
 
