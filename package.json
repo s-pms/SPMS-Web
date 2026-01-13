@@ -9,8 +9,7 @@
     "lint": "eslint --fix",
     "dev": "vite build --mode dev",
     "test": "vite build --mode test",
-    "production": "vite build --mode production",
-    "v": "vite preview"
+    "production": "vite build --mode production"
   },
   "dependencies": {
     "@airpower/web": "^2.0.3",
