@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'element-plus'
+import {InventoryEntity} from '@/model/wms/inventory/InventoryEntity'
+import {InventoryTypeEnum} from '@/model/wms/inventory/InventoryTypeEnum'
+import {OutputDetailEntity} from '@/model/wms/output/OutputDetailEntity'
+import {OutputDetailService} from '@/model/wms/output/OutputDetailService'
+import {OutputService} from '@/model/wms/output/OutputService'
 
-import { ADialog, AInput, DialogProps, DialogUtil } from '@airpower/web'
-import { ref } from 'vue'
-import { InventoryEntity } from '@/model/wms/inventory/InventoryEntity'
-import { InventoryTypeEnum } from '@/model/wms/inventory/InventoryTypeEnum'
-import { OutputDetailEntity } from '@/model/wms/output/OutputDetailEntity'
-import { OutputDetailService } from '@/model/wms/output/OutputDetailService'
-import { OutputService } from '@/model/wms/output/OutputService'
-import { InventorySelector } from '../../inventory/component'
+import {ADialog, AInput, DialogProps, DialogUtil} from '@airpower/web'
+import type {FormInstance} from 'element-plus'
+import {ref} from 'vue'
+import {InventorySelector} from '../../inventory/component'
 
 const props = defineProps(DialogProps.withParam(new OutputDetailEntity()))
 
@@ -19,9 +19,10 @@ const isLoading = ref(false)
 const formRef = ref<FormInstance>()
 
 async function onSubmit() {
-  await OutputService.create(isLoading).addDetailFinishQuantity(
-    formData.value.copy().expose('id', 'quantity', 'billId', 'inventory'),
-  )
+  const form = formData.value.copy()
+  form.expose('id', 'quantity', 'billId', 'inventory')
+  form.inventory.exposeOnlyId()
+  await OutputService.create(isLoading).addDetailFinishQuantity(form)
   props.onConfirm()
 }
 
@@ -38,53 +39,53 @@ async function selectInventory() {
   formData.value.inventoryId = formData.value.inventory.id
   formData.value.storageName = formData.value.inventory.storage.name
   formData.value.quantity = Math.min(
-    formData.value.inventory.quantity,
-    quantity.value,
+      formData.value.inventory.quantity,
+      quantity.value,
   )
 }
 </script>
 
 <template>
   <ADialog
-    :disable-confirm="formData.quantity <= 0"
-    :form-ref="formRef"
-    :loading="isLoading"
-    title="确认出库"
-    width="600px"
-    @cancel="onCancel"
-    @confirm="onSubmit"
+      :disable-confirm="formData.quantity <= 0"
+      :form-ref="formRef"
+      :loading="isLoading"
+      title="确认出库"
+      width="600px"
+      @cancel="onCancel"
+      @confirm="onSubmit"
   >
     <el-form
-      ref="formRef"
-      :model="formData"
-      :rules="OutputDetailService.createValidator()"
-      label-width="120px"
-      @submit.prevent
+        ref="formRef"
+        :model="formData"
+        :rules="OutputDetailService.createValidator()"
+        label-width="120px"
+        @submit.prevent
     >
       <el-form-item label="物料信息">
         <el-input
-          v-model="material.name"
-          disabled
+            v-model="material.name"
+            disabled
         />
       </el-form-item>
       <el-form-item
-        label="库存来源"
-        prop="inventoryId"
+          label="库存来源"
+          prop="inventoryId"
       >
         <AInput
-          v-model="formData.storageName"
-          :entity="OutputDetailEntity"
-          placeholder="请选择库存来源..."
-          @click="selectInventory"
+            v-model="formData.storageName"
+            :entity="OutputDetailEntity"
+            placeholder="请选择库存来源..."
+            @click="selectInventory"
         />
       </el-form-item>
       <el-form-item
-        v-if="formData.inventory"
-        label="当前库存"
+          v-if="formData.inventory"
+          label="当前库存"
       >
         <el-input
-          v-model="formData.inventory.quantity"
-          disabled
+            v-model="formData.inventory.quantity"
+            disabled
         >
           <template #append>
             {{ material.unit.name }}
@@ -93,8 +94,8 @@ async function selectInventory() {
       </el-form-item>
       <el-form-item label="待出数量">
         <el-input
-          v-model="quantity"
-          disabled
+            v-model="quantity"
+            disabled
         >
           <template #append>
             {{ material.unit.name }}
@@ -103,8 +104,8 @@ async function selectInventory() {
       </el-form-item>
       <el-form-item label="出库数量">
         <el-input
-          v-model="formData.quantity"
-          type="number"
+            v-model="formData.quantity"
+            type="number"
         >
           <template #append>
             {{ material.unit.name }}

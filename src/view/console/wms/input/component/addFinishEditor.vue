@@ -17,9 +17,10 @@ const isLoading = ref(false)
 const formRef = ref<FormInstance>()
 
 async function onSubmit() {
-  await InputService.create(isLoading).addDetailFinishQuantity(
-    formData.value.copy().expose('id', 'quantity', 'billId', 'storage'),
-  )
+  const form = formData.value.copy()
+  form.expose('id', 'quantity', 'billId', 'storage')
+  formData.value.storage.exposeOnlyId()
+  await InputService.create(isLoading).addDetailFinishQuantity(form)
   props.onConfirm()
 }
 
