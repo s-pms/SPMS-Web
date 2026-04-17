@@ -11,7 +11,7 @@ async function getList() {
   list.value = await McpToolService.create(isLoading).getMcpTools()
 }
 
-const mcpServer = computed(() => `${window.location.origin}/api/mcp/sse?token=私人令牌`)
+const mcpServer = computed(() => `${window.location.origin}/api/mcp?token=私人令牌`)
 
 async function copy() {
   await ClipboardUtil.copy(mcpServer.value)
