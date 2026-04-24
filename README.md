@@ -141,6 +141,10 @@ yarn production     #生产环境 使用.env.production
 
 > 如碰到其他兼容问题，建议在工作区禁用以上三个插件之外的其他插件，特别是`Vetur`。
 
+## AI辅助开发
+
+如果你使用 AI 辅助开发（如 Qwen Code、Cursor、GitHub Copilot 等），请让 AI 参考 **[AGENT.md](./AGENT.md)** 文档，其中详细约定了项目的开发规范、目录结构、编码风格等，保证 AI 生成的代码与项目现有风格一致。
+
 ## 联系我们
 
 **S-PMS** 所有代码均在 **MIT** 开源协议规范下免费提供，你可以放心使用。
