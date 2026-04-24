@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
-
 import { AButton, AEmpty, ClipboardUtil, DateTimeFormatter, DialogProps, FeedbackUtil } from '@airpower/web'
+
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import { UserService } from '@/model/personnel/user/UserService'
+import { PersonalTokenService } from '@/model/personnel/user/token/PersonalTokenService'
 
 defineProps(DialogProps.create())
 
@@ -15,12 +15,12 @@ const isLoading = ref(false)
 const name = ref('')
 
 async function init() {
-  list.value = await UserService.create(isLoading).getMyPersonalTokenList()
+  list.value = await PersonalTokenService.create(isLoading).getMyPersonalTokenList()
 }
 
 async function createMyPersonalToken() {
   await FeedbackUtil.confirmWarning('是否确认创建新的私人令牌？', '创建确认')
-  const token = await UserService.create(isLoading).createMyPersonalToken(name.value)
+  const token = await PersonalTokenService.create(isLoading).createMyPersonalToken(name.value)
 
   await ElMessageBox.alert('创建私人令牌成功，请点击复制，后续将不再显示令牌！', '创建成功', {
     confirmButtonText: '点击复制',
@@ -37,7 +37,7 @@ async function createMyPersonalToken() {
 
 async function onDisableOrEnable(item: PersonalTokenEntity) {
   await FeedbackUtil.confirmWarning(`是否确认${item.isDisabled ? '启用' : '禁用'}这个私人令牌？`, `${item.isDisabled ? '启用' : '禁用'}`)
-  const service = UserService.create(isLoading)
+  const service = PersonalTokenService.create(isLoading)
   await (item.isDisabled ? service.enableMyPersonalToken(item) : service.disableMyPersonalToken(item))
   init()
 }
