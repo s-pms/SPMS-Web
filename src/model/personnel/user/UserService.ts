@@ -3,7 +3,6 @@ import { OauthCreateCodeRequest } from '@/model/open/oauth/OauthCreateCodeReques
 import { OauthScope } from '@/model/open/oauth/OauthScope'
 import { ThirdLoginRequest } from '@/model/open/thirdlogin/ThirdLoginRequest'
 import { UserThirdLoginEntity } from '@/model/open/thirdlogin/UserThirdLoginEntity'
-import { PersonalTokenEntity } from '@/model/personnel/user/token/PersonalTokenEntity'
 import { UserEntity } from '@/model/personnel/user/UserEntity'
 import { MenuEntity } from '@/model/system/menu/MenuEntity'
 
@@ -102,18 +101,6 @@ export class UserService extends AbstractBaseService<UserEntity> {
     return code as unknown as string
   }
 
-  async getMyPersonalTokenList(): Promise<PersonalTokenEntity[]> {
-    const json = await this.api('getMyPersonalTokenList').requestRaw()
-    return PersonalTokenEntity.fromJsonArray(json)
-  }
-
-  async createMyPersonalToken(name: string): Promise<string> {
-    const personalToken = new PersonalTokenEntity()
-    personalToken.name = name
-    const result = await this.api('createMyPersonalToken').requestRaw(personalToken)
-    return result.toString()
-  }
-
   async callbackCode(platform: string, code: string): Promise<string> {
     const postData = new ThirdLoginRequest()
     postData.platform = platform
@@ -135,13 +122,5 @@ export class UserService extends AbstractBaseService<UserEntity> {
 
   async updateMyInfo(user: UserEntity) {
     await this.api('updateMyInfo').request(user)
-  }
-
-  async enableMyPersonalToken(item: PersonalTokenEntity) {
-    await this.api('enableMyPersonalToken').request(item.copyOnlyId())
-  }
-
-  async disableMyPersonalToken(item: PersonalTokenEntity) {
-    await this.api('disableMyPersonalToken').request(item.copyOnlyId())
   }
 }
