@@ -17,7 +17,7 @@ const props = defineProps(
 )
 
 const orderDetail = ref(new OrderDetailEntity())
-orderDetail.value.finishQuantity = props.param
+orderDetail.value.quantity = props.param
 orderDetail.value.ngQuantity = 0
 
 const rules = OrderDetailService.createValidator()
@@ -25,7 +25,7 @@ const rules = OrderDetailService.createValidator()
 
 <template>
   <ADialog
-    :disable-confirm="orderDetail.finishQuantity <= 0 && orderDetail.ngQuantity <= 0"
+    :disable-confirm="orderDetail.quantity <= 0 && orderDetail.ngQuantity <= 0"
     confirm-text="添加完成"
     hide-fullscreen
     min-height="200px"
@@ -40,11 +40,11 @@ const rules = OrderDetailService.createValidator()
       @submit.prevent
     >
       <el-form-item
-        :label="getFieldLabel(OrderDetailEntity, 'finishQuantity')"
-        prop="finishQuantity"
+        :label="getFieldLabel(OrderDetailEntity, 'quantity')"
+        prop="quantity"
       >
         <AInput
-          v-model.finishQuantity="orderDetail.finishQuantity"
+          v-model.quantity="orderDetail.quantity"
           :entity="OrderDetailEntity"
           clearable
         />

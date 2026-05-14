@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { OrderDetailEntity } from '@/model/mes/order/OrderDetailEntity'
-
 import type { OrderEntity } from '@/model/mes/order/OrderEntity'
 import { AButton, APanel, ATable, DialogUtil, FeedbackUtil } from '@airpower/web'
+
 import { BillAuditOrReject } from '@/component'
 import { useBillTable } from '@/hook/billTable/useBillTable'
 import { OrderService } from '@/model/mes/order/OrderService'
@@ -16,7 +16,8 @@ const hook = useBillTable(OrderService, {
 })
 
 async function onAddDetail(order: OrderEntity) {
-  const detail = await DialogUtil.show<OrderDetailEntity>(OrderFinishEditor, order.quantity)
+  const quantity = order.quantity - order.finishQuantity
+  const detail = await DialogUtil.show<OrderDetailEntity>(OrderFinishEditor, quantity)
   detail.billId = order.id
   await OrderService.create(hook.isLoading).addOrderDetail(detail)
   hook.onGetList()

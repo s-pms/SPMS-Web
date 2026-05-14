@@ -5,8 +5,6 @@ import { AbstractBaseBillDetailEntity } from '@/base/bill/detail/AbstractBaseBil
   label: '订单明细',
 })
 export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
-  quantity!: number
-
   @Form({
     requiredNumber: true,
     number: true,
@@ -14,6 +12,8 @@ export class OrderDetailEntity extends AbstractBaseBillDetailEntity {
   @Field({
     label: '完成数量',
   })
+  quantity!: number
+
   finishQuantity!: number
 
   @Form({
