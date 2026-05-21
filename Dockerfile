@@ -10,6 +10,7 @@ COPY package.json ./
 # 安装依赖
 # 配置网络超时并安装依赖
 RUN yarn config set network-timeout 300000 -g && \
+    yarn config set registry https://registry.npmmirror.com -g && \
     yarn install --ignore-engines
 
 # 复制源代码
