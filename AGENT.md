@@ -1,25 +1,27 @@
 # SPMS-Web 开发规范
 
-> 本文档供 AI 编程助手（如 Qwen Code、Cursor、GitHub Copilot 等）参考，遵循本文档规范可以保证代码风格一致。使用 VibeCoding 开发时请严格遵循本文档约定。
+> 本文档供 AI 编程助手（如 Qwen Code、Cursor、GitHub Copilot 等）参考，遵循本文档规范可以保证代码风格一致。使用 VibeCoding
+> 开发时请严格遵循本文档约定。
 
 ## 项目概述
 
-SPMS-Web 是 SPMS 智能生产管理系统的 Web 前端项目，基于 **Vue 3 + TypeScript + Vite** 开发，使用 **Element Plus** 作为 UI 组件库，依赖 **@airpower/web** 基础框架。
+SPMS-Web 是 SPMS 智能生产管理系统的 Web 前端项目，基于 **Vue 3 + TypeScript + Vite** 开发，使用 **Element Plus** 作为 UI
+组件库，依赖 **@airpower/web** 基础框架。
 
 ## 技术栈
 
-| 技术          | 版本  | 用途                               |
-| ------------- | ----- | ---------------------------------- |
+| 技术            | 版本    | 用途                             |
+|---------------|-------|--------------------------------|
 | Vue           | 3.5+  | 前端框架 (Composition API + setup) |
 | TypeScript    | 5.9+  | 类型系统                           |
 | Vite          | 7.3+  | 构建工具                           |
-| Element Plus  | 2.12+ | UI 组件库                          |
+| Element Plus  | 2.12+ | UI 组件库                         |
 | Pinia         | 3.0+  | 状态管理                           |
-| Vue Router    | 4.6+  | 路由                               |
-| @airpower/web | 2.9+  | 基础框架 (CRUD组件、Hooks、工具)   |
-| Axios         | 1.13  | HTTP 客户端                        |
-| ECharts       | 6.0   | 图表                               |
-| SCSS          | 1.96+ | 样式预处理                         |
+| Vue Router    | 4.6+  | 路由                             |
+| @airpower/web | 2.9+  | 基础框架 (CRUD组件、Hooks、工具)         |
+| Axios         | 1.13  | HTTP 客户端                       |
+| ECharts       | 6.0   | 图表                             |
+| SCSS          | 1.96+ | 样式预处理                          |
 | ESLint        | 9.39+ | 代码检查 (@antfu/eslint-config)    |
 
 ## 项目结构
@@ -49,6 +51,7 @@ src/
 ### 1. model/ - 数据模型层
 
 **结构**:
+
 ```
 model/
 ├── business-module/        # 业务模块 (如 asset, channel, factory, mes 等)
@@ -60,15 +63,17 @@ model/
 ```
 
 **规范**:
+
 - 按业务模块 → 功能模块二级分组
 - 命名：
-  - 实体: `XxxEntity.ts` (PascalCase)
-  - 服务: `XxxService.ts` (PascalCase)
-  - 枚举: `XxxEnum.ts` (PascalCase)
+    - 实体: `XxxEntity.ts` (PascalCase)
+    - 服务: `XxxService.ts` (PascalCase)
+    - 枚举: `XxxEnum.ts` (PascalCase)
 
 ### 2. view/ - 视图层
 
 **结构**:
+
 ```
 view/console/business-module/function-module/
 ├── component/              # 局部组件
@@ -79,6 +84,7 @@ view/console/business-module/function-module/
 ```
 
 **规范**:
+
 - 列表页: `list.vue` (kebab-case)
 - 编辑器弹窗: `editor.vue`
 - 选择器弹窗: `selector.vue`
@@ -89,24 +95,24 @@ view/console/business-module/function-module/
 
 ### 格式规范
 
-| 规则          | 取值     |
-| ------------- | -------- |
-| 缩进          | 2 空格   |
-| 分号          | 不使用   |
-| 引号          | 单引号   |
+| 规则          | 取值   |
+|-------------|------|
+| 缩进          | 2 空格 |
+| 分号          | 不使用  |
+| 引号          | 单引号  |
 | Trailing 逗号 | 自动保留 |
 
 ### 命名规范
 
-| 类型      | 规范                | 示例                                |
-| --------- | ------------------- | ----------------------------------- |
-| 类        | PascalCase          | `MaterialEntity`, `MaterialService` |
-| 枚举类    | PascalCase          | `MaterialTypeEnum`                  |
-| 枚举常量  | UPPER_SNAKE_CASE    | `PRODUCT`, `PURCHASE`               |
-| 接口/类型 | PascalCase (前缀 I) | `IBaseTableResult`                  |
-| 函数/变量 | camelCase           | `useMyTable`, `onPublish`           |
-| TS 文件   | PascalCase          | `MaterialEntity.ts`                 |
-| Vue 文件  | kebab-case          | `editor.vue`, `list.vue`            |
+| 类型     | 规范                | 示例                                  |
+|--------|-------------------|-------------------------------------|
+| 类      | PascalCase        | `MaterialEntity`, `MaterialService` |
+| 枚举类    | PascalCase        | `MaterialTypeEnum`                  |
+| 枚举常量   | UPPER_SNAKE_CASE  | `PRODUCT`, `PURCHASE`               |
+| 接口/类型  | PascalCase (前缀 I) | `IBaseTableResult`                  |
+| 函数/变量  | camelCase         | `useMyTable`, `onPublish`           |
+| TS 文件  | PascalCase        | `MaterialEntity.ts`                 |
+| Vue 文件 | kebab-case        | `editor.vue`, `list.vue`            |
 
 ### 类型规范
 
@@ -121,10 +127,11 @@ view/console/business-module/function-module/
 - 第三方包直接导入
 
 **正确示例**:
+
 ```typescript
+import { WebEnum } from '@airpower/web'
 import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { MaterialEntity } from './MaterialEntity'
-import { WebEnum } from '@airpower/web'
 ```
 
 ## Vue 组件规范
@@ -151,10 +158,11 @@ import { WebEnum } from '@airpower/web'
 - 多行每个属性占一行
 
 **正确示例**:
+
 ```vue
 <ATable
-  :use-hook="hook"
-  show-export
+    :use-hook="hook"
+    show-export
 />
 ```
 
@@ -182,26 +190,27 @@ const {
 ### 装饰器顺序 (必须遵循)
 
 ```typescript
-@Model({ label: '物料' })
+
+@Model({label: '物料'})
 export class MaterialEntity extends BaseEntity {
-  @Table({ ... })  // 1. 表格配置
-  @Form({ ... })    // 2. 表单配置
-  @Search({ ... })  // 3. 搜索配置
-  @Field({ ... })   // 4. 字段标记
-  name!: string
+    @Table({...})  // 1. 表格配置
+    @Form({...})    // 2. 表单配置
+    @Search({...})  // 3. 搜索配置
+    @Field({...})   // 4. 字段标记
+    name!: string
 }
 ```
 
 ### 常用装饰器配置说明
 
-| 装饰器    | 用途       | 常用配置项                                                                                                  |
-| --------- | ---------- | ----------------------------------------------------------------------------------------------------------- |
-| `@Model`  | 类标记     | `label` - 类标签                                                                                            |
-| `@Field`  | 字段标记   | `label` - 字段标签，`dictionary` - 枚举字典                                                                 |
-| `@Table`  | 表格列配置 | `width` - 宽度，`force` - 强制显示，`copy` - 可复制，`datetime` - 日期格式化，`color` - 染色                |
-| `@Form`   | 表单配置   | `requiredString`/`requiredNumber`/`requiredPayload` - 必填，`defaultValue` - 默认值，`placeholder` - 占位符 |
-| `@Search` | 搜索配置   | `width` - 宽度，`hide` - 是否隐藏                                                                           |
-| `@Type`   | 类型标记   | 标记 Payload 实体类型                                                                                       |
+| 装饰器       | 用途    | 常用配置项                                                                                             |
+|-----------|-------|---------------------------------------------------------------------------------------------------|
+| `@Model`  | 类标记   | `label` - 类标签                                                                                     |
+| `@Field`  | 字段标记  | `label` - 字段标签，`dictionary` - 枚举字典                                                                |
+| `@Table`  | 表格列配置 | `width` - 宽度，`force` - 强制显示，`copy` - 可复制，`datetime` - 日期格式化，`color` - 染色                          |
+| `@Form`   | 表单配置  | `requiredString`/`requiredNumber`/`requiredPayload` - 必填，`defaultValue` - 默认值，`placeholder` - 占位符 |
+| `@Search` | 搜索配置  | `width` - 宽度，`hide` - 是否隐藏                                                                        |
+| `@Type`   | 类型标记  | 标记 Payload 实体类型                                                                                   |
 
 ## 各类文件开发规范
 
@@ -212,6 +221,7 @@ export class MaterialEntity extends BaseEntity {
 - 调用 `setColor()` 设置颜色
 
 **示例**:
+
 ```typescript
 import { WebColor, WebEnum } from '@airpower/web'
 
@@ -231,6 +241,7 @@ export class MaterialTypeEnum extends WebEnum {
 - 指定 `baseUrl` 为 API 基础路径（不需要 `/api` 前缀）
 
 **示例**:
+
 ```typescript
 import { AbstractBaseService } from '@/base/AbstractBaseService'
 import { MaterialEntity } from './MaterialEntity'
@@ -248,6 +259,7 @@ export class MaterialService extends AbstractBaseService<MaterialEntity> {
 - 实现 `getPayloadLabel()` 方法返回显示文本
 
 **示例**:
+
 ```typescript
 import { Field, Form, Model, Search, Table, Type } from '@airpower/web'
 import { BaseEntity } from '@/base/BaseEntity'
@@ -295,6 +307,7 @@ export class MaterialEntity extends BaseEntity implements IPayload {
 - 使用泛型约束类型
 
 **示例**:
+
 ```typescript
 export function useMyTable<E extends BaseEntity, S extends AbstractBaseService<E>>(
   serviceClass: CurdServiceConstructor<E, S>,
@@ -396,8 +409,8 @@ const {
 <template>
   <ADialog
     :title="title"
-    @confirm="onConfirm"
     width="800px"
+    @confirm="onConfirm"
   >
     <APanel>
       <ATable
@@ -457,4 +470,5 @@ yarn production
 
 ---
 
-**AI 开发提示**: 在使用 VibeCoding 开发时，请将本文档作为系统提示的一部分，让 AI 遵循此开发规范。每次开发前，AI 都应该回顾本文档，确保输出的代码符合项目约定。
+**AI 开发提示**: 在使用 VibeCoding 开发时，请将本文档作为系统提示的一部分，让 AI 遵循此开发规范。每次开发前，AI
+都应该回顾本文档，确保输出的代码符合项目约定。
